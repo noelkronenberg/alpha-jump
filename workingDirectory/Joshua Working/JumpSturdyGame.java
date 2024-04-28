@@ -1,5 +1,5 @@
 import java.util.HashMap;
-import java.util.HashSet;
+
 
 
 public class JumpSturdyGame {
@@ -79,16 +79,18 @@ public class JumpSturdyGame {
         }
     }
 
-    public void getAllMovesForPlayer(String player, String[] colorsBoard, String[] piecesBoard, String enemyPlayer){ //Player soll sagen, ob wir rot oder blau sind (also Rot = R und Blau = B),
+    public void getAllMovesForPlayer(String player, String[] colorsBoard, String[] piecesBoard){ //Player soll sagen, ob wir rot oder blau sind (also Rot = R und Blau = B),
         HashMap<Integer,String> movesForFigure = new HashMap<>();
         for (int i = 0; i < colorsBoard.length; i++) {
-            if (colorsBoard[i].length()==1&&colorsBoard[i]==player) {
+            if (colorsBoard[i].length()==1) {
                 //checke die moves
-                String s=calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
-                movesForFigure.put(i,s);
+                if (colorsBoard[i].equals(player)){
+                    String s=calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
+                    movesForFigure.put(i,s);
+                }
             }
             else {
-                if (colorsBoard[i].substring(1)==player){
+                if (colorsBoard[i].substring(1).equals(player)){
                     String s=calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
                     movesForFigure.put(i,s);
                 }
@@ -105,7 +107,7 @@ public class JumpSturdyGame {
             if (piecesBoard[to]=="P"&& colorsBoard[from]!=colorsBoard[to]){             //Case: wir haben ein enemy piece
                 return true;
             }
-            if (piecesBoard[to]=="S"&&colorsBoard[from]!=colorsBoard[to].substring(1)){     //Case: wir haben ein Stack mit enemy piece oben
+            if (piecesBoard[to]=="S"&& !colorsBoard[from].equals(colorsBoard[to].substring(1))){     //Case: wir haben ein Stack mit enemy piece oben
                 return true;
             }
         }
@@ -178,12 +180,11 @@ public class JumpSturdyGame {
                         if (isMovePossible(pos, pos + 1, colorsBoard, piecesBoard, false,true)) {           //Move links
                             moves+=boardPostions.get(pos + 1)+",";
                         }
-
+                        //TODO: pos!=7
                         if (pos == 7) {
                             if (isMovePossible(pos, pos - 6, colorsBoard, piecesBoard, true,false)) {            //Capture Schräg rechts
                                 moves+=boardPostions.get(pos - 6)+",";
                             }
-
                         } else if (pos == 12) {
                             if (isMovePossible(pos, pos - 8, colorsBoard, piecesBoard, true,false)) {            //Capture Schräg links
                                 moves+=boardPostions.get(pos - 8)+",";
@@ -512,9 +513,11 @@ public class JumpSturdyGame {
     public static void main(String[] args) {
         JumpSturdyGame s = new JumpSturdyGame();
         s.initializeBoardPositonsHM();
-        String fen = "6/8/8/8/2b05/8/8/6";
+        String fen = "r0r0r0r0r0r0/1r0r0r0r0r0r01/8/8/8/8/1bbb0b0b0b0b01/b0b0b0b0b0b0";
         s.getColorAndPiecesBoardForFen(fen);
-        s.getAllMovesForPlayer("B",s.colorsBoard,s.piecesBoard,"R");
+        s.getAllMovesForPlayer("B",s.colorsBoard,s.piecesBoard);
+        String str = s.colorsBoard[47].substring(1);
+        System.out.println(str.equals("B"));
     }
 
 }
