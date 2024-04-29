@@ -288,8 +288,12 @@ public class MoveGenerator {
         System.out.println();
         System.out.println("Move:");
         List<Integer> possibleMoves = moveGenerator.generatePossibleMoves(testPosition, testColor);
-        moveGenerator.movePiece(testPosition, possibleMoves.getFirst(), moveGenerator.getPieceAtPosition(testPosition), testColor);
-        moveGenerator.printBoard();
+        if (!possibleMoves.isEmpty()) {
+            moveGenerator.movePiece(testPosition, possibleMoves.getFirst(), moveGenerator.getPieceAtPosition(testPosition), testColor);
+            moveGenerator.printBoard();
+        } else {
+            System.out.println("No possible moves found!");
+        }
     }
 
 }
