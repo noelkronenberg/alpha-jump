@@ -101,14 +101,16 @@ public class MoveGenerator {
                 if (row < 7) {
 
                     // forward
-                    possibleMoves.add(convertToNumber(row + 1, column));
+                    if (colorBoard[row + 1][column] != Color.WHITE) {
+                        possibleMoves.add(convertToNumber(row + 1, column));
+                    }
 
                     // left
-                    if (column > 0)
+                    if (column > 0 && colorBoard[row][column - 1] != Color.WHITE)
                         possibleMoves.add(convertToNumber(row, column - 1));
 
                     // right
-                    if (column < 7)
+                    if (column < 7 && colorBoard[row][column + 1] != Color.WHITE)
                         possibleMoves.add(convertToNumber(row, column + 1));
 
                     // left diagonal
@@ -139,14 +141,16 @@ public class MoveGenerator {
                 if (row > 0) {
 
                     // forward
-                    possibleMoves.add(convertToNumber(row - 1, column));
+                    if (colorBoard[row - 1][column] != Color.BLACK){
+                        possibleMoves.add(convertToNumber(row - 1, column));
+                    }
 
                     // left
-                    if (column > 0)
+                    if (column > 0 && colorBoard[row][column - 1] != Color.BLACK)
                         possibleMoves.add(convertToNumber(row, column - 1));
 
                     // right
-                    if (column < 7)
+                    if (column < 7 && colorBoard[row][column + 1] != Color.BLACK)
                         possibleMoves.add(convertToNumber(row, column + 1));
 
                     // left diagonal
