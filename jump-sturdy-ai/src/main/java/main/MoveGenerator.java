@@ -220,11 +220,46 @@ public class MoveGenerator {
         int toRow = end / 10;
         int toColumn = end % 10;
 
-        pieceBoard[fromRow][fromColumn] = Piece.EMPTY;
-        colorBoard[fromRow][fromColumn] = Color.EMPTY;
+        // adjust old square
 
-        pieceBoard[toRow][toColumn] = piece;
-        colorBoard[toRow][toColumn] = color;
+        // single
+        if (piece == Piece.SINGLE) {
+            pieceBoard[fromRow][fromColumn] = Piece.EMPTY;
+            colorBoard[fromRow][fromColumn] = Color.EMPTY;
+        }
+
+        // double
+        else if (piece == Piece.DOUBLE) {
+            pieceBoard[fromRow][fromColumn] = Piece.SINGLE;
+        }
+
+        // mixed
+        else if (piece == Piece.MIXED) {
+            pieceBoard[fromRow][fromColumn] = Piece.SINGLE;
+            Color oppositeColor = (color == Color.BLACK) ? Color.WHITE : Color.BLACK;
+            colorBoard[fromRow][fromColumn] = oppositeColor;
+        }
+
+        // adjust new square
+
+        // empty or opposite color
+        if (colorBoard[toRow][toColumn] == Color.EMPTY ||
+                (colorBoard[toRow][toColumn] != color && pieceBoard[toRow][toColumn] == Piece.SINGLE)) {
+            pieceBoard[toRow][toColumn] = piece;
+            colorBoard[toRow][toColumn] = color;
+        }
+
+        // opposite color and double or mixed
+        else if (colorBoard[toRow][toColumn] != color &&
+                (pieceBoard[toRow][toColumn] == Piece.DOUBLE || pieceBoard[toRow][toColumn] == Piece.MIXED)) {
+            pieceBoard[toRow][toColumn] = Piece.MIXED;
+            colorBoard[toRow][toColumn] = color;
+        }
+
+        // same color
+        else if (colorBoard[toRow][toColumn] == color && pieceBoard[toRow][toColumn] == Piece.SINGLE) {
+            pieceBoard[toRow][toColumn] = Piece.DOUBLE;
+        }
     }
 
     Piece getPieceAtPosition(int position) {
