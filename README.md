@@ -10,3 +10,7 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
     - ```main``` Java files
     - ```test``` [JUnit](https://www.jetbrains.com/help/idea/junit.html) tests
 - ```working``` individual work
+
+| <img width="300" alt="Maven directory structure" src="https://github.com/noelkronenberg/projekt-ki/assets/79874249/963b1211-6e07-4080-8f75-945dd20315e8"> | 
+|:--:| 
+| *[Maven directory structure](https://en.wikipedia.org/wiki/Apache_Maven#/media/File:Maven_CoC.svg)* |
