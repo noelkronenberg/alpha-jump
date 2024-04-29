@@ -8,5 +8,5 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
   - ```pom.xml``` [Maven](https://www.jetbrains.com/help/idea/maven-support.html) configuration (e.g. [dependencies](https://mvnrepository.com/))
   - ```src``` 
     - ```main``` Java files
-    - ```test``` [JUnit]([https://junit.org/junit5/](https://www.jetbrains.com/help/idea/junit.html)) tests
+    - ```test``` [JUnit](https://www.jetbrains.com/help/idea/junit.html) tests
 - ```working``` individual work
