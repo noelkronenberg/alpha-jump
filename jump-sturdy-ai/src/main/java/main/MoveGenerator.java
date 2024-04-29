@@ -275,17 +275,15 @@ public class MoveGenerator {
         }
     }
 
-    void exampleSequence(int rounds) {
+    void exampleSequence(int rounds, int positionBlack, int positionWhite) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
 
         System.out.println("Start:");
         moveGenerator.printBoard();
 
-        int positionBlack = 14;
-        int moveBlack = 0;
-        int positionWhite = 61;
-        int moveWhite = 0;
+        int moveBlack;
+        int moveWhite;
 
         List<Integer> possibleMoves;
 
@@ -327,7 +325,7 @@ public class MoveGenerator {
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
-        moveGenerator.exampleSequence(4);
+        moveGenerator.exampleSequence(4, 14, 61);
     }
 
 }
