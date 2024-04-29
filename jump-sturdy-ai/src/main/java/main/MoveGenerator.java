@@ -275,25 +275,59 @@ public class MoveGenerator {
         }
     }
 
-    public static void main(String[] args) {
+    void exampleSequence(int rounds) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
 
         System.out.println("Start:");
         moveGenerator.printBoard();
 
-        int testPosition = 14;
-        Color testColor = Color.BLACK;
+        int positionBlack = 14;
+        int moveBlack = 0;
+        int positionWhite = 61;
+        int moveWhite = 0;
 
-        System.out.println();
-        System.out.println("Move:");
-        List<Integer> possibleMoves = moveGenerator.generatePossibleMoves(testPosition, testColor);
-        if (!possibleMoves.isEmpty()) {
-            moveGenerator.movePiece(testPosition, possibleMoves.getFirst(), moveGenerator.getPieceAtPosition(testPosition), testColor);
-            moveGenerator.printBoard();
-        } else {
-            System.out.println("No possible moves found!");
+        List<Integer> possibleMoves;
+
+        for (int round = 1; round < rounds; round++) {
+
+            System.out.println();
+            System.out.println("Move " + round + ".1: ");
+
+            possibleMoves = moveGenerator.generatePossibleMoves(positionBlack, Color.BLACK);
+
+            if (!possibleMoves.isEmpty()) {
+                System.out.println("Possible: " + possibleMoves);
+                moveBlack = possibleMoves.getFirst();
+                System.out.println("Selected: " + moveBlack);
+                moveGenerator.movePiece(positionBlack, moveBlack, moveGenerator.getPieceAtPosition(positionBlack), Color.BLACK);
+                moveGenerator.printBoard();
+                positionBlack = moveBlack;
+            } else {
+                System.out.println("No possible moves found!");
+            }
+
+            System.out.println();
+            System.out.println("Move " + round + ".2: ");
+            possibleMoves = moveGenerator.generatePossibleMoves(positionWhite, Color.WHITE);
+            if (!possibleMoves.isEmpty()) {
+                System.out.println("Possible: " + possibleMoves);
+                moveWhite = possibleMoves.getFirst();
+                System.out.println("Selected: " + moveWhite);
+                moveGenerator.movePiece(positionWhite, moveWhite, moveGenerator.getPieceAtPosition(positionWhite), Color.WHITE);
+                moveGenerator.printBoard();
+                positionWhite = moveWhite;
+            } else {
+                System.out.println("No possible moves found!");
+            }
+
         }
+    }
+
+    public static void main(String[] args) {
+        MoveGenerator moveGenerator = new MoveGenerator();
+        moveGenerator.initializeBoard();
+        moveGenerator.exampleSequence(4);
     }
 
 }
