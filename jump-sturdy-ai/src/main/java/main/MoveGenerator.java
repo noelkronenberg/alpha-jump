@@ -269,7 +269,10 @@ public class MoveGenerator {
     }
 
     void printBoard() {
+        System.out.println("     0   1   2   3   4   5   6   7");
+        System.out.println();
         for (int row = 0; row < 8; row++) {
+            System.out.print(row + "   ");
             for (int column = 0; column < 8; column++) {
 
                 // border
