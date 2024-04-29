@@ -127,7 +127,7 @@ public class MoveGenerator {
 
             // double piece
             else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
-                addKnightMoves(possibleMoves, row, column);
+                addKnightMoves(possibleMoves, row, column, color);
             }
 
             // remove invalid moves
@@ -167,7 +167,7 @@ public class MoveGenerator {
 
             // double piece
             else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
-                addKnightMoves(possibleMoves, row, column);
+                addKnightMoves(possibleMoves, row, column, color);
             }
 
             // remove invalid moves
@@ -177,7 +177,7 @@ public class MoveGenerator {
         return possibleMoves;
     }
 
-    private void addKnightMoves(List<Integer> possibleMoves, int row, int column) {
+    private void addKnightMoves(List<Integer> possibleMoves, int row, int column, Color color) {
 
         // possible moves
         int[][] knightMoves = {
@@ -189,7 +189,12 @@ public class MoveGenerator {
         for (int[] move : knightMoves) {
             int newRow = row + move[0];
             int newColumn = column + move[1];
-            possibleMoves.add(convertToNumber(newRow, newColumn));
+
+            // cannot move to own double
+            if (!((pieceBoard[newRow][newColumn] == Piece.DOUBLE || pieceBoard[newRow][newColumn] == Piece.MIXED)
+                    && colorBoard[newRow][newColumn] == color)) {
+                possibleMoves.add(convertToNumber(newRow, newColumn));
+            }
         }
     }
 
