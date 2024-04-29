@@ -1,8 +1,7 @@
+package main;
 import java.util.HashMap;
 
-
-
-public class JumpSturdyGame {
+public class JumpSturdy {
     String fenBoard;
     boolean isMyTurn;
 
@@ -511,14 +510,13 @@ public class JumpSturdyGame {
     }
 
     public static void main(String[] args) {
-        JumpSturdyGame s = new JumpSturdyGame();
-        s.initializeBoardPositonsHM();
+        JumpSturdy game = new JumpSturdy();
+        game.initializeBoardPositonsHM();
         String fen = "r0r0r0r0r0r0/1r0r0r0r0r0r01/8/8/8/8/1bbb0b0b0b0b01/b0b0b0b0b0b0";
-        s.getColorAndPiecesBoardForFen(fen);
-        s.getAllMovesForPlayer("B",s.colorsBoard,s.piecesBoard);
-        String str = s.colorsBoard[47].substring(1);
+        game.getColorAndPiecesBoardForFen(fen);
+        game.getAllMovesForPlayer("B",game.colorsBoard,game.piecesBoard);
+        String str = game.colorsBoard[47].substring(1);
         System.out.println(str.equals("B"));
     }
 
 }
-
