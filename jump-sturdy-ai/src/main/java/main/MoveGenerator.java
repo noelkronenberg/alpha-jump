@@ -349,8 +349,8 @@ public class MoveGenerator {
                 moveGenerator.printBoard();
                 positionBlack = moveBlack;
 
-                System.out.println();
                 if (positionBlack / 10 == 7) {
+                    System.out.println();
                     System.out.println("Black wins!");
                     return;
                 }
