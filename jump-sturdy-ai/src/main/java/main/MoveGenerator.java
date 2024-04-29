@@ -348,6 +348,12 @@ public class MoveGenerator {
                 moveGenerator.movePiece(positionBlack, moveBlack, moveGenerator.getPieceAtPosition(positionBlack), Color.BLACK);
                 moveGenerator.printBoard();
                 positionBlack = moveBlack;
+
+                System.out.println();
+                if (positionBlack / 10 == 7) {
+                    System.out.println("Black wins!");
+                    return;
+                }
             } else {
                 System.out.println("No possible moves found!");
             }
@@ -362,6 +368,12 @@ public class MoveGenerator {
                 moveGenerator.movePiece(positionWhite, moveWhite, moveGenerator.getPieceAtPosition(positionWhite), Color.WHITE);
                 moveGenerator.printBoard();
                 positionWhite = moveWhite;
+
+                if (positionWhite / 10 == 0) {
+                    System.out.println();
+                    System.out.println("White wins!");
+                    return;
+                }
             } else {
                 System.out.println("No possible moves found!");
             }
@@ -372,7 +384,7 @@ public class MoveGenerator {
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
-        moveGenerator.exampleSequence(4, 14, 61);
+        moveGenerator.exampleSequence(9, 14, 61);
     }
 
 }
