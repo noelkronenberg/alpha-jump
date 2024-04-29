@@ -515,17 +515,28 @@ public class JumpSturdy {
             for (int t = 0; t < zeilen.length; t++) {
                 String zeile = zeilen[t];
                 for (int i = 0; i < zeile.length(); i++) {
-                    if ((t == 0 || t == zeilen.length - 1) && (i == 0 || i == zeile.length() - 1)) {
+                    // In erster und letzter Zeile die Ecken durch '-' kennzeichnen
+                    if ((t == 0 || t == 7) && i == 0 ) {
                         System.out.print("- ");
                     }
+
                     char zelle = zeile.charAt(i);
                     if (Character.isDigit(zelle)) {
                         int leerfelder = Character.getNumericValue(zelle);
                         for (int j = 0; j < leerfelder; j++) {
-                            System.out.print(". ");
+                            System.out.print(".");
+                            if (j < leerfelder - 1 || i <  zeile.length() - 1) {
+                                System.out.print(" ");
+                            }
                         }
                     } else {
-                        System.out.print(zelle + " ");
+                        System.out.print(zelle);
+                        if (i + 1 < zeile.length() - 1) {
+                            System.out.print(" ");
+                        }
+                    }
+                    if ((t == 0 || t == 7) && i == zeile.length() - 1) {
+                        System.out.print(" -");
                     }
                 }
                 System.out.println(); // Neue Zeile nach jeder Zeile

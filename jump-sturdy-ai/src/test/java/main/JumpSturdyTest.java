@@ -23,9 +23,8 @@ public class JumpSturdyTest {
     }
 
     @Test
-    @DisplayName("example")
     public void testLeeresSpielfeld() {
-        String notation = "8/8/8/8/8/8/8/8";
+        String notation = "6/8/8/8/8/8/8/6";
         String expectedOutput = "- . . . . . . -\n" +
                                  ". . . . . . . .\n" +
                                  ". . . . . . . .\n" +
@@ -34,6 +33,33 @@ public class JumpSturdyTest {
                                  ". . . . . . . .\n" +
                                  ". . . . . . . .\n" +
                                  "- . . . . . . -\n";
+        assertEquals(expectedOutput, printAndGetOutput(notation));
+    }
+
+    @Test
+    public void testSpielfeldMitSpielsteinen() {
+        String notation = "r0r0r0r0r0r0/1r0r0r0r0r0r01/r07/8/8/7b0/1b0b0b0b0b0b01/b0b0b0b0b0b0";
+        String expectedOutput = "- r r r r r r -\n" +
+                                ". r r r r r r .\n" +
+                                "r . . . . . . .\n" +
+                                ". . . . . . . .\n" +
+                                ". . . . . . . .\n" +
+                                ". . . . . . . b\n" +
+                                ". b b b b b b .\n" +
+                                "- b b b b b b -\n";
+        assertEquals(expectedOutput, printAndGetOutput(notation));
+    }
+
+    @Test
+    public void testUnvollstaendigeSpielfeldNotation() {
+        String notation = "r0r0r0r0r0r0/1r0r0r0r0r0r01/8/8/8/8/1b0b0b0b0b0b01";
+        String expectedOutput = "- r r r r r r -\n" +
+                                ". r r r r r r .\n" +
+                                ". . . . . . . .\n" +
+                                ". . . . . . . .\n" +
+                                ". . . . . . . .\n" +
+                                ". . . . . . . .\n" +
+                                ". b b b b b b .\n";
         assertEquals(expectedOutput, printAndGetOutput(notation));
     }
 
