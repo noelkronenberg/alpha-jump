@@ -337,7 +337,7 @@ public class MoveGenerator {
         for (int round = 1; round < rounds; round++) {
 
             System.out.println();
-            System.out.println("Move " + round + ".1: ");
+            System.out.println("Move " + round + " (black): ");
 
             possibleMoves = moveGenerator.generatePossibleMoves(positionBlack, Color.BLACK);
 
@@ -353,7 +353,7 @@ public class MoveGenerator {
             }
 
             System.out.println();
-            System.out.println("Move " + round + ".2: ");
+            System.out.println("Move " + round + " (white): ");
             possibleMoves = moveGenerator.generatePossibleMoves(positionWhite, Color.WHITE);
             if (!possibleMoves.isEmpty()) {
                 System.out.println("Possible: " + possibleMoves);
