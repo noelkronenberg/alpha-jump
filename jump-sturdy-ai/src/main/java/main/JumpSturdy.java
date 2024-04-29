@@ -509,10 +509,35 @@ public class JumpSturdy {
         return moves;
     }
 
+        public void printSpielfeld(String notation) {
+            String[] zeilen = notation.split("/");
+            
+            for (int t = 0; t < zeilen.length; t++) {
+                String zeile = zeilen[t];
+                for (int i = 0; i < zeile.length(); i++) {
+                    if ((t == 0 || t == zeilen.length - 1) && (i == 0 || i == zeile.length() - 1)) {
+                        System.out.print("- ");
+                    }
+                    char zelle = zeile.charAt(i);
+                    if (Character.isDigit(zelle)) {
+                        int leerfelder = Character.getNumericValue(zelle);
+                        for (int j = 0; j < leerfelder; j++) {
+                            System.out.print(". ");
+                        }
+                    } else {
+                        System.out.print(zelle + " ");
+                    }
+                }
+                System.out.println(); // Neue Zeile nach jeder Zeile
+            }
+        }
+    
+
     public static void main(String[] args) {
         JumpSturdy game = new JumpSturdy();
         game.initializeBoardPositonsHM();
-        String fen = "r0r0r0r0r0r0/1r0r0r0r0r0r01/8/8/8/8/1bbb0b0b0b0b01/b0b0b0b0b0b0";
+        String fen = "r0r0r0r0r0r0/1r0r0r0r0r0r01/8/8/8/8/1b0b0b0b0b0b01/b0b0b0b0b0b0";
+        game.printSpielfeld((fen));
         game.getColorAndPiecesBoardForFen(fen);
         game.getAllMovesForPlayer("B",game.colorsBoard,game.piecesBoard);
         String str = game.colorsBoard[47].substring(1);
