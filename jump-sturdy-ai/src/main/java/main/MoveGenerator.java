@@ -194,8 +194,8 @@ public class MoveGenerator {
         int column = move % 10;
 
         boolean withinBorder = row >= 0 && row < 8 && column >= 0 && column < 8;
-        boolean notCut = (row != 1 || column != 0) && (row != 1 || column != 7) &&
-                (row != 6 || column != 0) && (row != 6 || column != 7);
+        boolean notCut = (row != 0 || column != 0) && (row != 0 || column != 7) &&
+                (row != 7 || column != 0) && (row != 7 || column != 7);
         boolean notOwn = colorBoard[row][column] == Color.EMPTY || colorBoard[row][column] != pieceColor;
 
         return withinBorder & notCut & notOwn;
