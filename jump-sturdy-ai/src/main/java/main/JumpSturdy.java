@@ -1,5 +1,6 @@
 package main;
 import java.util.HashMap;
+import java.util.HashSet;
 
 
 public class JumpSturdyGame {
@@ -80,18 +81,18 @@ public class JumpSturdyGame {
     }
 
     public void getAllMovesForPlayer(String player, String[] colorsBoard, String[] piecesBoard){ //Player soll sagen, ob wir rot oder blau sind (also Rot = R und Blau = B),
-        HashMap<Integer,String> movesForFigure = new HashMap<>();
+        HashMap<Integer, HashSet<String>> movesForFigure = new HashMap<>();
         for (int i = 0; i < colorsBoard.length; i++) {
             if (colorsBoard[i].length()==1) {
                 //checke die moves
                 if (colorsBoard[i].equals(player)){
-                    String s = calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
+                    HashSet<String> s = calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
                     movesForFigure.put(i,s);
                 }
             }
             else {
                 if (colorsBoard[i].substring(1).equals(player)){
-                    String s=calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
+                    HashSet<String> s=calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
                     movesForFigure.put(i,s);
                 }
             }
@@ -122,49 +123,49 @@ public class JumpSturdyGame {
         return false;
     }
 
-    String calculateAllPostions(String player, int pos, String piece,String[] colorsBoard,String[] piecesBoard){
-        String moves = "";
+    HashSet<String> calculateAllPostions(String player, int pos, String piece,String[] colorsBoard,String[] piecesBoard){
+        HashSet<String> moves = new HashSet<>();
         if (player=="B"){
             if (piece=="P"){
                 if (pos%8==6&&pos!=54){                                                                                 //Linker Rand
                     if (pos==6){
                         if (isMovePossible(pos,0,colorsBoard,piecesBoard,true,false)){                      //Capture Rechts
-                            moves+=boardPostions.get(0)+",";
+                            moves.add(boardPostions.get(0));
                         }
                         if (isMovePossible(pos,7,colorsBoard,piecesBoard,false,true)){                      //Move Rechts
-                            moves+=boardPostions.get(7)+",";
+                            moves.add(boardPostions.get(7));
                         }
                     }
                     else {
                         if (isMovePossible(pos,pos-7,colorsBoard,piecesBoard,true,false)){                  //Capture Rechts
-                            moves+=boardPostions.get(pos-7)+",";
+                            moves.add(boardPostions.get(pos-7));
                         }
                         if (isMovePossible(pos,pos-8,colorsBoard,piecesBoard,false,true)){                  //Move gerade
-                            moves+=boardPostions.get(pos-8)+",";
+                            moves.add(boardPostions.get(pos-8));
                         }
                         if (isMovePossible(pos,pos+1,colorsBoard,piecesBoard,false,true)){                  //Move Rechts
-                            moves+=boardPostions.get(pos+1)+",";
+                            moves.add(boardPostions.get(pos+1));
                         }
                     }
                 }
                 else if (pos%8==5){                                                                                     //Rechter Rand
                     if (pos==13){
                         if (isMovePossible(pos,5,colorsBoard,piecesBoard,true,false)){                      //Capture Schräg links
-                            moves+=boardPostions.get(5)+",";
+                            moves.add(boardPostions.get(5));
                         }
                         if (isMovePossible(pos,12,colorsBoard,piecesBoard,false,true)){                     //Move links
-                            moves+=boardPostions.get(12)+",";
+                            moves.add(boardPostions.get(12));
                         }
                     }
                     else {                                                                                              //Schauen ob es mit 5 Faxxen macht... Sollte aber eigentlich nie kommen, weil pos == 5 wäre win!
                         if (isMovePossible(pos,pos-9,colorsBoard,piecesBoard,true,false)){                  //Capture Schräg links
-                            moves+=boardPostions.get(pos-9)+",";
+                            moves.add(boardPostions.get(pos-9));
                         }
                         if (isMovePossible(pos,pos-8,colorsBoard,piecesBoard,false,true)){                  //Move gerade aus
-                            moves+=boardPostions.get(pos-8)+",";
+                            moves.add(boardPostions.get(pos-8));
                         }
                         if (isMovePossible(pos,pos-1,colorsBoard,piecesBoard,false,true)){                  //Move links
-                            moves+=boardPostions.get(pos-1)+",";
+                            moves.add(boardPostions.get(pos-1));
                         }
                     }
                 }
@@ -172,68 +173,68 @@ public class JumpSturdyGame {
                     if (pos<=12&&pos>=7) {                                                                              //Case: 1 vor der Roten Baseline
 
                         if (isMovePossible(pos, pos - 7, colorsBoard, piecesBoard, false,true)) {           //Move gerade aus
-                            moves+=boardPostions.get(pos - 7)+",";
+                            moves.add(boardPostions.get(pos - 7));
                         }
                         if (isMovePossible(pos, pos - 1, colorsBoard, piecesBoard, false,true)) {           //Move links
-                            moves+=boardPostions.get(pos - 1)+",";
+                            moves.add(boardPostions.get(pos - 1));
                         }
                         if (isMovePossible(pos, pos + 1, colorsBoard, piecesBoard, false,true)) {           //Move links
-                            moves+=boardPostions.get(pos + 1)+",";
+                            moves.add(boardPostions.get(pos + 1));
                         }
                         //TODO: pos!=7
                         if (pos == 7) {
                             if (isMovePossible(pos, pos - 6, colorsBoard, piecesBoard, true,false)) {            //Capture Schräg rechts
-                                moves+=boardPostions.get(pos - 6)+",";
+                                moves.add(boardPostions.get(pos - 6));
                             }
                         } else if (pos == 12) {
                             if (isMovePossible(pos, pos - 8, colorsBoard, piecesBoard, true,false)) {            //Capture Schräg links
-                                moves+=boardPostions.get(pos - 8)+",";
+                                moves.add(boardPostions.get(pos - 8));
                             }
                         } else {
                             if (isMovePossible(pos, pos - 8, colorsBoard, piecesBoard, true,false)) {            //Capture Schräg links
-                                moves+=boardPostions.get(pos - 8)+",";
+                                moves.add(boardPostions.get(pos - 8));
                             }
                             if (isMovePossible(pos, pos - 6, colorsBoard, piecesBoard, true,false)) {            //Capture Schräg rechts
-                                moves+=boardPostions.get(pos - 6)+",";
+                                moves.add(boardPostions.get(pos - 6));
                             }
                         }
                     } else if (pos>=54&&pos<=59) {                                                                      //Case: Blaue Baseline
 
                         if (isMovePossible(pos, pos - 6, colorsBoard, piecesBoard, true,false)) {             //Capture Schräg rechts
-                            moves+=boardPostions.get(pos - 6)+",";
+                            moves.add(boardPostions.get(pos - 6));
                         }
                         if (isMovePossible(pos, pos - 7, colorsBoard, piecesBoard, false,true)) {            //Move gerade aus
-                            moves+=boardPostions.get(pos - 7)+",";
+                            moves.add(boardPostions.get(pos - 7));
                         }
                         if (isMovePossible(pos, pos - 8, colorsBoard, piecesBoard, true,false)) {             //Capture Schräg links
-                            moves+=boardPostions.get(pos - 8)+",";
+                            moves.add(boardPostions.get(pos - 8));
                         }
 
                         if (pos!=54){                                                                                            //Darf dann nicht nach links, weil er sich in der linken unteren Ecke befindet
                             if (isMovePossible(pos, pos - 1, colorsBoard, piecesBoard, false,true)) {         //Move links
-                                moves+=boardPostions.get(pos - 1)+",";
+                                moves.add(boardPostions.get(pos - 1));
                             }
                         }
                         if (pos!=59){                                                                                            //Darf dann nicht nach rechts, weil er sich in der rechten unteren Ecke befindet
                             if (isMovePossible(pos, pos + 1, colorsBoard, piecesBoard, false,true)) {         //Move rechts
-                                moves+=boardPostions.get(pos + 1)+",";
+                                moves.add(boardPostions.get(pos + 1));
                             }
                         }
                     } else {                                                 //ist der "normale" Fall TODO: vielleicht hier den code debuggen und auf laufzeit testen ---> Standardfall irgendwie früher abdecken
                         if (isMovePossible(pos, pos - 7, colorsBoard, piecesBoard, true,false)) {             //Capture Schräg rechts
-                            moves+=boardPostions.get(pos - 7)+",";
+                            moves.add(boardPostions.get(pos - 7));
                         }
                         if (isMovePossible(pos, pos - 8, colorsBoard, piecesBoard, false,true)) {             //Move gerade aus
-                            moves+=boardPostions.get(pos - 8)+",";
+                            moves.add(boardPostions.get(pos - 8));
                         }
                         if (isMovePossible(pos, pos - 9, colorsBoard, piecesBoard, true,false)) {             //Capture Schräg links
-                            moves+=boardPostions.get(pos - 9)+",";
+                            moves.add(boardPostions.get(pos - 9));
                         }
                         if (isMovePossible(pos, pos - 1, colorsBoard, piecesBoard, false,true)) {             //Move links
-                            moves+=boardPostions.get(pos - 1)+",";
+                            moves.add(boardPostions.get(pos - 1));
                         }
                         if (isMovePossible(pos, pos + 1, colorsBoard, piecesBoard, false,true)) {             //Move rechts
-                            moves+=boardPostions.get(pos + 1)+",";
+                            moves.add(boardPostions.get(pos + 1));
                         }
                     }
                 }
@@ -245,13 +246,13 @@ public class JumpSturdyGame {
                         if (((posCalc-15)/8)==0){                                                                           //Spezialfall, wenn wir auf die gewinner linie Springen.
                             if (pos!=20) {
                                 if (isMovePossible(pos, pos - 14, colorsBoard, piecesBoard, true, true)) {   //Capture & Move Check
-                                    moves+=boardPostions.get(pos - 14)+",";
+                                    moves.add(boardPostions.get(pos - 14));
                                 }
                             }
                         }
                         else{           //TODO: Test for edge case pos=20 ob wir hier rein rutschen
                             if (isMovePossible(pos, pos-15, colorsBoard, piecesBoard, true,true)) {          //Capture & Move Check
-                                moves+=boardPostions.get(pos-15)+",";
+                                moves.add(boardPostions.get(pos-15));
                             }
 
                         }
@@ -260,13 +261,13 @@ public class JumpSturdyGame {
                         if (((posCalc-17)/8)==0){                                                                           //Spezialfall, wenn wir auf der gewinner linie sind.
                             if (pos!=15){
                                 if (isMovePossible(pos, pos-16, colorsBoard, piecesBoard, true,true)) {      //Capture & Move Check
-                                    moves+=boardPostions.get(pos-16)+",";
+                                    moves.add(boardPostions.get(pos-16));
                                 }
                             }
                         }
                         else{       //TODO: Test for edge case pos=15 ob wir hier rein rutschen
                             if (isMovePossible(pos, pos-17, colorsBoard, piecesBoard, true,true)) {          //Capture & Move Check
-                                moves+=boardPostions.get(pos-17)+",";
+                                moves.add(boardPostions.get(pos-17));
                             }
                         }
                     }
@@ -274,13 +275,13 @@ public class JumpSturdyGame {
                         if (((posCalc-6)/8)==0){                                                                              //Spezialfall, wenn wir auf die gewinner linie springen.
                             if (pos!=11){
                                 if (isMovePossible(pos, pos-5, colorsBoard, piecesBoard, true,true)) {       //Capture & Move Check
-                                    moves+=boardPostions.get(pos-5)+",";
+                                    moves.add(boardPostions.get(pos-5));
                                 }
                             }
                         }
                         else {       //TODO: Test for edge case pos=11 ob wir hier rein rutschen
                             if (isMovePossible(pos, pos-6, colorsBoard, piecesBoard, true,true)) {           //Capture & Move Check
-                                moves+=boardPostions.get(pos-6)+",";
+                                moves.add(boardPostions.get(pos-6));
                             }
                         }
                     }
@@ -288,13 +289,13 @@ public class JumpSturdyGame {
                         if (((posCalc-10)/8)==0){
                             if (pos!=8){
                                 if (isMovePossible(pos, pos-9, colorsBoard, piecesBoard, true,true)) {        //Capture & Move Check
-                                    moves+=boardPostions.get(pos-9)+",";
+                                    moves.add(boardPostions.get(pos-9));
                                 }
                             }
                         }
                         else {        //TODO: Test for edge case pos=11 ob wir hier rein rutschen
                             if (isMovePossible(pos, pos-10, colorsBoard, piecesBoard, true,true)) {           //Capture & Move Check
-                                moves+=boardPostions.get(pos-10)+",";
+                                moves.add(boardPostions.get(pos-10));
                             }
                         }
                     }
@@ -303,20 +304,20 @@ public class JumpSturdyGame {
                     int posCalc = pos+2;
 
                     if (isMovePossible(pos, pos-14, colorsBoard, piecesBoard, true,true)) {                   //Capture & Move Check Gerade Rechts
-                        moves+=boardPostions.get(pos-14)+",";
+                        moves.add(boardPostions.get(pos-14));
                     }
                     if (isMovePossible(pos, pos-16, colorsBoard, piecesBoard, true,true)) {                   //Capture & Move Check Gerade Links
-                        moves+=boardPostions.get(pos-16)+",";
+                        moves.add(boardPostions.get(pos-16));
                     }
 
                     if ((posCalc/8)-((posCalc-5)/8)==1){                                                                        //Rechts hoch
                         if (isMovePossible(pos, pos-5, colorsBoard, piecesBoard, true,true)) {               //Capture & Move Check
-                            moves+=boardPostions.get(pos-5)+",";
+                            moves.add(boardPostions.get(pos-5));
                         }
                     }
                     if ((posCalc/8)-((posCalc-9)/8)==1){                                                                       //Links hoch
                         if (isMovePossible(pos, pos-9, colorsBoard, piecesBoard, true,true)) {              //Capture & Move Check
-                            moves+=boardPostions.get(pos-9)+",";
+                            moves.add(boardPostions.get(pos-9));
                         }
                     }
                 }
@@ -327,42 +328,42 @@ public class JumpSturdyGame {
                 if (pos%8==6&&pos!=54){                                                                                 //Linker Rand
                     if (pos==46){
                         if (isMovePossible(pos, 54, colorsBoard, piecesBoard, true,false)) {                //Capture right
-                            moves+=boardPostions.get(54)+",";
+                            moves.add(boardPostions.get(54));
                         }
                         if (isMovePossible(pos, 47, colorsBoard, piecesBoard, false,true)) {                //Move right
-                            moves+=boardPostions.get(47)+",";
+                            moves.add(boardPostions.get(47));
                         }
                     }
                     else {
                         if (isMovePossible(pos, pos+9, colorsBoard, piecesBoard, true,false)) {             //Capture right
-                            moves+=boardPostions.get(pos+9)+",";
+                            moves.add(boardPostions.get(pos+9));
                         }
                         if (isMovePossible(pos, pos+8, colorsBoard, piecesBoard, false,true)) {             //Move straight
-                            moves+=boardPostions.get(pos+8)+",";
+                            moves.add(boardPostions.get(pos+8));
                         }
                         if (isMovePossible(pos, pos+1, colorsBoard, piecesBoard, false,true)) {             //Move right
-                            moves+=boardPostions.get(pos+1)+",";
+                            moves.add(boardPostions.get(pos+1));
                         }
                     }
                 }
                 else if (pos%8==5&&pos!=5){                                                                             //Rechter Rand
                     if (pos==53){
                         if (isMovePossible(pos, 59, colorsBoard, piecesBoard, true,false)) {                //Capture left
-                            moves+=boardPostions.get(59)+",";
+                            moves.add(boardPostions.get(59));
                         }
                         if (isMovePossible(pos, 52, colorsBoard, piecesBoard, false,true)) {                //Move left
-                            moves+=boardPostions.get(52)+",";
+                            moves.add(boardPostions.get(52));
                         }
                     }
                     else {
                         if (isMovePossible(pos, pos+7, colorsBoard, piecesBoard, true,false)) {             //Capture left
-                            moves+=boardPostions.get(pos+7)+",";
+                            moves.add(boardPostions.get(pos+7));
                         }
                         if (isMovePossible(pos, pos+8, colorsBoard, piecesBoard, false,true)) {             //Move straight
-                            moves+=boardPostions.get(pos+8)+",";
+                            moves.add(boardPostions.get(pos+8));
                         }
                         if (isMovePossible(pos, pos-1, colorsBoard, piecesBoard, false,true)) {             //Move left
-                            moves+=boardPostions.get(pos-1)+",";
+                            moves.add(boardPostions.get(pos-1));
                         }
                     }
                 }
@@ -370,58 +371,58 @@ public class JumpSturdyGame {
                     if (pos >= 47 && 52 <= pos) {
                         if (pos != 52) {
                             if (isMovePossible(pos, pos + 8, colorsBoard, piecesBoard, true, false)) {      //Capture right
-                                moves+=boardPostions.get(pos + 8)+",";
+                                moves.add(boardPostions.get(pos + 8));
                             }
                         }
                         if (pos != 47) {
                             if (isMovePossible(pos, pos + 6, colorsBoard, piecesBoard, true, false)) {      //Capture left
-                                moves+=boardPostions.get(pos + 6)+",";
+                                moves.add(boardPostions.get(pos + 6));
                             }
                         }
                         if (isMovePossible(pos, pos + 7, colorsBoard, piecesBoard, false, true)) {          //Move straight
-                            moves+=boardPostions.get(pos + 7)+",";
+                            moves.add(boardPostions.get(pos + 7));
                         }
                         if (isMovePossible(pos, pos+1, colorsBoard, piecesBoard, false,true)) {             //Move right
-                            moves+=boardPostions.get(pos+1)+",";
+                            moves.add(boardPostions.get(pos+1));
                         }
                         if (isMovePossible(pos, pos-1, colorsBoard, piecesBoard, false,true)) {             //Move left
-                            moves+=boardPostions.get(pos-1)+",";
+                            moves.add(boardPostions.get(pos-1));
                         }
                     } else if (pos<=5) {            //Case : Rote Baseline
                         if (isMovePossible(pos, pos + 7, colorsBoard, piecesBoard, false, true)) {          //Move straight
-                            moves+=boardPostions.get(pos + 7)+",";
+                            moves.add(boardPostions.get(pos + 7));
                         }
                         if (isMovePossible(pos, pos+6, colorsBoard, piecesBoard, true,false)) {             //Capture left
-                            moves+=boardPostions.get(pos+6)+",";
+                            moves.add(boardPostions.get(pos+6));
                         }
                         if (isMovePossible(pos, pos+8, colorsBoard, piecesBoard, true,false)) {             //Capture right
-                            moves+=boardPostions.get(pos+8)+",";
+                            moves.add(boardPostions.get(pos+8));
                         }
                         if (pos!=5){
                             if (isMovePossible(pos, pos+1, colorsBoard, piecesBoard, false,true)) {        //Move right
-                                moves+=boardPostions.get(pos+1)+",";
+                                moves.add(boardPostions.get(pos+1));
                             }
                         }
                         if (pos!=0){
                             if (isMovePossible(pos, pos-1, colorsBoard, piecesBoard, false,true)) {        //Move left
-                                moves+=boardPostions.get(pos-1)+",";
+                                moves.add(boardPostions.get(pos-1));
                             }
                         }
                     } else {                                                //ist der "normale" Fall
                         if (isMovePossible(pos, pos+7, colorsBoard, piecesBoard, true,false)) {            //Capture left
-                            moves+=boardPostions.get(pos+7)+",";
+                            moves.add(boardPostions.get(pos+7));
                         }
                         if (isMovePossible(pos, pos+8, colorsBoard, piecesBoard, false,true)) {            //Move straight
-                            moves+=boardPostions.get(pos+8)+",";
+                            moves.add(boardPostions.get(pos+8));
                         }
                         if (isMovePossible(pos, pos+9, colorsBoard, piecesBoard, true,false)) {            //Capture right
-                            moves+=boardPostions.get(pos+9)+",";
+                            moves.add(boardPostions.get(pos+9));
                         }
                         if (isMovePossible(pos, pos+1, colorsBoard, piecesBoard, false,true)) {            //Move Right
-                            moves+=boardPostions.get(pos+1)+",";
+                            moves.add(boardPostions.get(pos+1));
                         }
                         if (isMovePossible(pos, pos-1, colorsBoard, piecesBoard, false,true)) {            //Move Left
-                            moves+=boardPostions.get(pos-1)+",";
+                            moves.add(boardPostions.get(pos-1));
                         }
                     }
                 }
@@ -433,13 +434,13 @@ public class JumpSturdyGame {
                         if (((posCalc+17)/8)-7==0){                                                                          //Spezialfall, wenn wir auf die Gewinnerlinie springen
                             if (pos!=44){
                                 if (isMovePossible(pos, pos+16, colorsBoard, piecesBoard, true,true)) {
-                                    moves+=boardPostions.get(pos+16)+",";
+                                    moves.add(boardPostions.get(pos+16));
                                 }
                             }
                         }
                         else{
                             if (isMovePossible(pos, pos+17, colorsBoard, piecesBoard, true,true)) {
-                                moves+=boardPostions.get(pos+17)+",";
+                                moves.add(boardPostions.get(pos+17));
                             }
                         }
                     }
@@ -447,13 +448,13 @@ public class JumpSturdyGame {
                         if (((posCalc+15)/8)-7==0){                                                                          //Spezialfall, wenn wir auf die Gewinnerlinie springen
                             if (pos!=39){
                                 if (isMovePossible(pos, pos+14, colorsBoard, piecesBoard, true,true)) {
-                                    moves+=boardPostions.get(pos+14)+",";
+                                    moves.add(boardPostions.get(pos+14));
                                 }
                             }
                         }
                         else {
                             if (isMovePossible(pos, pos+15, colorsBoard, piecesBoard, true,true)) {
-                                moves+=boardPostions.get(pos+15)+",";
+                                moves.add(boardPostions.get(pos+15));
                             }
                         }
                     }
@@ -461,13 +462,13 @@ public class JumpSturdyGame {
                         if (((posCalc+10)/8)-7==0){                                                                          //Spezialfall, wenn wir auf die Gewinnerlinie springen
                             if (pos!=51){
                                 if (isMovePossible(pos, pos+9, colorsBoard, piecesBoard, true,true)) {
-                                    moves+=boardPostions.get(pos+9)+",";
+                                    moves.add(boardPostions.get(pos+9));
                                 }
                             }
                         }
                         else{
                             if (isMovePossible(pos, pos+10, colorsBoard, piecesBoard, true,true)) {
-                                moves+=boardPostions.get(pos+10)+",";
+                                moves.add(boardPostions.get(pos+10));
                             }
                         }
                     }
@@ -475,13 +476,13 @@ public class JumpSturdyGame {
                         if (((posCalc+6)/8)-7==0){                                                                           //Spezialfall, wenn wir auf die Gewinnerlinie springen
                             if (pos != 48){
                                 if (isMovePossible(pos, pos+5, colorsBoard, piecesBoard, true,true)) {
-                                    moves+=boardPostions.get(pos+5)+",";
+                                    moves.add(boardPostions.get(pos+5));
                                 }
                             }
                         }
                         else{
                             if (isMovePossible(pos, pos+6, colorsBoard, piecesBoard, true,true)) {
-                                moves+=boardPostions.get(pos+6)+",";
+                                moves.add(boardPostions.get(pos+6));
                             }
                         }
                     }
@@ -489,19 +490,19 @@ public class JumpSturdyGame {
                 else {                                                                                                      //fall wenn wir auf der Baseline sind.
                     int posCalc = pos+2;
                     if (isMovePossible(pos, pos+16, colorsBoard, piecesBoard, true,true)) {             //Gerade Rechts
-                        moves+=boardPostions.get(pos+16)+",";
+                        moves.add(boardPostions.get(pos+16));
                     }
                     if (isMovePossible(pos, pos+14, colorsBoard, piecesBoard, true,true)) {             //Gerade Links
-                        moves+=boardPostions.get(pos+14)+",";
+                        moves.add(boardPostions.get(pos+14));
                     }
                     if ((((posCalc/8)-7)-(((posCalc+9)/8))-7)==-1){    //rechts Runter
                         if (isMovePossible(pos, pos+9, colorsBoard, piecesBoard, true,true)) {          //Gerade Links
-                            moves+=boardPostions.get(pos+9)+",";
+                            moves.add(boardPostions.get(pos+9));
                         }
                     }
                     if ((((posCalc/8)-7)-(((posCalc+5)/8))-7)==-1){    //links Runter
                         if (isMovePossible(pos, pos+5, colorsBoard, piecesBoard, true,true)) {          //Gerade Links
-                            moves+=boardPostions.get(pos+5)+",";
+                            moves.add(boardPostions.get(pos+5));
                         }
                     }
                 }
@@ -518,7 +519,7 @@ public class JumpSturdyGame {
             for (int i = 0; i < zeile.length(); i++) {
                 // In erster und letzter Zeile die Ecken durch '-' kennzeichnen
                 if ((t == 0 || t == 7) && i == 0 ) {
-                    System.out.print("- ");
+                    System.out.print("  ");
                 }
 
                 char zelle = zeile.charAt(i);
@@ -537,7 +538,7 @@ public class JumpSturdyGame {
                     }
                 }
                 if ((t == 0 || t == 7) && i == zeile.length() - 1) {
-                    System.out.print(" -");
+                    System.out.print("  ");
                 }
             }
             System.out.println(); // Neue Zeile nach jeder Zeile
@@ -545,12 +546,13 @@ public class JumpSturdyGame {
     }
 
     public static void main(String[] args) {
+        JumpSturdyGame s = new JumpSturdyGame();
+        s.initializeBoardPositonsHM();
         for (int i = 0; i < 1; i++) {
-            JumpSturdyGame s = new JumpSturdyGame();
-            s.initializeBoardPositonsHM();
             String fen = "r0r0r0r0r0r0/1r0r0r0r0r0r01/8/8/8/8/1b0b0b0b0b0b01/b0b0b0b0b0b0";
             s.getColorAndPiecesBoardForFen(fen);
             s.getAllMovesForPlayer("R",s.colorsBoard,s.piecesBoard);
+            s.printSpielfeld(fen);
         }
     }
 }
