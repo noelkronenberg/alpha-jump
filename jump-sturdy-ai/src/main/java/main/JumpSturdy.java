@@ -1,7 +1,8 @@
 package main;
 import java.util.HashMap;
 
-public class JumpSturdy {
+
+public class JumpSturdyGame {
     String fenBoard;
     boolean isMyTurn;
 
@@ -84,7 +85,7 @@ public class JumpSturdy {
             if (colorsBoard[i].length()==1) {
                 //checke die moves
                 if (colorsBoard[i].equals(player)){
-                    String s=calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
+                    String s = calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
                     movesForFigure.put(i,s);
                 }
             }
@@ -231,7 +232,7 @@ public class JumpSturdy {
                         if (isMovePossible(pos, pos - 1, colorsBoard, piecesBoard, false,true)) {             //Move links
                             moves+=boardPostions.get(pos - 1)+",";
                         }
-                        if (isMovePossible(pos, pos + 1, colorsBoard, piecesBoard, false,true)) {           //Move rechts
+                        if (isMovePossible(pos, pos + 1, colorsBoard, piecesBoard, false,true)) {             //Move rechts
                             moves+=boardPostions.get(pos + 1)+",";
                         }
                     }
@@ -387,7 +388,7 @@ public class JumpSturdy {
                             moves+=boardPostions.get(pos-1)+",";
                         }
                     } else if (pos<=5) {            //Case : Rote Baseline
-                        if (isMovePossible(pos, pos + 7, colorsBoard, piecesBoard, true, false)) {          //Move straight
+                        if (isMovePossible(pos, pos + 7, colorsBoard, piecesBoard, false, true)) {          //Move straight
                             moves+=boardPostions.get(pos + 7)+",";
                         }
                         if (isMovePossible(pos, pos+6, colorsBoard, piecesBoard, true,false)) {             //Capture left
@@ -509,50 +510,47 @@ public class JumpSturdy {
         return moves;
     }
 
-        public void printSpielfeld(String notation) {
-            String[] zeilen = notation.split("/");
-            
-            for (int t = 0; t < zeilen.length; t++) {
-                String zeile = zeilen[t];
-                for (int i = 0; i < zeile.length(); i++) {
-                    // In erster und letzter Zeile die Ecken durch '-' kennzeichnen
-                    if ((t == 0 || t == 7) && i == 0 ) {
-                        System.out.print("- ");
-                    }
+    public void printSpielfeld(String notation) {
+        String[] zeilen = notation.split("/");
 
-                    char zelle = zeile.charAt(i);
-                    if (Character.isDigit(zelle)) {
-                        int leerfelder = Character.getNumericValue(zelle);
-                        for (int j = 0; j < leerfelder; j++) {
-                            System.out.print(".");
-                            if (j < leerfelder - 1 || i <  zeile.length() - 1) {
-                                System.out.print(" ");
-                            }
-                        }
-                    } else {
-                        System.out.print(zelle);
-                        if (i + 1 < zeile.length() - 1) {
+        for (int t = 0; t < zeilen.length; t++) {
+            String zeile = zeilen[t];
+            for (int i = 0; i < zeile.length(); i++) {
+                // In erster und letzter Zeile die Ecken durch '-' kennzeichnen
+                if ((t == 0 || t == 7) && i == 0 ) {
+                    System.out.print("- ");
+                }
+
+                char zelle = zeile.charAt(i);
+                if (Character.isDigit(zelle)) {
+                    int leerfelder = Character.getNumericValue(zelle);
+                    for (int j = 0; j < leerfelder; j++) {
+                        System.out.print(".");
+                        if (j < leerfelder - 1 || i <  zeile.length() - 1) {
                             System.out.print(" ");
                         }
                     }
-                    if ((t == 0 || t == 7) && i == zeile.length() - 1) {
-                        System.out.print(" -");
+                } else {
+                    System.out.print(zelle);
+                    if (i + 1 < zeile.length() - 1) {
+                        System.out.print(" ");
                     }
                 }
-                System.out.println(); // Neue Zeile nach jeder Zeile
+                if ((t == 0 || t == 7) && i == zeile.length() - 1) {
+                    System.out.print(" -");
+                }
             }
+            System.out.println(); // Neue Zeile nach jeder Zeile
         }
-    
-
-    public static void main(String[] args) {
-        JumpSturdy game = new JumpSturdy();
-        game.initializeBoardPositonsHM();
-        String fen = "r0r0r0r0r0r0/1r0r0r0r0r0r01/8/8/8/8/1b0b0b0b0b0b01/b0b0b0b0b0b0";
-        game.printSpielfeld((fen));
-        game.getColorAndPiecesBoardForFen(fen);
-        game.getAllMovesForPlayer("B",game.colorsBoard,game.piecesBoard);
-        String str = game.colorsBoard[47].substring(1);
-        System.out.println(str.equals("B"));
     }
 
+    public static void main(String[] args) {
+        for (int i = 0; i < 1; i++) {
+            JumpSturdyGame s = new JumpSturdyGame();
+            s.initializeBoardPositonsHM();
+            String fen = "r0r0r0r0r0r0/1r0r0r0r0r0r01/8/8/8/8/1b0b0b0b0b0b01/b0b0b0b0b0b0";
+            s.getColorAndPiecesBoardForFen(fen);
+            s.getAllMovesForPlayer("R",s.colorsBoard,s.piecesBoard);
+        }
+    }
 }
