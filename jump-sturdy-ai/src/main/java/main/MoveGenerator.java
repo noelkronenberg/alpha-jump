@@ -192,6 +192,10 @@ public class MoveGenerator {
             int newRow = row + move[0];
             int newColumn = column + move[1];
 
+            if (newRow >= 8 || newColumn >= 8) {
+                continue;
+            }
+
             // cannot move to own double
             if (!((pieceBoard[newRow][newColumn] == Piece.DOUBLE || pieceBoard[newRow][newColumn] == Piece.MIXED)
                     && colorBoard[newRow][newColumn] == color)) {
@@ -247,7 +251,7 @@ public class MoveGenerator {
         // empty or opposite color
         if (colorBoard[toRow][toColumn] == Color.EMPTY ||
                 (colorBoard[toRow][toColumn] != color && pieceBoard[toRow][toColumn] == Piece.SINGLE)) {
-            pieceBoard[toRow][toColumn] = piece;
+            pieceBoard[toRow][toColumn] = Piece.SINGLE;
             colorBoard[toRow][toColumn] = color;
         }
 
@@ -405,11 +409,20 @@ public class MoveGenerator {
         moveGenerator.printBoard();
         // moveGenerator.exampleSequence(9, 14, 61);
 
-        System.out.println(moveGenerator.generateAllPossibleMoves(Color.WHITE));
+        System.out.println();
+        System.out.println("Possible moves: " + moveGenerator.generateAllPossibleMoves(Color.WHITE));
 
         System.out.println();
         System.out.println("Move 61 to 62:");
         moveGenerator.movePiece(61, 62, moveGenerator.getPieceAtPosition(61), Color.WHITE);
+        moveGenerator.printBoard();
+
+        System.out.println();
+        System.out.println("Possible moves: " + moveGenerator.generatePossibleMoves(62, Color.WHITE));
+
+        System.out.println();
+        System.out.println("Move 62 to 41:");
+        moveGenerator.movePiece(62, 41, moveGenerator.getPieceAtPosition(62), Color.WHITE);
         moveGenerator.printBoard();
     }
 
