@@ -1,8 +1,10 @@
 package main;
 
 import javax.swing.*;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MoveGenerator {
 
@@ -268,6 +270,22 @@ public class MoveGenerator {
         return pieceBoard[row][column];
     }
 
+    List<Map.Entry<Integer, List<Integer>>> generateAllPossibleMoves(Color color) {
+        List<Map.Entry<Integer, List<Integer>>> allPossibleMoves = new ArrayList<>();
+
+        for (int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
+                if (colorBoard[row][column] == color) {
+                    int position = convertToNumber(row, column);
+                    List<Integer> piecePossibleMoves = generatePossibleMoves(position, color);
+                    allPossibleMoves.add(new AbstractMap.SimpleEntry<>(position, piecePossibleMoves));
+                }
+            }
+        }
+
+        return allPossibleMoves;
+    }
+
     void printBoard() {
         System.out.println("     0   1   2   3   4   5   6   7");
         System.out.println();
@@ -384,7 +402,10 @@ public class MoveGenerator {
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
-        moveGenerator.exampleSequence(9, 14, 61);
+        moveGenerator.printBoard();
+        // moveGenerator.exampleSequence(9, 14, 61);
+
+        System.out.println(moveGenerator.generateAllPossibleMoves(Color.WHITE));
     }
 
 }
