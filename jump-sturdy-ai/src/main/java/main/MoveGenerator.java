@@ -207,7 +207,7 @@ public class MoveGenerator {
         boolean withinBorder = row >= 0 && row < 8 && column >= 0 && column < 8;
         boolean notCut = (row != 0 || column != 0) && (row != 0 || column != 7) &&
                 (row != 7 || column != 0) && (row != 7 || column != 7);
-        boolean notOwn = colorBoard[row][column] == Color.EMPTY || colorBoard[row][column] != pieceColor;
+        boolean notOwn = pieceBoard[row][column] != Piece.DOUBLE || (pieceBoard[row][column] != Piece.MIXED && colorBoard[row][column] == pieceColor);
 
         return withinBorder & notCut & notOwn;
     }
@@ -406,6 +406,11 @@ public class MoveGenerator {
         // moveGenerator.exampleSequence(9, 14, 61);
 
         System.out.println(moveGenerator.generateAllPossibleMoves(Color.WHITE));
+
+        System.out.println();
+        System.out.println("Move 61 to 62:");
+        moveGenerator.movePiece(61, 62, moveGenerator.getPieceAtPosition(61), Color.WHITE);
+        moveGenerator.printBoard();
     }
 
 }
