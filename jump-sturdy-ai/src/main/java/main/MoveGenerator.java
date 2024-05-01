@@ -196,6 +196,17 @@ public class MoveGenerator {
                 continue;
             }
 
+            // no moving backwards
+            if (color == Color.BLACK) {
+                if (newRow < row) {
+                    continue;
+                }
+            } else if (color == Color.WHITE) {
+                if (newRow > row) {
+                    continue;
+                }
+            }
+
             // cannot move to own double
             if (!((pieceBoard[newRow][newColumn] == Piece.DOUBLE || pieceBoard[newRow][newColumn] == Piece.MIXED)
                     && colorBoard[newRow][newColumn] == color)) {
