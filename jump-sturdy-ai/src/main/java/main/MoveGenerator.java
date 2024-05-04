@@ -320,9 +320,10 @@ public class MoveGenerator {
         boolean withinBorder = row >= 0 && row < 8 && column >= 0 && column < 8;
         boolean notCut = (row != 0 || column != 0) && (row != 0 || column != 7) &&
                 (row != 7 || column != 0) && (row != 7 || column != 7);
-        boolean notOwn = pieceBoard[row][column] != Piece.DOUBLE || (pieceBoard[row][column] != Piece.MIXED && colorBoard[row][column] == pieceColor);
+        boolean own = (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED)
+                && colorBoard[row][column] == pieceColor;
 
-        return withinBorder & notCut & notOwn;
+        return withinBorder & notCut & !own;
     }
 
     private int convertToNumber(int row, int column) {
@@ -514,7 +515,7 @@ public class MoveGenerator {
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        String fen = "3b02/2bb2b02/5b0bb1/2r0b04/2rb3b01/1rr1rr2r0r0/5r02/2rr3";
+        String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04";
         for (int i = 0; i < 1; i++) {
             moveGenerator.initializeBoard(fen);
             moveGenerator.printBoard();
