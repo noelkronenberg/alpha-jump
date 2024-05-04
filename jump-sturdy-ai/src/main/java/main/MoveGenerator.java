@@ -515,15 +515,11 @@ public class MoveGenerator {
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0";
+        String fen = "3b02/2bb2b02/5b0bb1/2r0b04/2rb3b01/1rr1rr2r0r0/5r02/2rr3";
         for (int i = 0; i < 1; i++) {
             moveGenerator.initializeBoard(fen);
             moveGenerator.printBoard();
-            // moveGenerator.exampleSequence(9, 14, 61);
-
-            System.out.println(moveGenerator.getPieceAtPosition(73));
-
-            moveGenerator.generateAllPossibleMoves(Color.BLACK);
+            System.out.println(moveGenerator.generateAllPossibleMoves(Color.BLACK));
         }
     }
 }
