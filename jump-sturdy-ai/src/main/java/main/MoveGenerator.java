@@ -396,11 +396,11 @@ public class MoveGenerator {
     }
 
     void printBoard() {
-        System.out.println("     0   1   2   3   4   5   6   7");
+        System.out.println("     7   6   5   4   3   2   1   0");
         System.out.println();
-        for (int row = 0; row < 8; row++) {
+        for (int row = 7; row >= 0; row--) {
             System.out.print(row + "   ");
-            for (int column = 0; column < 8; column++) {
+            for (int column = 7; column >= 0; column--) {
 
                 // border
                 if (pieceBoard[row][column] == null) {
@@ -417,13 +417,13 @@ public class MoveGenerator {
                     if (colorBoard[row][column] == Color.BLACK) {
                         switch (pieceBoard[row][column]) {
                             case SINGLE:
-                                System.out.print(" B ");
+                                System.out.print(" R ");
                                 break;
                             case DOUBLE:
-                                System.out.print(" BB");
+                                System.out.print("RR ");
                                 break;
                             case MIXED:
-                                System.out.print(" WB");
+                                System.out.print("RB ");
                                 break;
                         }
 
@@ -431,13 +431,13 @@ public class MoveGenerator {
                     } else {
                         switch (pieceBoard[row][column]) {
                             case SINGLE:
-                                System.out.print(" W ");
+                                System.out.print(" B ");
                                 break;
                             case DOUBLE:
-                                System.out.print(" WW");
+                                System.out.print("BB ");
                                 break;
                             case MIXED:
-                                System.out.print(" BW");
+                                System.out.print("BR ");
                                 break;
                         }
                     }
