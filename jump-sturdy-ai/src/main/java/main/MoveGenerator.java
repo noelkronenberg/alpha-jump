@@ -423,7 +423,7 @@ public class MoveGenerator {
                                 System.out.print("RR ");
                                 break;
                             case MIXED:
-                                System.out.print("RB ");
+                                System.out.print("BR ");
                                 break;
                         }
 
@@ -437,7 +437,7 @@ public class MoveGenerator {
                                 System.out.print("BB ");
                                 break;
                             case MIXED:
-                                System.out.print("BR ");
+                                System.out.print("RB ");
                                 break;
                         }
                     }
