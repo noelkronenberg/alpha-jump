@@ -27,19 +27,19 @@ public class MoveGenerator {
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = null;
                             colorBoard[row][column] = null;
-                        // color
+                            // color
                         } else {
                             pieceBoard[row][column] = Piece.SINGLE;
                             colorBoard[row][column] = Color.BLACK;
                         }
 
-                    // white
+                        // white
                     } else if (row == 7) {
                         // border
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = null;
                             colorBoard[row][column] = null;
-                        // color
+                            // color
                         } else {
                             pieceBoard[row][column] = Piece.SINGLE;
                             colorBoard[row][column] = Color.WHITE;
@@ -57,19 +57,19 @@ public class MoveGenerator {
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = Piece.EMPTY;
                             colorBoard[row][column] = Color.EMPTY;
-                        // color
+                            // color
                         } else {
                             pieceBoard[row][column] = Piece.SINGLE;
                             colorBoard[row][column] = Color.BLACK;
                         }
 
-                    // white
+                        // white
                     } else if (row == 6) {
                         // no piece
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = Piece.EMPTY;
                             colorBoard[row][column] = Color.EMPTY;
-                        // color
+                            // color
                         } else {
                             pieceBoard[row][column] = Piece.SINGLE;
                             colorBoard[row][column] = Color.WHITE;
@@ -87,6 +87,80 @@ public class MoveGenerator {
             }
         }
 
+    }
+
+    Color getColor(char c) {
+        if (c == 'r') {
+            return Color.BLACK;             //ROT==BLACK
+        } else {
+            return Color.WHITE;             //Blau==WHITE
+        }
+    }
+
+    void initializeBoard(String fen) {
+        pieceBoard = new Piece[8][8];
+        colorBoard = new Color[8][8];
+        char[] fenArray = fen.toCharArray();
+        fillBoardEdges();                                                                       //is used to fill the shortened edges
+        int fenCounter = 0;
+        int counter = 1;                                                                        //Is used to jump one column, depending on wether we are in a shot or "normal" row
+        for (int row = 0; row < 8; row++) {
+            if (row == 7) {
+                counter = 1;
+            }
+            for (int column = 0; column < 8; column++) {
+                char fenChar = fenArray[fenCounter];
+                if (Character.isLetter(fenChar)) {
+                    if (fenArray[fenCounter + 1] == '0') {                                           //CASE: PIECE SINGLE
+                        pieceBoard[row][column + counter] = Piece.SINGLE;
+                        colorBoard[row][column + counter] = getColor(fenChar);
+                    } else {                                                                      //CASE: PIECE STACKED
+                        char fenCharSecondPos = fenArray[fenCounter + 1];
+                        if (fenCharSecondPos != fenChar) {                                         //CASE: PIECE MIXED STACK
+                            pieceBoard[row][column + counter] = Piece.MIXED;
+                            colorBoard[row][column + counter] = getColor(fenCharSecondPos);
+                        } else {
+                            pieceBoard[row][column + counter] = Piece.DOUBLE;                     //CASE: PIECE SAME COLOR STACK
+                            colorBoard[row][column + counter] = getColor(fenCharSecondPos);
+                        }
+                    }
+                    fenCounter += 2;                                                              //we jump 2 lines in the fen, because it either a single: e.g. r0 or stack: e.g. bb
+                    if (column + counter == 7 || row == 7 && column + counter == 6) {                          //first case: end of a normal length line or second case: we are in the last line at the end
+                        column = 7;
+                        counter = 0;
+                        fenCounter++;
+                    }
+                } else if (Character.isDigit(fenChar)) {                                           //CASE: fenChar is a number, then we fill the places with EMPTY
+                    int numberOfFreePlaces = fenChar - '0';                                        // gives the int value for the Character: alternative: Character.getNumericValue(fenChar)
+                    for (int j = 0; j < numberOfFreePlaces; j++) {
+                        pieceBoard[row][column + counter + j] = Piece.EMPTY;
+                        colorBoard[row][column + counter + j] = Color.EMPTY;
+                    }
+                    counter += numberOfFreePlaces - 1;                                              //Explenation: numberOfFreePlaces-1 due to column already jumping 1 for each iteration of for-loop
+                    fenCounter++;
+                    if (column + counter == 7 || row == 7 && column + counter == 6) {                          //first case: end of a normal length line or second case: we are in the last line at the end
+                        column = 7;
+                        counter = 0;
+                        fenCounter++;
+                    }
+                } else {                                                                          // this is only the case when we are in row 0, and we are at the end of it: fenChar will be '/' and we use this to jump to the next line
+                    column = 7;
+                    fenCounter++;
+                    counter = 0;
+                }
+            }
+        }
+    }
+
+    void fillBoardEdges() {
+        pieceBoard[0][0] = null;
+        colorBoard[0][0] = null;
+        pieceBoard[0][7] = null;
+        colorBoard[0][7] = null;
+        pieceBoard[7][0] = null;
+        colorBoard[7][0] = null;
+        pieceBoard[7][7] = null;
+        colorBoard[7][7] = null;
     }
 
     List<Integer> generatePossibleMoves(int position, Color color) {
@@ -135,7 +209,7 @@ public class MoveGenerator {
             // remove invalid moves
             possibleMoves.removeIf(move -> !isValidMove(move, Color.BLACK));
 
-        // white
+            // white
         } else if (color == Color.WHITE) {
 
             // single piece
@@ -143,7 +217,7 @@ public class MoveGenerator {
                 if (row > 0) {
 
                     // forward
-                    if (colorBoard[row - 1][column] != Color.BLACK){
+                    if (colorBoard[row - 1][column] != Color.BLACK) {
                         possibleMoves.add(convertToNumber(row - 1, column));
                     }
 
@@ -316,9 +390,7 @@ public class MoveGenerator {
                 // no piece
                 else if (pieceBoard[row][column] == Piece.EMPTY) {
                     System.out.print(" . ");
-                }
-
-                else {
+                } else {
                     // black piece
                     if (colorBoard[row][column] == Color.BLACK) {
                         switch (pieceBoard[row][column]) {
@@ -333,7 +405,7 @@ public class MoveGenerator {
                                 break;
                         }
 
-                    // white piece
+                        // white piece
                     } else {
                         switch (pieceBoard[row][column]) {
                             case SINGLE:
@@ -416,25 +488,13 @@ public class MoveGenerator {
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        moveGenerator.initializeBoard();
-        moveGenerator.printBoard();
-        // moveGenerator.exampleSequence(9, 14, 61);
+        String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0";
+        for (int i = 0; i < 1; i++) {
+            moveGenerator.initializeBoard(fen);
+            moveGenerator.printBoard();
+            // moveGenerator.exampleSequence(9, 14, 61);
 
-        System.out.println();
-        System.out.println("Possible moves: " + moveGenerator.generateAllPossibleMoves(Color.WHITE));
-
-        System.out.println();
-        System.out.println("Move 61 to 62:");
-        moveGenerator.movePiece(61, 62, moveGenerator.getPieceAtPosition(61), Color.WHITE);
-        moveGenerator.printBoard();
-
-        System.out.println();
-        System.out.println("Possible moves: " + moveGenerator.generatePossibleMoves(62, Color.WHITE));
-
-        System.out.println();
-        System.out.println("Move 62 to 41:");
-        moveGenerator.movePiece(62, 41, moveGenerator.getPieceAtPosition(62), Color.WHITE);
-        moveGenerator.printBoard();
+            moveGenerator.generateAllPossibleMoves(Color.BLACK);
+        }
     }
-
 }
