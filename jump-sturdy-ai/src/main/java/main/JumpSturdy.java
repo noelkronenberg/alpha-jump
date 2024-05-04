@@ -1,11 +1,16 @@
-package main;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
+//WICHTIG: CODE FUNKTIONIERT NICHT KORREKT
 
-public class JumpSturdyGame {
-    String fenBoard;
-    boolean isMyTurn;
+public class JumpSturdy {
+
+    HashSet<Integer> positionOfOurPieces;
+
+    HashSet<String> moves;
+
+    HashMap<Integer, HashSet<String>> movesForFigure;
 
     HashMap<Integer,String> boardPostions;
 
@@ -13,12 +18,9 @@ public class JumpSturdyGame {
 
     String[] colorsBoard;
 
-    public String getBoard(){
-        return fenBoard;
-    }
-
-    public boolean isMyTurn() {
-        return isMyTurn;
+    public JumpSturdy() {
+        movesForFigure = new HashMap<>();
+        positionOfOurPieces=new HashSet<>();
     }
 
     public void initializeBoardPositonsHM(){
@@ -27,11 +29,11 @@ public class JumpSturdyGame {
         int startingCol = 66;       //B
         for (int i = 0; i < 60; i++) {
             if (i==54){
-                startingRow--;
+                startingRow++;
                 startingCol=66;
             }
             else if (i%8==6){
-                startingRow--;
+                startingRow++;
                 startingCol=65;
             }
             char col=(char)startingCol;
@@ -42,8 +44,8 @@ public class JumpSturdyGame {
         }
     }
 
-    String getCapitalizedColor(String fen, int index){
-        if (fen.charAt(index)=='r'){
+    String getCapitalizedColor(char c){
+        if (c=='r'){
             return "R";
         }
         else {
@@ -51,25 +53,34 @@ public class JumpSturdyGame {
         }
     }
 
-    void getColorAndPiecesBoardForFen(String fen){
+    void getColorAndPiecesBoardForFen(String fen,char player){
         piecesBoard=new String[60];
         colorsBoard=new String[60];
-        int boardCounter = 0;
-        for (int i = 0; i < fen.length(); i++) {
-            if (Character.isLetter(fen.charAt(i))){
+        int boardCounter = 0;      //TODO: nicht zurückzählen... alles nochmal änder.... ich könnte heulen
+        char[] fenArray = fen.toCharArray();
+        for (int i = 0; i < fenArray.length; i++) {
+            char ch = fenArray[i];
+            if (Character.isLetter(ch)){
                 if (fen.charAt(i+1)=='0'){
                     piecesBoard[boardCounter]="P";
-                    colorsBoard[boardCounter]=getCapitalizedColor(fen,i);
+                    colorsBoard[boardCounter]=getCapitalizedColor(ch);
+                    if (ch==player){
+                        positionOfOurPieces.add(boardCounter);
+                    }
                 }
                 else {
+                    char ch2=fenArray[i+1];
                     piecesBoard[boardCounter]="S";
-                    String stack = getCapitalizedColor(fen,i)+getCapitalizedColor(fen,i+1);
+                    String stack = getCapitalizedColor(ch)+Character.toUpperCase(ch2);
                     colorsBoard[boardCounter]=stack;
+                    if (ch2==player){
+                        positionOfOurPieces.add(boardCounter);
+                    }
                 }
-                i++;    //Damit wir zur nächsten figut/zahl springen
+                i++;    //Damit wir zur nächsten figur/zahl springen
                 boardCounter++;
             }
-            else if (Character.isDigit(fen.charAt(i))){
+            else if (Character.isDigit(ch)){
                 int numberOfFreePlaces =Integer.parseInt(fen.substring(i,i+1));
                 for (int j = 0; j < numberOfFreePlaces; j++) {
                     piecesBoard[boardCounter+j]="E";
@@ -81,19 +92,21 @@ public class JumpSturdyGame {
     }
 
     public void getAllMovesForPlayer(String player, String[] colorsBoard, String[] piecesBoard){ //Player soll sagen, ob wir rot oder blau sind (also Rot = R und Blau = B),
-        HashMap<Integer, HashSet<String>> movesForFigure = new HashMap<>();
-        for (int i = 0; i < colorsBoard.length; i++) {
+        Iterator<Integer> it=positionOfOurPieces.iterator();
+        while (it.hasNext()) {
+            int i = it.next();
             if (colorsBoard[i].length()==1) {
                 //checke die moves
-                if (colorsBoard[i].equals(player)){
-                    HashSet<String> s = calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
-                    movesForFigure.put(i,s);
-                }
+                HashSet<String> s = calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
+                movesForFigure.put(i,s);
+                //moves.clear();
+
             }
             else {
                 if (colorsBoard[i].substring(1).equals(player)){
                     HashSet<String> s=calculateAllPostions(player,i,piecesBoard[i], colorsBoard,piecesBoard);
                     movesForFigure.put(i,s);
+                    //moves.clear();
                 }
             }
         }
@@ -104,6 +117,9 @@ public class JumpSturdyGame {
 
 
     boolean isMovePossible(int from, int to, String[] colorsBoard,String[] piecesBoard,boolean isCapture, boolean isMove){
+        if (to>59||to<0){
+            return false;
+        }
         if (isCapture){
             if (piecesBoard[to]=="P"&& colorsBoard[from]!=colorsBoard[to]){             //Case: wir haben ein enemy piece
                 return true;
@@ -124,8 +140,8 @@ public class JumpSturdyGame {
     }
 
     HashSet<String> calculateAllPostions(String player, int pos, String piece,String[] colorsBoard,String[] piecesBoard){
-        HashSet<String> moves = new HashSet<>();
-        if (player=="B"){
+        moves=new HashSet<>();
+        if (player=="R"){
             if (piece=="P"){
                 if (pos%8==6&&pos!=54){                                                                                 //Linker Rand
                     if (pos==6){
@@ -150,21 +166,21 @@ public class JumpSturdyGame {
                 }
                 else if (pos%8==5){                                                                                     //Rechter Rand
                     if (pos==13){
-                        if (isMovePossible(pos,5,colorsBoard,piecesBoard,true,false)){                      //Capture Schräg links
+                        if (isMovePossible(pos,5, colorsBoard,piecesBoard,true,false)){                      //Capture Schräg links
                             moves.add(boardPostions.get(5));
                         }
-                        if (isMovePossible(pos,12,colorsBoard,piecesBoard,false,true)){                     //Move links
+                        if (isMovePossible(pos,12, colorsBoard,piecesBoard,false,true)){                     //Move links
                             moves.add(boardPostions.get(12));
                         }
                     }
                     else {                                                                                              //Schauen ob es mit 5 Faxxen macht... Sollte aber eigentlich nie kommen, weil pos == 5 wäre win!
-                        if (isMovePossible(pos,pos-9,colorsBoard,piecesBoard,true,false)){                  //Capture Schräg links
+                        if (isMovePossible(pos,pos-9, colorsBoard,piecesBoard,true,false)){                  //Capture Schräg links
                             moves.add(boardPostions.get(pos-9));
                         }
-                        if (isMovePossible(pos,pos-8,colorsBoard,piecesBoard,false,true)){                  //Move gerade aus
+                        if (isMovePossible(pos,pos-8, colorsBoard,piecesBoard,false,true)){                  //Move gerade aus
                             moves.add(boardPostions.get(pos-8));
                         }
-                        if (isMovePossible(pos,pos-1,colorsBoard,piecesBoard,false,true)){                  //Move links
+                        if (isMovePossible(pos,pos-1, colorsBoard,piecesBoard,false,true)){                  //Move links
                             moves.add(boardPostions.get(pos-1));
                         }
                     }
@@ -242,7 +258,7 @@ public class JumpSturdyGame {
             if (piece=="S"){
                 if (53>=pos){
                     int posCalc = pos+2;
-                    if (((posCalc/8)-((posCalc-15)/8))==2){                                                             //checkt den Sprung oben Rechts
+                    if (((posCalc/8)-((posCalc-15)/8))==2&&posCalc>0){                                                             //checkt den Sprung oben Rechts
                         if (((posCalc-15)/8)==0){                                                                           //Spezialfall, wenn wir auf die gewinner linie Springen.
                             if (pos!=20) {
                                 if (isMovePossible(pos, pos - 14, colorsBoard, piecesBoard, true, true)) {   //Capture & Move Check
@@ -257,7 +273,7 @@ public class JumpSturdyGame {
 
                         }
                     }
-                    if (((posCalc/8)-((posCalc-17)/8))==2){                                                             //checkt den Sprung oben links
+                    if (((posCalc/8)-((posCalc-17)/8))==2&&posCalc>0){                                                             //checkt den Sprung oben links
                         if (((posCalc-17)/8)==0){                                                                           //Spezialfall, wenn wir auf der gewinner linie sind.
                             if (pos!=15){
                                 if (isMovePossible(pos, pos-16, colorsBoard, piecesBoard, true,true)) {      //Capture & Move Check
@@ -271,7 +287,7 @@ public class JumpSturdyGame {
                             }
                         }
                     }
-                    if (((posCalc/8)-((posCalc-6)/8))==1){                                                              //checkt den Sprung Rechts hoch
+                    if (((posCalc/8)-((posCalc-6)/8))==1&&posCalc>0){                                                              //checkt den Sprung Rechts hoch
                         if (((posCalc-6)/8)==0){                                                                              //Spezialfall, wenn wir auf die gewinner linie springen.
                             if (pos!=11){
                                 if (isMovePossible(pos, pos-5, colorsBoard, piecesBoard, true,true)) {       //Capture & Move Check
@@ -285,7 +301,7 @@ public class JumpSturdyGame {
                             }
                         }
                     }
-                    if (((posCalc/8)-((posCalc-10)/8))==1){                                                             //checkt den Sprung links hoch
+                    if (((posCalc/8)-((posCalc-10)/8))==1&&posCalc>0){                                                             //checkt den Sprung links hoch
                         if (((posCalc-10)/8)==0){
                             if (pos!=8){
                                 if (isMovePossible(pos, pos-9, colorsBoard, piecesBoard, true,true)) {        //Capture & Move Check
@@ -323,7 +339,7 @@ public class JumpSturdyGame {
                 }
             }
         }
-        if (player=="R"){
+        if (player=="B"){
             if (piece=="P"){
                 if (pos%8==6&&pos!=54){                                                                                 //Linker Rand
                     if (pos==46){
@@ -428,9 +444,9 @@ public class JumpSturdyGame {
                 }
             }
             else if (piece=="S"){
-                if (6>=pos){
+                if (6<=pos){
                     int posCalc = pos+2;
-                    if ((((posCalc/8)-7)-(((posCalc+17)/8))-7)==-2){                                                         //checkt den Sprung unten Rechts
+                    if ((((posCalc/8)-7))-(((posCalc+17)/8)-7)==-2){        //TODO: Deckt den Rand nicht gut ab, bei allen                                                  //checkt den Sprung unten Rechts
                         if (((posCalc+17)/8)-7==0){                                                                          //Spezialfall, wenn wir auf die Gewinnerlinie springen
                             if (pos!=44){
                                 if (isMovePossible(pos, pos+16, colorsBoard, piecesBoard, true,true)) {
@@ -444,7 +460,7 @@ public class JumpSturdyGame {
                             }
                         }
                     }
-                    if ((((posCalc/8)-7)-(((posCalc+15)/8))-7)==-2){                                                         //checkt den Sprung unten links
+                    if (((posCalc/8)-7)-(((posCalc+15)/8)-7)==-2){                                                         //checkt den Sprung unten links
                         if (((posCalc+15)/8)-7==0){                                                                          //Spezialfall, wenn wir auf die Gewinnerlinie springen
                             if (pos!=39){
                                 if (isMovePossible(pos, pos+14, colorsBoard, piecesBoard, true,true)) {
@@ -458,7 +474,7 @@ public class JumpSturdyGame {
                             }
                         }
                     }
-                    if ((((posCalc/8)-7)-(((posCalc+10)/8))-7)==-1){                                                         //checkt den Sprung Rechts runter
+                    if (((posCalc/8)-7)-(((posCalc+10)/8)-7)==-1&&posCalc<60){                                                         //checkt den Sprung Rechts runter
                         if (((posCalc+10)/8)-7==0){                                                                          //Spezialfall, wenn wir auf die Gewinnerlinie springen
                             if (pos!=51){
                                 if (isMovePossible(pos, pos+9, colorsBoard, piecesBoard, true,true)) {
@@ -472,7 +488,7 @@ public class JumpSturdyGame {
                             }
                         }
                     }
-                    if ((((posCalc/8)-7)-(((posCalc+6)/8))-7)==-1){                                                          //checkt den Sprung links runter
+                    if (((posCalc/8)-7)-(((posCalc+6)/8)-7)==-1&&posCalc<60){                                                          //checkt den Sprung links runter
                         if (((posCalc+6)/8)-7==0){                                                                           //Spezialfall, wenn wir auf die Gewinnerlinie springen
                             if (pos != 48){
                                 if (isMovePossible(pos, pos+5, colorsBoard, piecesBoard, true,true)) {
@@ -545,14 +561,22 @@ public class JumpSturdyGame {
         }
     }
 
+    public void clearAllDataStructure(){
+        movesForFigure.clear();
+        positionOfOurPieces.clear();
+    }
+
     public static void main(String[] args) {
-        JumpSturdyGame s = new JumpSturdyGame();
+        JumpSturdy s = new JumpSturdy();
         s.initializeBoardPositonsHM();
-        for (int i = 0; i < 1; i++) {
-            String fen = "r0r0r0r0r0r0/1r0r0r0r0r0r01/8/8/8/8/1b0b0b0b0b0b01/b0b0b0b0b0b0";
-            s.getColorAndPiecesBoardForFen(fen);
+        //TODO: IDEE Abhängig von der Implementation
+        for (int i = 0; i < 2; i++) {
+            String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04";//"1r04/1rr1b0r0rrrr1/4b03/8/3b0r03/8/1bbb0b0brb0b01/5b0";
+            //s.printSpielfeld(fen);
+            s.getColorAndPiecesBoardForFen(fen,'r');
             s.getAllMovesForPlayer("R",s.colorsBoard,s.piecesBoard);
-            s.printSpielfeld(fen);
+            System.out.println(s.positionOfOurPieces);
+            s.clearAllDataStructure();
         }
     }
 }
