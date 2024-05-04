@@ -20,7 +20,7 @@ public class MoveGenerator {
                 // first rows for each side
                 if (row == 0 || row == 7) {
 
-                    // black
+                    // Red
                     if (row == 0) {
                         // border
                         if (column == 0 || column == 7) {
@@ -32,7 +32,7 @@ public class MoveGenerator {
                             colorBoard[row][column] = Color.RED;
                         }
 
-                    // white
+                    // Blue
                     } else if (row == 7) {
                         // border
                         if (column == 0 || column == 7) {
@@ -50,7 +50,7 @@ public class MoveGenerator {
                 // second row for each side
                 else if (row == 1 || row == 6) {
 
-                    // black
+                    // Red
                     if (row == 1) {
                         // no piece
                         if (column == 0 || column == 7) {
@@ -62,7 +62,7 @@ public class MoveGenerator {
                             colorBoard[row][column] = Color.RED;
                         }
 
-                    // white
+                    // Blue
                     } else if (row == 6) {
                         // no piece
                         if (column == 0 || column == 7) {
@@ -188,7 +188,7 @@ public class MoveGenerator {
 
         List<Integer> possibleMoves = new ArrayList<>();
 
-        // black
+        // Red
         if (color == Color.RED) {
 
             // single piece
@@ -228,7 +228,7 @@ public class MoveGenerator {
             // remove invalid moves
             possibleMoves.removeIf(move -> !isValidMove(move, Color.RED));
 
-        // white
+        // Blue
         } else if (color == Color.BLUE) {
 
             // single piece
@@ -417,7 +417,7 @@ public class MoveGenerator {
                 }
 
                 else {
-                    // black piece
+                    // Red piece
                     if (colorBoard[row][column] == Color.RED) {
                         switch (pieceBoard[row][column]) {
                             case SINGLE:
@@ -431,7 +431,7 @@ public class MoveGenerator {
                                 break;
                         }
 
-                    // white piece
+                    // Blue piece
                     } else {
                         switch (pieceBoard[row][column]) {
                             case SINGLE:
@@ -453,36 +453,36 @@ public class MoveGenerator {
         }
     }
 
-    void exampleSequence(int rounds, int positionBlack, int positionWhite) {
+    void exampleSequence(int rounds, int positionRed, int positionBlue) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
 
         System.out.println("Start:");
         moveGenerator.printBoard();
 
-        int moveBlack;
-        int moveWhite;
+        int moveRed;
+        int moveBlue;
 
         List<Integer> possibleMoves;
 
         for (int round = 1; round < rounds; round++) {
 
             System.out.println();
-            System.out.println("Move " + round + " (black): ");
+            System.out.println("Move " + round + " (Red): ");
 
-            possibleMoves = moveGenerator.generatePossibleMoves(positionBlack, Color.RED);
+            possibleMoves = moveGenerator.generatePossibleMoves(positionRed, Color.RED);
 
             if (!possibleMoves.isEmpty()) {
                 System.out.println("Possible: " + possibleMoves);
-                moveBlack = possibleMoves.getFirst();
-                System.out.println("Selected: " + moveBlack);
-                moveGenerator.movePiece(positionBlack, moveBlack, moveGenerator.getPieceAtPosition(positionBlack), Color.RED);
+                moveRed = possibleMoves.getFirst();
+                System.out.println("Selected: " + moveRed);
+                moveGenerator.movePiece(positionRed, moveRed, moveGenerator.getPieceAtPosition(positionRed), Color.RED);
                 moveGenerator.printBoard();
-                positionBlack = moveBlack;
+                positionRed = moveRed;
 
-                if (positionBlack / 10 == 7) {
+                if (positionRed / 10 == 7) {
                     System.out.println();
-                    System.out.println("Black wins!");
+                    System.out.println("Red wins!");
                     return;
                 }
             } else {
@@ -490,19 +490,19 @@ public class MoveGenerator {
             }
 
             System.out.println();
-            System.out.println("Move " + round + " (white): ");
-            possibleMoves = moveGenerator.generatePossibleMoves(positionWhite, Color.BLUE);
+            System.out.println("Move " + round + " (Blue): ");
+            possibleMoves = moveGenerator.generatePossibleMoves(positionBlue, Color.BLUE);
             if (!possibleMoves.isEmpty()) {
                 System.out.println("Possible: " + possibleMoves);
-                moveWhite = possibleMoves.getFirst();
-                System.out.println("Selected: " + moveWhite);
-                moveGenerator.movePiece(positionWhite, moveWhite, moveGenerator.getPieceAtPosition(positionWhite), Color.BLUE);
+                moveBlue = possibleMoves.getFirst();
+                System.out.println("Selected: " + moveBlue);
+                moveGenerator.movePiece(positionBlue, moveBlue, moveGenerator.getPieceAtPosition(positionBlue), Color.BLUE);
                 moveGenerator.printBoard();
-                positionWhite = moveWhite;
+                positionBlue = moveBlue;
 
-                if (positionWhite / 10 == 0) {
+                if (positionBlue / 10 == 0) {
                     System.out.println();
-                    System.out.println("White wins!");
+                    System.out.println("Blue wins!");
                     return;
                 }
             } else {
