@@ -1,6 +1,5 @@
 package main;
 
-import javax.swing.*;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ public class MoveGenerator {
                         // color
                         } else {
                             pieceBoard[row][column] = Piece.SINGLE;
-                            colorBoard[row][column] = Color.BLACK;
+                            colorBoard[row][column] = Color.RED;
                         }
 
                     // white
@@ -42,7 +41,7 @@ public class MoveGenerator {
                         // color
                         } else {
                             pieceBoard[row][column] = Piece.SINGLE;
-                            colorBoard[row][column] = Color.WHITE;
+                            colorBoard[row][column] = Color.BLUE;
                         }
                     }
 
@@ -60,7 +59,7 @@ public class MoveGenerator {
                          // color
                         } else {
                             pieceBoard[row][column] = Piece.SINGLE;
-                            colorBoard[row][column] = Color.BLACK;
+                            colorBoard[row][column] = Color.RED;
                         }
 
                     // white
@@ -72,7 +71,7 @@ public class MoveGenerator {
                         // color
                         } else {
                             pieceBoard[row][column] = Piece.SINGLE;
-                            colorBoard[row][column] = Color.WHITE;
+                            colorBoard[row][column] = Color.BLUE;
                         }
                     }
 
@@ -91,9 +90,9 @@ public class MoveGenerator {
 
     Color getColor(char c) {
         if (c == 'r') {
-            return Color.BLACK; // ROT = BLACK
+            return Color.RED; // ROT = RED
         } else {
-            return Color.WHITE; // BLAU = WHITE
+            return Color.BLUE; // BLAU = BLUE
         }
     }
 
@@ -190,32 +189,32 @@ public class MoveGenerator {
         List<Integer> possibleMoves = new ArrayList<>();
 
         // black
-        if (color == Color.BLACK) {
+        if (color == Color.RED) {
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
                 if (row < 7) {
 
                     // forward
-                    if (colorBoard[row + 1][column] != Color.WHITE) {
+                    if (colorBoard[row + 1][column] != Color.BLUE) {
                         possibleMoves.add(convertToNumber(row + 1, column));
                     }
 
                     // left
-                    if (column > 0 && colorBoard[row][column - 1] != Color.WHITE)
+                    if (column > 0 && colorBoard[row][column - 1] != Color.BLUE)
                         possibleMoves.add(convertToNumber(row, column - 1));
 
                     // right
-                    if (column < 7 && colorBoard[row][column + 1] != Color.WHITE)
+                    if (column < 7 && colorBoard[row][column + 1] != Color.BLUE)
                         possibleMoves.add(convertToNumber(row, column + 1));
 
                     // left diagonal
-                    if (column > 0 && colorBoard[row + 1][column - 1] == Color.WHITE) {
+                    if (column > 0 && colorBoard[row + 1][column - 1] == Color.BLUE) {
                         possibleMoves.add(convertToNumber(row + 1, column - 1));
                     }
 
                     // right diagonal
-                    if (column < 7 && colorBoard[row + 1][column + 1] == Color.WHITE) {
+                    if (column < 7 && colorBoard[row + 1][column + 1] == Color.BLUE) {
                         possibleMoves.add(convertToNumber(row + 1, column + 1));
                     }
                 }
@@ -227,35 +226,35 @@ public class MoveGenerator {
             }
 
             // remove invalid moves
-            possibleMoves.removeIf(move -> !isValidMove(move, Color.BLACK));
+            possibleMoves.removeIf(move -> !isValidMove(move, Color.RED));
 
         // white
-        } else if (color == Color.WHITE) {
+        } else if (color == Color.BLUE) {
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
                 if (row > 0) {
 
                     // forward
-                    if (colorBoard[row - 1][column] != Color.BLACK) {
+                    if (colorBoard[row - 1][column] != Color.RED) {
                         possibleMoves.add(convertToNumber(row - 1, column));
                     }
 
                     // left
-                    if (column > 0 && colorBoard[row][column - 1] != Color.BLACK)
+                    if (column > 0 && colorBoard[row][column - 1] != Color.RED)
                         possibleMoves.add(convertToNumber(row, column - 1));
 
                     // right
-                    if (column < 7 && colorBoard[row][column + 1] != Color.BLACK)
+                    if (column < 7 && colorBoard[row][column + 1] != Color.RED)
                         possibleMoves.add(convertToNumber(row, column + 1));
 
                     // left diagonal
-                    if (column > 0 && colorBoard[row - 1][column - 1] == Color.BLACK) {
+                    if (column > 0 && colorBoard[row - 1][column - 1] == Color.RED) {
                         possibleMoves.add(convertToNumber(row - 1, column - 1));
                     }
 
                     // right diagonal
-                    if (column < 7 && colorBoard[row - 1][column + 1] == Color.BLACK) {
+                    if (column < 7 && colorBoard[row - 1][column + 1] == Color.RED) {
                         possibleMoves.add(convertToNumber(row - 1, column + 1));
                     }
                 }
@@ -267,7 +266,7 @@ public class MoveGenerator {
             }
 
             // remove invalid moves
-            possibleMoves.removeIf(move -> !isValidMove(move, Color.WHITE));
+            possibleMoves.removeIf(move -> !isValidMove(move, Color.BLUE));
         }
 
         return possibleMoves;
@@ -291,11 +290,11 @@ public class MoveGenerator {
             }
 
             // no moving backwards
-            if (color == Color.BLACK) {
+            if (color == Color.RED) {
                 if (newRow < row) {
                     continue;
                 }
-            } else if (color == Color.WHITE) {
+            } else if (color == Color.BLUE) {
                 if (newRow > row) {
                     continue;
                 }
@@ -352,7 +351,7 @@ public class MoveGenerator {
         // mixed
         else if (piece == Piece.MIXED) {
             pieceBoard[fromRow][fromColumn] = Piece.SINGLE;
-            Color oppositeColor = (color == Color.BLACK) ? Color.WHITE : Color.BLACK;
+            Color oppositeColor = (color == Color.RED) ? Color.BLUE : Color.RED;
             colorBoard[fromRow][fromColumn] = oppositeColor;
         }
 
@@ -419,7 +418,7 @@ public class MoveGenerator {
 
                 else {
                     // black piece
-                    if (colorBoard[row][column] == Color.BLACK) {
+                    if (colorBoard[row][column] == Color.RED) {
                         switch (pieceBoard[row][column]) {
                             case SINGLE:
                                 System.out.print(" R ");
@@ -471,13 +470,13 @@ public class MoveGenerator {
             System.out.println();
             System.out.println("Move " + round + " (black): ");
 
-            possibleMoves = moveGenerator.generatePossibleMoves(positionBlack, Color.BLACK);
+            possibleMoves = moveGenerator.generatePossibleMoves(positionBlack, Color.RED);
 
             if (!possibleMoves.isEmpty()) {
                 System.out.println("Possible: " + possibleMoves);
                 moveBlack = possibleMoves.getFirst();
                 System.out.println("Selected: " + moveBlack);
-                moveGenerator.movePiece(positionBlack, moveBlack, moveGenerator.getPieceAtPosition(positionBlack), Color.BLACK);
+                moveGenerator.movePiece(positionBlack, moveBlack, moveGenerator.getPieceAtPosition(positionBlack), Color.RED);
                 moveGenerator.printBoard();
                 positionBlack = moveBlack;
 
@@ -492,12 +491,12 @@ public class MoveGenerator {
 
             System.out.println();
             System.out.println("Move " + round + " (white): ");
-            possibleMoves = moveGenerator.generatePossibleMoves(positionWhite, Color.WHITE);
+            possibleMoves = moveGenerator.generatePossibleMoves(positionWhite, Color.BLUE);
             if (!possibleMoves.isEmpty()) {
                 System.out.println("Possible: " + possibleMoves);
                 moveWhite = possibleMoves.getFirst();
                 System.out.println("Selected: " + moveWhite);
-                moveGenerator.movePiece(positionWhite, moveWhite, moveGenerator.getPieceAtPosition(positionWhite), Color.WHITE);
+                moveGenerator.movePiece(positionWhite, moveWhite, moveGenerator.getPieceAtPosition(positionWhite), Color.BLUE);
                 moveGenerator.printBoard();
                 positionWhite = moveWhite;
 
@@ -519,7 +518,7 @@ public class MoveGenerator {
         for (int i = 0; i < 1; i++) {
             moveGenerator.initializeBoard(fen);
             moveGenerator.printBoard();
-            System.out.println(moveGenerator.generateAllPossibleMoves(Color.BLACK));
+            System.out.println(moveGenerator.generateAllPossibleMoves(Color.RED));
         }
     }
 }
