@@ -193,7 +193,7 @@ public class MoveGenerator {
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
-                if (row < 7) {
+                if (row > 0) {
 
                     // forward
                     if (colorBoard[row - 1][column] != Color.BLUE) {
