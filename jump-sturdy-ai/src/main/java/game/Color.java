@@ -1,4 +1,4 @@
-package main;
+package game;
 
 public enum Color {
     RED, BLUE, EMPTY

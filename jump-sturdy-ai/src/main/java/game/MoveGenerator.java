@@ -1,4 +1,4 @@
-package main;
+package game;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
