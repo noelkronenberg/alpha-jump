@@ -1,6 +1,5 @@
 package main;
 
-import javax.swing.*;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,7 @@ public class MoveGenerator {
     Piece[][] pieceBoard;
     Color[][] colorBoard;
 
-    void initializeBoard() {
+    public void initializeBoard() {
         pieceBoard = new Piece[8][8];
         colorBoard = new Color[8][8];
 
@@ -89,7 +88,7 @@ public class MoveGenerator {
 
     }
 
-    List<Integer> generatePossibleMoves(int position, Color color) {
+    public List<Integer> generatePossibleMoves(int position, Color color) {
         int row = position / 10;
         int column = position % 10;
 
@@ -231,7 +230,7 @@ public class MoveGenerator {
         return row * 10 + column;
     }
 
-    void movePiece(int start, int end, Piece piece, Color color) {
+    public void movePiece(int start, int end, Piece piece, Color color) {
         int fromRow = start / 10;
         int fromColumn = start % 10;
         int toRow = end / 10;
@@ -279,13 +278,13 @@ public class MoveGenerator {
         }
     }
 
-    Piece getPieceAtPosition(int position) {
+    public Piece getPieceAtPosition(int position) {
         int row = position / 10;
         int column = position % 10;
         return pieceBoard[row][column];
     }
 
-    List<Map.Entry<Integer, List<Integer>>> generateAllPossibleMoves(Color color) {
+    public List<Map.Entry<Integer, List<Integer>>> generateAllPossibleMoves(Color color) {
         List<Map.Entry<Integer, List<Integer>>> allPossibleMoves = new ArrayList<>();
 
         for (int row = 0; row < 8; row++) {
@@ -301,7 +300,7 @@ public class MoveGenerator {
         return allPossibleMoves;
     }
 
-    void printBoard() {
+    public void printBoard() {
         System.out.println("     0   1   2   3   4   5   6   7");
         System.out.println();
         for (int row = 0; row < 8; row++) {
@@ -355,7 +354,7 @@ public class MoveGenerator {
         }
     }
 
-    void exampleSequence(int rounds, int positionBlack, int positionWhite) {
+    public void exampleSequence(int rounds, int positionBlack, int positionWhite) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
 
