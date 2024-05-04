@@ -11,7 +11,7 @@ public class MoveGeneratorBM {
     private MoveGenerator moveGenerator;
 
     @Setup
-    public void setup() {
+    public void init() {
         moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
     }
