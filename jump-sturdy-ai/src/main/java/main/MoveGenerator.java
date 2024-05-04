@@ -400,7 +400,7 @@ public class MoveGenerator {
         System.out.println();
         for (int row = 7; row >= 0; row--) {
             System.out.print(row + "   ");
-            for (int column = 7; column >= 0; column--) {
+            for (int column = 0; column <= 7; column++) {
 
                 // border
                 if (pieceBoard[row][column] == null) {
@@ -515,6 +515,8 @@ public class MoveGenerator {
             moveGenerator.initializeBoard(fen);
             moveGenerator.printBoard();
             // moveGenerator.exampleSequence(9, 14, 61);
+
+            System.out.println(moveGenerator.getPieceAtPosition(73));
 
             moveGenerator.generateAllPossibleMoves(Color.BLACK);
         }
