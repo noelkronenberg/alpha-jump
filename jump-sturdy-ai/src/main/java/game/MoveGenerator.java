@@ -454,7 +454,7 @@ public class MoveGenerator {
         }
     }
 
-    void exampleSequence(int rounds, int positionRed, int positionBlue) {
+    /*void exampleSequence(int rounds, int positionRed, int positionBlue) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
 
@@ -511,7 +511,7 @@ public class MoveGenerator {
             }
 
         }
-    }
+    }*/
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
