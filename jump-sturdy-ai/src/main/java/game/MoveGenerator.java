@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.*;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -452,7 +453,41 @@ public class MoveGenerator {
             }
             System.out.println();
         }
+
     }
+
+
+    public static String convertAllMoves(List<Map.Entry<Integer, List<Integer>>> possibleMoves) {
+        // Mapping für die Spalten
+        Map<Integer, Character> columnMapping = Map.of(
+                0, 'A', 1, 'B', 2, 'C', 3, 'D', 4, 'E', 5, 'F', 6, 'G', 7, 'H'
+        );
+
+        StringBuilder formattedOutput = new StringBuilder();
+
+        // Füge die möglichen Züge hinzu
+        for (Map.Entry<Integer, List<Integer>> entry : possibleMoves) {
+            int startY = entry.getKey() / 10 + 1;  // Y-Koordinate des Startpunkts
+            int startX = entry.getKey() % 10;  // X-Koordinate des Startpunkts
+            char startColumn = columnMapping.get(startX);
+            for (int targetPosition : entry.getValue()) {
+                int targetY = targetPosition / 10 + 1;  // Y-Koordinate des Zielpunkts
+                int targetX = targetPosition % 10;  // X-Koordinate des Zielpunkts
+                char targetColumn = columnMapping.get(targetX);
+                formattedOutput.append(startColumn).append(startY).append("-").append(targetColumn).append(targetY).append(", ");
+            }
+        }
+
+        // Entferne das letzte Komma und Leerzeichen
+        if (formattedOutput.length() > 0) {
+            formattedOutput.setLength(formattedOutput.length() - 2);
+        }
+
+        return formattedOutput.toString();
+    }
+
+
+
 
     /*void exampleSequence(int rounds, int positionRed, int positionBlue) {
         MoveGenerator moveGenerator = new MoveGenerator();
@@ -515,11 +550,13 @@ public class MoveGenerator {
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04";
+        String fen = "2bb3/5b02/8/2bb5/5rr2/8/3b03r0/7";
         for (int i = 0; i < 1; i++) {
             moveGenerator.initializeBoard(fen);
             moveGenerator.printBoard();
-            System.out.println(moveGenerator.generateAllPossibleMoves(Color.RED));
+            List text = moveGenerator.generateAllPossibleMoves(Color.RED);
+            System.out.println(text);
+            System.out.println(convertAllMoves(text));
         }
     }
 }
