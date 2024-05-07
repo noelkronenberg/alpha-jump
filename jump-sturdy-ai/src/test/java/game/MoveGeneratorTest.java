@@ -23,7 +23,7 @@ public class MoveGeneratorTest {
 
     @Test
     @DisplayName("Speed-Test")
-    public void testZugGeneratorSpeed() {
+    public void testMoveGeneratorSpeed() {
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < 1000; i++) {
             moveGenerator.generateAllPossibleMoves(Color.BLUE);
@@ -31,7 +31,7 @@ public class MoveGeneratorTest {
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
 
-        System.out.println("Zuggenerierungsdauer: " + duration + " Millisekunden");
+        System.out.println("Time to generate moves: " + duration + " milliseconds");
 
         // Annahme: Eine "akzeptable" Zeit wird hier definiert, je nach Komplexität der Stellung
         // Beispiel: Maximal 1 Sekunde
@@ -39,7 +39,8 @@ public class MoveGeneratorTest {
     }
     
     @Test
-    public void testMemoryUsage() {
+    @DisplayName("Memory-Test")
+    public void testMoveGeneratorMemoryUsage() {
         Runtime runtime = Runtime.getRuntime();
         long memoryBefore = runtime.totalMemory() - runtime.freeMemory();
 
@@ -51,7 +52,7 @@ public class MoveGeneratorTest {
         long memoryAfter = runtime.totalMemory() - runtime.freeMemory();
         long usedMemory = memoryAfter - memoryBefore;
 
-        System.out.println("Speicherbedarf: " + usedMemory + " Bytes");
+        System.out.println("Memory usage: " + usedMemory + " bytes");
 
         // Annahme: Ein "akzeptabler" Speicherbedarf wird hier definiert, je nach Systemressourcen
         // Beispiel: Maximal 10 Megabyte
