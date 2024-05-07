@@ -24,17 +24,16 @@ public class MoveGeneratorTest {
     @Test
     @DisplayName("Speed-Test")
     public void testMoveGeneratorSpeed() {
-        long startTime = System.currentTimeMillis();
+        double startTime = System.nanoTime();
         for (int i = 0; i < 1000; i++) {
             moveGenerator.generateAllPossibleMoves(Color.BLUE);
         }
-        long endTime = System.currentTimeMillis();
-        long duration = endTime - startTime;
+        double endTime = System.nanoTime();
+        double duration = ((endTime - startTime) / 1000) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
 
         System.out.println("Time to generate moves: " + duration + " milliseconds");
 
-        // Annahme: Eine "akzeptable" Zeit wird hier definiert, je nach Komplexität der Stellung
-        // Beispiel: Maximal 1 Sekunde
+        // example: max. 1 second
         assertTrue(duration <= 1000);
     }
     
@@ -44,18 +43,16 @@ public class MoveGeneratorTest {
         Runtime runtime = Runtime.getRuntime();
         long memoryBefore = runtime.totalMemory() - runtime.freeMemory();
 
-        // Annahme: Eine große Anzahl von Zügen wird generiert, um den Speicherbedarf zu erhöhen
         for (int i = 0; i < 1000; i++) {
             moveGenerator.generateAllPossibleMoves(Color.BLUE);
         }
 
         long memoryAfter = runtime.totalMemory() - runtime.freeMemory();
-        long usedMemory = memoryAfter - memoryBefore;
+        long usedMemory = (memoryAfter - memoryBefore) / 1000;
 
         System.out.println("Memory usage: " + usedMemory + " bytes");
 
-        // Annahme: Ein "akzeptabler" Speicherbedarf wird hier definiert, je nach Systemressourcen
-        // Beispiel: Maximal 10 Megabyte
+        // example: max 10 megabyte
         assertTrue(usedMemory <= 10 * 1024 * 1024);
     }
 
