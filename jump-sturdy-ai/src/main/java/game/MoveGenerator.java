@@ -1,5 +1,10 @@
 package game;
 
+import java.awt.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.*;
 
 public class MoveGenerator {
@@ -30,7 +35,7 @@ public class MoveGenerator {
                         }
 
                     // Blue
-                    } else if (row == 7) {              //TODO: for 100% coverage change this to else (because always true)
+                    } else if (row == 7) { // NOTE: for 100% coverage change this to else (because always true)
                         // border
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = null;
@@ -43,6 +48,7 @@ public class MoveGenerator {
                     }
 
                 }
+
                 // second row for each side
                 else if (row == 1 || row == 6) {
 
@@ -59,7 +65,7 @@ public class MoveGenerator {
                         }
 
                     // Blue
-                    } else if (row == 6) {                      //TODO: for 100% coverage change this to else (because always true)
+                    } else if (row == 6) { // NOTE: for 100% coverage change this to else (because always true)
                         // no piece
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = Piece.EMPTY;
@@ -74,7 +80,7 @@ public class MoveGenerator {
                 }
 
                 // middle
-                else if (2 <= row & row <= 5) {             //TODO: for 100% coverage change this to else (because always true)
+                else if (2 <= row & row <= 5) { // NOTE: for 100% coverage change this to else (because always true)
                     pieceBoard[row][column] = Piece.EMPTY;
                     colorBoard[row][column] = Color.EMPTY;
                 }
@@ -326,7 +332,7 @@ public class MoveGenerator {
         return row * 10 + column;
     }
 
-    void movePiece(int start, int end, Piece piece, Color color) {
+    public void movePiece(int start, int end, Piece piece, Color color) {
         int fromRow = start / 10;
         int fromColumn = start % 10;
         int toRow = end / 10;
@@ -374,7 +380,7 @@ public class MoveGenerator {
         }
     }
 
-    Piece getPieceAtPosition(int position) {
+    public Piece getPieceAtPosition(int position) {
         int row = position / 10;
         int column = position % 10;
         return pieceBoard[row][column];
@@ -388,7 +394,7 @@ public class MoveGenerator {
                 if (colorBoard[row][column] == color) {
                     int position = convertToNumber(row, column);
                     List<Integer> piecePossibleMoves = generatePossibleMoves(position, color);
-                    if (piecePossibleMoves.isEmpty()) { // ignores Pieces that have no moves
+                    if (!piecePossibleMoves.isEmpty()) { // ignores Pieces that have no moves
                         allPossibleMoves.put(position, piecePossibleMoves);
                     }
                 }
@@ -453,6 +459,36 @@ public class MoveGenerator {
         System.out.println();
     }
 
+
+    public static String convertAllMoves(Map<Integer, List<Integer>> possibleMoves) {
+        // Mapping for the columns
+        Map<Integer, Character> columnMapping = Map.of(
+                0, 'A', 1, 'B', 2, 'C', 3, 'D', 4, 'E', 5, 'F', 6, 'G', 7, 'H'
+        );
+
+        StringBuilder formattedOutput = new StringBuilder();
+
+        // Add the possible moves
+        for (Map.Entry<Integer, List<Integer>> entry : possibleMoves.entrySet()) {
+            int startY = entry.getKey() / 10 + 1;  // Y-coordinate of the starting point
+            int startX = entry.getKey() % 10;  // X-coordinate of the starting point
+            char startColumn = columnMapping.get(startX);
+            for (int targetPosition : entry.getValue()) {
+                int targetY = targetPosition / 10 + 1;  // Y-coordinate of the target point
+                int targetX = targetPosition % 10;  // X-coordinate of the target point
+                char targetColumn = columnMapping.get(targetX);
+                formattedOutput.append(startColumn).append(startY).append("-").append(targetColumn).append(targetY).append(", ");
+            }
+        }
+
+        // Remove the trailing comma and space
+        if (!formattedOutput.isEmpty()) {
+            formattedOutput.setLength(formattedOutput.length() - 2);
+        }
+
+        return formattedOutput.toString();
+    }
+
     void exampleSequence(int rounds, int positionRed, int positionBlue) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
@@ -513,7 +549,7 @@ public class MoveGenerator {
     }
 
     boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor) {
-        if (!moves.isEmpty()){
+        if (!moves.isEmpty()) {
             Color opponentColor = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
             if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
                 return true;
@@ -528,14 +564,14 @@ public class MoveGenerator {
 
     boolean doesBaseRowContainEnemy(Color enemyColor, int rowToCheck) {
         for (int i = 1; i < 7; i++) {
-            if (colorBoard[rowToCheck][i] == enemyColor){
+            if (colorBoard[rowToCheck][i] == enemyColor) {
                 return true;
             }
         }
         return false;
     }
 
-    String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
+    public String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
 
@@ -552,29 +588,15 @@ public class MoveGenerator {
     String getPosForRowColInteger(int rowAndColInt) {
         int col = rowAndColInt % 10;
         int row = rowAndColInt / 10;
-
         String colString = String.valueOf(( (char) (65 + col) ));
-
         return colString + (row + 1);
     }
 
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(MoveGenerator moveGenerator, String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
-
         Color color = moveGenerator.getColor(color_fen);
         moveGenerator.initializeBoard(fen.substring(0, fen.length() - 2));
-
         return moveGenerator.generateAllPossibleMoves(color);
-    }
-
-    int revertPosRowColToIntForServer(String pos){
-        char col=pos.charAt(0);
-        char row=pos.charAt(1);
-
-        int rowInt =Character.getNumericValue(row)-1;
-        int colInt = col-65;
-
-        return rowInt*10+colInt;
     }
 
     public static void main(String[] args) {
@@ -589,7 +611,6 @@ public class MoveGenerator {
 
             System.out.println(moveGenerator.getRandomMove(moves));
 
-            System.out.println(moveGenerator.revertPosRowColToIntForServer("B1"));
         }
     }
 }
