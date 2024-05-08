@@ -547,17 +547,19 @@ public class MoveGenerator {
         System.out.println("From: "+randomPiece+" To: "+randomPos );
     }
 
+    public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(MoveGenerator moveGenerator, String fen) {
+        char color_fen = fen.charAt(fen.length() - 1);
+        Color color = moveGenerator.getColor(color_fen);
+        moveGenerator.initializeBoard(fen.substring(0, fen.length() - 2));
+        return moveGenerator.generateAllPossibleMoves(color);
+    }
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04";
+        String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
         for (int i = 0; i < 1; i++) {
-            moveGenerator.initializeBoard(fen);
+            System.out.println(moveGenerator.getMovesWrapper(moveGenerator, fen));
             moveGenerator.printBoard();
-            LinkedHashMap moves =moveGenerator.generateAllPossibleMoves(Color.RED);
-            System.out.println(moves);
-            moveGenerator.generateRandomMove(moves);
-            moveGenerator.isGameOver(moves,Color.RED);
         }
     }
 }
