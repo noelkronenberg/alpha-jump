@@ -7,7 +7,7 @@ public class MoveGenerator {
     Piece[][] pieceBoard;
     Color[][] colorBoard;
 
-    void initializeBoard() {
+    public void initializeBoard() {
         pieceBoard = new Piece[8][8];
         colorBoard = new Color[8][8];
 
@@ -85,7 +85,7 @@ public class MoveGenerator {
 
     }
 
-    Color getColor(char c) {
+    public Color getColor(char c) {
         if (c == 'r') {
             return Color.RED; // ROT = RED
         } else {
@@ -93,7 +93,7 @@ public class MoveGenerator {
         }
     }
 
-    void initializeBoard(String fen) {
+    public void initializeBoard(String fen) {
         pieceBoard = new Piece[8][8];
         colorBoard = new Color[8][8];
         char[] fenArray = fen.toCharArray();
@@ -381,7 +381,7 @@ public class MoveGenerator {
         return pieceBoard[row][column];
     }
 
-    LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
+    public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
 
         for (int row = 0; row < 8; row++) {
