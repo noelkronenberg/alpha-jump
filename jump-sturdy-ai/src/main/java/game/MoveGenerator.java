@@ -514,7 +514,7 @@ public class MoveGenerator {
     }
 
     boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor) {
-        if (moves.size()!=0){
+        if (moves.size() != 0){
             Color opponentColor = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
             if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
                 return true;
@@ -529,13 +529,12 @@ public class MoveGenerator {
 
     boolean doesBaseRowContainEnemy(Color enemyColor, int rowToCheck) {
         for (int i = 1; i < 7; i++) {
-            if (colorBoard[rowToCheck][i]==enemyColor){
+            if (colorBoard[rowToCheck][i] == enemyColor){
                 return true;
             }
         }
         return false;
     }
-
 
     String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
         Random generator =  new Random();
@@ -548,14 +547,14 @@ public class MoveGenerator {
         number = generator.nextInt(allMoveToPos.size());
 
         int randomPos = allMoveToPos.get(number);
-        return getPosForRowColInteger(randomPiece)+"-"+getPosForRowColInteger(randomPos);
+        return getPosForRowColInteger(randomPiece) + "-" + getPosForRowColInteger(randomPos);
     }
 
     String getPosForRowColInteger(int rowAndColInt) {
-        int col = rowAndColInt%10;          
-        int row = rowAndColInt/10;
-        String colString = String.valueOf(((char)(65+col)));
-        return colString+(row+1);
+        int col = rowAndColInt % 10;
+        int row = rowAndColInt / 10;
+        String colString = String.valueOf(( (char) (65 + col) ));
+        return colString + (row + 1);
     }
 
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(MoveGenerator moveGenerator, String fen) {
