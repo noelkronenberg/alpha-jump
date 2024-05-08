@@ -482,18 +482,14 @@ public class MoveGenerator {
         }
 
         // Remove the trailing comma and space
-        if (formattedOutput.length() > 0) {
+        if (!formattedOutput.isEmpty()) {
             formattedOutput.setLength(formattedOutput.length() - 2);
         }
 
         return formattedOutput.toString();
     }
 
-
-
-
-
-   /* void exampleSequence(int rounds, int positionRed, int positionBlue) {
+    void exampleSequence(int rounds, int positionRed, int positionBlue) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
 
@@ -550,7 +546,7 @@ public class MoveGenerator {
             }
 
         }
-    }*/
+    }
 
     boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor) {
         if (!moves.isEmpty()) {

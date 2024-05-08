@@ -309,7 +309,7 @@ public class MoveGeneratorTest {
     }
 
     private void testMoves(String fen, String expectedMoves) {
-        Color color = getColorFromFen(fen.charAt(fen.length() - 1));
+        Color color = fen.charAt(fen.length() - 1) == 'r' ? Color.RED : Color.BLUE;
         fen = fen.substring(0, fen.length() - 2);
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard();
@@ -325,11 +325,6 @@ public class MoveGeneratorTest {
         Arrays.sort(expectedMovesArray);
 
         assertArrayEquals(expectedMovesArray, actualMovesArray);
-    }
-
-
-    private Color getColorFromFen(char fenChar) {
-        return fenChar == 'r' ? Color.RED : Color.BLUE;
     }
 
 }
