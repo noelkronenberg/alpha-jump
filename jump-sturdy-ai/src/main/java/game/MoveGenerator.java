@@ -553,22 +553,28 @@ public class MoveGenerator {
     String getPosForRowColInteger(int rowAndColInt) {
         int col = rowAndColInt % 10;
         int row = rowAndColInt / 10;
+
         String colString = String.valueOf(( (char) (65 + col) ));
+
         return colString + (row + 1);
     }
 
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(MoveGenerator moveGenerator, String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
+
         Color color = moveGenerator.getColor(color_fen);
         moveGenerator.initializeBoard(fen.substring(0, fen.length() - 2));
+
         return moveGenerator.generateAllPossibleMoves(color);
     }
 
     int revertPosRowColToIntForServer(String pos){
         char col=pos.charAt(0);
         char row=pos.charAt(1);
+
         int rowInt =Character.getNumericValue(row)-1;
         int colInt = col-65;
+
         return rowInt*10+colInt;
     }
 
