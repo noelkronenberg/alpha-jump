@@ -550,6 +550,8 @@ public class MoveGenerator {
         return rowInt*10+colInt;
     }
 
+    /* Wird noch an 2D-Array angepasst
+
     public int SumWeightedPositions(String givenString, char searchedChar) {
         int counter = 0;
         int weight = 0;
@@ -595,14 +597,11 @@ public class MoveGenerator {
         int result = 0;
         result = ratePosition(endBoard, player) - ratePosition(startBoard, player);
         return result;
-    }
+    } */ 
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
-        String fen2 = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b01rrrr1/1r04 b";
-        System.out.println("Positionsbewertung: " + moveGenerator.ratePosition(fen, Color.BLUE));
-        System.out.println("Zugbewertung: " + moveGenerator.rateMove(fen, fen2, Color.BLUE));
         for (int i = 0; i < 1; i++) {
             LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(moveGenerator, fen);
             System.out.println(moves);
