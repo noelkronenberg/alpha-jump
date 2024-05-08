@@ -1,9 +1,6 @@
 package game;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MoveGenerator {
 
@@ -384,15 +381,17 @@ public class MoveGenerator {
         return pieceBoard[row][column];
     }
 
-    List<Map.Entry<Integer, List<Integer>>> generateAllPossibleMoves(Color color) {
-        List<Map.Entry<Integer, List<Integer>>> allPossibleMoves = new ArrayList<>();
+    LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
+        LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
 
         for (int row = 0; row < 8; row++) {
             for (int column = 0; column < 8; column++) {
                 if (colorBoard[row][column] == color) {
                     int position = convertToNumber(row, column);
                     List<Integer> piecePossibleMoves = generatePossibleMoves(position, color);
-                    allPossibleMoves.add(new AbstractMap.SimpleEntry<>(position, piecePossibleMoves));
+                    if (piecePossibleMoves.size()!=0) {                                             //Ignores Pieces that have no moves
+                        allPossibleMoves.put(position, piecePossibleMoves);
+                    }
                 }
             }
         }
@@ -452,6 +451,7 @@ public class MoveGenerator {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     void exampleSequence(int rounds, int positionRed, int positionBlue) {
@@ -513,13 +513,58 @@ public class MoveGenerator {
         }
     }
 
+    Color getOpponentsColor(Color myColor){
+        if (myColor==Color.RED){
+            return Color.BLUE;
+        }
+        return Color.RED;
+    }
+
+    boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor){
+        if (moves.size()!=0){
+            Color opponentColor = getOpponentsColor(ourColor);
+            if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)){
+                return true;
+            }
+            if (opponentColor==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)){
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    boolean doesBaseRowContainEnemy(Color enemyColor, int rowToCheck){
+        for (int i = 1; i < 7; i++) {
+            if (colorBoard[rowToCheck][i]==enemyColor){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void generateRandomMove(LinkedHashMap<Integer, List<Integer>> moves){
+        Random generator =  new Random();
+        ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
+        int number = generator.nextInt(allPieces.size());
+        int randomPiece = allPieces.get(number);
+        List<Integer> allMoveToPos = moves.get(randomPiece);
+        number = generator.nextInt(allMoveToPos.size());
+        int randomPos = allMoveToPos.get(number);
+        System.out.println("From: "+randomPiece+" To: "+randomPos );
+    }
+
+
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04";
         for (int i = 0; i < 1; i++) {
             moveGenerator.initializeBoard(fen);
             moveGenerator.printBoard();
-            System.out.println(moveGenerator.generateAllPossibleMoves(Color.RED));
+            LinkedHashMap moves =moveGenerator.generateAllPossibleMoves(Color.RED);
+            System.out.println(moves);
+            moveGenerator.generateRandomMove(moves);
+            moveGenerator.isGameOver(moves,Color.RED);
         }
     }
 }
