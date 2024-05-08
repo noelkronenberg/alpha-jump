@@ -543,7 +543,7 @@ public class MoveGenerator {
         return false;
     }
 
-    void generateRandomMove(LinkedHashMap<Integer, List<Integer>> moves){
+    String generateRandomMove(LinkedHashMap<Integer, List<Integer>> moves){
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
         int number = generator.nextInt(allPieces.size());
@@ -551,7 +551,14 @@ public class MoveGenerator {
         List<Integer> allMoveToPos = moves.get(randomPiece);
         number = generator.nextInt(allMoveToPos.size());
         int randomPos = allMoveToPos.get(number);
-        System.out.println("From: "+randomPiece+" To: "+randomPos );
+        return getPosForRowColInteger(randomPiece)+"-"+getPosForRowColInteger(randomPos);
+    }
+
+    String getPosForRowColInteger(int rowAndColInt){
+        int col = rowAndColInt%10;          //Gets the back digit
+        int row = rowAndColInt/10;
+        String colString = String.valueOf(((char)(65+col)));
+        return colString+(row+1);
     }
 
 
@@ -563,7 +570,7 @@ public class MoveGenerator {
             moveGenerator.printBoard();
             LinkedHashMap moves =moveGenerator.generateAllPossibleMoves(Color.RED);
             System.out.println(moves);
-            moveGenerator.generateRandomMove(moves);
+            System.out.println(moveGenerator.generateRandomMove(moves));
             moveGenerator.isGameOver(moves,Color.RED);
         }
     }
