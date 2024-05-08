@@ -12,13 +12,8 @@ public class MoveGeneratorBM {
         moveGenerator.initializeBoard();
     }
 
-    static double generateAllPossibleMovesSpeed(String fen) {
-        // split color and board
-        char color_fen = fen.charAt(fen.length() - 1);
-        Color color = moveGenerator.getColor(color_fen);
-        moveGenerator.initializeBoard(fen.substring(0, fen.length() - 2));
-
-        // get metric
+    static double generateAllPossibleMovesSpeed(String board_fen, Color color) {
+        moveGenerator.initializeBoard(board_fen);
         double startTime = System.nanoTime();
         for (int i = 0; i < 1000; i++) {
             moveGenerator.generateAllPossibleMoves(color);
@@ -28,13 +23,8 @@ public class MoveGeneratorBM {
         return duration;
     }
 
-    static double generateAllPossibleMovesMemory(String fen) {
-        // split color and board
-        char color_fen = fen.charAt(fen.length() - 1);
-        Color color = moveGenerator.getColor(color_fen);
-        moveGenerator.initializeBoard(fen.substring(0, fen.length() - 2));
-
-        // get metric
+    static double generateAllPossibleMovesMemory(String board_fen, Color color) {
+        moveGenerator.initializeBoard(board_fen);
         Runtime runtime = Runtime.getRuntime();
         long memoryBefore = runtime.totalMemory() - runtime.freeMemory();
         for (int i = 0; i < 1000; i++) {
@@ -46,10 +36,17 @@ public class MoveGeneratorBM {
     }
 
     static void wrapperBM(String fen) {
-        double duration = MoveGeneratorBM.generateAllPossibleMovesSpeed(fen);
+        // split color and board
+        char color_fen = fen.charAt(fen.length() - 1);
+        Color color = moveGenerator.getColor(color_fen);
+        String board_fen = fen.substring(0, fen.length() - 2);
+
+        // get metrics
+
+        double duration = MoveGeneratorBM.generateAllPossibleMovesSpeed(board_fen, color);
         System.out.println("Time to generate moves: " + duration + " milliseconds");
 
-        double usedMemory = MoveGeneratorBM.generateAllPossibleMovesMemory(fen);
+        double usedMemory = MoveGeneratorBM.generateAllPossibleMovesMemory(board_fen, color);
         System.out.println("Memory usage: " + usedMemory + " bytes");
     }
 
