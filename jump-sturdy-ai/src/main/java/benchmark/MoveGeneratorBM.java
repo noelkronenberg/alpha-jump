@@ -57,7 +57,7 @@ public class MoveGeneratorBM {
         MoveGeneratorBM.wrapperBM("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b");
 
         System.out.println();
-        System.out.println("End game : ");
+        System.out.println("End game: ");
         MoveGeneratorBM.wrapperBM("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b");
 
     }
