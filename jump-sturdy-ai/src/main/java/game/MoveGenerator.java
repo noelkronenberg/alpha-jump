@@ -7,7 +7,7 @@ public class MoveGenerator {
     Piece[][] pieceBoard;
     Color[][] colorBoard;
 
-    void initializeBoard() {
+    public void initializeBoard() {
         pieceBoard = new Piece[8][8];
         colorBoard = new Color[8][8];
 
@@ -85,15 +85,15 @@ public class MoveGenerator {
 
     }
 
-    Color getColor(char c) {
+    public Color getColor(char c) {
         if (c == 'r') {
-            return Color.RED; // ROT = RED
+            return Color.RED;
         } else {
-            return Color.BLUE; // BLAU = BLUE
+            return Color.BLUE;
         }
     }
 
-    void initializeBoard(String fen) {
+    public void initializeBoard(String fen) {
         pieceBoard = new Piece[8][8];
         colorBoard = new Color[8][8];
         char[] fenArray = fen.toCharArray();
@@ -381,7 +381,7 @@ public class MoveGenerator {
         return pieceBoard[row][column];
     }
 
-    LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
+    public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
 
         for (int row = 0; row < 8; row++) {
@@ -389,7 +389,7 @@ public class MoveGenerator {
                 if (colorBoard[row][column] == color) {
                     int position = convertToNumber(row, column);
                     List<Integer> piecePossibleMoves = generatePossibleMoves(position, color);
-                    if (piecePossibleMoves.size()!=0) {                                             //Ignores Pieces that have no moves
+                    if (piecePossibleMoves.size()!=0) { // ignores Pieces that have no moves
                         allPossibleMoves.put(position, piecePossibleMoves);
                     }
                 }
@@ -513,16 +513,9 @@ public class MoveGenerator {
         }
     }
 
-    Color getOpponentsColor(Color myColor){
-        if (myColor==Color.RED){
-            return Color.BLUE;
-        }
-        return Color.RED;
-    }
-
     boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor){
         if (moves.size()!=0){
-            Color opponentColor = getOpponentsColor(ourColor);
+            Color opponentColor = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
             if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)){
                 return true;
             }
@@ -543,35 +536,46 @@ public class MoveGenerator {
         return false;
     }
 
-    String generateRandomMove(LinkedHashMap<Integer, List<Integer>> moves){
+    LinkedHashMap<Integer, Integer> getRandomMove(LinkedHashMap<Integer, List<Integer>> moves){
+        LinkedHashMap<Integer, Integer> randomMove = new LinkedHashMap<>();
+
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
         int number = generator.nextInt(allPieces.size());
         int randomPiece = allPieces.get(number);
+
         List<Integer> allMoveToPos = moves.get(randomPiece);
         number = generator.nextInt(allMoveToPos.size());
         int randomPos = allMoveToPos.get(number);
-        return getPosForRowColInteger(randomPiece)+"-"+getPosForRowColInteger(randomPos);
+
+        randomMove.put(randomPiece, randomPos);
+
+        return randomMove;
     }
 
-    String getPosForRowColInteger(int rowAndColInt){
-        int col = rowAndColInt%10;          //Gets the back digit
-        int row = rowAndColInt/10;
-        String colString = String.valueOf(((char)(65+col)));
-        return colString+(row+1);
+    public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(MoveGenerator moveGenerator, String fen) {
+        char color_fen = fen.charAt(fen.length() - 1);
+        Color color = moveGenerator.getColor(color_fen);
+        moveGenerator.initializeBoard(fen.substring(0, fen.length() - 2));
+        return moveGenerator.generateAllPossibleMoves(color);
     }
-
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04";
+        String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
         for (int i = 0; i < 1; i++) {
-            moveGenerator.initializeBoard(fen);
-            moveGenerator.printBoard();
-            LinkedHashMap moves =moveGenerator.generateAllPossibleMoves(Color.RED);
+            LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(moveGenerator, fen);
             System.out.println(moves);
-            System.out.println(moveGenerator.generateRandomMove(moves));
-            moveGenerator.isGameOver(moves,Color.RED);
+
+            System.out.println();
+            moveGenerator.printBoard();
+
+            System.out.println();
+            System.out.println("Random move: ");
+            LinkedHashMap<Integer,Integer> move = moveGenerator.getRandomMove(moves);
+            int from = move.keySet().iterator().next();
+            int to = move.get(from);
+            System.out.println("From: " + from + " To: " + to);
         }
     }
 }
