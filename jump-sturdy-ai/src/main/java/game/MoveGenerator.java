@@ -327,7 +327,7 @@ public class MoveGenerator {
         return row * 10 + column;
     }
 
-    void movePiece(int start, int end, Piece piece, Color color) {
+    public void movePiece(int start, int end, Piece piece, Color color) {
         int fromRow = start / 10;
         int fromColumn = start % 10;
         int toRow = end / 10;
@@ -375,7 +375,7 @@ public class MoveGenerator {
         }
     }
 
-    Piece getPieceAtPosition(int position) {
+    public Piece getPieceAtPosition(int position) {
         int row = position / 10;
         int column = position % 10;
         return pieceBoard[row][column];
@@ -536,7 +536,7 @@ public class MoveGenerator {
         return false;
     }
 
-    String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
+    public String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
 
