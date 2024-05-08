@@ -35,7 +35,7 @@ public class MoveGenerator {
                         }
 
                     // Blue
-                    } else if (row == 7) {
+                    } else if (row == 7) { // NOTE: for 100% coverage change this to else (because always true)
                         // border
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = null;
@@ -65,7 +65,7 @@ public class MoveGenerator {
                         }
 
                     // Blue
-                    } else if (row == 6) {
+                    } else if (row == 6) { // NOTE: for 100% coverage change this to else (because always true)
                         // no piece
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = Piece.EMPTY;
@@ -80,7 +80,7 @@ public class MoveGenerator {
                 }
 
                 // middle
-                else if (2 <= row & row <= 5) {
+                else if (2 <= row & row <= 5) { // NOTE: for 100% coverage change this to else (because always true)
                     pieceBoard[row][column] = Piece.EMPTY;
                     colorBoard[row][column] = Color.EMPTY;
                 }
@@ -332,7 +332,7 @@ public class MoveGenerator {
         return row * 10 + column;
     }
 
-    void movePiece(int start, int end, Piece piece, Color color) {
+    public void movePiece(int start, int end, Piece piece, Color color) {
         int fromRow = start / 10;
         int fromColumn = start % 10;
         int toRow = end / 10;
@@ -380,7 +380,7 @@ public class MoveGenerator {
         }
     }
 
-    Piece getPieceAtPosition(int position) {
+    public Piece getPieceAtPosition(int position) {
         int row = position / 10;
         int column = position % 10;
         return pieceBoard[row][column];
@@ -394,7 +394,7 @@ public class MoveGenerator {
                 if (colorBoard[row][column] == color) {
                     int position = convertToNumber(row, column);
                     List<Integer> piecePossibleMoves = generatePossibleMoves(position, color);
-                    if (piecePossibleMoves.size()!=0) { // ignores Pieces that have no moves
+                    if (!piecePossibleMoves.isEmpty()) { // ignores Pieces that have no moves
                         allPossibleMoves.put(position, piecePossibleMoves);
                     }
                 }
@@ -553,7 +553,7 @@ public class MoveGenerator {
     }*/
 
     boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor) {
-        if (moves.size() != 0){
+        if (!moves.isEmpty()) {
             Color opponentColor = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
             if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
                 return true;
@@ -575,7 +575,7 @@ public class MoveGenerator {
         return false;
     }
 
-    String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
+    public String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
 
