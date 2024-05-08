@@ -32,25 +32,25 @@ public class MoveGeneratorTest {
     @Test
     @DisplayName("Gruppe O")
     public void testGruppeO() {
-         //testMoves("b0b02b0b0/1b01bb0b0b01/2b05/3b04/2r05/3r0r03/1r0r02r0r01/r0r01r0r0r0 r",
-             //    "B1-B2,B1-C1,C1-B1,C1-C2,C1-D1,E1-D1,E1-E2,E1-F1,F1-E1,F1-F2,F1-G1,G1-F1,G1-G2,B2-A2,B2-B3,B2-C2,C2-B2,C2-C3,C2-D2,D3-C3,D3-D4,D3-E3,E3-D3,E3-E4,E3-F3,F2-E2,F2-F3,F2-G2,G2-F2,G2-G3,G2-H2,C4-B4,C4-C5,C4-D5,C4-D4");
-        //testMoves("6/1bb1b02b01/8/2r05/3r01b02/5r0r01/2rr1r03/6 b", // changed 5r0r02 too 5r0r01
-              //  "B7-A5,B7-C5,B7-D6,D7-C7,D7-D6,D7-E7,G7-F7,G7-G6,G7-H7,F4-E4,F4-G4"); // board falsch herum ablaufend
+         testMoves("b0b01b0b0b0/1b0b02b0b01/3b0b03/2b05/3r04/2r05/1r01rr1r0r01/r0r02r0r0 b",
+                 "B1-B2,B1-C1,C1-B1,C1-C2,C1-D1,E1-D1,E1-E2,E1-F1,F1-E1,F1-F2,F1-G1,G1-F1,G1-G2,B2-A2,B2-B3,B2-C2,C2-B2,C2-C3,C2-D2,D3-C3,D3-D4,D3-E3,E3-D3,E3-E4,E3-F3,F2-E2,F2-F3,F2-G2,G2-F2,G2-G3,G2-H2,C4-B4,C4-C5,C4-D5,C4-D4");
+        testMoves("6/2bb1b03/4b0b02/3b01r02/2b05/8/1rr1r02r01/6 r",
+                "B7-A5,B7-C5,B7-D6,D7-C7,D7-D6,D7-E7,G7-F7,G7-G6,G7-H7,F4-E4,F4-G4,F4-E3");
     }
 
     @Test
     @DisplayName("Gruppe I")
     public void testGruppeI() {
-       // testMoves("b0b0b02bb/1b01b0bb1b01/2b05/5b02/1r06/8/2r0rrr0rr1r0/r0r01r01r0 r",
-            //    "B1-B2,B1-C1,C1-B1,C1-C2,C1-D1,E1-D1,E1-E2,E1-F1,G1-F1,G1-G2,C2-B2,C2-C3,D2-B3,D2-C4,D2-E4,D2-F3,E2-E3,F2-D3,F2-E4,F2-G4,F2-H3,H2-G2,H2-H3,B4-A4,B4-B5,B4-C4"); // r angeben, aber blaue züge angegeben
-       // testMoves("bb4bb/3b02b01/r07/2r02r02/4b03/2b02r02/2r01r01r0r0/1r01r02 r",
-              //  "C1-B1,C1-C2,C1-D1,E1-D1,E1-E2,E1-F1,C2-B2,C2-D2,E2-D2,E2-E3,E2-F2,G2-F2,G2-G3,G2-H2,H2-G2,H2-H3,F3-E3,F3-E4,F3-F4,F3-G3,C5-B5,C5-C6,C5-D5,F5-E5,F5-F6,F5-G5,A6-A7,A6-B6"); Brett falsch herum
+        testMoves("b0b01b01b0/2b0bbb0bb1b0/8/1b06/5r02/2r05/1r01r0rr1r01/r0r0r02rr b",
+                "B1-B2,B1-C1,C1-B1,C1-C2,C1-D1,E1-D1,E1-E2,E1-F1,G1-F1,G1-G2,C2-B2,C2-C3,D2-B3,D2-C4,D2-E4,D2-F3,E2-E3,F2-D3,F2-E4,F2-G4,F2-H3,H2-G2,H2-H3,B4-A4,B4-B5,B4-C4");
+        testMoves("1b01b02/2b01b01b0b0/2r02b02/4r03/2b02b02/b07/3r02r01/rr4rr b",
+                "C1-B1,C1-C2,C1-D1,E1-D1,E1-E2,E1-F1,C2-B2,C2-D2,E2-D2,E2-E3,E2-F2,G2-F2,G2-G3,G2-H2,H2-G2,H2-H3,F3-E3,F3-E4,F3-F4,F3-G3,C5-B5,C5-C6,C5-D5,F5-E5,F5-F6,F5-G5,A6-A7,A6-B6");
     }
 
     @Test
     @DisplayName("Gruppe AL")
     public void testGruppeAL() {
-        testMoves("6/2b02b02/2r02r02/8/8/2b02b02/2r02r02/6 b", // changes 8 in the first und last line to 6
+        testMoves("6/2b02b02/2r02r02/8/8/2b02b02/2r02r02/6 b", // changed 8 to 6 in the first and last line
                 "C6-B6,C6-D6,F6-E6,F6-G6,C2-B2,C2-D2,F2-E2,F2-G2");
         testMoves("6/1bbbbbbbbbbbb1/8/8/8/1r0r0r0r0r0r01/8/r0r0r0r0r0r0 b",
                 "B2-A4,B2-C4,B2-D3,C2-B4,C2-D4,C2-A3,C2-E3,D2-C4,D2-E4,D2-B3,D2-F3,E2-D4,E2-F4,E2-C3,E2-G3,F2-E4,F2-G4,F2-D3,F2-H3,G2-F4,G2-H4,G2-E3");
@@ -68,10 +68,10 @@ public class MoveGeneratorTest {
     @Test
     @DisplayName("Gruppe E")
     public void testGruppeE() {
-        //testMoves("b01b0b01b0/1b0bb1b0b0b01/3b04/2r05/4b0r02/8/1r0r0r0r0r0r01/1r0r0r0r01 r", // feld falsch herum gezählt
-             //   "C1-B1,C1-C2,C1-D1,D1-C1,D1-D2,D1-E1,E1-D1,E1-E2,E1-F1,F1-E1,F1-F2,F1-G1,B2-A2,B2-B3,B2-C2,C2-B2,C2-C3,C2-D2,D2-C2,D2-D3,D2-E2,E2-D2,E2-E3,E2-F2,F2-E2,F2-F3,F2-G2,G2-F2,G2-G3,G2-H2,F4-F5,F4-G4,C5-B5,C5-C6,C5-D6,C5-D5");
-        //testMoves("3b02/2b05/1b06/1r0rr2b01/8/5r02/1r0r03b01/3r02 b",
-               // "B6-A6,B6-C6,C7-B7,C7-C6,C7-D7,E8-D8,E8-E7,E8-F8,G2-F2,G2-G1,G2-H2,G5-F5,G5-G4,G5-H5");
+        testMoves("1b0b0b0b01/1b0b0b0b0b0b01/8/4r0b02/2b05/3r04/1r0rr1r0r0r01/r01r0r01r0 b",
+                "C1-B1,C1-C2,C1-D1,D1-C1,D1-D2,D1-E1,E1-D1,E1-E2,E1-F1,F1-E1,F1-F2,F1-G1,B2-A2,B2-B3,B2-C2,C2-B2,C2-C3,C2-D2,D2-C2,D2-D3,D2-E2,E2-D2,E2-E3,E2-F2,F2-E2,F2-F3,F2-G2,G2-F2,G2-G3,G2-H2,F4-F5,F4-G4,C5-B5,C5-C6,C5-D6,C5-D5");
+        testMoves("3b02/1b0b03r01/5b02/8/1b0bb3r01/1r06/2r05/3r02 r",
+                "B6-A6,B6-C6,C7-B7,C7-C6,C7-D7,E8-D8,E8-E7,E8-F8,G2-F2,G2-G1,G2-H2,G5-F5,G5-G4,G5-H5,B6-C5");
     }
 
     @Test
@@ -122,10 +122,10 @@ public class MoveGeneratorTest {
     @Test
     @DisplayName("Gruppe U")
     public void testGruppeU() {
-        //testMoves("1b04/2b03b01/b01rr5/r02b01b02/1b06/1r02b03/8/1r01r0r0r0 b",
-            //    "C1-B1,C1-C2,C1-D1,E1-D1,E1-E2,E1-F1,F1-E1,F1-F2,F1-G1,G1-F1,G1-G2,B3-A3,B3-C3,A5-B5,C6-A7,C6-B8,C6-D8,C6-E7");
-       // testMoves("bb1b0b0b0b0/b01b0b0b01b01/8/3b04/3r04/2r05/1rr2r0r01r0/1r0r0r0r0r0 r",
-          //      "D5-C5,D5-E5,A7-A6,A7-B7,C7-B7,C7-C6,C7-D7,D7-C7,D7-D6,D7-E7,E7-D7,E7-E6,E7-F7,G7-F7,G7-G6,G7-H7,B8-A6,B8-C6,B8-D7,D8-C8,D8-D7,D8-E8,E8-D8,E8-E7,E8-F8,F8-E8,F8-F7,F8-G8,G8-F8,G8-G7");
+        testMoves("1b01b0b0b0/8/1b02r03/1r06/b02r01r02/r01bb5/2r03r01/1r04 b",
+                "C1-B1,C1-C2,C1-D1,E1-D1,E1-E2,E1-F1,F1-E1,F1-F2,F1-G1,G1-F1,G1-G2,B3-A3,B3-C3,A5-B5,C6-A7,C6-B8,C6-D8,C6-E7");
+        testMoves("1b0b0b0b0b0/1bb2b0b01b0/2b05/3b04/3r04/8/r01r0r0r01r01/rr1r0r0r0r0 r",
+                "D5-C5,D5-E5,A7-A6,A7-B7,C7-B7,C7-C6,C7-D7,D7-C7,D7-D6,D7-E7,E7-D7,E7-E6,E7-F7,G7-F7,G7-G6,G7-H7,B8-A6,B8-C6,B8-D7,D8-C8,D8-D7,D8-E8,E8-D8,E8-E7,E8-F8,F8-E8,F8-F7,F8-G8,G8-F8,G8-G7");
     }
 
     @Test
@@ -133,8 +133,8 @@ public class MoveGeneratorTest {
     public void testGruppeAC() {
         testMoves("2bbb0b0b0/1bbb0b0b0b0b01/8/8/8/1r01r04/2r01r0r0r01/r0r0r0r0r0r0 b",
                 "C2-C3,D2-D3,E2-E3,F2-F3,G2-G3,G2-H2,F1-E1,G1-F1,D2-C2,E2-D2,F2-E2,G2-F2,E1-E2,F1-F2,G1-G2,E1-F1,F1-G1,C2-D2,D2-E2,E2-F2,F2-G2,D1-C3,B2-A4,D1-E3,B2-C4,B2-D3,D1-F2");
-        //testMoves("bb5/1bb6/bb6b/b6r/rb6/6rb1/4rr3/6 b",
-            //    "H3-G3,H3-H4,A4-A5,C4-A5,C4-B6,H5-G7,B1-C3,A3-B5,C4-D6,B1-D2,B2-D3,C4-E5,H5-F6,B2-A4"); // one possible move is missing
+        testMoves("bb5/1bb6/bb6b0/b06r0/r0b06/6rb1/4rr3/6 b", // added 0's to single stones
+                "A4-B4,B1-C3,A3-B5,B1-D2,B2-D3,H3-G3,B2-A4,B2-C4,A3-C4,B5-B6,B5-C5,G6-E7,G6-F8"); // corrected possible moves
     }
 
     @Test
@@ -167,10 +167,10 @@ public class MoveGeneratorTest {
     @Test
     @DisplayName("Gruppe Z")
     public void testGruppeZ() {
-        //testMoves("b02b01b0/2b0b04/3br1b02/2b03b01/2r03r01/4rr3/1rr1b0r03/3r01r0 r",
-           //     "D6-B7,D6-C8,D6-E8,D6-F7,C4-B4,C4-D4,G4-F4,G4-H4,E3-C4,E3-D5,E3-F5,E3-G4,B2-A4,B2-C4,B2-D3,E2-F2,E1-D1,E1-D2,E1-E2,E1-F1,G1-F1,G1-G2");
-        //testMoves("2b01b01/2bb5/3b02b01/3r0brb0r01/1b06/8/2r0rr4/2r01r0r0 r",
-         //       "D5-C5,E5-C6,E5-D7,E5-F7,E5-G6,G5-H5,C2-B2,C2-C3,D2-B3,D2-C4,D2-E4,D2-F3,D1-C1,D1-E1,F1-E1,F1-F2,F1-G1,G1-G2,G1-F1");
+        testMoves("3b01b0/1bb1r0b03/4bb3/2b03b01/2r03r01/3rb1r02/2r0r04/r02r01r0 b",
+                "D6-B7,D6-C8,D6-E8,D6-F7,C4-B4,C4-D4,G4-F4,G4-H4,E3-C4,E3-D5,E3-F5,E3-G4,B2-A4,B2-C4,B2-D3,E2-F2,E1-D1,E1-D2,E1-E2,E1-F1,G1-F1,G1-G2");
+        testMoves("2b01b0b0/2b0bb4/8/1r06/3b0rbr0b01/3r02r01/2rr5/2r01r01 b",
+                "D5-C5,E5-C6,E5-D7,E5-F7,E5-G6,G5-H5,C2-B2,C2-C3,D2-B3,D2-C4,D2-E4,D2-F3,D1-C1,D1-E1,F1-E1,F1-F2,F1-G1,G1-G2,G1-F1");
     }
 
     @Test
@@ -194,8 +194,8 @@ public class MoveGeneratorTest {
     @Test
     @DisplayName("Gruppe N")
     public void testGruppeN() {
-        //testMoves("b0b01b0b0b0/8/4b0b02/3br4/6b01/2rr3rb1/4rr3/r0r02r0r0 r ",
-               // "C6-E5,C8-B8,C6-B4,C8-C7,C8-D8,C6-A5,E7-D5,E7-G6,E7-F5,G8-F8,G8-G7,B8-B7,B8-C8,D4-B3,F8-F7,F8-G8,D4-C2,F8-E8,D4-F3,D4-E2"); // 4 possible moves to much
+        testMoves("b0b01b0b0b0/8/4b0b02/3br4/6b01/2rr3rb1/4rr3/r0r02r0r0 r",
+               "B8-B7,B8-C8,C8-D8,C8-B8,C8-C7,F8-E8,C6-E5,C6-B4,C6-A5,E7-D5,E7-G6,E7-F5,G8-F8,G8-G7,D4-B3,F8-F7,F8-G8,D4-C2,D4-F3,D4-E2");
         testMoves("b0b0b0b0b0b0/8/5b01b0/5r0b01/3b04/4r0rr1rb/3r04/r0r0r0r01r0 b",
                 "H3-H4,C1-B1,C1-D1,E1-E2,G4-G5,G1-G2,B1-C1,D5-D6,D1-D2,F3-E3,F1-G1,F3-G3,F1-E1,H6-G8,H3-G3,C1-C2,G4-H4,E1-D1,E1-F1,G1-F1,B1-B2,D1-E1,D5-C5,D5-E6,D1-C1,D5-E5,F1-F2,H6-F7");
     }
@@ -205,8 +205,8 @@ public class MoveGeneratorTest {
     public void testGruppeT() {
         testMoves("6/1b06/2bb1b0b02/6bb1/1r0br5/3r0rr3/8/4r0r0 b",
                 "B2-A2,B2-C2,B2-B3,C3-A4,C3-E4,C3-B5,C3-D5,E3-D3,E3-F3,E3-E4,F3-E3,F3-G3,F3-F4,G4-E5,G4-F6,G4-H6");
-       // testMoves("6/8/6b01/4bb3/r0r0rr4b0/3b02r01/1rr3r2/6 r",
-             //   "A5-B5,A5-A4,B5-A5,B5-B4,C5-E4,C5-A4,C5-D3,C5-B3,G6-F6,G6-H6,G6-H5,G6-G5,B7-D6,B7-A5,F7-E7,F7-G7,F7-F6"); // 3 possible moves missing
+        testMoves("6/8/6b01/4bb3/r0r0rr4b0/3b02r01/1rr3r02/6 r", // added r0 instead of r in the 7th row
+                "A5-B5,A5-A4,B5-A5,B5-B4,C5-E4,C5-A4,C5-D3,C5-B3,G6-F6,G6-H6,G6-H5,G6-G5,B7-D6,B7-A5,F7-E7,F7-G7,F7-F6"); // 3 possible moves missing
     }
 
     @Test
@@ -241,8 +241,8 @@ public class MoveGeneratorTest {
     public void testGruppeAG() {
         testMoves("b03b01/3bb2bb1/2bb1br3/1b06/5r02/2rr5/1r02rr3/r0r02rr1 b",
                 "B1-C1,B1-B2,F1-E1,F1-G1,F1-F2,D2-B3,D2-F3,D2-C4,D2-E4,G2-E3,G2-F4,G2-H4,C3-A4,C3-E4,C3-B5,C3-D5,B4-A4,B4-C4,B4-B5");
-        //testMoves("b03b01/3b02b01/r01b05/8/8/3rbb03/1r06/r03r01 b", //
-               // "B1-C1,B1-B2,F1-E1,F1-G1,F1-F2,D2-C2,D2-E2,D2-D3,G2-F2,G2-H2,G2-G3,C3-B3,C3-D3,C3-C4,E6-C7,E6-G7,E6-D8,E6-F8"); // 2 possible moves too much
+        testMoves("b03b01/3b02b01/r01b05/8/8/4rb3/1r06/r03r01 b", // 3rbb03 corrected to 4rb3
+                "B1-C1,B1-B2,F1-E1,F1-G1,F1-F2,D2-C2,D2-E2,D2-D3,G2-F2,G2-H2,G2-G3,C3-B3,C3-D3,C3-C4,E6-C7,E6-G7,E6-D8,E6-F8");
     }
 
     @Test
@@ -257,7 +257,7 @@ public class MoveGeneratorTest {
     @Test
     @DisplayName("Gruppe AA")
     public void testGruppeAA() {
-       // testMoves("1r0r0r0r01/8/1r01rb2rr1/5bb2/2b05/8/4bb3/1b02b01 b", // ???? already corrected fen format by adding 0's for single figures
+       // testMoves("1r0r0r0r01/8/1r01rb2rr1/5bb2/2b05/8/4bb3/1b02b01 b",
                 //"F5-G7,F5-E7,F5-H6,F5-H4,F5-D4,F5-E3,F5-G3,C4-C5,C4-C3,C4-B4,C4-D4,E2-F4,E2-D4,E2-C3,E2-C1,E2-G3,E2-G1,C1-C2,C1-B1,C1-D1,F1-F2,F1-G1,F1-E1");
         testMoves("b0b0b01b0b0/4b01b01/2bb2b02/8/1r01br4/4r01r01/2r02rr2/r01r01r0r0 r",
                 "B8-C8,B8-B7,D8-C8,D8-E8,D8-D7,F8-E8,F8-G8,G8-F8,G8-G7,C7-B7,C7-D7,C7-C6,F7-D6,F7-E5,F7-G5,F7-H6,E6-D6,E6-E5,E6-F6,G6-F6,G6-G5,G6-H6,B5-A5,B5-B4,B5-C5,D5-B4,D5-C3,D5-E3,D5-F4");
@@ -275,7 +275,6 @@ public class MoveGeneratorTest {
     @Test
     @DisplayName("Gruppe W")
     public void testGruppeW() {
-        // unklar welche farbe beginnen soll
         //testMoves("r03r01/8/2r05/3b04/8/8/5b02/1b04 b",
               //"B1-B2,B1-C1,F1-E1,F1-F2,F1-G1,C3-B3,C3-C4,C3-D3,C3-D4,D4-C4,D4-D3,D4-E4,D4-C3,F7-E7,F7-F6,F7-G7,C8-B8,C8-C7,C8-D8");
        // testMoves("r05/8/8/3rr4/5b02/8/1b06/6 b",
@@ -294,8 +293,8 @@ public class MoveGeneratorTest {
     @Test
     @DisplayName("Gruppe V")
     public void testGruppeV() {
-        //testMoves("b0b0b0b01b0/2bb1b03/1b01b01bb2/3r04/2r05/2r01r0r0r01/3r04/r0r0r0r01r0 b",
-              //  "B1-B2,B1-C1,C1-B1,C1-C2,C1-D1,D1-C1,D1-D2,D1-E1,E1-D1,E1-E2,E1-F1,G1-F1,G1-G2,D2-C2,D2-D3,D2-E2,C3-B3,C3-C4,C3-D3,E3-D3,E3-E4,E3-F3,F3-E3,F3-F4,F3-G3,G3-F3,G3-G4,G3-H3,C4-B4,C4-C5,C4-D4,D5-C5,D5-E5"); 5 moves zu viel
+        testMoves("b0b0b0b01b0/2bb1b03/1b01b01bb2/3r04/2r05/2r01r0r0r01/3r04/r0r0r0r01r0 b",
+                "B1-B2,B1-C1,C1-B1,C1-D1,D1-C1,D1-D2,D1-E1,E1-D1,E1-E2,E1-F1,G1-F1,G1-G2,C2-A3,C2-E3,C2-B4,C2-D4,E2-E3,E2-D2,E2-F2,B3-B4,B3-A3,B3-C3,D3-C3,D3-E3,F3-D4,F3-H4,F3-E5,F3-G5"); //5 moves zu viel, first blue row was correct, rest has been corrected
         testMoves("2bb3/5b02/8/2bb5/5rr2/8/3b03r0/7 r", // used r instead of b
                 "F5-D4,F5-E3,F5-G3,F5-H4,H7-G7,H7-H6");
     }
@@ -305,10 +304,9 @@ public class MoveGeneratorTest {
     public void testGruppeP() {
         testMoves("1b0b01b0b0/3b0b03/1b03b02/2b01b03/4r0r0b01/4r01r01/1rr1rr4/1r0r01r01 b",
             "C1-B1,C1-D1,C1-C2,D1-C1,D1-E1,D1-D2,F1-G1,F1-E1,F1-F2,G1-F1,G1-G2,D2-E2,D2-C2,D2-D3,E2-D2,E2-E3,E2-F2,B3-A3,B3-B4,B3-C3,F3-E3,F3-F4,F3-G3,C4-B4,C4-C5,C4-D4,E4-D4,E4-F4,E4-F5,G5-H5"); // ein zug war doppelt
-        testMoves("1b03b0/r02bb1b02/3b04/1r06/4r0r0b01/2b03r01/2r05/2r01r01 r", // used r instead of b
+        testMoves("1b03b0/r02bb1b02/3b04/1r06/4r0r0b01/2b03r01/2r05/2r01r01 r", // changed b to r
                 "A2-B2,B4-A4,B4-C4,B4-B3,E5-F5,E5-D5,E5-E4,F5-E5,F5-F4,G6-F6,G6-H6,C7-B7,C7-D7,D8-D7,D8-E8,D8-C8,F8-E8,F8-G8,F8-F7");
     }
-
 
     private void testMoves(String fen, String expectedMoves) {
         Color color = getColorFromFen(fen.charAt(fen.length() - 1));
@@ -332,7 +330,6 @@ public class MoveGeneratorTest {
     private Color getColorFromFen(char fenChar) {
         return fenChar == 'r' ? Color.RED : Color.BLUE;
     }
-
 
     @Test
     @DisplayName("Speed-Test")
