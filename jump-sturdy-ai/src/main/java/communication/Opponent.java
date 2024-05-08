@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class Opponent {
 
@@ -26,18 +28,17 @@ public class Opponent {
 
             int i = 0;
             while (i <= 10) {
-                String response;
 
-                if (i == 0) { // first message
-                    response = "";
-                } else { // get response
-                    response = inFromServer.readLine();
-                    System.out.println("Server says: " + response);
-                }
+                String server_fen = inFromServer.readLine();
+                System.out.println("Server says: " + server_fen);
 
-                if (response != null) {
-                    String message = String.valueOf(i++);
-                    outToServer.println(message);
+                moveGenerator.initializeBoard(server_fen);
+                LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(moveGenerator, server_fen);
+                String move = moveGenerator.getRandomMove(moves);
+
+                if (server_fen != null) {
+                    outToServer.println(move);
+                    System.out.println("I sent: " + move);
                 }
             }
         } catch (IOException e) {
