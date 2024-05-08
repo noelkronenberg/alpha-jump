@@ -489,65 +489,6 @@ public class MoveGenerator {
         return formattedOutput.toString();
     }
 
-    void exampleSequence(int rounds, int positionRed, int positionBlue) {
-        MoveGenerator moveGenerator = new MoveGenerator();
-        moveGenerator.initializeBoard();
-
-        System.out.println("Start:");
-        moveGenerator.printBoard();
-
-        int moveRed;
-        int moveBlue;
-
-        List<Integer> possibleMoves;
-
-        for (int round = 1; round < rounds; round++) {
-
-            System.out.println();
-            System.out.println("Move " + round + " (Red): ");
-
-            possibleMoves = moveGenerator.generatePossibleMoves(positionRed, Color.RED);
-
-            if (!possibleMoves.isEmpty()) {
-                System.out.println("Possible: " + possibleMoves);
-                moveRed = possibleMoves.getFirst();
-                System.out.println("Selected: " + moveRed);
-                moveGenerator.movePiece(positionRed, moveRed, moveGenerator.getPieceAtPosition(positionRed), Color.RED);
-                moveGenerator.printBoard();
-                positionRed = moveRed;
-
-                if (positionRed / 10 == 7) {
-                    System.out.println();
-                    System.out.println("Red wins!");
-                    return;
-                }
-            } else {
-                System.out.println("No possible moves found!");
-            }
-
-            System.out.println();
-            System.out.println("Move " + round + " (Blue): ");
-            possibleMoves = moveGenerator.generatePossibleMoves(positionBlue, Color.BLUE);
-            if (!possibleMoves.isEmpty()) {
-                System.out.println("Possible: " + possibleMoves);
-                moveBlue = possibleMoves.getFirst();
-                System.out.println("Selected: " + moveBlue);
-                moveGenerator.movePiece(positionBlue, moveBlue, moveGenerator.getPieceAtPosition(positionBlue), Color.BLUE);
-                moveGenerator.printBoard();
-                positionBlue = moveBlue;
-
-                if (positionBlue / 10 == 0) {
-                    System.out.println();
-                    System.out.println("Blue wins!");
-                    return;
-                }
-            } else {
-                System.out.println("No possible moves found!");
-            }
-
-        }
-    }
-
     public boolean isGameOver(String move, Color ourColor) {
         if (!move.isEmpty()) {
             Color opponentColor = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
