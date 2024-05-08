@@ -87,9 +87,9 @@ public class MoveGenerator {
 
     public Color getColor(char c) {
         if (c == 'r') {
-            return Color.RED; // ROT = RED
+            return Color.RED;
         } else {
-            return Color.BLUE; // BLAU = BLUE
+            return Color.BLUE;
         }
     }
 
