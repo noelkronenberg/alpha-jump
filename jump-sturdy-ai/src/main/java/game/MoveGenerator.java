@@ -1,10 +1,5 @@
 package game;
 
-import java.awt.*;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.*;
 
 public class MoveGenerator {
@@ -458,36 +453,6 @@ public class MoveGenerator {
         System.out.println();
     }
 
-
-    public static String convertAllMoves(Map<Integer, List<Integer>> possibleMoves) {
-        // Mapping for the columns
-        Map<Integer, Character> columnMapping = Map.of(
-                0, 'A', 1, 'B', 2, 'C', 3, 'D', 4, 'E', 5, 'F', 6, 'G', 7, 'H'
-        );
-
-        StringBuilder formattedOutput = new StringBuilder();
-
-        // Add the possible moves
-        for (Map.Entry<Integer, List<Integer>> entry : possibleMoves.entrySet()) {
-            int startY = entry.getKey() / 10 + 1;  // Y-coordinate of the starting point
-            int startX = entry.getKey() % 10;  // X-coordinate of the starting point
-            char startColumn = columnMapping.get(startX);
-            for (int targetPosition : entry.getValue()) {
-                int targetY = targetPosition / 10 + 1;  // Y-coordinate of the target point
-                int targetX = targetPosition % 10;  // X-coordinate of the target point
-                char targetColumn = columnMapping.get(targetX);
-                formattedOutput.append(startColumn).append(startY).append("-").append(targetColumn).append(targetY).append(", ");
-            }
-        }
-
-        // Remove the trailing comma and space
-        if (!formattedOutput.isEmpty()) {
-            formattedOutput.setLength(formattedOutput.length() - 2);
-        }
-
-        return formattedOutput.toString();
-    }
-
     void exampleSequence(int rounds, int positionRed, int positionBlue) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
@@ -563,7 +528,7 @@ public class MoveGenerator {
 
     boolean doesBaseRowContainEnemy(Color enemyColor, int rowToCheck) {
         for (int i = 1; i < 7; i++) {
-            if (colorBoard[rowToCheck][i] == enemyColor) {
+            if (colorBoard[rowToCheck][i] == enemyColor){
                 return true;
             }
         }
