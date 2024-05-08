@@ -460,7 +460,7 @@ public class MoveGenerator {
     }
 
 
-    public static String convertAllMoves(List<Map.Entry<Integer, List<Integer>>> possibleMoves) {
+    public static String convertAllMoves(Map<Integer, List<Integer>> possibleMoves) {
         // Mapping for the columns
         Map<Integer, Character> columnMapping = Map.of(
                 0, 'A', 1, 'B', 2, 'C', 3, 'D', 4, 'E', 5, 'F', 6, 'G', 7, 'H'
@@ -469,7 +469,7 @@ public class MoveGenerator {
         StringBuilder formattedOutput = new StringBuilder();
 
         // Add the possible moves
-        for (Map.Entry<Integer, List<Integer>> entry : possibleMoves) {
+        for (Map.Entry<Integer, List<Integer>> entry : possibleMoves.entrySet()) {
             int startY = entry.getKey() / 10 + 1;  // Y-coordinate of the starting point
             int startX = entry.getKey() % 10;  // X-coordinate of the starting point
             char startColumn = columnMapping.get(startX);
@@ -493,7 +493,7 @@ public class MoveGenerator {
 
 
 
-    void exampleSequence(int rounds, int positionRed, int positionBlue) {
+   /* void exampleSequence(int rounds, int positionRed, int positionBlue) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
 
@@ -550,7 +550,7 @@ public class MoveGenerator {
             }
 
         }
-    }
+    }*/
 
     boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor){
         if (moves.size()!=0){
@@ -615,9 +615,10 @@ public class MoveGenerator {
             int from = move.keySet().iterator().next();
             int to = move.get(from);
             System.out.println("From: " + from + " To: " + to);
-            List text = moveGenerator.generateAllPossibleMoves(Color.RED);
+            List text = (List) moveGenerator.generateAllPossibleMoves(Color.RED);
             System.out.println(text);
-            System.out.println(convertAllMoves(text));
+            System.out.println(convertAllMoves((Map<Integer, List<Integer>>) text));
+
         }
     }
 }

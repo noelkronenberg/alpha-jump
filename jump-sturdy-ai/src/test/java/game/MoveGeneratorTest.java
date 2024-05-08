@@ -310,15 +310,15 @@ public class MoveGeneratorTest {
 
     private void testMoves(String fen, String expectedMoves) {
         Color color = getColorFromFen(fen.charAt(fen.length() - 1));
-         fen = fen.substring(0, fen.length() - 2);
+        fen = fen.substring(0, fen.length() - 2);
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard();
 
-         // Determine color based on the last character of FEN
-        System.out.println(moveGenerator.generateAllPossibleMoves(color));
-        List<Map.Entry<Integer, List<Integer>>> actualMovesList = moveGenerator.generateAllPossibleMoves(color);
+        // Determine color based on the last character of FEN
+        Map<Integer, List<Integer>> actualMovesMap = moveGenerator.generateAllPossibleMoves(color);
 
-        String[] actualMovesArray = moveGenerator.convertAllMoves(actualMovesList).split(", ");
+        String actualMoves = moveGenerator.convertAllMoves(actualMovesMap);
+        String[] actualMovesArray = actualMoves.split(", ");
         String[] expectedMovesArray = expectedMoves.trim().split(",");
 
         Arrays.sort(actualMovesArray);
@@ -326,6 +326,7 @@ public class MoveGeneratorTest {
 
         assertArrayEquals(expectedMovesArray, actualMovesArray);
     }
+
 
     private Color getColorFromFen(char fenChar) {
         return fenChar == 'r' ? Color.RED : Color.BLUE;
