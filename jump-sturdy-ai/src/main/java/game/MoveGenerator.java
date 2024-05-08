@@ -513,13 +513,13 @@ public class MoveGenerator {
         }
     }
 
-    boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor){
+    boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor) {
         if (moves.size()!=0){
             Color opponentColor = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
-            if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)){
+            if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
                 return true;
             }
-            if (opponentColor==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)){
+            if (opponentColor==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)) {
                 return true;
             }
             return false;
@@ -527,7 +527,7 @@ public class MoveGenerator {
         return true;
     }
 
-    boolean doesBaseRowContainEnemy(Color enemyColor, int rowToCheck){
+    boolean doesBaseRowContainEnemy(Color enemyColor, int rowToCheck) {
         for (int i = 1; i < 7; i++) {
             if (colorBoard[rowToCheck][i]==enemyColor){
                 return true;
@@ -537,7 +537,7 @@ public class MoveGenerator {
     }
 
 
-    String generateRandomMove(LinkedHashMap<Integer, List<Integer>> moves){
+    String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
 
@@ -551,13 +551,12 @@ public class MoveGenerator {
         return getPosForRowColInteger(randomPiece)+"-"+getPosForRowColInteger(randomPos);
     }
 
-    String getPosForRowColInteger(int rowAndColInt){
+    String getPosForRowColInteger(int rowAndColInt) {
         int col = rowAndColInt%10;          
         int row = rowAndColInt/10;
         String colString = String.valueOf(((char)(65+col)));
         return colString+(row+1);
     }
-
 
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(MoveGenerator moveGenerator, String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
@@ -576,7 +575,7 @@ public class MoveGenerator {
             System.out.println();
             moveGenerator.printBoard();
 
-            System.out.println(moveGenerator.generateRandomMove(moves));
+            System.out.println(moveGenerator.getRandomMove(moves));
 
         }
     }
