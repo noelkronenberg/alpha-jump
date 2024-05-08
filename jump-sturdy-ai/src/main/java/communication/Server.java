@@ -1,8 +1,5 @@
 package communication;
 
-import game.Color;
-import game.MoveGenerator;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,38 +26,17 @@ public class Server {
             BufferedReader inFromClient_02 = new BufferedReader(new InputStreamReader(client_02.getInputStream()));
             PrintWriter outToClient_02 = new PrintWriter(client_02.getOutputStream(), true);
 
-            // start
-            MoveGenerator moveGenerator = new MoveGenerator();
-            String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
-            moveGenerator.initializeBoard(fen);
-            outToClient_01.println(fen);
-            boolean gameEnded = false;
-
             // read from one client and send to the other (continuously)
-            while (!gameEnded) {
+            while (true) {
                 String messageFromClient1 = inFromClient_01.readLine();
                 if (messageFromClient1 != null) {
                     System.out.println("Client 1 says: " + messageFromClient1);
-
-                    int start = 0; // TBI
-                    int end =  0; // TBI
-                    moveGenerator.movePiece(start, end, moveGenerator.getPieceAtPosition(start), Color.BLUE);
-
-                    // TBI: check for win
-
                     outToClient_02.println(messageFromClient1);
                 }
 
                 String messageFromClient2 = inFromClient_02.readLine();
                 if (messageFromClient2 != null) {
                     System.out.println("Client 2 says: " + messageFromClient2);
-
-                    int start = 0; // TBI
-                    int end =  0; // TBI
-                    moveGenerator.movePiece(start, end, moveGenerator.getPieceAtPosition(start), Color.RED);
-
-                    // TBI: check for win
-
                     outToClient_01.println(messageFromClient2);
                 }
             }
