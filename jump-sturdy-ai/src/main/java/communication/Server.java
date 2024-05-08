@@ -46,7 +46,11 @@ public class Server {
                     int end =  0; // TBI
                     moveGenerator.movePiece(start, end, moveGenerator.getPieceAtPosition(start), Color.BLUE);
 
-                    // TBI: check for win
+                    if (moveGenerator.isGameOver(messageFromClient1, Color.BLUE)) {
+                        gameEnded = true;
+                        System.out.println("BLUE won!");
+                        continue;
+                    }
 
                     outToClient_02.println(messageFromClient1);
                 }
@@ -59,7 +63,11 @@ public class Server {
                     int end =  0; // TBI
                     moveGenerator.movePiece(start, end, moveGenerator.getPieceAtPosition(start), Color.RED);
 
-                    // TBI: check for win
+                    if (moveGenerator.isGameOver(messageFromClient2, Color.RED)) {
+                        gameEnded = true;
+                        System.out.println("RED won!");
+                        continue;
+                    }
 
                     outToClient_01.println(messageFromClient2);
                 }
