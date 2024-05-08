@@ -513,7 +513,7 @@ public class MoveGenerator {
     }
 
     boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor) {
-        if (moves.isEmpty()){
+        if (!moves.isEmpty()){
             Color opponentColor = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
             if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
                 return true;
