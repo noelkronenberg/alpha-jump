@@ -327,7 +327,7 @@ public class MoveGenerator {
         return row * 10 + column;
     }
 
-    void movePiece(int start, int end, Piece piece, Color color) {
+    public void movePiece(int start, int end, Piece piece, Color color) {
         int fromRow = start / 10;
         int fromColumn = start % 10;
         int toRow = end / 10;
@@ -375,7 +375,7 @@ public class MoveGenerator {
         }
     }
 
-    Piece getPieceAtPosition(int position) {
+    public Piece getPieceAtPosition(int position) {
         int row = position / 10;
         int column = position % 10;
         return pieceBoard[row][column];
@@ -514,7 +514,7 @@ public class MoveGenerator {
     }
 
     boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor) {
-        if (moves.size() != 0){
+        if (moves.size() != 0) {
             Color opponentColor = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
             if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
                 return true;
@@ -536,7 +536,7 @@ public class MoveGenerator {
         return false;
     }
 
-    String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
+    public String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
 
@@ -568,13 +568,15 @@ public class MoveGenerator {
         MoveGenerator moveGenerator = new MoveGenerator();
         String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
         for (int i = 0; i < 1; i++) {
-            LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(moveGenerator, fen);
-            System.out.println(moves);
-
-            System.out.println();
             moveGenerator.printBoard();
 
-            System.out.println(moveGenerator.getRandomMove(moves));
+            LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(moveGenerator, fen);
+            System.out.println();
+            System.out.println(moves);
+
+            String move = moveGenerator.getRandomMove(moves);
+            System.out.println();
+            System.out.println(move);
 
         }
     }
