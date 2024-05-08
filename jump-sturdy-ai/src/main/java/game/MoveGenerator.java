@@ -389,7 +389,7 @@ public class MoveGenerator {
                 if (colorBoard[row][column] == color) {
                     int position = convertToNumber(row, column);
                     List<Integer> piecePossibleMoves = generatePossibleMoves(position, color);
-                    if (piecePossibleMoves.size()!=0) {                                             //Ignores Pieces that have no moves
+                    if (piecePossibleMoves.size()!=0) { // ignores Pieces that have no moves
                         allPossibleMoves.put(position, piecePossibleMoves);
                     }
                 }
