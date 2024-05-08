@@ -52,6 +52,8 @@ public class Server {
                         continue;
                     }
 
+                    // TBI: board to FEN
+
                     outToClient_02.println(messageFromClient1);
                 }
 
@@ -68,6 +70,8 @@ public class Server {
                         System.out.println("RED won!");
                         continue;
                     }
+
+                    // TBI: board to FEN
 
                     outToClient_01.println(messageFromClient2);
                 }
