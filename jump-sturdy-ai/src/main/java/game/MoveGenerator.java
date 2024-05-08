@@ -536,15 +536,21 @@ public class MoveGenerator {
         return false;
     }
 
-    void generateRandomMove(LinkedHashMap<Integer, List<Integer>> moves){
+    LinkedHashMap<Integer, Integer> getRandomMove(LinkedHashMap<Integer, List<Integer>> moves){
+        LinkedHashMap<Integer, Integer> randomMove = new LinkedHashMap<>();
+
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
         int number = generator.nextInt(allPieces.size());
         int randomPiece = allPieces.get(number);
+
         List<Integer> allMoveToPos = moves.get(randomPiece);
         number = generator.nextInt(allMoveToPos.size());
         int randomPos = allMoveToPos.get(number);
-        System.out.println("From: "+randomPiece+" To: "+randomPos );
+
+        randomMove.put(randomPiece, randomPos);
+
+        return randomMove;
     }
 
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(MoveGenerator moveGenerator, String fen) {
@@ -558,8 +564,18 @@ public class MoveGenerator {
         MoveGenerator moveGenerator = new MoveGenerator();
         String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
         for (int i = 0; i < 1; i++) {
-            System.out.println(moveGenerator.getMovesWrapper(moveGenerator, fen));
+            LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(moveGenerator, fen);
+            System.out.println(moves);
+
+            System.out.println();
             moveGenerator.printBoard();
+
+            System.out.println();
+            System.out.println("Random move: ");
+            LinkedHashMap<Integer,Integer> move = moveGenerator.getRandomMove(moves);
+            int from = move.keySet().iterator().next();
+            int to = move.get(from);
+            System.out.println("From: " + from + " To: " + to);
         }
     }
 }
