@@ -564,6 +564,14 @@ public class MoveGenerator {
         return moveGenerator.generateAllPossibleMoves(color);
     }
 
+    int revertPosRowColToIntForServer(String pos){
+        char col=pos.charAt(0);
+        char row=pos.charAt(1);
+        int rowInt =Character.getNumericValue(row)-1;
+        int colInt = col-65;
+        return rowInt*10+colInt;
+    }
+
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
@@ -576,6 +584,7 @@ public class MoveGenerator {
 
             System.out.println(moveGenerator.getRandomMove(moves));
 
+            System.out.println(moveGenerator.revertPosRowColToIntForServer("B1"));
         }
     }
 }
