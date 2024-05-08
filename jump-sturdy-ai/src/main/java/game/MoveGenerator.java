@@ -513,16 +513,9 @@ public class MoveGenerator {
         }
     }
 
-    Color getOpponentsColor(Color myColor){
-        if (myColor==Color.RED){
-            return Color.BLUE;
-        }
-        return Color.RED;
-    }
-
     boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor){
         if (moves.size()!=0){
-            Color opponentColor = getOpponentsColor(ourColor);
+            Color opponentColor = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
             if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)){
                 return true;
             }
