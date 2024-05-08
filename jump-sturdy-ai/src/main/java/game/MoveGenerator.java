@@ -195,7 +195,7 @@ public class MoveGenerator {
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
-                if (row > 0) {
+                if (row > 0) {                              //NOTE: remove: is always true
 
                     // forward
                     if (colorBoard[row - 1][column] != Color.BLUE) {
@@ -231,11 +231,11 @@ public class MoveGenerator {
             possibleMoves.removeIf(move -> !isValidMove(move, Color.RED));
 
         // Blue
-        } else if (color == Color.BLUE) {
+        } else if (color == Color.BLUE) {               //NOTE: always TRUE--> else
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
-                if (row < 7) {
+                if (row < 7) {                          //NOTE: Delete
 
                     // forward
                     if (colorBoard[row + 1][column] != Color.RED) {
@@ -263,7 +263,7 @@ public class MoveGenerator {
             }
 
             // double piece
-            else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
+            else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {       //NOTE: else
                 addKnightMoves(possibleMoves, row, column, color);
             }
 
@@ -296,7 +296,7 @@ public class MoveGenerator {
                 if (newRow > row) {
                     continue;
                 }
-            } else if (color == Color.BLUE) {
+            } else if (color == Color.BLUE) {           //NOTE: else
                 if (newRow < row) {
                     continue;
                 }
@@ -597,6 +597,16 @@ public class MoveGenerator {
         Color color = moveGenerator.getColor(color_fen);
         moveGenerator.initializeBoard(fen.substring(0, fen.length() - 2));
         return moveGenerator.generateAllPossibleMoves(color);
+    }
+
+    int revertPosRowColToIntForServer(String pos){
+        char col=pos.charAt(0);
+        char row=pos.charAt(1);
+
+        int rowInt =Character.getNumericValue(row)-1;
+        int colInt = col-65;
+
+        return rowInt*10+colInt;
     }
 
     public static void main(String[] args) {
