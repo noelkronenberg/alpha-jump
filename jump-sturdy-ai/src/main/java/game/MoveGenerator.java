@@ -564,7 +564,7 @@ public class MoveGenerator {
 
     boolean doesBaseRowContainEnemy(Color enemyColor, int rowToCheck) {
         for (int i = 1; i < 7; i++) {
-            if (colorBoard[rowToCheck][i] == enemyColor){
+            if (colorBoard[rowToCheck][i] == enemyColor) {
                 return true;
             }
         }
