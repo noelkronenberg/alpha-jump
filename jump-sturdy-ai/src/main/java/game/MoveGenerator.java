@@ -550,7 +550,7 @@ public class MoveGenerator {
             }
 
         }
-    }
+    }*/
 
     boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color ourColor) {
         if (moves.size() != 0){
