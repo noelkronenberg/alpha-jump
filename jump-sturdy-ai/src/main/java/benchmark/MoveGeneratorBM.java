@@ -3,6 +3,9 @@ package benchmark;
 import game.Color;
 import game.MoveGenerator;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+
 public class MoveGeneratorBM {
 
     static MoveGenerator moveGenerator;
@@ -50,6 +53,52 @@ public class MoveGeneratorBM {
         System.out.println("Memory usage: " + usedMemory + " bytes");
     }
 
+    static double fullGameTime() {
+        MoveGeneratorBM.init();
+
+        String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
+        LinkedHashMap<Integer, List<Integer>> moves;
+        String move_string;
+        int[] move_int;
+        String new_fen;
+        boolean gameEnded = false;
+
+        double startTime = System.nanoTime();
+        while(!gameEnded) {
+            // BLUE player
+            moves = moveGenerator.getMovesWrapper(fen);
+            move_string = moveGenerator.getRandomMove(moves);
+            move_int = moveGenerator.convertStringToPosWrapper(move_string);
+            moveGenerator.movePiece(move_int[0], move_int[1]);
+            new_fen = moveGenerator.getFenFromBoard();
+            fen = new_fen + " r";
+
+            if (moveGenerator.isGameOver(move_string, Color.BLUE)) {
+                gameEnded = true;
+                continue;
+            }
+
+            // RED player
+            moves = moveGenerator.getMovesWrapper(fen);
+            move_string = moveGenerator.getRandomMove(moves);
+            move_int = moveGenerator.convertStringToPosWrapper(move_string);
+            moveGenerator.movePiece(move_int[0], move_int[1]);
+            new_fen = moveGenerator.getFenFromBoard();
+            fen = new_fen + " b";
+
+            if (moveGenerator.isGameOver(move_string, Color.RED)) {
+                gameEnded = true;
+                continue;
+            }
+        }
+
+        double endTime = System.nanoTime();
+
+        double duration = ((endTime - startTime) / 1000) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
+        return duration;
+
+    }
+
     public static void main(String[] args) {
         MoveGeneratorBM.init();
 
@@ -60,5 +109,8 @@ public class MoveGeneratorBM {
         System.out.println("End game: ");
         MoveGeneratorBM.wrapperBM("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b");
 
+        System.out.println();
+        System.out.println("Full game: ");
+        System.out.println("Time to play full game: " + MoveGeneratorBM.fullGameTime() + " milliseconds");
     }
 }
