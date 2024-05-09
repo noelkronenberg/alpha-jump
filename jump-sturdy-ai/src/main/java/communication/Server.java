@@ -45,7 +45,7 @@ public class Server {
                     int[] moves = moveGenerator.convertStringToPosWrapper(messageFromClient1); // convert to internal representation
                     moveGenerator.movePiece(moves[0], moves[1]);
 
-                    moveGenerator.printBoard();
+                    moveGenerator.printBoard(true);
 
                     if (moveGenerator.isGameOver(messageFromClient1, Color.RED)) {
                         gameEnded = true;
@@ -68,7 +68,7 @@ public class Server {
                     int[] moves = moveGenerator.convertStringToPosWrapper(messageFromClient2); // convert to internal representation
                     moveGenerator.movePiece(moves[0], moves[1]);
 
-                    moveGenerator.printBoard();
+                    moveGenerator.printBoard(true);
 
                     if (moveGenerator.isGameOver(messageFromClient2, Color.BLUE)) {
                         gameEnded = true;

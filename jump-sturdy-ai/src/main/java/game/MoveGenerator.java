@@ -413,11 +413,19 @@ public class MoveGenerator {
         return allPossibleMoves;
     }
 
-    public void printBoard() {
-        System.out.println("     0   1   2   3   4   5   6   7");
+    public void printBoard(boolean fen) {
+        if (fen) {
+            System.out.println("     A   B   C   D   E   F   G   H");
+        } else {
+            System.out.println("     0   1   2   3   4   5   6   7");
+        }
         System.out.println();
         for (int row = 7; row >= 0; row--) {
-            System.out.print(row + "   ");
+            if (fen) {
+                System.out.print(row + 1 + "   ");
+            } else {
+                System.out.print(row + "   ");
+            }
             for (int column = 0; column <= 7; column++) {
 
                 // border
@@ -633,7 +641,7 @@ public class MoveGenerator {
             System.out.println(moves);
 
             System.out.println();
-            moveGenerator.printBoard();
+            moveGenerator.printBoard(false);
 
             String move_string = moveGenerator.getRandomMove(moves);
             System.out.println(move_string);
@@ -644,7 +652,7 @@ public class MoveGenerator {
             moveGenerator.movePiece(move_int[0], move_int[1]);
 
             System.out.println();
-            moveGenerator.printBoard();
+            moveGenerator.printBoard(false);
 
             System.out.println(moveGenerator.getFenFromBoard());
         }
