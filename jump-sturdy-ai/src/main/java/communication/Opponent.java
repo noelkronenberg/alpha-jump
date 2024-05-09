@@ -32,6 +32,10 @@ public class Opponent {
                 String server_fen = inFromServer.readLine();
                 System.out.println("Server says: " + server_fen);
 
+                if (server_fen.equals("GAME OVER")) {
+                    break;
+                }
+
                 moveGenerator.initializeBoard(server_fen);
                 LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(server_fen);
                 String move = moveGenerator.getRandomMove(moves);
