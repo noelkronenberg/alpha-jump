@@ -26,14 +26,15 @@ public class Player {
             PrintWriter outToServer = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            int i = 0;
-            while (i <= 10) {
+            boolean gameEnded = false;
+            while (!gameEnded) {
 
                 String server_fen = inFromServer.readLine();
                 System.out.println("Server says: " + server_fen);
 
                 if (server_fen.contains("GAME OVER")) {
-                    break;
+                    gameEnded = true;
+                    continue;
                 }
 
                 moveGenerator.initializeBoard(server_fen);
