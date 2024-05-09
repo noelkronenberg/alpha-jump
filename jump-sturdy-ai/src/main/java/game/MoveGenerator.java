@@ -571,7 +571,7 @@ public class MoveGenerator {
         return new int[]{start, end};
     }
 
-    String getFenFromBoard(){
+    public String getFenFromBoard(){
         boolean isCounting = false;
         int counter = 0;
         String s= "";

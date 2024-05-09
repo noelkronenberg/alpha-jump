@@ -53,9 +53,9 @@ public class Server {
                         continue;
                     }
 
-                    // TBI: board to FEN
+                    String new_fen = moveGenerator.getFenFromBoard(); // convert to FEN
 
-                    outToClient_02.println(messageFromClient1);
+                    outToClient_02.println(new_fen);
                 }
 
                 String messageFromClient2 = inFromClient_02.readLine();
@@ -73,7 +73,7 @@ public class Server {
                         continue;
                     }
 
-                    // TBI: board to FEN
+                    String new_fen = moveGenerator.getFenFromBoard(); // convert to FEN
 
                     outToClient_01.println(messageFromClient2);
                 }
