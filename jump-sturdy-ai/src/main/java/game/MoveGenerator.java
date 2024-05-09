@@ -532,10 +532,10 @@ public class MoveGenerator {
         number = generator.nextInt(allMoveToPos.size());
 
         int randomPos = allMoveToPos.get(number);
-        return getPosForRowColInteger(randomPiece) + "-" + getPosForRowColInteger(randomPos);
+        return convertPosToString(randomPiece) + "-" + convertPosToString(randomPos);
     }
 
-    String getPosForRowColInteger(int rowAndColInt) {
+    String convertPosToString(int rowAndColInt) {
         int col = rowAndColInt % 10;
         int row = rowAndColInt / 10;
         String colString = String.valueOf(( (char) (65 + col) ));
