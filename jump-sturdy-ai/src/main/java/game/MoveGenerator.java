@@ -332,7 +332,10 @@ public class MoveGenerator {
         return row * 10 + column;
     }
 
-    public void movePiece(int start, int end, Piece piece, Color color) {
+    public void movePiece(int start, int end) {
+        Piece piece = this.getPieceAtPosition(start);
+        Color color = this.getColorAtPosition(start);
+
         int fromRow = start / 10;
         int fromColumn = start % 10;
         int toRow = end / 10;
@@ -384,6 +387,12 @@ public class MoveGenerator {
         int row = position / 10;
         int column = position % 10;
         return pieceBoard[row][column];
+    }
+
+    public Color getColorAtPosition(int position) {
+        int row = position / 10;
+        int column = position % 10;
+        return colorBoard[row][column];
     }
 
     public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
@@ -540,7 +549,7 @@ public class MoveGenerator {
         return this.generateAllPossibleMoves(color);
     }
 
-    public int revertPosRowColToIntForServer(String pos){
+    int convertStringToPos(String pos) {
         char col=pos.charAt(0);
         char row=pos.charAt(1);
 
@@ -548,6 +557,18 @@ public class MoveGenerator {
         int colInt = col-65;
 
         return rowInt*10+colInt;
+    }
+
+    public int[] convertStringToPosWrapper(String position_string) {
+        String[] position_strings = position_string.split("-");
+
+        String start_string = position_strings[0];
+        String end_string = position_strings[1];
+
+        int start = this.convertStringToPos(start_string);
+        int end =  this.convertStringToPos(end_string);
+
+        return new int[]{start, end};
     }
 
     public static void main(String[] args) {
@@ -560,8 +581,16 @@ public class MoveGenerator {
             System.out.println();
             moveGenerator.printBoard();
 
-            System.out.println(moveGenerator.getRandomMove(moves));
+            String move_string = moveGenerator.getRandomMove(moves);
+            System.out.println(move_string);
+            int[] move_int = moveGenerator.convertStringToPosWrapper(move_string);
+            System.out.println(move_int[0] + "-" + move_int[1]);
 
+            System.out.println();
+            moveGenerator.movePiece(move_int[0], move_int[1]);
+
+            System.out.println();
+            moveGenerator.printBoard();
         }
     }
 }

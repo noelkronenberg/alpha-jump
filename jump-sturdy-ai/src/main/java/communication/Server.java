@@ -42,14 +42,8 @@ public class Server {
                 if (messageFromClient1 != null) {
                     System.out.println("Client 1 says: " + messageFromClient1);
 
-                    // convert to internal representation
-                    String[] positions_string = messageFromClient1.split("-");
-                    String start_string = positions_string[0];
-                    String end_string = positions_string[1];
-                    int start = moveGenerator.revertPosRowColToIntForServer(start_string);
-                    int end =  moveGenerator.revertPosRowColToIntForServer(end_string);
-
-                    moveGenerator.movePiece(start, end, moveGenerator.getPieceAtPosition(start), Color.BLUE);
+                    int[] moves = moveGenerator.convertStringToPosWrapper(messageFromClient1); // convert to internal representation
+                    moveGenerator.movePiece(moves[0], moves[1]);
 
                     moveGenerator.printBoard();
 
@@ -68,14 +62,8 @@ public class Server {
                 if (messageFromClient2 != null) {
                     System.out.println("Client 2 says: " + messageFromClient2);
 
-                    // convert to internal representation
-                    String[] positions_string = messageFromClient2.split("-");
-                    String start_string = positions_string[0];
-                    String end_string = positions_string[1];
-                    int start = moveGenerator.revertPosRowColToIntForServer(start_string);
-                    int end =  moveGenerator.revertPosRowColToIntForServer(end_string);
-
-                    moveGenerator.movePiece(start, end, moveGenerator.getPieceAtPosition(start), Color.RED);
+                    int[] moves = moveGenerator.convertStringToPosWrapper(messageFromClient2); // convert to internal representation
+                    moveGenerator.movePiece(moves[0], moves[1]);
 
                     moveGenerator.printBoard();
 
