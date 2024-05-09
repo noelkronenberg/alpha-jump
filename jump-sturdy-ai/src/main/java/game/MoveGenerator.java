@@ -571,6 +571,60 @@ public class MoveGenerator {
         return new int[]{start, end};
     }
 
+    String getFenFromBoard(){
+        boolean isCounting = false;
+        int counter = 0;
+        String s= "";
+        for (int i = 0; i < colorBoard.length; i++) {
+            for (int j = 0; j < colorBoard.length; j++) {
+                if (colorBoard[i][j]==null){
+                    continue;
+                }
+                if (isCounting && colorBoard[i][j]!=Color.EMPTY){
+                    isCounting=false;
+                    s+=counter;
+                    counter=0;
+                }
+                if (colorBoard[i][j]==Color.EMPTY){
+                    isCounting=true;
+                    counter++;
+                }
+                else {
+                    if (colorBoard[i][j]==Color.RED){
+                        if (pieceBoard[i][j]==Piece.SINGLE){
+                            s+="r0";
+                        } else if (pieceBoard[i][j]==Piece.DOUBLE){
+                            s+="rr";
+                        }
+                        else {
+                            s+="br";
+                        }
+                    }
+                    else {
+                        if (pieceBoard[i][j]==Piece.SINGLE){
+                            s+="b0";
+                        } else if (pieceBoard[i][j]==Piece.DOUBLE){
+                            s+="bb";
+                        }
+                        else {
+                            s+="rb";
+                        }
+                    }
+                }
+            }
+            if (isCounting){
+                isCounting=false;
+                s+=counter;
+                counter=0;
+            }
+            if (i!=7){
+                s+="/";
+            }
+        }
+        //maybe noch Color hinzufügen
+        return s;
+    }
+
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
@@ -591,6 +645,8 @@ public class MoveGenerator {
 
             System.out.println();
             moveGenerator.printBoard();
+
+            System.out.println(moveGenerator.getFenFromBoard());
         }
     }
 }
