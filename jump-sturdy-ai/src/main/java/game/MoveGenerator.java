@@ -404,7 +404,7 @@ public class MoveGenerator {
         return allPossibleMoves;
     }
 
-    void printBoard() {
+    public void printBoard() {
         System.out.println("     0   1   2   3   4   5   6   7");
         System.out.println();
         for (int row = 7; row >= 0; row--) {
@@ -533,11 +533,11 @@ public class MoveGenerator {
         return colString + (row + 1);
     }
 
-    public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(MoveGenerator moveGenerator, String fen) {
+    public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
-        Color color = moveGenerator.getColor(color_fen);
-        moveGenerator.initializeBoard(fen.substring(0, fen.length() - 2));
-        return moveGenerator.generateAllPossibleMoves(color);
+        Color color = this.getColor(color_fen);
+        this.initializeBoard(fen.substring(0, fen.length() - 2));
+        return this.generateAllPossibleMoves(color);
     }
 
     public int revertPosRowColToIntForServer(String pos){
@@ -554,7 +554,7 @@ public class MoveGenerator {
         MoveGenerator moveGenerator = new MoveGenerator();
         String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
         for (int i = 0; i < 1; i++) {
-            LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(moveGenerator, fen);
+            LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(fen);
             System.out.println(moves);
 
             System.out.println();

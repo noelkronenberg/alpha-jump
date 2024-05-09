@@ -33,7 +33,7 @@ public class Player {
                 System.out.println("Server says: " + server_fen);
 
                 moveGenerator.initializeBoard(server_fen);
-                LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(moveGenerator, server_fen);
+                LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(server_fen);
                 String move = moveGenerator.getRandomMove(moves);
 
                 if (server_fen != null) {
