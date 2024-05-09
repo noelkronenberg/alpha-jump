@@ -40,7 +40,7 @@ public class Server {
             while (!gameEnded) {
                 String messageFromClient1 = inFromClient_01.readLine();
                 if (messageFromClient1 != null) {
-                    System.out.println("Player 1 (BLUE) says: " + messageFromClient1);
+                    System.out.println("Player 1 (BLUE): " + messageFromClient1);
 
                     int[] moves = moveGenerator.convertStringToPosWrapper(messageFromClient1); // convert to internal representation
                     moveGenerator.movePiece(moves[0], moves[1]);
@@ -50,8 +50,8 @@ public class Server {
                     if (moveGenerator.isGameOver(messageFromClient1, Color.RED)) {
                         gameEnded = true;
                         System.out.println("BLUE won!");
-                        outToClient_01.println("GAME OVER");
-                        outToClient_02.println("GAME OVER");
+                        outToClient_01.println("GAME OVER: You won!");
+                        outToClient_02.println("GAME OVER: You lost!");
                         continue;
                     }
 
@@ -63,7 +63,7 @@ public class Server {
 
                 String messageFromClient2 = inFromClient_02.readLine();
                 if (messageFromClient2 != null) {
-                    System.out.println("Player 2 (RED) says: " + messageFromClient2);
+                    System.out.println("Player 2 (RED): " + messageFromClient2);
 
                     int[] moves = moveGenerator.convertStringToPosWrapper(messageFromClient2); // convert to internal representation
                     moveGenerator.movePiece(moves[0], moves[1]);
@@ -73,8 +73,8 @@ public class Server {
                     if (moveGenerator.isGameOver(messageFromClient2, Color.BLUE)) {
                         gameEnded = true;
                         System.out.println("RED won!");
-                        outToClient_01.println("GAME OVER");
-                        outToClient_02.println("GAME OVER");
+                        outToClient_01.println("GAME OVER: You lost!");
+                        outToClient_02.println("GAME OVER: You won!");
                         continue;
                     }
 

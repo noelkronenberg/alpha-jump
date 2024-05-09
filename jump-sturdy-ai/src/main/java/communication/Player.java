@@ -32,7 +32,7 @@ public class Player {
                 String server_fen = inFromServer.readLine();
                 System.out.println("Server says: " + server_fen);
 
-                if (server_fen.equals("GAME OVER")) {
+                if (server_fen.contains("GAME OVER")) {
                     break;
                 }
 
@@ -44,6 +44,8 @@ public class Player {
                     outToServer.println(move);
                     System.out.println("I sent: " + move);
                 }
+
+                System.out.println();
             }
         } catch (IOException e) {
             System.err.println("Error occurred while connecting to the server: " + e.getMessage());
