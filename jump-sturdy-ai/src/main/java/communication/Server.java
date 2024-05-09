@@ -54,8 +54,9 @@ public class Server {
                     }
 
                     String new_fen = moveGenerator.getFenFromBoard(); // convert to FEN
+                    String new_fen_with_color = new_fen + " r";
 
-                    outToClient_02.println(new_fen);
+                    outToClient_02.println(new_fen_with_color);
                 }
 
                 String messageFromClient2 = inFromClient_02.readLine();
@@ -74,8 +75,9 @@ public class Server {
                     }
 
                     String new_fen = moveGenerator.getFenFromBoard(); // convert to FEN
+                    String new_fen_with_color = new_fen + " b";
 
-                    outToClient_01.println(messageFromClient2);
+                    outToClient_01.println(new_fen_with_color);
                 }
             }
 
