@@ -51,6 +51,8 @@ public class Server {
 
                     moveGenerator.movePiece(start, end, moveGenerator.getPieceAtPosition(start), Color.BLUE);
 
+                    moveGenerator.printBoard();
+
                     if (moveGenerator.isGameOver(messageFromClient1, Color.BLUE)) {
                         gameEnded = true;
                         System.out.println("BLUE won!");
@@ -74,6 +76,8 @@ public class Server {
                     int end =  moveGenerator.revertPosRowColToIntForServer(end_string);
 
                     moveGenerator.movePiece(start, end, moveGenerator.getPieceAtPosition(start), Color.RED);
+
+                    moveGenerator.printBoard();
 
                     if (moveGenerator.isGameOver(messageFromClient2, Color.RED)) {
                         gameEnded = true;
