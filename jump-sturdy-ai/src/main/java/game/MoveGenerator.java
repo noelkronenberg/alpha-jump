@@ -498,13 +498,13 @@ public class MoveGenerator {
         return formattedOutput.toString();
     }
 
-    public boolean isGameOver(String move, Color ourColor) {
+    public boolean isGameOver(String move, Color opponentColor) {
         if (!move.isEmpty()) {
-            Color opponentColor = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
-            if (opponentColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
+            Color ourColor = (opponentColor == Color.RED) ? Color.BLUE : Color.RED;
+            if (ourColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
                 return true;
             }
-            if (opponentColor==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)) {
+            if (ourColor==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)) {
                 return true;
             }
             return false;
