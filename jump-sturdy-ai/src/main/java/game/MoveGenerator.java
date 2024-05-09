@@ -540,7 +540,7 @@ public class MoveGenerator {
         return moveGenerator.generateAllPossibleMoves(color);
     }
 
-    int revertPosRowColToIntForServer(String pos){
+    public int revertPosRowColToIntForServer(String pos){
         char col=pos.charAt(0);
         char row=pos.charAt(1);
 

@@ -42,8 +42,13 @@ public class Server {
                 if (messageFromClient1 != null) {
                     System.out.println("Client 1 says: " + messageFromClient1);
 
-                    int start = 0; // TBI
-                    int end =  0; // TBI
+                    // convert to internal representation
+                    String[] positions_string = messageFromClient1.split("-");
+                    String start_string = positions_string[0];
+                    String end_string = positions_string[1];
+                    int start = moveGenerator.revertPosRowColToIntForServer(start_string);
+                    int end =  moveGenerator.revertPosRowColToIntForServer(end_string);
+
                     moveGenerator.movePiece(start, end, moveGenerator.getPieceAtPosition(start), Color.BLUE);
 
                     if (moveGenerator.isGameOver(messageFromClient1, Color.BLUE)) {
@@ -61,8 +66,13 @@ public class Server {
                 if (messageFromClient2 != null) {
                     System.out.println("Client 2 says: " + messageFromClient2);
 
-                    int start = 0; // TBI
-                    int end =  0; // TBI
+                    // convert to internal representation
+                    String[] positions_string = messageFromClient2.split("-");
+                    String start_string = positions_string[0];
+                    String end_string = positions_string[1];
+                    int start = moveGenerator.revertPosRowColToIntForServer(start_string);
+                    int end =  moveGenerator.revertPosRowColToIntForServer(end_string);
+
                     moveGenerator.movePiece(start, end, moveGenerator.getPieceAtPosition(start), Color.RED);
 
                     if (moveGenerator.isGameOver(messageFromClient2, Color.RED)) {
