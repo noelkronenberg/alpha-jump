@@ -311,7 +311,7 @@ public class MoveGeneratorTest {
         Color color = fen.charAt(fen.length() - 1) == 'r' ? Color.RED : Color.BLUE;
         fen = fen.substring(0, fen.length() - 2);
         moveGenerator.initializeBoard(fen);
-        moveGenerator.printBoard();
+        moveGenerator.printBoard(false);
 
         // Determine color based on the last character of FEN
         Map<Integer, List<Integer>> actualMovesMap = moveGenerator.generateAllPossibleMoves(color);

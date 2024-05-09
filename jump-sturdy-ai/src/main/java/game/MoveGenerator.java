@@ -1,7 +1,6 @@
 package game;
 
-import java.awt.*;
-import java.util.AbstractMap;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -649,7 +648,7 @@ public class MoveGenerator {
             System.out.println(move_int[0] + "-" + move_int[1]);
 
             System.out.println();
-            moveGenerator.movePiece(move_int[0], move_int[1]);
+            //moveGenerator.movePiece(move_int[0], move_int[1]);
 
             System.out.println();
             moveGenerator.printBoard(false);

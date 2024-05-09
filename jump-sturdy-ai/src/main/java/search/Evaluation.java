@@ -6,7 +6,7 @@ public class Evaluation {
 
     // NOTE: Wird noch an 2D-Array angepasst
 
-    public int SumWeightedPositions(String givenString, char searchedChar) {
+    public int sumWeightedPositions(String givenString, char searchedChar) {
         int counter = 0;
         int weight = 0;
         if (searchedChar == 'b') {
@@ -37,9 +37,9 @@ public class Evaluation {
         //Außerdem haben die Steine ein Rating von 1-8, je nachdem wie nah sie an der gegnerischen Endreihe stehen
         int rating = 0;
         if (player == Color.BLUE) {
-            rating = SumWeightedPositions(currBoard, 'b') - SumWeightedPositions(currBoard, 'r');
+            rating = sumWeightedPositions(currBoard, 'b') - sumWeightedPositions(currBoard, 'r');
         } else if (player == Color.RED) {
-            rating = SumWeightedPositions(currBoard, 'r') - SumWeightedPositions(currBoard, 'b');
+            rating = sumWeightedPositions(currBoard, 'r') - sumWeightedPositions(currBoard, 'b');
         } else {
             System.out.println("Leider wurde kein gültiger Spieler angegeben.");
         }
