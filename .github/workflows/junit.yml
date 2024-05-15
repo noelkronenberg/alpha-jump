@@ -3,6 +3,9 @@ on: push
 jobs:
   run_tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: jump-sturdy-ai
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -14,9 +17,12 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/jump-sturdy-ai/pom.xml') }}
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Run tests with Maven
-        run: mvn -B test --file /jump-sturdy-ai/pom.xml
-
-  # reference: https://dev.to/ewefie/getting-started-with-github-actions-run-junit-5-tests-in-a-java-project-with-maven-20g4
+        run: mvn -B test --file pom.xml
+    
+# references: 
+# https://dev.to/ewefie/getting-started-with-github-actions-run-junit-5-tests-in-a-java-project-with-maven-20g4
+# https://stackoverflow.com/a/57806894
+# https://docs.github.com/en/actions/using-jobs/setting-default-values-for-jobs
