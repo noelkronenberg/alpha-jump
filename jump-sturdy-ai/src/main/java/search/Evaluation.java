@@ -6,9 +6,10 @@ import game.Piece;
 
 public class Evaluation {
 
-    // NOTE: Wird noch an 2D-Array angepasst
-
     public int sumWeightedPositions(MoveGenerator mgSP, Color player) {
+        //Aktuell wird nach Anzahl der Steine bewertet
+        //Außerdem haben die Steine ein Rating von 1-8, je nachdem wie nah sie an der gegnerischen Endreihe stehen
+        //Türme werden mit x2 bewertet, bisher egal ob MIXED oder einfarbig
         int counter = 0;
         int weight = 0;
         if (player == Color.BLUE) {
@@ -19,6 +20,8 @@ public class Evaluation {
                         if (mgSP.getPieceBoard()[row][col] == Piece.SINGLE) {
                             counter += weight; 
                         } else if (mgSP.getPieceBoard()[row][col] == Piece.DOUBLE) {
+                            counter += weight*2;
+                        } else if (mgSP.getPieceBoard()[row][col] == Piece.MIXED) {
                             counter += weight*2;
                         }
                     }
@@ -34,6 +37,8 @@ public class Evaluation {
                             counter += weight; 
                         } else if (mgSP.getPieceBoard()[row][col] == Piece.DOUBLE) {
                             counter += weight*2;
+                        } else if (mgSP.getPieceBoard()[row][col] == Piece.MIXED) {
+                            counter += weight*2;
                         }
                     }
                 }
@@ -45,8 +50,7 @@ public class Evaluation {
 
     public int ratePosition(MoveGenerator mgRP, Color player) {
         //Bewertet vorhandene Position für den angegebenen Spieler
-        //Aktuell wird nach Anzahl der Steine bewertet
-        //Außerdem haben die Steine ein Rating von 1-8, je nachdem wie nah sie an der gegnerischen Endreihe stehen
+        //Summe der Steine des Spielers - Summe der Steine des Gegners
         int rating = 0;
         if (player == Color.BLUE) {
             rating = sumWeightedPositions(mgRP, Color.BLUE) - sumWeightedPositions(mgRP, Color.RED);

@@ -676,10 +676,8 @@ public class MoveGenerator {
             System.out.println(move_int[0] + "-" + move_int[1]);
 
             System.out.println();
-            
-            System.out.println("Zugbewertung: " + evaluater.rateMove(moveGenerator, Color.BLUE, 13, 14));
 
-            moveGenerator.movePiece(13, 14);
+            moveGenerator.movePiece(move_int[0], move_int[1]);
 
             System.out.println();
             moveGenerator.printBoard(false);
