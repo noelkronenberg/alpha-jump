@@ -4,6 +4,9 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import search.Evaluation;
+
 import java.util.*;
 
 public class MoveGenerator {
@@ -11,7 +14,29 @@ public class MoveGenerator {
     Piece[][] pieceBoard;
     Color[][] colorBoard;
 
-    // START: board basics
+    public Piece[][] getPieceBoard() {
+        return pieceBoard;
+    }
+
+    public Color[][] getColorBoard() {
+        return colorBoard;
+    }
+
+    public void setPieceBoard(Piece[][] givenPieceBoard) {
+        for (int row = 0; row < pieceBoard.length; row++) {
+            for (int col = 0; col < pieceBoard[row].length; col++) {
+                pieceBoard[row][col] = givenPieceBoard[row][col];
+            }
+        }
+    }
+
+    public void setColorBoard(Color[][] givenColorBoard) {
+        for (int row = 0; row < colorBoard.length; row++) {
+            for (int col = 0; col < colorBoard[row].length; col++) {
+                colorBoard[row][col] = givenColorBoard[row][col];
+            }
+        }
+    }
 
     public void initializeBoard() {
         pieceBoard = new Piece[8][8];
@@ -716,6 +741,7 @@ public class MoveGenerator {
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
+        Evaluation evaluater = new Evaluation();
         String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
         for (int i = 0; i < 1; i++) {
             LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(fen);
@@ -730,7 +756,8 @@ public class MoveGenerator {
             System.out.println(move_int[0] + "-" + move_int[1]);
 
             System.out.println();
-            //moveGenerator.movePiece(move_int[0], move_int[1]);
+
+            moveGenerator.movePiece(move_int[0], move_int[1]);
 
             System.out.println();
             moveGenerator.printBoard(false);
