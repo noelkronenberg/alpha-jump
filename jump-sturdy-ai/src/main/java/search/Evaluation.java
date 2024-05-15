@@ -110,7 +110,7 @@ public class Evaluation {
 
         System.out.println();
         System.out.println("Sorted moves: ");
-        orderMoves(movesList, Color.RED);
+        orderMoves(movesList, Color.BLUE);
         System.out.println(movesList);
 
         System.out.println();

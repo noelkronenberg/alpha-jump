@@ -537,6 +537,59 @@ public class MoveGenerator {
         }
     }
 
+    public void movePiece(int startEnd) {
+        int start = startEnd / 100;
+        int end = startEnd % 100;
+        Piece piece = this.getPieceAtPosition(start);
+        Color color = this.getColorAtPosition(start);
+
+        int fromRow = start / 10;
+        int fromColumn = start % 10;
+        int toRow = end / 10;
+        int toColumn = end % 10;
+
+        // adjust old square
+
+        // single
+        if (piece == Piece.SINGLE) {
+            pieceBoard[fromRow][fromColumn] = Piece.EMPTY;
+            colorBoard[fromRow][fromColumn] = Color.EMPTY;
+        }
+
+        // double
+        else if (piece == Piece.DOUBLE) {
+            pieceBoard[fromRow][fromColumn] = Piece.SINGLE;
+        }
+
+        // mixed
+        else if (piece == Piece.MIXED) {
+            pieceBoard[fromRow][fromColumn] = Piece.SINGLE;
+            Color oppositeColor = (color == Color.RED) ? Color.BLUE : Color.RED;
+            colorBoard[fromRow][fromColumn] = oppositeColor;
+        }
+
+        // adjust new square
+
+        // empty or opposite color
+        if (colorBoard[toRow][toColumn] == Color.EMPTY ||
+                (colorBoard[toRow][toColumn] != color && pieceBoard[toRow][toColumn] == Piece.SINGLE)) {
+            pieceBoard[toRow][toColumn] = Piece.SINGLE;
+            colorBoard[toRow][toColumn] = color;
+        }
+
+        // opposite color and double or mixed
+        else if (colorBoard[toRow][toColumn] != color &&
+                (pieceBoard[toRow][toColumn] == Piece.DOUBLE || pieceBoard[toRow][toColumn] == Piece.MIXED)) {
+            pieceBoard[toRow][toColumn] = Piece.MIXED;
+            colorBoard[toRow][toColumn] = color;
+        }
+
+        // same color
+        else if (colorBoard[toRow][toColumn] == color && pieceBoard[toRow][toColumn] == Piece.SINGLE) {
+            pieceBoard[toRow][toColumn] = Piece.DOUBLE;
+        }
+    }
+
     public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
 
@@ -557,6 +610,20 @@ public class MoveGenerator {
 
     public boolean isGameOver(String move, Color opponentColor) {
         if (!move.isEmpty()) {
+            Color ourColor = (opponentColor == Color.RED) ? Color.BLUE : Color.RED;
+            if (ourColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
+                return true;
+            }
+            if (ourColor==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color opponentColor) {
+        if (!moves.isEmpty()) {
             Color ourColor = (opponentColor == Color.RED) ? Color.BLUE : Color.RED;
             if (ourColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
                 return true;
