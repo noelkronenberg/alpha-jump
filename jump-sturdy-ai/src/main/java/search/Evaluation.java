@@ -90,9 +90,9 @@ public class Evaluation {
 
     public static void orderMoves(LinkedList<Integer> moves, Color color) {
         if (color == Color.RED) {
-            moves.sort(Comparator.comparingInt(move -> (move % 100) % 10));
+            moves.sort(Comparator.comparingInt(move -> (move % 100) % 100));
         } else {
-            moves.sort(Comparator.comparingInt(move -> ((int) move % 100) % 10).reversed());
+            moves.sort(Comparator.comparingInt(move -> ((int) move % 100) % 100).reversed());
         }
     }
 
