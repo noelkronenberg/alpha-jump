@@ -116,8 +116,11 @@ public class BasisKI {
         if(System.currentTimeMillis()>= endTime){
             stopSearch = true;
         }
+        if (gameState.isGameOver(moves,color)){
+            return 100000;
+        }
 
-        if (stopSearch|| (depth==0) || gameState.isGameOver(moves,color)){     //Vielleicht noch winCutOff Checken
+        if (stopSearch|| (depth==0)){     //Vielleicht noch winCutOff Checken
             return score;
         }
         if (maxDepth<depth){
@@ -159,7 +162,7 @@ public class BasisKI {
 
     public static void main(String[] args) {
         BasisKI ki= new BasisKI();
-        System.out.println(ki.orchestrator("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b"));
+        System.out.println(ki.orchestrator("6/1bbbbbbbbbbbb1/8/8/8/1r0r0r0r0r0r01/8/r0r0r0r0r0r0 b"));
         System.out.println(maxDepth);
     }
 }
