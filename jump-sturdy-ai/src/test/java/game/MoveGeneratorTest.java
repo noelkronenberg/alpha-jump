@@ -3,19 +3,17 @@ package game;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.*;
-
 import static org.junit.jupiter.api.Assertions.*;
-
+import game.MoveGenerator;
 
 public class MoveGeneratorTest {
 
-    static game.MoveGenerator moveGenerator;
+    static MoveGenerator moveGenerator;
 
     @BeforeAll
     public static void init() {
-        moveGenerator = new game.MoveGenerator();
+        moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
     }
 
@@ -308,15 +306,18 @@ public class MoveGeneratorTest {
     }
 
     private void testMoves(String fen, String expectedMoves) {
+
+        init();
+
         Color color = fen.charAt(fen.length() - 1) == 'r' ? Color.RED : Color.BLUE;
         fen = fen.substring(0, fen.length() - 2);
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard(false);
 
-        // Determine color based on the last character of FEN
+        // determine color based on the last character of FEN
         Map<Integer, List<Integer>> actualMovesMap = moveGenerator.generateAllPossibleMoves(color);
 
-        String actualMoves = moveGenerator.convertAllMoves(actualMovesMap);
+        String actualMoves = MoveGenerator.convertAllMoves(actualMovesMap);
         String[] actualMovesArray = actualMoves.split(", ");
         String[] expectedMovesArray = expectedMoves.trim().split(",");
 
