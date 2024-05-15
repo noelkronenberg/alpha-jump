@@ -11,6 +11,8 @@ public class MoveGenerator {
     Piece[][] pieceBoard;
     Color[][] colorBoard;
 
+    // START: board basics
+
     public void initializeBoard() {
         pieceBoard = new Piece[8][8];
         colorBoard = new Color[8][8];
@@ -89,14 +91,6 @@ public class MoveGenerator {
 
     }
 
-    public Color getColor(char c) {
-        if (c == 'r') {
-            return Color.RED;
-        } else {
-            return Color.BLUE;
-        }
-    }
-
     public void initializeBoard(String fen) {
         pieceBoard = new Piece[8][8];
         colorBoard = new Color[8][8];
@@ -144,7 +138,7 @@ public class MoveGenerator {
                         fenCounter++;
                     }
 
-                // CASE: fenChar is a number, then we fill the places with EMPTY
+                    // CASE: fenChar is a number, then we fill the places with EMPTY
                 } else if (Character.isDigit(fenChar)) {
                     int numberOfFreePlaces = fenChar - '0'; // gives the int value for the Character: alternative: Character.getNumericValue(fenChar)
                     for (int j = 0; j < numberOfFreePlaces; j++) {
@@ -182,6 +176,117 @@ public class MoveGenerator {
         pieceBoard[7][7] = null;
         colorBoard[7][7] = null;
     }
+
+    public String getFenFromBoard(){
+        boolean isCounting = false;
+        int counter = 0;
+        String s= "";
+        for (int i = 0; i < colorBoard.length; i++) {
+            for (int j = 0; j < colorBoard.length; j++) {
+                if (colorBoard[i][j]==null){
+                    continue;
+                }
+                if (isCounting && colorBoard[i][j]!=Color.EMPTY){
+                    isCounting=false;
+                    s+=counter;
+                    counter=0;
+                }
+                if (colorBoard[i][j]==Color.EMPTY){
+                    isCounting=true;
+                    counter++;
+                }
+                else {
+                    if (colorBoard[i][j]==Color.RED){
+                        if (pieceBoard[i][j]==Piece.SINGLE){
+                            s+="r0";
+                        } else if (pieceBoard[i][j]==Piece.DOUBLE){
+                            s+="rr";
+                        }
+                        else {
+                            s+="br";
+                        }
+                    }
+                    else {
+                        if (pieceBoard[i][j]==Piece.SINGLE){
+                            s+="b0";
+                        } else if (pieceBoard[i][j]==Piece.DOUBLE){
+                            s+="bb";
+                        }
+                        else {
+                            s+="rb";
+                        }
+                    }
+                }
+            }
+            if (isCounting){
+                isCounting=false;
+                s+=counter;
+                counter=0;
+            }
+            if (i!=7){
+                s+="/";
+            }
+        }
+        //maybe noch Color hinzufügen
+        return s;
+    }
+
+    public Color getColor(char c) {
+        if (c == 'r') {
+            return Color.RED;
+        } else {
+            return Color.BLUE;
+        }
+    }
+
+    public Color getColorAtPosition(int position) {
+        int row = position / 10;
+        int column = position % 10;
+        return colorBoard[row][column];
+    }
+
+    public Piece getPieceAtPosition(int position) {
+        int row = position / 10;
+        int column = position % 10;
+        return pieceBoard[row][column];
+    }
+
+    private int convertToNumber(int row, int column) {
+        return row * 10 + column;
+    }
+
+    String convertPosToString(int rowAndColInt) {
+        int col = rowAndColInt % 10;
+        int row = rowAndColInt / 10;
+        String colString = String.valueOf(( (char) (65 + col) ));
+        return colString + (row + 1);
+    }
+
+    int convertStringToPos(String pos) {
+        char col=pos.charAt(0);
+        char row=pos.charAt(1);
+
+        int rowInt =Character.getNumericValue(row)-1;
+        int colInt = col-65;
+
+        return rowInt*10+colInt;
+    }
+
+    public int[] convertStringToPosWrapper(String position_string) {
+        String[] position_strings = position_string.split("-");
+
+        String start_string = position_strings[0];
+        String end_string = position_strings[1];
+
+        int start = this.convertStringToPos(start_string);
+        int end =  this.convertStringToPos(end_string);
+
+        return new int[]{start, end};
+    }
+
+    // END: board basics
+
+    // START: move generation
 
     List<Integer> generatePossibleMoves(int position, Color color) {
         int row = position / 10;
@@ -327,9 +432,59 @@ public class MoveGenerator {
         return withinBorder & notCut & !own;
     }
 
-    private int convertToNumber(int row, int column) {
-        return row * 10 + column;
+    public static String convertAllMoves(Map<Integer, List<Integer>> possibleMoves) {
+        // Mapping for the columns
+        Map<Integer, Character> columnMapping = Map.of(
+                0, 'A', 1, 'B', 2, 'C', 3, 'D', 4, 'E', 5, 'F', 6, 'G', 7, 'H'
+        );
+
+        StringBuilder formattedOutput = new StringBuilder();
+
+        // Add the possible moves
+        for (Map.Entry<Integer, List<Integer>> entry : possibleMoves.entrySet()) {
+            int startY = entry.getKey() / 10 + 1;  // Y-coordinate of the starting point
+            int startX = entry.getKey() % 10;  // X-coordinate of the starting point
+            char startColumn = columnMapping.get(startX);
+            for (int targetPosition : entry.getValue()) {
+                int targetY = targetPosition / 10 + 1;  // Y-coordinate of the target point
+                int targetX = targetPosition % 10;  // X-coordinate of the target point
+                char targetColumn = columnMapping.get(targetX);
+                formattedOutput.append(startColumn).append(startY).append("-").append(targetColumn).append(targetY).append(", ");
+            }
+        }
+
+        // Remove the trailing comma and space
+        if (!formattedOutput.isEmpty()) {
+            formattedOutput.setLength(formattedOutput.length() - 2);
+        }
+
+        return formattedOutput.toString();
     }
+
+    public String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
+        Random generator =  new Random();
+        ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
+
+        int number = generator.nextInt(allPieces.size());
+        int randomPiece = allPieces.get(number);
+
+        List<Integer> allMoveToPos = moves.get(randomPiece);
+        number = generator.nextInt(allMoveToPos.size());
+
+        int randomPos = allMoveToPos.get(number);
+        return convertPosToString(randomPiece) + "-" + convertPosToString(randomPos);
+    }
+
+    public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
+        char color_fen = fen.charAt(fen.length() - 1);
+        Color color = this.getColor(color_fen);
+        this.initializeBoard(fen.substring(0, fen.length() - 2));
+        return this.generateAllPossibleMoves(color);
+    }
+
+    // END: move generation
+
+    // START: gameplay
 
     public void movePiece(int start, int end) {
         Piece piece = this.getPieceAtPosition(start);
@@ -382,18 +537,6 @@ public class MoveGenerator {
         }
     }
 
-    public Piece getPieceAtPosition(int position) {
-        int row = position / 10;
-        int column = position % 10;
-        return pieceBoard[row][column];
-    }
-
-    public Color getColorAtPosition(int position) {
-        int row = position / 10;
-        int column = position % 10;
-        return colorBoard[row][column];
-    }
-
     public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
 
@@ -411,6 +554,33 @@ public class MoveGenerator {
 
         return allPossibleMoves;
     }
+
+    public boolean isGameOver(String move, Color opponentColor) {
+        if (!move.isEmpty()) {
+            Color ourColor = (opponentColor == Color.RED) ? Color.BLUE : Color.RED;
+            if (ourColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
+                return true;
+            }
+            if (ourColor==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    boolean doesBaseRowContainEnemy(Color enemyColor, int rowToCheck) {
+        for (int i = 1; i < 7; i++) {
+            if (colorBoard[rowToCheck][i] == enemyColor) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // END: gameplay
+
+    // START: visualisation
 
     public void printBoard(boolean fen) {
         if (fen) {
@@ -475,162 +645,7 @@ public class MoveGenerator {
         System.out.println();
     }
 
-
-    public static String convertAllMoves(Map<Integer, List<Integer>> possibleMoves) {
-        // Mapping for the columns
-        Map<Integer, Character> columnMapping = Map.of(
-                0, 'A', 1, 'B', 2, 'C', 3, 'D', 4, 'E', 5, 'F', 6, 'G', 7, 'H'
-        );
-
-        StringBuilder formattedOutput = new StringBuilder();
-
-        // Add the possible moves
-        for (Map.Entry<Integer, List<Integer>> entry : possibleMoves.entrySet()) {
-            int startY = entry.getKey() / 10 + 1;  // Y-coordinate of the starting point
-            int startX = entry.getKey() % 10;  // X-coordinate of the starting point
-            char startColumn = columnMapping.get(startX);
-            for (int targetPosition : entry.getValue()) {
-                int targetY = targetPosition / 10 + 1;  // Y-coordinate of the target point
-                int targetX = targetPosition % 10;  // X-coordinate of the target point
-                char targetColumn = columnMapping.get(targetX);
-                formattedOutput.append(startColumn).append(startY).append("-").append(targetColumn).append(targetY).append(", ");
-            }
-        }
-
-        // Remove the trailing comma and space
-        if (!formattedOutput.isEmpty()) {
-            formattedOutput.setLength(formattedOutput.length() - 2);
-        }
-
-        return formattedOutput.toString();
-    }
-
-    public boolean isGameOver(String move, Color opponentColor) {
-        if (!move.isEmpty()) {
-            Color ourColor = (opponentColor == Color.RED) ? Color.BLUE : Color.RED;
-            if (ourColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
-                return true;
-            }
-            if (ourColor==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)) {
-                return true;
-            }
-            return false;
-        }
-        return true;
-    }
-
-    boolean doesBaseRowContainEnemy(Color enemyColor, int rowToCheck) {
-        for (int i = 1; i < 7; i++) {
-            if (colorBoard[rowToCheck][i] == enemyColor) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
-        Random generator =  new Random();
-        ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
-
-        int number = generator.nextInt(allPieces.size());
-        int randomPiece = allPieces.get(number);
-
-        List<Integer> allMoveToPos = moves.get(randomPiece);
-        number = generator.nextInt(allMoveToPos.size());
-
-        int randomPos = allMoveToPos.get(number);
-        return convertPosToString(randomPiece) + "-" + convertPosToString(randomPos);
-    }
-
-    String convertPosToString(int rowAndColInt) {
-        int col = rowAndColInt % 10;
-        int row = rowAndColInt / 10;
-        String colString = String.valueOf(( (char) (65 + col) ));
-        return colString + (row + 1);
-    }
-
-    public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
-        char color_fen = fen.charAt(fen.length() - 1);
-        Color color = this.getColor(color_fen);
-        this.initializeBoard(fen.substring(0, fen.length() - 2));
-        return this.generateAllPossibleMoves(color);
-    }
-
-    int convertStringToPos(String pos) {
-        char col=pos.charAt(0);
-        char row=pos.charAt(1);
-
-        int rowInt =Character.getNumericValue(row)-1;
-        int colInt = col-65;
-
-        return rowInt*10+colInt;
-    }
-
-    public int[] convertStringToPosWrapper(String position_string) {
-        String[] position_strings = position_string.split("-");
-
-        String start_string = position_strings[0];
-        String end_string = position_strings[1];
-
-        int start = this.convertStringToPos(start_string);
-        int end =  this.convertStringToPos(end_string);
-
-        return new int[]{start, end};
-    }
-
-    public String getFenFromBoard(){
-        boolean isCounting = false;
-        int counter = 0;
-        String s= "";
-        for (int i = 0; i < colorBoard.length; i++) {
-            for (int j = 0; j < colorBoard.length; j++) {
-                if (colorBoard[i][j]==null){
-                    continue;
-                }
-                if (isCounting && colorBoard[i][j]!=Color.EMPTY){
-                    isCounting=false;
-                    s+=counter;
-                    counter=0;
-                }
-                if (colorBoard[i][j]==Color.EMPTY){
-                    isCounting=true;
-                    counter++;
-                }
-                else {
-                    if (colorBoard[i][j]==Color.RED){
-                        if (pieceBoard[i][j]==Piece.SINGLE){
-                            s+="r0";
-                        } else if (pieceBoard[i][j]==Piece.DOUBLE){
-                            s+="rr";
-                        }
-                        else {
-                            s+="br";
-                        }
-                    }
-                    else {
-                        if (pieceBoard[i][j]==Piece.SINGLE){
-                            s+="b0";
-                        } else if (pieceBoard[i][j]==Piece.DOUBLE){
-                            s+="bb";
-                        }
-                        else {
-                            s+="rb";
-                        }
-                    }
-                }
-            }
-            if (isCounting){
-                isCounting=false;
-                s+=counter;
-                counter=0;
-            }
-            if (i!=7){
-                s+="/";
-            }
-        }
-        //maybe noch Color hinzufügen
-        return s;
-    }
+    // END: visualisation
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
