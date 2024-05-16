@@ -101,7 +101,7 @@ public class BasisKI {
         //Fen
         String fen = gameState.getFenFromBoard();
         //get the current Rating for Position
-        int score = eval.ratePosition(fen,color);
+        int score = eval.ratePosition(gameState,color);
 
         //change color to opposite color to signal move change
         color = (color==Color.RED) ? Color.BLUE : Color.RED;
