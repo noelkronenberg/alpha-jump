@@ -41,11 +41,11 @@ public class BasisKI {
 
         LinkedList<Integer> movesList = eval.convertMovesToList(moves); // TODO: Wirkt ineffizient: 1 Moves, dann movesList, dann OrderedmovesList.....
 
-        long moveTimeLimit = (TIME_LIMIT - 100)/movesList.size(); // time for each move to search
+        long moveTimeLimit = (TIME_LIMIT - 100) / movesList.size(); // time for each move to search
 
         eval.orderMoves(movesList, color);
 
-        for(Integer move : movesList) {
+        for (Integer move : movesList) {
             MoveGenerator nextState = new MoveGenerator();  // TODO: Clone Funktion oder hier neuen MoveGenerator?
             nextState.initializeBoard(fen);
             nextState.movePiece(move); // preforms Move
