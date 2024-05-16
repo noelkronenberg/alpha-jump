@@ -132,6 +132,6 @@ public class MoveGeneratorBM {
 
         System.out.println();
         System.out.println("Best move: ");
-        System.out.println("Time to play full game: " + MoveGeneratorBM.generateBestMoveSpeed("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b") + " milliseconds");
+        System.out.println("Time to play best move: " + MoveGeneratorBM.generateBestMoveSpeed("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b") + " milliseconds");
     }
 }
