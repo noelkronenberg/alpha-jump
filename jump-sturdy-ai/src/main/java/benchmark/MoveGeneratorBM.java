@@ -2,6 +2,7 @@ package benchmark;
 
 import game.Color;
 import game.MoveGenerator;
+import search.BasisKI;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -99,6 +100,18 @@ public class MoveGeneratorBM {
 
     }
 
+    static double generateBestMoveSpeed(String board_fen) {
+        moveGenerator.initializeBoard(board_fen);
+        BasisKI ki = new BasisKI();
+        double startTime = System.nanoTime();
+        for (int i = 0; i < 1000; i++) {
+            ki.orchestrator(board_fen);
+        }
+        double endTime = System.nanoTime();
+        double duration = ((endTime - startTime) / 1000) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
+        return duration;
+    }
+
     public static void main(String[] args) {
         MoveGeneratorBM.init();
 
@@ -116,5 +129,9 @@ public class MoveGeneratorBM {
         System.out.println();
         System.out.println("Full game: ");
         System.out.println("Time to play full game: " + MoveGeneratorBM.fullGameTime() + " milliseconds");
+
+        System.out.println();
+        System.out.println("Best move: ");
+        System.out.println("Time to play full game: " + MoveGeneratorBM.generateBestMoveSpeed("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b") + " milliseconds");
     }
 }
