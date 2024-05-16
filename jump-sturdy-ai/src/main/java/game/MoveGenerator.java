@@ -50,7 +50,7 @@ public class MoveGenerator {
                 // first rows for each side
                 if (row == 0 || row == 7) {
 
-                    // Red
+                    // RED
                     if (row == 0) {
                         // border
                         if (column == 0 || column == 7) {
@@ -62,7 +62,7 @@ public class MoveGenerator {
                             colorBoard[row][column] = Color.RED;
                         }
 
-                    // Blue
+                    // BLUE
                     } else if (row == 7) { // NOTE: for 100% coverage change this to else (because always true)
                         // border
                         if (column == 0 || column == 7) {
@@ -80,7 +80,7 @@ public class MoveGenerator {
                 // second row for each side
                 else if (row == 1 || row == 6) {
 
-                    // Red
+                    // RED
                     if (row == 1) {
                         // no piece
                         if (column == 0 || column == 7) {
@@ -92,7 +92,7 @@ public class MoveGenerator {
                             colorBoard[row][column] = Color.RED;
                         }
 
-                    // Blue
+                    // BLUE
                     } else if (row == 6) { // NOTE: for 100% coverage change this to else (because always true)
                         // no piece
                         if (column == 0 || column == 7) {
@@ -204,43 +204,43 @@ public class MoveGenerator {
         colorBoard[7][7] = null;
     }
 
-    public String getFenFromBoard(){
+    public String getFenFromBoard() {
         boolean isCounting = false;
         int counter = 0;
         String s= "";
         for (int i = 0; i < colorBoard.length; i++) {
             for (int j = 0; j < colorBoard.length; j++) {
-                if (colorBoard[i][j]==null){
+                if (colorBoard[i][j] == null) {
                     continue;
                 }
-                if (isCounting && colorBoard[i][j]!=Color.EMPTY){
-                    isCounting=false;
-                    s+=counter;
-                    counter=0;
+                if (isCounting && colorBoard[i][j] != Color.EMPTY) {
+                    isCounting = false;
+                    s += counter;
+                    counter = 0;
                 }
-                if (colorBoard[i][j]==Color.EMPTY){
-                    isCounting=true;
+                if (colorBoard[i][j] == Color.EMPTY) {
+                    isCounting = true;
                     counter++;
                 }
                 else {
-                    if (colorBoard[i][j]==Color.RED){
-                        if (pieceBoard[i][j]==Piece.SINGLE){
-                            s+="r0";
-                        } else if (pieceBoard[i][j]==Piece.DOUBLE){
-                            s+="rr";
+                    if (colorBoard[i][j] == Color.RED) {
+                        if (pieceBoard[i][j] == Piece.SINGLE) {
+                            s += "r0";
+                        } else if (pieceBoard[i][j] == Piece.DOUBLE) {
+                            s += "rr";
                         }
                         else {
-                            s+="br";
+                            s += "br";
                         }
                     }
                     else {
-                        if (pieceBoard[i][j]==Piece.SINGLE){
-                            s+="b0";
-                        } else if (pieceBoard[i][j]==Piece.DOUBLE){
-                            s+="bb";
+                        if (pieceBoard[i][j] == Piece.SINGLE) {
+                            s += "b0";
+                        } else if (pieceBoard[i][j] == Piece.DOUBLE) {
+                            s += "bb";
                         }
                         else {
-                            s+="rb";
+                            s += "rb";
                         }
                     }
                 }
@@ -251,10 +251,11 @@ public class MoveGenerator {
                 counter=0;
             }
             if (i!=7){
-                s+="/";
+                s += "/";
             }
         }
-        //maybe noch Color hinzufügen
+
+        // maybe add Color
         return s;
     }
 
@@ -321,12 +322,12 @@ public class MoveGenerator {
 
         List<Integer> possibleMoves = new ArrayList<>();
 
-        // Red
+        // RED
         if (color == Color.RED) {
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
-                if (row > 0) {                              //NOTE: remove: is always true
+                if (row > 0) { // NOTE: always TRUE
 
                     // forward
                     if (colorBoard[row - 1][column] != Color.BLUE) {
@@ -361,12 +362,12 @@ public class MoveGenerator {
             // remove invalid moves
             possibleMoves.removeIf(move -> !isValidMove(move, Color.RED));
 
-        // Blue
-        } else if (color == Color.BLUE) {               //NOTE: always TRUE--> else
+        // BLUE
+        } else if (color == Color.BLUE) { // NOTE: always TRUE
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
-                if (row < 7) {                          //NOTE: Delete
+                if (row < 7) { // NOTE: maybe remove
 
                     // forward
                     if (colorBoard[row + 1][column] != Color.RED) {
@@ -394,7 +395,7 @@ public class MoveGenerator {
             }
 
             // double piece
-            else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {       //NOTE: else
+            else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) { // NOTE: else
                 addKnightMoves(possibleMoves, row, column, color);
             }
 
@@ -427,7 +428,7 @@ public class MoveGenerator {
                 if (newRow > row) {
                     continue;
                 }
-            } else if (color == Color.BLUE) {           //NOTE: else
+            } else if (color == Color.BLUE) { //NOTE: else
                 if (newRow < row) {
                     continue;
                 }
@@ -460,14 +461,14 @@ public class MoveGenerator {
     }
 
     public static String convertAllMoves(Map<Integer, List<Integer>> possibleMoves) {
-        // Mapping for the columns
+        // mapping for the columns
         Map<Integer, Character> columnMapping = Map.of(
                 0, 'A', 1, 'B', 2, 'C', 3, 'D', 4, 'E', 5, 'F', 6, 'G', 7, 'H'
         );
 
         StringBuilder formattedOutput = new StringBuilder();
 
-        // Add the possible moves
+        // add the possible moves
         for (Map.Entry<Integer, List<Integer>> entry : possibleMoves.entrySet()) {
             int startY = entry.getKey() / 10 + 1;  // Y-coordinate of the starting point
             int startX = entry.getKey() % 10;  // X-coordinate of the starting point
@@ -480,7 +481,7 @@ public class MoveGenerator {
             }
         }
 
-        // Remove the trailing comma and space
+        // remove the trailing comma and space
         if (!formattedOutput.isEmpty()) {
             formattedOutput.setLength(formattedOutput.length() - 2);
         }
