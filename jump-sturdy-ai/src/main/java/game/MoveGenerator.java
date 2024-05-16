@@ -14,6 +14,8 @@ public class MoveGenerator {
     Piece[][] pieceBoard;
     Color[][] colorBoard;
 
+    // START: board basics
+
     public Piece[][] getPieceBoard() {
         return pieceBoard;
     }
