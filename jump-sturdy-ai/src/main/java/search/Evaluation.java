@@ -64,13 +64,13 @@ public class Evaluation {
         return score;
     }
 
-    public static int ratePosition(MoveGenerator mgRP, Color player) {
+    public static int ratePosition(MoveGenerator moveGenerator, Color player) {
         int score = 0;
 
         if (player == Color.BLUE) {
-            score = getScoreWrapper(mgRP, Color.BLUE) - getScoreWrapper(mgRP, Color.RED);
+            score = getScoreWrapper(moveGenerator, Color.BLUE) - getScoreWrapper(moveGenerator, Color.RED);
         } else if (player == Color.RED) {
-            score = getScoreWrapper(mgRP, Color.RED) - getScoreWrapper(mgRP, Color.BLUE);
+            score = getScoreWrapper(moveGenerator, Color.RED) - getScoreWrapper(moveGenerator, Color.BLUE);
         }
 
         return score;
