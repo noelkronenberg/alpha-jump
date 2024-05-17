@@ -47,7 +47,7 @@ public class Server {
 
                     moveGenerator.printBoard(true);
 
-                    if (moveGenerator.isGameOver(messageFromClient1, Color.RED)) {
+                    if (moveGenerator.isGameOver(messageFromClient1, Color.BLUE)) {
                         gameEnded = true;
                         System.out.println("BLUE won!");
                         outToClient_01.println("GAME OVER: You won!");
@@ -70,7 +70,7 @@ public class Server {
 
                     moveGenerator.printBoard(true);
 
-                    if (moveGenerator.isGameOver(messageFromClient2, Color.BLUE)) {
+                    if (moveGenerator.isGameOver(messageFromClient2, Color.RED)) {
                         gameEnded = true;
                         System.out.println("RED won!");
                         outToClient_01.println("GAME OVER: You lost!");

@@ -283,14 +283,14 @@ public class MoveGenerator {
         return row * 10 + column;
     }
 
-    String convertPosToString(int rowAndColInt) {
+    public static String convertPosToString(int rowAndColInt) {
         int col = rowAndColInt % 10;
         int row = rowAndColInt / 10;
         String colString = String.valueOf(( (char) (65 + col) ));
         return colString + (row + 1);
     }
 
-    int convertStringToPos(String pos) {
+    public static int convertStringToPos(String pos) {
         char col=pos.charAt(0);
         char row=pos.charAt(1);
 
@@ -306,8 +306,8 @@ public class MoveGenerator {
         String start_string = position_strings[0];
         String end_string = position_strings[1];
 
-        int start = this.convertStringToPos(start_string);
-        int end =  this.convertStringToPos(end_string);
+        int start = MoveGenerator.convertStringToPos(start_string);
+        int end =  MoveGenerator.convertStringToPos(end_string);
 
         return new int[]{start, end};
     }
@@ -636,13 +636,12 @@ public class MoveGenerator {
         return allPossibleMoves;
     }
 
-    public boolean isGameOver(String move, Color opponentColor) {
+    public boolean isGameOver(String move, Color color) {
         if (!move.isEmpty()) {
-            Color ourColor = (opponentColor == Color.RED) ? Color.BLUE : Color.RED;
-            if (ourColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
+            if (color==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
                 return true;
             }
-            if (ourColor==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)) {
+            if (color==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)) {
                 return true;
             }
             return false;
@@ -650,13 +649,12 @@ public class MoveGenerator {
         return true;
     }
 
-    public boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color opponentColor) {
+    public boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color color) {
         if (!moves.isEmpty()) {
-            Color ourColor = (opponentColor == Color.RED) ? Color.BLUE : Color.RED;
-            if (ourColor==Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
+            if (color == Color.RED && doesBaseRowContainEnemy(Color.RED,0)) {
                 return true;
             }
-            if (ourColor==Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)) {
+            if (color == Color.BLUE && doesBaseRowContainEnemy(Color.BLUE,7)) {
                 return true;
             }
             return false;
