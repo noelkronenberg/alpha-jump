@@ -9,81 +9,90 @@ public class Evaluation {
 
     // START: evaluation
 
-    public static int sumWeightedPositions(MoveGenerator mgSP, Color player) {
-        // aktuell wird nach Anzahl der Steine bewertet
-        // außerdem haben die Steine ein Rating von 1-8, je nachdem wie nah sie an der gegnerischen Endreihe stehen
-        // Türme werden mit x2 bewertet, bisher egal ob MIXED oder einfarbig
+    public static int getScore(Piece piece, int score, int row, int column, int weight) {
+        switch (piece) {
+            case Piece.SINGLE:
+                score += weight;
+                break;
+            case Piece.DOUBLE:
+                score += weight * 2;
+                break;
+            case Piece.MIXED:
+                score += weight * 2;
+                break;
+        }
+        return score;
+    }
 
-        int counter = 0;
+    public static int getScoreWrapper(MoveGenerator moveGenerator, Color player) {
+        int score = 0;
         int weight = 0;
 
         if (player == Color.BLUE) {
             weight = 1;
-            for (int row=0; row < mgSP.getPieceBoard().length; row++) {
-                for (int col = 0; col < mgSP.getPieceBoard()[row].length; col++) {
-                    if (mgSP.getColorBoard()[row][col] == Color.BLUE) {
-                        if (mgSP.getPieceBoard()[row][col] == Piece.SINGLE) {
-                            counter += weight; 
-                        } else if (mgSP.getPieceBoard()[row][col] == Piece.DOUBLE) {
-                            counter += weight*2;
-                        } else if (mgSP.getPieceBoard()[row][col] == Piece.MIXED) {
-                            counter += weight*2;
-                        }
+            // check row
+            for (int row = 0; row < moveGenerator.getPieceBoard().length; row++) {
+                // check column
+                for (int column = 0; column < moveGenerator.getPieceBoard()[row].length; column++) {
+                    // check color
+                    if (moveGenerator.getColorBoard()[row][column] == Color.BLUE) {
+                        // get score of piece
+                        Piece piece = moveGenerator.getPieceBoard()[row][column];
+                        score = getScore(piece, score, row, column, weight);
                     }
                 }
-
                 weight += 1;
             }
-        }
 
-        else if (player == Color.RED) {
+        } else if (player == Color.RED) {
             weight = 8;
-            for (int row=0; row < mgSP.getPieceBoard().length; row++) {
-                for (int col = 0; col < mgSP.getPieceBoard()[row].length; col++) {
-                    if (mgSP.getColorBoard()[row][col] == Color.RED) {
-                        if (mgSP.getPieceBoard()[row][col] == Piece.SINGLE) {
-                            counter += weight; 
-                        } else if (mgSP.getPieceBoard()[row][col] == Piece.DOUBLE) {
-                            counter += weight * 2;
-                        } else if (mgSP.getPieceBoard()[row][col] == Piece.MIXED) {
-                            counter += weight * 2;
-                        }
+            // check row
+            for (int row = 0; row < moveGenerator.getPieceBoard().length; row++) {
+                // check column
+                for (int column = 0; column < moveGenerator.getPieceBoard()[row].length; column++) {
+                    // check color
+                    if (moveGenerator.getColorBoard()[row][column] == Color.RED) {
+                        // get score of piece
+                        Piece piece = moveGenerator.getPieceBoard()[row][column];
+                        score = getScore(piece, score, row, column, weight);
                     }
+                    weight -= 1;
                 }
-                weight -= 1;
             }
         }
 
-        return counter;
+        return score;
     }
 
     public static int ratePosition(MoveGenerator mgRP, Color player) {
-        // bewertet vorhandene Position für den angegebenen Spieler
-        // Summe der Steine des Spielers - Summe der Steine des Gegners
+        int score = 0;
 
-        int rating = 0;
         if (player == Color.BLUE) {
-            rating = sumWeightedPositions(mgRP, Color.BLUE) - sumWeightedPositions(mgRP, Color.RED);
+            score = getScoreWrapper(mgRP, Color.BLUE) - getScoreWrapper(mgRP, Color.RED);
         } else if (player == Color.RED) {
-            rating = sumWeightedPositions(mgRP, Color.RED) - sumWeightedPositions(mgRP, Color.BLUE);
-        } else {
-            System.out.println("Leider wurde kein gültiger Spieler angegeben.");
+            score = getScoreWrapper(mgRP, Color.RED) - getScoreWrapper(mgRP, Color.BLUE);
         }
 
-        return rating;
+        return score;
     }
 
-    public int rateMove(MoveGenerator mgRT, Color player, int startPos, int endPos) {
-        // Bewertung des Endboards - Bewertung des Startboards
-
+    public int rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition) {
         int result = 0;
-        MoveGenerator mgComp = new MoveGenerator();
-        mgComp.initializeBoard();
-        mgComp.setColorBoard(mgRT.getColorBoard());
-        mgComp.setPieceBoard(mgRT.getPieceBoard());
-        result -= ratePosition(mgComp, player);
-        mgComp.movePiece(startPos, endPos);
-        result += ratePosition(mgComp, player);
+
+        MoveGenerator nextState = new MoveGenerator();
+        nextState.initializeBoard();
+        nextState.setColorBoard(gameState.getColorBoard());
+        nextState.setPieceBoard(gameState.getPieceBoard());
+
+        // check if winning move
+        String moveString = MoveGenerator.convertPosToString(startPosition) + "-" + MoveGenerator.convertPosToString(endPosition);
+        if (nextState.isGameOver(moveString, color)) {
+            return 100000;
+        }
+
+        result -= ratePosition(nextState, color);
+        nextState.movePiece(startPosition, endPosition);
+        result += ratePosition(nextState, color);
 
         return result;
     }
