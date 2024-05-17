@@ -68,7 +68,7 @@ public class Evaluation {
         int score = 0;
 
         if (color == Color.BLUE) {
-            // check if winning move
+            // check if winning position (for BLUE)
             if (moveGenerator.doesBaseRowContainEnemy(Color.BLUE,7)) {
                 return 100000;
             }
@@ -76,7 +76,7 @@ public class Evaluation {
         }
 
         else if (color == Color.RED) {
-            // check if winning move
+            // check if winning position (for RED)
             if (moveGenerator.doesBaseRowContainEnemy(Color.RED,0)) {
                 return 100000;
             } else {
