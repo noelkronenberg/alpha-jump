@@ -79,7 +79,7 @@ public class BasisKI {
                 break;
             }
 
-            int currentScore = treeSearch(gameState, Integer.MIN_VALUE, Integer.MAX_VALUE, currentTime, endTime, depth, color); // get score for current move (order)
+            int currentScore = treeSearch(gameState, Integer.MIN_VALUE, Integer.MAX_VALUE, endTime, depth, color); // get score for current move (order)
 
             // return if move order contains winning move
             if (currentScore >= winCutOff) {
@@ -96,7 +96,7 @@ public class BasisKI {
         return bestScore;
     }
 
-    public int treeSearch(MoveGenerator gameState, int alpha, int beta, long startTime, long endTime, int depth, Color color) {
+    public int treeSearch(MoveGenerator gameState, int alpha, int beta, long endTime, int depth, Color color) {
 
         // get score for current position
         String fen = gameState.getFenFromBoard();
@@ -145,7 +145,7 @@ public class BasisKI {
                 isOurMove = false; // player change
 
                 // update alpha
-                alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, startTime, endTime, depth - 1, color));
+                alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, color));
 
                 // prune branch if no improvements can be made
                 if (beta <= alpha) {
@@ -168,7 +168,7 @@ public class BasisKI {
                 isOurMove = true; // player change
 
                 // update alpha
-                beta = Math.min(beta, treeSearch(nextState, alpha, beta, startTime, endTime, depth - 1, color));
+                beta = Math.min(beta, treeSearch(nextState, alpha, beta, endTime, depth - 1, color));
 
                 // prune branch if no improvements can be made
                 if (beta <= alpha) {
