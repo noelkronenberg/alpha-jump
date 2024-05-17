@@ -662,9 +662,9 @@ public class MoveGenerator {
         return true;
     }
 
-    boolean doesBaseRowContainEnemy(Color enemyColor, int rowToCheck) {
+    public boolean doesBaseRowContainEnemy(Color color, int rowToCheck) {
         for (int i = 1; i < 7; i++) {
-            if (colorBoard[rowToCheck][i] == enemyColor) {
+            if (colorBoard[rowToCheck][i] == color) {
                 return true;
             }
         }
