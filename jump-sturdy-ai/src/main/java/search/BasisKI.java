@@ -102,7 +102,7 @@ public class BasisKI {
         String fen = gameState.getFenFromBoard();
         int score = Evaluation.ratePosition(gameState, color);
 
-        color = (color==Color.RED) ? Color.BLUE : Color.RED;  // signal player change
+        color = (color == Color.RED) ? Color.BLUE : Color.RED;  // signal player change
 
         // get moves for other player
         LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(color);
