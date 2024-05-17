@@ -15,49 +15,46 @@ public class BasisKI {
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     static int maxDepth = -1;
 
-    public int orchestrator(String fenAndColorFromServer) {
-        // IDEE: Hier dann auch auf antwort von server warten und bestmove ausführen/zurücksenden
-
-        MoveGenerator moveGenerator = new MoveGenerator();
-        Evaluation evaluation = new Evaluation();
-        char color_fen = fenAndColorFromServer.charAt(fenAndColorFromServer.length() - 1);
-        Color color = moveGenerator.getColor(color_fen);
-
-        // diese Antwort dann auf den server senden. Davor noch umformen in deren Format (UNKNOWN)
-        return getBestMove(moveGenerator, evaluation, fenAndColorFromServer, color);
+    public int orchestrator(String fen) {
+        return getBestMove(fen);
     }
 
-    public int getBestMove(MoveGenerator gameState, Evaluation eval, String fen, Color color) {
-
+    public int getBestMove(String fen) {
         int bestScore = Integer.MIN_VALUE;
         int bestMove = -1;
 
         // TODO: Implementiere eine LinkedList oder einen Stack. Darin sind in der Reihenfolge die Ganzen vorherigen Zustände drin. wenn man durch einen durch ist, dann suche da durch
 
-        // get the Moves here: ordered!
-
+        // get moves
+        MoveGenerator gameState = new MoveGenerator();
         LinkedHashMap<Integer, List<Integer>> moves = gameState.getMovesWrapper(fen);
+        LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
+        // order moves
+        char color_fen = fen.charAt(fen.length() - 1);
+        Color color = gameState.getColor(color_fen);
+        Evaluation.orderMoves(movesList, color);
 
-        LinkedList<Integer> movesList = eval.convertMovesToList(moves); // TODO: Wirkt ineffizient: 1 Moves, dann movesList, dann OrderedmovesList.....
+        long moveTimeLimit = (TIME_LIMIT - 100) / movesList.size(); // (static) time for each move to search
 
-        long moveTimeLimit = (TIME_LIMIT - 100) / movesList.size(); // time for each move to search
-
-        eval.orderMoves(movesList, color);
-
+        // go through all possible moves
         for (Integer move : movesList) {
-            MoveGenerator nextState = new MoveGenerator();  // TODO: Impl inplace updates rather than new Object
+
+            // get board with current move made
+            MoveGenerator nextState = new MoveGenerator(); // TODO: switch to makeMOve / unmakeMove
             nextState.initializeBoard(fen);
-            nextState.movePiece(move); // preforms Move
+            nextState.movePiece(move);
 
-            // TODO: Vielleicht die Farbe in MoveGenerator Speichern + in movePiece aktualisieren?
+            int currentScore = iterativeDeepeningDFS(nextState, moveTimeLimit, color); // get score for current move (order)
 
-            int currentScore = iterativeDeepeningDFS(nextState, moveTimeLimit, eval, color) ;
+            // evaluate move (score)
 
+            // return if move order contains winning move
             if (currentScore >= winCutOff) {
                 return move;
             }
 
+            // check if current move is best
             if (currentScore > bestScore) {
                 bestScore = currentScore;
                 bestMove = move;
@@ -68,51 +65,60 @@ public class BasisKI {
         return bestMove;
     }
 
-    public int iterativeDeepeningDFS(MoveGenerator gameState, long timePerMove, Evaluation eval, Color color) {
+    public int iterativeDeepeningDFS(MoveGenerator gameState, long moveTimeLimit, Color color) {
         int depth = 1;
-        int currentScore = 0;
-        long endTime = System.currentTimeMillis() + timePerMove;
+        int bestScore = 0;
+
+        long endTime = System.currentTimeMillis() + moveTimeLimit;
         stopSearch = false;
 
+        // check until time has run out
         while (true) {
             long currentTime = System.currentTimeMillis();
             if (currentTime >= endTime) {
                 break;
             }
 
-            int scoreForMove = treeSearch(gameState, eval, Integer.MIN_VALUE, Integer.MAX_VALUE, currentTime,endTime, depth, color);
+            int currentScore = treeSearch(gameState, Integer.MIN_VALUE, Integer.MAX_VALUE, currentTime, endTime, depth, color); // get score for current move (order)
 
-            if (scoreForMove >= winCutOff) {
-                return scoreForMove;
+            // return if move order contains winning move
+            if (currentScore >= winCutOff) {
+                return currentScore;
             }
 
-            if (scoreForMove > currentScore) {
-                currentScore = scoreForMove;
+            if (currentScore > bestScore) {
+                bestScore = currentScore;
             }
 
             depth++;
         }
 
-        return currentScore;
+        return bestScore;
     }
 
-    public int treeSearch(MoveGenerator gameState, Evaluation eval, int alpha, int beta, long startTime, long endTime, int depth, Color color) {
+    public int treeSearch(MoveGenerator gameState, int alpha, int beta, long startTime, long endTime, int depth, Color color) {
+
+        // get score for current position
         String fen = gameState.getFenFromBoard();
-        int score = eval.ratePosition(gameState, color); // get the current Rating for Position
+        int score = Evaluation.ratePosition(gameState, color);
 
-        color = (color==Color.RED) ? Color.BLUE : Color.RED;  // change color to opposite color to signal move change
+        color = (color==Color.RED) ? Color.BLUE : Color.RED;  // signal player change
 
-        // get the moves
+        // get moves for other player
         LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(color);
-        LinkedList<Integer> movesList = eval.convertMovesToList(moves);
-        eval.orderMoves(movesList, color);
+        LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
+        Evaluation.orderMoves(movesList, color); // order moves
 
-        // checks if we have time left
-        if(System.currentTimeMillis() >= endTime) {
+        // check if we have time left
+        if (System.currentTimeMillis() >= endTime) {
             stopSearch = true;
         }
-        if (gameState.isGameOver(moves, color)) {       //TODO MAYBE FLAWED and should be in EVAL (Overload existing method to take LHM moves for isGameOver check)
+
+        // check if move is winning
+        // TODO: MAYBE FLAWED
+        // TODO: should be in EVAL (overload existing method to take LHM moves for isGameOver check)
+        if (gameState.isGameOver(moves, color)) {
             if (isOurMove) {
                 return 100000;
             }
@@ -122,19 +128,26 @@ public class BasisKI {
         if (stopSearch || (depth == 0)) { // NOTE: maybe check winCutOff
             return score;
         }
+
+        // update depth
         if (maxDepth < depth) {
             maxDepth = depth;
         }
 
+        // our turn
         if (isOurMove) {
             for (Integer move : movesList) {
+
+                // get board with next (now current) move made
                 MoveGenerator nextState = new MoveGenerator();
                 nextState.initializeBoard(fen);
                 nextState.movePiece(move);
-                isOurMove = false;
+                isOurMove = false; // player change
 
-                alpha = Math.max(alpha, treeSearch(nextState, eval, alpha, beta, startTime, endTime, depth - 1, color));
+                // update alpha
+                alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, startTime, endTime, depth - 1, color));
 
+                // prune branch if no improvements can be made
                 if (beta <= alpha) {
                     break;
                 }
@@ -142,15 +155,22 @@ public class BasisKI {
             return alpha;
         }
 
+        // other players turn
         else {
+
+            // go through all possible moves
             for (Integer move : movesList) {
+
+                // get board with next (now current) move made
                 MoveGenerator nextState = new MoveGenerator();
                 nextState.initializeBoard(fen);
                 nextState.movePiece(move);
-                isOurMove = true;
+                isOurMove = true; // player change
 
-                beta = Math.min(beta, treeSearch(nextState, eval, alpha, beta, startTime, endTime, depth - 1, color));
+                // update alpha
+                beta = Math.min(beta, treeSearch(nextState, alpha, beta, startTime, endTime, depth - 1, color));
 
+                // prune branch if no improvements can be made
                 if (beta <= alpha) {
                     break;
                 }
@@ -160,11 +180,12 @@ public class BasisKI {
     }
 
     public static void main(String[] args) {
-        BasisKI ki= new BasisKI();
         String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
         m.printBoard(false);
+
+        BasisKI ki = new BasisKI();
         System.out.println(ki.orchestrator(fen));
         System.out.println(maxDepth);
     }

@@ -9,7 +9,7 @@ public class Evaluation {
 
     // START: evaluation
 
-    public int sumWeightedPositions(MoveGenerator mgSP, Color player) {
+    public static int sumWeightedPositions(MoveGenerator mgSP, Color player) {
         // aktuell wird nach Anzahl der Steine bewertet
         // außerdem haben die Steine ein Rating von 1-8, je nachdem wie nah sie an der gegnerischen Endreihe stehen
         // Türme werden mit x2 bewertet, bisher egal ob MIXED oder einfarbig
@@ -57,7 +57,7 @@ public class Evaluation {
         return counter;
     }
 
-    public int ratePosition(MoveGenerator mgRP, Color player) {
+    public static int ratePosition(MoveGenerator mgRP, Color player) {
         // bewertet vorhandene Position für den angegebenen Spieler
         // Summe der Steine des Spielers - Summe der Steine des Gegners
 
