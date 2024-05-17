@@ -34,21 +34,8 @@ public class MoveGeneratorBM {
         String board_fen = fen.substring(0, fen.length() - 2);
 
         // get metrics
-
         double duration = MoveGeneratorBM.generateAllPossibleMovesSpeed(board_fen, color);
         System.out.println("Time to generate moves: " + duration + " milliseconds");
-    }
-
-    static double generateBestMoveSpeed(String board_fen) {
-        moveGenerator.initializeBoard(board_fen);
-        BasisKI ki = new BasisKI();
-        double startTime = System.nanoTime();
-        for (int i = 0; i < 1000; i++) {
-            ki.orchestrator(board_fen);
-        }
-        double endTime = System.nanoTime();
-        double duration = ((endTime - startTime) / 1000) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
-        return duration;
     }
 
     public static void main(String[] args) {
@@ -64,9 +51,5 @@ public class MoveGeneratorBM {
         System.out.println();
         System.out.println("End game: ");
         MoveGeneratorBM.wrapperBM("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b");
-
-        System.out.println();
-        System.out.println("Best move: ");
-        System.out.println("Time to play best move: " + MoveGeneratorBM.generateBestMoveSpeed("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b") + " milliseconds");
     }
 }
