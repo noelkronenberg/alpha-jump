@@ -138,11 +138,38 @@ public class Evaluation {
     }
 
     public static void orderMoves(LinkedList<Integer> moves, Color color) {
-        if (color == Color.RED) {
-            moves.sort(Comparator.comparingInt(move -> (move % 100) % 100));
-        } else {
-            moves.sort(Comparator.comparingInt(move -> ((int) move % 100) % 100).reversed());
-        }
+        Comparator<Integer> comparator = (move1, move2) -> {
+            int newRow_move1 = (move1 % 100) % 100;
+            int newRow_move2 = (move2 % 100) % 100;
+
+            boolean isMod1Zero;
+            boolean isMod2Zero;
+
+            if (color == Color.RED) {
+                isMod1Zero = newRow_move1 == 0;
+                isMod2Zero = newRow_move2 == 0;
+            } else {
+                isMod1Zero = newRow_move1 == 7;
+                isMod2Zero = newRow_move2 == 7;
+            }
+
+            // winning moves first
+            if (isMod1Zero && !isMod2Zero) {
+                return -1;
+            } else if (!isMod1Zero && isMod2Zero) {
+                return 1;
+
+            // other moves
+            } else {
+                if (color == Color.RED) {
+                    return Integer.compare(newRow_move1, newRow_move2);
+                } else {
+                    return Integer.compare(newRow_move2, newRow_move1);
+                }
+            }
+        };
+
+        moves.sort(comparator);
     }
 
     // END: move ordering

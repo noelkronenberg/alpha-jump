@@ -115,16 +115,6 @@ public class BasisKI {
             stopSearch = true;
         }
 
-        // check if move is winning
-        // TODO: MAYBE FLAWED
-        // TODO: should be in EVAL (overload existing method to take LHM moves for isGameOver check)
-        if (gameState.isGameOver(moves, color)) {
-            if (isOurMove) {
-                return 100000;
-            }
-            return -100000;
-        }
-
         if (stopSearch || (depth == 0)) { // NOTE: maybe check winCutOff
             return score;
         }
