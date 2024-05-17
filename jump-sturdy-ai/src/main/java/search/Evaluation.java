@@ -64,13 +64,24 @@ public class Evaluation {
         return score;
     }
 
-    public static int ratePosition(MoveGenerator moveGenerator, Color player) {
+    public static int ratePosition(MoveGenerator moveGenerator, Color color) {
         int score = 0;
 
-        if (player == Color.BLUE) {
+        if (color == Color.BLUE) {
+            // check if winning move
+            if (moveGenerator.doesBaseRowContainEnemy(Color.BLUE,7)) {
+                return 100000;
+            }
             score = getScoreWrapper(moveGenerator, Color.BLUE) - getScoreWrapper(moveGenerator, Color.RED);
-        } else if (player == Color.RED) {
-            score = getScoreWrapper(moveGenerator, Color.RED) - getScoreWrapper(moveGenerator, Color.BLUE);
+        }
+
+        else if (color == Color.RED) {
+            // check if winning move
+            if (moveGenerator.doesBaseRowContainEnemy(Color.RED,0)) {
+                return 100000;
+            } else {
+                score = getScoreWrapper(moveGenerator, Color.RED) - getScoreWrapper(moveGenerator, Color.BLUE);
+            }
         }
 
         return score;
@@ -83,12 +94,6 @@ public class Evaluation {
         nextState.initializeBoard();
         nextState.setColorBoard(gameState.getColorBoard());
         nextState.setPieceBoard(gameState.getPieceBoard());
-
-        // check if winning move
-        String moveString = MoveGenerator.convertPosToString(startPosition) + "-" + MoveGenerator.convertPosToString(endPosition);
-        if (nextState.isGameOver(moveString, color)) {
-            return 100000;
-        }
 
         result -= ratePosition(nextState, color);
         nextState.movePiece(startPosition, endPosition);
