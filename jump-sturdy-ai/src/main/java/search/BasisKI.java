@@ -36,7 +36,7 @@ public class BasisKI {
 
         // get the Moves here: ordered!
 
-        LinkedHashMap<Integer, List<Integer>> moves = gameState.getMovesWrapper(fen); // TODO: getMovesWrapper funktionalität in basisKI einbauen und übergeben! Damit man hier mit Color noch weiter arbeiten kann.
+        LinkedHashMap<Integer, List<Integer>> moves = gameState.getMovesWrapper(fen);
 
 
         LinkedList<Integer> movesList = eval.convertMovesToList(moves); // TODO: Wirkt ineffizient: 1 Moves, dann movesList, dann OrderedmovesList.....
@@ -46,7 +46,7 @@ public class BasisKI {
         eval.orderMoves(movesList, color);
 
         for (Integer move : movesList) {
-            MoveGenerator nextState = new MoveGenerator();  // TODO: Clone Funktion oder hier neuen MoveGenerator?
+            MoveGenerator nextState = new MoveGenerator();  // TODO: Impl inplace updates rather than new Object
             nextState.initializeBoard(fen);
             nextState.movePiece(move); // preforms Move
 
@@ -112,8 +112,11 @@ public class BasisKI {
         if(System.currentTimeMillis() >= endTime) {
             stopSearch = true;
         }
-        if (gameState.isGameOver(moves, color)) {
-            return 100000;
+        if (gameState.isGameOver(moves, color)) {       //TODO MAYBE FLAWED and should be in EVAL (Overload existing method to take LHM moves for isGameOver check)
+            if (isOurMove) {
+                return 100000;
+            }
+            return -100000;
         }
 
         if (stopSearch || (depth == 0)) { // NOTE: maybe check winCutOff
@@ -158,7 +161,11 @@ public class BasisKI {
 
     public static void main(String[] args) {
         BasisKI ki= new BasisKI();
-        System.out.println(ki.orchestrator("6/1bbbbbbbbbbbb1/8/8/8/1r0r0r0r0r0r01/8/r0r0r0r0r0r0 b"));
+        String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
+        MoveGenerator m = new MoveGenerator();
+        m.initializeBoard(fen);
+        m.printBoard(false);
+        System.out.println(ki.orchestrator(fen));
         System.out.println(maxDepth);
     }
 }

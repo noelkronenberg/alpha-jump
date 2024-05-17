@@ -50,7 +50,6 @@ public class Evaluation {
                         }
                     }
                 }
-
                 weight -= 1;
             }
         }
@@ -152,5 +151,7 @@ public class Evaluation {
         System.out.println();
         System.out.println("Moves as map again: ");
         System.out.println(convertMovesToMap(movesList));
+
+        String s = "6/8/8/4b03/3r04/8/8/6";
     }
 }
