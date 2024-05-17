@@ -7,6 +7,8 @@ import game.Piece;
 
 public class Evaluation {
 
+    // START: evaluation
+
     public int sumWeightedPositions(MoveGenerator mgSP, Color player) {
         // aktuell wird nach Anzahl der Steine bewertet
         // außerdem haben die Steine ein Rating von 1-8, je nachdem wie nah sie an der gegnerischen Endreihe stehen
@@ -86,6 +88,8 @@ public class Evaluation {
 
         return result;
     }
+
+    // END: evaluation
 
     // START: move ordering
 
