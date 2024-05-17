@@ -45,7 +45,7 @@ public class BasisKI {
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
 
-            int currentScore = iterativeDeepeningDFS(nextState, moveTimeLimit, color); // get score for current move (order)
+            int currentScore = iterativeDeepening(nextState, moveTimeLimit, color); // get score for current move (order)
 
             // evaluate move (score)
 
@@ -58,14 +58,14 @@ public class BasisKI {
             if (currentScore > bestScore) {
                 bestScore = currentScore;
                 bestMove = move;
-                System.out.println("Best Score: " + bestScore + "  Move: " + bestMove);
+                System.out.println("Current best move: " + bestMove + " (score: " + bestScore + ")");
             }
         }
 
         return bestMove;
     }
 
-    public int iterativeDeepeningDFS(MoveGenerator gameState, long moveTimeLimit, Color color) {
+    public int iterativeDeepening(MoveGenerator gameState, long moveTimeLimit, Color color) {
         int depth = 1;
         int bestScore = 0;
 
@@ -186,7 +186,9 @@ public class BasisKI {
         m.printBoard(false);
 
         BasisKI ki = new BasisKI();
-        System.out.println(ki.orchestrator(fen));
-        System.out.println(maxDepth);
+        int bestMove = ki.orchestrator(fen);
+        System.out.println();
+        System.out.println("Best move: " + bestMove);
+        System.out.println("Depth reached: " + maxDepth);
     }
 }
