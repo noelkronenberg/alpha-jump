@@ -1,5 +1,6 @@
 package search;
 
+import game.MoveGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,4 +32,17 @@ public class BasisKITest {
         testMoves("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 r", "D3-E2");
     }
 
+    @Test
+    @DisplayName("Gruppe F")
+    public void testGruppeF() {
+        testMoves("6/7b0/8/8/1r06/4b03/2rr1rrr02/5r0 b", "E6-D6");
+        //testMoves("6/4bbb02/b02b01b02/1b02b03/2b01rrrr2/6r01/r01r0r0r03/5r0 r", "E5-F3");             Wird hoffentlich noch von Gruppe F korrigiert
+    }
+
+
+    public static void main(String[] args) {
+        MoveGenerator moveGenerator = new MoveGenerator();
+        moveGenerator.initializeBoard("6/4bbb02/b02b01b02/1b02b03/2b01rrrr2/6r01/r01r0r0r03/5r0 r");
+        moveGenerator.printBoard(true);
+    }
 }
