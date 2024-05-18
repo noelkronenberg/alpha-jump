@@ -69,7 +69,7 @@ public class Evaluation {
 
         if (color == Color.BLUE) {
             // check if winning position (for BLUE)
-            if (moveGenerator.doesBaseRowContainEnemy(Color.BLUE,7)) {
+            if (moveGenerator.doesBaseRowContainColor(Color.BLUE,7)) {
                 return 100000;
             }
             score = getScoreWrapper(moveGenerator, Color.BLUE) - getScoreWrapper(moveGenerator, Color.RED);
@@ -77,7 +77,7 @@ public class Evaluation {
 
         else if (color == Color.RED) {
             // check if winning position (for RED)
-            if (moveGenerator.doesBaseRowContainEnemy(Color.RED,0)) {
+            if (moveGenerator.doesBaseRowContainColor(Color.RED,0)) {
                 return 100000;
             } else {
                 score = getScoreWrapper(moveGenerator, Color.RED) - getScoreWrapper(moveGenerator, Color.BLUE);
