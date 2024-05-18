@@ -290,6 +290,12 @@ public class MoveGenerator {
         return colString + (row + 1);
     }
 
+    public static String convertMoveToFEN(int move) {
+        int from = move / 100;
+        int to = move % 100;
+        return convertPosToString(from) + "-" +  convertPosToString(to);
+    }
+
     public static int convertStringToPos(String pos) {
         char col=pos.charAt(0);
         char row=pos.charAt(1);
