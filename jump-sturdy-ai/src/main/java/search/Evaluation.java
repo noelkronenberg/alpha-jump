@@ -88,18 +88,18 @@ public class Evaluation {
     }
 
     public double rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition) {
-        double result = 0;
+        double score = 0;
 
         MoveGenerator nextState = new MoveGenerator();
         nextState.initializeBoard();
         nextState.setColorBoard(gameState.getColorBoard());
         nextState.setPieceBoard(gameState.getPieceBoard());
 
-        result -= ratePosition(nextState, color);
+        score -= ratePosition(nextState, color);
         nextState.movePiece(startPosition, endPosition);
-        result += ratePosition(nextState, color);
+        score += ratePosition(nextState, color);
 
-        return result;
+        return score;
     }
 
     // END: evaluation
