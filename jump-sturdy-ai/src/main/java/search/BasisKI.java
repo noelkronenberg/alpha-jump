@@ -15,8 +15,8 @@ public class BasisKI {
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     static int maxDepth = -1;
-    public int orchestrator(String fen) {
-        return getBestMove(fen);
+    public String orchestrator(String fen) {
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
     public int getBestMove(String fen) {
@@ -60,7 +60,7 @@ public class BasisKI {
             if (currentScore > bestScore) {
                 bestScore = currentScore;
                 bestMove = move;
-                System.out.println("Current best move: " + bestMove + " (score: " + bestScore + ")");
+                System.out.println("Current best move: " + MoveGenerator.convertMoveToFEN(bestMove) + " (score: " + bestScore + ")");
             }
 
             moveStack.clear();
@@ -222,7 +222,7 @@ public class BasisKI {
         m.printBoard(false);
 
         BasisKI ki = new BasisKI();
-        int bestMove = ki.orchestrator(fen);
+        String bestMove = ki.orchestrator(fen);
         System.out.println();
         System.out.println("Best move: " + bestMove);
         System.out.println("Depth reached: " + maxDepth);

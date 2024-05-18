@@ -20,10 +20,9 @@ public class Middleware {
         String serverValue = getServerValue();
 
         BasisKI ki = new BasisKI();
-        int bestMoveInt = ki.orchestrator(serverValue);
-        String bestMoveString = MoveGenerator.convertMoveToFEN(bestMoveInt);
+        String bestMove = ki.orchestrator(serverValue);
 
-        send(bestMoveString);
+        send(bestMove);
 
     }
 }
