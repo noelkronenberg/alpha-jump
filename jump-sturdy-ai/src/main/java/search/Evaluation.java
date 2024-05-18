@@ -26,7 +26,7 @@ public class Evaluation {
 
     public static int getScoreWrapper(MoveGenerator moveGenerator, Color player) {
         int score = 0;
-        int weight = 0;
+        int weight;
 
         if (player == Color.BLUE) {
             weight = 1;
