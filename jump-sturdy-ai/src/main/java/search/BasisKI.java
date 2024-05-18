@@ -35,13 +35,13 @@ public class BasisKI {
         Color color = gameState.getColor(color_fen);
         Evaluation.orderMoves(movesList, color);
 
-
         long moveTimeLimit = (TIME_LIMIT - 100) / movesList.size(); // (static) time for each move to search
 
         // go through all possible moves
         for (Integer move : movesList) {
             Stack<Integer> moveStack = new Stack<>();
             moveStack.push(move);
+
             // get board with current move made
             MoveGenerator nextState = new MoveGenerator(); // TODO: switch to makeMOve / unmakeMove
             nextState.initializeBoard(fen);
@@ -62,6 +62,7 @@ public class BasisKI {
                 bestMove = move;
                 System.out.println("Current best move: " + bestMove + " (score: " + bestScore + ")");
             }
+
             moveStack.clear();
         }
 
@@ -93,6 +94,7 @@ public class BasisKI {
                 bestScore = currentScore;
                 //System.out.println(moveStack);
             }
+
             moveStack.pop();
             depth++;
         }
@@ -103,14 +105,12 @@ public class BasisKI {
         boolean firstIt = true;
         int prevAlpha = alpha;
         int prevBeta = beta;
+
         // get score for current position
-        String fen = gameState.getFenFromBoard();
-
         int score = Evaluation.ratePosition(gameState, playerColor);
-        color = (color == Color.RED) ? Color.BLUE : Color.RED ;  // signal player change
-
 
         // get moves for other player
+        color = (color == Color.RED) ? Color.BLUE : Color.RED ;  // signal player change
         LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(color);
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
@@ -130,31 +130,40 @@ public class BasisKI {
             maxDepth = depth;
         }
 
+        String fen = gameState.getFenFromBoard(); // convert position to FEN
+
         // our turn
         if (isOurMove) {
             for (Integer move : movesList) {
                 moveStack.push(move);
+
                 // get board with next (now current) move made
                 MoveGenerator nextState = new MoveGenerator();
                 nextState.initializeBoard(fen);
                 nextState.movePiece(move);
+
                 isOurMove = false; // player change
+
                 Stack<Integer> moveStackForBelow = new Stack<>();
                 moveStackForBelow.addAll(moveStack);
+
                 // update alpha
                 alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, color, moveStackForBelow,playerColor));
-                if(alpha <= prevAlpha) {
+
+                if (alpha <= prevAlpha) {
                     moveStack.pop();
                 }
                 else if (firstIt){
-                    moveStack=moveStackForBelow;
-                    prevAlpha=alpha;
-                    firstIt=false;
-                } else  {
-                    moveStack=moveStackForBelow;
-                    moveStack.remove(moveStack.size()-2);
-                    prevAlpha=alpha;
+                    moveStack = moveStackForBelow;
+                    prevAlpha = alpha;
+                    firstIt = false;
                 }
+                else {
+                    moveStack = moveStackForBelow;
+                    moveStack.remove(moveStack.size()-2);
+                    prevAlpha = alpha;
+                }
+
                 // prune branch if no improvements can be made
                 if (beta <= alpha) {
                     break;
@@ -169,29 +178,32 @@ public class BasisKI {
             // go through all possible moves
             for (Integer move : movesList) {
                 moveStack.push(move);
+
                 // get board with next (now current) move made
                 MoveGenerator nextState = new MoveGenerator();
                 nextState.initializeBoard(fen);
                 nextState.movePiece(move);
 
                 isOurMove = true; // player change
+
                 Stack<Integer> moveStackForBelow = new Stack<>();
                 moveStackForBelow.addAll(moveStack);
+
                 // update beta
                 beta = Math.min(beta, treeSearch(nextState, alpha, beta, endTime, depth - 1, color, moveStack, playerColor));
 
-                if(beta >= prevBeta) {
+                if (beta >= prevBeta) {
                     moveStack.pop();
                 }
-                else if (firstIt){
-                    moveStack=moveStackForBelow;
-                    firstIt=false;
-                    prevBeta=beta;
+                else if (firstIt) {
+                    moveStack = moveStackForBelow;
+                    firstIt = false;
+                    prevBeta = beta;
                 }
                 else {
-                    moveStack=moveStackForBelow;
+                    moveStack = moveStackForBelow;
                     moveStack.remove(moveStack.size()-2);
-                    prevBeta=beta;
+                    prevBeta = beta;
                 }
 
                 // prune branch if no improvements can be made
@@ -215,6 +227,7 @@ public class BasisKI {
         System.out.println("Best move: " + bestMove);
         System.out.println("Depth reached: " + maxDepth);
 
+        System.out.println();
         Stack<Integer> moveStack = new Stack<>();
         moveStack.push(1);
         moveStack.push(2);
