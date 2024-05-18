@@ -9,7 +9,7 @@ public class Evaluation {
 
     // START: evaluation
 
-    public static int getScore(Piece piece, int score, int row, int column, int weight) {
+    public static int getScore(Piece piece, int score, int weight) {
         switch (piece) {
             case Piece.SINGLE:
                 score += weight;
@@ -38,7 +38,7 @@ public class Evaluation {
                     if (moveGenerator.getColorBoard()[row][column] == Color.BLUE) {
                         // get score of piece
                         Piece piece = moveGenerator.getPieceBoard()[row][column];
-                        score = getScore(piece, score, row, column, weight);
+                        score = getScore(piece, score, weight);
                     }
                 }
                 weight += 1;
@@ -54,7 +54,7 @@ public class Evaluation {
                     if (moveGenerator.getColorBoard()[row][column] == Color.RED) {
                         // get score of piece
                         Piece piece = moveGenerator.getPieceBoard()[row][column];
-                        score = getScore(piece, score, row, column, weight);
+                        score = getScore(piece, score, weight);
                     }
                 }
                 weight -= 1;
@@ -193,8 +193,7 @@ public class Evaluation {
         System.out.println("Moves as map again: ");
         System.out.println(convertMovesToMap(movesList));
 
-        System.out.println(ratePosition(moveGenerator, Color.BLUE));
-
-        //ratePosition()
+        System.out.println();
+        System.out.println("Score: " + ratePosition(moveGenerator, Color.BLUE));
     }
 }
