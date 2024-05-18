@@ -20,7 +20,7 @@ public class BasisKI {
     }
 
     public int getBestMove(String fen) {
-        int bestScore = Integer.MIN_VALUE;
+        double bestScore = Integer.MIN_VALUE;
         int bestMove = -1;
 
         // TODO: Implementiere eine LinkedList oder einen Stack. Darin sind in der Reihenfolge die Ganzen vorherigen Zustände drin. wenn man durch einen durch ist, dann suche da durch
@@ -47,7 +47,7 @@ public class BasisKI {
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
 
-            int currentScore = iterativeDeepening(nextState, moveTimeLimit, color, moveStack,color); // get score for current move (order)
+            double currentScore = iterativeDeepening(nextState, moveTimeLimit, color, moveStack,color); // get score for current move (order)
 
             // evaluate move (score)
 
@@ -69,9 +69,9 @@ public class BasisKI {
         return bestMove;
     }
 
-    public int iterativeDeepening(MoveGenerator gameState, long moveTimeLimit, Color color,Stack<Integer> moveStack, Color playerColor) {
+    public double iterativeDeepening(MoveGenerator gameState, long moveTimeLimit, Color color,Stack<Integer> moveStack, Color playerColor) {
         int depth = 1;
-        int bestScore = Integer.MIN_VALUE;
+        double bestScore = Integer.MIN_VALUE;
 
         long endTime = System.currentTimeMillis() + moveTimeLimit;
         stopSearch = false;
@@ -83,7 +83,7 @@ public class BasisKI {
                 break;
             }
 
-            int currentScore = treeSearch(gameState, Integer.MIN_VALUE, Integer.MAX_VALUE, endTime, depth, color, moveStack, playerColor); // get score for current move (order)
+            double currentScore = treeSearch(gameState, Integer.MIN_VALUE, Integer.MAX_VALUE, endTime, depth, color, moveStack, playerColor); // get score for current move (order)
 
             // return if move order contains winning move
             if (currentScore >= winCutOff) {
@@ -101,13 +101,13 @@ public class BasisKI {
         return bestScore;
     }
 
-    public int treeSearch(MoveGenerator gameState, int alpha, int beta, long endTime, int depth, Color color ,Stack<Integer> moveStack, Color playerColor) {
+    public double treeSearch(MoveGenerator gameState, double alpha, double beta, long endTime, int depth, Color color ,Stack<Integer> moveStack, Color playerColor) {
         boolean firstIt = true;
-        int prevAlpha = alpha;
-        int prevBeta = beta;
+        double prevAlpha = alpha;
+        double prevBeta = beta;
 
         // get score for current position
-        int score = Evaluation.ratePosition(gameState, playerColor);
+        double score = Evaluation.ratePosition(gameState, playerColor);
 
         // get moves for other player
         color = (color == Color.RED) ? Color.BLUE : Color.RED ;  // signal player change

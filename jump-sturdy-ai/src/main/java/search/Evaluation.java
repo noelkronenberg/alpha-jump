@@ -9,7 +9,7 @@ public class Evaluation {
 
     // START: evaluation
 
-    public static int getScore(Piece piece, int score, int weight) {
+    public static double getScore(Piece piece, double score, int weight) {
         switch (piece) {
             case Piece.SINGLE:
                 score += weight;
@@ -24,8 +24,8 @@ public class Evaluation {
         return score;
     }
 
-    public static int getScoreWrapper(MoveGenerator moveGenerator, Color player) {
-        int score = 0;
+    public static double getScoreWrapper(MoveGenerator moveGenerator, Color player) {
+        double score = 0;
         int weight;
 
         if (player == Color.BLUE) {
@@ -64,8 +64,8 @@ public class Evaluation {
         return score;
     }
 
-    public static int ratePosition(MoveGenerator moveGenerator, Color color) {
-        int score = 0;
+    public static double ratePosition(MoveGenerator moveGenerator, Color color) {
+        double score = 0;
 
         if (color == Color.BLUE) {
             // check if winning position (for BLUE)
@@ -87,8 +87,8 @@ public class Evaluation {
         return score;
     }
 
-    public int rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition) {
-        int result = 0;
+    public double rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition) {
+        double result = 0;
 
         MoveGenerator nextState = new MoveGenerator();
         nextState.initializeBoard();
