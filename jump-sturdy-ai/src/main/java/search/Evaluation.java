@@ -56,8 +56,8 @@ public class Evaluation {
                         Piece piece = moveGenerator.getPieceBoard()[row][column];
                         score = getScore(piece, score, row, column, weight);
                     }
-                    weight -= 1;
                 }
+                weight -= 1;
             }
         }
 
@@ -176,7 +176,7 @@ public class Evaluation {
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b");
+        LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b");
         System.out.println(moves);
 
         System.out.println();
@@ -193,6 +193,8 @@ public class Evaluation {
         System.out.println("Moves as map again: ");
         System.out.println(convertMovesToMap(movesList));
 
-        String s = "6/8/8/4b03/3r04/8/8/6";
+        System.out.println(ratePosition(moveGenerator, Color.BLUE));
+
+        //ratePosition()
     }
 }
