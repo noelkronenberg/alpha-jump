@@ -139,8 +139,8 @@ public class Evaluation {
 
     public static void orderMoves(LinkedList<Integer> moves, Color color) {
         Comparator<Integer> comparator = (move1, move2) -> {
-            int newRow_move1 = (move1 % 100) % 100;
-            int newRow_move2 = (move2 % 100) % 100;
+            int newRow_move1 = (move1 % 100) / 10;
+            int newRow_move2 = (move2 % 100) / 10;
 
             boolean isMod1Zero;
             boolean isMod2Zero;

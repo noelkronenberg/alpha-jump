@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class BasisKI {
-    static final int TIME_LIMIT = 5000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
+    static final int TIME_LIMIT = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
     static final int winCutOff = 100000;
 
     static boolean stopSearch = false;
@@ -58,7 +58,7 @@ public class BasisKI {
             if (currentScore > bestScore) {
                 bestScore = currentScore;
                 bestMove = move;
-                System.out.println("Current best move: " + MoveGenerator.convertMoveToFEN(bestMove) + " (score: " + bestScore + ")");
+                //System.out.println("Current best move: " + MoveGenerator.convertMoveToFEN(bestMove) + " (score: " + bestScore + ")");
             }
         }
 
@@ -169,7 +169,7 @@ public class BasisKI {
     }
 
     public static void main(String[] args) {
-        String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
+        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
         m.printBoard(false);
