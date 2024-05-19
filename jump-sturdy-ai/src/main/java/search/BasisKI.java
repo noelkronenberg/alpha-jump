@@ -18,12 +18,10 @@ public class BasisKI {
     static int maxDepth = -1;
     static HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
 
+    // START: search with Alpha-Beta
+
     public String orchestrator(String fen) {
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestratorNoAlphaBeta(String fen) {
-        return MoveGenerator.convertMoveToFEN(getBestMoveNoAlphaBeta(fen));
     }
 
     public int getBestMove(String fen) {
@@ -174,6 +172,14 @@ public class BasisKI {
         }
     }
 
+    // END: search with Alpha-Beta
+
+    // START: search without Alpha-Beta
+
+    public String orchestratorNoAlphaBeta(String fen) {
+        return MoveGenerator.convertMoveToFEN(getBestMoveNoAlphaBeta(fen));
+    }
+
     public int getBestMoveNoAlphaBeta(String fen) {
         double bestScore = Integer.MIN_VALUE;
         int bestMove = -1;
@@ -320,6 +326,8 @@ public class BasisKI {
             return value;
         }
     }
+
+    // END: search without Alpha-Beta
 
 
     public static void main(String[] args) {
