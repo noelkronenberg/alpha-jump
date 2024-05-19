@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class BasisKI {
-    static final int TIME_LIMIT = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
+    static final int TIME_LIMIT = 5000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
     static final int winCutOff = 100000;
 
     static boolean stopSearch = false;
@@ -178,7 +178,7 @@ public class BasisKI {
         double bestScore = Integer.MIN_VALUE;
         int bestMove = -1;
 
-
+        positionsHM.put(fen,1);
         // get moves
         MoveGenerator gameState = new MoveGenerator();
         LinkedHashMap<Integer, List<Integer>> moves = gameState.getMovesWrapper(fen);
@@ -199,6 +199,7 @@ public class BasisKI {
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
 
+
             double currentScore = iterativeDeepeningNoAlphaBeta(nextState, moveTimeLimit, ourColor,ourColor, move); // get score for current move (order)
 
             // evaluate move (score)
@@ -215,7 +216,7 @@ public class BasisKI {
                 //System.out.println("Current best move: " + MoveGenerator.convertMoveToFEN(bestMove) + " (score: " + bestScore + ")");
             }
         }
-
+        System.out.println("Number of Unique Positions: "+positionsHM.size());
         return bestMove;
     }
 
@@ -274,6 +275,14 @@ public class BasisKI {
         }
 
         String fen = gameState.getFenFromBoard(); // convert position to FEN
+
+        //
+        if (positionsHM.containsKey(fen)){
+            positionsHM.put(fen,positionsHM.get(fen)+1);
+        }
+        else {
+            positionsHM.put(fen,1);
+        }
 
         // our turn
         if (isOurMove) {
