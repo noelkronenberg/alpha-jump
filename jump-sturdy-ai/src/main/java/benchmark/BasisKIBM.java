@@ -17,11 +17,11 @@ public class BasisKIBM {
         moveGenerator.initializeBoard(board_fen);
         BasisKI ki = new BasisKI();
         double startTime = System.nanoTime();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100000; i++) {
             ki.orchestrator(board_fen);
         }
         double endTime = System.nanoTime();
-        double duration = ((endTime - startTime) / 1000) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
+        double duration = ((endTime - startTime) / 100000) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
         return duration;
     }
 
