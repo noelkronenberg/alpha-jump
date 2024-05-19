@@ -3,18 +3,20 @@ package search;
 import game.Color;
 import game.MoveGenerator;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 
 public class BasisKI {
-    static final int TIME_LIMIT = 5000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
+    static final int TIME_LIMIT = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
     static final int winCutOff = 100000;
 
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     static int maxDepth = -1;
+    static HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
 
     public String orchestrator(String fen) {
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
