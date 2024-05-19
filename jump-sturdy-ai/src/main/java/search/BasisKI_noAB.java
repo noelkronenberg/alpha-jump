@@ -87,7 +87,8 @@ public class BasisKI_noAB {
             }
 
             double currentScore = treeSearchNoAlphaBeta(gameState, endTime, depth, currentColor, ourColor, -1); // get score for current move (order)
-            System.out.println("Best Score for Iteration: "+currentScore+" For Depth: "+depth+" For Move: "+move);
+            System.out.println("best score (for iteration): " + currentScore + " | depth: " + depth + " | move: " + MoveGenerator.convertMoveToFEN(move));
+
             // return if move order contains winning move
             if (currentScore >= winCutOff) {
                 return currentScore;
@@ -176,10 +177,10 @@ public class BasisKI_noAB {
     // END: search without Alpha-Beta
 
     public static void main(String[] args) {
-        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r";
+        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
-        m.printBoard(false);
+        m.printBoard(true);
 
         BasisKI_noAB ki = new BasisKI_noAB();
         String bestMove = ki.orchestratorNoAlphaBeta(fen);

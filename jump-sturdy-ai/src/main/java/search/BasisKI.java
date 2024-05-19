@@ -172,10 +172,10 @@ public class BasisKI {
     // END: search with Alpha-Beta
 
     public static void main(String[] args) {
-        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r";
+        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
-        m.printBoard(false);
+        m.printBoard(true);
 
         BasisKI ki = new BasisKI();
         String bestMove = ki.orchestrator(fen);
