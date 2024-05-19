@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class BasisKI {
-    static final int TIME_LIMIT = 5000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
+    static final int TIME_LIMIT = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
     static final int winCutOff = 100000;
 
     static boolean stopSearch = false;
