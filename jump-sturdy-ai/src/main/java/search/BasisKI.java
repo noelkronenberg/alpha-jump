@@ -199,8 +199,10 @@ public class BasisKI {
         System.out.println("Best move: " + bestMove);
         System.out.println("Depth reached: " + maxDepth);
 
+        System.out.println();
         System.out.println("Number of Unique Positions: " +ki.positionsHM.size());
 
+        System.out.println();
         int numberOfPos=0;
         for (Map.Entry<String, Integer> entry : ki.positionsHM.entrySet()){
             numberOfPos+= entry.getValue();

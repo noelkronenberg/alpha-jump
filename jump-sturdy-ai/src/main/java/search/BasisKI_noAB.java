@@ -8,7 +8,7 @@ import java.util.*;
 public class BasisKI_noAB {
     static final int TIME_LIMIT = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
     static final int winCutOff = 100000;
-    static final int maxAllowedDepth =2;
+    static int maxAllowedDepth = 2;
 
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
@@ -18,6 +18,11 @@ public class BasisKI_noAB {
     // START: search without Alpha-Beta
 
     public String orchestratorNoAlphaBeta(String fen) {
+        return MoveGenerator.convertMoveToFEN(getBestMoveNoAlphaBeta(fen));
+    }
+
+    public String orchestratorNoAlphaBeta(String fen, int actualMaxDepth) {
+        maxAllowedDepth = actualMaxDepth;
         return MoveGenerator.convertMoveToFEN(getBestMoveNoAlphaBeta(fen));
     }
 
@@ -65,8 +70,6 @@ public class BasisKI_noAB {
                 //System.out.println("Current best move: " + MoveGenerator.convertMoveToFEN(bestMove) + " (score: " + bestScore + ")");
             }
         }
-
-        System.out.println("Number of Unique Positions: " + positionsHM.size());
 
         return bestMove;
     }
@@ -175,6 +178,11 @@ public class BasisKI_noAB {
         String bestMove = ki.orchestratorNoAlphaBeta(fen);
         System.out.println("Best move: " + bestMove);
         System.out.println("Depth reached: " + maxDepth);
+
+        System.out.println();
+        System.out.println("Number of Unique Positions: " + positionsHM.size());
+
+        System.out.println();
         int numberOfPos=0;
         for (Map.Entry<String, Integer> entry : positionsHM.entrySet()){
             numberOfPos+= entry.getValue();
