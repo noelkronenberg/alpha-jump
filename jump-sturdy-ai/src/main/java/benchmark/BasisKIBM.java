@@ -164,7 +164,7 @@ public class BasisKIBM {
 
         System.out.println();
         double timeLimit = 20000;
-        System.out.println("Time limit: (" + timeLimit + " ms)");
+        System.out.println("Time limit (" + timeLimit + " ms):");
 
         System.out.println();
         System.out.println("Start position: ");
