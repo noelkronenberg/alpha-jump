@@ -6,7 +6,7 @@ import game.MoveGenerator;
 import java.util.*;
 
 public class BasisKI {
-    static final int TIME_LIMIT = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
+    double timeLimit = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
     static final int winCutOff = 100000;
 
     static int maxAllowedDepth = 0;
@@ -18,6 +18,11 @@ public class BasisKI {
     // START: search with Alpha-Beta
 
     public String orchestrator(String fen) {
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen, true));
+    }
+
+    public String orchestrator(String fen, double ms) {
+        timeLimit = ms;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen, true));
     }
 
@@ -43,7 +48,7 @@ public class BasisKI {
         fen=fen.substring(0,fen.length()-2);
         positionsHM.put(fen,1); // save position
 
-        long moveTimeLimit = (TIME_LIMIT - 100) / movesList.size(); // (static) time for each move to search
+        double moveTimeLimit = (timeLimit - 100) / movesList.size(); // (static) time for each move to search
 
         // go through all possible moves
         for (Integer move : movesList) {
@@ -73,11 +78,11 @@ public class BasisKI {
         return bestMove;
     }
 
-    public double iterativeDeepening(MoveGenerator gameState, long moveTimeLimit, Color currentColor, Color ourColor, boolean timeCriterion) {
+    public double iterativeDeepening(MoveGenerator gameState, double moveTimeLimit, Color currentColor, Color ourColor, boolean timeCriterion) {
         int depth = 1;
         double bestScore = Integer.MIN_VALUE;
 
-        long endTime = System.currentTimeMillis() + moveTimeLimit;
+        double endTime = System.currentTimeMillis() + moveTimeLimit;
         stopSearch = false;
 
         // check until time has run out or maxAllowedDepth is reached
@@ -104,7 +109,7 @@ public class BasisKI {
         return bestScore;
     }
 
-    public double treeSearch(MoveGenerator gameState, double alpha, double beta, long endTime, int depth, Color currentColor , Color ourColor, boolean timeCriterion) {
+    public double treeSearch(MoveGenerator gameState, double alpha, double beta, double endTime, int depth, Color currentColor , Color ourColor, boolean timeCriterion) {
         // get score for current position
         double score = Evaluation.ratePosition(gameState, ourColor);
 
