@@ -13,7 +13,7 @@ public class BasisKI {
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     static int maxDepth = -1;
-    HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
+    public HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
 
     // START: search with Alpha-Beta
 
