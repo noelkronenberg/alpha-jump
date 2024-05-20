@@ -13,7 +13,7 @@ public class BasisKI {
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     static int maxDepth = -1;
-    public HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
+    HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
 
     // START: search with Alpha-Beta
 
@@ -200,13 +200,13 @@ public class BasisKI {
         System.out.println("Depth reached: " + maxDepth);
 
         System.out.println();
-        System.out.println("Number of Unique Positions: " +ki.positionsHM.size());
+        System.out.println("Number of Unique Positions: " + ki.positionsHM.size());
 
         System.out.println();
-        int numberOfPos=0;
-        for (Map.Entry<String, Integer> entry : ki.positionsHM.entrySet()){
-            numberOfPos+= entry.getValue();
+        int numberOfPos = 0;
+        for (Map.Entry < String, Integer > entry : ki.positionsHM.entrySet()){
+            numberOfPos += entry.getValue();
         }
-        System.out.println("Actual : "+numberOfPos);
+        System.out.println("Actual : " + numberOfPos);
     }
 }

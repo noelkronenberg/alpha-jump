@@ -13,7 +13,7 @@ public class BasisKI_noAB {
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     static int maxDepth = -1;
-    static HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
+    public HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
 
     // START: search without Alpha-Beta
 
@@ -67,7 +67,7 @@ public class BasisKI_noAB {
             if (currentScore > bestScore) {
                 bestScore = currentScore;
                 bestMove = move;
-                //System.out.println("Current best move: " + MoveGenerator.convertMoveToFEN(bestMove) + " (score: " + bestScore + ")");
+                // System.out.println("Current best move: " + MoveGenerator.convertMoveToFEN(bestMove) + " (score: " + bestScore + ")");
             }
         }
 
@@ -84,7 +84,7 @@ public class BasisKI_noAB {
         // check until time has run out
         while ((depth) <= maxAllowedDepth) {
             double currentScore = treeSearchNoAlphaBeta(gameState, endTime, depth, currentColor, ourColor, -1); // get score for current move (order)
-            System.out.println("best score (for iteration): " + currentScore + " | depth: " + depth + " | move: " + MoveGenerator.convertMoveToFEN(move));
+            // System.out.println("best score (for iteration): " + currentScore + " | depth: " + depth + " | move: " + MoveGenerator.convertMoveToFEN(move));
 
             // return if move order contains winning move
             if (currentScore >= winCutOff) {
@@ -180,13 +180,13 @@ public class BasisKI_noAB {
         System.out.println("Depth reached: " + maxDepth);
 
         System.out.println();
-        System.out.println("Number of Unique Positions: " + positionsHM.size());
+        System.out.println("Number of Unique Positions: " + ki.positionsHM.size());
 
         System.out.println();
-        int numberOfPos=0;
-        for (Map.Entry<String, Integer> entry : positionsHM.entrySet()){
-            numberOfPos+= entry.getValue();
+        int numberOfPos = 0;
+        for (Map.Entry < String, Integer> entry : ki.positionsHM.entrySet()){
+            numberOfPos += entry.getValue();
         }
-        System.out.println("Actual : "+numberOfPos);
+        System.out.println("Actual : " + numberOfPos);
     }
 }
