@@ -3,15 +3,12 @@ package search;
 import game.Color;
 import game.MoveGenerator;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class BasisKI_noAB {
     static final int TIME_LIMIT = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
     static final int winCutOff = 100000;
-    static final int maxAllowedDepth =4;
+    static final int maxAllowedDepth =2;
 
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
@@ -28,8 +25,6 @@ public class BasisKI_noAB {
         double bestScore = Integer.MIN_VALUE;
         int bestMove = -1;
 
-        positionsHM.put(fen,1); // save position
-
         // get moves
         MoveGenerator gameState = new MoveGenerator();
         LinkedHashMap<Integer, List<Integer>> moves = gameState.getMovesWrapper(fen);
@@ -39,6 +34,9 @@ public class BasisKI_noAB {
         char color_fen = fen.charAt(fen.length() - 1);
         Color ourColor = gameState.getColor(color_fen);
         Evaluation.orderMoves(movesList, ourColor);
+
+        fen=fen.substring(0,fen.length()-2);
+        positionsHM.put(fen,1); // save position
 
         long moveTimeLimit = (TIME_LIMIT - 100) / movesList.size(); // (static) time for each move to search
 
@@ -81,12 +79,7 @@ public class BasisKI_noAB {
         stopSearch = false;
 
         // check until time has run out
-        while (/*true*/depth <= maxAllowedDepth) {
-//            long currentTime = System.currentTimeMillis();
-//            if (currentTime >= endTime) {
-//                break;
-//            }
-
+        while ((depth) <= maxAllowedDepth) {
             double currentScore = treeSearchNoAlphaBeta(gameState, endTime, depth, currentColor, ourColor, -1); // get score for current move (order)
             System.out.println("best score (for iteration): " + currentScore + " | depth: " + depth + " | move: " + MoveGenerator.convertMoveToFEN(move));
 
@@ -114,20 +107,6 @@ public class BasisKI_noAB {
 
         Evaluation.orderMoves(movesList, currentColor); // order moves
 
-        // check if we have time left
-//        if (System.currentTimeMillis() >= endTime) {
-//            stopSearch = true;
-//        }
-
-        if (stopSearch || (depth == 0)) {
-            return score;
-        }
-
-        // update depth
-        if (maxDepth < depth) {
-            maxDepth = depth;
-        }
-
         String fen = gameState.getFenFromBoard(); // convert position to FEN
 
         // save position
@@ -136,6 +115,15 @@ public class BasisKI_noAB {
         }
         else {
             positionsHM.put(fen,1);
+        }
+
+        if (stopSearch || (depth == 1)) {
+            return score;
+        }
+
+        // update depth
+        if (maxDepth < depth) {
+            maxDepth = depth;
         }
 
         // our turn
@@ -178,7 +166,7 @@ public class BasisKI_noAB {
     // END: search without Alpha-Beta
 
     public static void main(String[] args) {
-        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b";
+        String fen = "6/8/8/3r04/4b03/8/8/6 b";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
         m.printBoard(true);
@@ -187,5 +175,10 @@ public class BasisKI_noAB {
         String bestMove = ki.orchestratorNoAlphaBeta(fen);
         System.out.println("Best move: " + bestMove);
         System.out.println("Depth reached: " + maxDepth);
+        int numberOfPos=0;
+        for (Map.Entry<String, Integer> entry : positionsHM.entrySet()){
+            numberOfPos+= entry.getValue();
+        }
+        System.out.println("Actual : "+numberOfPos);
     }
 }
