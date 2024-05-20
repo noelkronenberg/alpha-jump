@@ -18,12 +18,13 @@ public class MoveGeneratorBM {
 
     static double generateAllPossibleMovesSpeed(String board_fen, Color color) {
         moveGenerator.initializeBoard(board_fen);
+        int iterations = 100000;
         double startTime = System.nanoTime();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < iterations; i++) {
             moveGenerator.generateAllPossibleMoves(color);
         }
         double endTime = System.nanoTime();
-        double duration = ((endTime - startTime) / 100000) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
+        double duration = ((endTime - startTime) / iterations) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
         return duration;
     }
 

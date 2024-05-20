@@ -25,12 +25,13 @@ public class BasisKI_noABBM {
 
     static double generateBestMoveSpeed(String board_fen, int depth) {
         init();
+        int iterations = 10;
         double startTime = System.nanoTime();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < iterations; i++) {
             ki.orchestratorNoAlphaBeta(board_fen, depth);
         }
         double endTime = System.nanoTime();
-        double duration = ((endTime - startTime) / 10) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
+        double duration = ((endTime - startTime) / iterations) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
         return duration;
     }
 
