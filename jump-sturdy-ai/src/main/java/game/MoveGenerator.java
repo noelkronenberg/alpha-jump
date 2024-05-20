@@ -644,10 +644,10 @@ public class MoveGenerator {
 
     public boolean isGameOver(String move, Color color) {
         if (!move.isEmpty()) {
-            if (color==Color.RED && doesBaseRowContainColor(Color.RED,0)) {
+            if (color==Color.RED && doesBaseRowContainColor(Color.BLUE,7)) {
                 return true;
             }
-            if (color==Color.BLUE && doesBaseRowContainColor(Color.BLUE,7)) {
+            if (color==Color.BLUE && doesBaseRowContainColor(Color.RED,0)) {
                 return true;
             }
             return false;
@@ -657,10 +657,10 @@ public class MoveGenerator {
 
     public boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color color) {
         if (!moves.isEmpty()) {
-            if (color == Color.RED && doesBaseRowContainColor(Color.RED,0)) {
+            if (color == Color.RED && doesBaseRowContainColor(Color.BLUE,7)) {
                 return true;
             }
-            if (color == Color.BLUE && doesBaseRowContainColor(Color.BLUE,7)) {
+            if (color == Color.BLUE && doesBaseRowContainColor(Color.RED,0)) {
                 return true;
             }
             return false;
