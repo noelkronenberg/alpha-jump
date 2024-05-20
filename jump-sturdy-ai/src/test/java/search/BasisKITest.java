@@ -61,6 +61,13 @@ public class BasisKITest {
         testMoves("3b01b0/3bb1b02/8/8/8/2r0b0r02/8/0r04r0 b", "D6-D7");
     }
 
+    @Test
+    @DisplayName("Gruppe C")
+    public void testGruppeC() {
+        testMoves("6/4b01b01/8/5b01b0/2b04r0/1b04r01/5r01rr/1r04 b", "C5-C6");
+        testMoves("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b", "B4-C5");
+    }
+
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard("6/4bb3/8/8/4b0r0b01/8/8/6 b");
