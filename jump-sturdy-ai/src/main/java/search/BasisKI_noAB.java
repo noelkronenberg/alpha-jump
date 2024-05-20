@@ -11,6 +11,7 @@ import java.util.List;
 public class BasisKI_noAB {
     static final int TIME_LIMIT = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
     static final int winCutOff = 100000;
+    static final int maxAllowedDepth =4;
 
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
@@ -80,11 +81,11 @@ public class BasisKI_noAB {
         stopSearch = false;
 
         // check until time has run out
-        while (true) {
-            long currentTime = System.currentTimeMillis();
-            if (currentTime >= endTime) {
-                break;
-            }
+        while (/*true*/depth <= maxAllowedDepth) {
+//            long currentTime = System.currentTimeMillis();
+//            if (currentTime >= endTime) {
+//                break;
+//            }
 
             double currentScore = treeSearchNoAlphaBeta(gameState, endTime, depth, currentColor, ourColor, -1); // get score for current move (order)
             System.out.println("best score (for iteration): " + currentScore + " | depth: " + depth + " | move: " + MoveGenerator.convertMoveToFEN(move));
@@ -114,9 +115,9 @@ public class BasisKI_noAB {
         Evaluation.orderMoves(movesList, currentColor); // order moves
 
         // check if we have time left
-        if (System.currentTimeMillis() >= endTime) {
-            stopSearch = true;
-        }
+//        if (System.currentTimeMillis() >= endTime) {
+//            stopSearch = true;
+//        }
 
         if (stopSearch || (depth == 0)) {
             return score;
