@@ -23,14 +23,15 @@ public class EvaluationTest {
         moveGenerator = new MoveGenerator();
     }
 
+    // Test to ensure the first move in the ordered list matches the expected move
     private void testOrderMovesFirst(String fen, int expectedFirst) {
         init();
 
-        // get moves
+        // Get moves from FEN
         LinkedHashMap<Integer, List<Integer>> movesMap = moveGenerator.getMovesWrapper(fen);
-        LinkedList<Integer> movesList =  Evaluation.convertMovesToList(movesMap);
+        LinkedList<Integer> movesList = Evaluation.convertMovesToList(movesMap);
 
-        // order moves
+        // Order moves based on the current player's color
         char color_fen = fen.charAt(fen.length() - 1);
         Color color = getColorFromFen(color_fen);
         Evaluation.orderMoves(movesList, color);
@@ -38,15 +39,17 @@ public class EvaluationTest {
         assertEquals(movesList.getFirst(), expectedFirst);
     }
 
+    // Test to compare the ratings of two positions
     private void testPositionComparison(String fen1, Color color1, String fen2, Color color2) {
         init();
         moveGenerator.initializeBoard(fen1);
         double score1 = Evaluation.ratePosition(moveGenerator, color1);
         moveGenerator.initializeBoard(fen2);
         double score2 = Evaluation.ratePosition(moveGenerator, color2);
-        assertTrue( score1 < score2, "Expected position 2 to be rated higher than position 1");
+        assertTrue(score1 < score2, "Expected position 2 to be rated higher than position 1");
     }
 
+    // Test to check if a move rating matches the expected rating
     private void testRateMoves(String fen, double expectedRating, int startPosition, int endPosition) {
         init();
         moveGenerator.initializeBoard(fen);
@@ -56,6 +59,7 @@ public class EvaluationTest {
         assertEquals(expectedRating, rated);
     }
 
+    // Test to check if the position rating matches the expected score
     private void testPositionRating(String fen, Color color, double expectedScore) {
         init();
         moveGenerator.initializeBoard(fen);
@@ -63,10 +67,12 @@ public class EvaluationTest {
         assertEquals(expectedScore, score);
     }
 
+    // Helper function to get color from FEN character
     private Color getColorFromFen(char colorFen) {
         return colorFen == 'b' ? Color.BLUE : Color.RED;
     }
 
+    // Test to compare ratings of two moves
     private void testMoveRatingComparison(String fen, int startPosition1, int endPosition1, int startPosition2, int endPosition2) {
         init();
         moveGenerator.initializeBoard(fen);
@@ -78,56 +84,60 @@ public class EvaluationTest {
 
         assertTrue(rating1 > rating2, "Expected move rating (" + rating1 + ") to be higher than (" + rating2 + ")");
     }
-/*
-    // Vergleichstest für Move Ratings
-    @Test
-    @DisplayName("Move Rating Comparison 1")
-    public void testMoveRatingComparison1() {
-        String fen = "b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b";
-        int startPosition1 = 1;
-        int endPosition1 = 11; // Seitwärtszug
-        int startPosition2 = 26;
-        int endPosition2 = 36; // Vorwärtszug
 
-        testMoveRatingComparison(fen, startPosition1, endPosition1, startPosition2, endPosition2);
-    }*/
-
+    // Test case to ensure correct move ordering for a specific FEN
     @Test
     @DisplayName("Move Order 1")
     public void testMoveOrder1() {
         testOrderMovesFirst("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b", 5060);
     }
 
+    // Another test case for move ordering
     @Test
     @DisplayName("Move Order 2")
     public void testMoveOrder2() {
         testOrderMovesFirst("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 2636);
     }
 
-    // end game move at first
+    // Test case for end game move ordering
     @Test
     @DisplayName("Move Order 3")
     public void testMoveOrder3() {
         testOrderMovesFirst("6/8/4r03/8/8/8/3b04/6 b", 6373);
     }
 
+    // Test move rating for a specific move
     @Test
     @DisplayName("Move Rating 1")
     public void testRateMoves1() {
-        testRateMoves("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 1.0,26,36);
+        testRateMoves("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 1.0, 26, 36);
     }
 
+    // Another test case for move rating
     @Test
     @DisplayName("Move Rating 2")
     public void testRateMoves2() {
-        testRateMoves("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 1.0,1,11);
+        testRateMoves("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 1.0, 1, 11);
     }
 
-    // end game move
+    // Test case for rating an end game move
     @Test
     @DisplayName("Move Rating 4")
     public void testRateMoves4() {
-        testRateMoves("6/8/4r03/8/8/8/3b04/6 b", 99999.0,63,73);
+        testRateMoves("6/8/4r03/8/8/8/3b04/6 b", 99999.0, 63, 73);
+    }
+
+    // Compare rating of moving forward as a single player or as a tower
+    @Test
+    @DisplayName("Move Rating Comparison 1")
+    public void testMoveRatingComparison1() {
+        String fen = "6/8/4r03/8/8/3b04/8/6 b";
+        int startPosition2 = 53;
+        int endPosition2 = 52; // normal move - one forward
+        int startPosition1 = 53;
+        int endPosition1 = 63; // tower move
+
+        testMoveRatingComparison(fen, startPosition1, endPosition1, startPosition2, endPosition2);
     }
 
     // Compare the rating of different moves
@@ -138,31 +148,33 @@ public class EvaluationTest {
         int startPosition1 = 63;
         int endPosition1 = 73; // end game move
         int startPosition2 = 12;
-        int endPosition2 = 22; // sideway move
+        int endPosition2 = 22; // sideways move
 
         testMoveRatingComparison(fen, startPosition1, endPosition1, startPosition2, endPosition2);
     }
 
+    // Test position rating for a specific FEN and color
     @Test
     @DisplayName("Position Rating 1")
     public void testPositionRating1() {
         testPositionRating("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", Color.BLUE, 0.0);
     }
 
+    // Another test case for position rating
     @Test
     @DisplayName("Position Rating 2")
     public void testPositionRating2() {
         testPositionRating("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 r", Color.RED, 0.0);
     }
 
-    // end position
+    // Test case for rating an end position
     @Test
     @DisplayName("Position Rating 3")
     public void testPositionRating3() {
         testPositionRating("6/8/4r03/8/8/8/8/b05 b", Color.BLUE, 100000);
     }
 
-    // double player
+    // Test case for rating a double player position
     @Test
     @DisplayName("Position Rating 4")
     public void testPositionRating4() {
@@ -178,3 +190,4 @@ public class EvaluationTest {
         testPositionComparison(fen1, Color.BLUE, fen2, Color.BLUE);
     }
 }
+
