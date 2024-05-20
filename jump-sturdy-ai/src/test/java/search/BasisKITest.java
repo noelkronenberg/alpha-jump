@@ -47,10 +47,23 @@ public class BasisKITest {
         testMoves("6/4bbb02/b02b01b02/1b02b03/2b01rrrr2/6r01/r01r0r0r03/5r0 r", "E5-D3");
     }
 
+    @Test
+    @DisplayName("Gruppe T")
+    public void testGruppeT() {
+        testMoves("1b0b0b02/8/3b04/3b04/r0r06/2b05/5r0r01/6 b", "C6-C7");
+        // testMoves("6/4bb3/8/8/4b0r0b01/8/8/6 b", "E2-F4");
+    }
+
+    @Test
+    @DisplayName("Gruppe AG")
+    public void testGruppeAG() {
+        testMoves("6/8/8/8/b0b02b0b0/2b05/2r0r0r0r02/6 b", "C6-D7");
+        testMoves("3b01b0/3bb1b02/8/8/8/2r0b0r02/8/0r04r0 b", "D6-D7");
+    }
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        moveGenerator.initializeBoard("6/4bbb02/b02b01b02/1b02b03/2b01rrrr2/6r01/r01r0r0r03/5r0 r");
+        moveGenerator.initializeBoard("6/4bb3/8/8/4b0r0b01/8/8/6 b");
         moveGenerator.printBoard(true);
     }
 }
