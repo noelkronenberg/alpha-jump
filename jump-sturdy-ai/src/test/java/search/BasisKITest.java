@@ -16,6 +16,14 @@ public class BasisKITest {
         ki = new BasisKI();
     }
 
+    @Test
+    @DisplayName("Anzahl untersuchter Züge (mit händischen Beweis)")
+    public void anzahlSanityCheck() {
+        init();
+        ki.orchestrator("6/8/8/3r04/4b03/8/8/6 b", 2);
+        assertEquals(ki.positionsHM.size(), 13);
+    }
+
     private void testMoves(String fen, String expectedMove) {
         init();
         String answer = ki.orchestrator(fen);
