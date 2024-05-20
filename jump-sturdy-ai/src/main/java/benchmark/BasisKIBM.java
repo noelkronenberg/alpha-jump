@@ -47,7 +47,7 @@ public class BasisKIBM {
 
     static double generateBestMoveSpeedTimeLimit(String board_fen, double ms) {
         init();
-        int iterations = 10;
+        int iterations = 3;
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             ki.orchestrator(board_fen, ms);
