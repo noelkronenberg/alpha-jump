@@ -44,6 +44,11 @@ public class Evaluation {
                 weight += 1;
             }
 
+            // check gameOver of other player
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
+                score = 100000;
+            }
+
         } else if (player == Color.RED) {
             weight = 8;
             // check row
@@ -58,6 +63,11 @@ public class Evaluation {
                     }
                 }
                 weight -= 1;
+            }
+
+            // check gameOver of other player
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE), Color.BLUE)) {
+                score = 100000;
             }
         }
 
