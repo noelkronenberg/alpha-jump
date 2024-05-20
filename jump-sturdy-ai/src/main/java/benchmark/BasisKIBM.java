@@ -17,16 +17,32 @@ public class BasisKIBM {
         ki = new BasisKI();
     }
 
-    static String generateBestMoveTimeLimit(String board_fen, double ms) {
-        init();
-        String bestMove = ki.orchestrator(board_fen, ms);
-        return bestMove;
+    static class Result {
+        String bestMove;
+        int depth;
+        int uniquePositions;
+        int positions;
+
+        Result(String bestMove, int depth, int uniquePositions, int positions) {
+            this.bestMove = bestMove;
+            this.depth = depth;
+            this.uniquePositions = uniquePositions;
+            this.positions = positions;
+        }
     }
 
-    static String generateBestMoveDepthLimit(String board_fen, int depth) {
+    // START: time limit
+
+    static Result generateBestMoveResultTimeLimit(String board_fen, double ms) {
         init();
-        String bestMove = ki.orchestrator(board_fen, depth);
-        return bestMove;
+        String bestMove = ki.orchestrator(board_fen, ms);
+        int depth = ki.maxDepth;
+        int uniquePositions = ki.positionsHM.size();
+        int positions = 0;
+        for (Map.Entry<String, Integer> entry : ki.positionsHM.entrySet()){
+            positions += entry.getValue();
+        }
+        return new Result(bestMove, depth, uniquePositions, positions);
     }
 
     static double generateBestMoveSpeedTimeLimit(String board_fen, double ms) {
@@ -41,6 +57,39 @@ public class BasisKIBM {
         return duration;
     }
 
+    static void wrapperBMTimeLimit(String fen, double ms) {
+        double duration = BasisKIBM.generateBestMoveSpeedTimeLimit(fen, ms);
+        Result bestMoveResult = BasisKIBM.generateBestMoveResultTimeLimit(fen, ms);
+
+        String bestMove = bestMoveResult.bestMove;
+        int depth = bestMoveResult.depth;
+        int uniquePositions = bestMoveResult.uniquePositions;
+        int positions = bestMoveResult.positions;
+
+        // display as table (reference: https://github.com/vdmeer/asciitable)
+        AsciiTable at = new AsciiTable();
+        at.addRule();
+        at.addRow("Time Limit (ms)", "Depth", "Best Move", "Time (ms)", "Unique Positions", "Total Positions", "Positions/ms");
+        at.addRule();
+        at.addRow(ms, depth, bestMove, String.format(Locale.US, "%.2f", duration), uniquePositions, positions, String.format(Locale.US, "%.2f", positions / duration));
+        at.addRule();
+        at.getRenderer().setCWC(new CWC_LongestLine());
+        at.setPaddingLeftRight(1);
+        at.setTextAlignment(TextAlignment.LEFT);
+
+        System.out.println(at.render());
+    }
+
+    // END: time limit
+
+    // START: depth limit
+
+    static String generateBestMoveDepthLimit(String board_fen, int depth) {
+        init();
+        String bestMove = ki.orchestrator(board_fen, depth);
+        return bestMove;
+    }
+
     static double generateBestMoveSpeedDepthLimit(String board_fen, int depth) {
         init();
         int iterations = 10;
@@ -53,28 +102,11 @@ public class BasisKIBM {
         return duration;
     }
 
-    static int generateBestMoveUniquePositionsTimeLimit(String board_fen, double ms) {
-        init();
-        ki.orchestrator(board_fen, ms);
-        int uniquePositions = ki.positionsHM.size();
-        return uniquePositions;
-    }
-
     static int generateBestMoveUniquePositionsDepthLimit(String board_fen, int depth) {
         init();
         ki.orchestrator(board_fen, depth);
         int uniquePositions = ki.positionsHM.size();
         return uniquePositions;
-    }
-
-    static int generateBestMovePositionsTimeLimit(String board_fen, double ms) {
-        init();
-        ki.orchestrator(board_fen, ms);
-        int positions = 0;
-        for (Map.Entry<String, Integer> entry : ki.positionsHM.entrySet()){
-            positions += entry.getValue();
-        }
-        return positions;
     }
 
     static int generateBestMovePositionsDepthLimit(String board_fen, int depth) {
@@ -85,26 +117,6 @@ public class BasisKIBM {
             positions += entry.getValue();
         }
         return positions;
-    }
-
-    static void wrapperBMTimeLimit(String fen, double ms) {
-        String bestMove = BasisKIBM.generateBestMoveTimeLimit(fen, ms);
-        double duration = BasisKIBM.generateBestMoveSpeedTimeLimit(fen, ms);
-        int uniquePositions = BasisKIBM.generateBestMoveUniquePositionsTimeLimit(fen, ms);
-        int positions = BasisKIBM.generateBestMovePositionsTimeLimit(fen, ms);
-
-        // display as table (reference: https://github.com/vdmeer/asciitable)
-        AsciiTable at = new AsciiTable();
-        at.addRule();
-        at.addRow("Time Limit (ms)", "Best Move", "Time (ms)", "Unique Positions", "Total Positions", "Positions/ms");
-        at.addRule();
-        at.addRow(ms, bestMove, String.format(Locale.US, "%.2f", duration), uniquePositions, positions, String.format(Locale.US, "%.2f", positions / duration));
-        at.addRule();
-        at.getRenderer().setCWC(new CWC_LongestLine());
-        at.setPaddingLeftRight(1);
-        at.setTextAlignment(TextAlignment.LEFT);
-
-        System.out.println(at.render());
     }
 
     static void wrapperBMDepthLimit(String fen, int depth) {
@@ -127,7 +139,12 @@ public class BasisKIBM {
         System.out.println(at.render());
     }
 
+    // END: depth limit
+
     public static void main(String[] args) {
+        System.out.println("Depth limit:");
+
+        System.out.println();
         System.out.println("Start position: ");
         BasisKIBM.wrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2);
         BasisKIBM.wrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3);
