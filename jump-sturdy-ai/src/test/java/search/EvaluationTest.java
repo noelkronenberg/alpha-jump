@@ -32,11 +32,65 @@ public class EvaluationTest {
 
         // order moves
         char color_fen = fen.charAt(fen.length() - 1);
-        Color color = moveGenerator.getColor(color_fen);
+        Color color = getColorFromFen(color_fen);
         Evaluation.orderMoves(movesList, color);
 
         assertEquals(movesList.getFirst(), expectedFirst);
     }
+
+    private void testPositionComparison(String fen1, Color color1, String fen2, Color color2) {
+        init();
+        moveGenerator.initializeBoard(fen1);
+        double score1 = Evaluation.ratePosition(moveGenerator, color1);
+        moveGenerator.initializeBoard(fen2);
+        double score2 = Evaluation.ratePosition(moveGenerator, color2);
+        assertTrue( score1 < score2, "Expected position 2 to be rated higher than position 1");
+    }
+
+    private void testRateMoves(String fen, double expectedRating, int startPosition, int endPosition) {
+        init();
+        moveGenerator.initializeBoard(fen);
+        char colorFen = fen.charAt(fen.length() - 1);
+        Color color = getColorFromFen(colorFen);
+        double rated = Evaluation.rateMove(moveGenerator, color, startPosition, endPosition);
+        assertEquals(expectedRating, rated);
+    }
+
+    private void testPositionRating(String fen, Color color, double expectedScore) {
+        init();
+        moveGenerator.initializeBoard(fen);
+        double score = Evaluation.ratePosition(moveGenerator, color);
+        assertEquals(expectedScore, score);
+    }
+
+    private Color getColorFromFen(char colorFen) {
+        return colorFen == 'b' ? Color.BLUE : Color.RED;
+    }
+
+    private void testMoveRatingComparison(String fen, int startPosition1, int endPosition1, int startPosition2, int endPosition2) {
+        init();
+        moveGenerator.initializeBoard(fen);
+        char colorFen = fen.charAt(fen.length() - 1);
+        Color color = getColorFromFen(colorFen);
+
+        double rating1 = Evaluation.rateMove(moveGenerator, color, startPosition1, endPosition1);
+        double rating2 = Evaluation.rateMove(moveGenerator, color, startPosition2, endPosition2);
+
+        assertTrue(rating1 > rating2, "Expected move rating (" + rating1 + ") to be higher than (" + rating2 + ")");
+    }
+/*
+    // Vergleichstest für Move Ratings
+    @Test
+    @DisplayName("Move Rating Comparison 1")
+    public void testMoveRatingComparison1() {
+        String fen = "b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b";
+        int startPosition1 = 1;
+        int endPosition1 = 11; // Seitwärtszug
+        int startPosition2 = 26;
+        int endPosition2 = 36; // Vorwärtszug
+
+        testMoveRatingComparison(fen, startPosition1, endPosition1, startPosition2, endPosition2);
+    }*/
 
     @Test
     @DisplayName("Move Order 1")
@@ -57,7 +111,6 @@ public class EvaluationTest {
         testOrderMovesFirst("6/8/4r03/8/8/8/3b04/6 b", 6373);
     }
 
-
     @Test
     @DisplayName("Move Rating 1")
     public void testRateMoves1() {
@@ -69,19 +122,25 @@ public class EvaluationTest {
     public void testRateMoves2() {
         testRateMoves("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 1.0,1,11);
     }
-/*
-    // illegal move
-    @Test
-    @DisplayName("Move Rating 3")
-    public void testRateMoves() {
-        testRateMoves("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 0.0,1,12);
-    }*/
 
     // end game move
     @Test
     @DisplayName("Move Rating 4")
     public void testRateMoves4() {
         testRateMoves("6/8/4r03/8/8/8/3b04/6 b", 99999.0,63,73);
+    }
+
+    // Compare the rating of different moves
+    @Test
+    @DisplayName("Move Rating Comparison 2")
+    public void testMoveRatingComparison2() {
+        String fen = "6/8/4r03/8/8/8/3b04/6 b";
+        int startPosition1 = 63;
+        int endPosition1 = 73; // end game move
+        int startPosition2 = 12;
+        int endPosition2 = 22; // sideway move
+
+        testMoveRatingComparison(fen, startPosition1, endPosition1, startPosition2, endPosition2);
     }
 
     @Test
@@ -110,26 +169,12 @@ public class EvaluationTest {
         testPositionRating("6/8/4r03/8/8/8/2bb5/6 b", Color.BLUE, 8);
     }
 
-    private void testRateMoves(String fen, double expectedRating, int startPosition, int endPosition) {
-        init();
-        moveGenerator.initializeBoard(fen);
-        char colorFen = fen.charAt(fen.length() - 1);
-        Color color = getColorFromFen(colorFen);
-        double rated = Evaluation.rateMove(moveGenerator, color, startPosition, endPosition);
-        assertEquals(expectedRating, rated);
+    // Compare two positions where one should be rated higher - end position vs. possible end
+    @Test
+    @DisplayName("Position Comparison 2")
+    public void testPositionComparison2() {
+        String fen1 = "6/8/4r03/8/8/8/2bb5/6 b";
+        String fen2 = "6/8/4r03/8/8/8/8/b05 b";
+        testPositionComparison(fen1, Color.BLUE, fen2, Color.BLUE);
     }
-
-    private void testPositionRating(String fen, Color color, double expectedScore) {
-        init();
-        moveGenerator.initializeBoard(fen);
-        double score = Evaluation.ratePosition(moveGenerator, color);
-        assertEquals(expectedScore, score);
-    }
-
-    private Color getColorFromFen(char colorFen) {
-        return colorFen == 'b' ? Color.BLUE : Color.RED;
-    }
-
-
-
 }
