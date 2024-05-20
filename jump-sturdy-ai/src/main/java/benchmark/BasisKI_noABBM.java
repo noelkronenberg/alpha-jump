@@ -2,6 +2,10 @@ package benchmark;
 
 import search.BasisKI_noAB;
 
+import de.vandermeer.asciitable.AsciiTable;
+import de.vandermeer.asciitable.CWC_LongestLine;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
+
 import java.util.Locale;
 import java.util.Map;
 
@@ -52,7 +56,19 @@ public class BasisKI_noABBM {
         double duration = BasisKI_noABBM.generateBestMoveSpeed(fen, depth);
         int uniquePositions = BasisKI_noABBM.generateBestMoveUniquePositions(fen, depth);
         int positions = BasisKI_noABBM.generateBestMovePositions(fen, depth);
-        System.out.println(String.format(Locale.US, "best move: %s | %.2f milliseconds | depth %d | %d unique positions | %d positions | %.2f positions / ms", bestMove, duration, depth, uniquePositions, positions, positions / duration));
+
+        // display as table (reference: https://github.com/vdmeer/asciitable)
+        AsciiTable at = new AsciiTable();
+        at.addRule();
+        at.addRow("Best Move", "Time (ms)", "Depth", "Unique Positions", "Total Positions", "Positions/ms");
+        at.addRule();
+        at.addRow(bestMove, String.format(Locale.US, "%.2f", duration), depth, uniquePositions, positions, String.format(Locale.US, "%.2f", positions / duration));
+        at.addRule();
+        at.getRenderer().setCWC(new CWC_LongestLine());
+        at.setPaddingLeftRight(1);
+        at.setTextAlignment(TextAlignment.LEFT);
+
+        System.out.println(at.render());
     }
 
     public static void main(String[] args) {
