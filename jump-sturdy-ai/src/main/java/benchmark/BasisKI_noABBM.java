@@ -60,9 +60,9 @@ public class BasisKI_noABBM {
         // display as table (reference: https://github.com/vdmeer/asciitable)
         AsciiTable at = new AsciiTable();
         at.addRule();
-        at.addRow("Best Move", "Time (ms)", "Depth", "Unique Positions", "Total Positions", "Positions/ms");
+        at.addRow("Depth", "Best Move", "Time (ms)", "Unique Positions", "Total Positions", "Positions/ms");
         at.addRule();
-        at.addRow(bestMove, String.format(Locale.US, "%.2f", duration), depth, uniquePositions, positions, String.format(Locale.US, "%.2f", positions / duration));
+        at.addRow(depth, bestMove, String.format(Locale.US, "%.2f", duration), uniquePositions, positions, String.format(Locale.US, "%.2f", positions / duration));
         at.addRule();
         at.getRenderer().setCWC(new CWC_LongestLine());
         at.setPaddingLeftRight(1);
