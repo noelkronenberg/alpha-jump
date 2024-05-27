@@ -1,4 +1,4 @@
-package communication;
+package communication.demo;
 
 import game.MoveGenerator;
 

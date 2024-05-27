@@ -1,4 +1,4 @@
-package communication;
+package communication.demo;
 
 import game.Color;
 import game.MoveGenerator;
