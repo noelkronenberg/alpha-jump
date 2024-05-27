@@ -1,8 +1,8 @@
 package communication;
 
 import search.BasisKI;
-
 import org.json.JSONObject;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -16,67 +16,65 @@ public class Connection {
 
     public void connect() {
         BasisKI ki = new BasisKI();
-        BasisKI opponent = new BasisKI();
-
         String serverAddress = "localhost";
         int port = 5555;
 
         try (Socket server = new Socket(serverAddress, port)) {
             System.out.println("Connected to the server.");
 
-            boolean run = true;
-            while (run) {
-                // get streams
-                PrintWriter output = new PrintWriter(server.getOutputStream(), true);
-                BufferedReader input = new BufferedReader(new InputStreamReader(server.getInputStream()));
+            ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
+            ObjectInputStream input = new ObjectInputStream(server.getInputStream()); // NOTE: seems to be null
 
-                // wait for connection
-                output.println("get");
-                String response = input.readLine();
-                while (!input.ready()) {
-                    // wait
-                }
+            while (true) {
+                // send request to get game status
+                output.writeObject("\"get\"");
 
-                // error
-                if (response == null) {
-                    System.out.println("Couldn't get game");
-                    run = false;
-                    continue;
-                }
+                // wait for server response
+                Object responseObject = input.readObject();
 
-                // process response from server input
-                JSONObject response_json = new JSONObject(response);
-                if (response_json.getBoolean("bothConnected")) {
-                    String fen = response_json.getString("board");
-                    System.out.println("Current board: ");
-                    System.out.println(fen);
+                if (responseObject != null) {
 
-                    // our turn
-                    if (response_json.getBoolean("player1")) {
-                        String move = ki.orchestrator(fen);
-                        JSONObject moveConverted = Connection.toJSON(move);
-                        output.println(moveConverted);
+                    // process server response
+                    JSONObject response_json = (JSONObject) responseObject;
+                    if (response_json.getBoolean("bothConnected")) {
+                        String fen = response_json.getString("board");
+                        System.out.println("Current board: ");
+                        System.out.println(fen);
 
-                    // opponent
-                    } else {
-                        String move = opponent.orchestrator(fen);
-                        JSONObject moveConverted = Connection.toJSON(move);
-                        output.println(moveConverted);
+                        // player turns
+                        if (response_json.getBoolean("player1")) {
+                            String move = ki.orchestrator(fen);
+                            JSONObject moveConverted = toJSON(move);
+                            output.writeObject(moveConverted);
+                        } else {
+                            String move = ki.orchestrator(fen);
+                            JSONObject moveConverted = toJSON(move);
+                            output.writeObject(moveConverted);
+                        }
                     }
-
                 }
             }
 
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.err.println("Error occurred while connecting to the server: " + e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        Connection player = new Connection();
-        Connection opponent = new Connection();
-        player.connect();
-        opponent.connect();
-    }
+        Connection player1 = new Connection();
+        Connection player2 = new Connection();
 
+        Thread thread1 = new Thread(() -> player1.connect());
+        Thread thread2 = new Thread(() -> player2.connect());
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
