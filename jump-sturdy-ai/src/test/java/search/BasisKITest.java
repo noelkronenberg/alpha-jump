@@ -27,7 +27,7 @@ public class BasisKITest {
     private void testMoves(String fen, String expectedMove) {
         init();
         String answer = ki.orchestrator(fen);
-        assertEquals(answer, expectedMove);
+        assertEquals(expectedMove, answer);
         System.out.println(answer);
     }
 
