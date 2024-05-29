@@ -139,6 +139,33 @@ public class BasisKITest {
         testMoves("1b01b01b0/1b06/3b04/8/4b0r02/2b03r01/3r0r03/r03r01 b", "C6-D7");
     }
 
+    @Test
+    @DisplayName("Gruppe P")
+    public void testGruppeP() {
+        testMoves("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "E4-D5");
+        testMoves("b04b0/8/7r0/1b03b02/1rr5r0/4r0b02/b07/4r01 b", "F6-F7");
+    }
+
+    @Test
+    @DisplayName("Gruppe B")
+    public void testGruppeB() {
+        // testMoves("1bb4/1b0b01r03/b01b0bb4/1b01b01b02/3r01r02/b0r0r02rr2/4r01rr1/4r0r0 b", "C1-E2");
+        // testMoves("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/1r0r02rr2/b03r01rr1/2r01r0r0 r", "D8-C8");
+    }
+
+    @Test
+    @DisplayName("Gruppe Q")
+    public void testGruppeQ() {
+        testMoves("b03b01/1b0b0b02b01/4b01b01/1b0b05/3b01r0b01/1r02b01rr1/4r0r02/r0r0r03 b", "E6-F7");
+        // testMoves("6/3b0b03/8/1rrr02bb2/6b01/2b05/3r04/5r0 b", "C6-D7");
+    }
+
+    @Test
+    @DisplayName("Gruppe V")
+    public void testGruppeV() {
+        // testMoves("1b01b02/8/3b04/1rbr05/6bb1/1r02r03/2rr5/8 b", "H5-G7");
+        // testMoves("6/4b03/1b01b01bb2/r02r04/8/br01/2r02r02/6 r", "A4-B3");
+    }
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
