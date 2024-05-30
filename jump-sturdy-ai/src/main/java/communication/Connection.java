@@ -8,13 +8,15 @@ import java.net.Socket;
 
 public class Connection {
 
+    int player;
+
     public static JSONObject toJSON(String move) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("move", move);
         return jsonObject;
     }
 
-    public void connect() {
+    public void connect(int player) {
         BasisKI ki = new BasisKI();
         String serverAddress = "localhost";
         int port = 5555;
@@ -53,7 +55,7 @@ public class Connection {
                         System.out.println(fen);
 
                         // player turns
-                        if (response.getBoolean("player1")) {
+                        if (response.getBoolean("player1") && this.player == 1) {
                             String move = ki.orchestrator(fen);
                             JSONObject moveConverted = toJSON(move);
                             output.println(moveConverted);
@@ -79,8 +81,8 @@ public class Connection {
         Connection player1 = new Connection();
         Connection player2 = new Connection();
 
-        Thread thread1 = new Thread(() -> player1.connect());
-        Thread thread2 = new Thread(() -> player2.connect());
+        Thread thread1 = new Thread(() -> player1.connect(1));
+        Thread thread2 = new Thread(() -> player2.connect(2));
 
         thread1.start();
         thread2.start();
