@@ -1,5 +1,6 @@
 package communication;
 
+import org.json.JSONException;
 import search.BasisKI;
 import org.json.JSONObject;
 
@@ -17,6 +18,7 @@ public class Connection {
     }
 
     public void connect(int player) {
+        this.player = player;
         BasisKI ki = new BasisKI();
         String serverAddress = "localhost";
         int port = 5555;
@@ -33,7 +35,7 @@ public class Connection {
                 output.println("\"get\"");
 
                 // wait for server response
-                Thread.currentThread().sleep(2000);
+                Thread.currentThread().sleep(5000);
 
                 // get server response
                 byte[] data = new byte[9999];
@@ -43,7 +45,12 @@ public class Connection {
                 if (bytesRead != -1) {
                     // convert response
                     String jsonString = new String(data, 1, bytesRead);
-                    response = new JSONObject(jsonString);
+                    try {
+                        response = new JSONObject(jsonString);
+                    } catch (JSONException e) {
+                        System.out.println("\n" + "Error parsing JSON: " + jsonString);
+                        continue;
+                    }
 
                     System.out.println("\n" + "Server response:  " + response);
 
@@ -59,13 +66,12 @@ public class Connection {
                             String move = ki.orchestrator(fen);
                             JSONObject moveConverted = toJSON(move);
                             output.println(moveConverted);
-
                             System.out.println("\n" + "Player 1 move: " + moveConverted);
-                        } else {
+
+                        } else if (response.getBoolean("player2") && this.player == 2) {
                             String move = ki.orchestrator(fen);
                             JSONObject moveConverted = toJSON(move);
                             output.println(moveConverted);
-
                             System.out.println("\n" + "Player 2 move: " + moveConverted);
                         }
                     }
@@ -77,7 +83,7 @@ public class Connection {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Connection player1 = new Connection();
         Connection player2 = new Connection();
 
