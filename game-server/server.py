@@ -40,6 +40,7 @@ def threaded_client(conn, p, gameId):
     reply = ""
     while True:
         try:
+            print("HERE")
             data = conn.recv(4096).decode('utf-8')
             data = json.loads(data)
             if gameId in games:
@@ -73,6 +74,7 @@ def threaded_client(conn, p, gameId):
                     output = dict(board = game.getBoard(), player1 = game.getP1Turn(), player2 = game.getP2Turn(), bothConnected = game.bothConnected())
                     output = json.dumps(output)
                     output = output.encode('utf-8')
+                    print(f'TYPE: {type(output)}')
                     conn.sendall(output)
             else:
                 break

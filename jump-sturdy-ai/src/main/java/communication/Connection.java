@@ -22,40 +22,55 @@ public class Connection {
         try (Socket server = new Socket(serverAddress, port)) {
             System.out.println("Connected to the server.");
 
-            ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
-            ObjectInputStream input = new ObjectInputStream(server.getInputStream()); // NOTE: seems to be null
+            PrintWriter output = new PrintWriter(server.getOutputStream(), true);
+            InputStream inputStream = server.getInputStream();
 
             while (true) {
+
                 // send request to get game status
-                output.writeObject("\"get\"");
+                output.println("\"get\"");
 
                 // wait for server response
-                Object responseObject = input.readObject();
+                Thread.currentThread().sleep(2000);
 
-                if (responseObject != null) {
+                // get server response
+                byte[] data = new byte[9999];
+                int bytesRead = inputStream.read(data);
+                JSONObject response;
+
+                if (bytesRead != -1) {
+                    // convert response
+                    String jsonString = new String(data, 1, bytesRead);
+                    response = new JSONObject(jsonString);
+
+                    System.out.println("\n" + "Server response:  " + response);
 
                     // process server response
-                    JSONObject response_json = (JSONObject) responseObject;
-                    if (response_json.getBoolean("bothConnected")) {
-                        String fen = response_json.getString("board");
-                        System.out.println("Current board: ");
+                    if (response.getBoolean("bothConnected")) {
+
+                        String fen = response.getString("board");
+                        System.out.println("\n" + "Current board: ");
                         System.out.println(fen);
 
                         // player turns
-                        if (response_json.getBoolean("player1")) {
+                        if (response.getBoolean("player1")) {
                             String move = ki.orchestrator(fen);
                             JSONObject moveConverted = toJSON(move);
-                            output.writeObject(moveConverted);
+                            output.println(moveConverted);
+
+                            System.out.println("\n" + "Player 1 move: " + moveConverted);
                         } else {
                             String move = ki.orchestrator(fen);
                             JSONObject moveConverted = toJSON(move);
-                            output.writeObject(moveConverted);
+                            output.println(moveConverted);
+
+                            System.out.println("\n" + "Player 2 move: " + moveConverted);
                         }
                     }
                 }
             }
 
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | InterruptedException e) {
             System.err.println("Error occurred while connecting to the server: " + e.getMessage());
         }
     }
