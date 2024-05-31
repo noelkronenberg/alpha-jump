@@ -51,7 +51,7 @@ public class BasisKITest {
     @DisplayName("Gruppe T")
     public void testGruppeT() {
         testMoves("1b0b0b02/8/3b04/3b04/r0r06/2b05/5r0r01/6 b", "C6-C7");
-        // testMoves("6/4bb3/8/8/4b0r0b01/8/8/6 b", "E2-F4");
+        testMoves("6/4bb3/8/8/4b0r0b01/8/8/6 b", "E2-F4");
     }
 
     @Test

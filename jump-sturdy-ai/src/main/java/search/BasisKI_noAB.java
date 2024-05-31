@@ -10,6 +10,8 @@ public class BasisKI_noAB {
     static final int winCutOff = 100000;
     static int maxAllowedDepth = 2;
 
+    static int currentDepth = 1;
+
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     static int maxDepth = -1;
@@ -85,7 +87,7 @@ public class BasisKI_noAB {
         while ((depth) <= maxAllowedDepth) {
             double currentScore = treeSearchNoAlphaBeta(gameState, endTime, depth, currentColor, ourColor, -1); // get score for current move (order)
             // System.out.println("best score (for iteration): " + currentScore + " | depth: " + depth + " | move: " + MoveGenerator.convertMoveToFEN(move));
-
+            currentDepth=1;
             // return if move order contains winning move
             if (currentScore >= winCutOff) {
                 return currentScore;
@@ -101,7 +103,7 @@ public class BasisKI_noAB {
 
     public double treeSearchNoAlphaBeta(MoveGenerator gameState, long endTime, int depth, Color currentColor , Color ourColor, double value) {
         // get score for current position
-        double score = Evaluation.ratePosition(gameState, ourColor);
+        double score = Evaluation.ratePosition(gameState, ourColor, currentDepth);
 
         // get moves for other player
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ;  // signal player change
@@ -139,7 +141,7 @@ public class BasisKI_noAB {
                 nextState.movePiece(move);
 
                 isOurMove = false; // player change
-
+                currentDepth +=1;
                 value = Math.max(value,treeSearchNoAlphaBeta(nextState, endTime, depth - 1, currentColor,ourColor, value));
 
             }
@@ -158,7 +160,7 @@ public class BasisKI_noAB {
                 nextState.movePiece(move);
 
                 isOurMove = true; // player change
-
+                currentDepth +=1;
                 value=Math.min(value,treeSearchNoAlphaBeta(nextState, endTime, depth - 1, currentColor, ourColor,value));
 
             }
