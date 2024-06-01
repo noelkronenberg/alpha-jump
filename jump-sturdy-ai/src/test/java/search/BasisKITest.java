@@ -5,6 +5,7 @@ import game.MoveGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BasisKITest {
@@ -34,6 +35,8 @@ public class BasisKITest {
                 break;
             }
         }
+
+        System.out.println("Expected: " + Arrays.asList(expectedMoves)+ "\n" + "Actual: " + answer);
         assertTrue(matchFound);
     }
 
@@ -180,9 +183,37 @@ public class BasisKITest {
         testMoves("6/4b03/1b01b01bb2/r02r04/8/br01/2r02r02/6 r", "A4-B3");
     }
 
+    @Test
+    @DisplayName("Gruppe L")
+    public void testGruppeL() {
+        testMoves("2b03/3bb4/1b02b03/4br3/3r02bb1/1rr2rr3/2r03rr1/6 b", "G5-F7");
+        testMoves("6/4bb3/5b02/r03b03/1b02r01r0b0/1rr2r02r0/8/6 r", "B6-A4");
+    }
+
+    @Test
+    @DisplayName("Gruppe AI")
+    public void testGruppeAI() {
+        testMoves("6/6b01/8/2b02rr2/8/8/6r01/6 r", "F4-G2");
+        // testMoves("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "B4-C5", "F4-F5", "F4-E5", "F4-G5"); // added missings
+    }
+
+    @Test
+    @DisplayName("Gruppe O")
+    public void testGruppeO() {
+        // testMoves("6/8/5bb2/8/6b01/8/r07/6 b", "F6-F1");
+        // testMoves("6/4r03/8/8/8/8/4b03/6 r", "E7-E8");
+    }
+
+    @Test
+    @DisplayName("Gruppe N")
+    public void testGruppeN() {
+        // testMoves("b0b01b0b0b0/8/4b0b02/3br4/6b01/2rr3rb1/4rr3/r0r02r0r0 r", "D4-F3", "D4-B3");
+        // testMoves("b0b01b0b0b0/8/4b0b02/3br4/6b01/2rr3rb1/4rr3/r0r02r0r0 r", "H6-G8");
+    }
+
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        moveGenerator.initializeBoard("6/4bb3/8/8/4b0r0b01/8/8/6 b");
+        moveGenerator.initializeBoard("b0b01b0b0b0/8/4b0b02/3br4/6b01/2rr3rb1/4rr3/r0r02r0r0 r");
         moveGenerator.printBoard(true);
     }
 }
