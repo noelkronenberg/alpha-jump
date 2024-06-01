@@ -88,13 +88,13 @@ public class BasisKITest {
     @DisplayName("Gruppe S")
     public void testGruppeS() {
         testMoves("2b03/1b0b05/6b01/3bb2r01/3r02r01/2b05/2r03r01/3r02 b", "D4-C6");
-       // testMoves("2b03/1b0b05/6b01/3b02r01/1b01r02r01/2b05/2r03r01/3r02 b", "B5-C5");
+        testMoves("2b03/1b0b05/6b01/3b02r01/1b01r02r01/2b05/2r03r01/3r02 b", "B5-C5");
     }
 
     @Test
     @DisplayName("Gruppe Z")
     public void testGruppeZ() {
-        //testMoves("6/8/6r01/2b01r0r02/1r03r02/8/8/6 r", "B5-C4"); //G3-G2
+        testMoves("6/8/6r01/2b01r0r02/1r03r02/8/8/6 r", "B5-C4"); //G3-G2
         testMoves("1b02b0b0/1r06/1b04b01/8/2r02b02/1r01r01r02/5r0r01/r0r01r011 b", "C1-B2");
         testMoves("3b0b01/8/1b0b01b0b02/2r01b01b01/8/2rr2r02/1r06/2r03 r", "C4-B3");
     }
@@ -103,21 +103,21 @@ public class BasisKITest {
     @DisplayName("Gruppe J")
     public void testGruppeJ() {
         testMoves("6/1bb1b0bbb0b01/r02b04/2b01b0b02/2r02r02/1r02rrr02/6rr1/2r01r01 r", "A3-B2"); //G3-G2
-        //testMoves("3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r", "B3-A3");
+        testMoves("3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r", "B3-A3");
     }
 
     @Test
     @DisplayName("Gruppe I")
     public void testGruppeI() {
         testMoves("3b02/5b02/8/1b06/4bb3/6r01/1r06/1r0r03 b", "E5-F7"); //G3-G2
-        //testMoves("6/1b06/5b02/2b05/2b05/4r03/2r05/6 b", "C4-C5");
+        testMoves("6/1b06/5b02/2b05/2b05/4r03/2r05/6 b", "C4-C5");
     }
 
     @Test
     @DisplayName("Gruppe W")
     public void testGruppeW() {
         testMoves("6/8/2b01b03/6b0r0/4b03/8/r07/6 b", "E5-E6"); //G3-G2
-        //testMoves("6/8/8/8/8/1r0b0r0b0r02/4r03/3rr2 b", "E8-C7");
+        // testMoves("6/8/8/8/8/1r0b0r0b0r02/4r03/3rr2 b", "E8-C7");
     }
 
     @Test
@@ -130,15 +130,15 @@ public class BasisKITest {
     @Test
     @DisplayName("Gruppe AC")
     public void testGruppeAC() {
-       // testMoves("3b01b0/3b04/3bb4/2r05/rbbr5rb/4rr3/br4r02/6 b", "H5-G7"); //G3-G2
-       // testMoves("1b01b01b0/bb6bb/3bb4/2rr5/r0r01r03r0/1br3rr2/8/6 r", "D3-C5");
+        // testMoves("3b01b0/3b04/3bb4/2r05/rbbr5rb/4rr3/br4r02/6 b", "H5-G7"); //G3-G2
+        // testMoves("1b01b01b0/bb6bb/3bb4/2rr5/r0r01r03r0/1br3rr2/8/6 r", "D3-C5");
     }
 
     @Test
     @DisplayName("Gruppe K")
     public void testGruppeK() {
          testMoves("1bbb01b0b0/4b03/4r01b01/2b01r0b02/5r02/1r06/3r02r01/1rrr01r01 r", "E4-E3"); //G3-G2
-         //testMoves("b0b02b01/3b01b0b01/2r01r02b0/4r0b02/r07/3b04/5r02/rr3rr1 r", "E3-D2");
+         // testMoves("b0b02b01/3b01b0b01/2r01r02b0/4r0b02/r07/3b04/5r02/rr3rr1 r", "E3-D2");
     }
 
     @Test
@@ -151,7 +151,7 @@ public class BasisKITest {
     @Test
     @DisplayName("Gruppe G")
     public void testGruppeG() {
-       // testMoves("b02b01b0/4r03/1b02r03/1bb6/8/4r0b02/1r03r02/r01r02r0 r", "E3-E2"); //G3-G2
+        testMoves("b02b01b0/4r03/1b02r03/1bb6/8/4r0b02/1r03r02/r01r02r0 r", "E3-E2"); //G3-G2
         testMoves("1b01b01b0/1b06/3b04/8/4b0r02/2b03r01/3r0r03/r03r01 b", "C6-D7");
     }
 
@@ -165,7 +165,7 @@ public class BasisKITest {
     @Test
     @DisplayName("Gruppe B")
     public void testGruppeB() {
-        // testMoves("1bb4/1b0b01r03/b01b0bb4/1b01b01b02/3r01r02/b0r0r02rr2/4r01rr1/4r0r0 b", "C1-E2");
+        testMoves("1bb4/1b0b01r03/b01b0bb4/1b01b01b02/3r01r02/b0r0r02rr2/4r01rr1/4r0r0 b", "C1-E2");
         // testMoves("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/1r0r02rr2/b03r01rr1/2r01r0r0 r", "D8-C8");
     }
 
@@ -173,7 +173,7 @@ public class BasisKITest {
     @DisplayName("Gruppe Q")
     public void testGruppeQ() {
         testMoves("b03b01/1b0b0b02b01/4b01b01/1b0b05/3b01r0b01/1r02b01rr1/4r0r02/r0r0r03 b", "E6-F7");
-        // testMoves("6/3b0b03/8/1rrr02bb2/6b01/2b05/3r04/5r0 b", "C6-D7");
+        testMoves("6/3b0b03/8/1rrr02bb2/6b01/2b05/3r04/5r0 b", "C6-D7");
     }
 
     @Test
