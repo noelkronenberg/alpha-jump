@@ -13,6 +13,9 @@ public class MoveGenerator {
 
     Piece[][] pieceBoard;
     Color[][] colorBoard;
+    int totalPossibleMoves;
+    int protectedPieces;
+    String comparisonFen;
 
     // START: board basics
 
@@ -22,6 +25,18 @@ public class MoveGenerator {
 
     public Color[][] getColorBoard() {
         return colorBoard;
+    }
+
+    public int getTotalPossibleMoves() {
+        return totalPossibleMoves;
+    }
+
+    public int getProtectedPieces() {
+        return protectedPieces;
+    }
+
+    public String getComparisonFen() {
+        return comparisonFen;
     }
 
     public void setPieceBoard(Piece[][] givenPieceBoard) {
@@ -351,11 +366,19 @@ public class MoveGenerator {
                     // left diagonal
                     if (column > 0 && colorBoard[row - 1][column - 1] == Color.BLUE) {
                         possibleMoves.add(convertToNumber(row - 1, column - 1));
+                    } 
+                    // left diagonal protection
+                    else if (column > 0 && colorBoard[row - 1][column - 1] == Color.RED) {
+                        protectedPieces += 1;
                     }
 
                     // right diagonal
                     if (column < 7 && colorBoard[row - 1][column + 1] == Color.BLUE) {
                         possibleMoves.add(convertToNumber(row - 1, column + 1));
+                    }
+                    //right diagonal protection
+                    else if (column > 0 && colorBoard[row - 1][column + 1] == Color.RED) {
+                        protectedPieces += 1;
                     }
                 }
             }
@@ -392,10 +415,18 @@ public class MoveGenerator {
                     if (column > 0 && colorBoard[row + 1][column - 1] == Color.RED) {
                         possibleMoves.add(convertToNumber(row + 1, column - 1));
                     }
+                    // left diagonal protection
+                    else if (column > 0 && colorBoard[row + 1][column - 1] == Color.BLUE) {
+                        protectedPieces += 1;
+                    }
 
                     // right diagonal
                     if (column < 7 && colorBoard[row + 1][column + 1] == Color.RED) {
                         possibleMoves.add(convertToNumber(row + 1, column + 1));
+                    }
+                    // right diagonal protection
+                    else if (column > 0 && colorBoard[row + 1][column + 1] == Color.BLUE) {
+                        protectedPieces += 1;
                     }
                 }
             }
@@ -409,6 +440,7 @@ public class MoveGenerator {
             possibleMoves.removeIf(move -> !isValidMove(move, Color.BLUE));
         }
 
+        totalPossibleMoves += possibleMoves.size();
         return possibleMoves;
     }
 
@@ -449,6 +481,9 @@ public class MoveGenerator {
             if (!((pieceBoard[newRow][newColumn] == Piece.DOUBLE || pieceBoard[newRow][newColumn] == Piece.MIXED)
                     && colorBoard[newRow][newColumn] == color)) {
                 possibleMoves.add(convertToNumber(newRow, newColumn));
+            }
+            if (colorBoard[newRow][newColumn] == color) {
+                protectedPieces += 1;
             }
         }
     }
@@ -512,6 +547,7 @@ public class MoveGenerator {
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
         Color color = this.getColor(color_fen);
+        System.out.println("Farbe: " + color);
         this.initializeBoard(fen.substring(0, fen.length() - 2));
         return this.generateAllPossibleMoves(color);
     }
@@ -626,6 +662,9 @@ public class MoveGenerator {
 
     public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
+        totalPossibleMoves = 0;
+        protectedPieces = 0;
+        comparisonFen = getFenFromBoard();
 
         for (int row = 0; row < 8; row++) {
             for (int column = 0; column < 8; column++) {

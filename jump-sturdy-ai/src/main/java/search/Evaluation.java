@@ -7,6 +7,9 @@ import game.Piece;
 
 public class Evaluation {
 
+    static double possibleMovesWeight = 0.01;
+    static double protectedPiecesWeight = 0.1;
+
     // START: evaluation
 
     public static double getScore(Piece piece, double score, int weight) {
@@ -71,6 +74,14 @@ public class Evaluation {
             }
         }
 
+        if (moveGenerator.getComparisonFen() != moveGenerator.getFenFromBoard()) {
+            moveGenerator.generateAllPossibleMoves(player);
+        }
+        System.out.println("Mögliche Züge: " + moveGenerator.getTotalPossibleMoves());
+        score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
+        System.out.println("Gedeckte Figuren: " + moveGenerator.getProtectedPieces());
+        score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
+
         return score;
     }
 
@@ -93,7 +104,6 @@ public class Evaluation {
                 score = getScoreWrapper(moveGenerator, Color.RED) - getScoreWrapper(moveGenerator, Color.BLUE);
             }
         }
-
         return score;
     }
 
@@ -205,5 +215,6 @@ public class Evaluation {
 
         System.out.println();
         System.out.println("Score: " + ratePosition(moveGenerator, Color.BLUE));
+        moveGenerator.printBoard(false);
     }
 }
