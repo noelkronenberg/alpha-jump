@@ -9,11 +9,13 @@ public class BasisKI {
     double timeLimit = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
     static final int winCutOff = 100000;
 
+    static int currentDepth = 1;
+
     static int maxAllowedDepth = 0;
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     public int maxDepth = 1;
-    public HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
+    public HashMap<String,Integer> positionsHM = new HashMap<>();
 
     // START: search with Alpha-Beta
 
@@ -58,14 +60,17 @@ public class BasisKI {
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
 
+            //Auf nummer sicher gehen, dass auch wirklich nicht noch isOurMove auf true ist aufgrund eines TimeCutOffs
+            isOurMove=false;
+
             double currentScore = iterativeDeepening(nextState, moveTimeLimit, ourColor,ourColor, timeCriterion); // get score for current move (order)
 
             // evaluate move (score)
 
             // return if move order contains winning move
-            if (currentScore >= winCutOff) {
-                return move;
-            }
+//            if (currentScore >= winCutOff) {
+//                return move;
+//            }
 
             // check if current move is best
             if (currentScore > bestScore) {
@@ -81,7 +86,8 @@ public class BasisKI {
     public double iterativeDeepening(MoveGenerator gameState, double moveTimeLimit, Color currentColor, Color ourColor, boolean timeCriterion) {
         int depth = 1;
         double bestScore = Integer.MIN_VALUE;
-
+        double alpha=Integer.MIN_VALUE;
+        double beta=Integer.MAX_VALUE;
         double endTime = System.currentTimeMillis() + moveTimeLimit;
         stopSearch = false;
 
@@ -93,25 +99,48 @@ public class BasisKI {
                     break;
                 }
             }
+            //damit wir für jede Tiefe wieder damit anfangen, dass der Gegner drann ist.
+            isOurMove=false;
 
-            double currentScore = treeSearch(gameState, Integer.MIN_VALUE, Integer.MAX_VALUE, endTime, depth, currentColor, ourColor, timeCriterion); // get score for current move (order)
+            double currentScore = treeSearch(gameState, alpha, beta, endTime, depth, currentColor, ourColor, timeCriterion); // get score for current move (order)
+
+            currentDepth=1;
 
             // return if move order contains winning move
             if (currentScore >= winCutOff) {
                 return currentScore;
             }
 
-            if (currentScore > bestScore) {
+            if (!stopSearch) {      //this is so that the most exact(longest and deepest searched) value is always taken
                 bestScore = currentScore;
             }
+            if (currentScore<=alpha || currentScore >= beta) {  //Case HighFail/LowFail
+                alpha = Integer.MIN_VALUE;
+                beta = Integer.MAX_VALUE;
+                continue;
+            }
+            alpha = currentScore - 0.25;
+            beta = currentScore + 0.25;
             depth++;
         }
         return bestScore;
     }
 
     public double treeSearch(MoveGenerator gameState, double alpha, double beta, double endTime, int depth, Color currentColor , Color ourColor, boolean timeCriterion) {
+        String fen = gameState.getFenFromBoard(); // convert position to FEN
+        double score = Evaluation.ratePosition(gameState, ourColor, currentDepth);
+        // save position
+        if (positionsHM.containsKey(fen)){
+            //return positionsHM.get(fen);
+            positionsHM.put(fen, positionsHM.get(fen)+1);
+        }
+        else /*if ((depth == 1))*/{
+             //score = Evaluation.ratePosition(gameState, ourColor);
+            positionsHM.put(fen,1);
+        }
         // get score for current position
-        double score = Evaluation.ratePosition(gameState, ourColor);
+
+        //double score = Evaluation.ratePosition(gameState, ourColor);
 
         // get moves for other player
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ;  // signal player change
@@ -120,21 +149,21 @@ public class BasisKI {
 
         Evaluation.orderMoves(movesList, currentColor); // order moves
 
-        String fen = gameState.getFenFromBoard(); // convert position to FEN
+
 
         // save position
-        if (/*(depth == 1)&&*/positionsHM.containsKey(fen)){
-            positionsHM.put(fen, positionsHM.get(fen)+1);
-        }
-        else /*if ((depth == 1))*/{
-            positionsHM.put(fen,1);
-        }
+//        if (positionsHM.containsKey(fen)){
+//            positionsHM.put(fen, score);
+//        }
+//        else /*if ((depth == 1))*/{
+//            positionsHM.put(fen,score);
+//        }
 
         if (timeCriterion && System.currentTimeMillis() >= endTime) {
             stopSearch = true;
         }
 
-        if (stopSearch || (depth == 1)) {
+        if (stopSearch|| (depth == 1)|| score >= winCutOff ||score <= -winCutOff) {
             return score;
         }
 
@@ -142,7 +171,6 @@ public class BasisKI {
         if (maxDepth < depth) {
             maxDepth = depth;
         }
-
 
         // our turn
         if (isOurMove) {
@@ -156,6 +184,7 @@ public class BasisKI {
                 isOurMove = false; // player change
 
                 // update alpha
+                currentDepth+=1;
                 alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor,ourColor, timeCriterion));
 
                 // prune branch if no improvements can be made
@@ -168,7 +197,6 @@ public class BasisKI {
 
         // other players turn
         else {
-
             // go through all possible moves
             for (Integer move : movesList) {
 
@@ -180,6 +208,7 @@ public class BasisKI {
                 isOurMove = true; // player change
 
                 // update beta
+                currentDepth+=1;
                 beta = Math.min(beta, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor, ourColor, timeCriterion));
 
                 // prune branch if no improvements can be made
@@ -194,13 +223,13 @@ public class BasisKI {
     // END: search with Alpha-Beta
 
     public static void main(String[] args) {
-        String fen = "6/4bbb02/b02b01b02/1b02b03/2b01rrrr2/6r01/r01r0r0r03/5r0 r";
+        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/1r0r02rr2/b03r01rr1/2r01r0r0 r";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
         m.printBoard(true);
 
         BasisKI ki = new BasisKI();
-        String bestMove = ki.orchestrator(fen,3);
+        String bestMove = ki.orchestrator(fen);
         System.out.println("Best move: " + bestMove);
         System.out.println("Depth reached: " + ki.maxDepth);
 

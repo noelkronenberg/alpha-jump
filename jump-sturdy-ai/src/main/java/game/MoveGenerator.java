@@ -682,29 +682,61 @@ public class MoveGenerator {
     }
 
     public boolean isGameOver(String move, Color color) {
-        if (!move.isEmpty()) {
-            if (color==Color.RED && doesBaseRowContainColor(Color.BLUE,7)) {
+//        if (!move.isEmpty()){
+//            if (color==Color.RED && doesBaseRowContainColor(Color.BLUE,7)) {
+//                return true;
+//            }
+//            if (color==Color.BLUE && doesBaseRowContainColor(Color.RED,0)) {
+//                return true;
+//            }
+//            return false;
+//        }
+//        return true;
+
+        if (color==Color.RED ){
+            if (doesBaseRowContainColor(color,0)){
+                return false;
+            } else if (move.isEmpty()||doesBaseRowContainColor(Color.BLUE,7)) {
                 return true;
             }
-            if (color==Color.BLUE && doesBaseRowContainColor(Color.RED,0)) {
-                return true;
-            }
-            return false;
         }
-        return true;
+        else {
+            if (doesBaseRowContainColor(color,7)){
+                return false;
+            } else if (move.isEmpty()||doesBaseRowContainColor(Color.RED,0)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color color) {
-        if (!moves.isEmpty()) {
-            if (color == Color.RED && doesBaseRowContainColor(Color.BLUE,7)) {
+//        if (!moves.isEmpty()) {
+//            if (color == Color.RED && doesBaseRowContainColor(Color.BLUE,7)) {
+//                return true;
+//            }
+//            if (color == Color.BLUE && doesBaseRowContainColor(Color.RED,0)) {
+//                return true;
+//            }
+//            return false;
+//        }
+//        return true;
+
+        if (color==Color.RED ){
+            if (doesBaseRowContainColor(color,0)){
+                return false;
+            } else if (moves.isEmpty()||doesBaseRowContainColor(Color.BLUE,7)) {
                 return true;
             }
-            if (color == Color.BLUE && doesBaseRowContainColor(Color.RED,0)) {
-                return true;
-            }
-            return false;
         }
-        return true;
+        else {
+            if (doesBaseRowContainColor(color,7)){
+                return false;
+            } else if (moves.isEmpty()||doesBaseRowContainColor(Color.RED,0)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean doesBaseRowContainColor(Color color, int rowToCheck) {
