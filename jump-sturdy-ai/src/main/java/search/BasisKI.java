@@ -60,6 +60,9 @@ public class BasisKI {
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
 
+            //Auf nummer sicher gehen, dass auch wirklich nicht noch isOurMove auf true ist aufgrund eines TimeCutOffs
+            isOurMove=false;
+
             double currentScore = iterativeDeepening(nextState, moveTimeLimit, ourColor,ourColor, timeCriterion); // get score for current move (order)
 
             // evaluate move (score)
@@ -96,6 +99,8 @@ public class BasisKI {
                     break;
                 }
             }
+            //damit wir für jede Tiefe wieder damit anfangen, dass der Gegner drann ist.
+            isOurMove=false;
 
             double currentScore = treeSearch(gameState, alpha, beta, endTime, depth, currentColor, ourColor, timeCriterion); // get score for current move (order)
 
@@ -105,7 +110,8 @@ public class BasisKI {
             if (currentScore >= winCutOff) {
                 return currentScore;
             }
-            if (currentScore > bestScore) {
+
+            if (!stopSearch) {      //this is so that the most exact(longest and deepest searched) value is always taken
                 bestScore = currentScore;
             }
             if (currentScore<=alpha || currentScore >= beta) {  //Case HighFail/LowFail
@@ -157,7 +163,7 @@ public class BasisKI {
             stopSearch = true;
         }
 
-        if (stopSearch|| (depth == 1)|| score>=winCutOff ) {
+        if (stopSearch|| (depth == 1)|| score >= winCutOff ||score <= -winCutOff) {
             return score;
         }
 
@@ -217,7 +223,7 @@ public class BasisKI {
     // END: search with Alpha-Beta
 
     public static void main(String[] args) {
-        String fen = "6/4b01b01/8/5b01b0/2b04r0/1b04r01/5r01rr/1r04 b";
+        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/1r0r02rr2/b03r01rr1/2r01r0r0 r";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
         m.printBoard(true);
