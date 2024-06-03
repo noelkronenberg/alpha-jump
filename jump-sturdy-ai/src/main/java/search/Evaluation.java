@@ -31,9 +31,13 @@ public class Evaluation {
         double score = 0;
         int weight;
 
+        score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
+        score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
+
+
         if (player == Color.BLUE) {
             weight = 1;
-
+            
             // check gameOver of other player
             if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
                 score += 100000 * (1+(1/depth));
@@ -52,9 +56,6 @@ public class Evaluation {
                 }
                 weight += 1;
             }
-
-            score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
-            score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
 
         } else if (player == Color.RED) {
             weight = 8;
@@ -77,9 +78,6 @@ public class Evaluation {
                 }
                 weight -= 1;
             }
-
-            score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
-            score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
         }
 
         return score;
