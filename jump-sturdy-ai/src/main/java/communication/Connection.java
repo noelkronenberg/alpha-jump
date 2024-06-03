@@ -24,7 +24,7 @@ public class Connection {
         int port = 5555;
 
         try (Socket server = new Socket(serverAddress, port)) {
-            System.out.println("Connected to the server.");
+            System.out.println("Player "+ this.player + " | " + "Connected to the server.");
 
             PrintWriter output = new PrintWriter(server.getOutputStream(), true);
             InputStream inputStream = server.getInputStream();
@@ -48,17 +48,17 @@ public class Connection {
                     try {
                         response = new JSONObject(jsonString);
                     } catch (JSONException e) {
-                        System.out.println("\n" + "Error parsing JSON: " + jsonString);
+                        System.out.println("\n" + "Player "+ this.player + " | " + "Error parsing JSON: " + jsonString);
                         continue;
                     }
 
-                    System.out.println("\n" + "Server response:  " + response);
+                    System.out.println("\n" + "Player "+ this.player + " | " + "Server response:  " + response);
 
                     // process server response
                     if (response.getBoolean("bothConnected")) {
 
                         String fen = response.getString("board");
-                        System.out.println("\n" + "Current board: ");
+                        System.out.println("\n" + "Player "+ this.player + " | " + "Current board: ");
                         System.out.println(fen);
 
                         // player turns
@@ -79,7 +79,7 @@ public class Connection {
             }
 
         } catch (IOException | InterruptedException e) {
-            System.err.println("Error occurred while connecting to the server: " + e.getMessage());
+            System.err.println("Player "+ this.player + " | " +  "Error occurred while connecting to the server: " + e.getMessage());
         }
     }
 
