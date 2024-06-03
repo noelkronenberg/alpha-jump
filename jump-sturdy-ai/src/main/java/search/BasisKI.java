@@ -7,6 +7,8 @@ import java.util.*;
 
 public class BasisKI {
     double timeLimit = 20000;
+    boolean aspirationWindow = true;
+    double aspirationWindowSize = 0.25;
     static final int winCutOff = 100000;
     static int currentDepth = 1;
     static int maxAllowedDepth = 0;
@@ -23,6 +25,13 @@ public class BasisKI {
 
     public String orchestrator(String fen, double ms) {
         timeLimit = ms;
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen, true));
+    }
+
+    public String orchestrator(String fen, double ms, boolean aspirationWindow, double aspirationWindowSize) {
+        timeLimit = ms;
+        this.aspirationWindow = aspirationWindow;
+        this.aspirationWindowSize = aspirationWindowSize;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen, true));
     }
 
@@ -116,17 +125,18 @@ public class BasisKI {
             }
 
             // START: aspiration window
+            if (this.aspirationWindow) {
+                // fail high / low
+                if (currentScore <=alpha || currentScore >= beta) {
+                    alpha = Integer.MIN_VALUE;
+                    beta = Integer.MAX_VALUE;
+                    continue;
+                }
 
-            // fail high / low
-            if (currentScore<=alpha || currentScore >= beta) {
-                alpha = Integer.MIN_VALUE;
-                beta = Integer.MAX_VALUE;
-                continue;
+                // set window
+                alpha = currentScore - this.aspirationWindowSize;
+                beta = currentScore + this.aspirationWindowSize;
             }
-
-            alpha = currentScore - 0.25;
-            beta = currentScore + 0.25;
-
             // END: aspiration window
 
             depth++;
