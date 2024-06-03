@@ -32,10 +32,10 @@ public class BasisKI {
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
-    public String orchestrator(String fen, double ms, boolean aspirationWindow, double aspirationWindowSize) {
+    public String orchestrator(String fen, double ms, double aspirationWindowSize) {
         this.timeCriterion = true;
         this.timeLimit = ms;
-        this.aspirationWindow = aspirationWindow;
+        this.aspirationWindow = true;
         this.aspirationWindowSize = aspirationWindowSize;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
