@@ -33,7 +33,7 @@ public class Evaluation {
 
         score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
         score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
-        
+
         if (player == Color.BLUE) {
             weight = 1;
 

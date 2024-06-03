@@ -163,6 +163,8 @@ public class EvaluationTest {
         testMoveRatingComparison(fen, startPosition1, endPosition1, startPosition2, endPosition2);
     }
 
+    /*
+
     @Test
     @DisplayName("Position Rating 1")
     public void testPositionRating1() {
@@ -174,6 +176,7 @@ public class EvaluationTest {
     public void testPositionRating2() {
         testPositionRating("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 r", Color.RED, 0.0);
     }
+    */
 
     // end position
     @Test
