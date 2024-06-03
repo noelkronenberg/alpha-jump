@@ -115,25 +115,10 @@ public class EvaluationTest {
         testOrderMovesFirst("6/8/4r03/8/8/8/3b04/6 b", 6373);
     }
 
-    /*
-    // TODO: need to be adjusted to new Evaluation
-    @Test
-    @DisplayName("Move Rating 1")
-    public void testRateMoves1() {
-        testRateMoves("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 1.0, 26, 36);
-    }
-
-    @Test
-    @DisplayName("Move Rating 2")
-    public void testRateMoves2() {
-        testRateMoves("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 1.0, 1, 11);
-    }
-    */
-
     // end game move
     @Test
-    @DisplayName("Move Rating 4")
-    public void testRateMoves4() {
+    @DisplayName("Move Rating (winning)")
+    public void testRateMovesWin() {
         testRateMoves("6/8/4r03/8/8/8/3b04/6 b", true, 63, 73);
     }
 
@@ -163,42 +148,17 @@ public class EvaluationTest {
         testMoveRatingComparison(fen, startPosition1, endPosition1, startPosition2, endPosition2);
     }
 
-    /*
-
-    @Test
-    @DisplayName("Position Rating 1")
-    public void testPositionRating1() {
-        testPositionRating("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", Color.BLUE, 0.0);
-    }
-
-    @Test
-    @DisplayName("Position Rating 2")
-    public void testPositionRating2() {
-        testPositionRating("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 r", Color.RED, 0.0);
-    }
-    */
-
     // end position
     @Test
-    @DisplayName("Position Rating 3")
-    public void testPositionRating3() {
+    @DisplayName("Position Rating (winning)")
+    public void testPositionRatingWin() {
         testPositionRating("6/8/4r03/8/8/8/8/b05 b", Color.BLUE, true);
     }
 
-    /*
-    // TODO: needs to be adjusted to new Evaluation
-    // double player
-    @Test
-    @DisplayName("Position Rating 4")
-    public void testPositionRating4() {
-        testPositionRating("6/8/4r03/8/8/8/2bb5/6 b", Color.BLUE, 8);
-    }
-    */
-
     // Compare two positions where one should be rated higher - end position vs. possible end
     @Test
-    @DisplayName("Position Comparison 2")
-    public void testPositionComparison2() {
+    @DisplayName("Position Comparison")
+    public void testPositionComparison() {
         String fen1 = "6/8/4r03/8/8/8/2bb5/6 b";
         String fen2 = "6/8/4r03/8/8/8/8/b05 b";
         testPositionComparison(fen1, Color.BLUE, fen2, Color.BLUE);
