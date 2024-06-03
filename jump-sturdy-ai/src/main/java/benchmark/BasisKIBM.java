@@ -374,6 +374,22 @@ public class BasisKIBM {
         System.out.println("End game: ");
         BasisKIBM.wrapperBMTimeLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", timeLimit);
 
+        System.out.println();
+        System.out.println("Position 1: ");
+        BasisKIBM.wrapperBMTimeLimit("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b", timeLimit);
+
+        System.out.println();
+        System.out.println("Position 2: ");
+        BasisKIBM.wrapperBMTimeLimit("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r", timeLimit);
+
+        System.out.println();
+        System.out.println("Position 3: ");
+        BasisKIBM.wrapperBMTimeLimit("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b", timeLimit);
+
+        System.out.println();
+        System.out.println("Position 4: ");
+        BasisKIBM.wrapperBMTimeLimit("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 r", timeLimit);
+
         // ---
 
         System.out.println();
@@ -391,6 +407,22 @@ public class BasisKIBM {
         System.out.println();
         System.out.println("End game: ");
         BasisKIBM.notDynamicWrapperBMTimeLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", timeLimit);
+
+        System.out.println();
+        System.out.println("Position 1: ");
+        BasisKIBM.notDynamicWrapperBMTimeLimit("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b", timeLimit);
+
+        System.out.println();
+        System.out.println("Position 2: ");
+        BasisKIBM.notDynamicWrapperBMTimeLimit("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r", timeLimit);
+
+        System.out.println();
+        System.out.println("Position 3: ");
+        BasisKIBM.notDynamicWrapperBMTimeLimit("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b", timeLimit);
+
+        System.out.println();
+        System.out.println("Position 4: ");
+        BasisKIBM.notDynamicWrapperBMTimeLimit("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 r", timeLimit);
 
     }
 }
