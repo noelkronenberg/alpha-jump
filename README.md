@@ -20,7 +20,7 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
 
 ## Game Server
 
-> ```middleware.getMove(fen)``` is a translation between the Java implementation and Python. It will return the best move for a given fen string (e.g. ```game["board"]```).
+> Only ```middleware.py``` and the ```target``` folder are specific to this implementation. ```middleware.getMove(fen)``` is a translation between the Java build (```target``` folder) and Python. It will return the best move for a given fen string (e.g. ```game["board"]```).
 
 ### Steps
 
