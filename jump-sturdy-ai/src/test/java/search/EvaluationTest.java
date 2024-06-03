@@ -2,10 +2,10 @@ package search;
 
 import game.Color;
 import game.MoveGenerator;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;

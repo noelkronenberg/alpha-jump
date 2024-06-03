@@ -1,9 +1,10 @@
 package search;
 
 import game.Color;
-import game.MoveGenerator;
-import java.util.*;
 import game.Piece;
+import game.MoveGenerator;
+
+import java.util.*;
 
 public class Evaluation {
 
@@ -39,7 +40,7 @@ public class Evaluation {
 
             // check gameOver of other player
             if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
-                score += 100000 * (1+(1/depth));
+                score += 100000 * (1 + (1 / depth));
             }
 
             // check row
@@ -61,7 +62,7 @@ public class Evaluation {
 
             // check gameOver of other player
             if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE), Color.BLUE)) {
-                score += 100000 * (1+(1/depth));
+                score += 100000 * (1 + (1 / depth));
             }
 
             // check row

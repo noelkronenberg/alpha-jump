@@ -2,10 +2,6 @@ package benchmark;
 
 import game.Color;
 import game.MoveGenerator;
-import search.BasisKI;
-
-import java.util.LinkedHashMap;
-import java.util.List;
 
 public class MoveGeneratorBM {
 

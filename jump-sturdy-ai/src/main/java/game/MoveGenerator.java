@@ -1,12 +1,8 @@
 package game;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import search.Evaluation;
-
 import java.util.*;
 
 public class MoveGenerator {
@@ -74,7 +70,7 @@ public class MoveGenerator {
                         }
 
                     // BLUE
-                    } else if (row == 7) { // NOTE: for 100% coverage change this to else (because always true)
+                    } else if (row == 7) {
                         // border
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = null;
@@ -104,7 +100,7 @@ public class MoveGenerator {
                         }
 
                     // BLUE
-                    } else if (row == 6) { // NOTE: for 100% coverage change this to else (because always true)
+                    } else if (row == 6) {
                         // no piece
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = Piece.EMPTY;
@@ -119,7 +115,7 @@ public class MoveGenerator {
                 }
 
                 // middle
-                else if (2 <= row & row <= 5) { // NOTE: for 100% coverage change this to else (because always true)
+                else if (2 <= row & row <= 5) {
                     pieceBoard[row][column] = Piece.EMPTY;
                     colorBoard[row][column] = Color.EMPTY;
                 }
@@ -256,12 +252,12 @@ public class MoveGenerator {
                     }
                 }
             }
-            if (isCounting){
-                isCounting=false;
-                s+=counter;
-                counter=0;
+            if (isCounting) {
+                isCounting = false;
+                s += counter;
+                counter = 0;
             }
-            if (i!=7){
+            if (i!=7) {
                 s += "/";
             }
         }
@@ -344,7 +340,7 @@ public class MoveGenerator {
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
-                if (row > 0) { // NOTE: always TRUE
+                if (row > 0) {
 
                     // forward
                     if (colorBoard[row - 1][column] != Color.BLUE) {
@@ -390,11 +386,11 @@ public class MoveGenerator {
             possibleMoves.removeIf(move -> !isValidMove(move, Color.RED));
 
         // BLUE
-        } else if (color == Color.BLUE) { // NOTE: always TRUE
+        } else if (color == Color.BLUE) {
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
-                if (row < 7) { // NOTE: maybe remove
+                if (row < 7) {
 
                     // forward
                     if (colorBoard[row + 1][column] != Color.RED) {
@@ -432,7 +428,7 @@ public class MoveGenerator {
             }
 
             // double piece
-            else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) { // NOTE: else
+            else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
                 addKnightMoves(possibleMoves, row, column, color);
             }
 

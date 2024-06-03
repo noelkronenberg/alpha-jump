@@ -2,7 +2,6 @@ package debug;
 
 import search.BasisKI;
 import game.MoveGenerator;
-import game.Color;
 
 public class BasisKIDebugger {
 

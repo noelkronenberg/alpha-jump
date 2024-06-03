@@ -152,8 +152,8 @@ public class BasisKI {
     public double iterativeDeepening(MoveGenerator gameState, double moveTimeLimit, Color currentColor, Color ourColor) {
         int depth = 1;
         double bestScore = Integer.MIN_VALUE;
-        double alpha=Integer.MIN_VALUE;
-        double beta=Integer.MAX_VALUE;
+        double alpha = Integer.MIN_VALUE;
+        double beta = Integer.MAX_VALUE;
         double endTime = System.currentTimeMillis() + moveTimeLimit;
         this.stopSearch = false;
 
@@ -173,7 +173,7 @@ public class BasisKI {
             this.currentDepth = 1;
 
             // return if move order contains winning move
-            if (currentScore >= this.winCutOff || currentScore <=  -this.winCutOff) {
+            if (currentScore >= this.winCutOff || currentScore <= -this.winCutOff) {
                 return currentScore;
             }
 
@@ -184,7 +184,7 @@ public class BasisKI {
             // START: aspiration window
             if (this.aspirationWindow) {
                 // fail high / low
-                if (currentScore <=alpha || currentScore >= beta) {
+                if (currentScore <= alpha || currentScore >= beta) {
                     alpha = Integer.MIN_VALUE;
                     beta = Integer.MAX_VALUE;
                     continue;
@@ -206,10 +206,10 @@ public class BasisKI {
 
         // save position
         if (positionsHM.containsKey(fen)){
-            positionsHM.put(fen, positionsHM.get(fen)+1);
+            positionsHM.put(fen, positionsHM.get(fen) + 1);
         }
         else{
-            positionsHM.put(fen,1);
+            positionsHM.put(fen, 1);
         }
 
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ; // signal player change
