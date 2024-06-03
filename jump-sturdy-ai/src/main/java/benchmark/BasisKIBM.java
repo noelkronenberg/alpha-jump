@@ -219,8 +219,54 @@ public class BasisKIBM {
         BasisKIBM.wrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4);
 
         System.out.println();
-        double aspirationWindowSize = 0.25;
-        System.out.println("Aspiration Window ("+ aspirationWindowSize + " | with depth limit)");
+        double aspirationWindowSize = 0.5;
+        System.out.println("Aspiration Window (" + aspirationWindowSize + " | with depth limit)");
+
+        System.out.println();
+        System.out.println("Start position: ");
+        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4, aspirationWindowSize);
+
+        System.out.println();
+        System.out.println("Mid game: ");
+        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 2, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 3, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 4, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 6, aspirationWindowSize);
+
+        System.out.println();
+        System.out.println("End game: ");
+        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 2, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4, aspirationWindowSize);
+
+        System.out.println();
+        aspirationWindowSize = 0.25;
+        System.out.println("Aspiration Window (" + aspirationWindowSize + " | with depth limit)");
+
+        System.out.println();
+        System.out.println("Start position: ");
+        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4, aspirationWindowSize);
+
+        System.out.println();
+        System.out.println("Mid game: ");
+        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 2, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 3, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 4, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 6, aspirationWindowSize);
+
+        System.out.println();
+        System.out.println("End game: ");
+        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 2, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3, aspirationWindowSize);
+        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4, aspirationWindowSize);
+
+        System.out.println();
+        aspirationWindowSize = 0.05;
+        System.out.println("Aspiration Window (" + aspirationWindowSize + " | with depth limit)");
 
         System.out.println();
         System.out.println("Start position: ");
