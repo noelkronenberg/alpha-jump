@@ -2,6 +2,8 @@
 
 High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/index.php/the-pit/576-jumpsturdy).
 
+![](https://github.com/noelkronenberg/projekt-ki/workflows/tests/badge.svg)
+
 ## Structure
 
 - ```jump-sturdy-ai``` project work
@@ -23,7 +25,3 @@ See [manual](/game-server/manual.md) for set-up.
 ### Demo
 
 https://github.com/noelkronenberg/projekt-ki/assets/79874249/407ad9ac-230e-4874-bb2a-90bbcb663c02
-
-## Status
-
-![](https://github.com/noelkronenberg/projekt-ki/workflows/tests/badge.svg)
