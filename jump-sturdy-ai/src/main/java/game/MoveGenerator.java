@@ -373,6 +373,7 @@ public class MoveGenerator {
                     if (column < 7 && colorBoard[row - 1][column + 1] == Color.BLUE) {
                         possibleMoves.add(convertToNumber(row - 1, column + 1));
                     }
+
                     // right diagonal protection (for Evaluation)
                     else if (column < 7 && colorBoard[row - 1][column + 1] == Color.RED) {
                         protectedPieces += 1;
