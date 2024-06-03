@@ -46,13 +46,39 @@ public class BasisKIBM {
         return new Result(bestMove, depth, uniquePositions, positions);
     }
 
+    // best move (without dynamic time management)
+    static Result generateBestMoveNotDynamicResultTimeLimit(String board_fen, double ms) {
+        init();
+        String bestMove = ki.orchestrator(board_fen, ms);
+        int depth = ki.maxDepth;
+        int uniquePositions = ki.positionsHM.size();
+        int positions = 0;
+        for (Map.Entry<String, Integer> entry : ki.positionsHM.entrySet()){
+            positions += entry.getValue();
+        }
+        return new Result(bestMove, depth, uniquePositions, positions);
+    }
+
     // speed for best move
     static double generateBestMoveSpeedTimeLimit(String board_fen, double ms) {
         init();
         int iterations = 3;
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
-            ki.orchestrator(board_fen, ms);
+            ki.orchestrator(board_fen, ms, true);
+        }
+        double endTime = System.nanoTime();
+        double duration = ((endTime - startTime) / iterations) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
+        return duration;
+    }
+
+    // speed for best move (without dynamic time management)
+    static double generateBestMoveNotDynamicSpeedTimeLimit(String board_fen, double ms) {
+        init();
+        int iterations = 3;
+        double startTime = System.nanoTime();
+        for (int i = 0; i < iterations; i++) {
+            ki.orchestrator(board_fen, ms, true);
         }
         double endTime = System.nanoTime();
         double duration = ((endTime - startTime) / iterations) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
@@ -63,6 +89,30 @@ public class BasisKIBM {
     static void wrapperBMTimeLimit(String fen, double ms) {
         double duration = BasisKIBM.generateBestMoveSpeedTimeLimit(fen, ms);
         Result bestMoveResult = BasisKIBM.generateBestMoveResultTimeLimit(fen, ms);
+
+        String bestMove = bestMoveResult.bestMove;
+        int depth = bestMoveResult.depth;
+        int uniquePositions = bestMoveResult.uniquePositions;
+        int positions = bestMoveResult.positions;
+
+        // display as table (reference: https://github.com/vdmeer/asciitable)
+        AsciiTable at = new AsciiTable();
+        at.addRule();
+        at.addRow("Time Limit (ms)", "Depth", "Best Move", "Time (ms)", "Unique Positions", "Total Positions", "Positions/ms");
+        at.addRule();
+        at.addRow(ms, depth, bestMove, String.format(Locale.US, "%.2f", duration), uniquePositions, positions, String.format(Locale.US, "%.2f", positions / duration));
+        at.addRule();
+        at.getRenderer().setCWC(new CWC_LongestLine());
+        at.setPaddingLeftRight(1);
+        at.setTextAlignment(TextAlignment.LEFT);
+
+        System.out.println(at.render());
+    }
+
+    // combination and visualisation of all (without dynamic time management)
+    static void notDynamicWrapperBMTimeLimit(String fen, double ms) {
+        double duration = BasisKIBM.generateBestMoveNotDynamicSpeedTimeLimit(fen, ms);
+        Result bestMoveResult = BasisKIBM.generateBestMoveNotDynamicResultTimeLimit(fen, ms);
 
         String bestMove = bestMoveResult.bestMove;
         int depth = bestMoveResult.depth;
@@ -210,104 +260,6 @@ public class BasisKIBM {
     // END: depth limit
 
     public static void main(String[] args) {
-        System.out.println("Depth limit");
-
-        System.out.println();
-        System.out.println("Start position: ");
-        BasisKIBM.wrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2);
-        BasisKIBM.wrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3);
-        BasisKIBM.wrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4);
-
-        System.out.println();
-        System.out.println("Mid game: ");
-        BasisKIBM.wrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 2);
-        BasisKIBM.wrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 3);
-        BasisKIBM.wrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 4);
-        BasisKIBM.wrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 6);
-
-        System.out.println();
-        System.out.println("End game: ");
-        BasisKIBM.wrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 2);
-        BasisKIBM.wrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3);
-        BasisKIBM.wrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4);
-
-        // ---
-
-        System.out.println();
-        double aspirationWindowSize = 0.5;
-        System.out.println("Aspiration Window (" + aspirationWindowSize + " | with depth limit)");
-
-        System.out.println();
-        System.out.println("Start position: ");
-        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4, aspirationWindowSize);
-
-        System.out.println();
-        System.out.println("Mid game: ");
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 2, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 3, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 4, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 6, aspirationWindowSize);
-
-        System.out.println();
-        System.out.println("End game: ");
-        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 2, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4, aspirationWindowSize);
-
-        // ---
-
-        System.out.println();
-        aspirationWindowSize = 0.25;
-        System.out.println("Aspiration Window (" + aspirationWindowSize + " | with depth limit)");
-
-        System.out.println();
-        System.out.println("Start position: ");
-        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4, aspirationWindowSize);
-
-        System.out.println();
-        System.out.println("Mid game: ");
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 2, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 3, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 4, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 6, aspirationWindowSize);
-
-        System.out.println();
-        System.out.println("End game: ");
-        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 2, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4, aspirationWindowSize);
-
-        // ---
-
-        System.out.println();
-        aspirationWindowSize = 0.05;
-        System.out.println("Aspiration Window (" + aspirationWindowSize + " | with depth limit)");
-
-        System.out.println();
-        System.out.println("Start position: ");
-        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4, aspirationWindowSize);
-
-        System.out.println();
-        System.out.println("Mid game: ");
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 2, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 3, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 4, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", 6, aspirationWindowSize);
-
-        System.out.println();
-        System.out.println("End game: ");
-        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 2, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3, aspirationWindowSize);
-        BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4, aspirationWindowSize);
-
-        // ---
-
         System.out.println();
         double timeLimit = 20000.0;
         System.out.println("Time limit (" + timeLimit + " ms):");
@@ -323,6 +275,24 @@ public class BasisKIBM {
         System.out.println();
         System.out.println("End game: ");
         BasisKIBM.wrapperBMTimeLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", timeLimit);
+
+        // ---
+
+        System.out.println();
+        timeLimit = 20000.0;
+        System.out.println("Time limit (without dynamic time management | " + timeLimit + " ms):");
+
+        System.out.println();
+        System.out.println("Start position: ");
+        BasisKIBM.notDynamicWrapperBMTimeLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", timeLimit);
+
+        System.out.println();
+        System.out.println("Mid game: ");
+        BasisKIBM.notDynamicWrapperBMTimeLimit("2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b", timeLimit);
+
+        System.out.println();
+        System.out.println("End game: ");
+        BasisKIBM.notDynamicWrapperBMTimeLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", timeLimit);
 
     }
 }

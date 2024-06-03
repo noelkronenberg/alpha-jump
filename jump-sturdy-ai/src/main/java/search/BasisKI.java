@@ -6,12 +6,13 @@ import game.MoveGenerator;
 import java.util.*;
 
 public class BasisKI {
-    // hyperparameters
+    // hyperparameters (defaults)
     boolean timeCriterion = true;
     double timeLimit = 20000.0;
     boolean aspirationWindow = false;
     double aspirationWindowSize = 0;
     int maxAllowedDepth = 0;
+    boolean dynamicTime = true;
 
     // derived parameters
     public int maxDepth = 1;
@@ -32,6 +33,13 @@ public class BasisKI {
     public String orchestrator(String fen, double ms) {
         this.timeCriterion = true;
         this.timeLimit = ms;
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
+    }
+
+    public String orchestrator(String fen, double ms, boolean dynamicTime) {
+        this.timeCriterion = true;
+        this.timeLimit = ms;
+        this.dynamicTime = dynamicTime;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
@@ -74,38 +82,39 @@ public class BasisKI {
         fen = fen.substring(0, fen.length() - 2);
         positionsHM.put(fen,1); // save position
 
-        // START: dynamic time management
+        // START: time management
+        double moveTimeLimit = (this.timeLimit - 100) / movesList.size(); // default (for static)
+        double totalTime = this.timeLimit - 100; // for dynamic
+        double remainingTime = totalTime; // for dynamic
+        double totalWeight = 0.0; // for dynamic
 
-        double totalTime = this.timeLimit - 100;
-        double remainingTime = totalTime;
-        double totalWeight = 0.0;
-
-        // total weight (sum of inverses of indices)
-        for (int i = 1; i <= movesList.size(); i++) {
-            totalWeight += 1.0 / i;
+        if (this.dynamicTime) {
+            // total weight (sum of inverses of indices)
+            for (int i = 1; i <= movesList.size(); i++) {
+                totalWeight += 1.0 / i;
+            }
         }
-
-        // END: dynamic time management
+        // END: time management
 
         // go through all possible moves
         for (int i = 0; i < movesList.size(); i++) {
             Integer move = movesList.get(i);
 
             // START: dynamic time management
-            double moveTimeLimit;
+            if (this.dynamicTime) {
+                if (remainingTime <= 0) {
+                    break;
+                } else {
+                    double weight = 1.0 / (i + 1);
+                    moveTimeLimit = (weight / totalWeight) * totalTime;
 
-            if (remainingTime <= 0) {
-                break;
-            } else {
-                double weight = 1.0 / (i + 1);
-                moveTimeLimit = (weight / totalWeight) * totalTime;
+                    // remaining time
+                    remainingTime -= moveTimeLimit;
 
-                // remaining time
-                remainingTime -= moveTimeLimit;
-
-                // remove over-allocation
-                if (remainingTime < 0) {
-                    moveTimeLimit += remainingTime;
+                    // remove over-allocation
+                    if (remainingTime < 0) {
+                        moveTimeLimit += remainingTime;
+                    }
                 }
             }
             // END: dynamic time management
