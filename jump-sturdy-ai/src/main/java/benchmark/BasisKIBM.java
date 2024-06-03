@@ -33,6 +33,7 @@ public class BasisKIBM {
 
     // START: time limit
 
+    // best move
     static Result generateBestMoveResultTimeLimit(String board_fen, double ms) {
         init();
         String bestMove = ki.orchestrator(board_fen, ms);
@@ -45,6 +46,7 @@ public class BasisKIBM {
         return new Result(bestMove, depth, uniquePositions, positions);
     }
 
+    // speed for best move
     static double generateBestMoveSpeedTimeLimit(String board_fen, double ms) {
         init();
         int iterations = 3;
@@ -57,6 +59,7 @@ public class BasisKIBM {
         return duration;
     }
 
+    // combination and visualisation of all
     static void wrapperBMTimeLimit(String fen, double ms) {
         double duration = BasisKIBM.generateBestMoveSpeedTimeLimit(fen, ms);
         Result bestMoveResult = BasisKIBM.generateBestMoveResultTimeLimit(fen, ms);
@@ -84,18 +87,21 @@ public class BasisKIBM {
 
     // START: depth limit
 
+    // best move
     static String generateBestMoveDepthLimit(String board_fen, int depth) {
         init();
         String bestMove = ki.orchestrator(board_fen, depth);
         return bestMove;
     }
 
+    // best move (with aspiration window)
     static String generateBestMoveWindowDepthLimit(String board_fen, int depth, double aspirationWindowSize) {
         init();
         String bestMove = ki.orchestrator(board_fen, depth, aspirationWindowSize);
         return bestMove;
     }
 
+    // speed for best move
     static double generateBestMoveSpeedDepthLimit(String board_fen, int depth) {
         init();
         int iterations = 10;
@@ -108,6 +114,7 @@ public class BasisKIBM {
         return duration;
     }
 
+    // speed for best move (with aspiration window)
     static double generateBestMoveWindowSpeedDepthLimit(String board_fen, int depth, double aspirationWindowSize) {
         init();
         int iterations = 10;
@@ -120,6 +127,7 @@ public class BasisKIBM {
         return duration;
     }
 
+    // unique positions for best move
     static int generateBestMoveUniquePositionsDepthLimit(String board_fen, int depth) {
         init();
         ki.orchestrator(board_fen, depth);
@@ -127,6 +135,7 @@ public class BasisKIBM {
         return uniquePositions;
     }
 
+    // unique positions for best move (with aspiration window)
     static int generateBestMoveWindowUniquePositionsDepthLimit(String board_fen, int depth, double aspirationWindowSize) {
         init();
         ki.orchestrator(board_fen, depth, aspirationWindowSize);
@@ -134,6 +143,7 @@ public class BasisKIBM {
         return uniquePositions;
     }
 
+    // positions for best move
     static int generateBestMovePositionsDepthLimit(String board_fen, int depth) {
         init();
         ki.orchestrator(board_fen, depth);
@@ -144,6 +154,7 @@ public class BasisKIBM {
         return positions;
     }
 
+    // positions for best move (with aspiration window)
     static int generateBestMoveWindowPositionsDepthLimit(String board_fen, int depth, double aspirationWindowSize) {
         init();
         ki.orchestrator(board_fen, depth, aspirationWindowSize);
@@ -154,6 +165,7 @@ public class BasisKIBM {
         return positions;
     }
 
+    // combination and visualisation of all
     static void wrapperBMDepthLimit(String fen, int depth) {
         String bestMove = BasisKIBM.generateBestMoveDepthLimit(fen, depth);
         double duration = BasisKIBM.generateBestMoveSpeedDepthLimit(fen, depth);
@@ -174,6 +186,7 @@ public class BasisKIBM {
         System.out.println(at.render());
     }
 
+    // combination and visualisation of all (with window)
     static void windowsWrapperBMDepthLimit(String fen, int depth, double aspirationWindowSize) {
         String bestMove = BasisKIBM.generateBestMoveWindowDepthLimit(fen, depth, aspirationWindowSize);
         double duration = BasisKIBM.generateBestMoveWindowSpeedDepthLimit(fen, depth, aspirationWindowSize);
@@ -218,6 +231,8 @@ public class BasisKIBM {
         BasisKIBM.wrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3);
         BasisKIBM.wrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4);
 
+        // ---
+
         System.out.println();
         double aspirationWindowSize = 0.5;
         System.out.println("Aspiration Window (" + aspirationWindowSize + " | with depth limit)");
@@ -240,6 +255,8 @@ public class BasisKIBM {
         BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 2, aspirationWindowSize);
         BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3, aspirationWindowSize);
         BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4, aspirationWindowSize);
+
+        // ---
 
         System.out.println();
         aspirationWindowSize = 0.25;
@@ -264,6 +281,8 @@ public class BasisKIBM {
         BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3, aspirationWindowSize);
         BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4, aspirationWindowSize);
 
+        // ---
+
         System.out.println();
         aspirationWindowSize = 0.05;
         System.out.println("Aspiration Window (" + aspirationWindowSize + " | with depth limit)");
@@ -287,8 +306,10 @@ public class BasisKIBM {
         BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3, aspirationWindowSize);
         BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4, aspirationWindowSize);
 
+        // ---
+
         System.out.println();
-        double timeLimit = 20000;
+        double timeLimit = 20000.0;
         System.out.println("Time limit (" + timeLimit + " ms):");
 
         System.out.println();
