@@ -1,15 +1,18 @@
 import subprocess
 
-path = '/Users/noelkronenberg/Documents/GitHub' # NOTE: adjist to local path
+path = 'target' # NOTE: adjust to local path to 'target' folder
 
-def getMove(fen, time_limit=None):
-    java_class_path = f'{path}/projekt-ki/jump-sturdy-ai/target/classes'
+def getMove(fen, time_limit=20000.0, aspiration_window=0.25):
+    java_class_path = f'{path}/classes'
     java_command = ['java', '-cp', java_class_path, 'communication.Middleware', fen]
     
     if time_limit is not None:
         java_command.append(str(time_limit))
+
+    if aspiration_window is not None:
+        java_command.append(str(aspiration_window))
     
-    process = subprocess.Popen(java_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    output, _ = process.communicate()
+    process = subprocess.Popen(java_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE) # reference: https://stackoverflow.com/a/92395
+    output, _ = process.communicate() # reference: https://stackoverflow.com/a/4514905
     
     return output.decode().strip()

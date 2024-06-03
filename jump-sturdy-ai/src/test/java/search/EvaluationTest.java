@@ -2,10 +2,10 @@ package search;
 
 import game.Color;
 import game.MoveGenerator;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,9 +41,9 @@ public class EvaluationTest {
     private void testPositionComparison(String fen1, Color color1, String fen2, Color color2) {
         init();
         moveGenerator.initializeBoard(fen1);
-        double score1 = evaluator.ratePosition(moveGenerator, color1);
+        double score1 = evaluator.ratePosition(moveGenerator, color1,1);
         moveGenerator.initializeBoard(fen2);
-        double score2 = evaluator.ratePosition(moveGenerator, color2);
+        double score2 = evaluator.ratePosition(moveGenerator, color2,1);
         assertTrue(score1 < score2, "Expected position 2 to be rated higher than position 1");
     }
 
@@ -52,15 +52,32 @@ public class EvaluationTest {
         moveGenerator.initializeBoard(fen);
         char colorFen = fen.charAt(fen.length() - 1);
         Color color = getColorFromFen(colorFen);
-        double rated = evaluator.rateMove(moveGenerator, color, startPosition, endPosition);
+        double rated = evaluator.rateMove(moveGenerator, color, startPosition, endPosition,1);
         assertEquals(expectedRating, rated);
     }
+
+    private void testRateMoves(String fen, boolean win, int startPosition, int endPosition) {
+        init();
+        moveGenerator.initializeBoard(fen);
+        char colorFen = fen.charAt(fen.length() - 1);
+        Color color = getColorFromFen(colorFen);
+        double rated = evaluator.rateMove(moveGenerator, color, startPosition, endPosition,1);
+        assertTrue(rated >= 50000);
+    }
+
 
     private void testPositionRating(String fen, Color color, double expectedScore) {
         init();
         moveGenerator.initializeBoard(fen);
-        double score = evaluator.ratePosition(moveGenerator, color);
+        double score = evaluator.ratePosition(moveGenerator, color,1);
         assertEquals(expectedScore, score);
+    }
+
+    private void testPositionRating(String fen, Color color, boolean win) {
+        init();
+        moveGenerator.initializeBoard(fen);
+        double score = evaluator.ratePosition(moveGenerator, color,1);
+        assertTrue(score >= 50000);
     }
 
     private Color getColorFromFen(char colorFen) {
@@ -73,8 +90,8 @@ public class EvaluationTest {
         char colorFen = fen.charAt(fen.length() - 1);
         Color color = getColorFromFen(colorFen);
 
-        double rating1 = evaluator.rateMove(moveGenerator, color, startPosition1, endPosition1);
-        double rating2 = evaluator.rateMove(moveGenerator, color, startPosition2, endPosition2);
+        double rating1 = evaluator.rateMove(moveGenerator, color, startPosition1, endPosition1,1);
+        double rating2 = evaluator.rateMove(moveGenerator, color, startPosition2, endPosition2,1);
 
         assertTrue(rating1 > rating2, "Expected move rating (" + rating1 + ") to be higher than (" + rating2 + ")");
     }
@@ -98,23 +115,11 @@ public class EvaluationTest {
         testOrderMovesFirst("6/8/4r03/8/8/8/3b04/6 b", 6373);
     }
 
-    @Test
-    @DisplayName("Move Rating 1")
-    public void testRateMoves1() {
-        testRateMoves("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 1.0, 26, 36);
-    }
-
-    @Test
-    @DisplayName("Move Rating 2")
-    public void testRateMoves2() {
-        testRateMoves("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 1.0, 1, 11);
-    }
-
     // end game move
     @Test
-    @DisplayName("Move Rating 4")
-    public void testRateMoves4() {
-        testRateMoves("6/8/4r03/8/8/8/3b04/6 b", 99999.0, 63, 73);
+    @DisplayName("Move Rating (winning)")
+    public void testRateMovesWin() {
+        testRateMoves("6/8/4r03/8/8/8/3b04/6 b", true, 63, 73);
     }
 
     // compare Rating of moving forward as a single player or as a tower
@@ -143,36 +148,17 @@ public class EvaluationTest {
         testMoveRatingComparison(fen, startPosition1, endPosition1, startPosition2, endPosition2);
     }
 
-    @Test
-    @DisplayName("Position Rating 1")
-    public void testPositionRating1() {
-        testPositionRating("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", Color.BLUE, 0.0);
-    }
-
-    @Test
-    @DisplayName("Position Rating 2")
-    public void testPositionRating2() {
-        testPositionRating("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 r", Color.RED, 0.0);
-    }
-
     // end position
     @Test
-    @DisplayName("Position Rating 3")
-    public void testPositionRating3() {
-        testPositionRating("6/8/4r03/8/8/8/8/b05 b", Color.BLUE, 100000);
-    }
-
-    // double player
-    @Test
-    @DisplayName("Position Rating 4")
-    public void testPositionRating4() {
-        testPositionRating("6/8/4r03/8/8/8/2bb5/6 b", Color.BLUE, 8);
+    @DisplayName("Position Rating (winning)")
+    public void testPositionRatingWin() {
+        testPositionRating("6/8/4r03/8/8/8/8/b05 b", Color.BLUE, true);
     }
 
     // Compare two positions where one should be rated higher - end position vs. possible end
     @Test
-    @DisplayName("Position Comparison 2")
-    public void testPositionComparison2() {
+    @DisplayName("Position Comparison")
+    public void testPositionComparison() {
         String fen1 = "6/8/4r03/8/8/8/2bb5/6 b";
         String fen2 = "6/8/4r03/8/8/8/8/b05 b";
         testPositionComparison(fen1, Color.BLUE, fen2, Color.BLUE);

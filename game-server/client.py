@@ -38,7 +38,13 @@ def main():
                 #printing not necessary, game["board"] is the way to get the board string
                 print("New Board: " + game["board"])
 
+                import time
+                start_time = time.time()
                 i = middleware.getMove(game["board"])
+                end_time = time.time()
+                elapsed_time = end_time - start_time
+                print(f"Time taken: {elapsed_time} seconds")
+
                 print(f'Move: {i}')
 
                 #json.dumps(i) transforms the input into a json. You can print it, if you want to see the difference

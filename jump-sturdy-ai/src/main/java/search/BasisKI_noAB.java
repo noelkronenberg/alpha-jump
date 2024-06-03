@@ -6,10 +6,10 @@ import game.MoveGenerator;
 import java.util.*;
 
 public class BasisKI_noAB {
-    static final int TIME_LIMIT = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
+    static final int TIME_LIMIT = 20000;
     static final int winCutOff = 100000;
     static int maxAllowedDepth = 2;
-
+    static int currentDepth = 1;
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     static int maxDepth = -1;
@@ -40,7 +40,7 @@ public class BasisKI_noAB {
         Color ourColor = gameState.getColor(color_fen);
         Evaluation.orderMoves(movesList, ourColor);
 
-        fen=fen.substring(0,fen.length()-2);
+        fen=fen.substring(0, fen.length() - 2);
         positionsHM.put(fen,1); // save position
 
         long moveTimeLimit = (TIME_LIMIT - 100) / movesList.size(); // (static) time for each move to search
@@ -52,7 +52,6 @@ public class BasisKI_noAB {
             MoveGenerator nextState = new MoveGenerator();
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
-
 
             double currentScore = iterativeDeepeningNoAlphaBeta(nextState, moveTimeLimit, ourColor,ourColor, move); // get score for current move (order)
 
@@ -85,6 +84,7 @@ public class BasisKI_noAB {
         while ((depth) <= maxAllowedDepth) {
             double currentScore = treeSearchNoAlphaBeta(gameState, endTime, depth, currentColor, ourColor, -1); // get score for current move (order)
             // System.out.println("best score (for iteration): " + currentScore + " | depth: " + depth + " | move: " + MoveGenerator.convertMoveToFEN(move));
+            currentDepth=1;
 
             // return if move order contains winning move
             if (currentScore >= winCutOff) {
@@ -101,7 +101,7 @@ public class BasisKI_noAB {
 
     public double treeSearchNoAlphaBeta(MoveGenerator gameState, long endTime, int depth, Color currentColor , Color ourColor, double value) {
         // get score for current position
-        double score = Evaluation.ratePosition(gameState, ourColor);
+        double score = Evaluation.ratePosition(gameState, ourColor, currentDepth);
 
         // get moves for other player
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ;  // signal player change
@@ -139,7 +139,7 @@ public class BasisKI_noAB {
                 nextState.movePiece(move);
 
                 isOurMove = false; // player change
-
+                currentDepth +=1;
                 value = Math.max(value,treeSearchNoAlphaBeta(nextState, endTime, depth - 1, currentColor,ourColor, value));
 
             }
@@ -158,7 +158,7 @@ public class BasisKI_noAB {
                 nextState.movePiece(move);
 
                 isOurMove = true; // player change
-
+                currentDepth +=1;
                 value=Math.min(value,treeSearchNoAlphaBeta(nextState, endTime, depth - 1, currentColor, ourColor,value));
 
             }

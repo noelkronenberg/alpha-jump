@@ -1,28 +1,35 @@
 package game;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import search.Evaluation;
-
 import java.util.*;
 
 public class MoveGenerator {
 
     Piece[][] pieceBoard;
     Color[][] colorBoard;
-
-    // START: board basics
+    int totalPossibleMoves;
+    int protectedPieces;
+    String comparisonFen;
 
     public Piece[][] getPieceBoard() {
         return pieceBoard;
     }
-
     public Color[][] getColorBoard() {
         return colorBoard;
     }
+    public int getTotalPossibleMoves() {
+        return totalPossibleMoves;
+    }
+    public int getProtectedPieces() {
+        return protectedPieces;
+    }
+    public String getComparisonFen() {
+        return comparisonFen;
+    }
+
+    // START: board basics
 
     public void setPieceBoard(Piece[][] givenPieceBoard) {
         for (int row = 0; row < pieceBoard.length; row++) {
@@ -63,7 +70,7 @@ public class MoveGenerator {
                         }
 
                     // BLUE
-                    } else if (row == 7) { // NOTE: for 100% coverage change this to else (because always true)
+                    } else if (row == 7) {
                         // border
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = null;
@@ -93,7 +100,7 @@ public class MoveGenerator {
                         }
 
                     // BLUE
-                    } else if (row == 6) { // NOTE: for 100% coverage change this to else (because always true)
+                    } else if (row == 6) {
                         // no piece
                         if (column == 0 || column == 7) {
                             pieceBoard[row][column] = Piece.EMPTY;
@@ -108,7 +115,7 @@ public class MoveGenerator {
                 }
 
                 // middle
-                else if (2 <= row & row <= 5) { // NOTE: for 100% coverage change this to else (because always true)
+                else if (2 <= row & row <= 5) {
                     pieceBoard[row][column] = Piece.EMPTY;
                     colorBoard[row][column] = Color.EMPTY;
                 }
@@ -165,7 +172,7 @@ public class MoveGenerator {
                         fenCounter++;
                     }
 
-                    // CASE: fenChar is a number, then we fill the places with EMPTY
+                // CASE: fenChar is a number, then we fill the places with EMPTY
                 } else if (Character.isDigit(fenChar)) {
                     int numberOfFreePlaces = fenChar - '0'; // gives the int value for the Character: alternative: Character.getNumericValue(fenChar)
                     for (int j = 0; j < numberOfFreePlaces; j++) {
@@ -245,17 +252,17 @@ public class MoveGenerator {
                     }
                 }
             }
-            if (isCounting){
-                isCounting=false;
-                s+=counter;
-                counter=0;
+            if (isCounting) {
+                isCounting = false;
+                s += counter;
+                counter = 0;
             }
-            if (i!=7){
+            if (i!=7) {
                 s += "/";
             }
         }
 
-        // maybe add Color
+        // NOTE: maybe add Color
         return s;
     }
 
@@ -301,9 +308,9 @@ public class MoveGenerator {
         char row=pos.charAt(1);
 
         int rowInt =Character.getNumericValue(row)-1;
-        int colInt = col-65;
+        int colInt = col - 65;
 
-        return rowInt*10+colInt;
+        return rowInt * 10 + colInt;
     }
 
     public int[] convertStringToPosWrapper(String position_string) {
@@ -333,7 +340,7 @@ public class MoveGenerator {
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
-                if (row > 0) { // NOTE: always TRUE
+                if (row > 0) {
 
                     // forward
                     if (colorBoard[row - 1][column] != Color.BLUE) {
@@ -353,9 +360,19 @@ public class MoveGenerator {
                         possibleMoves.add(convertToNumber(row - 1, column - 1));
                     }
 
+                    // left diagonal protection (for Evaluation)
+                    else if (column > 0 && colorBoard[row - 1][column - 1] == Color.RED) {
+                        protectedPieces += 1;
+                    }
+
                     // right diagonal
                     if (column < 7 && colorBoard[row - 1][column + 1] == Color.BLUE) {
                         possibleMoves.add(convertToNumber(row - 1, column + 1));
+                    }
+
+                    // right diagonal protection (for Evaluation)
+                    else if (column < 7 && colorBoard[row - 1][column + 1] == Color.RED) {
+                        protectedPieces += 1;
                     }
                 }
             }
@@ -369,11 +386,11 @@ public class MoveGenerator {
             possibleMoves.removeIf(move -> !isValidMove(move, Color.RED));
 
         // BLUE
-        } else if (color == Color.BLUE) { // NOTE: always TRUE
+        } else if (color == Color.BLUE) {
 
             // single piece
             if (pieceBoard[row][column] == Piece.SINGLE) {
-                if (row < 7) { // NOTE: maybe remove
+                if (row < 7) {
 
                     // forward
                     if (colorBoard[row + 1][column] != Color.RED) {
@@ -393,15 +410,25 @@ public class MoveGenerator {
                         possibleMoves.add(convertToNumber(row + 1, column - 1));
                     }
 
+                    // left diagonal protection (for Evaluation)
+                    else if (column > 0 && colorBoard[row + 1][column - 1] == Color.BLUE) {
+                        protectedPieces += 1;
+                    }
+
                     // right diagonal
                     if (column < 7 && colorBoard[row + 1][column + 1] == Color.RED) {
                         possibleMoves.add(convertToNumber(row + 1, column + 1));
+                    }
+
+                    // right diagonal protection (for Evaluation)
+                    else if (column < 7 && colorBoard[row + 1][column + 1] == Color.BLUE) {
+                        protectedPieces += 1;
                     }
                 }
             }
 
             // double piece
-            else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) { // NOTE: else
+            else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
                 addKnightMoves(possibleMoves, row, column, color);
             }
 
@@ -409,6 +436,7 @@ public class MoveGenerator {
             possibleMoves.removeIf(move -> !isValidMove(move, Color.BLUE));
         }
 
+        totalPossibleMoves += possibleMoves.size(); // for Evaluation
         return possibleMoves;
     }
 
@@ -449,6 +477,11 @@ public class MoveGenerator {
             if (!((pieceBoard[newRow][newColumn] == Piece.DOUBLE || pieceBoard[newRow][newColumn] == Piece.MIXED)
                     && colorBoard[newRow][newColumn] == color)) {
                 possibleMoves.add(convertToNumber(newRow, newColumn));
+            }
+
+            // count protected pieces (for Evaluation)
+            if (colorBoard[newRow][newColumn] == color) {
+                protectedPieces += 1;
             }
         }
     }
@@ -512,6 +545,7 @@ public class MoveGenerator {
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
         Color color = this.getColor(color_fen);
+        // System.out.println("Color: " + color);
         this.initializeBoard(fen.substring(0, fen.length() - 2));
         return this.generateAllPossibleMoves(color);
     }
@@ -626,6 +660,9 @@ public class MoveGenerator {
 
     public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
+        totalPossibleMoves = 0;
+        protectedPieces = 0;
+        comparisonFen = getFenFromBoard();
 
         for (int row = 0; row < 8; row++) {
             for (int column = 0; column < 8; column++) {
@@ -643,29 +680,39 @@ public class MoveGenerator {
     }
 
     public boolean isGameOver(String move, Color color) {
-        if (!move.isEmpty()) {
-            if (color==Color.RED && doesBaseRowContainColor(Color.BLUE,7)) {
+        if (color == Color.RED) {
+            if (doesBaseRowContainColor(color,0)) {
+                return false;
+            } else if (move.isEmpty() || doesBaseRowContainColor(Color.BLUE,7)) {
                 return true;
             }
-            if (color==Color.BLUE && doesBaseRowContainColor(Color.RED,0)) {
-                return true;
-            }
-            return false;
         }
-        return true;
+        else {
+            if (doesBaseRowContainColor(color,7)){
+                return false;
+            } else if (move.isEmpty() || doesBaseRowContainColor(Color.RED,0)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color color) {
-        if (!moves.isEmpty()) {
-            if (color == Color.RED && doesBaseRowContainColor(Color.BLUE,7)) {
+        if (color == Color.RED) {
+            if (doesBaseRowContainColor(color,0)) {
+                return false;
+            } else if (moves.isEmpty() || doesBaseRowContainColor(Color.BLUE,7)) {
                 return true;
             }
-            if (color == Color.BLUE && doesBaseRowContainColor(Color.RED,0)) {
-                return true;
-            }
-            return false;
         }
-        return true;
+        else {
+            if (doesBaseRowContainColor(color,7)){
+                return false;
+            } else if (moves.isEmpty() || doesBaseRowContainColor(Color.RED,0)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean doesBaseRowContainColor(Color color, int rowToCheck) {
@@ -748,7 +795,6 @@ public class MoveGenerator {
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        Evaluation evaluater = new Evaluation();
         String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
         for (int i = 0; i < 1; i++) {
             LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(fen);
