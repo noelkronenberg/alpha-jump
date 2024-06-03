@@ -9,8 +9,8 @@ public class BasisKI {
     // hyperparameters
     boolean timeCriterion = true;
     double timeLimit = 20000;
-    boolean aspirationWindow = true;
-    double aspirationWindowSize = 0.25;
+    boolean aspirationWindow = false;
+    double aspirationWindowSize = 0;
     int maxAllowedDepth = 0;
 
     // derived parameters
@@ -38,6 +38,14 @@ public class BasisKI {
     public String orchestrator(String fen, double ms, double aspirationWindowSize) {
         this.timeCriterion = true;
         this.timeLimit = ms;
+        this.aspirationWindow = true;
+        this.aspirationWindowSize = aspirationWindowSize;
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
+    }
+
+    public String orchestrator(String fen, int actualMaxDepth, double aspirationWindowSize) {
+        this.timeCriterion = false;
+        this.maxAllowedDepth = actualMaxDepth;
         this.aspirationWindow = true;
         this.aspirationWindowSize = aspirationWindowSize;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
