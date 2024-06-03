@@ -1,9 +1,9 @@
 import subprocess
 
-path = '/Users/noelkronenberg/Documents/GitHub' # NOTE: adjust to local path
+path = 'target' # NOTE: adjust to local path to 'target' folder
 
 def getMove(fen, time_limit=None):
-    java_class_path = f'{path}/projekt-ki/jump-sturdy-ai/target/classes'
+    java_class_path = f'{path}/classes'
     java_command = ['java', '-cp', java_class_path, 'communication.Middleware', fen]
     
     if time_limit is not None:
