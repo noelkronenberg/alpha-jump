@@ -196,8 +196,8 @@ public class BasisKI {
         }
 
         // update depth
-        if (maxDepth < depth) {
-            maxDepth = depth;
+        if (this.maxDepth < depth) {
+            this.maxDepth = depth;
         }
 
         // our turn
