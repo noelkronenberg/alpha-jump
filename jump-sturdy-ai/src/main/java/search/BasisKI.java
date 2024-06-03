@@ -15,7 +15,7 @@ public class BasisKI {
 
     // derived parameters
     public int maxDepth = 1;
-    public HashMap<String,Integer> positionsHM = new HashMap<>();
+    public HashMap<String, Integer> positionsHM = new HashMap<>();
 
     // logic
     final int winCutOff = 100000;
