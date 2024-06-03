@@ -6,41 +6,47 @@ import game.MoveGenerator;
 import java.util.*;
 
 public class BasisKI {
+    boolean timeCriterion = true;
     double timeLimit = 20000;
     boolean aspirationWindow = true;
     double aspirationWindowSize = 0.25;
+
     static final int winCutOff = 100000;
     static int currentDepth = 1;
     static int maxAllowedDepth = 0;
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     public int maxDepth = 1;
+
     public HashMap<String,Integer> positionsHM = new HashMap<>();
 
     // START: search with Alpha-Beta
 
     public String orchestrator(String fen) {
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen, true));
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
     public String orchestrator(String fen, double ms) {
-        timeLimit = ms;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen, true));
+        this.timeCriterion = true;
+        this.timeLimit = ms;
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
     public String orchestrator(String fen, double ms, boolean aspirationWindow, double aspirationWindowSize) {
-        timeLimit = ms;
+        this.timeCriterion = true;
+        this.timeLimit = ms;
         this.aspirationWindow = aspirationWindow;
         this.aspirationWindowSize = aspirationWindowSize;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen, true));
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
     public String orchestrator(String fen, int actualMaxDepth) {
+        this.timeCriterion = false;
         maxAllowedDepth = actualMaxDepth;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen, false));
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
-    public int getBestMove(String fen, boolean timeCriterion) {
+    public int getBestMove(String fen) {
         double bestScore = Integer.MIN_VALUE;
         int bestMove = -1;
 
@@ -57,7 +63,7 @@ public class BasisKI {
         fen = fen.substring(0, fen.length() - 2);
         positionsHM.put(fen,1); // save position
 
-        double moveTimeLimit = (timeLimit - 100) / movesList.size(); // (static) time for each move to search
+        double moveTimeLimit = (this.timeLimit - 100) / movesList.size(); // (static) time for each move to search
 
         // go through all possible moves
         for (Integer move : movesList) {
@@ -70,7 +76,7 @@ public class BasisKI {
             // for safety (in case of TimeCutOffs)
             isOurMove = false;
 
-            double currentScore = iterativeDeepening(nextState, moveTimeLimit, ourColor,ourColor, timeCriterion); // get score for current move (order)
+            double currentScore = iterativeDeepening(nextState, moveTimeLimit, ourColor,ourColor); // get score for current move (order)
 
             // evaluate move (score)
 
@@ -92,7 +98,7 @@ public class BasisKI {
         return bestMove;
     }
 
-    public double iterativeDeepening(MoveGenerator gameState, double moveTimeLimit, Color currentColor, Color ourColor, boolean timeCriterion) {
+    public double iterativeDeepening(MoveGenerator gameState, double moveTimeLimit, Color currentColor, Color ourColor) {
         int depth = 1;
         double bestScore = Integer.MIN_VALUE;
         double alpha=Integer.MIN_VALUE;
@@ -101,8 +107,8 @@ public class BasisKI {
         stopSearch = false;
 
         // check until time has run out or maxAllowedDepth is reached
-        while (timeCriterion || depth <= maxAllowedDepth) {
-            if(timeCriterion) {
+        while (this.timeCriterion || depth <= maxAllowedDepth) {
+            if (this.timeCriterion) {
                 long currentTime = System.currentTimeMillis();
                 if (currentTime >= endTime) {
                     break;
@@ -111,7 +117,7 @@ public class BasisKI {
 
             isOurMove = false; // to switch players for each depth
 
-            double currentScore = treeSearch(gameState, alpha, beta, endTime, depth, currentColor, ourColor, timeCriterion); // get score for current move (order)
+            double currentScore = treeSearch(gameState, alpha, beta, endTime, depth, currentColor, ourColor); // get score for current move (order)
 
             currentDepth = 1;
 
@@ -144,7 +150,7 @@ public class BasisKI {
         return bestScore;
     }
 
-    public double treeSearch(MoveGenerator gameState, double alpha, double beta, double endTime, int depth, Color currentColor , Color ourColor, boolean timeCriterion) {
+    public double treeSearch(MoveGenerator gameState, double alpha, double beta, double endTime, int depth, Color currentColor , Color ourColor) {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
         double score = Evaluation.ratePosition(gameState, ourColor, currentDepth);
 
@@ -178,7 +184,7 @@ public class BasisKI {
         }
         */
 
-        if (timeCriterion && System.currentTimeMillis() >= endTime) {
+        if (this.timeCriterion && System.currentTimeMillis() >= endTime) {
             stopSearch = true;
         }
 
@@ -204,7 +210,7 @@ public class BasisKI {
 
                 // update alpha
                 currentDepth+=1;
-                alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor,ourColor, timeCriterion));
+                alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor,ourColor));
 
                 // prune branch if no improvements can be made
                 if (beta <= alpha) {
@@ -228,7 +234,7 @@ public class BasisKI {
 
                 // update beta
                 currentDepth+=1;
-                beta = Math.min(beta, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor, ourColor, timeCriterion));
+                beta = Math.min(beta, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor, ourColor));
 
                 // prune branch if no improvements can be made
                 if (beta <= alpha) {
