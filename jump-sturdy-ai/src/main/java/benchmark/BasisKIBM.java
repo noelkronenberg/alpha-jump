@@ -49,7 +49,7 @@ public class BasisKIBM {
     // best move (without dynamic time management)
     static Result generateBestMoveNotDynamicResultTimeLimit(String board_fen, double ms) {
         init();
-        String bestMove = ki.orchestrator(board_fen, ms);
+        String bestMove = ki.orchestrator(board_fen, ms, false);
         int depth = ki.maxDepth;
         int uniquePositions = ki.positionsHM.size();
         int positions = 0;
@@ -65,7 +65,7 @@ public class BasisKIBM {
         int iterations = 3;
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
-            ki.orchestrator(board_fen, ms, true);
+            ki.orchestrator(board_fen, ms);
         }
         double endTime = System.nanoTime();
         double duration = ((endTime - startTime) / iterations) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
@@ -78,7 +78,7 @@ public class BasisKIBM {
         int iterations = 3;
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
-            ki.orchestrator(board_fen, ms, true);
+            ki.orchestrator(board_fen, ms, false);
         }
         double endTime = System.nanoTime();
         double duration = ((endTime - startTime) / iterations) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
