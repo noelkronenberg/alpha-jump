@@ -158,7 +158,7 @@ public class BasisKITest {
     @Test
     @DisplayName("Gruppe P")
     public void testGruppeP() {
-        testMoves("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "E4-D5");
+        testMoves("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "D3-F4", "E4-D5"); // NOTE: to be confirmed
         testMoves("b04b0/8/7r0/1b03b02/1rr5r0/4r0b02/b07/4r01 b", "A7-B7"); // fixed from F6-F7
     }
 

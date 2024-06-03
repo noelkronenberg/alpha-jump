@@ -10,6 +10,7 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
     - ```main``` Java files
       - ```benchmark``` benchmarking of algorithms
       - ```communication``` communication with (demo) game server
+      - ```debug``` algorithms (only) for debugging
       - ```game``` actual game logic
       - ```search``` algorithms for optimising gameplay
     - ```test``` [JUnit](https://www.jetbrains.com/help/idea/junit.html) tests

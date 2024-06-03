@@ -173,23 +173,15 @@ public class BasisKI {
         }
 
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ; // signal player change
-        LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
+        LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
         Evaluation.orderMoves(movesList, currentColor); // order moves
 
         double score = Evaluation.ratePosition(gameState, ourColor, this.currentDepth);
 
-
-
-        // get score for current position
-        // double score = Evaluation.ratePosition(gameState, ourColor);
-
-        // get moves for other player
-
-
         /*
-        // For Transp. Tables
+        // START: Transposition Tables
         if (positionsHM.containsKey(fen)){
             //return positionsHM.get(fen);
             positionsHM.put(fen, score);
@@ -198,6 +190,7 @@ public class BasisKI {
             //score = Evaluation.ratePosition(gameState, ourColor);
             positionsHM.put(fen,score);
         }
+        // END: Transposition Tables
         */
 
         if (this.timeCriterion && System.currentTimeMillis() >= endTime) {
@@ -264,13 +257,13 @@ public class BasisKI {
     // END: search with Alpha-Beta
 
     public static void main(String[] args) {
-        String fen = "6/8/5bb2/8/6b01/8/r07/6 b";
+        String fen = "b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
         m.printBoard(true);
 
         BasisKI ki = new BasisKI();
-        String bestMove = ki.orchestrator(fen);
+        String bestMove = ki.orchestrator(fen, 20000.0, 0.25);
         System.out.println("Best move: " + bestMove);
         System.out.println("Depth reached: " + ki.maxDepth);
 
