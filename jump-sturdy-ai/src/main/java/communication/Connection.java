@@ -63,13 +63,13 @@ public class Connection {
 
                         // player turns
                         if (response.getBoolean("player1") && this.player == 1) {
-                            String move = ki.orchestrator(fen);
+                            String move = ki.orchestrator(fen, 20000.0, 0.25);
                             JSONObject moveConverted = toJSON(move);
                             output.println(moveConverted);
                             System.out.println("\n" + "Player 1 move: " + moveConverted);
 
                         } else if (response.getBoolean("player2") && this.player == 2) {
-                            String move = ki.orchestrator(fen);
+                            String move = ki.orchestrator(fen, 20000.0, 0.25);
                             JSONObject moveConverted = toJSON(move);
                             output.println(moveConverted);
                             System.out.println("\n" + "Player 2 move: " + moveConverted);
