@@ -1,4 +1,9 @@
 jump-sturdy-ai/target
+/.idea
+/jump-sturdy-ai/.idea
+/game-server/__pycache__
+game-server/.idea
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -36,6 +41,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/.idea
-/jump-sturdy-ai/.idea
-/game-server/__pycache__
