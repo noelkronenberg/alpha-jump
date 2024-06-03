@@ -36,7 +36,7 @@ public class Evaluation {
 
             // check gameOver of other player
             if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
-                score += 100000*(1+(1/depth));
+                score += 100000 * (1+(1/depth));
             }
 
             // check row
@@ -52,6 +52,9 @@ public class Evaluation {
                 }
                 weight += 1;
             }
+
+            score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
+            score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
 
         } else if (player == Color.RED) {
             weight = 8;
@@ -74,16 +77,10 @@ public class Evaluation {
                 }
                 weight -= 1;
             }
-        }
 
-        if (moveGenerator.getComparisonFen() != moveGenerator.getFenFromBoard()) {
-            moveGenerator.generateAllPossibleMoves(player);
+            score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
+            score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
         }
-
-        // System.out.println("Possible moves: " + moveGenerator.getTotalPossibleMoves());
-        score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
-        // System.out.println("Protected pieces: " + moveGenerator.getProtectedPieces());
-        score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
 
         return score;
     }
