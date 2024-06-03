@@ -18,9 +18,16 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
     - ```test``` [JUnit](https://www.jetbrains.com/help/idea/junit.html) tests
 - ```working``` individual work
 
-## Steps for Game Server
+## Game Server
 
-See [manual](/game-server/manual.md) for set-up.
+> ```middleware.getMove(fen)``` is a translation between the Java implementation and Python. It will return the best move for a given fen string (e.g. ```game["board"]```).
+
+### Steps
+
+1. adjust ```path``` to ```target``` folder in ```middleware.py``` (if needed)
+2. start server: ```python server.py```
+3. start first client (in new terminal): ```python server.py```
+4. start second client (in new terminal): ```python server.py```
 
 ### Demo
 
