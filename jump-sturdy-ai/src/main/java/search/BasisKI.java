@@ -6,19 +6,22 @@ import game.MoveGenerator;
 import java.util.*;
 
 public class BasisKI {
+    // hyperparameters
     boolean timeCriterion = true;
     double timeLimit = 20000;
     boolean aspirationWindow = true;
     double aspirationWindowSize = 0.25;
+    int maxAllowedDepth = 0;
 
+    // derived parameters
+    public int maxDepth = 1;
+    public HashMap<String,Integer> positionsHM = new HashMap<>();
+
+    // logic
     final int winCutOff = 100000;
     int currentDepth = 1;
-    int maxAllowedDepth = 0;
     boolean stopSearch = false;
     boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
-    public int maxDepth = 1;
-
-    public HashMap<String,Integer> positionsHM = new HashMap<>();
 
     // START: search with Alpha-Beta
 
