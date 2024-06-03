@@ -8,7 +8,7 @@ import java.util.*;
 public class BasisKI {
     // hyperparameters
     boolean timeCriterion = true;
-    double timeLimit = 20000;
+    double timeLimit = 20000.0;
     boolean aspirationWindow = false;
     double aspirationWindowSize = 0;
     int maxAllowedDepth = 0;
