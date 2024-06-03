@@ -125,7 +125,7 @@ public class BasisKI {
             this.currentDepth = 1;
 
             // return if move order contains winning move
-            if (currentScore >= this.winCutOff) {
+            if (currentScore >= this.winCutOff || currentScore <=  -this.winCutOff) {
                 return currentScore;
             }
 
@@ -155,34 +155,39 @@ public class BasisKI {
 
     public double treeSearch(MoveGenerator gameState, double alpha, double beta, double endTime, int depth, Color currentColor , Color ourColor) {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
-        double score = Evaluation.ratePosition(gameState, ourColor, this.currentDepth);
 
         // save position
         if (positionsHM.containsKey(fen)){
-            //return positionsHM.get(fen);
             positionsHM.put(fen, positionsHM.get(fen)+1);
         }
-        else /*if ((depth == 1))*/{
-             //score = Evaluation.ratePosition(gameState, ourColor);
+        else{
             positionsHM.put(fen,1);
         }
 
-        // get score for current position
-        // double score = Evaluation.ratePosition(gameState, ourColor);
-
-        // get moves for other player
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ; // signal player change
         LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
         Evaluation.orderMoves(movesList, currentColor); // order moves
 
+        double score = Evaluation.ratePosition(gameState, ourColor, this.currentDepth);
+
+
+
+        // get score for current position
+        // double score = Evaluation.ratePosition(gameState, ourColor);
+
+        // get moves for other player
+
+
         /*
-        // save position
+        // For Transp. Tables
         if (positionsHM.containsKey(fen)){
+            //return positionsHM.get(fen);
             positionsHM.put(fen, score);
         }
         else if ((depth == 1)){
+            //score = Evaluation.ratePosition(gameState, ourColor);
             positionsHM.put(fen,score);
         }
         */
@@ -251,7 +256,7 @@ public class BasisKI {
     // END: search with Alpha-Beta
 
     public static void main(String[] args) {
-        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/1r0r02rr2/b03r01rr1/2r01r0r0 r";
+        String fen = "6/8/5bb2/8/6b01/8/r07/6 b";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
         m.printBoard(true);
