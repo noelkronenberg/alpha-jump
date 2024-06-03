@@ -33,6 +33,7 @@ public class Evaluation {
 
         if (player == Color.BLUE) {
             weight = 1;
+
             // check gameOver of other player
             if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
                 score += 100000*(1+(1/depth));
@@ -57,8 +58,9 @@ public class Evaluation {
 
             // check gameOver of other player
             if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE), Color.BLUE)) {
-                score += 100000*(1+(1/depth));
+                score += 100000 * (1+(1/depth));
             }
+
             // check row
             for (int row = 0; row < moveGenerator.getPieceBoard().length; row++) {
                 // check column
@@ -77,9 +79,10 @@ public class Evaluation {
         if (moveGenerator.getComparisonFen() != moveGenerator.getFenFromBoard()) {
             moveGenerator.generateAllPossibleMoves(player);
         }
-        System.out.println("Mögliche Züge: " + moveGenerator.getTotalPossibleMoves());
+
+        // System.out.println("Possible moves: " + moveGenerator.getTotalPossibleMoves());
         score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
-        System.out.println("Gedeckte Figuren: " + moveGenerator.getProtectedPieces());
+        // System.out.println("Protected pieces: " + moveGenerator.getProtectedPieces());
         score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
 
         return score;
@@ -89,19 +92,11 @@ public class Evaluation {
         double score = 0;
 
         if (color == Color.BLUE) {
-            // check if winning position (for BLUE)
-//            if (moveGenerator.doesBaseRowContainColor(Color.BLUE,7)) {
-//                return 100000;
-//            }
             score = getScoreWrapper(moveGenerator, Color.BLUE, depth) - getScoreWrapper(moveGenerator, Color.RED, depth);
         }
 
         else if (color == Color.RED) {
-            // check if winning position (for RED)
-//            if (moveGenerator.doesBaseRowContainColor(Color.RED,0)) {
-//                return 100000;
-//            }
-                score = getScoreWrapper(moveGenerator, Color.RED, depth) - getScoreWrapper(moveGenerator, Color.BLUE, depth);
+            score = getScoreWrapper(moveGenerator, Color.RED, depth) - getScoreWrapper(moveGenerator, Color.BLUE, depth);
         }
         return score;
     }

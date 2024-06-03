@@ -6,12 +6,10 @@ import game.MoveGenerator;
 import java.util.*;
 
 public class BasisKI_noAB {
-    static final int TIME_LIMIT = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
+    static final int TIME_LIMIT = 20000;
     static final int winCutOff = 100000;
     static int maxAllowedDepth = 2;
-
     static int currentDepth = 1;
-
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     static int maxDepth = -1;
@@ -42,7 +40,7 @@ public class BasisKI_noAB {
         Color ourColor = gameState.getColor(color_fen);
         Evaluation.orderMoves(movesList, ourColor);
 
-        fen=fen.substring(0,fen.length()-2);
+        fen=fen.substring(0, fen.length() - 2);
         positionsHM.put(fen,1); // save position
 
         long moveTimeLimit = (TIME_LIMIT - 100) / movesList.size(); // (static) time for each move to search
@@ -54,7 +52,6 @@ public class BasisKI_noAB {
             MoveGenerator nextState = new MoveGenerator();
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
-
 
             double currentScore = iterativeDeepeningNoAlphaBeta(nextState, moveTimeLimit, ourColor,ourColor, move); // get score for current move (order)
 
@@ -88,6 +85,7 @@ public class BasisKI_noAB {
             double currentScore = treeSearchNoAlphaBeta(gameState, endTime, depth, currentColor, ourColor, -1); // get score for current move (order)
             // System.out.println("best score (for iteration): " + currentScore + " | depth: " + depth + " | move: " + MoveGenerator.convertMoveToFEN(move));
             currentDepth=1;
+
             // return if move order contains winning move
             if (currentScore >= winCutOff) {
                 return currentScore;

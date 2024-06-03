@@ -6,11 +6,9 @@ import game.MoveGenerator;
 import java.util.*;
 
 public class BasisKI {
-    double timeLimit = 20000; // TODO: Hier rumspielen um sinnvollste Zeit zu checken
+    double timeLimit = 20000;
     static final int winCutOff = 100000;
-
     static int currentDepth = 1;
-
     static int maxAllowedDepth = 0;
     static boolean stopSearch = false;
     static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
@@ -47,7 +45,7 @@ public class BasisKI {
         Color ourColor = gameState.getColor(color_fen);
         Evaluation.orderMoves(movesList, ourColor);
 
-        fen=fen.substring(0,fen.length()-2);
+        fen = fen.substring(0, fen.length() - 2);
         positionsHM.put(fen,1); // save position
 
         double moveTimeLimit = (timeLimit - 100) / movesList.size(); // (static) time for each move to search
@@ -60,23 +58,25 @@ public class BasisKI {
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
 
-            //Auf nummer sicher gehen, dass auch wirklich nicht noch isOurMove auf true ist aufgrund eines TimeCutOffs
-            isOurMove=false;
+            // for safety (in case of TimeCutOffs)
+            isOurMove = false;
 
             double currentScore = iterativeDeepening(nextState, moveTimeLimit, ourColor,ourColor, timeCriterion); // get score for current move (order)
 
             // evaluate move (score)
 
+            /*
             // return if move order contains winning move
-//            if (currentScore >= winCutOff) {
-//                return move;
-//            }
+            if (currentScore >= winCutOff) {
+                return move;
+            }
+            */
 
             // check if current move is best
             if (currentScore > bestScore) {
                 bestScore = currentScore;
                 bestMove = move;
-                //System.out.println("Current best move: " + MoveGenerator.convertMoveToFEN(bestMove) + " (score: " + bestScore + ")");
+                // System.out.println("Current best move: " + MoveGenerator.convertMoveToFEN(bestMove) + " (score: " + bestScore + ")");
             }
         }
 
@@ -92,35 +92,43 @@ public class BasisKI {
         stopSearch = false;
 
         // check until time has run out or maxAllowedDepth is reached
-        while (timeCriterion||depth <= maxAllowedDepth) {
+        while (timeCriterion || depth <= maxAllowedDepth) {
             if(timeCriterion) {
                 long currentTime = System.currentTimeMillis();
                 if (currentTime >= endTime) {
                     break;
                 }
             }
-            //damit wir für jede Tiefe wieder damit anfangen, dass der Gegner drann ist.
-            isOurMove=false;
+
+            isOurMove = false; // to switch players for each depth
 
             double currentScore = treeSearch(gameState, alpha, beta, endTime, depth, currentColor, ourColor, timeCriterion); // get score for current move (order)
 
-            currentDepth=1;
+            currentDepth = 1;
 
             // return if move order contains winning move
             if (currentScore >= winCutOff) {
                 return currentScore;
             }
 
-            if (!stopSearch) {      //this is so that the most exact(longest and deepest searched) value is always taken
+            if (!stopSearch) { // this is so that the most exact (longest and deepest searched) value is always taken
                 bestScore = currentScore;
             }
-            if (currentScore<=alpha || currentScore >= beta) {  //Case HighFail/LowFail
+
+            // START: aspiration window
+
+            // fail high / low
+            if (currentScore<=alpha || currentScore >= beta) {
                 alpha = Integer.MIN_VALUE;
                 beta = Integer.MAX_VALUE;
                 continue;
             }
+
             alpha = currentScore - 0.25;
             beta = currentScore + 0.25;
+
+            // END: aspiration window
+
             depth++;
         }
         return bestScore;
@@ -129,6 +137,7 @@ public class BasisKI {
     public double treeSearch(MoveGenerator gameState, double alpha, double beta, double endTime, int depth, Color currentColor , Color ourColor, boolean timeCriterion) {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
         double score = Evaluation.ratePosition(gameState, ourColor, currentDepth);
+
         // save position
         if (positionsHM.containsKey(fen)){
             //return positionsHM.get(fen);
@@ -138,26 +147,26 @@ public class BasisKI {
              //score = Evaluation.ratePosition(gameState, ourColor);
             positionsHM.put(fen,1);
         }
-        // get score for current position
 
-        //double score = Evaluation.ratePosition(gameState, ourColor);
+        // get score for current position
+        // double score = Evaluation.ratePosition(gameState, ourColor);
 
         // get moves for other player
-        currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ;  // signal player change
+        currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ; // signal player change
         LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
         Evaluation.orderMoves(movesList, currentColor); // order moves
 
-
-
+        /*
         // save position
-//        if (positionsHM.containsKey(fen)){
-//            positionsHM.put(fen, score);
-//        }
-//        else /*if ((depth == 1))*/{
-//            positionsHM.put(fen,score);
-//        }
+        if (positionsHM.containsKey(fen)){
+            positionsHM.put(fen, score);
+        }
+        else if ((depth == 1)){
+            positionsHM.put(fen,score);
+        }
+        */
 
         if (timeCriterion && System.currentTimeMillis() >= endTime) {
             stopSearch = true;
