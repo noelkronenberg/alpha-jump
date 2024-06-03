@@ -18,7 +18,7 @@ public class BasisKIDebugger {
         // best move
         String currentColor = "" + fen.charAt(fen.length() - 1);
         System.out.println();
-        System.out.println("Best move: " + move + " (" + currentColor + ")");
+        System.out.println("Best move: " + move + " (color: " + currentColor + " | move: "+ 1 + ")");
 
         // move piece
         int[] moveInt = moveGenerator.convertStringToPosWrapper(move);
@@ -28,12 +28,12 @@ public class BasisKIDebugger {
         System.out.println();
         moveGenerator.printBoard(true);
 
-        for (int i = 1; i < sequence; i++)  {
+        for (int i = 2; i <= sequence; i++)  {
             currentColor = (currentColor.equals("r")) ? "b" : "r"; // switch color
 
             // get best move
             String bestMove = ki.orchestrator(moveGenerator.getFenFromBoard() + " " + currentColor, 20000.0, 0.25);
-            System.out.println("Best move: " + bestMove + " (" + currentColor + ")");
+            System.out.println("Best move: " + bestMove + " (color: " + currentColor + " | move: "+ i + ")");
 
             // convert move
             int[] bestMoveInts = moveGenerator.convertStringToPosWrapper(bestMove);
@@ -47,7 +47,7 @@ public class BasisKIDebugger {
     }
 
     public static void main(String[] args) {
-        BasisKIDebugger.moveOrder("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "D3-F4", 10);
+        BasisKIDebugger.moveOrder("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "E4-D5", 10);
     }
 
 }
