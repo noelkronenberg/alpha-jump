@@ -9,7 +9,7 @@ public class BasisKI {
     // hyperparameters (defaults)
     boolean timeCriterion = true;
     double timeLimit = 20000.0;
-    boolean aspirationWindow = false;
+    boolean aspirationWindow = false; // TODO: turn on by default (with 0.25); requires adjustment of benchmarks / tests
     double aspirationWindowSize = 0;
     int maxAllowedDepth = 0;
     boolean dynamicTime = true;
