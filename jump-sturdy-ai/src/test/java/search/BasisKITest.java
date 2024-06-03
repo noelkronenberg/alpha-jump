@@ -158,7 +158,7 @@ public class BasisKITest {
     @Test
     @DisplayName("Gruppe P")
     public void testGruppeP() {
-        testMoves("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "E4-D5");
+        testMoves("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "D3-F4");
         testMoves("b04b0/8/7r0/1b03b02/1rr5r0/4r0b02/b07/4r01 b", "A7-B7"); // fixed from F6-F7
     }
 
@@ -213,7 +213,7 @@ public class BasisKITest {
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        moveGenerator.initializeBoard("b0b01b0b0b0/8/4b0b02/3br4/6b01/2rr3rb1/4rr3/r0r02r0r0 r");
+        moveGenerator.initializeBoard("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b");
         moveGenerator.printBoard(true);
     }
 }
