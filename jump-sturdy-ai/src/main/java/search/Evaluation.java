@@ -33,11 +33,10 @@ public class Evaluation {
 
         score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
         score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
-
-
+        
         if (player == Color.BLUE) {
             weight = 1;
-            
+
             // check gameOver of other player
             if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
                 score += 100000 * (1+(1/depth));
