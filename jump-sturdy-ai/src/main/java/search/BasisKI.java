@@ -11,11 +11,11 @@ public class BasisKI {
     boolean aspirationWindow = true;
     double aspirationWindowSize = 0.25;
 
-    static final int winCutOff = 100000;
-    static int currentDepth = 1;
-    static int maxAllowedDepth = 0;
-    static boolean stopSearch = false;
-    static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
+    final int winCutOff = 100000;
+    int currentDepth = 1;
+    int maxAllowedDepth = 0;
+    boolean stopSearch = false;
+    boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
     public int maxDepth = 1;
 
     public HashMap<String,Integer> positionsHM = new HashMap<>();
@@ -42,7 +42,7 @@ public class BasisKI {
 
     public String orchestrator(String fen, int actualMaxDepth) {
         this.timeCriterion = false;
-        maxAllowedDepth = actualMaxDepth;
+        this.maxAllowedDepth = actualMaxDepth;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
@@ -74,7 +74,7 @@ public class BasisKI {
             nextState.movePiece(move);
 
             // for safety (in case of TimeCutOffs)
-            isOurMove = false;
+            this.isOurMove = false;
 
             double currentScore = iterativeDeepening(nextState, moveTimeLimit, ourColor,ourColor); // get score for current move (order)
 
@@ -82,7 +82,7 @@ public class BasisKI {
 
             /*
             // return if move order contains winning move
-            if (currentScore >= winCutOff) {
+            if (currentScore >= this.winCutOff) {
                 return move;
             }
             */
@@ -104,10 +104,10 @@ public class BasisKI {
         double alpha=Integer.MIN_VALUE;
         double beta=Integer.MAX_VALUE;
         double endTime = System.currentTimeMillis() + moveTimeLimit;
-        stopSearch = false;
+        this.stopSearch = false;
 
         // check until time has run out or maxAllowedDepth is reached
-        while (this.timeCriterion || depth <= maxAllowedDepth) {
+        while (this.timeCriterion || depth <= this.maxAllowedDepth) {
             if (this.timeCriterion) {
                 long currentTime = System.currentTimeMillis();
                 if (currentTime >= endTime) {
@@ -115,18 +115,18 @@ public class BasisKI {
                 }
             }
 
-            isOurMove = false; // to switch players for each depth
+            this.isOurMove = false; // to switch players for each depth
 
             double currentScore = treeSearch(gameState, alpha, beta, endTime, depth, currentColor, ourColor); // get score for current move (order)
 
-            currentDepth = 1;
+            this.currentDepth = 1;
 
             // return if move order contains winning move
-            if (currentScore >= winCutOff) {
+            if (currentScore >= this.winCutOff) {
                 return currentScore;
             }
 
-            if (!stopSearch) { // this is so that the most exact (longest and deepest searched) value is always taken
+            if (!this.stopSearch) { // this is so that the most exact (longest and deepest searched) value is always taken
                 bestScore = currentScore;
             }
 
@@ -152,7 +152,7 @@ public class BasisKI {
 
     public double treeSearch(MoveGenerator gameState, double alpha, double beta, double endTime, int depth, Color currentColor , Color ourColor) {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
-        double score = Evaluation.ratePosition(gameState, ourColor, currentDepth);
+        double score = Evaluation.ratePosition(gameState, ourColor, this.currentDepth);
 
         // save position
         if (positionsHM.containsKey(fen)){
@@ -185,10 +185,10 @@ public class BasisKI {
         */
 
         if (this.timeCriterion && System.currentTimeMillis() >= endTime) {
-            stopSearch = true;
+            this.stopSearch = true;
         }
 
-        if (stopSearch|| (depth == 1)|| score >= winCutOff ||score <= -winCutOff) {
+        if (this.stopSearch || (depth == 1)|| score >= this.winCutOff || score <= -this.winCutOff) {
             return score;
         }
 
@@ -198,7 +198,7 @@ public class BasisKI {
         }
 
         // our turn
-        if (isOurMove) {
+        if (this.isOurMove) {
             for (Integer move : movesList) {
 
                 // get board with next (now current) move made
@@ -206,10 +206,10 @@ public class BasisKI {
                 nextState.initializeBoard(fen);
                 nextState.movePiece(move);
 
-                isOurMove = false; // player change
+                this.isOurMove = false; // player change
 
                 // update alpha
-                currentDepth+=1;
+                this.currentDepth += 1;
                 alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor,ourColor));
 
                 // prune branch if no improvements can be made
@@ -230,10 +230,10 @@ public class BasisKI {
                 nextState.initializeBoard(fen);
                 nextState.movePiece(move);
 
-                isOurMove = true; // player change
+                this.isOurMove = true; // player change
 
                 // update beta
-                currentDepth+=1;
+                this.currentDepth += 1;
                 beta = Math.min(beta, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor, ourColor));
 
                 // prune branch if no improvements can be made
