@@ -74,10 +74,41 @@ public class BasisKI {
         fen = fen.substring(0, fen.length() - 2);
         positionsHM.put(fen,1); // save position
 
-        double moveTimeLimit = (this.timeLimit - 100) / movesList.size(); // (static) time for each move to search
+        // START: dynamic time management
+
+        double totalTime = this.timeLimit - 100;
+        double remainingTime = totalTime;
+        double totalWeight = 0.0;
+
+        // total weight (sum of inverses of indices)
+        for (int i = 1; i <= movesList.size(); i++) {
+            totalWeight += 1.0 / i;
+        }
+
+        // END: dynamic time management
 
         // go through all possible moves
-        for (Integer move : movesList) {
+        for (int i = 0; i < movesList.size(); i++) {
+            Integer move = movesList.get(i);
+
+            // START: dynamic time management
+            double moveTimeLimit;
+
+            if (remainingTime <= 0) {
+                break;
+            } else {
+                double weight = 1.0 / (i + 1);
+                moveTimeLimit = (weight / totalWeight) * totalTime;
+
+                // remaining time
+                remainingTime -= moveTimeLimit;
+
+                // remove over-allocation
+                if (remainingTime < 0) {
+                    moveTimeLimit += remainingTime;
+                }
+            }
+            // END: dynamic time management
 
             // get board with current move made
             MoveGenerator nextState = new MoveGenerator();
