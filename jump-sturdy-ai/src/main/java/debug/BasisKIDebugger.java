@@ -12,7 +12,12 @@ public class BasisKIDebugger {
         moveGenerator.initializeBoard(fen);
 
         // show board
+        System.out.println();
+        moveGenerator.printBoard(true);
+
+        // best move
         String currentColor = "" + fen.charAt(fen.length() - 1);
+        System.out.println();
         System.out.println("Best move: " + move + " (" + currentColor + ")");
 
         // move piece
