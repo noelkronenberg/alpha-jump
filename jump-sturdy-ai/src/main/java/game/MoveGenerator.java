@@ -548,7 +548,7 @@ public class MoveGenerator {
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
         Color color = this.getColor(color_fen);
-        System.out.println("Farbe: " + color);
+        // System.out.println("Color: " + color);
         this.initializeBoard(fen.substring(0, fen.length() - 2));
         return this.generateAllPossibleMoves(color);
     }
