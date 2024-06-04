@@ -81,9 +81,9 @@ public class BasisKI {
         Evaluation.orderMoves(movesList, ourColor);
 
         fen = fen.substring(0, fen.length() - 2);
-        positionsHM.put(fen,1); // save position
-        //TODO: Maybe impl. the starting position for Transposition tables aswell?! needs to be discussed!
+        positionsHM.put(fen, 1); // save position
 
+        //TODO: Maybe impl. the starting position for Transposition tables as well?
 
         // START: time management
         double moveTimeLimit = (this.timeLimit - 100) / movesList.size(); // default (for static)
