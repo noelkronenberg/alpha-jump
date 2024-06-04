@@ -17,6 +17,7 @@ public class BasisKI {
     // derived parameters
     public int maxDepth = 1;
     public HashMap<String, Integer> positionsHM = new HashMap<>();
+    public HashMap<String, TranspositionTableObejct> transpositionTable = new HashMap<>();
 
     // logic
     final int winCutOff = 100000;
@@ -81,6 +82,8 @@ public class BasisKI {
 
         fen = fen.substring(0, fen.length() - 2);
         positionsHM.put(fen,1); // save position
+        //TODO: Maybe impl. the starting position for Transposition tables aswell?! needs to be discussed!
+
 
         // START: time management
         double moveTimeLimit = (this.timeLimit - 100) / movesList.size(); // default (for static)
@@ -212,86 +215,131 @@ public class BasisKI {
             positionsHM.put(fen, 1);
         }
 
-        currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ; // signal player change
-        LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
-        LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
-        Evaluation.orderMoves(movesList, currentColor); // order moves
 
-        double score = Evaluation.ratePosition(gameState, ourColor, this.currentDepth);
 
-        /*
         // START: Transposition Tables
-        if (positionsHM.containsKey(fen)){
+        boolean isInTT=transpositionTable.containsKey(fen);
+        if (isInTT&& transpositionTable.get(fen).depth > depth){
             //return positionsHM.get(fen);
-            positionsHM.put(fen, score);
+            if (this.maxDepth < depth) {
+                this.maxDepth = depth;
+            }
+            if (this.timeCriterion && System.currentTimeMillis() >= endTime) {
+                this.stopSearch = true;
+            }
+            return transpositionTable.get(fen).overAllScore;
         }
-        else if ((depth == 1)){
-            //score = Evaluation.ratePosition(gameState, ourColor);
-            positionsHM.put(fen,score);
+        else {
+
+            double score;
+
+            currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ; // signal player change
+
+            LinkedList<Integer> movesList;
+
+            TranspositionTableObejct ttData;
+
+            if (!isInTT){
+
+                LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
+                movesList = Evaluation.convertMovesToList(moves);
+
+                Evaluation.orderMoves(movesList, currentColor); // order moves
+
+                score = Evaluation.ratePosition(gameState, ourColor, this.currentDepth);
+
+                ttData=new TranspositionTableObejct(score,movesList,depth);
+            }
+            else {
+                ttData=transpositionTable.get(fen);
+                movesList=ttData.movesList;      //List is already be ordered!
+                score = ttData.overAllScore;
+                ttData.depth=depth;                //TODO: should depth be updated here or at the end=?!
+            }
+
+            if (this.timeCriterion && System.currentTimeMillis() >= endTime) {
+                this.stopSearch = true;
+            }
+
+            if (this.stopSearch || (depth == 1)|| score >= this.winCutOff || score <= -this.winCutOff) {
+                return score;
+            }
+
+            // update depth
+            if (this.maxDepth < depth) {
+                this.maxDepth = depth;
+            }
+
+            double bestScore = Integer.MIN_VALUE;   //Support Variables for TTs
+            int bestMove = -1;
+
+            // our turn
+            if (this.isOurMove) {
+                for (Integer move : movesList) {
+
+                    // get board with next (now current) move made
+                    MoveGenerator nextState = new MoveGenerator();
+                    nextState.initializeBoard(fen);
+                    nextState.movePiece(move);
+
+                    this.isOurMove = false; // player change
+
+                    // update alpha
+                    this.currentDepth += 1;
+                    double prevAlpha = alpha;
+                    alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor,ourColor));
+                    if (prevAlpha<alpha){   //Signals Switch of best move
+                        bestScore=alpha;
+                        bestMove=move;
+                    }
+
+                    // prune branch if no improvements can be made
+                    if (beta <= alpha) {
+                        break;
+                    }
+                }
+                ttData.bestMove=bestMove;       //Update TT
+                ttData.overAllScore=bestScore;
+
+                return alpha;
+            }
+
+            // other players turn
+            else {
+                // go through all possible moves
+                for (Integer move : movesList) {
+
+                    // get board with next (now current) move made
+                    MoveGenerator nextState = new MoveGenerator();
+                    nextState.initializeBoard(fen);
+                    nextState.movePiece(move);
+
+                    this.isOurMove = true; // player change
+
+                    // update beta
+                    this.currentDepth += 1;
+                    double prevBeta = beta;
+
+                    beta = Math.min(beta, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor, ourColor));
+
+                    if (prevBeta>beta){   //Signals Switch of best move
+                        bestScore=beta;
+                        bestMove=move;           //Update overallscore for this pos and its best move
+                    }
+
+                    // prune branch if no improvements can be made
+                    if (beta <= alpha) {
+                        break;
+                    }
+                }
+                ttData.bestMove=bestMove;       //Update TT
+                ttData.overAllScore=bestScore;
+
+                return beta;
+            }
         }
         // END: Transposition Tables
-        */
-
-        if (this.timeCriterion && System.currentTimeMillis() >= endTime) {
-            this.stopSearch = true;
-        }
-
-        if (this.stopSearch || (depth == 1)|| score >= this.winCutOff || score <= -this.winCutOff) {
-            return score;
-        }
-
-        // update depth
-        if (this.maxDepth < depth) {
-            this.maxDepth = depth;
-        }
-
-        // our turn
-        if (this.isOurMove) {
-            for (Integer move : movesList) {
-
-                // get board with next (now current) move made
-                MoveGenerator nextState = new MoveGenerator();
-                nextState.initializeBoard(fen);
-                nextState.movePiece(move);
-
-                this.isOurMove = false; // player change
-
-                // update alpha
-                this.currentDepth += 1;
-                alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor,ourColor));
-
-                // prune branch if no improvements can be made
-                if (beta <= alpha) {
-                    break;
-                }
-            }
-            return alpha;
-        }
-
-        // other players turn
-        else {
-            // go through all possible moves
-            for (Integer move : movesList) {
-
-                // get board with next (now current) move made
-                MoveGenerator nextState = new MoveGenerator();
-                nextState.initializeBoard(fen);
-                nextState.movePiece(move);
-
-                this.isOurMove = true; // player change
-
-                // update beta
-                this.currentDepth += 1;
-                beta = Math.min(beta, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor, ourColor));
-
-                // prune branch if no improvements can be made
-                if (beta <= alpha) {
-                    break;
-                }
-            }
-            return beta;
-        }
     }
 
     // END: search with Alpha-Beta
