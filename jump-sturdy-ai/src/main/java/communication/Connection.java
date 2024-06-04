@@ -27,10 +27,10 @@ public class Connection {
             System.out.println("Player "+ this.player + " | " + "Connected to the server.");
 
             PrintWriter output = new PrintWriter(server.getOutputStream(), true);
+
             InputStream inputStream = server.getInputStream();
 
             while (true) {
-
                 // send request to get game status
                 output.println("\"get\"");
 
@@ -65,13 +65,13 @@ public class Connection {
                         if (response.getBoolean("player1") && this.player == 1) {
                             String move = ki.orchestrator(fen, 20000.0, 0.25);
                             JSONObject moveConverted = toJSON(move);
-                            output.println(moveConverted);
-                            System.out.println("\n" + "Player 1 move: " + moveConverted);
+                            output.println(moveConverted.toString());
+                            System.out.print("\n" + "Player 1 move: " + moveConverted);
 
                         } else if (response.getBoolean("player2") && this.player == 2) {
                             String move = ki.orchestrator(fen, 20000.0, 0.25);
                             JSONObject moveConverted = toJSON(move);
-                            output.println(moveConverted);
+                            output.println(moveConverted.toString());
                             System.out.println("\n" + "Player 2 move: " + moveConverted);
                         }
                     }
@@ -88,6 +88,7 @@ public class Connection {
         Connection player2 = new Connection();
 
         Thread thread1 = new Thread(() -> player1.connect(1));
+        Thread.sleep(1000);
         Thread thread2 = new Thread(() -> player2.connect(2));
 
         thread1.start();
