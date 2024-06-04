@@ -215,13 +215,10 @@ public class BasisKI {
             positionsHM.put(fen, 1);
         }
 
-
-
-
         // START: Transposition Tables
-        boolean isInTT=transpositionTable.containsKey(fen);
-        if (isInTT&& transpositionTable.get(fen).depth > depth){
-            //return positionsHM.get(fen);
+        boolean isInTT = transpositionTable.containsKey(fen);
+        if (isInTT && transpositionTable.get(fen).depth > depth){
+            // return positionsHM.get(fen);
             if (this.maxDepth < depth) {
                 this.maxDepth = depth;
             }
@@ -231,31 +228,24 @@ public class BasisKI {
             return transpositionTable.get(fen).overAllScore;
         }
         else {
-
             double score;
-
             currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ; // signal player change
-
             LinkedList<Integer> movesList;
-
             TranspositionTableObejct ttData;
 
-            if (!isInTT){
-
+            if (!isInTT) {
                 LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
                 movesList = Evaluation.convertMovesToList(moves);
-
                 Evaluation.orderMoves(movesList, currentColor); // order moves
 
                 score = Evaluation.ratePosition(gameState, ourColor, this.currentDepth);
-
-                ttData=new TranspositionTableObejct(score,movesList,depth);
+                ttData = new TranspositionTableObejct(score, movesList, depth);
             }
             else {
-                ttData=transpositionTable.get(fen);
-                movesList=ttData.movesList;      //List is already be ordered!
+                ttData = transpositionTable.get(fen);
+                movesList = ttData.movesList; // list is already ordered
                 score = ttData.overAllScore;
-                ttData.depth=depth;                //TODO: should depth be updated here or at the end=?!
+                ttData.depth=depth; // TODO: should depth be updated here or at the end?
             }
 
             if (this.timeCriterion && System.currentTimeMillis() >= endTime) {
@@ -271,7 +261,7 @@ public class BasisKI {
                 this.maxDepth = depth;
             }
 
-            double bestScore = Integer.MIN_VALUE;   //Support Variables for TTs
+            double bestScore = Integer.MIN_VALUE; // support variables for TTs
             int bestMove = -1;
 
             // our turn
@@ -289,9 +279,9 @@ public class BasisKI {
                     this.currentDepth += 1;
                     double prevAlpha = alpha;
                     alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor,ourColor));
-                    if (prevAlpha<alpha){   //Signals Switch of best move
-                        bestScore=alpha;
-                        bestMove=move;
+                    if (prevAlpha < alpha) { // signals switch of best move
+                        bestScore = alpha;
+                        bestMove = move;
                     }
 
                     // prune branch if no improvements can be made
@@ -299,8 +289,8 @@ public class BasisKI {
                         break;
                     }
                 }
-                ttData.bestMove=bestMove;       //Update TT
-                ttData.overAllScore=bestScore;
+                ttData.bestMove = bestMove; // update TT
+                ttData.overAllScore = bestScore;
 
                 return alpha;
             }
@@ -323,9 +313,9 @@ public class BasisKI {
 
                     beta = Math.min(beta, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor, ourColor));
 
-                    if (prevBeta>beta){   //Signals Switch of best move
-                        bestScore=beta;
-                        bestMove=move;           //Update overallscore for this pos and its best move
+                    if (prevBeta > beta){ // signals switch of best move
+                        bestScore = beta;
+                        bestMove = move; // update overall score for this pos and its best move
                     }
 
                     // prune branch if no improvements can be made
@@ -333,8 +323,8 @@ public class BasisKI {
                         break;
                     }
                 }
-                ttData.bestMove=bestMove;       //Update TT
-                ttData.overAllScore=bestScore;
+                ttData.bestMove = bestMove; // update TT
+                ttData.overAllScore = bestScore;
 
                 return beta;
             }
