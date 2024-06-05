@@ -1,0 +1,7 @@
+P2 connected 
+b0b0b0b0b0b0/2b0b0b0b0b01/1b06/8/8/3r04/1r0r01r0r0r01/r0r0r0r0r0r0 r
+B2-B3
+b0b0b0b0b0b0/2b0b0b0b0b01/8/1b06/8/1r01r04/2r01r0r0r01/r0r0r0r0r0r0 r
+B3-B4
+b01b0b0b0b0/2bbb0b0b0b01/8/1b06/8/1r01r02r01/2r01r0r02/r0r0r0r0r0r0 r
+C1-C2
