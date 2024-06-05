@@ -44,7 +44,14 @@ public class Connection {
 
                 if (bytesRead != -1) {
                     // convert response
-                    String jsonString = new String(data, 1, bytesRead);
+                    String jsonString;
+                    if (data[0]==49||data[0]==48){          //check whos turn it is (0 or 1)
+                         jsonString = new String(data, 1, bytesRead);
+                    }
+                    else {
+                         jsonString = new String(data, 0, bytesRead);
+                    }
+                    
                     try {
                         response = new JSONObject(jsonString);
                     } catch (JSONException e) {
