@@ -39,7 +39,7 @@ public class Connection {
                 this.player=2;
             }
 
-            System.out.println("Player "+ this.player + " | " + "Connected to the server.");
+            //System.out.println("Player "+ this.player + " | " + "Connected to the server.");
             
             Gson gson = new Gson();
 
@@ -48,7 +48,7 @@ public class Connection {
                 output.println("\"get\"");
 
                 // wait for server response
-                Thread.currentThread().sleep(500);
+                //Thread.currentThread().sleep(500);
 
                 // get server response
                 byte[] data = new byte[9999];
@@ -68,55 +68,54 @@ public class Connection {
                     try {
                         response = new JSONObject(jsonString);
                     } catch (JSONException e) {
-                        System.out.println("\n" + "Player "+ this.player + " | " + "Error parsing JSON: " + jsonString);
+                        //System.out.println("\n" + "Player "+ this.player + " | " + "Error parsing JSON: " + jsonString);
                         continue;
                     }
 
-                    System.out.println("\n" + "Player "+ this.player + " | " + "Server response:  " + response);
+                    //System.out.println("\n" + "Player "+ this.player + " | " + "Server response:  " + response);
 
                     // process server response
                     if (response.getBoolean("bothConnected")) {
 
                         String fen = response.getString("board");
-                        System.out.println("\n" + "Player "+ this.player + " | " + "Current board: ");
-                        System.out.println(fen);
+                        //System.out.println("\n" + "Player "+ this.player + " | " + "Current board: ");
+                        //System.out.println(fen);
 
                         // player turns
                         if (response.getBoolean("player1") && this.player == 1) {
                             String move = ki.orchestrator(fen, 20000.0, 0.25);
-                            JSONObject moveConverted = toJSON(move);
                             output.println(gson.toJson(move));
-                            System.out.print("\n" + "Player 1 move: " + moveConverted);
+                            //System.out.print("\n" + "Player 1 move: " + moveConverted);
 
                         } else if (response.getBoolean("player2") && this.player == 2) {
                             String move = ki.orchestrator(fen, 20000.0, 0.25);
-                            JSONObject moveConverted = toJSON(move);
                             output.println(gson.toJson(move));
-                            System.out.println("\n" + "Player 2 move: " + moveConverted);
+                            //System.out.println("\n" + "Player 2 move: " + moveConverted);
                         }
                     }
                 }
             }
 
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             System.err.println("Player "+ this.player + " | " +  "Error occurred while connecting to the server: " + e.getMessage());
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
         Connection player1 = new Connection();
-        Connection player2 = new Connection();
+        //player1.connect();                              //add this
+        Connection player2 = new Connection();          //Delete this
 
-        Thread thread1 = new Thread(() -> player1.connect()); //
-        Thread thread2 = new Thread(() -> player2.connect());
+        Thread thread1 = new Thread(() -> player1.connect()); //Delete this
+        Thread thread2 = new Thread(() -> player2.connect()); //Delete this
 
-        thread1.start();
-        Thread.sleep(100);
-        thread2.start();
+        thread1.start();                    //Delete this
+        Thread.sleep(100);            //Delete this
+        thread2.start();                    //Delete this
 
         try {
-            thread1.join();
-            thread2.join();
+            thread1.join();                 //Delete this
+            thread2.join();                 //Delete this
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
