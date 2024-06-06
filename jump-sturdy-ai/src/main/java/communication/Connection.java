@@ -34,9 +34,11 @@ public class Connection {
             int zwischen = (int) inputStream.read();
             if (zwischen==48){
                 this.player=1;
+                System.out.println("You are Player 1");
             }
             else {
                 this.player=2;
+                System.out.println("You are Player 2");
             }
 
             //System.out.println("Player "+ this.player + " | " + "Connected to the server.");
@@ -85,12 +87,12 @@ public class Connection {
                         if (response.getBoolean("player1") && this.player == 1) {
                             String move = ki.orchestrator(fen, 20000.0, 0.25);
                             output.println(gson.toJson(move));
-                            //System.out.print("\n" + "Player 1 move: " + moveConverted);
+                            System.out.print("\n" + "Player 1 move: " + move);
 
                         } else if (response.getBoolean("player2") && this.player == 2) {
                             String move = ki.orchestrator(fen, 20000.0, 0.25);
                             output.println(gson.toJson(move));
-                            //System.out.println("\n" + "Player 2 move: " + moveConverted);
+                            System.out.println("\n" + "Player 2 move: " + move);
                         }
                     }
                 }
@@ -103,21 +105,21 @@ public class Connection {
 
     public static void main(String[] args) throws InterruptedException {
         Connection player1 = new Connection();
-        //player1.connect();                              //add this
-        Connection player2 = new Connection();          //Delete this
+        player1.connect();                              //add this
+        //Connection player2 = new Connection();          //Delete this
 
-        Thread thread1 = new Thread(() -> player1.connect()); //Delete this
-        Thread thread2 = new Thread(() -> player2.connect()); //Delete this
+        //Thread thread1 = new Thread(() -> player1.connect()); //Delete this
+        //Thread thread2 = new Thread(() -> player2.connect()); //Delete this
 
-        thread1.start();                    //Delete this
-        Thread.sleep(100);            //Delete this
-        thread2.start();                    //Delete this
-
-        try {
-            thread1.join();                 //Delete this
-            thread2.join();                 //Delete this
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        thread1.start();                    //Delete this
+//        Thread.sleep(100);            //Delete this
+//        thread2.start();                    //Delete this
+//
+//        try {
+//            thread1.join();                 //Delete this
+//            thread2.join();                 //Delete this
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 }

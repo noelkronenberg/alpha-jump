@@ -42,7 +42,6 @@ def threaded_client(conn, p, gameId):
         try:
             data = conn.recv(4096).decode('utf-8')
             data = json.loads(data)
-            print(f"\nINPUT: {data}")
             if gameId in games:
                 game = games[gameId]
                 if not data:
@@ -57,7 +56,6 @@ def threaded_client(conn, p, gameId):
                         fileLog.write("\n")
                         fileLog.write(data)
                         fileLog.write("\n")
-                        print("\nPOINT 1")
                         if not game.getValid():
                             if game.getCurrentPlayer() == "r":
                                 game.reset()
@@ -75,7 +73,6 @@ def threaded_client(conn, p, gameId):
                     output = dict(board = game.getBoard(), player1 = game.getP1Turn(), player2 = game.getP2Turn(), bothConnected = game.bothConnected())
                     output = json.dumps(output)
                     output = output.encode('utf-8')
-                    print(f'\nOUTPUT: {str(output)}')
                     conn.sendall(output)
             else:
                 break
