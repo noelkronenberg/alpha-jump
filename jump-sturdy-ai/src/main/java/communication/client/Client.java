@@ -18,8 +18,6 @@ public class Client {
         int player = Integer.parseInt(n.getP());
         System.out.println("You are player " + player);
         Gson gson = new Gson();
-        Scanner scanner = new Scanner(System.in);
-
         BasisKI ki = new BasisKI();
 
         while (true) {
@@ -42,7 +40,6 @@ public class Client {
                         // not necessary while running, helpful for debug
                         System.out.println("New Board: " + game.board);
 
-                        //answer must have format: start_field-end_field like E7-F7
                         String input = ki.orchestrator(game.board, 20000.0, 0.25); // NOTE: this is the only specific element to the implementation
 
                         // transforms the input move to JSON
@@ -51,7 +48,6 @@ public class Client {
                         // Send data via network
                         n.send(data);
                     } else if (player == 1 && game.player2) {
-                        //TODO: do the same here
                         System.out.println("New Board: " + game.board);
                         String input = ki.orchestrator(game.board, 20000.0, 0.25); // NOTE: this is the only specific element to the implementation
                         String data = gson.toJson(input);
