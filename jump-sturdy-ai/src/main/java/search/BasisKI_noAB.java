@@ -5,6 +5,8 @@ import game.MoveGenerator;
 
 import java.util.*;
 
+import org.antlr.v4.parse.ANTLRParser.grammarSpec_return;
+
 public class BasisKI_noAB {
     static final int TIME_LIMIT = 20000;
     static final int winCutOff = 100000;
@@ -38,7 +40,7 @@ public class BasisKI_noAB {
         // order moves
         char color_fen = fen.charAt(fen.length() - 1);
         Color ourColor = gameState.getColor(color_fen);
-        Evaluation.orderMoves(movesList, ourColor);
+        Evaluation.orderMoves(movesList, ourColor, fen);
 
         fen=fen.substring(0, fen.length() - 2);
         positionsHM.put(fen,1); // save position
@@ -108,7 +110,7 @@ public class BasisKI_noAB {
         LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
-        Evaluation.orderMoves(movesList, currentColor); // order moves
+        Evaluation.orderMoves(movesList, currentColor, gameState.getFenFromBoard()); // order moves
 
         String fen = gameState.getFenFromBoard(); // convert position to FEN
 

@@ -146,13 +146,17 @@ public class Evaluation {
         return movesMap;
     }
 
-    public static void orderMoves(LinkedList<Integer> moves, Color color) {
+    public static void orderMoves(LinkedList<Integer> moves, Color color, String fen) {
         Comparator<Integer> comparator = (move1, move2) -> {
             int newRow_move1 = (move1 % 100) / 10;
             int newRow_move2 = (move2 % 100) / 10;
+            int endPos1 = move1 % 100;
+            int endPos2 = move2 % 100;
 
             boolean isMod1Zero;
             boolean isMod2Zero;
+            boolean is1TakingMove;
+            boolean is2TakingMove;
 
             if (color == Color.RED) {
                 isMod1Zero = newRow_move1 == 0;
@@ -162,12 +166,35 @@ public class Evaluation {
                 isMod2Zero = newRow_move2 == 7;
             }
 
+            if (color == Color.RED) {
+                is1TakingMove = MoveGenerator.getColorInFenAtPos(fen, endPos1) == Color.BLUE;
+                is2TakingMove = MoveGenerator.getColorInFenAtPos(fen, endPos2) == Color.BLUE;
+            } else {
+                is1TakingMove = MoveGenerator.getColorInFenAtPos(fen, endPos1) == Color.RED;
+                is2TakingMove = MoveGenerator.getColorInFenAtPos(fen, endPos2) == Color.RED;
+            }
+            if (endPos1 == 62) {
+                System.out.println("Farbe an EndPos: " + MoveGenerator.getColorInFenAtPos(fen, endPos1 + 1));
+                System.out.println("Ist Taking Move: " + is1TakingMove);
+            }
+            
+            if (endPos2 == 62) {
+                System.out.println("Farbe an EndPos: " + MoveGenerator.getColorInFenAtPos(fen, endPos2 + 1));
+                System.out.println("Ist Taking Move: " + is2TakingMove);
+            }
+
             // winning moves first
             if (isMod1Zero && !isMod2Zero) {
                 return -1;
             } else if (!isMod1Zero && isMod2Zero) {
                 return 1;
 
+            // Taking Moves second
+            } else if (is1TakingMove && !is2TakingMove) {
+                return -1;
+            } else if (!is1TakingMove && is2TakingMove) {
+                return 1;
+            
             // other moves
             } else {
                 if (color == Color.RED) {
@@ -185,7 +212,10 @@ public class Evaluation {
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b");
+        //String fen = "b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1b06/2r0r0r0b0r01/r0r0r0r0r0r0 b";
+        String fen = "1bb4/1b0b01r03/b01b0bb4/1b01b01b02/3r01r02/b0r0r02rr2/4r01rr1/4r0r0 b";
+        LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(fen);
+        moveGenerator.printBoard(false);
         System.out.println(moves);
 
         System.out.println();
@@ -195,7 +225,7 @@ public class Evaluation {
 
         System.out.println();
         System.out.println("Sorted moves: ");
-        orderMoves(movesList, Color.BLUE);
+        orderMoves(movesList, Color.BLUE, fen);
         System.out.println(movesList);
 
         System.out.println();

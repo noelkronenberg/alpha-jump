@@ -286,6 +286,83 @@ public class MoveGenerator {
         return pieceBoard[row][column];
     }
 
+    public static Color getColorInFenAtPos(String fen, Integer pos) {
+        Integer fenPositionCounter = 0;
+        Integer parrallelCounter = -1;
+            for (int i = 0; i < pos / 10; i++) {
+                int index = fen.indexOf("/");
+                fen = fen.substring(index + 1, fen.length());
+            }
+        for (int j = 0; j < pos % 10; j++) {
+            fenPositionCounter += 1;
+            parrallelCounter += 1;
+            switch (fen.charAt(parrallelCounter)) {
+                case '1': break;
+                case '2': //fenPositionCounter -= 1;
+                        j += 1;
+                        // Wenn es auf einer Zahl endet, 
+                        if (!(j < pos % 10)) {
+                            fenPositionCounter -= 1;
+                        }
+                        break;
+                case '3': //fenPositionCounter -= 2;
+                        j += 2;
+                        if (!(j < pos % 10)) {
+                            fenPositionCounter -= 1;
+                        }
+                        break;
+                case '4': //fenPositionCounter -= 3;
+                        j += 3;
+                        if (!(j < pos % 10)) {
+                            fenPositionCounter -= 1;
+                        }
+                        break;
+                case '5': //fenPositionCounter -= 4;
+                        j += 4;
+                        if (!(j < pos % 10)) {
+                            fenPositionCounter -= 1;
+                        }
+                        break;
+                case '6': //fenPositionCounter -= 5;
+                        j += 5;
+                        if (!(j < pos % 10)) {
+                            fenPositionCounter -= 1;
+                        }
+                        break;
+                case '7': //fenPositionCounter -= 6;
+                        j += 6;
+                        if (!(j < pos % 10)) {
+                            fenPositionCounter -= 1;
+                        }
+                        break;
+                case '8': j += 7;
+                        if (!(j < pos % 10)) {
+                            fenPositionCounter -= 1;
+                        }
+                        break;
+                case '0': break;
+                default: fenPositionCounter += 1;
+                        parrallelCounter += 1;
+                        break;
+            }
+        }
+        if (fenPositionCounter < 0) {
+            return Color.EMPTY;
+        }
+        if (pos == 62) {
+            System.out.println("Hier müsste r stehen: " + fen.charAt(fenPositionCounter));
+            System.out.println("Fen: " + fen);
+            System.out.println("Pos in String: " + fenPositionCounter);
+        }
+        if (fen.charAt(fenPositionCounter) == 'r') {
+            return Color.RED;
+        } else if (fen.charAt(fenPositionCounter) == 'b') {
+            return Color.BLUE;
+        } else {
+            return Color.EMPTY;
+        }
+    }
+
     private int convertToNumber(int row, int column) {
         return row * 10 + column;
     }
