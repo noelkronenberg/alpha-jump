@@ -83,6 +83,61 @@ public class Evaluation {
         return score;
     }
 
+    public static double getScoreWrapperKI(MoveGenerator moveGenerator, Color player, double depth,LinkedHashMap<Integer, List<Integer>> moves) {   //moves Contains the enemys moves
+        double score = 0;
+        int weight;
+
+        score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
+        score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
+
+        if (player == Color.BLUE) {
+            weight = 1;
+
+            // check gameOver of other player
+            if (moveGenerator.isGameOver(moves, Color.RED)) {
+                score += 100000 * (1 + (1 / depth));
+            }
+
+            // check row
+            for (int row = 0; row < moveGenerator.getPieceBoard().length; row++) {
+                // check column
+                for (int column = 0; column < moveGenerator.getPieceBoard()[row].length; column++) {
+                    // check color
+                    if (moveGenerator.getColorBoard()[row][column] == Color.BLUE) {
+                        // get score of piece
+                        Piece piece = moveGenerator.getPieceBoard()[row][column];
+                        score = getScore(piece, score, weight);
+                    }
+                }
+                weight += 1;
+            }
+
+        } else if (player == Color.RED) {
+            weight = 8;
+
+            // check gameOver of other player
+            if (moveGenerator.isGameOver(moves, Color.BLUE)) {
+                score += 100000 * (1 + (1 / depth));
+            }
+
+            // check row
+            for (int row = 0; row < moveGenerator.getPieceBoard().length; row++) {
+                // check column
+                for (int column = 0; column < moveGenerator.getPieceBoard()[row].length; column++) {
+                    // check color
+                    if (moveGenerator.getColorBoard()[row][column] == Color.RED) {
+                        // get score of piece
+                        Piece piece = moveGenerator.getPieceBoard()[row][column];
+                        score = getScore(piece, score, weight);
+                    }
+                }
+                weight -= 1;
+            }
+        }
+
+        return score;
+    }
+
     public static double ratePosition(MoveGenerator moveGenerator, Color color, int depth,String fen) {
         double score = 0;
 
@@ -92,6 +147,22 @@ public class Evaluation {
 
         else if (color == Color.RED) {
             score = getScoreWrapper(moveGenerator, Color.RED, depth, fen) - getScoreWrapper(moveGenerator, Color.BLUE, depth, fen);
+        }
+        return score;
+    }
+
+    public static double ratePositionKI(MoveGenerator moveGenerator, Color color, int depth,String fen, LinkedHashMap<Integer,List<Integer>> moves, Color currentColor) {      //A more efficient approach to ratePosition for the KI
+        double score = 0;
+        //TODO: unterscheide zwischen current and our color :)
+        if (color == Color.BLUE && currentColor != color) {
+            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE,fen));
+        } else if (color == Color.BLUE && currentColor == color) {
+            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED,fen)) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moves);
+        } else if (color == Color.RED && currentColor != color) {
+            score = getScoreWrapperKI(moveGenerator, Color.RED, depth, moves) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED,fen));
+        }
+        else {
+            score = getScoreWrapperKI(moveGenerator, Color.RED, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE,fen)) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves);
         }
         return score;
     }

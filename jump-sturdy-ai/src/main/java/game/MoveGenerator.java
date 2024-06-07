@@ -680,6 +680,28 @@ public class MoveGenerator {
         return allPossibleMoves;
     }
 
+    public LinkedHashMap<Integer, List<Integer>> generateMaxOnePossibleMoveForKI(Color color, String fen) {
+        LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
+        totalPossibleMoves = 0;
+        protectedPieces = 0;
+        comparisonFen = fen;
+
+        for (int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
+                if (colorBoard[row][column] == color) {
+                    int position = convertToNumber(row, column);
+                    List<Integer> piecePossibleMoves = generatePossibleMoves(position, color);
+                    if (!piecePossibleMoves.isEmpty()) { // ignores Pieces that have no moves
+                        allPossibleMoves.put(position, piecePossibleMoves);
+                        return allPossibleMoves;
+                    }
+                }
+            }
+        }
+
+        return allPossibleMoves;
+    }
+
     public boolean isGameOver(String move, Color color) {
         if (color == Color.RED) {
             if (doesBaseRowContainColor(color,0)) {

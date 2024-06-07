@@ -204,6 +204,7 @@ public class BasisKI {
 //            }
 
 
+
             // check if current move is best
             if (currentScore > bestScore) {
                 bestScore = currentScore;
@@ -301,7 +302,7 @@ public class BasisKI {
                 movesList = Evaluation.convertMovesToList(moves);
                 Evaluation.orderMoves(movesList, currentColor); // order moves
 
-                score = Evaluation.ratePosition(gameState, ourColor, this.currentDepth,fen);
+                score = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
                 ttData = new TranspositionTableObejct(score, movesList, depth);
                 } else {
                     ttData = transpositionTable.get(fen);
@@ -315,7 +316,7 @@ public class BasisKI {
             movesList = Evaluation.convertMovesToList(moves);
             Evaluation.orderMoves(movesList, currentColor); // order moves
 
-            score = Evaluation.ratePosition(gameState, ourColor, this.currentDepth,fen);
+            score = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
             ttData = new TranspositionTableObejct(score, movesList, depth);
         }
         if (this.timeCriterion && System.currentTimeMillis() >= endTime) {
@@ -404,13 +405,13 @@ public class BasisKI {
     // END: search with Alpha-Beta
 
     public static void main(String[] args) {
-        String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r";
+        String fen = "6/8/8/8/8/1r0b0r0b0r02/4r03/3rr2 r";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
         m.printBoard(true);
 
         BasisKI ki = new BasisKI();
-        String bestMove = ki.orchestrator(fen, 20000.0, 0.25);
+        String bestMove = ki.orchestrator(fen, 20000000.0, 0.25);
         System.out.println("Best move: " + bestMove);
         System.out.println("Depth reached: " + ki.maxDepth);
 
