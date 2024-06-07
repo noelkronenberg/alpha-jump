@@ -173,7 +173,8 @@ public class Evaluation {
                 is1TakingMove = MoveGenerator.getColorInFenAtPos(fen, endPos1) == Color.RED;
                 is2TakingMove = MoveGenerator.getColorInFenAtPos(fen, endPos2) == Color.RED;
             }
-            if (endPos1 == 62) {
+            
+            /*if (endPos1 == 62) {
                 System.out.println("Farbe an EndPos: " + MoveGenerator.getColorInFenAtPos(fen, endPos1 + 1));
                 System.out.println("Ist Taking Move: " + is1TakingMove);
             }
@@ -181,7 +182,7 @@ public class Evaluation {
             if (endPos2 == 62) {
                 System.out.println("Farbe an EndPos: " + MoveGenerator.getColorInFenAtPos(fen, endPos2 + 1));
                 System.out.println("Ist Taking Move: " + is2TakingMove);
-            }
+            }*/
 
             // winning moves first
             if (isMod1Zero && !isMod2Zero) {
