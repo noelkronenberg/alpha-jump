@@ -215,7 +215,7 @@ class Game:
         #for red moves
         if self.currentPlayer == "r":
             #check if move includes a check
-            if self.oldBoard[end[0]][end[1]] == "bb" or self.oldBoard[end[0]][end[1]] == "bb" or self.oldBoard[end[0]][end[1]] == "rb":
+            if self.oldBoard[end[0]][end[1]] == "b" or self.oldBoard[end[0]][end[1]] == "bb" or self.oldBoard[end[0]][end[1]] == "rb":
                 check = True
 
             #check with single
