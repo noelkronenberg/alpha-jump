@@ -206,7 +206,7 @@ public class Evaluation {
 
         System.out.println();
         System.out.println("Sorted moves: ");
-        orderMoves(movesList, Color.BLUE, new MoveGenerator());
+        orderMoves(movesList, Color.BLUE, moveGenerator);
         System.out.println(movesList);
 
         System.out.println();
