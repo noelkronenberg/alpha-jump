@@ -3,6 +3,10 @@ package debug;
 import search.BasisKI;
 import game.MoveGenerator;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
 public class BasisKIDebugger {
 
     public static void moveOrder(String fen, String move, int sequence) {
@@ -46,7 +50,14 @@ public class BasisKIDebugger {
     }
 
     public static void main(String[] args) {
-        BasisKIDebugger.moveOrder("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "E4-D5", 10);
+        try {
+            PrintStream fileOut = new PrintStream(new File("src/main/java/debug/output.txt"));
+            System.setOut(fileOut);
+            BasisKIDebugger.moveOrder("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b", "E4-D5", 3);
+            fileOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }
