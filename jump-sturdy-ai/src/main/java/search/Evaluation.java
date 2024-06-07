@@ -217,13 +217,16 @@ public class Evaluation {
         return movesMap;
     }
 
-    public static void orderMoves(LinkedList<Integer> moves, Color color) {
+    public static void orderMoves(LinkedList<Integer> moves, Color color, MoveGenerator game) {
         Comparator<Integer> comparator = (move1, move2) -> {
             int newRow_move1 = (move1 % 100) / 10;
             int newRow_move2 = (move2 % 100) / 10;
 
             boolean isMod1Zero;
             boolean isMod2Zero;
+
+            boolean is1TakingMove=game.capturingHM.containsKey(move1);
+            boolean is2TakingMove=game.capturingHM.containsKey(move2);
 
             if (color == Color.RED) {
                 isMod1Zero = newRow_move1 == 0;
@@ -238,6 +241,13 @@ public class Evaluation {
                 return -1;
             } else if (!isMod1Zero && isMod2Zero) {
                 return 1;
+
+            // Taking Moves second
+            } else if (is1TakingMove && !is2TakingMove) {
+                return -1;
+            } else if (!is1TakingMove && is2TakingMove) {
+                return 1;
+
 
             // other moves
             } else {
@@ -268,7 +278,7 @@ public class Evaluation {
 
         System.out.println();
         System.out.println("Sorted moves: ");
-        orderMoves(movesList, Color.BLUE);
+        orderMoves(movesList, Color.BLUE,moveGenerator);
         System.out.println(movesList);
 
         System.out.println();
