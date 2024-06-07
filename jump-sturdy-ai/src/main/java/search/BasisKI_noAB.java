@@ -101,16 +101,17 @@ public class BasisKI_noAB {
 
     public double treeSearchNoAlphaBeta(MoveGenerator gameState, long endTime, int depth, Color currentColor , Color ourColor, double value) {
         // get score for current position
-        double score = Evaluation.ratePosition(gameState, ourColor, currentDepth);
+        String fen = gameState.getFenFromBoard(); // convert position to FEN
 
         // get moves for other player
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ;  // signal player change
-        LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
+        LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen);
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
         Evaluation.orderMoves(movesList, currentColor); // order moves
 
-        String fen = gameState.getFenFromBoard(); // convert position to FEN
+
+        double score = Evaluation.ratePosition(gameState, ourColor, currentDepth, fen);
 
         // save position
         if (positionsHM.containsKey(fen)){

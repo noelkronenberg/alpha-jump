@@ -17,7 +17,7 @@ public class MoveGeneratorBM {
         int iterations = 100000;
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
-            moveGenerator.generateAllPossibleMoves(color);
+            moveGenerator.generateAllPossibleMoves(color,board_fen);
         }
         double endTime = System.nanoTime();
         double duration = ((endTime - startTime) / iterations) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)

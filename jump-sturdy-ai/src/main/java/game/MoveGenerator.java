@@ -546,8 +546,9 @@ public class MoveGenerator {
         char color_fen = fen.charAt(fen.length() - 1);
         Color color = this.getColor(color_fen);
         // System.out.println("Color: " + color);
-        this.initializeBoard(fen.substring(0, fen.length() - 2));
-        return this.generateAllPossibleMoves(color);
+        String fenBoard=fen.substring(0, fen.length() - 2);
+        this.initializeBoard(fenBoard);
+        return this.generateAllPossibleMoves(color,fenBoard);
     }
 
     // END: move generation
@@ -658,11 +659,11 @@ public class MoveGenerator {
         }
     }
 
-    public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
+    public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color, String fen) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
         totalPossibleMoves = 0;
         protectedPieces = 0;
-        comparisonFen = getFenFromBoard();
+        comparisonFen = fen;
 
         for (int row = 0; row < 8; row++) {
             for (int column = 0; column < 8; column++) {

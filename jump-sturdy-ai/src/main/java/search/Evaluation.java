@@ -28,7 +28,7 @@ public class Evaluation {
         return score;
     }
 
-    public static double getScoreWrapper(MoveGenerator moveGenerator, Color player, double depth) {
+    public static double getScoreWrapper(MoveGenerator moveGenerator, Color player, double depth, String fen) {
         double score = 0;
         int weight;
 
@@ -39,7 +39,7 @@ public class Evaluation {
             weight = 1;
 
             // check gameOver of other player
-            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED, fen), Color.RED)) {
                 score += 100000 * (1 + (1 / depth));
             }
 
@@ -61,7 +61,7 @@ public class Evaluation {
             weight = 8;
 
             // check gameOver of other player
-            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE), Color.BLUE)) {
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE,fen), Color.BLUE)) {
                 score += 100000 * (1 + (1 / depth));
             }
 
@@ -83,20 +83,20 @@ public class Evaluation {
         return score;
     }
 
-    public static double ratePosition(MoveGenerator moveGenerator, Color color, int depth) {
+    public static double ratePosition(MoveGenerator moveGenerator, Color color, int depth,String fen) {
         double score = 0;
 
         if (color == Color.BLUE) {
-            score = getScoreWrapper(moveGenerator, Color.BLUE, depth) - getScoreWrapper(moveGenerator, Color.RED, depth);
+            score = getScoreWrapper(moveGenerator, Color.BLUE, depth, fen) - getScoreWrapper(moveGenerator, Color.RED, depth, fen);
         }
 
         else if (color == Color.RED) {
-            score = getScoreWrapper(moveGenerator, Color.RED, depth) - getScoreWrapper(moveGenerator, Color.BLUE, depth);
+            score = getScoreWrapper(moveGenerator, Color.RED, depth, fen) - getScoreWrapper(moveGenerator, Color.BLUE, depth, fen);
         }
         return score;
     }
 
-    public double rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition, int depth) {
+    public double rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition, int depth,String fen) {
         double score = 0;
 
         MoveGenerator nextState = new MoveGenerator();
@@ -104,9 +104,9 @@ public class Evaluation {
         nextState.setColorBoard(gameState.getColorBoard());
         nextState.setPieceBoard(gameState.getPieceBoard());
 
-        score -= ratePosition(nextState, color, depth);
+        score -= ratePosition(nextState, color, depth,fen);
         nextState.movePiece(startPosition, endPosition);
-        score += ratePosition(nextState, color, depth);
+        score += ratePosition(nextState, color, depth, fen);
 
         return score;
     }
@@ -188,6 +188,8 @@ public class Evaluation {
         LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b");
         System.out.println(moves);
 
+        String fen = moveGenerator.getFenFromBoard();
+
         System.out.println();
         System.out.println("Moves as list: ");
         LinkedList<Integer> movesList = convertMovesToList(moves);
@@ -203,6 +205,6 @@ public class Evaluation {
         System.out.println(convertMovesToMap(movesList));
 
         System.out.println();
-        System.out.println("Score: " + ratePosition(moveGenerator, Color.BLUE,1));
+        System.out.println("Score: " + ratePosition(moveGenerator, Color.BLUE,1,fen));
     }
 }
