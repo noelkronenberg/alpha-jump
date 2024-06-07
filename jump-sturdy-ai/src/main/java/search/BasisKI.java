@@ -142,7 +142,7 @@ public class BasisKI {
         // order moves
         char color_fen = fen.charAt(fen.length() - 1);
         Color ourColor = gameState.getColor(color_fen);
-        Evaluation.orderMoves(movesList, ourColor);
+        Evaluation.orderMoves(movesList, ourColor,gameState);
 
         fen = fen.substring(0, fen.length() - 2);
         positionsHM.put(fen, 1); // save position
@@ -300,7 +300,7 @@ public class BasisKI {
             if (!isInTT) {
                 LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen); // get moves for other player
                 movesList = Evaluation.convertMovesToList(moves);
-                Evaluation.orderMoves(movesList, currentColor); // order moves
+                Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
                 score = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
                 ttData = new TranspositionTableObejct(score, movesList, depth);
@@ -314,7 +314,7 @@ public class BasisKI {
         else {
             LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen); // get moves for other player
             movesList = Evaluation.convertMovesToList(moves);
-            Evaluation.orderMoves(movesList, currentColor); // order moves
+            Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
             score = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
             ttData = new TranspositionTableObejct(score, movesList, depth);

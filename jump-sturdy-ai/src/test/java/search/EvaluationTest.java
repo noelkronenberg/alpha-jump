@@ -33,7 +33,7 @@ public class EvaluationTest {
         // order moves
         char color_fen = fen.charAt(fen.length() - 1);
         Color color = getColorFromFen(color_fen);
-        evaluator.orderMoves(movesList, color);
+        evaluator.orderMoves(movesList, color,moveGenerator);
 
         assertEquals(movesList.getFirst(), expectedFirst);
     }

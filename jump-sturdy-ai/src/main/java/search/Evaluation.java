@@ -167,6 +167,79 @@ public class Evaluation {
         return score;
     }
 
+    public static double getScoreWrapperOld(MoveGenerator moveGenerator, Color player,String fen) {
+        double score = 0;
+        int weight;
+
+        if (player == Color.BLUE) {
+            weight = 1;
+            // check row
+            for (int row = 0; row < moveGenerator.getPieceBoard().length; row++) {
+                // check column
+                for (int column = 0; column < moveGenerator.getPieceBoard()[row].length; column++) {
+                    // check color
+                    if (moveGenerator.getColorBoard()[row][column] == Color.BLUE) {
+                        // get score of piece
+                        Piece piece = moveGenerator.getPieceBoard()[row][column];
+                        score = getScore(piece, score, weight);
+                    }
+                }
+                weight += 1;
+            }
+
+            // check gameOver of other player
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED,fen), Color.RED)) {
+                score = 100000;
+            }
+
+        } else if (player == Color.RED) {
+            weight = 8;
+            // check row
+            for (int row = 0; row < moveGenerator.getPieceBoard().length; row++) {
+                // check column
+                for (int column = 0; column < moveGenerator.getPieceBoard()[row].length; column++) {
+                    // check color
+                    if (moveGenerator.getColorBoard()[row][column] == Color.RED) {
+                        // get score of piece
+                        Piece piece = moveGenerator.getPieceBoard()[row][column];
+                        score = getScore(piece, score, weight);
+                    }
+                }
+                weight -= 1;
+            }
+
+            // check gameOver of other player
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE,fen), Color.BLUE)) {
+                score = 100000;
+            }
+        }
+
+        return score;
+    }
+
+    public static double ratePositionOld(MoveGenerator moveGenerator, Color color, String fen) {
+        double score = 0;
+
+        if (color == Color.BLUE) {
+            // check if winning position (for BLUE)
+            if (moveGenerator.doesBaseRowContainColor(Color.BLUE,7)) {
+                return 100000;
+            }
+            score = getScoreWrapperOld(moveGenerator, Color.BLUE,fen) - getScoreWrapperOld(moveGenerator, Color.RED,fen);
+        }
+
+        else if (color == Color.RED) {
+            // check if winning position (for RED)
+            if (moveGenerator.doesBaseRowContainColor(Color.RED,0)) {
+                return 100000;
+            } else {
+                score = getScoreWrapperOld(moveGenerator, Color.RED,fen) - getScoreWrapperOld(moveGenerator, Color.BLUE,fen);
+            }
+        }
+
+        return score;
+    }
+
     public double rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition, int depth,String fen) {
         double score = 0;
 
@@ -217,7 +290,52 @@ public class Evaluation {
         return movesMap;
     }
 
-    public static void orderMoves(LinkedList<Integer> moves, Color color) {
+    public static void orderMoves(LinkedList<Integer> moves, Color color, MoveGenerator game) {
+        Comparator<Integer> comparator = (move1, move2) -> {
+            int newRow_move1 = (move1 % 100) / 10;
+            int newRow_move2 = (move2 % 100) / 10;
+
+            boolean isMod1Zero;
+            boolean isMod2Zero;
+
+            boolean is1TakingMove=game.capturingHM.containsKey(move1);
+            boolean is2TakingMove=game.capturingHM.containsKey(move2);
+
+            if (color == Color.RED) {
+                isMod1Zero = newRow_move1 == 0;
+                isMod2Zero = newRow_move2 == 0;
+            } else {
+                isMod1Zero = newRow_move1 == 7;
+                isMod2Zero = newRow_move2 == 7;
+            }
+
+            // winning moves first
+            if (isMod1Zero && !isMod2Zero) {
+                return -1;
+            } else if (!isMod1Zero && isMod2Zero) {
+                return 1;
+
+            // Taking Moves second
+            } else if (is1TakingMove && !is2TakingMove) {
+                return -1;
+            } else if (!is1TakingMove && is2TakingMove) {
+                return 1;
+
+
+            // other moves
+            } else {
+                if (color == Color.RED) {
+                    return Integer.compare(newRow_move1, newRow_move2);
+                } else {
+                    return Integer.compare(newRow_move2, newRow_move1);
+                }
+            }
+        };
+
+        moves.sort(comparator);
+    }
+
+    public static void orderMovesOld(LinkedList<Integer> moves, Color color) {
         Comparator<Integer> comparator = (move1, move2) -> {
             int newRow_move1 = (move1 % 100) / 10;
             int newRow_move2 = (move2 % 100) / 10;
@@ -239,7 +357,7 @@ public class Evaluation {
             } else if (!isMod1Zero && isMod2Zero) {
                 return 1;
 
-            // other moves
+                // other moves
             } else {
                 if (color == Color.RED) {
                     return Integer.compare(newRow_move1, newRow_move2);
@@ -251,6 +369,7 @@ public class Evaluation {
 
         moves.sort(comparator);
     }
+
 
     // END: move ordering
 
@@ -268,7 +387,7 @@ public class Evaluation {
 
         System.out.println();
         System.out.println("Sorted moves: ");
-        orderMoves(movesList, Color.BLUE);
+        orderMoves(movesList, Color.BLUE,moveGenerator);
         System.out.println(movesList);
 
         System.out.println();
