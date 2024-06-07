@@ -79,11 +79,11 @@ public class Connection {
 
                         // player turns
                         if (response.getBoolean("player1") && this.player == 1) {
-                            String move = ki.orchestrator(fen, 20000.0, 0.25);
+                            String move = ki.orchestrator(fen, BasisKI.bestConfig);
                             outputStream.println(gson.toJson(move));
                             System.out.print("\n" + "Player 1 | Move: " + move);
                         } else if (response.getBoolean("player2") && this.player == 2) {
-                            String move = ki.orchestrator(fen, 20000.0, 0.25);
+                            String move = ki.orchestrator(fen, BasisKI.bestConfig);
                             outputStream.println(gson.toJson(move));
                             System.out.println("\n" + "Player 2 | Move: " + move);
                         }

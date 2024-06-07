@@ -23,6 +23,8 @@ public class BasisKIDebugger {
         System.out.println();
         System.out.println("Best move: " + move + " (color: " + currentColor + " | move: "+ 1 + ")");
 
+        String current_fen; // helper fen
+
         // move piece
         int[] moveInt = moveGenerator.convertStringToPosWrapper(move);
         moveGenerator.movePiece(moveInt[0], moveInt[1]);
@@ -35,7 +37,8 @@ public class BasisKIDebugger {
             currentColor = (currentColor.equals("r")) ? "b" : "r"; // switch color
 
             // get best move
-            String bestMove = ki.orchestrator(moveGenerator.getFenFromBoard() + " " + currentColor, 20000.0, 0.25);
+            current_fen = moveGenerator.getFenFromBoard() + " " + currentColor;
+            String bestMove = ki.orchestrator(current_fen, BasisKI.bestConfig);
             System.out.println("Best move: " + bestMove + " (color: " + currentColor + " | move: "+ i + ")");
 
             // convert move

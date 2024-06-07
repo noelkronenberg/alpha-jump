@@ -27,7 +27,7 @@ public class BasisKITest {
 
     private void testMoves(String fen, String... expectedMoves) {
         init();
-        String answer = ki.orchestrator(fen, 20000.0, 0.25); // NOTE: always change to currently best configuration
+        String answer = ki.orchestrator(fen, BasisKI.bestConfig);
         boolean matchFound = false;
         for (String expectedMove : expectedMoves) {
             if (expectedMove.equals(answer)) {
@@ -42,7 +42,7 @@ public class BasisKITest {
 
     private void testMoves(String fen, String expectedMove) {
         init();
-        String answer = ki.orchestrator(fen, 20000.0, 0.25); // NOTE: always change to currently best configuration
+        String answer = ki.orchestrator(fen, BasisKI.bestConfig);
         assertEquals(expectedMove, answer);
         System.out.println(answer);
     }

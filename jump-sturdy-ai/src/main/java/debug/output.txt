@@ -11,41 +11,15 @@
 1        .   .   .  BB   .   .      
 
 
-Best move: E4-D5 (color: b | move: 1)
+Best move: E1-D3 (color: b | move: 1)
 
      A   B   C   D   E   F   G   H
 
 8        .   .   .   .   .   .      
 7    .   .   .   .   .   R   R   R  
 6    .   .   .   .   .   .   R   .  
-5    .   R   R   B   .   R   .   R  
+5    .   R   R   .   .   R   .   R  
 4    .   B   .   .   .   .   .   .  
-3    .   .   .   B   .   .  BB   B  
-2    B   .   .   B   .   .   B   .  
-1        .   .   .  BB   .   .      
-
-Best move: C5-B4 (color: r | move: 2)
-
-     A   B   C   D   E   F   G   H
-
-8        .   .   .   .   .   .      
-7    .   .   .   .   .   R   R   R  
-6    .   .   .   .   .   .   R   .  
-5    .   R   .   B   .   R   .   R  
-4    .   R   .   .   .   .   .   .  
-3    .   .   .   B   .   .  BB   B  
-2    B   .   .   B   .   .   B   .  
-1        .   .   .  BB   .   .      
-
-Best move: E1-D3 (color: b | move: 3)
-
-     A   B   C   D   E   F   G   H
-
-8        .   .   .   .   .   .      
-7    .   .   .   .   .   R   R   R  
-6    .   .   .   .   .   .   R   .  
-5    .   R   .   B   .   R   .   R  
-4    .   R   .   .   .   .   .   .  
 3    .   .   .  BB   .   .  BB   B  
 2    B   .   .   B   .   .   B   .  
 1        .   .   .   B   .   .      

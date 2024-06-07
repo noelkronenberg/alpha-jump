@@ -28,6 +28,19 @@ public class BasisKI {
 
     // START: search with Alpha-Beta
 
+    public static SearchConfig bestConfig = new SearchConfig(true, 50000.0, true, 0.25, true, 0, true);
+
+    public String orchestrator(String fen, SearchConfig config) {
+        this.timeCriterion = config.timeCriterion;
+        this.timeLimit = config.timeLimit;
+        this.aspirationWindow = config.aspirationWindow;
+        this.aspirationWindowSize = config.aspirationWindowSize;
+        this.transpositionTables = config.transpositionTables;
+        this.maxAllowedDepth = config.maxAllowedDepth;
+        this.dynamicTime = config.dynamicTime;
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
+    }
+
     public String orchestrator(String fen) {
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
