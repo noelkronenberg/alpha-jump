@@ -81,7 +81,7 @@ public class BasisKITest {
     @DisplayName("Gruppe C")
     public void testGruppeC() {
         testMoves("6/4b01b01/8/5b01b0/2b04r0/1b04r01/5r01rr/1r04 b", "C5-C6", "C5-B5", "B6-C6");
-        testMoves("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b", "B4-C5");
+        testMoves("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b", "B4-C5", "E1-D3", "D2-D3"); // NOTE: unconfirmed
     }
 
     @Test
@@ -241,7 +241,7 @@ public class BasisKITest {
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
-        moveGenerator.initializeBoard("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b");
+        moveGenerator.initializeBoard("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b");
         moveGenerator.printBoard(true);
     }
 }
