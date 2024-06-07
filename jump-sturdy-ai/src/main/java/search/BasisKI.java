@@ -28,7 +28,7 @@ public class BasisKI {
 
     // START: search with Alpha-Beta
 
-    public static SearchConfig bestConfig = new SearchConfig(true, 20000.0, true, 0.25, true, 0, true);
+    public static SearchConfig bestConfig = new SearchConfig(true, 50000.0, true, 0.25, true, 0, true);
 
     public String orchestrator(String fen, SearchConfig config) {
         this.timeCriterion = config.timeCriterion;
