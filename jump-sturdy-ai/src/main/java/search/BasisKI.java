@@ -338,7 +338,7 @@ public class BasisKI {
         String fen = "3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
-        m.printBoard(false);
+        m.printBoard(true);
 
         BasisKI ki = new BasisKI();
         String bestMove = ki.orchestrator(fen, 20000.0, 0.25);
