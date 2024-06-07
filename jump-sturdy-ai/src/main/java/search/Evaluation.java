@@ -146,7 +146,7 @@ public class Evaluation {
         return movesMap;
     }
 
-    public static void orderMoves(LinkedList<Integer> moves, Color color, String fen, MoveGenerator game) {
+    public static void orderMoves(LinkedList<Integer> moves, Color color, MoveGenerator game) {
         Comparator<Integer> comparator = (move1, move2) -> {
             int newRow_move1 = (move1 % 100) / 10;
             int newRow_move2 = (move2 % 100) / 10;
@@ -206,7 +206,7 @@ public class Evaluation {
 
         System.out.println();
         System.out.println("Sorted moves: ");
-        orderMoves(movesList, Color.BLUE, fen, new MoveGenerator());
+        orderMoves(movesList, Color.BLUE, new MoveGenerator());
         System.out.println(movesList);
 
         System.out.println();
