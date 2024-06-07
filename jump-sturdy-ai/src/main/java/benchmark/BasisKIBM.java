@@ -250,6 +250,8 @@ public class BasisKIBM {
         return new Result(bestMove, depth, uniquePositions, positions);
     }
 
+    // START: time limit
+
     // speed for best move
     static double generateBestMoveSpeedTimeLimit(String board_fen, double ms) {
         init();
@@ -545,6 +547,8 @@ public class BasisKIBM {
             }
         }
 
+        /*
+
         System.out.println();
         double timeLimit = 20000.0;
         System.out.println("Time limit (" + timeLimit + " ms):");
@@ -586,6 +590,8 @@ public class BasisKIBM {
         System.out.println();
         System.out.println("Position Gruppe B: ");
         BasisKIBM.notDynamicWrapperBMTimeLimit("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/1r0r02rr2/b03r01rr1/2r01r0r0 r", timeLimit);
+
+        */
 
     }
 }
