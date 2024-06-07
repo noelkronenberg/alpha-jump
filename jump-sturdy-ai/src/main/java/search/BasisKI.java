@@ -11,9 +11,9 @@ public class BasisKI {
     double timeLimit = 20000.0;
     boolean aspirationWindow = false; // TODO: turn on by default (with 0.25); requires adjustment of benchmarks / tests
     double aspirationWindowSize = 0;
-    boolean transpositionTables = true;
+    boolean transpositionTables = false;
     int maxAllowedDepth = 0;
-    boolean dynamicTime = true;
+    boolean dynamicTime = false;
 
     // derived parameters
     public int maxDepth = 1;
