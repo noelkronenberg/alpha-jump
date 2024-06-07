@@ -2,7 +2,7 @@
 
 High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/index.php/the-pit/576-jumpsturdy).
 
-![](https://github.com/noelkronenberg/projekt-ki/workflows/tests/badge.svg)
+![](https://github.com/noelkronenberg/projekt-ki/actions/workflows/junit.yml/badge.svg)
 
 ## Structure
 
