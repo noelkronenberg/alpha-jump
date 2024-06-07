@@ -12,6 +12,7 @@ public class MoveGenerator {
     int totalPossibleMoves;
     int protectedPieces;
     String comparisonFen;
+    public HashMap<Integer,Integer> capturingHM= new HashMap<>();
 
     public Piece[][] getPieceBoard() {
         return pieceBoard;
@@ -431,7 +432,9 @@ public class MoveGenerator {
 
                     // left diagonal
                     if (column > 0 && colorBoard[row - 1][column - 1] == Color.BLUE) {
-                        possibleMoves.add(convertToNumber(row - 1, column - 1));
+                        int move=convertToNumber(row - 1, column - 1);
+                        possibleMoves.add(move);
+                        capturingHM.put((position*100)+move,1);
                     }
 
                     // left diagonal protection (for Evaluation)
@@ -441,7 +444,9 @@ public class MoveGenerator {
 
                     // right diagonal
                     if (column < 7 && colorBoard[row - 1][column + 1] == Color.BLUE) {
-                        possibleMoves.add(convertToNumber(row - 1, column + 1));
+                        int move=convertToNumber(row - 1, column + 1);
+                        possibleMoves.add(move);
+                        capturingHM.put((position*100)+move,1);
                     }
 
                     // right diagonal protection (for Evaluation)
@@ -453,7 +458,7 @@ public class MoveGenerator {
 
             // double piece
             else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
-                addKnightMoves(possibleMoves, row, column, color);
+                addKnightMoves(possibleMoves, row, column, color,position);
             }
 
             // remove invalid moves
@@ -481,7 +486,9 @@ public class MoveGenerator {
 
                     // left diagonal
                     if (column > 0 && colorBoard[row + 1][column - 1] == Color.RED) {
-                        possibleMoves.add(convertToNumber(row + 1, column - 1));
+                        int move = convertToNumber(row + 1, column - 1);
+                        possibleMoves.add(move);
+                        capturingHM.put((position*100)+move,1);
                     }
 
                     // left diagonal protection (for Evaluation)
@@ -491,7 +498,9 @@ public class MoveGenerator {
 
                     // right diagonal
                     if (column < 7 && colorBoard[row + 1][column + 1] == Color.RED) {
-                        possibleMoves.add(convertToNumber(row + 1, column + 1));
+                        int move = convertToNumber(row + 1, column + 1);
+                        possibleMoves.add(move);
+                        capturingHM.put((position*100)+move,1);
                     }
 
                     // right diagonal protection (for Evaluation)
@@ -503,7 +512,7 @@ public class MoveGenerator {
 
             // double piece
             else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
-                addKnightMoves(possibleMoves, row, column, color);
+                addKnightMoves(possibleMoves, row, column, color,position);
             }
 
             // remove invalid moves
@@ -514,7 +523,7 @@ public class MoveGenerator {
         return possibleMoves;
     }
 
-    private void addKnightMoves(List<Integer> possibleMoves, int row, int column, Color color) {
+    private void addKnightMoves(List<Integer> possibleMoves, int row, int column, Color color, Integer position) {
 
         // possible moves
         int[][] knightMoves = {
@@ -556,6 +565,10 @@ public class MoveGenerator {
             // count protected pieces (for Evaluation)
             if (colorBoard[newRow][newColumn] == color) {
                 protectedPieces += 1;
+            }
+            // is attacking
+            else if (colorBoard[newRow][newColumn] != color && colorBoard[newRow][newColumn] != Color.EMPTY){
+                capturingHM.put((position*100)+convertToNumber(newRow, newColumn),1);
             }
         }
     }
@@ -733,6 +746,7 @@ public class MoveGenerator {
     }
 
     public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
+        capturingHM= new HashMap<>();
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
         totalPossibleMoves = 0;
         protectedPieces = 0;

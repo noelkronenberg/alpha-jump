@@ -78,7 +78,7 @@ public class BasisKI {
         // order moves
         char color_fen = fen.charAt(fen.length() - 1);
         Color ourColor = gameState.getColor(color_fen);
-        Evaluation.orderMoves(movesList, ourColor, fen);
+        Evaluation.orderMoves(movesList, ourColor, fen,gameState);
 
         fen = fen.substring(0, fen.length() - 2);
         positionsHM.put(fen, 1); // save position
@@ -236,7 +236,7 @@ public class BasisKI {
             if (!isInTT) {
                 LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
                 movesList = Evaluation.convertMovesToList(moves);
-                Evaluation.orderMoves(movesList, currentColor, fen); // order moves
+                Evaluation.orderMoves(movesList, currentColor, fen,gameState); // order moves
 
                 score = Evaluation.ratePosition(gameState, ourColor, this.currentDepth);
                 ttData = new TranspositionTableObejct(score, movesList, depth);
@@ -335,10 +335,10 @@ public class BasisKI {
     // END: search with Alpha-Beta
 
     public static void main(String[] args) {
-        String fen = "b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b";
+        String fen = "3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
-        m.printBoard(true);
+        m.printBoard(false);
 
         BasisKI ki = new BasisKI();
         String bestMove = ki.orchestrator(fen, 20000.0, 0.25);

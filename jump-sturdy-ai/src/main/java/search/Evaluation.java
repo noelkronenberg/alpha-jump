@@ -146,17 +146,15 @@ public class Evaluation {
         return movesMap;
     }
 
-    public static void orderMoves(LinkedList<Integer> moves, Color color, String fen) {
+    public static void orderMoves(LinkedList<Integer> moves, Color color, String fen, MoveGenerator game) {
         Comparator<Integer> comparator = (move1, move2) -> {
             int newRow_move1 = (move1 % 100) / 10;
             int newRow_move2 = (move2 % 100) / 10;
-            int endPos1 = move1 % 100;
-            int endPos2 = move2 % 100;
 
             boolean isMod1Zero;
             boolean isMod2Zero;
-            boolean is1TakingMove;
-            boolean is2TakingMove;
+            boolean is1TakingMove=game.capturingHM.containsKey(move1);
+            boolean is2TakingMove=game.capturingHM.containsKey(move2);
 
             if (color == Color.RED) {
                 isMod1Zero = newRow_move1 == 0;
@@ -165,24 +163,6 @@ public class Evaluation {
                 isMod1Zero = newRow_move1 == 7;
                 isMod2Zero = newRow_move2 == 7;
             }
-
-            if (color == Color.RED) {
-                is1TakingMove = MoveGenerator.getColorInFenAtPos(fen, endPos1) == Color.BLUE;
-                is2TakingMove = MoveGenerator.getColorInFenAtPos(fen, endPos2) == Color.BLUE;
-            } else {
-                is1TakingMove = MoveGenerator.getColorInFenAtPos(fen, endPos1) == Color.RED;
-                is2TakingMove = MoveGenerator.getColorInFenAtPos(fen, endPos2) == Color.RED;
-            }
-            
-            /*if (endPos1 == 62) {
-                System.out.println("Farbe an EndPos: " + MoveGenerator.getColorInFenAtPos(fen, endPos1 + 1));
-                System.out.println("Ist Taking Move: " + is1TakingMove);
-            }
-            
-            if (endPos2 == 62) {
-                System.out.println("Farbe an EndPos: " + MoveGenerator.getColorInFenAtPos(fen, endPos2 + 1));
-                System.out.println("Ist Taking Move: " + is2TakingMove);
-            }*/
 
             // winning moves first
             if (isMod1Zero && !isMod2Zero) {
@@ -195,7 +175,7 @@ public class Evaluation {
                 return -1;
             } else if (!is1TakingMove && is2TakingMove) {
                 return 1;
-            
+
             // other moves
             } else {
                 if (color == Color.RED) {
@@ -226,7 +206,7 @@ public class Evaluation {
 
         System.out.println();
         System.out.println("Sorted moves: ");
-        orderMoves(movesList, Color.BLUE, fen);
+        orderMoves(movesList, Color.BLUE, fen, new MoveGenerator());
         System.out.println(movesList);
 
         System.out.println();
