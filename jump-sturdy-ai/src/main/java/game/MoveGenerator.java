@@ -287,7 +287,6 @@ public class MoveGenerator {
     }
 
     public static Color getColorInFenAtPos(String fen, Integer pos) {
-        System.out.println("Pos: " + pos);
         Integer fenPositionCounter = 0;
         Integer limit = 0;
             for (int i = 0; i < pos / 10; i++) {
@@ -299,9 +298,7 @@ public class MoveGenerator {
             } else {
                 limit = (pos % 10) + 1;
             }
-            System.out.println("geteilter Fen: " + fen);
         for (int j = 0; j < limit; j++) {
-            //System.out.println("fenPosCounter: " + fenPositionCounter);
             switch (fen.charAt(fenPositionCounter)) {
                 case '1': if (j + 1 < limit) {
                             fenPositionCounter += 1;
@@ -343,8 +340,7 @@ public class MoveGenerator {
                         }
                         break;
                 case '0': break;
-                default: //System.out.println("j at last stage: " + j);
-                        if (j + 1 < limit) {
+                default: if (j + 1 < limit) {
                             fenPositionCounter += 2;
                         }
                         break;
@@ -354,10 +350,7 @@ public class MoveGenerator {
         if (fenPositionCounter < 0) {
             return Color.EMPTY;
         }
-        /*if (pos == 65) {
-        System.out.println("Pos im String: " + fenPositionCounter);
-        System.out.println("Hier sollte b stehen: " + fen.charAt(fenPositionCounter));
-    }*/
+        
         if (fen.charAt(fenPositionCounter) == 'r') {
             return Color.RED;
         } else if (fen.charAt(fenPositionCounter) == 'b') {
