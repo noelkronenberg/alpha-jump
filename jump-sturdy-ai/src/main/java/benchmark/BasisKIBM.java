@@ -29,6 +29,47 @@ public class BasisKIBM {
             this.positions = positions;
         }
     }
+    static double calculatePercentageChange(double oldValue, double newValue) {
+        if (oldValue == 0) {
+            return newValue == 0 ? 0 : 100;
+        }
+        return ((newValue - oldValue) / oldValue) * 100;
+    }
+
+    static void compareResults(String fen, int depth, double aspirationWindowSize) {
+        String bestMove = BasisKIBM.generateBestMoveDepthLimit(fen, depth);
+        double duration = BasisKIBM.generateBestMoveSpeedDepthLimit(fen, depth);
+        int uniquePositions = BasisKIBM.generateBestMoveUniquePositionsDepthLimit(fen, depth);
+        int positions = BasisKIBM.generateBestMovePositionsDepthLimit(fen, depth);
+
+        String bestMoveW = BasisKIBM.generateBestMoveWindowDepthLimit(fen, depth, aspirationWindowSize);
+        double durationW = BasisKIBM.generateBestMoveWindowSpeedDepthLimit(fen, depth, aspirationWindowSize);
+        int uniquePositionsW = BasisKIBM.generateBestMoveWindowUniquePositionsDepthLimit(fen, depth, aspirationWindowSize);
+        int positionsW = BasisKIBM.generateBestMoveWindowPositionsDepthLimit(fen, depth, aspirationWindowSize);
+
+        double uniquePositionsChange = calculatePercentageChange(uniquePositions, uniquePositionsW);
+        double positionsChange = calculatePercentageChange( positions,positionsW);
+        double positionsPerMsWithoutWindow = positions / duration;
+        double positionsPerMsWithWindow = positionsW / durationW;
+        double durationChange = calculatePercentageChange(duration, durationW);
+        double positionsPerMsChange = calculatePercentageChange(positionsPerMsWithoutWindow, positionsPerMsWithWindow);
+
+        // display as table (reference: https://github.com/vdmeer/asciitable)
+        AsciiTable at = new AsciiTable();
+        at.addRule();
+        at.addRow("Depth", "Best Move", "Time (ms)", "Unique Positions", "Total Positions", "Positions/ms");
+        at.addRule();
+        at.addRow(depth, bestMove, String.format(Locale.US, "%.2f", duration), uniquePositions, positions, String.format(Locale.US, "%.2f", positions / duration));
+        at.addRule();
+        at.addRow(depth, bestMoveW, String.format(Locale.US, "%.2f", durationW), uniquePositionsW, positionsW, String.format(Locale.US, "%.2f", positionsW / durationW));
+        at.addRule();
+        at.addRow("Change (%)", "/", String.format(Locale.US, "%.2f", durationChange),String.format(Locale.US, "%.2f", uniquePositionsChange), String.format(Locale.US, "%.2f", positionsChange), String.format(Locale.US, "%.2f", positionsPerMsChange));
+        at.addRule();
+        at.getRenderer().setCWC(new CWC_LongestLine());
+        at.setPaddingLeftRight(1);
+        at.setTextAlignment(TextAlignment.LEFT);
+        System.out.println(at.render());
+    }
 
     // START: time limit
 
@@ -100,6 +141,7 @@ public class BasisKIBM {
         at.addRow("Time Limit (ms)", "Depth", "Best Move", "Time (ms)", "Unique Positions", "Total Positions", "Positions/ms");
         at.addRule();
         at.addRow(ms, depth, bestMove, String.format(Locale.US, "%.2f", duration), uniquePositions, positions, String.format(Locale.US, "%.2f", positions / duration));
+        //System.out.println(calculatePercentageChange(duration, ));
         at.addRule();
         at.getRenderer().setCWC(new CWC_LongestLine());
         at.setPaddingLeftRight(1);
@@ -259,6 +301,7 @@ public class BasisKIBM {
     // END: depth limit
 
     public static void main(String[] args) {
+
         System.out.println("Depth limit");
 
         System.out.println();
@@ -293,8 +336,10 @@ public class BasisKIBM {
         System.out.println();
         System.out.println("Start position: ");
         BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2, aspirationWindowSize);
+        compareResults("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2, aspirationWindowSize);
         BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3, aspirationWindowSize);
         BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4, aspirationWindowSize);
+        compareResults("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4, aspirationWindowSize);
 
         System.out.println();
         System.out.println("Mid game: ");
@@ -315,15 +360,26 @@ public class BasisKIBM {
 
         // ---
 
-        System.out.println();
         aspirationWindowSize = 0.25;
         System.out.println("Aspiration Window (" + aspirationWindowSize + " | with depth limit)");
 
         System.out.println();
         System.out.println("Start position: ");
+        System.out.println("Without: ");
+        BasisKIBM.wrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2);
+        System.out.println("With: ");
         BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2, aspirationWindowSize);
+        compareResults("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2, aspirationWindowSize);
+        System.out.println("Without: ");
+        BasisKIBM.wrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3);
+        System.out.println("With: ");
         BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3, aspirationWindowSize);
+        compareResults("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3, aspirationWindowSize);
+        System.out.println("Without: ");
+        BasisKIBM.wrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4);
+        System.out.println("With: ");
         BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4, aspirationWindowSize);
+        compareResults("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4, aspirationWindowSize);
 
         System.out.println();
         System.out.println("Mid game: ");
@@ -337,6 +393,7 @@ public class BasisKIBM {
         BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 2, aspirationWindowSize);
         BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 3, aspirationWindowSize);
         BasisKIBM.windowsWrapperBMDepthLimit("5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b", 4, aspirationWindowSize);
+
 
         System.out.println();
         System.out.println("Position Gruppe B: ");
@@ -353,6 +410,7 @@ public class BasisKIBM {
         BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2, aspirationWindowSize);
         BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 3, aspirationWindowSize);
         BasisKIBM.windowsWrapperBMDepthLimit("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 4, aspirationWindowSize);
+
 
         System.out.println();
         System.out.println("Mid game: ");
@@ -414,6 +472,5 @@ public class BasisKIBM {
         System.out.println();
         System.out.println("Position Gruppe B: ");
         BasisKIBM.notDynamicWrapperBMTimeLimit("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/1r0r02rr2/b03r01rr1/2r01r0r0 r", timeLimit);
-
     }
 }
