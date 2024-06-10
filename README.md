@@ -6,6 +6,7 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
 
 ## Structure
 
+- ```.github/workflows``` [GitHub Actions](https://docs.github.com/en/actions) for automatic unit testing
 - ```jump-sturdy-ai``` project work
   - ```pom.xml``` [Maven](https://www.jetbrains.com/help/idea/maven-support.html) configuration (e.g. [dependencies](https://mvnrepository.com/))
   - ```src``` 
