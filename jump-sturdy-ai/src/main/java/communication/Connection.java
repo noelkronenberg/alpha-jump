@@ -86,6 +86,7 @@ public class Connection {
 
                             // check if AI or human player
                             if (isPlayer) {
+                                System.out.println("Enter your move: ");
                                 this.move = this.scanner.nextLine();
                             } else {
                                 this.move = ki.orchestrator(fen, BasisKI.bestConfig);
@@ -105,6 +106,7 @@ public class Connection {
 
                             // check if AI or human player
                             if (isPlayer) {
+                                System.out.println("Enter your move: ");
                                 this.move = scanner.nextLine();
                             } else {
                                 this.move = ki.orchestrator(fen, BasisKI.bestConfig);
