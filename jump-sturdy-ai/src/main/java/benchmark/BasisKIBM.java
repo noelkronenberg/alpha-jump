@@ -1,17 +1,14 @@
 package benchmark;
 
-import debug.BasisKIDebugger;
 import search.BasisKI;
 
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_LongestLine;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import search.SearchConfig;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.sql.SQLOutput;
 import java.util.Locale;
 import java.util.Map;
 
@@ -148,7 +145,7 @@ public class BasisKIBM {
 
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/BasisKIBM.txt"));
+            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/output.txt"));
             System.setOut(fileOut);
 
             System.out.println("Start Position: ");

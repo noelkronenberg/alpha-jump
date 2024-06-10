@@ -138,7 +138,7 @@ public class Evaluation {
         return score;
     }
 
-    public static double ratePosition(MoveGenerator moveGenerator, Color color, int depth,String fen) {
+    public static double ratePosition(MoveGenerator moveGenerator, Color color, int depth, String fen) {
         double score = 0;
 
         if (color == Color.BLUE) {
@@ -151,22 +151,25 @@ public class Evaluation {
         return score;
     }
 
-    public static double ratePositionKI(MoveGenerator moveGenerator, Color color, int depth,String fen, LinkedHashMap<Integer,List<Integer>> moves, Color currentColor) {      //A more efficient approach to ratePosition for the KI
+    public static double ratePositionKI(MoveGenerator moveGenerator, Color color, int depth,String fen, LinkedHashMap<Integer,List<Integer>> moves, Color currentColor) { // a more efficient approach to ratePosition for the KI
         double score = 0;
-        //TODO: unterscheide zwischen current and our color :)
+
+        // TODO: difference between ourColor / currentColor
+
         if (color == Color.BLUE && currentColor != color) {
             score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE,fen));
         } else if (color == Color.BLUE && currentColor == color) {
             score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED,fen)) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moves);
         } else if (color == Color.RED && currentColor != color) {
             score = getScoreWrapperKI(moveGenerator, Color.RED, depth, moves) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED,fen));
-        }
-        else {
+        } else {
             score = getScoreWrapperKI(moveGenerator, Color.RED, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE,fen)) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves);
         }
+
         return score;
     }
 
+    // old version for benchmarking
     public static double getScoreWrapperOld(MoveGenerator moveGenerator, Color player,String fen) {
         double score = 0;
         int weight;
@@ -217,6 +220,7 @@ public class Evaluation {
         return score;
     }
 
+    // old version for benchmarking
     public static double ratePositionOld(MoveGenerator moveGenerator, Color color, String fen) {
         double score = 0;
 
@@ -298,8 +302,8 @@ public class Evaluation {
             boolean isMod1Zero;
             boolean isMod2Zero;
 
-            boolean is1TakingMove=game.capturingHM.containsKey(move1);
-            boolean is2TakingMove=game.capturingHM.containsKey(move2);
+            boolean is1TakingMove = game.capturingHM.containsKey(move1);
+            boolean is2TakingMove = game.capturingHM.containsKey(move2);
 
             if (color == Color.RED) {
                 isMod1Zero = newRow_move1 == 0;
@@ -315,7 +319,7 @@ public class Evaluation {
             } else if (!isMod1Zero && isMod2Zero) {
                 return 1;
 
-            // Taking Moves second
+            // taking moves second
             } else if (is1TakingMove && !is2TakingMove) {
                 return -1;
             } else if (!is1TakingMove && is2TakingMove) {
@@ -335,6 +339,7 @@ public class Evaluation {
         moves.sort(comparator);
     }
 
+    // old version for benchmarking
     public static void orderMovesOld(LinkedList<Integer> moves, Color color) {
         Comparator<Integer> comparator = (move1, move2) -> {
             int newRow_move1 = (move1 % 100) / 10;

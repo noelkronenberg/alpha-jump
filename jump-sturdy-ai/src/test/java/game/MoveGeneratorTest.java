@@ -305,7 +305,6 @@ public class MoveGeneratorTest {
     }
 
     private void testMoves(String fen, String expectedMoves) {
-
         init();
 
         Color color = fen.charAt(fen.length() - 1) == 'r' ? Color.RED : Color.BLUE;

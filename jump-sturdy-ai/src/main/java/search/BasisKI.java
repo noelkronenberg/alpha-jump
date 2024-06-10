@@ -198,12 +198,12 @@ public class BasisKI {
 
             // evaluate move (score)
 
+            /*
             // return if move order contains winning move
-//            if (currentScore >= this.winCutOff) {
-//                return move;
-//            }
-
-
+            if (currentScore >= this.winCutOff) {
+                return move;
+            }
+            */
 
             // check if current move is best
             if (currentScore > bestScore) {
@@ -272,15 +272,15 @@ public class BasisKI {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
         boolean isInTT = transpositionTable.containsKey(fen);
 
-        if (positionsHM.containsKey(fen)) {         //Dauert 1 sekunde dieser ganze block... vielleicht löschen?!
+        if (positionsHM.containsKey(fen)) { // NOTE: takes a long time; remove if time is critical
             positionsHM.put(fen, positionsHM.get(fen) + 1);
         } else {
             positionsHM.put(fen, 1);
         }
 
-        if (transpositionTables){
+        // START: Transposition Tables
+        if (transpositionTables) {
             // save position
-            // START: Transposition Tables
             if (isInTT && transpositionTable.get(fen).depth > depth) {
                 // return positionsHM.get(fen);
                 if (this.maxDepth < depth) {
@@ -292,10 +292,14 @@ public class BasisKI {
                 return transpositionTable.get(fen).overAllScore;
             }
         }
+        // END: Transposition Tables
+
         double score;
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED; // signal player change
         LinkedList<Integer> movesList;
         TranspositionTableObejct ttData;
+
+        // START: Transposition Tables
         if (transpositionTables) {
             if (!isInTT) {
                 LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen); // get moves for other player
@@ -311,6 +315,8 @@ public class BasisKI {
                     ttData.depth = depth; // TODO: should depth be updated here or at the end?
                 }
         }
+        // END: Transposition Tables
+
         else {
             LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen); // get moves for other player
             movesList = Evaluation.convertMovesToList(moves);
@@ -319,6 +325,7 @@ public class BasisKI {
             score = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
             ttData = new TranspositionTableObejct(score, movesList, depth);
         }
+
         if (this.timeCriterion && System.currentTimeMillis() >= endTime) {
             this.stopSearch = true;
         }
@@ -349,7 +356,7 @@ public class BasisKI {
                 // update alpha
                 this.currentDepth += 1;
                 double prevAlpha = alpha;
-                alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor,ourColor));
+                alpha = Math.max(alpha, treeSearch(nextState, alpha, beta, endTime, depth - 1, currentColor, ourColor));
                 if (prevAlpha < alpha) { // signals switch of best move
                     bestScore = alpha;
                     bestMove = move;
@@ -389,11 +396,12 @@ public class BasisKI {
                     bestMove = move; // update overall score for this pos and its best move
                 }
 
-                // prune branchif no improvements can be made
+                // prune branch if no improvements can be made
                 if (beta <= alpha) {
                     break;
                 }
             }
+
             ttData.bestMove = bestMove; // update TT
             ttData.overAllScore = bestScore;
 

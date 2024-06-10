@@ -360,7 +360,7 @@ public class MoveGenerator {
                     if (column > 0 && colorBoard[row - 1][column - 1] == Color.BLUE) {
                         int move=convertToNumber(row - 1, column - 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // left diagonal protection (for Evaluation)
@@ -372,7 +372,7 @@ public class MoveGenerator {
                     if (column < 7 && colorBoard[row - 1][column + 1] == Color.BLUE) {
                         int move=convertToNumber(row - 1, column + 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // right diagonal protection (for Evaluation)
@@ -414,7 +414,7 @@ public class MoveGenerator {
                     if (column > 0 && colorBoard[row + 1][column - 1] == Color.RED) {
                         int move = convertToNumber(row + 1, column - 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // left diagonal protection (for Evaluation)
@@ -426,7 +426,7 @@ public class MoveGenerator {
                     if (column < 7 && colorBoard[row + 1][column + 1] == Color.RED) {
                         int move = convertToNumber(row + 1, column + 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // right diagonal protection (for Evaluation)
@@ -492,6 +492,7 @@ public class MoveGenerator {
             if (colorBoard[newRow][newColumn] == color) {
                 protectedPieces += 1;
             }
+
             // is attacking
             else if (colorBoard[newRow][newColumn] != color && colorBoard[newRow][newColumn] != Color.EMPTY){
                 capturingHM.put((position*100)+convertToNumber(newRow, newColumn),1);
@@ -558,10 +559,9 @@ public class MoveGenerator {
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
         Color color = this.getColor(color_fen);
-        // System.out.println("Color: " + color);
-        String fenBoard=fen.substring(0, fen.length() - 2);
+        String fenBoard = fen.substring(0, fen.length() - 2);
         this.initializeBoard(fenBoard);
-        return this.generateAllPossibleMoves(color,fenBoard);
+        return this.generateAllPossibleMoves(color, fenBoard);
     }
 
     // END: move generation
@@ -673,8 +673,10 @@ public class MoveGenerator {
     }
 
     public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color, String fen) {
-        capturingHM= new HashMap<>();
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
+
+        // helpers (for Evaluation)
+        capturingHM = new HashMap<>();
         totalPossibleMoves = 0;
         protectedPieces = 0;
         comparisonFen = fen;
@@ -696,6 +698,8 @@ public class MoveGenerator {
 
     public LinkedHashMap<Integer, List<Integer>> generateMaxOnePossibleMoveForKI(Color color, String fen) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
+
+        // helpers (for Evaluation)
         totalPossibleMoves = 0;
         protectedPieces = 0;
         comparisonFen = fen;
@@ -829,30 +833,4 @@ public class MoveGenerator {
     }
 
     // END: visualisation
-
-    public static void main(String[] args) {
-        MoveGenerator moveGenerator = new MoveGenerator();
-        String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
-        for (int i = 0; i < 1; i++) {
-            LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(fen);
-            System.out.println(moves);
-
-            System.out.println();
-            moveGenerator.printBoard(false);
-
-            String move_string = moveGenerator.getRandomMove(moves);
-            System.out.println(move_string);
-            int[] move_int = moveGenerator.convertStringToPosWrapper(move_string);
-            System.out.println(move_int[0] + "-" + move_int[1]);
-
-            System.out.println();
-
-            moveGenerator.movePiece(move_int[0], move_int[1]);
-
-            System.out.println();
-            moveGenerator.printBoard(false);
-
-            System.out.println(moveGenerator.getFenFromBoard());
-        }
-    }
 }
