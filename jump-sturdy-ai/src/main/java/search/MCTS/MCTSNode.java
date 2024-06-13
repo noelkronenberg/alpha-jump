@@ -11,14 +11,15 @@ public class MCTSNode {
     List<MCTSNode> children;
     int visits;
     double wins;
-    String stateString;
+    int depth;
 
-    public MCTSNode(int move, MCTSNode parent) {
+    public MCTSNode(int move, MCTSNode parent, int depth) {
         this.move = move;
         this.parent = parent;
         this.children = new ArrayList<>();
         this.visits = 0;
         this.wins = 0.0;
+        this.depth = depth;
     }
 
     public boolean isFullyExpanded() {

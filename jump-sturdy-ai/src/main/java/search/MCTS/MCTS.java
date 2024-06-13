@@ -17,12 +17,13 @@ public class MCTS {
 
     public static int runMCTS(MoveGenerator moveGenerator, Color color, int iterations) {
         String initialState = moveGenerator.getFenFromBoard();
-        MCTSNode root = new MCTSNode(0, null); // Root hat keinen Zug, weil es der Startzustand ist
+        MCTSNode root = new MCTSNode(0, null, 0); // Root hat keinen Zug, weil es der Startzustand ist
 
         for (int i = 0; i < iterations; i++) {
             MCTSNode node = root;
             String state = initialState;
             Color currentPlayer = color;
+            moveGenerator.initializeBoard(initialState);
 
             // Traverse down the tree
             while (!node.children.isEmpty() && node.isFullyExpanded()) {
@@ -34,7 +35,6 @@ public class MCTS {
             // Expansion
             
             expand(node, currentPlayer, moveGenerator);
-            printChildren(node);
             if (!node.children.isEmpty()) {
                 node = node.children.get(random.nextInt(node.children.size()));
                 state = makeMove(moveGenerator, node.move, currentPlayer);
@@ -56,7 +56,7 @@ public class MCTS {
         LinkedList<Integer> movesList;
         movesList = Evaluation.convertMovesToList(possibleMoves);
         for (int move : movesList) {
-            node.children.add(new MCTSNode(move, node));
+            node.children.add(new MCTSNode(move, node, (node.depth+1)));
         }
     }
 
@@ -97,8 +97,6 @@ public class MCTS {
     }
 
     private static MCTSNode bestChild(MCTSNode node) {
-        /*System.out.println("Mögliche move für den besten ersten Move: ");
-        printChildren(node); */
         return node.children.stream().max((n1, n2) -> Integer.compare(n1.visits, n2.visits)).orElseThrow(RuntimeException::new);
     }
 
@@ -119,7 +117,7 @@ public class MCTS {
             System.out.println("Es gibt keine Nachfolgeknoten.");
         } else {
             for (int i = 0; i < node.children.size(); i++) {
-                System.out.println(node.children.get(i).move + ", ");
+                System.out.println(node.children.get(i).move);
             }
         }
     }
@@ -130,6 +128,6 @@ public class MCTS {
         MCTS mcts = new MCTS();
         mg.initializeBoard(board);
         mg.printBoard(false);
-        System.out.println(mcts.runMCTS(mg, Color.BLUE, 3));
+        System.out.println(mcts.runMCTS(mg, Color.BLUE, 100000));
     }
 }
