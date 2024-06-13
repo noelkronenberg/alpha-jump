@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game.Color;
+import game.MoveGenerator;
 
 public class MCTSNode {
     int move; // Der Zug, der zu diesem Knoten führt (z.B. [row, col])
@@ -10,6 +11,7 @@ public class MCTSNode {
     List<MCTSNode> children;
     int visits;
     double wins;
+    String stateString;
 
     public MCTSNode(int move, MCTSNode parent) {
         this.move = move;
@@ -26,12 +28,18 @@ public class MCTSNode {
         return true;
     }
 
-    public boolean isTerminal(String state) {
-        return getWinner(state) != null;
-    }
-
-    public static Color getWinner(String state) {
-        // Placeholder: Implementiere die Logik zur Überprüfung des Spielgewinners
-        return null;  // Beispielhaft kein Gewinner
-    }
+    /*public static Color getWinner(MoveGenerator moveGenerator) {
+        String state = moveGenerator.getFenFromBoard();
+        String[] splittedState = state.split("/");
+        String firstRow = splittedState[0];
+        String lastRow = splittedState[7].split(" ")[0];
+        System.out.println(lastRow);
+        if (!state.contains("r") || lastRow.contains("b")) {
+            return Color.BLUE;
+        } else if (!state.contains("b") || firstRow.contains("r")) {
+            return Color.RED;
+        } else {
+            return null;
+        }
+    }*/
 }

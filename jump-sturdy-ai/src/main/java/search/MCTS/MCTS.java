@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import org.antlr.v4.misc.Graph.Node;
+
 import game.Color;
 import game.MoveGenerator;
 import search.Evaluation;
@@ -14,8 +16,8 @@ public class MCTS {
     private static final double EXPLORATION_PARAM = Math.sqrt(2);
 
     public static int runMCTS(MoveGenerator moveGenerator, Color color, int iterations) {
-        MCTSNode root = new MCTSNode(0, null); // Root hat keinen Zug, weil es der Startzustand ist
         String initialState = moveGenerator.getFenFromBoard();
+        MCTSNode root = new MCTSNode(0, null); // Root hat keinen Zug, weil es der Startzustand ist
 
         for (int i = 0; i < iterations; i++) {
             MCTSNode node = root;
@@ -30,8 +32,10 @@ public class MCTS {
             }
 
             // Expansion
-            if (!node.isTerminal(state)) {
-                expand(node, currentPlayer, moveGenerator);
+            
+            expand(node, currentPlayer, moveGenerator);
+            printChildren(node);
+            if (!node.children.isEmpty()) {
                 node = node.children.get(random.nextInt(node.children.size()));
                 state = makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
@@ -58,16 +62,20 @@ public class MCTS {
 
     private static Color simulate(MoveGenerator moveGenerator, Color color) {
         String fen = moveGenerator.getFenFromBoard();
-        while (MCTSNode.getWinner(fen) == null) {
+        Color winner = Color.EMPTY;
+        while (winner == Color.EMPTY) {
             LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
             LinkedList<Integer> movesList;
             movesList = Evaluation.convertMovesToList(possibleMoves);
             if (possibleMoves.isEmpty()) break;
             Integer move = movesList.get(random.nextInt(possibleMoves.size()));
+            if (moveGenerator.isGameOver(MoveGenerator.convertMoveToFEN(move), color)) {
+                winner = color;
+            }
             fen = makeMove(moveGenerator, move, color);
             color = (color == Color.RED) ? Color.BLUE : Color.RED;
         }
-        return MCTSNode.getWinner(fen);
+        return winner;
     }
 
     private static void backpropagate(MCTSNode node, Color winner, Color color) {
@@ -89,6 +97,8 @@ public class MCTS {
     }
 
     private static MCTSNode bestChild(MCTSNode node) {
+        /*System.out.println("Mögliche move für den besten ersten Move: ");
+        printChildren(node); */
         return node.children.stream().max((n1, n2) -> Integer.compare(n1.visits, n2.visits)).orElseThrow(RuntimeException::new);
     }
 
@@ -102,5 +112,24 @@ public class MCTS {
         moveGenerator.movePiece(move);
         String fen = moveGenerator.getFenFromBoard();
         return fen;
+    }
+
+    private static void printChildren(MCTSNode node) {
+        if (node.children.size() == 0){
+            System.out.println("Es gibt keine Nachfolgeknoten.");
+        } else {
+            for (int i = 0; i < node.children.size(); i++) {
+                System.out.println(node.children.get(i).move + ", ");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        MoveGenerator mg = new MoveGenerator();
+        String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
+        MCTS mcts = new MCTS();
+        mg.initializeBoard(board);
+        mg.printBoard(false);
+        System.out.println(mcts.runMCTS(mg, Color.BLUE, 3));
     }
 }
