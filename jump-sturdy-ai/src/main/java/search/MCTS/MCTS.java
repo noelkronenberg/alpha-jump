@@ -13,7 +13,7 @@ import search.Evaluation;
 
 public class MCTS {
     private static final Random random = new Random();
-    private static final double EXPLORATION_PARAM = Math.sqrt(2);
+    private static final double EXPLORATION_PARAM = Math.sqrt(10);
 
     public static int runMCTS(MoveGenerator moveGenerator, Color color, int iterations) {
         String initialState = moveGenerator.getFenFromBoard();
@@ -112,7 +112,7 @@ public class MCTS {
         return fen;
     }
 
-    private static void printChildren(MCTSNode node) {
+    /*private static void printChildren(MCTSNode node) {
         if (node.children.size() == 0){
             System.out.println("Es gibt keine Nachfolgeknoten.");
         } else {
@@ -120,14 +120,16 @@ public class MCTS {
                 System.out.println(node.children.get(i).move);
             }
         }
-    }
+    }*/
 
     public static void main(String[] args) {
-        MoveGenerator mg = new MoveGenerator();
-        String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
-        MCTS mcts = new MCTS();
-        mg.initializeBoard(board);
-        mg.printBoard(false);
-        System.out.println(mcts.runMCTS(mg, Color.BLUE, 100000));
+        for (int fullIterations = 0; fullIterations < 3; fullIterations++) {
+            MoveGenerator mg = new MoveGenerator();
+            String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0b01/r0r0r0r0r01 b";
+            MCTS mcts = new MCTS();
+            mg.initializeBoard(board);
+            mg.printBoard(false);
+            System.out.println(mcts.runMCTS(mg, Color.BLUE, 10000));
+        }
     }
 }
