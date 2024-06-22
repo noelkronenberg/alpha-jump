@@ -8,21 +8,25 @@ import java.util.*;
 
 public class Evaluation {
 
-    static double possibleMovesWeight = 0.01;
-    static double protectedPiecesWeight = 0.1;
+    public static double possibleMovesWeight = 0.01;
+    public static double protectedPiecesWeight = 0.1;
+    public static double doubleWeight = 2;
+    public static double mixedWeight = 2;
+    public static double closenessWeight = 1;
+    public static double closenessWeightTotal = closenessWeight * 8;
 
     // START: evaluation
 
-    public static double getScore(Piece piece, double score, int weight) {
+    public static double getScore(Piece piece, double score, double weight) {
         switch (piece) {
             case Piece.SINGLE:
                 score += weight;
                 break;
             case Piece.DOUBLE:
-                score += weight * 2;
+                score += weight * Evaluation.doubleWeight;
                 break;
             case Piece.MIXED:
-                score += weight * 2;
+                score += weight * Evaluation.mixedWeight;
                 break;
         }
         return score;
@@ -30,13 +34,13 @@ public class Evaluation {
 
     public static double getScoreWrapper(MoveGenerator moveGenerator, Color player, double depth, String fen) {
         double score = 0;
-        int weight;
+        double weight;
 
-        score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
-        score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
+        score += moveGenerator.getTotalPossibleMoves() * Evaluation.possibleMovesWeight;
+        score += moveGenerator.getProtectedPieces() * Evaluation.protectedPiecesWeight;
 
         if (player == Color.BLUE) {
-            weight = 1;
+            weight = Evaluation.closenessWeight;
 
             // check gameOver of other player
             if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED, fen), Color.RED)) {
@@ -54,11 +58,11 @@ public class Evaluation {
                         score = getScore(piece, score, weight);
                     }
                 }
-                weight += 1;
+                weight += Evaluation.closenessWeight;
             }
 
         } else if (player == Color.RED) {
-            weight = 8;
+            weight = Evaluation.closenessWeightTotal;
 
             // check gameOver of other player
             if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE,fen), Color.BLUE)) {
@@ -76,22 +80,22 @@ public class Evaluation {
                         score = getScore(piece, score, weight);
                     }
                 }
-                weight -= 1;
+                weight -= Evaluation.closenessWeight;
             }
         }
 
         return score;
     }
 
-    public static double getScoreWrapperKI(MoveGenerator moveGenerator, Color player, double depth,LinkedHashMap<Integer, List<Integer>> moves) {   //moves Contains the enemys moves
+    public static double getScoreWrapperKI(MoveGenerator moveGenerator, Color player, double depth, LinkedHashMap<Integer, List<Integer>> moves) {   //moves Contains the enemys moves
         double score = 0;
-        int weight;
+        double weight;
 
-        score += moveGenerator.getTotalPossibleMoves() * possibleMovesWeight;
-        score += moveGenerator.getProtectedPieces() * protectedPiecesWeight;
+        score += moveGenerator.getTotalPossibleMoves() * Evaluation.possibleMovesWeight;
+        score += moveGenerator.getProtectedPieces() * Evaluation.protectedPiecesWeight;
 
         if (player == Color.BLUE) {
-            weight = 1;
+            weight = Evaluation.closenessWeight;
 
             // check gameOver of other player
             if (moveGenerator.isGameOver(moves, Color.RED)) {
@@ -109,11 +113,11 @@ public class Evaluation {
                         score = getScore(piece, score, weight);
                     }
                 }
-                weight += 1;
+                weight += Evaluation.closenessWeight;
             }
 
         } else if (player == Color.RED) {
-            weight = 8;
+            weight = Evaluation.closenessWeightTotal;
 
             // check gameOver of other player
             if (moveGenerator.isGameOver(moves, Color.BLUE)) {
@@ -131,7 +135,7 @@ public class Evaluation {
                         score = getScore(piece, score, weight);
                     }
                 }
-                weight -= 1;
+                weight -= Evaluation.closenessWeight;
             }
         }
 
@@ -374,7 +378,6 @@ public class Evaluation {
 
         moves.sort(comparator);
     }
-
 
     // END: move ordering
 
