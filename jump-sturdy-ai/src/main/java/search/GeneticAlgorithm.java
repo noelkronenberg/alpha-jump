@@ -1,5 +1,8 @@
 package search;
 
+import game.Color;
+import game.MoveGenerator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -54,10 +57,62 @@ public class GeneticAlgorithm {
     }
 
     public static double playGame() {
-        // replace with actual game-playing code
-        // should use the Evaluation class internally
-        // return a score indicating performance
-        return new Random().nextDouble() * 100;
+        BasisKI ki = new BasisKI();
+        BasisKI.bestConfig.timeLimit = 1000; // reduce time for speed
+        String bestMove;
+
+        String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
+        Color currentColor = Color.BLUE;
+        MoveGenerator gameState = new MoveGenerator();
+        gameState.initializeBoard(fen);
+
+        boolean gameOver = false;
+        int moveCount = 0;
+
+        while (!gameOver) {
+            bestMove = ki.orchestrator(fen,  BasisKI.bestConfig); // get best move
+
+            // convert move
+            int[] bestMoveInts = gameState.convertStringToPosWrapper(bestMove);
+            int bestMoveInt = bestMoveInts[0] * 100 + bestMoveInts[1];
+
+            // move piece
+            gameState.movePiece(bestMoveInt);
+            moveCount++;
+
+            // check for game over
+            char currentColorChar = fen.charAt(fen.length() - 1);
+            currentColor = (currentColorChar == 'r') ? Color.RED : Color.BLUE;
+            gameOver = gameState.isGameOver(bestMove, currentColor);
+
+            // show status
+            System.out.println("Color: " + currentColor);
+            System.out.println("Move: " + bestMove);
+            System.out.println("MoveCount: " + moveCount);
+            System.out.println("GameOver: " + gameOver);
+            gameState.printBoard(true);
+
+            // get next FEN
+            char nextColor = (currentColorChar == 'r') ? 'b' : 'r'; // switch color
+            fen = gameState.getFenFromBoard() + " " + nextColor;
+        }
+
+        // START: score
+
+        double score = 0;
+
+        // check if won
+        if (currentColor != Color.BLUE) {
+            score += 1000;
+        }
+        score -= moveCount; // "get" points for fewer moves
+
+        System.out.println();
+        System.out.println("Score: " + score); // show status
+
+        // END: score
+
+        return score;
     }
 
     private static Individual[] crossover(Individual parent1, Individual parent2) {
