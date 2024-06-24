@@ -64,7 +64,7 @@ public class GeneticAlgorithm {
         BasisKI.bestConfig.timeLimit = 1000; // reduce time for speed
         String bestMove;
 
-        String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
+        String fen = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
         Color currentColor = Color.BLUE;
         MoveGenerator gameState = new MoveGenerator();
         gameState.initializeBoard(fen);

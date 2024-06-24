@@ -1,0 +1,4688 @@
+Color: BLUE
+Move: G6-G7
+MoveCount: 1
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .  RR   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: F7-E5
+MoveCount: 2
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .  RR   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: D3-D4
+MoveCount: 3
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .  RR   .   .   .  
+4    .   .   .   B   B   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: E5-G4
+MoveCount: 4
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   B   B   .   R   .  
+3    .   B   .   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: E4-D4
+MoveCount: 5
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .  BB   .   .   R   .  
+3    .   B   .   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: E5-D5
+MoveCount: 6
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   R   .   .   .   .  
+4    .   .   .  BB   .   .   R   .  
+3    .   B   .   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: D1-C3
+MoveCount: 7
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   R   .   .   .   .  
+4    .   .   .  BB   .   .   R   .  
+3    .   B   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: F7-E7
+MoveCount: 8
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   R   .   .   .   .  
+4    .   .   .  BB   .   .   R   .  
+3    .   B   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: D4-B5
+MoveCount: 9
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   B   .   R   .   .   .   .  
+4    .   .   .   B   .   .   R   .  
+3    .   B   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: G4-H4
+MoveCount: 10
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   B   .   R   .   .   .   .  
+4    .   .   .   B   .   .   .   R  
+3    .   B   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: D4-C4
+MoveCount: 11
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   B   .   R   .   .   .   .  
+4    .   .   B   .   .   .   .   R  
+3    .   B   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: D8-E6
+MoveCount: 12
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   R   .   .   .  
+5    .   B   .   R   .   .   .   .  
+4    .   .   B   .   .   .   .   R  
+3    .   B   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: E1-D3
+MoveCount: 13
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   R   .   .   .  
+5    .   B   .   R   .   .   .   .  
+4    .   .   B   .   .   .   .   R  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: D5-E5
+MoveCount: 14
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   R   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   .   B   .   .   .   .   R  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: C3-C4
+MoveCount: 15
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   R   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   .  BB   .   .   .   .   R  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: E5-F5
+MoveCount: 16
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   R   .   .   .  
+5    .   B   .   .   .   R   .   .  
+4    .   .  BB   .   .   .   .   R  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: D3-D4
+MoveCount: 17
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   R   .   .   .  
+5    .   B   .   .   .   R   .   .  
+4    .   .  BB   B   .   .   .   R  
+3    .   B   .   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: D6-D5
+MoveCount: 18
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   B   .   R   .   R   .   .  
+4    .   .  BB   B   .   .   .   R  
+3    .   B   .   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: C4-A5
+MoveCount: 19
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    B   B   .   R   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   B   .   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: D5-C5
+MoveCount: 20
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    B   B   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   B   .   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: B3-C3
+MoveCount: 21
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    B   B   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: D8-C8
+MoveCount: 22
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    B   B   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: G1-G2
+MoveCount: 23
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    B   B   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: E6-D6
+MoveCount: 24
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   .   .   .   .  
+5    B   B   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: A5-B5
+MoveCount: 25
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   R   .   R   .   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: C7-C6
+MoveCount: 26
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   .   .   R   .   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G7-F7
+MoveCount: 27
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   .   .   R   B   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: G8-F8
+MoveCount: 28
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   R   .      
+7    .   R   .   .   R   B   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: F7-G7
+MoveCount: 29
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   R   .      
+7    .   R   .   .   R   .   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: F8-G8
+MoveCount: 30
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   .   .   R   .   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G7-F7
+MoveCount: 31
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   .   .   R   B   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: G8-F8
+MoveCount: 32
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   R   .      
+7    .   R   .   .   R   B   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: F7-G7
+MoveCount: 33
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   R   .      
+7    .   R   .   .   R   .   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: F8-G8
+MoveCount: 34
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   .   .   R   .   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G7-F7
+MoveCount: 35
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   .   .   R   B   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: G8-F8
+MoveCount: 36
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   R   .      
+7    .   R   .   .   R   B   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: F7-G7
+MoveCount: 37
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   R   .      
+7    .   R   .   .   R   .   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: F8-G8
+MoveCount: 38
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   .   .   R   .   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G7-F7
+MoveCount: 39
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   .   .   R   B   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: G8-F8
+MoveCount: 40
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   R   .      
+7    .   R   .   .   R   B   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: F7-G7
+MoveCount: 41
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   R   .      
+7    .   R   .   .   R   .   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: F8-G8
+MoveCount: 42
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   .   .   R   .   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G7-F7
+MoveCount: 43
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   R   .   .   R   B   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: G8-F7
+MoveCount: 44
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   R   R   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G2-G3
+MoveCount: 45
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   R   R   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   B   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: E7-F7
+MoveCount: 46
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .  RR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   R  
+3    .   .   B   .   .   .   B   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G3-H4
+MoveCount: 47
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .  RR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .  BB   R   .   .   R   .   .  
+4    .   .   B   B   .   .   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: D6-D5
+MoveCount: 48
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .  RR   .   .  
+6    .   .   R   .   .   .   .   .  
+5    .  BB   R   R   .   R   .   .  
+4    .   .   B   B   .   .   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: B5-D6
+MoveCount: 49
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .  RR   .   .  
+6    .   .   R   B   .   .   .   .  
+5    .   B   R   R   .   R   .   .  
+4    .   .   B   B   .   .   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: F5-F4
+MoveCount: 50
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .  RR   .   .  
+6    .   .   R   B   .   .   .   .  
+5    .   B   R   R   .   .   .   .  
+4    .   .   B   B   .   R   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: D4-C5
+MoveCount: 51
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .  RR   .   .  
+6    .   .   R   B   .   .   .   .  
+5    .   B   B   R   .   .   .   .  
+4    .   .   B   .   .   R   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: C6-B6
+MoveCount: 52
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .  RR   .   .  
+6    .   R   .   B   .   .   .   .  
+5    .   B   B   R   .   .   .   .  
+4    .   .   B   .   .   R   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: D6-E6
+MoveCount: 53
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .  RR   .   .  
+6    .   R   .   .   B   .   .   .  
+5    .   B   B   R   .   .   .   .  
+4    .   .   B   .   .   R   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: F7-G5
+MoveCount: 54
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .   R   .   .  
+6    .   R   .   .   B   .   .   .  
+5    .   B   B   R   .   .   R   .  
+4    .   .   B   .   .   R   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: E6-F7
+MoveCount: 55
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .   B   .   .  
+6    .   R   .   .   .   .   .   .  
+5    .   B   B   R   .   .   R   .  
+4    .   .   B   .   .   R   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: B6-C5
+MoveCount: 56
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   .      
+7    .   R   .   .   .   B   .   .  
+6    .   .   .   .   .   .   .   .  
+5    .   B   R   R   .   .   R   .  
+4    .   .   B   .   .   R   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: F7-F8
+MoveCount: 57
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   B   .      
+7    .   R   .   .   .   .   .   .  
+6    .   .   .   .   .   .   .   .  
+5    .   B   R   R   .   .   R   .  
+4    .   .   B   .   .   R   .   B  
+3    .   .   B   .   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: F4-F3
+MoveCount: 58
+GameOver: true
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   B   .      
+7    .   R   .   .   .   .   .   .  
+6    .   .   .   .   .   .   .   .  
+5    .   B   R   R   .   .   R   .  
+4    .   .   B   .   .   .   .   B  
+3    .   .   B   .   .   R   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+
+Score: 942.0
+Color: BLUE
+Move: G6-F7
+MoveCount: 1
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .  RB   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: G8-F7
+MoveCount: 2
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: D1-C3
+MoveCount: 3
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: D8-C6
+MoveCount: 4
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: E1-D3
+MoveCount: 5
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: C7-C6
+MoveCount: 6
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: G1-G2
+MoveCount: 7
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: D8-D7
+MoveCount: 8
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G2-G3
+MoveCount: 9
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   B   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: C6-A5
+MoveCount: 10
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   B   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: B2-B3
+MoveCount: 11
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .  BB   B  BB   .   .   B   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: A5-A4
+MoveCount: 12
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    R   .   .   .   B   .   .   .  
+3    .  BB   B  BB   .   .   B   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: B3-D4
+MoveCount: 13
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    R   .   .   B   B   .   .   .  
+3    .   B   B  BB   .   .   B   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: E5-F5
+MoveCount: 14
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   .   R   .   .  
+4    R   .   .   B   B   .   .   .  
+3    .   B   B  BB   .   .   B   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: B3-A4
+MoveCount: 15
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   .   R   .   .  
+4    B   .   .   B   B   .   .   .  
+3    .   .   B  BB   .   .   B   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: F5-G5
+MoveCount: 16
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   .   .   R   .  
+4    B   .   .   B   B   .   .   .  
+3    .   .   B  BB   .   .   B   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G3-G4
+MoveCount: 17
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   .   .   R   .  
+4    B   .   .   B   B   .   B   .  
+3    .   .   B  BB   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: B7-B6
+MoveCount: 18
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   R   R   R   .   .   .   .  
+5    .   .   .   .   .   .   R   .  
+4    B   .   .   B   B   .   B   .  
+3    .   .   B  BB   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: D3-B4
+MoveCount: 19
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   R   R   R   .   .   .   .  
+5    .   .   .   .   .   .   R   .  
+4    B   B   .   B   B   .   B   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: B6-C6
+MoveCount: 20
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   .   .   R   .  
+4    B   B   .   B   B   .   B   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: D4-E4
+MoveCount: 21
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   .   .   R   .  
+4    B   B   .   .  BB   .   B   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: D6-E6
+MoveCount: 22
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   .   R   .   .   .  
+5    .   .   .   .   .   .   R   .  
+4    B   B   .   .  BB   .   B   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: D3-D4
+MoveCount: 23
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   .   R   .   .   .  
+5    .   .   .   .   .   .   R   .  
+4    B   B   .   B  BB   .   B   .  
+3    .   .   B   .   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: D7-C7
+MoveCount: 24
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .   .  RR   .   R   .   .   .  
+5    .   .   .   .   .   .   R   .  
+4    B   B   .   B  BB   .   B   .  
+3    .   .   B   .   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: E4-G5
+MoveCount: 25
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .   .  RR   .   R   .   .   .  
+5    .   .   .   .   .   .   B   .  
+4    B   B   .   B   B   .   B   .  
+3    .   .   B   .   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: C7-D7
+MoveCount: 26
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   .   R   .   .   .  
+5    .   .   .   .   .   .   B   .  
+4    B   B   .   B   B   .   B   .  
+3    .   .   B   .   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G4-G5
+MoveCount: 27
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   .   R   .   .   .  
+5    .   .   .   .   .   .  BB   .  
+4    B   B   .   B   B   .   .   .  
+3    .   .   B   .   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: C6-E5
+MoveCount: 28
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   R   .   R   .   .   .  
+5    .   .   .   .   R   .  BB   .  
+4    B   B   .   B   B   .   .   .  
+3    .   .   B   .   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G5-F7
+MoveCount: 29
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  RB   .   .  
+6    .   .   R   .   R   .   .   .  
+5    .   .   .   .   R   .   B   .  
+4    B   B   .   B   B   .   .   .  
+3    .   .   B   .   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: E5-D4
+MoveCount: 30
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  RB   .   .  
+6    .   .   R   .   R   .   .   .  
+5    .   .   .   .   .   .   B   .  
+4    B   B   .   R   B   .   .   .  
+3    .   .   B   .   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: F7-D8
+MoveCount: 31
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   B   .   .   .      
+7    .   .   .   R   .   R   .   .  
+6    .   .   R   .   R   .   .   .  
+5    .   .   .   .   .   .   B   .  
+4    B   B   .   R   B   .   .   .  
+3    .   .   B   .   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: C6-C5
+MoveCount: 32
+GameOver: true
+     A   B   C   D   E   F   G   H
+
+8        .   .   B   .   .   .      
+7    .   .   .   R   .   R   .   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   R   .   .   .   B   .  
+4    B   B   .   R   B   .   .   .  
+3    .   .   B   .   .   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+
+Score: 968.0
+Color: BLUE
+Move: B2-C2
+MoveCount: 1
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .  RR   .   .  
+6    .   .   .   R   .   .   B   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: F7-G5
+MoveCount: 2
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   .   .  
+6    .   .   .   R   .   .   B   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: E4-F4
+MoveCount: 3
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   .   .  
+6    .   .   .   R   .   .   B   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   .   B   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: G8-G7
+MoveCount: 4
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   R   R   .  
+6    .   .   .   R   .   .   B   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   .   B   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: F4-G5
+MoveCount: 5
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   R   R   .  
+6    .   .   .   R   .   .   B   .  
+5    .   .   .   .   R   .   B   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: F7-G6
+MoveCount: 6
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   R   .  
+5    .   .   .   .   R   .   B   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: E1-D3
+MoveCount: 7
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   R   .  
+5    .   .   .   .   R   .   B   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .  BB   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB   B   .   B      
+
+Color: RED
+Move: E5-D5
+MoveCount: 8
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   R   .  
+5    .   .   .   R   .   .   B   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .  BB   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB   B   .   B      
+
+Color: BLUE
+Move: G5-F5
+MoveCount: 9
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   R   .  
+5    .   .   .   R   .   B   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .  BB   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB   B   .   B      
+
+Color: RED
+Move: G6-F5
+MoveCount: 10
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   R   .   R   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .  BB   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB   B   .   B      
+
+Color: BLUE
+Move: D3-F4
+MoveCount: 11
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   R   .   R   .   .  
+4    .   .   .   .   .   B   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB   B   .   B      
+
+Color: RED
+Move: D5-C5
+MoveCount: 12
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   R   .   .   R   .   .  
+4    .   .   .   .   .   B   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB   B   .   B      
+
+Color: BLUE
+Move: F4-E4
+MoveCount: 13
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   R   .   .   R   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB   B   .   B      
+
+Color: RED
+Move: F5-F4
+MoveCount: 14
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   R   .   .   .   .   .  
+4    .   .   .   .   B   R   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .  BB   B   .   B      
+
+Color: BLUE
+Move: D1-E3
+MoveCount: 15
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   R   .   .   .   .   .  
+4    .   .   .   .   B   R   .   .  
+3    .   B   .   B   B   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: F4-E3
+MoveCount: 16
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   R   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   R   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: D1-D2
+MoveCount: 17
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   R   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   R   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: E3-E2
+MoveCount: 18
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   R   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   B   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: D2-D3
+MoveCount: 19
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   R   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .  BB   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: C5-B5
+MoveCount: 20
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   R   .   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .  BB   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: D3-C5
+MoveCount: 21
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .   .   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   R   B   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: D8-F7
+MoveCount: 22
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .   R   R   .  
+6    .   .   .   R   .   .   .   .  
+5    .   R   B   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: C5-D6
+MoveCount: 23
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .   R   R   .  
+6    .   .   .   B   .   .   .   .  
+5    .   R   .   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: C7-C6
+MoveCount: 24
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .   R   R   .  
+6    .   .   R   B   .   .   .   .  
+5    .   R   .   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: D3-D4
+MoveCount: 25
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .   R   R   .  
+6    .   .   R   B   .   .   .   .  
+5    .   R   .   .   .   .   .   .  
+4    .   .   .   B   B   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: C6-B6
+MoveCount: 26
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .   R   R   .  
+6    .   R   .   B   .   .   .   .  
+5    .   R   .   .   .   .   .   .  
+4    .   .   .   B   B   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: D4-D5
+MoveCount: 27
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .   R   R   .  
+6    .   R   .   B   .   .   .   .  
+5    .   R   .   B   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: G7-F7
+MoveCount: 28
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  RR   .   .  
+6    .   R   .   B   .   .   .   .  
+5    .   R   .   B   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: E4-E5
+MoveCount: 29
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  RR   .   .  
+6    .   R   .   B   .   .   .   .  
+5    .   R   .   B   B   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: B7-B6
+MoveCount: 30
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  RR   .   .  
+6    .  RR   .   B   .   .   .   .  
+5    .   R   .   B   B   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: D5-D6
+MoveCount: 31
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  RR   .   .  
+6    .  RR   .  BB   .   .   .   .  
+5    .   R   .   .   B   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: F7-D6
+MoveCount: 32
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .   R   .   .  
+6    .  RR   .  BR   .   .   .   .  
+5    .   R   .   .   B   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: E5-D6
+MoveCount: 33
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .   R   .   .  
+6    .  RR   .  RB   .   .   .   .  
+5    .   R   .   .   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: B6-A4
+MoveCount: 34
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .   R   .   .  
+6    .   R   .  RB   .   .   .   .  
+5    .   R   .   .   .   .   .   .  
+4    R   .   .   .   .   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: D6-C8
+MoveCount: 35
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   B   R   .   .   .      
+7    .   .   .   .   .   R   .   .  
+6    .   R   .   R   .   .   .   .  
+5    .   R   .   .   .   .   .   .  
+4    R   .   .   .   .   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: D6-D5
+MoveCount: 36
+GameOver: true
+     A   B   C   D   E   F   G   H
+
+8        .   B   R   .   .   .      
+7    .   .   .   .   .   R   .   .  
+6    .   R   .   .   .   .   .   .  
+5    .   R   .   R   .   .   .   .  
+4    R   .   .   .   .   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   .   R   .   .   .  
+1        .   .   .   B   .   B      
+
+
+Score: 964.0
+Color: BLUE
+Move: D1-C3
+MoveCount: 1
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .  RR   .   .  
+6    .   .   .   R   .   .   B   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: F7-G5
+MoveCount: 2
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   .   .  
+6    .   .   .   R   .   .   B   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: G6-G7
+MoveCount: 3
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: G5-G4
+MoveCount: 4
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   R   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: B3-B4
+MoveCount: 5
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   .   .   B   .   R   .  
+3    .   .   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: G4-G3
+MoveCount: 6
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   .   .   B   .   .   .  
+3    .   .   B   B   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: E1-D3
+MoveCount: 7
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   .   .   B   .   .   .  
+3    .   .   B  BB   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: F7-F6
+MoveCount: 8
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   .   R   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   .   .   B   .   .   .  
+3    .   .   B  BB   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: C3-C4
+MoveCount: 9
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   .   R   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   B   .   B   .   .   .  
+3    .   .   .  BB   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: E5-D5
+MoveCount: 10
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   .   R   .   .  
+5    .   .   .   R   .   .   .   .  
+4    .   B   B   .   B   .   .   .  
+3    .   .   .  BB   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: D3-C5
+MoveCount: 11
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   .   R   .   .  
+5    .   .   B   R   .   .   .   .  
+4    .   B   B   .   B   .   .   .  
+3    .   .   .   B   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: D5-D4
+MoveCount: 12
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   .   R   .   .  
+5    .   .   B   .   .   .   .   .  
+4    .   B   B   R   B   .   .   .  
+3    .   .   .   B   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: E4-E5
+MoveCount: 13
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   .   R   .   .  
+5    .   .   B   .   B   .   .   .  
+4    .   B   B   R   .   .   .   .  
+3    .   .   .   B   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: F6-E5
+MoveCount: 14
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   B   .   R   .   .   .  
+4    .   B   B   R   .   .   .   .  
+3    .   .   .   B   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: D3-C3
+MoveCount: 15
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   B   .   R   .   .   .  
+4    .   B   B   R   .   .   .   .  
+3    .   .   B   .   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: D4-D3
+MoveCount: 16
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   B   .   R   .   .   .  
+4    .   B   B   .   .   .   .   .  
+3    .   .   B   R   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: C3-C4
+MoveCount: 17
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   B   .   R   .   .   .  
+4    .   B  BB   .   .   .   .   .  
+3    .   .   .   R   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: D8-E6
+MoveCount: 18
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   R   .   .   .  
+5    .   .   B   .   R   .   .   .  
+4    .   B  BB   .   .   .   .   .  
+3    .   .   .   R   .   .   R   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: B2-B3
+MoveCount: 19
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   R   R   .   .   .  
+5    .   .   B   .   R   .   .   .  
+4    .   B  BB   .   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: D6-C5
+MoveCount: 20
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   R   .   R   .   .   .  
+4    .   B  BB   .   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: E1-E2
+MoveCount: 21
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   R   .   R   .   .   .  
+4    .   B  BB   .   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   B   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: RED
+Move: E5-D5
+MoveCount: 22
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   R   R   .   .   .   .  
+4    .   B  BB   .   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   B   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: BLUE
+Move: C4-A5
+MoveCount: 23
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    B   .   R   R   .   .   .   .  
+4    .   B   B   .   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   B   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: RED
+Move: D5-D4
+MoveCount: 24
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    B   .   R   .   .   .   .   .  
+4    .   B   B   R   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   B   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: BLUE
+Move: B4-C5
+MoveCount: 25
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    B   .   B   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   B   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: RED
+Move: C7-B7
+MoveCount: 26
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .  RR   .   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    B   .   B   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   B   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: BLUE
+Move: A5-A6
+MoveCount: 27
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .  RR   .   .   .   .   B   .  
+6    B   .   .   .   R   .   .   .  
+5    .   .   B   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   B   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: RED
+Move: D8-C8
+MoveCount: 28
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .  RR   .   .   .   .   B   .  
+6    B   .   .   .   R   .   .   .  
+5    .   .   B   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   B   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: BLUE
+Move: A6-B7
+MoveCount: 29
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .  RB   .   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   B   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   B   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: RED
+Move: C8-B7
+MoveCount: 30
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   R      
+7    .  BR   .   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   B   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   R   .   .   R   .  
+2    .   .   .   .   B   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: BLUE
+Move: E2-D3
+MoveCount: 31
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   R      
+7    .  BR   .   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   B   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   B   .   .   R   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   B   .   .   B      
+
+Color: RED
+Move: G3-G2
+MoveCount: 32
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   R      
+7    .  BR   .   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   B   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   .   .   .   .   R   .  
+1        .   .   B   .   .   B      
+
+Color: BLUE
+Move: C5-C6
+MoveCount: 33
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   R      
+7    .  BR   .   .   .   .   B   .  
+6    .   .   B   .   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   .   .   .   .   R   .  
+1        .   .   B   .   .   B      
+
+Color: RED
+Move: G2-F2
+MoveCount: 34
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   R      
+7    .  BR   .   .   .   .   B   .  
+6    .   .   B   .   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   .   .   .   R   .   .  
+1        .   .   B   .   .   B      
+
+Color: BLUE
+Move: G1-F2
+MoveCount: 35
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   R      
+7    .  BR   .   .   .   .   B   .  
+6    .   .   B   .   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   B   R   .   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   .   .   .   B   .   .  
+1        .   .   B   .   .   .      
+
+Color: RED
+Move: D4-E4
+MoveCount: 36
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   R      
+7    .  BR   .   .   .   .   B   .  
+6    .   .   B   .   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   B   .   R   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   .   .   .   B   .   .  
+1        .   .   B   .   .   .      
+
+Color: BLUE
+Move: C6-B7
+MoveCount: 37
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   R      
+7    .  RB   .   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   B   .   R   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   .   .   .   .   B   .   .  
+1        .   .   B   .   .   .      
+
+Color: RED
+Move: E4-D3
+MoveCount: 38
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   R      
+7    .  RB   .   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   B   .   R   .   .   .   .  
+2    .   .   .   .   .   B   .   .  
+1        .   .   B   .   .   .      
+
+Color: BLUE
+Move: B7-D8
+MoveCount: 39
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   B   .   .   R      
+7    .   R   .   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   B   .   R   .   .   .   .  
+2    .   .   .   .   .   B   .   .  
+1        .   .   B   .   .   .      
+
+Color: RED
+Move: G8-F8
+MoveCount: 40
+GameOver: true
+     A   B   C   D   E   F   G   H
+
+8        .   .   B   .   R   .      
+7    .   R   .   .   .   .   B   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   B   .   R   .   .   .   .  
+2    .   .   .   .   .   B   .   .  
+1        .   .   B   .   .   .      
+
+
+Score: 960.0
+Color: BLUE
+Move: G6-F7
+MoveCount: 1
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .  RB   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: G8-F7
+MoveCount: 2
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: D1-E3
+MoveCount: 3
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   B   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: D8-C6
+MoveCount: 4
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   B   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: E1-D3
+MoveCount: 5
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .  BB   B   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: C7-C6
+MoveCount: 6
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .  BB   B   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: D1-D2
+MoveCount: 7
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: B7-B6
+MoveCount: 8
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   R  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: E1-E2
+MoveCount: 9
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   R  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .  BB   B   .   .   .  
+2    .   B   .   B   B   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: B6-B5
+MoveCount: 10
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   R   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .  BB   B   .   .   .  
+2    .   B   .   B   B   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: E2-E3
+MoveCount: 11
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   R   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .  BB  BB   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: C6-A5
+MoveCount: 12
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   R   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .  BB  BB   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: E3-C4
+MoveCount: 13
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   R   .   .   R   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   B   .  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: B5-C5
+MoveCount: 14
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   R   .   R   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   B   .  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: D3-E5
+MoveCount: 15
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   R   .   B   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   B   .   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: C6-C5
+MoveCount: 16
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    R   .  RR   .   B   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   B   .   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: E5-D6
+MoveCount: 17
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   .   B   .   .   .   .  
+5    R   .  RR   .   .   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   B   .   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: D8-D7
+MoveCount: 18
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   .   B   .   .   .   .  
+5    R   .  RR   .   .   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   B   .   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: B2-C2
+MoveCount: 19
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   .   B   .   .   .   .  
+5    R   .  RR   .   .   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   B   .   B   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: A5-A4
+MoveCount: 20
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   .   B   .   .   .   .  
+5    .   .  RR   .   .   .   .   .  
+4    R   .   B   .   B   .   .   .  
+3    .   B   .   B   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: B3-A4
+MoveCount: 21
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   .   B   .   .   .   .  
+5    .   .  RR   .   .   .   .   .  
+4    B   .   B   .   B   .   .   .  
+3    .   .   .   B   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: C5-E4
+MoveCount: 22
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   .   B   .   .   .   .  
+5    .   .   R   .   .   .   .   .  
+4    B   .   B   .   R   .   .   .  
+3    .   .   .   B   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: D3-E4
+MoveCount: 23
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   .   B   .   .   .   .  
+5    .   .   R   .   .   .   .   .  
+4    B   .   B   .   B   .   .   .  
+3    .   .   .   .   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: C5-B5
+MoveCount: 24
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   .   B   .   .   .   .  
+5    .   R   .   .   .   .   .   .  
+4    B   .   B   .   B   .   .   .  
+3    .   .   .   .   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: C4-B5
+MoveCount: 25
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   .   B   .   .   .   .  
+5    .   B   .   .   .   .   .   .  
+4    B   .   .   .   B   .   .   .  
+3    .   .   .   .   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: D7-C7
+MoveCount: 26
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .   .   .   B   .   .   .   .  
+5    .   B   .   .   .   .   .   .  
+4    B   .   .   .   B   .   .   .  
+3    .   .   .   .   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: D6-C7
+MoveCount: 27
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   B   .   .  BR   .   .  
+6    .   .   .   .   .   .   .   .  
+5    .   B   .   .   .   .   .   .  
+4    B   .   .   .   B   .   .   .  
+3    .   .   .   .   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: F7-E5
+MoveCount: 28
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   B   .   .   B   .   .  
+6    .   .   .   .   .   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    B   .   .   .   B   .   .   .  
+3    .   .   .   .   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: C7-C8
+MoveCount: 29
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .   .   .   .   .   B   .   .  
+6    .   .   .   .   .   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    B   .   .   .   B   .   .   .  
+3    .   .   .   .   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E5-D5
+MoveCount: 30
+GameOver: true
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .   .   .   .   .   B   .   .  
+6    .   .   .   .   .   .   .   .  
+5    .   B   .   R   .   .   .   .  
+4    B   .   .   .   B   .   .   .  
+3    .   .   .   .   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+
+Score: 970.0
+Generation 1 - possibleMovesWeight: 0,53084 | protectedPiecesWeight: 0,57628 | doubleWeight: 0,41600 | mixedWeight: 0,61423 | closenessWeight: 0,87276 | fitness: 970,00000
+Color: BLUE
+Move: G6-F7
+MoveCount: 1
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .  RB   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: G8-F7
+MoveCount: 2
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: D1-C3
+MoveCount: 3
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: D8-C6
+MoveCount: 4
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: E1-D3
+MoveCount: 5
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: C7-C6
+MoveCount: 6
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: D1-D2
+MoveCount: 7
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: C6-A5
+MoveCount: 8
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: E1-E2
+MoveCount: 9
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   B   B   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: D8-D7
+MoveCount: 10
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   B   B   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: E2-E3
+MoveCount: 11
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   R   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: B7-B6
+MoveCount: 12
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   R   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: B2-C2
+MoveCount: 13
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   R   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: C6-C5
+MoveCount: 14
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   R   .   R   .   .   .   .  
+5    R   .   R   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   B   .   .   .  
+2    .   .   B   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: C2-C3
+MoveCount: 15
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   R   .   R   .   .   .   .  
+5    R   .   R   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B  BB  BB   B   .   .   .  
+2    .   .   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: B6-C6
+MoveCount: 16
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   R   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B  BB  BB   B   .   .   .  
+2    .   .   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: D3-E5
+MoveCount: 17
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   R   .   B   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B  BB   B   B   .   .   .  
+2    .   .   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: D6-C6
+MoveCount: 18
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   .   .   .   .   .  
+5    R   .   R   .   B   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B  BB   B   B   .   .   .  
+2    .   .   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: D2-D3
+MoveCount: 19
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   .   .   .   .   .  
+5    R   .   R   .   B   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B  BB  BB   B   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: D7-C7
+MoveCount: 20
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .   .  RR   .   .   .   .   .  
+5    R   .   R   .   B   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B  BB  BB   B   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: E5-E6
+MoveCount: 21
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .   .  RR   .   B   .   .   .  
+5    R   .   R   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B  BB  BB   B   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: C7-D7
+MoveCount: 22
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   .   B   .   .   .  
+5    R   .   R   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B  BB  BB   B   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: E6-F7
+MoveCount: 23
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  RB   .   .  
+6    .   .  RR   .   .   .   .   .  
+5    R   .   R   .   .   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B  BB  BB   B   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: C6-B4
+MoveCount: 24
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  RB   .   .  
+6    .   .   R   .   .   .   .   .  
+5    R   .   R   .   .   .   .   .  
+4    .   R   .   .   B   .   .   .  
+3    .   B  BB  BB   B   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: F7-D8
+MoveCount: 25
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   B   .   .   .      
+7    .   .   .   R   .   R   .   .  
+6    .   .   R   .   .   .   .   .  
+5    R   .   R   .   .   .   .   .  
+4    .   R   .   .   B   .   .   .  
+3    .   B  BB  BB   B   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: A5-A4
+MoveCount: 26
+GameOver: true
+     A   B   C   D   E   F   G   H
+
+8        .   .   B   .   .   .      
+7    .   .   .   R   .   R   .   .  
+6    .   .   R   .   .   .   .   .  
+5    .   .   R   .   .   .   .   .  
+4    R   R   .   .   B   .   .   .  
+3    .   B  BB  BB   B   .   .   .  
+2    .   .   .   .   .   .   .   .  
+1        .   .   .   .   .   B      
+
+
+Score: 974.0
+Color: BLUE
+Move: D1-C3
+MoveCount: 1
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .  RR   .   .  
+6    .   .   .   R   .   .   B   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: F7-G5
+MoveCount: 2
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   .   .  
+6    .   .   .   R   .   .   B   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: G6-G7
+MoveCount: 3
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: G5-G4
+MoveCount: 4
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   R   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: B3-B4
+MoveCount: 5
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   .   .   B   .   R   .  
+3    .   .   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: D8-C6
+MoveCount: 6
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   .   .   B   .   R   .  
+3    .   .   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: E1-D3
+MoveCount: 7
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   R   B   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   .   .   B   .   R   .  
+3    .   .   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: F7-F6
+MoveCount: 8
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   R   R   .   R   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   .   .   B   .   R   .  
+3    .   .   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: C3-C4
+MoveCount: 9
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   R   R   .   R   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   B   .   B   .   R   .  
+3    .   .   .  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: G4-H4
+MoveCount: 10
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   R   R   .   R   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   B   B   .   B   .   .   R  
+3    .   .   .  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: B4-B5
+MoveCount: 11
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   R   R   .   R   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   .   B   .   B   .   .   R  
+3    .   .   .  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: C6-D6
+MoveCount: 12
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .  RR   .   R   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   .   B   .   B   .   .   R  
+3    .   .   .  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: G1-F1
+MoveCount: 13
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   R   R   .   .   .   B   .  
+6    .   .   .  RR   .   R   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   .   B   .   B   .   .   R  
+3    .   .   .  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   B   .      
+
+Color: RED
+Move: B7-B6
+MoveCount: 14
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   R   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   .   B   .   B   .   .   R  
+3    .   .   .  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   B   .      
+
+Color: BLUE
+Move: F1-F2
+MoveCount: 15
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   R   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   .   B   .   B   .   .   R  
+3    .   .   .  BB   .   .   .   .  
+2    .   B   .   .   .   B   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: H4-H3
+MoveCount: 16
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   R   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   .   .  BB   .   .   .   R  
+2    .   B   .   .   .   B   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: D3-B4
+MoveCount: 17
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   R   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   B   B   .   B   .   .   .  
+3    .   .   .   B   .   .   .   R  
+2    .   B   .   .   .   B   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: H3-H2
+MoveCount: 18
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   R   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   B   B   .   B   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   B   .   R  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: D1-E1
+MoveCount: 19
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   R   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   B   B   .   B   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   B   .   R  
+1        .   .   .  BB   .   .      
+
+Color: RED
+Move: F6-F5
+MoveCount: 20
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    .   B   .   .   R   R   .   .  
+4    .   B   B   .   B   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   B   .   R  
+1        .   .   .  BB   .   .      
+
+Color: BLUE
+Move: B4-A4
+MoveCount: 21
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    .   B   .   .   R   R   .   .  
+4    B   .   B   .   B   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   B   .   R  
+1        .   .   .  BB   .   .      
+
+Color: RED
+Move: F5-F4
+MoveCount: 22
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    B   .   B   .   B   R   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   B   .   R  
+1        .   .   .  BB   .   .      
+
+Color: BLUE
+Move: E1-G2
+MoveCount: 23
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    B   .   B   .   B   R   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   B   B   R  
+1        .   .   .   B   .   .      
+
+Color: RED
+Move: F4-G4
+MoveCount: 24
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    B   .   B   .   B   .   R   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   B   B   R  
+1        .   .   .   B   .   .      
+
+Color: BLUE
+Move: F2-F3
+MoveCount: 25
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    B   .   B   .   B   .   R   .  
+3    .   .   .   B   .   B   .   .  
+2    .   B   .   .   .   .   B   R  
+1        .   .   .   B   .   .      
+
+Color: RED
+Move: G4-F3
+MoveCount: 26
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    B   .   B   .   B   .   .   .  
+3    .   .   .   B   .   R   .   .  
+2    .   B   .   .   .   .   B   R  
+1        .   .   .   B   .   .      
+
+Color: BLUE
+Move: E1-D1
+MoveCount: 27
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    B   .   B   .   B   .   .   .  
+3    .   .   .   B   .   R   .   .  
+2    .   B   .   .   .   .   B   R  
+1        .   .   B   .   .   .      
+
+Color: RED
+Move: F3-F2
+MoveCount: 28
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    B   .   B   .   B   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   R   B   R  
+1        .   .   B   .   .   .      
+
+Color: BLUE
+Move: A4-A5
+MoveCount: 29
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    B   B   .   .   R   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   R   B   R  
+1        .   .   B   .   .   .      
+
+Color: RED
+Move: F2-F1
+MoveCount: 30
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   R   .  RR   .   .   .   .  
+5    B   B   .   .   R   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   .   B   R  
+1        .   .   B   .   R   .      
+
+Color: BLUE
+Move: A5-B6
+MoveCount: 31
+GameOver: true
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   R      
+7    .   .   R   .   .   .   B   .  
+6    .   B   .  RR   .   .   .   .  
+5    .   B   .   .   R   .   .   .  
+4    .   .   B   .   B   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   B   .   .   .   .   B   R  
+1        .   .   B   .   R   .      
+
+
+Score: -31.0
+Generation 2 - possibleMovesWeight: 0,53084 | protectedPiecesWeight: 0,57628 | doubleWeight: 0,41600 | mixedWeight: 0,61423 | closenessWeight: 0,87276 | fitness: 974,00000
+Color: BLUE
+Move: G6-F7
+MoveCount: 1
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .  RB   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: G8-F7
+MoveCount: 2
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: D1-C3
+MoveCount: 3
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: D8-C6
+MoveCount: 4
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: E1-D3
+MoveCount: 5
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: C7-C6
+MoveCount: 6
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: D1-D2
+MoveCount: 7
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .  RR   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: RED
+Move: C6-A5
+MoveCount: 8
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   B   .   B      
+
+Color: BLUE
+Move: E1-E2
+MoveCount: 9
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   B   B   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: B7-B6
+MoveCount: 10
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   R   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   B   B   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: E2-E3
+MoveCount: 11
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   R   R   R   .   .   .   .  
+5    R   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: B6-B5
+MoveCount: 12
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   R   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: C3-B3
+MoveCount: 13
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    R   R   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .  BB   .  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: A5-A4
+MoveCount: 14
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    .   R   .   .   R   .   .   .  
+4    R   .   .   .   B   .   .   .  
+3    .  BB   .  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: B3-A5
+MoveCount: 15
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    B   R   .   .   R   .   .   .  
+4    R   .   .   .   B   .   .   .  
+3    .   B   .  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: A4-B3
+MoveCount: 16
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    B   R   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   R   .  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   B      
+
+Color: BLUE
+Move: G1-G2
+MoveCount: 17
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   .   .   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    B   R   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   R   .  BB   B   .   .   .  
+2    .   B   .   B   .   .   B   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: D8-D7
+MoveCount: 18
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    B   R   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   R   .  BB   B   .   .   .  
+2    .   B   .   B   .   .   B   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: G2-G3
+MoveCount: 19
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   R   R   .   .   .   .  
+5    B   R   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   R   .  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: D6-C6
+MoveCount: 20
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   .   .   .   .   .  
+5    B   R   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   R   .  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: E4-F4
+MoveCount: 21
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   .   .   .   .   .  
+5    B   R   .   .   R   .   .   .  
+4    .   .   .   .   .   B   .   .  
+3    .   R   .  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: E5-D5
+MoveCount: 22
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .  RR   .   .   .   .   .  
+5    B   R   .   R   .   .   .   .  
+4    .   .   .   .   .   B   .   .  
+3    .   R   .  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: A5-A6
+MoveCount: 23
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    B   .  RR   .   .   .   .   .  
+5    .   R   .   R   .   .   .   .  
+4    .   .   .   .   .   B   .   .  
+3    .   R   .  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: B5-A5
+MoveCount: 24
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    B   .  RR   .   .   .   .   .  
+5    R   .   .   R   .   .   .   .  
+4    .   .   .   .   .   B   .   .  
+3    .   R   .  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: A6-A7
+MoveCount: 25
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    B   .   .   R   .  BR   .   .  
+6    .   .  RR   .   .   .   .   .  
+5    R   .   .   R   .   .   .   .  
+4    .   .   .   .   .   B   .   .  
+3    .   R   .  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: B3-C3
+MoveCount: 26
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    B   .   .   R   .  BR   .   .  
+6    .   .  RR   .   .   .   .   .  
+5    R   .   .   R   .   .   .   .  
+4    .   .   .   .   .   B   .   .  
+3    .   .   R  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: A7-B7
+MoveCount: 27
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   B   .   R   .  BR   .   .  
+6    .   .  RR   .   .   .   .   .  
+5    R   .   .   R   .   .   .   .  
+4    .   .   .   .   .   B   .   .  
+3    .   .   R  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: C6-B4
+MoveCount: 28
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   B   .   R   .  BR   .   .  
+6    .   .   R   .   .   .   .   .  
+5    R   .   .   R   .   .   .   .  
+4    .   R   .   .   .   B   .   .  
+3    .   .   R  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: B7-B8
+MoveCount: 29
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        B   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   R   .   .   .   .   .  
+5    R   .   .   R   .   .   .   .  
+4    .   R   .   .   .   B   .   .  
+3    .   .   R  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: B4-B3
+MoveCount: 30
+GameOver: true
+     A   B   C   D   E   F   G   H
+
+8        B   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   .   R   .   .   .   .   .  
+5    R   .   .   R   .   .   .   .  
+4    .   .   .   .   .   B   .   .  
+3    .   R   R  BB   B   .   B   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+
+Score: 970.0
+Color: BLUE
+Move: G6-F7
+MoveCount: 1
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   R      
+7    .   R   R   .   .  RB   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: RED
+Move: G8-F7
+MoveCount: 2
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   .   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .  BB  BB   .   B      
+
+Color: BLUE
+Move: D1-C3
+MoveCount: 3
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .  RR   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: RED
+Move: D8-E6
+MoveCount: 4
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B   B   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B  BB   .   B      
+
+Color: BLUE
+Move: E1-D3
+MoveCount: 5
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   R   R   .   .  BR   .   .  
+6    .   .   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: RED
+Move: B7-B6
+MoveCount: 6
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .   R   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   B      
+
+Color: BLUE
+Move: G1-G2
+MoveCount: 7
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .   R   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: D8-D7
+MoveCount: 8
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   R   .  BR   .   .  
+6    .   R   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   .   .  
+2    .   B   .   .   .   .   B   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: G2-G3
+MoveCount: 9
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   R   .  BR   .   .  
+6    .   R   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   B   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: RED
+Move: C7-C6
+MoveCount: 10
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   R   R   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   B   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   B   .   .      
+
+Color: BLUE
+Move: E1-E2
+MoveCount: 11
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .   R   R   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   B   .  
+2    .   B   .   .   B   .   .   .  
+1        .   .   B   .   .   .      
+
+Color: RED
+Move: C6-B6
+MoveCount: 12
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .  RR   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   .   .   B   .  
+2    .   B   .   .   B   .   .   .  
+1        .   .   B   .   .   .      
+
+Color: BLUE
+Move: E2-E3
+MoveCount: 13
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .  RR   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   B   .   B   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   .   .   .      
+
+Color: RED
+Move: E6-F6
+MoveCount: 14
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .  RR   .   R   .   R   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   .   .  
+3    .   B   B  BB   B   .   B   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   .   .   .      
+
+Color: BLUE
+Move: G3-G4
+MoveCount: 15
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   .   R   .  BR   .   .  
+6    .  RR   .   R   .   R   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   B   .  
+3    .   B   B  BB   B   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   .   .   .      
+
+Color: RED
+Move: D7-C7
+MoveCount: 16
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .  RR   .   R   .   R   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   B   .  
+3    .   B   B  BB   B   .   .   .  
+2    .   B   .   .   .   .   .   .  
+1        .   .   B   .   .   .      
+
+Color: BLUE
+Move: D1-D2
+MoveCount: 17
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .  RR   .   R   .   R   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   B   .  
+3    .   B   B  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: F6-E6
+MoveCount: 18
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .  RR   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   .   B   .  
+3    .   B   B  BB   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: D3-F4
+MoveCount: 19
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .  RR   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   B   B   .  
+3    .   B   B   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: E5-D5
+MoveCount: 20
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .  RR   .   R   R   .   .   .  
+5    .   .   .   R   .   .   .   .  
+4    .   .   .   .   B   B   B   .  
+3    .   B   B   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: G4-G5
+MoveCount: 21
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .  RR   .   R   R   .   .   .  
+5    .   .   .   R   .   .   B   .  
+4    .   .   .   .   B   B   .   .  
+3    .   B   B   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: D5-E5
+MoveCount: 22
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .  RR   .   R   R   .   .   .  
+5    .   .   .   .   R   .   B   .  
+4    .   .   .   .   B   B   .   .  
+3    .   B   B   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: G5-G6
+MoveCount: 23
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .  RR   .   R   R   .   B   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   B   B   .   .  
+3    .   B   B   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: B6-D5
+MoveCount: 24
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  BR   .   .  
+6    .   R   .   R   R   .   B   .  
+5    .   .   .   R   R   .   .   .  
+4    .   .   .   .   B   B   .   .  
+3    .   B   B   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: G6-F7
+MoveCount: 25
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  RB   .   .  
+6    .   R   .   R   R   .   .   .  
+5    .   .   .   R   R   .   .   .  
+4    .   .   .   .   B   B   .   .  
+3    .   B   B   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: D5-E4
+MoveCount: 26
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   .      
+7    .   .   R   .   .  RB   .   .  
+6    .   R   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   R   B   .   .  
+3    .   B   B   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: BLUE
+Move: F7-D8
+MoveCount: 27
+GameOver: false
+     A   B   C   D   E   F   G   H
+
+8        .   .   B   .   .   .      
+7    .   .   R   .   .   R   .   .  
+6    .   R   .   R   R   .   .   .  
+5    .   .   .   .   R   .   .   .  
+4    .   .   .   .   R   B   .   .  
+3    .   B   B   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+Color: RED
+Move: E5-F4
+MoveCount: 28
+GameOver: true
+     A   B   C   D   E   F   G   H
+
+8        .   .   B   .   .   .      
+7    .   .   R   .   .   R   .   .  
+6    .   R   .   R   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   .   R   R   .   .  
+3    .   B   B   B   B   .   .   .  
+2    .   B   .   B   .   .   .   .  
+1        .   .   .   .   .   .      
+
+
+Score: 972.0
+Generation 3 - possibleMovesWeight: 0,53084 | protectedPiecesWeight: 0,57628 | doubleWeight: 0,41600 | mixedWeight: 0,61423 | closenessWeight: 0,87276 | fitness: 972,00000
+
+Optimized parameters: possibleMovesWeight: 0,53084 | protectedPiecesWeight: 0,57628 | doubleWeight: 0,41600 | mixedWeight: 0,61423 | closenessWeight: 0,87276 | fitness: 972,00000
