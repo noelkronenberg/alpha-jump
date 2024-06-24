@@ -3,6 +3,9 @@ package search;
 import game.Color;
 import game.MoveGenerator;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,8 +16,8 @@ import java.util.Random;
 public class GeneticAlgorithm {
 
     // hyperparameter (reference: https://www.baeldung.com/java-genetic-algorithm)
-    private static final int POPULATION_SIZE = 20;
-    private static final int GENERATIONS = 50;
+    private static final int POPULATION_SIZE = 3;
+    private static final int GENERATIONS = 3;
     private static final double MUTATION_RATE = 0.1;
     private static final double CROSSOVER_RATE = 0.75;
 
@@ -151,46 +154,55 @@ public class GeneticAlgorithm {
     }
 
     public static void main(String[] args) {
-        List<Individual> population = new ArrayList<>();
+        try {
+            PrintStream fileOut = new PrintStream(new File("src/main/java/search/GA-output.txt"));
+            System.setOut(fileOut);
 
-        for (int i = 0; i < POPULATION_SIZE; i++) {
-            Individual individual = Individual.generateRandomIndividual();
-            individual.evaluateFitness();
-            population.add(individual);
-        }
+            List<Individual> population = new ArrayList<>();
 
-        for (int generation = 1; generation <= GENERATIONS; generation++) {
-            Collections.sort(population, Comparator.comparingDouble(individual -> -individual.fitness)); // put fittest individuals first
-
-            List<Individual> newPopulation = new ArrayList<>();
-
-            // use top half as parents
-            for (int i = 0; i < POPULATION_SIZE / 2; i++) {
-                Individual parent1 = population.get(i); // get (next) fittest individual
-                Individual parent2 = population.get(random.nextInt(POPULATION_SIZE / 2)); // get random other individual
-
-                Individual[] children = crossover(parent1, parent2); // crossover selected parents
-
-                // add new (mutated) children to (new) population
-                newPopulation.add(mutate(children[0]));
-                newPopulation.add(mutate(children[1]));
-            }
-
-            // evaluate fitness of new population
-            for (Individual individual : newPopulation) {
+            for (int i = 0; i < POPULATION_SIZE; i++) {
+                Individual individual = Individual.generateRandomIndividual();
                 individual.evaluateFitness();
+                population.add(individual);
             }
 
-            population = newPopulation;
+            for (int generation = 1; generation <= GENERATIONS; generation++) {
+                Collections.sort(population, Comparator.comparingDouble(individual -> -individual.fitness)); // put fittest individuals first
 
-            // show the fittest individual of current generation
+                List<Individual> newPopulation = new ArrayList<>();
+
+                // use top half as parents
+                for (int i = 0; i < POPULATION_SIZE / 2; i++) {
+                    Individual parent1 = population.get(i); // get (next) fittest individual
+                    Individual parent2 = population.get(random.nextInt(POPULATION_SIZE / 2)); // get random other individual
+
+                    Individual[] children = crossover(parent1, parent2); // crossover selected parents
+
+                    // add new (mutated) children to (new) population
+                    newPopulation.add(mutate(children[0]));
+                    newPopulation.add(mutate(children[1]));
+                }
+
+                // evaluate fitness of new population
+                for (Individual individual : newPopulation) {
+                    individual.evaluateFitness();
+                }
+
+                population = newPopulation;
+
+                // show the fittest individual of current generation
+                Individual bestIndividual = population.get(0);
+                System.out.printf("Generation %d - %s\n", generation, bestIndividual);
+            }
+
+            // show the overal fittest individual
             Individual bestIndividual = population.get(0);
-            System.out.printf("Generation %d - %s\n", generation, bestIndividual);
-        }
+            System.out.println();
+            System.out.printf("Optimized parameters: %s\n", bestIndividual);
 
-        // show the overal fittest individual
-        Individual bestIndividual = population.get(0);
-        System.out.println();
-        System.out.printf("Optimized parameters: %s\n", bestIndividual);
+            fileOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
