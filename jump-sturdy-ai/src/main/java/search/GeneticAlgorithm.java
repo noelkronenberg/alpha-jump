@@ -49,7 +49,7 @@ public class GeneticAlgorithm {
         }
 
         static Individual generateRandomIndividual() {
-            return new Individual(random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble(), random.nextDouble());
+            return new Individual(random.nextDouble()*5, random.nextDouble()*5, random.nextDouble()*5, random.nextDouble()*5, random.nextDouble()*5);
         }
 
         @Override
@@ -192,6 +192,7 @@ public class GeneticAlgorithm {
 
                 // show the fittest individual of current generation
                 Individual bestIndividual = population.get(0);
+                System.out.println();
                 System.out.printf("Generation %d - %s\n", generation, bestIndividual);
             }
 
