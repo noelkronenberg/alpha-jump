@@ -16,8 +16,8 @@ import java.util.Random;
 public class GeneticAlgorithm {
 
     // hyperparameter (reference: https://www.baeldung.com/java-genetic-algorithm)
-    private static final int POPULATION_SIZE = 3;
-    private static final int GENERATIONS = 3;
+    private static final int POPULATION_SIZE = 20;
+    private static final int GENERATIONS = 10;
     private static final double MUTATION_RATE = 0.1;
     private static final double CROSSOVER_RATE = 0.75;
 
@@ -79,21 +79,25 @@ public class GeneticAlgorithm {
             int[] bestMoveInts = gameState.convertStringToPosWrapper(bestMove);
             int bestMoveInt = bestMoveInts[0] * 100 + bestMoveInts[1];
 
-            // move piece
-            gameState.movePiece(bestMoveInt);
-            moveCount++;
-
             // check for game over
             char currentColorChar = fen.charAt(fen.length() - 1);
             currentColor = (currentColorChar == 'r') ? Color.RED : Color.BLUE;
             gameOver = gameState.isGameOver(bestMove, currentColor);
 
+            if (!gameOver) {
+                // move piece
+                gameState.movePiece(bestMoveInt);
+                moveCount++;
+            }
+
+            /*
             // show status
             System.out.println("Color: " + currentColor);
             System.out.println("Move: " + bestMove);
             System.out.println("MoveCount: " + moveCount);
             System.out.println("GameOver: " + gameOver);
             gameState.printBoard(true);
+            */
 
             // get next FEN
             char nextColor = (currentColorChar == 'r') ? 'b' : 'r'; // switch color
@@ -110,8 +114,10 @@ public class GeneticAlgorithm {
         }
         score -= moveCount; // "get" points for fewer moves
 
+        /*
         System.out.println();
         System.out.println("Score: " + score); // show status
+        */
 
         // END: score
 
