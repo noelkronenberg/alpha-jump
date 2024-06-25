@@ -13,7 +13,7 @@ import search.Evaluation;
 
 public class MCTS {
     private static final Random random = new Random();
-    private static final double EXPLORATION_PARAM = Math.sqrt(10);
+    private static final double EXPLORATION_PARAM = Math.sqrt(0.5);
 
     public static int runMCTS(MoveGenerator moveGenerator, Color color, int iterations) {
         String initialState = moveGenerator.getFenFromBoard();
@@ -30,6 +30,7 @@ public class MCTS {
                 node = selectPromisingNode(node);
                 state = makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
+                moveGenerator.printBoard(false);
             }
 
             // Expansion
@@ -39,6 +40,7 @@ public class MCTS {
                 node = node.children.get(random.nextInt(node.children.size()));
                 state = makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
+                moveGenerator.printBoard(false);
             }
 
             // Simulation
@@ -65,16 +67,25 @@ public class MCTS {
         Color winner = Color.EMPTY;
         while (winner == Color.EMPTY) {
             LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
-            LinkedList<Integer> movesList;
-            movesList = Evaluation.convertMovesToList(possibleMoves);
-            if (possibleMoves.isEmpty()) break;
-            Integer move = movesList.get(random.nextInt(possibleMoves.size()));
-            if (moveGenerator.isGameOver(MoveGenerator.convertMoveToFEN(move), color)) {
-                winner = color;
+            LinkedList<Integer> movesList = Evaluation.convertMovesToList(possibleMoves);
+
+            //checking if game is over
+            if (movesList.isEmpty()) {
+                winner = (color == Color.RED) ? Color.BLUE : Color.RED;
+                break;
             }
+            Integer raInteger = random.nextInt(movesList.size());
+            Integer move = movesList.get(raInteger);
+            if (moveGenerator.isGameOver(MoveGenerator.convertMoveToFEN(move), color)) {
+                winner = (color == Color.RED) ? Color.BLUE : Color.RED;
+                break;
+            }
+
+            moveGenerator.printBoard(false);
             fen = makeMove(moveGenerator, move, color);
             color = (color == Color.RED) ? Color.BLUE : Color.RED;
         }
+        moveGenerator.printBoard(false);
         return winner;
     }
 
@@ -123,13 +134,10 @@ public class MCTS {
     }*/
 
     public static void main(String[] args) {
-        for (int fullIterations = 0; fullIterations < 3; fullIterations++) {
-            MoveGenerator mg = new MoveGenerator();
-            String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0b01/r0r0r0r0r01 b";
-            MCTS mcts = new MCTS();
-            mg.initializeBoard(board);
-            mg.printBoard(false);
-            System.out.println(mcts.runMCTS(mg, Color.BLUE, 10000));
-        }
+        MCTS mcts = new MCTS();
+        MoveGenerator mg = new MoveGenerator();
+        String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
+        mg.initializeBoard(board);
+        runMCTS(mg, Color.BLUE, 1);
     }
 }
