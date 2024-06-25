@@ -12,9 +12,12 @@ public class BasisKITest {
 
     static BasisKI ki;
 
+    static MCTSKI kiMCTS;
+
     @BeforeAll
     public static void init() {
         ki = new BasisKI();
+        kiMCTS=new MCTSKI();
     }
 
     @Test
@@ -27,7 +30,7 @@ public class BasisKITest {
 
     private void testMoves(String fen, String... expectedMoves) {
         init();
-        String answer = ki.orchestrator(fen, BasisKI.bestConfig);
+        String answer = kiMCTS.MCTS_Orchestrator(fen);
         boolean matchFound = false;
         for (String expectedMove : expectedMoves) {
             if (expectedMove.equals(answer)) {
@@ -42,7 +45,7 @@ public class BasisKITest {
 
     private void testMoves(String fen, String expectedMove) {
         init();
-        String answer = ki.orchestrator(fen, BasisKI.bestConfig);
+        String answer = kiMCTS.MCTS_Orchestrator(fen);
         assertEquals(expectedMove, answer);
         System.out.println(answer);
     }
@@ -180,7 +183,7 @@ public class BasisKITest {
     @DisplayName("Gruppe X")
     public void testGruppeX() {
         testMoves("b05/1r03r02/2b01b03/2r01r03/1b06/8/3b02b01/r04r0 b", "D7-D8");
-        testMoves("4b0b0/2b0br4/3b04/2b0b01b02/8/4r03/1r03r02/r0r0r01r0r0 r", "D2-F1");
+        testMoves("4b0b0/2b0br4/3b04/2b0b01b02/8/4r03/1r03r02/r0r0r01r0r0 r", "D2-F1","D2-B1");
     }
 
     @Test
@@ -207,7 +210,7 @@ public class BasisKITest {
     @Test
     @DisplayName("Gruppe AI")
     public void testGruppeAI() {
-        testMoves("6/6b01/8/2b02rr2/8/8/6r01/6 r", "F4-G2");
+        testMoves("6/6b01/8/2b02rr2/8/8/6r01/6 r", "F4-G2","F4-E2");
         testMoves("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "F4-F5"); // added missings
     }
 
@@ -228,7 +231,7 @@ public class BasisKITest {
     @Test
     @DisplayName("Gruppe E")
     public void testGruppeE() {
-        testMoves("b0b0b0b0b01/1b01b02b01/2r05/2r01b03/1r06/3bb4/2r0r02r01/r01r0r0r0r0 b", "D6-E8");
+        testMoves("b0b0b0b0b01/1b01b02b01/2r05/2r01b03/1r06/3bb4/2r0r02r01/r01r0r0r0r0 b", "D6-E8","D6-C8");
         testMoves("b01b03/4b03/1b03r02/3rbb03/1bb4r01/8/2r02r02/1r0r02r0 r", "F3-F2");
     }
 

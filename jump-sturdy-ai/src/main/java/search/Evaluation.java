@@ -157,13 +157,13 @@ public class Evaluation {
         // TODO: difference between ourColor / currentColor
 
         if (color == Color.BLUE && currentColor != color) {
-            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE,fen));
+            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE));
         } else if (color == Color.BLUE && currentColor == color) {
-            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED,fen)) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moves);
+            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED)) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moves);
         } else if (color == Color.RED && currentColor != color) {
-            score = getScoreWrapperKI(moveGenerator, Color.RED, depth, moves) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED,fen));
+            score = getScoreWrapperKI(moveGenerator, Color.RED, depth, moves) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED));
         } else {
-            score = getScoreWrapperKI(moveGenerator, Color.RED, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE,fen)) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves);
+            score = getScoreWrapperKI(moveGenerator, Color.RED, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE)) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves);
         }
 
         return score;

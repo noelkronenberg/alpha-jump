@@ -413,7 +413,7 @@ public class BasisKI {
     // END: search with Alpha-Beta
 
     public static void main(String[] args) {
-        String fen = "6/8/8/8/8/1r0b0r0b0r02/4r03/3rr2 r";
+        String fen = "6/8/8/4b03/8/8/4r03/6 r";
         MoveGenerator m = new MoveGenerator();
         m.initializeBoard(fen);
         m.printBoard(true);
