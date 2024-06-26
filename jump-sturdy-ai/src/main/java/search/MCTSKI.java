@@ -24,29 +24,29 @@ public class MCTSKI {
     double timeLimit = 20000;
     //TODO: 1 add a Tree system(Done)     2 add the value function: UCB(done)       3 add a way to simulate randomly the game end(done)      4 traversal Function (done)   5 backpropagation (done)
 
-    public void MCTS_UCB(String fen){
-        MoveGenerator gameState = new MoveGenerator();
-        char color_fen = fen.charAt(fen.length() - 1);
-        Color ourColor = gameState.getColor(color_fen);
-
-        this.ourColor=ourColor;
-
-        LinkedHashMap<Integer, List<Integer>> moves = gameState.getMovesWrapper(fen);
-        LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
-        MCTSNode parentNode = new MCTSNode(movesList,moves,ourColor);
-        this.parentNode = parentNode;
-        gameState.printBoard(true);
-
-        treePolicy(gameState,parentNode, ourColor);
-
-        for (MCTSNode m : parentNode.childrenSearched){
-            System.out.println("Node For Move "+m.move+", Value: "+m.getNodeValue()+" Visits: "+m.numberOfVisits+" Wins: "+m.numberOfWins);
-        }
-        System.out.println("Number Of all: "+numberOfAllSimulations);
-        System.out.println("Number Of all: "+parentNode.numberOfVisits);
-
-        System.out.println(MoveGenerator.convertMoveToFEN(getBestMove(parentNode)));
-    }
+//    public void MCTS_UCB(String fen){
+//        MoveGenerator gameState = new MoveGenerator();
+//        char color_fen = fen.charAt(fen.length() - 1);
+//        Color ourColor = gameState.getColor(color_fen);
+//
+//        this.ourColor=ourColor;
+//
+//        LinkedHashMap<Integer, List<Integer>> moves = gameState.getMovesWrapper(fen);
+//        LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
+//        MCTSNode parentNode = new MCTSNode(movesList,moves,ourColor);
+//        this.parentNode = parentNode;
+//        gameState.printBoard(true);
+//
+//        treePolicy(gameState,parentNode, ourColor);
+//
+//        for (MCTSNode m : parentNode.children){
+//            System.out.println("Node For Move "+m.move+", Value: "+m.getNodeValue()+" Visits: "+m.numberOfVisits+" Wins: "+m.numberOfWins);
+//        }
+//        System.out.println("Number Of all: "+numberOfAllSimulations);
+//        System.out.println("Number Of all: "+parentNode.numberOfVisits);
+//
+//        System.out.println(MoveGenerator.convertMoveToFEN(getBestMove(parentNode)));
+//    }
 
     public String MCTS_Orchestrator(String fen){
         MoveGenerator gameState = new MoveGenerator();
@@ -57,31 +57,25 @@ public class MCTSKI {
 
         LinkedHashMap<Integer, List<Integer>> moves = gameState.getMovesWrapper(fen);
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
-        MCTSNode parentNode = new MCTSNode(movesList,moves,ourColor);
+        MCTSNode parentNode = new MCTSNode(ourColor);
+
         this.parentNode = parentNode;
         gameState.printBoard(true);
-
-        Color color = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
 
         MoveGenerator parentGameState = new MoveGenerator();
         parentGameState.initializeBoard(gameState.getFenFromBoard());
 
-        MCTSNode node =expandAndReturnRandomNode(parentNode,gameState,color);
+        Color color = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
+
+        MCTSNode node = expandAndReturnRandomNodeNew(parentNode,gameState,color,movesList);
+
+        //MCTSNode node =expandAndReturnRandomNode(parentNode,gameState,color);
         int reward = simulateToEnd(color,gameState,ourColor);
-        propagateDataToRoot(node,reward);
-//        for (int move:movesList){
-//            MCTSNode childNode = new MCTSNode(parentNode,move,gameState,gameState.getFenFromBoard(), color);
-//            parentNode.addSearchedChildNoRemove(childNode);
-//
-//            int reward = simulateToEnd(color,gameState,ourColor);
-//
-//            propagateDataToRoot(childNode,reward);
-//        }
-        parentNode.childrenUnserached.clear();
+        propagateDataToRoot(node,reward,node.color);    //TODO check if node.color and color is always equal
 
         newTreePolicy(parentGameState,parentNode, ourColor);
 
-        for (MCTSNode m : parentNode.childrenSearched){
+        for (MCTSNode m : parentNode.children){
             System.out.println("Node For Move "+m.move+", Value: "+m.getNodeValue()+" Visits: "+m.numberOfVisits+" Wins: "+m.numberOfWins);
         }
         System.out.println("Number Of all: "+numberOfAllSimulations);
@@ -97,7 +91,7 @@ public class MCTSKI {
     public int getBestMove(MCTSNode node){
         double max = Integer.MIN_VALUE;
         MCTSNode maxChild = null;
-        for (MCTSNode child:node.childrenSearched){
+        for (MCTSNode child:node.children){
             double value = child.numberOfWins/ child.numberOfVisits;
             if (value>max){
                 max=value;
@@ -107,41 +101,32 @@ public class MCTSKI {
         return maxChild.move;
     }
 
-    public void setOurColor(Color ourColor) {
-        this.ourColor=ourColor;
-    }
 
     public int simulateToEnd(Color color, MoveGenerator moveGenerator, Color parentColor){
-        while (true){
+        while (true){           //TODO CHANGE FOR NEW PROPAGATION
             //generate and Pick random mov
             color = (color == Color.RED) ? Color.BLUE : Color.RED;          //TODO: Check where to do color change
-            LinkedHashMap<Integer,List<Integer>> moves = moveGenerator.generateAllPossibleMoves(color,moveGenerator.getFenFromBoard());
+            LinkedHashMap<Integer,List<Integer>> moves = moveGenerator.generateAllPossibleMoves(color);
 
             int move = moveGenerator.getRandomMoveInt(moves);                                      //IDEA: maybe change randomness based on position in order
             int res = moveGenerator.isGameOverMCTS(moves,color);
             if (parentColor==Color.RED && res==-1||parentColor==Color.BLUE && res==1){
                 return 1;
             } else if (parentColor==Color.BLUE && res==-1||parentColor==Color.RED && res==1){
-                return -1;
+                return 0;
             }
             if (moves.size()!=0) {
                 moveGenerator.movePiece(move);
             }
         }
+//        LinkedHashMap<Integer,List<Integer>> moves1 = moveGenerator.generateAllPossibleMoves(color);
+//        color  = (color == Color.RED) ? Color.BLUE : Color.RED;
+//        LinkedHashMap<Integer,List<Integer>> moves2 = moveGenerator.generateAllPossibleMoves(color);
+//        double prob = moves1.size()/(double) (moves2.size()+moves1.size());
+//        Random generator =  new Random();
+//        return  generator.nextDouble() >= prob? 1 : 0;
     }
 
-    public MCTSNode getBestChild(MCTSNode node){
-        double maxUCB = Integer.MIN_VALUE;
-        MCTSNode maxChild = null;
-        for (MCTSNode child : node.childrenSearched){
-            double value = child.getNodeValue();       //TODO: Maybe edit this
-            if (value>maxUCB){
-                maxUCB=value;
-                maxChild = child;
-            }
-        }
-        return maxChild;
-    }
 
     public boolean continueSearch(double endTime){
         double time = System.currentTimeMillis();
@@ -153,54 +138,63 @@ public class MCTSKI {
 
     public MCTSNode treeTraversal(double endtime, MCTSNode node, MoveGenerator moveGenerator){
         while(/*continueSearch(endtime))*/true){        //TODO: check here for tree traversal: Color is somtimes min, sometimes max (weird)
-            if(node.childrenSearched.isEmpty()||node.isWin){
+            if(node.children.isEmpty()||node.isWin){
                 return node;
             }
-            if (node.color==ourColor){      //TODO: hier
-                if (node.parent.numberOfVisits>=20000){
-                    int i=1;
-                    //System.out.println("WTF");
-                }
-                double maxUCB = Integer.MIN_VALUE;
-                MCTSNode bestChild = null;
-                for (MCTSNode child:node.childrenSearched){
-                    double nodeUCB= child.getNodeValueNew(1);
-                    if (nodeUCB>=maxUCB){
-                        maxUCB=nodeUCB;
-                        bestChild=child;
-                    }
-                }
-                moveGenerator.movePiece(bestChild.move);
-                node=bestChild;
+            if (node.numberOfVisits>20000){
+                int i =1;
             }
-            else {
-                if (node.move==4526&&node.parent.numberOfVisits>=20000){
-                    int i=1;
-                }
 
-                MCTSNode bestChild = null;
-                double minUCB = Integer.MAX_VALUE;
-                for (MCTSNode child:node.childrenSearched){
-                    double nodeUCB= child.getNodeValueNew(-1);
-                    if (nodeUCB<minUCB){
-                        minUCB=nodeUCB;
-                        bestChild=child;
-                    }
+            double maxUCB = Integer.MIN_VALUE;
+            MCTSNode bestChild = null;
+            for (MCTSNode child:node.children){
+                if (child.move==7372&&numberOfAllSimulations>=200000){
+                    int i = 0;
                 }
-                moveGenerator.movePiece(bestChild.move);
-                node=bestChild;
+                double nodeUCB= child.getNodeValueNew();
+                if (child.isWin){
+                     bestChild=child;
+                     continue;
+                }
+                if (nodeUCB>=maxUCB){
+                    maxUCB=nodeUCB;
+                    bestChild=child;
+                }
             }
+            if(bestChild.move==6171){
+                int i =0;
+            }
+            moveGenerator.movePiece(bestChild.move);
+            if (bestChild.numberOfVisits<=1){
+                //check if win
+                bestChild.updateNode(moveGenerator);
+                if (bestChild.isWin){
+                    return bestChild;
+                }
+            }
+            node=bestChild;
         }
-        //return null;
     }
 
-    public MCTSNode expandAndReturnRandomNode(MCTSNode node, MoveGenerator moveGenerator, Color color){
-        for (int move:node.childrenUnserached){
-            node.childrenSearched.add(new MCTSNode(node,move,moveGenerator,moveGenerator.getFenFromBoard(), color));
-        }
-        node.childrenUnserached.clear();
+//    public MCTSNode expandAndReturnRandomNode(MCTSNode node, MoveGenerator moveGenerator, Color color){
+//        for (int move:node.childrenUnserached){
+//            node.children.add(new MCTSNode(node,move,moveGenerator, color));
+//        }
+//        node.childrenUnserached.clear();
+//
+//        MCTSNode selectedChild=node.children.get(random.nextInt(node.children.size()));
+//        return selectedChild;
+//    }
 
-        MCTSNode selectedChild=node.childrenSearched.get(random.nextInt(node.childrenSearched.size()));
+    public MCTSNode expandAndReturnRandomNodeNew(MCTSNode node, MoveGenerator moveGenerator, Color color, LinkedList<Integer> children){
+        for (int move:children){
+            node.children.add(new MCTSNode(node,move,moveGenerator, color));        //TODO Switch to new MCTSNode
+        }
+        if (node.children.size()<=0){
+            int i =0;
+        }
+        MCTSNode selectedChild=node.children.get(random.nextInt(node.children.size()));
+        moveGenerator.movePiece(selectedChild.move);
         return selectedChild;
     }
 
@@ -215,90 +209,58 @@ public class MCTSKI {
         double endtime = System.currentTimeMillis() + timeLimit;
 
         while(continueSearch(endtime)){
-
             MCTSNode selectedNode=treeTraversal(endtime,node,moveGenerator);
+            if (selectedNode.move==6171){
+                int i =1;
+            }
             if (selectedNode.isWin){
-                if(selectedNode.move==4526){
-                    int i = 0;
-                    System.out.println("WTF");
-                }
-                if (selectedNode.color==ourColor){
-                    propagateDataToRoot(selectedNode,-1);
-                    node = this.parentNode;
-                    moveGenerator.initializeBoard(parentGameState.getFenFromBoard());
-                    continue;
-                }
-                else {
-                    propagateDataToRoot(selectedNode,1);
-
-                    node = this.parentNode;
-                    moveGenerator.initializeBoard(parentGameState.getFenFromBoard());
-
-                    continue;
-                }
+              //TODO Change for new propagation
+                //color = (selectedNode.color == Color.RED) ? Color.BLUE : Color.RED;
+                propagateDataToRoot(selectedNode,1,selectedNode.color);
+                node = this.parentNode;
+                moveGenerator.initializeBoard(parentGameState.getFenFromBoard());
+                continue;
             }
             color = (selectedNode.color == Color.RED) ? Color.BLUE : Color.RED;
-            MCTSNode nodeToRollout = expandAndReturnRandomNode(selectedNode,moveGenerator,color);
-            int reward = simulateToEnd(selectedNode.color,moveGenerator,parentColor);
-            if (nodeToRollout==null){
-                //System.out.println("WTF");
-            }
-            propagateDataToRoot(nodeToRollout,reward);
+            //generate possible moves:
+            LinkedList<Integer> moves = Evaluation.convertMovesToList(moveGenerator.generateAllPossibleMoves(selectedNode.color));
+            MCTSNode nodeToRollout = expandAndReturnRandomNodeNew(selectedNode,moveGenerator,color,moves);
+            int reward = simulateToEnd(nodeToRollout.color,moveGenerator,parentColor);               //maybe random reward?
+
+            propagateDataToRoot(nodeToRollout,reward,nodeToRollout.color);
 
             node = this.parentNode;
             moveGenerator.initializeBoard(parentGameState.getFenFromBoard());
         }
     }
 
-    public void treePolicy(MoveGenerator moveGenerator, MCTSNode node, Color color){
-        //TODO: IMPL Time cutoff und solange es nicht ein win ist
-        //TODO: mach UCB, falls noch nicht alle children explored wurden, mach das (done)
-        //TODO: Change node to have searched child nodes and unsearched child nodes (maybe play around with a bool to see if unsearched is empty) (done)
-        //TODO: update color after each move (done)
-        MoveGenerator parentGameState = new MoveGenerator();
-        parentGameState.initializeBoard(moveGenerator.getFenFromBoard());
-        Color parentColor = color;
-        double endtime = System.currentTimeMillis() + timeLimit;
 
-        while(continueSearch(endtime)){
-            if (!node.isFullySearched){
-                color = (color == Color.RED) ? Color.BLUE : Color.RED;
-
-                LinkedList<Integer> moves =node.getChildrenUnserached();
-                int move =moves.get(random.nextInt(moves.size()));
-
-                MCTSNode childNode = new MCTSNode(node,move,moveGenerator, moveGenerator.getFenFromBoard(), color);
-                node.addSearchedChild(childNode,move);
-
-                int reward = simulateToEnd(color,moveGenerator,parentColor);
-
-                propagateDataToRoot(childNode,reward);
-
-                node = this.parentNode;
-
-                moveGenerator.initializeBoard(parentGameState.getFenFromBoard());
-                color = parentColor;
-            }
-            else {
-                color = (color == Color.RED) ? Color.BLUE : Color.RED;
-                node = getBestChild(node);
-            }
-        }
-    }
-
-    public void propagateDataToRoot(MCTSNode node, int reward){
+    public void propagateDataToRoot(MCTSNode node, int reward, Color colorOfExpandedPlayer){
         while (node.parent != null){
-            node.addWinAndIncrementVisit(reward);
-            node=node.parent;
+            if (node.color==colorOfExpandedPlayer){
+                node.addWinAndIncrementVisit(reward);
+                node=node.parent;
+            }
+            else  {
+                if (reward==0){
+                    node.addWinAndIncrementVisit(1);
+                }
+                else {
+                    node.addWinAndIncrementVisit(0);
+                }
+                node=node.parent;
+            }
         }
         node.numberOfVisits++;
-        node.numberOfWins+=reward;
+        if (node.color==colorOfExpandedPlayer){
+            node.numberOfWins+=reward;
+        }
         numberOfAllSimulations++;
     }
 
     public static void main(String[] args) {
         MCTSKI ki = new MCTSKI();
-        String fen = "1bb4/8/8/8/5rr2/8/b07/2r03 r"; //1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r    +      6/1bb1b0bbb0b01/r02b04/2b01b0b02/2r02r02/1r02rrr02/6rr1/2r01r01 r
+        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/1r0r02rr2/b03r01rr1/2r01r0r0 r"; //1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r    +      6/1bb1b0bbb0b01/r02b04/2b01b0b02/2r02r02/1r02rrr02/6rr1/2r01r01 r
         ki.MCTS_Orchestrator(fen);
     }
 }

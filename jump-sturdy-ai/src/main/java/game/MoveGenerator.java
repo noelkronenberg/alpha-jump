@@ -575,7 +575,7 @@ public class MoveGenerator {
         // System.out.println("Color: " + color);
         String fenBoard=fen.substring(0, fen.length() - 2);
         this.initializeBoard(fenBoard);
-        return this.generateAllPossibleMoves(color,fenBoard);
+        return this.generateAllPossibleMoves(color);
     }
 
     // END: move generation
@@ -686,7 +686,7 @@ public class MoveGenerator {
         }
     }
 
-    public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color, String fen) {
+    public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
         capturingHM= new HashMap<>();
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
         totalPossibleMoves = 0;
@@ -732,14 +732,14 @@ public class MoveGenerator {
         if (color == Color.RED) {
             if (doesBaseRowContainColor(color,0)) {
                 return false;
-            } else if (generateMaxOnePossibleMoveForKI(color).isEmpty() || doesBaseRowContainColor(Color.BLUE,7)) {
+            } else if (doesBaseRowContainColor(Color.BLUE,7)||generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
             }
         }
         else {
             if (doesBaseRowContainColor(color,7)){
                 return false;
-            } else if (generateMaxOnePossibleMoveForKI(color).isEmpty() || doesBaseRowContainColor(Color.RED,0)) {
+            } else if (doesBaseRowContainColor(Color.RED,0)||generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
             }
         }
@@ -764,15 +764,19 @@ public class MoveGenerator {
         return false;
     }
 
-    public boolean isWin(int move, Color color) {
+    public boolean isWin(Color color) {
         if (color == Color.RED) {
-            if (doesBaseRowContainColor(color,0)) {
+            if (doesBaseRowContainColor(color,0)||generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
+            } else if (doesBaseRowContainColor(Color.BLUE,7)) {
+                return false;
             }
         }
         else {
-            if (doesBaseRowContainColor(color,7)){
+            if (doesBaseRowContainColor(color,7)||generateMaxOnePossibleMoveForKI(color).isEmpty()){
                 return true;
+            } else if (doesBaseRowContainColor(Color.RED,0)) {
+                return false;
             }
         }
         return false;

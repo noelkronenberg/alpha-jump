@@ -11,59 +11,54 @@ import java.util.List;
 
 public class MCTSNode {
     MCTSNode parent;
-    List<MCTSNode> childrenSearched = new ArrayList<>();
-    LinkedList<Integer> childrenUnserached;
+    //List<MCTSNode> childrenSearched = new LinkedList<>();
+    List<MCTSNode> children = new LinkedList<>();
+    //LinkedList<Integer> childrenUnserached;
     double numberOfVisits;
     double numberOfWins;
-    double explorationParameter = Math.sqrt(2);
     int move;
-    boolean isFullySearched = false;
+    //boolean isFullySearched = false;
     Color color;
-    LinkedHashMap<Integer,List<Integer>> movesList;
-    boolean isWin;
+    //LinkedHashMap<Integer,List<Integer>> movesList;
+    boolean isWin=false;
 
-    public MCTSNode(MCTSNode parent, int move, MoveGenerator moveGenerator, String fen, Color color) {
+//    public MCTSNode(MCTSNode parent, int move, MoveGenerator moveGenerator, Color color) {
+//        MoveGenerator throwAwayMG = new MoveGenerator();
+//        throwAwayMG.initializeBoard(moveGenerator.getFenFromBoard());
+//        throwAwayMG.movePiece(move);
+//        this.parent = parent;
+//        LinkedHashMap<Integer,List<Integer>> movesList=throwAwayMG.generateAllPossibleMoves(color);
+//        this.childrenUnserached = Evaluation.convertMovesToList(movesList);         //Eigentlich gerne das nicht mehr machen :( ---> Erstelle neue methode die einfach nur die moves ungeordnet generiert
+//        this.numberOfVisits = 0;
+//        this.numberOfWins = 0;
+//        this.move = move;
+//        this.color = color;
+//        this.isWin = throwAwayMG.isGameOver(color);
+//    }
+
+    public MCTSNode(MCTSNode parent, int move, MoveGenerator moveGenerator, Color color) {
+        if (move==6171){
+            int i =1;
+        }
         this.parent = parent;
-        this.movesList=moveGenerator.generateAllPossibleMoves(color,fen);
-        this.childrenUnserached = Evaluation.convertMovesToList(movesList);         //Eigentlich gerne das nicht mehr machen :( ---> Erstelle neue methode die einfach nur die moves ungeordnet generiert
+        this.children=new ArrayList<>();
         this.numberOfVisits = 0;
         this.numberOfWins = 0;
         this.move = move;
         this.color = color;
-
-        MoveGenerator throwAwayMG = new MoveGenerator();
-        throwAwayMG.initializeBoard(moveGenerator.getFenFromBoard());
-        throwAwayMG.movePiece(move);
-
-        this.isWin = throwAwayMG.isGameOver(color);
+        this.isWin = moveGenerator.isWin(color);
     }
 
 
-
-    public MCTSNode(LinkedList<Integer> childrenUnserached,LinkedHashMap<Integer,List<Integer>> movesList, Color color) {
+    public MCTSNode(Color color) {
         this.parent = null;
-        this.childrenUnserached = childrenUnserached;         //Eigentlich gerne das nicht mehr machen :( ---> Erstelle neue methode die einfach nur die moves ungeordnet generiert
-        this.movesList=movesList;
+        this.children = new ArrayList<>();;         //Eigentlich gerne das nicht mehr machen :( ---> Erstelle neue methode die einfach nur die moves ungeordnet generiert
         this.numberOfVisits = 0;
         this.numberOfWins = 0;
         this.move = 0;
         this.color = color;
     }
 
-    public void addSearchedChild(MCTSNode child, int move) {
-        childrenUnserached.remove(Integer.valueOf(move));
-        childrenSearched.add(child);
-        if (childrenUnserached.size()==0){
-            this.isFullySearched = true;
-        }
-    }
-
-    public void addSearchedChildNoRemove(MCTSNode child) {
-        childrenSearched.add(child);
-        if (childrenUnserached.size()==0){
-            this.isFullySearched = true;
-        }
-    }
 
 
     public void addWinAndIncrementVisit(int winValue) {
@@ -72,25 +67,21 @@ public class MCTSNode {
     }
 
     public double getNodeValue(){
-            double value = (this.numberOfWins/this.numberOfVisits)+(this.explorationParameter*Math.sqrt((Math.log(parent.numberOfVisits))/(this.numberOfVisits)));
+            double value = (this.numberOfWins/this.numberOfVisits)+(Math.sqrt(2)*Math.sqrt((Math.log(parent.numberOfVisits))/(this.numberOfVisits)));
             return value;
     }
 
-    public double getNodeValueNew(int ourOrEnemy){
+    public double getNodeValueNew(){
         if (this.numberOfVisits>0){
-            double value = (this.numberOfWins/this.numberOfVisits)+(this.explorationParameter*Math.sqrt((Math.log(parent.numberOfVisits))/(this.numberOfVisits)));
+            double value = (this.numberOfWins/this.numberOfVisits)+(Math.sqrt(2)*Math.sqrt((Math.log(parent.numberOfVisits))/(this.numberOfVisits)));
             return value;
         }
         else {
-            return 500000 * ourOrEnemy;
+            return 500000 ;
         }
     }
 
-    public LinkedList<Integer> getChildrenUnserached() {
-        return childrenUnserached;
-    }
-
-    public MCTSNode getParent() {
-        return parent;
+    public void updateNode(MoveGenerator moveGenerator){
+        this.isWin = moveGenerator.isGameOver(color);
     }
 }

@@ -302,7 +302,7 @@ public class BasisKI {
         // START: Transposition Tables
         if (transpositionTables) {
             if (!isInTT) {
-                LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen); // get moves for other player
+                LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
                 movesList = Evaluation.convertMovesToList(moves);
                 Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
@@ -318,7 +318,7 @@ public class BasisKI {
         // END: Transposition Tables
 
         else {
-            LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen); // get moves for other player
+            LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
             movesList = Evaluation.convertMovesToList(moves);
             Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 

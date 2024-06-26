@@ -39,7 +39,7 @@ public class Evaluation {
             weight = 1;
 
             // check gameOver of other player
-            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED, fen), Color.RED)) {
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
                 score += 100000 * (1 + (1 / depth));
             }
 
@@ -61,7 +61,7 @@ public class Evaluation {
             weight = 8;
 
             // check gameOver of other player
-            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE,fen), Color.BLUE)) {
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE), Color.BLUE)) {
                 score += 100000 * (1 + (1 / depth));
             }
 
@@ -191,7 +191,7 @@ public class Evaluation {
             }
 
             // check gameOver of other player
-            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED,fen), Color.RED)) {
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
                 score = 100000;
             }
 
@@ -212,7 +212,7 @@ public class Evaluation {
             }
 
             // check gameOver of other player
-            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE,fen), Color.BLUE)) {
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE), Color.BLUE)) {
                 score = 100000;
             }
         }
