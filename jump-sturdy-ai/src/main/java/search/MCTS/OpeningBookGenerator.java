@@ -11,10 +11,10 @@ import search.Evaluation;
 
 public class OpeningBookGenerator {
     private static final int DEPTH = 3;
-    private static int mctsIterations = 10000;
+    private static int mctsIterations = 1000;
     private static Color startingPlayer = Color.BLUE;
-    //private static String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
-    private static String board = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
+    private static String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
+    //private static String board = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
 
     public static void main(String[] args) {
         MoveGenerator initialState = new MoveGenerator();
@@ -75,7 +75,6 @@ public class OpeningBookGenerator {
             String completeMoveProcedure = moveProcedureWithOppMove + "OM: " + bestResponseFEN + ";";
             if(depth + 1 == DEPTH) {
             writer.write(completeMoveProcedure + "\n");
-            System.out.println(possMovesOppList.size());
             }
     
             // Board zurücksetzen auf nach dem Gegnerzug
@@ -90,7 +89,6 @@ public class OpeningBookGenerator {
     
         // Ursprüngliches Board zurücksetzen
         moveGenerator.initializeBoard(fenStorage);
-        moveGenerator.printBoard(false);
     }
 
     private static void generateOpeningBookSecond(MoveGenerator moveGenerator, MCTS mcts, FileWriter writer, Color player, String moveProcedure, int depth) throws IOException {
@@ -122,7 +120,6 @@ public class OpeningBookGenerator {
             String completeMoveProcedure = moveProcedureWithOppMove + "OM: " + bestResponseFEN + ";";
             if(depth + 1 == DEPTH) {
             writer.write(completeMoveProcedure + "\n");
-            System.out.println(possMovesOppList.size());
             }
     
             // Board zurücksetzen auf nach dem Gegnerzug
@@ -136,50 +133,6 @@ public class OpeningBookGenerator {
         }
         // Ursprüngliches Board zurücksetzen
         moveGenerator.initializeBoard(fenStorage);
-        moveGenerator.printBoard(false);
     }
-    
-
-    /*private static void generateOpeningBook(MoveGenerator moveGenerator, MCTS mcts, FileWriter writer, Color player, String moveProcedure, int depth) throws IOException {
-        if (depth == DEPTH) {
-            return;
-        }
-
-        //Farbe des Gegners herausfinden
-        Color oppPlayer = (player == Color.RED) ? Color.BLUE : Color.RED;
-
-        //finde und notiere den besten Zug in der aktuellen Position und resette das Board danach 
-        String fenStorage = moveGenerator.getFenFromBoard();
-        int bestMove = MCTS.runMCTS(moveGenerator, player, mctsIterations);
-        moveGenerator.initializeBoard(fenStorage);
-
-        //Zug ausführen und Ausgangsboard speichern
-        moveGenerator.movePiece(bestMove);
-        moveProcedure += "my move: " + MoveGenerator.convertMoveToFEN(bestMove) + "; ";
-        fenStorage = moveGenerator.getFenFromBoard();
-
-        //mögliche Moves des Gegners herausfinden
-        LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer, fenStorage);
-        List<Integer> possMovesOppList = Evaluation.convertMovesToList(possMovesOpp);
-
-        for (int moveCounter = 0; moveCounter < possMovesOppList.size(); moveCounter++) {
-            //den Startzug (immer der gleiche) und den variablen Gegenzug des Gegners eintragen
-            moveProcedure += "enemy move: " + MoveGenerator.convertMoveToFEN(possMovesOppList.get(moveCounter)) + "; ";
-            moveGenerator.movePiece(possMovesOppList.get(moveCounter));
-            fenStorage = moveGenerator.getFenFromBoard();
-
-            //nächte Iteration starten
-            generateOpeningBook(moveGenerator, mcts, writer, player,moveProcedure, depth + 1);
-
-            moveGenerator.initializeBoard(fenStorage);
-
-            //Zeile und Board resetten
-            if (depth + 1 == DEPTH) {
-                writer.write(moveProcedure + "\n");
-            }
-        }
-        moveGenerator.initializeBoard("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b");
-        moveGenerator.printBoard(false);
-    }*/
 }
 

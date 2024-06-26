@@ -47,13 +47,6 @@ public class MCTS {
             // Backpropagation
             backpropagate(node, winner, color);
         }
-
-        for (int iterator = 0; iterator < root.children.size(); iterator++) {
-            System.out.println("Kind an Index: " + iterator + ": " + MoveGenerator.convertMoveToFEN(root.children.get(iterator).move));
-            System.out.println("Besuche bei Kind an Index " + iterator + ": " + root.children.get(iterator).visits);
-            System.out.println("Wins von Kind an Index " + iterator + ": " + root.children.get(iterator).wins);
-        }
-        System.out.println("Bestes Kind: " + MoveGenerator.convertMoveToFEN(bestChild(root).move));
         return bestChild(root).move;
     }
 
@@ -126,25 +119,12 @@ public class MCTS {
         return fen;
     }
 
-    /*private static void printChildren(MCTSNode node) {
-        if (node.children.size() == 0){
-            System.out.println("Es gibt keine Nachfolgeknoten.");
-        } else {
-            for (int i = 0; i < node.children.size(); i++) {
-                System.out.println(node.children.get(i).move);
-            }
-        }
-    }*/
-
     public static void main(String[] args) {
-        /*MCTS mcts = new MCTS();
+        MCTS mcts = new MCTS();
         MoveGenerator mg = new MoveGenerator();
-        String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
+        String board = "6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/1b0b01b01r01/2r0r03r0/5r0 b";
         mg.initializeBoard(board);
-        runMCTS(mg, Color.BLUE, 10000);
-    */
-    MoveGenerator mg = new MoveGenerator();
-    mg.initializeBoard("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b");
-    mg.printBoard(false);
+        mg.printBoard(false);
+        //runMCTS(mg, Color.BLUE, 10000);
     }
 }
