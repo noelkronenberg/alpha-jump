@@ -14,19 +14,20 @@ public class OpeningBookGenerator {
     private static int mctsIterations = 1000;
     private static Color startingPlayer = Color.BLUE;
     private static String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
-    //private static String board = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
 
     public static void main(String[] args) {
         MoveGenerator initialState = new MoveGenerator();
         initialState.initializeBoard(board);
         initialState.printBoard(false);
         MCTS mcts = new MCTS();
-        try (FileWriter writer = new FileWriter("opening_book_startingMove.txt")) {
+        
+        // Im Folgenden den Block auskommentieren, welcher nicht erstellt werden soll
+        try (FileWriter writer = new FileWriter("opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
             generateOpeningBookStarting(initialState, mcts, writer, startingPlayer, "", 0);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (FileWriter writer = new FileWriter("opening_book_secondMove.txt")) {
+        try (FileWriter writer = new FileWriter("opening_book_secondMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
             generateOpeningBookSecond(initialState, mcts, writer, startingPlayer, "", 0);
         } catch (IOException e) {
             e.printStackTrace();
