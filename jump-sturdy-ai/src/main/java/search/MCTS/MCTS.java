@@ -30,7 +30,6 @@ public class MCTS {
                 node = selectPromisingNode(node);
                 state = makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
-                moveGenerator.printBoard(false);
             }
 
             // Expansion
@@ -40,7 +39,6 @@ public class MCTS {
                 node = node.children.get(random.nextInt(node.children.size()));
                 state = makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
-                moveGenerator.printBoard(false);
             }
 
             // Simulation
@@ -50,6 +48,12 @@ public class MCTS {
             backpropagate(node, winner, color);
         }
 
+        for (int iterator = 0; iterator < root.children.size(); iterator++) {
+            System.out.println("Kind an Index: " + iterator + ": " + MoveGenerator.convertMoveToFEN(root.children.get(iterator).move));
+            System.out.println("Besuche bei Kind an Index " + iterator + ": " + root.children.get(iterator).visits);
+            System.out.println("Wins von Kind an Index " + iterator + ": " + root.children.get(iterator).wins);
+        }
+        System.out.println("Bestes Kind: " + MoveGenerator.convertMoveToFEN(bestChild(root).move));
         return bestChild(root).move;
     }
 
@@ -58,7 +62,9 @@ public class MCTS {
         LinkedList<Integer> movesList;
         movesList = Evaluation.convertMovesToList(possibleMoves);
         for (int move : movesList) {
-            node.children.add(new MCTSNode(move, node, (node.depth+1)));
+            if (!node.children.stream().anyMatch(x -> x.move == move)) {
+                node.children.add(new MCTSNode(move, node, (node.depth+1)));
+            }
         }
     }
 
@@ -80,12 +86,9 @@ public class MCTS {
                 winner = (color == Color.RED) ? Color.BLUE : Color.RED;
                 break;
             }
-
-            moveGenerator.printBoard(false);
             fen = makeMove(moveGenerator, move, color);
             color = (color == Color.RED) ? Color.BLUE : Color.RED;
         }
-        moveGenerator.printBoard(false);
         return winner;
     }
 
@@ -134,10 +137,14 @@ public class MCTS {
     }*/
 
     public static void main(String[] args) {
-        MCTS mcts = new MCTS();
+        /*MCTS mcts = new MCTS();
         MoveGenerator mg = new MoveGenerator();
         String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
         mg.initializeBoard(board);
-        runMCTS(mg, Color.BLUE, 1);
+        runMCTS(mg, Color.BLUE, 10000);
+    */
+    MoveGenerator mg = new MoveGenerator();
+    mg.initializeBoard("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b");
+    mg.printBoard(false);
     }
 }
