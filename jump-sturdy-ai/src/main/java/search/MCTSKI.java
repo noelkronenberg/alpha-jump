@@ -103,28 +103,28 @@ public class MCTSKI {
 
 
     public int simulateToEnd(Color color, MoveGenerator moveGenerator, Color parentColor){
-        while (true){           //TODO CHANGE FOR NEW PROPAGATION
-            //generate and Pick random mov
-            color = (color == Color.RED) ? Color.BLUE : Color.RED;          //TODO: Check where to do color change
-            LinkedHashMap<Integer,List<Integer>> moves = moveGenerator.generateAllPossibleMoves(color);
-
-            int move = moveGenerator.getRandomMoveInt(moves);                                      //IDEA: maybe change randomness based on position in order
-            int res = moveGenerator.isGameOverMCTS(moves,color);
-            if (parentColor==Color.RED && res==-1||parentColor==Color.BLUE && res==1){
-                return 1;
-            } else if (parentColor==Color.BLUE && res==-1||parentColor==Color.RED && res==1){
-                return 0;
-            }
-            if (moves.size()!=0) {
-                moveGenerator.movePiece(move);
-            }
-        }
-//        LinkedHashMap<Integer,List<Integer>> moves1 = moveGenerator.generateAllPossibleMoves(color);
-//        color  = (color == Color.RED) ? Color.BLUE : Color.RED;
-//        LinkedHashMap<Integer,List<Integer>> moves2 = moveGenerator.generateAllPossibleMoves(color);
-//        double prob = moves1.size()/(double) (moves2.size()+moves1.size());
-//        Random generator =  new Random();
-//        return  generator.nextDouble() >= prob? 1 : 0;
+//        while (true){           //TODO CHANGE FOR NEW PROPAGATION
+//            //generate and Pick random mov
+//            color = (color == Color.RED) ? Color.BLUE : Color.RED;          //TODO: Check where to do color change
+//            LinkedHashMap<Integer,List<Integer>> moves = moveGenerator.generateAllPossibleMoves(color);
+//
+//            int move = moveGenerator.getRandomMoveInt(moves);                                      //IDEA: maybe change randomness based on position in order
+//            int res = moveGenerator.isGameOverMCTS(moves,color);
+//            if (parentColor==Color.RED && res==-1||parentColor==Color.BLUE && res==1){
+//                return 1;
+//            } else if (parentColor==Color.BLUE && res==-1||parentColor==Color.RED && res==1){
+//                return 0;
+//            }
+//            if (moves.size()!=0) {
+//                moveGenerator.movePiece(move);
+//            }
+//        }
+        LinkedHashMap<Integer,List<Integer>> moves1 = moveGenerator.generateAllPossibleMoves(color);
+        color  = (color == Color.RED) ? Color.BLUE : Color.RED;
+        LinkedHashMap<Integer,List<Integer>> moves2 = moveGenerator.generateAllPossibleMoves(color);
+        double prob = moves1.size()/(double) (moves2.size()+moves1.size());
+        Random generator =  new Random();
+        return  generator.nextDouble() >= prob? 1 : 0;
     }
 
 

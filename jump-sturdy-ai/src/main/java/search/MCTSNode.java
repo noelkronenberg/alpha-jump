@@ -37,9 +37,6 @@ public class MCTSNode {
 //    }
 
     public MCTSNode(MCTSNode parent, int move, MoveGenerator moveGenerator, Color color) {
-        if (move==6171){
-            int i =1;
-        }
         this.parent = parent;
         this.children=new ArrayList<>();
         this.numberOfVisits = 0;
@@ -86,9 +83,6 @@ public class MCTSNode {
     }
 
     public boolean isOnBaseLineForColor(){
-        if (move==6171){
-            int i =1;
-        }
         if ((move%100)/10==0&&color==Color.BLUE){
             return true;
         }
