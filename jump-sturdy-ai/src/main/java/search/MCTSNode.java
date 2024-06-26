@@ -46,7 +46,7 @@ public class MCTSNode {
         this.numberOfWins = 0;
         this.move = move;
         this.color = color;
-        this.isWin = moveGenerator.isWin(color);
+        this.isWin = isOnBaseLineForColor();
     }
 
 
@@ -83,5 +83,15 @@ public class MCTSNode {
 
     public void updateNode(MoveGenerator moveGenerator){
         this.isWin = moveGenerator.isGameOver(color);
+    }
+
+    public boolean isOnBaseLineForColor(){
+        if ((move%100)/10==0&&color==Color.BLUE){
+            return true;
+        }
+        if ((move%100)/10==7&&color==Color.RED){
+            return true;
+        }
+        return false;
     }
 }

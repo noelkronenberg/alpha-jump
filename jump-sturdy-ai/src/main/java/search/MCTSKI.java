@@ -15,7 +15,7 @@ import java.util.Random;
 
 
 public class MCTSKI {
-    static double numberOfAllSimulations;
+    double numberOfAllSimulations;
     Color ourColor = Color.BLUE;
     Random random = new Random();
     MCTSNode parentNode = null;
@@ -48,7 +48,7 @@ public class MCTSKI {
 //        System.out.println(MoveGenerator.convertMoveToFEN(getBestMove(parentNode)));
 //    }
 
-    public String MCTS_Orchestrator(String fen){
+    public String MCTS_Orchestrator(String fen) {
         MoveGenerator gameState = new MoveGenerator();
         char color_fen = fen.charAt(fen.length() - 1);
         Color ourColor = gameState.getColor(color_fen);
@@ -93,7 +93,7 @@ public class MCTSKI {
         MCTSNode maxChild = null;
         for (MCTSNode child:node.children){
             double value = child.numberOfWins/ child.numberOfVisits;
-            if (value>max){
+            if (value>max&&child.numberOfVisits>maxChild.numberOfVisits){
                 max=value;
                 maxChild = child;
             }
@@ -141,29 +141,27 @@ public class MCTSKI {
             if(node.children.isEmpty()||node.isWin){
                 return node;
             }
-            if (node.numberOfVisits>20000){
-                int i =1;
-            }
+
 
             double maxUCB = Integer.MIN_VALUE;
             MCTSNode bestChild = null;
             for (MCTSNode child:node.children){
-                if (child.move==7372&&numberOfAllSimulations>=200000){
+                if (child.move==3314&&numberOfAllSimulations>=200000){
                     int i = 0;
                 }
                 double nodeUCB= child.getNodeValueNew();
                 if (child.isWin){
                      bestChild=child;
-                     continue;
+                     return  bestChild;
                 }
                 if (nodeUCB>=maxUCB){
                     maxUCB=nodeUCB;
                     bestChild=child;
                 }
             }
-            if(bestChild.move==6171){
-                int i =0;
-            }
+//            if(bestChild.move==6171){
+//                int i =0;
+//            }
             moveGenerator.movePiece(bestChild.move);
             if (bestChild.numberOfVisits<=1){
                 //check if win
@@ -210,7 +208,7 @@ public class MCTSKI {
 
         while(continueSearch(endtime)){
             MCTSNode selectedNode=treeTraversal(endtime,node,moveGenerator);
-            if (selectedNode.move==6171){
+            if (selectedNode.move==2514){
                 int i =1;
             }
             if (selectedNode.isWin){
@@ -260,7 +258,7 @@ public class MCTSKI {
 
     public static void main(String[] args) {
         MCTSKI ki = new MCTSKI();
-        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/1r0r02rr2/b03r01rr1/2r01r0r0 r"; //1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r    +      6/1bb1b0bbb0b01/r02b04/2b01b0b02/2r02r02/1r02rrr02/6rr1/2r01r01 r
+        String fen = "1b04/1bb2b0bb2/2bb1b03/3rr4/2r02b01r0/1b02r0rr1b0/1rr2r03/6 r"; //1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r    +      6/1bb1b0bbb0b01/r02b04/2b01b0b02/2r02r02/1r02rrr02/6rr1/2r01r01 r
         ki.MCTS_Orchestrator(fen);
     }
 }
