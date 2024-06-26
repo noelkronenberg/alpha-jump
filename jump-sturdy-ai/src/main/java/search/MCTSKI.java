@@ -21,7 +21,7 @@ public class MCTSKI {
     MCTSNode parentNode = null;
     //double endTime = 0;
 
-    double timeLimit = 20000;
+    double timeLimit = 50000;
     //TODO: 1 add a Tree system(Done)     2 add the value function: UCB(done)       3 add a way to simulate randomly the game end(done)      4 traversal Function (done)   5 backpropagation (done)
 
 //    public void MCTS_UCB(String fen){
@@ -146,9 +146,9 @@ public class MCTSKI {
             double maxUCB = Integer.MIN_VALUE;
             MCTSNode bestChild = null;
             for (MCTSNode child:node.children){
-                if (child.move==5060&&numberOfAllSimulations>=200000){
-                    int i = 0;
-                }
+//                if (child.move==3243&&numberOfAllSimulations>=700000){
+//                    int i = 0;
+//                }
                 double nodeUCB= child.getNodeValueNew();
                 if (child.isWin){
                      bestChild=child;
@@ -208,9 +208,9 @@ public class MCTSKI {
 
         while(continueSearch(endtime)){
             MCTSNode selectedNode=treeTraversal(endtime,node,moveGenerator);
-            if (selectedNode.move==2514){
-                int i =1;
-            }
+//            if (selectedNode.move==2514){
+//                int i =1;
+//            }
             if (selectedNode.isWin){
               //TODO Change for new propagation
                 //color = (selectedNode.color == Color.RED) ? Color.BLUE : Color.RED;
@@ -258,7 +258,7 @@ public class MCTSKI {
 
     public static void main(String[] args) {
         MCTSKI ki = new MCTSKI();
-        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b"; //testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
+        String fen = "2b03/8/8/1b03b02/3rr4/8/8/6 b"; //testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
         ki.MCTS_Orchestrator(fen);
     }
 }
