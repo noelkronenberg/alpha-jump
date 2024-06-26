@@ -86,6 +86,9 @@ public class MCTSNode {
     }
 
     public boolean isOnBaseLineForColor(){
+        if (move==6171){
+            int i =1;
+        }
         if ((move%100)/10==0&&color==Color.BLUE){
             return true;
         }

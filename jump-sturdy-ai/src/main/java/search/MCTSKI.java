@@ -93,7 +93,7 @@ public class MCTSKI {
         MCTSNode maxChild = null;
         for (MCTSNode child:node.children){
             double value = child.numberOfWins/ child.numberOfVisits;
-            if (value>max&&child.numberOfVisits>maxChild.numberOfVisits){
+            if (value>max&&child.numberOfVisits>100){
                 max=value;
                 maxChild = child;
             }
@@ -146,7 +146,7 @@ public class MCTSKI {
             double maxUCB = Integer.MIN_VALUE;
             MCTSNode bestChild = null;
             for (MCTSNode child:node.children){
-                if (child.move==3314&&numberOfAllSimulations>=200000){
+                if (child.move==5060&&numberOfAllSimulations>=200000){
                     int i = 0;
                 }
                 double nodeUCB= child.getNodeValueNew();
@@ -258,7 +258,7 @@ public class MCTSKI {
 
     public static void main(String[] args) {
         MCTSKI ki = new MCTSKI();
-        String fen = "1b04/1bb2b0bb2/2bb1b03/3rr4/2r02b01r0/1b02r0rr1b0/1rr2r03/6 r"; //1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r    +      6/1bb1b0bbb0b01/r02b04/2b01b0b02/2r02r02/1r02rrr02/6rr1/2r01r01 r
+        String fen = "1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b"; //testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
         ki.MCTS_Orchestrator(fen);
     }
 }
