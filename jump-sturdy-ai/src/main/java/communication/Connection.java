@@ -25,7 +25,7 @@ public class Connection {
         int port = 5555;
 
         double overall = 115000.0; // overall time (in ms)
-        int averageMoves = 30;
+        int averageMoves = 40;
         BasisKI.bestConfig.timeLimit = overall / averageMoves; // set time for move (in ms)
 
         try (Socket server = new Socket(serverAddress, port)) {
@@ -95,12 +95,12 @@ public class Connection {
                                 System.out.println("Enter your move: ");
                                 this.move = this.scanner.nextLine();
                             } else {
-                                if (moveCounter<=4||(24<moveCounter&&moveCounter<=29)){
-                                    BasisKI.bestConfig.timeLimit=(overall*0.2)/10;
+                                if (moveCounter<=6||(31<moveCounter&&moveCounter<=39)){
+                                    BasisKI.bestConfig.timeLimit=(overall*0.2)/15;
                                 } else if (timeleft<=5000) {
                                     BasisKI.bestConfig.timeLimit=(timeleft*0.5);
                                 } else {
-                                    BasisKI.bestConfig.timeLimit=(overall*0.8)/20;
+                                    BasisKI.bestConfig.timeLimit=(overall*0.8)/25;
                                 }
 
                                 this.move = ki.orchestrator(fen, BasisKI.bestConfig);
@@ -115,12 +115,15 @@ public class Connection {
                             System.out.println("Time For move: "+(timeforMove));
                             System.out.println("Time left for moves: "+timeleft);
                             System.out.println("Move: "+moveCounter);
-                            /*
+
                             MoveGenerator moveGenerator = new MoveGenerator();
                             moveGenerator.initializeBoard(fen);
+                            if (moveGenerator.isGameOver(fen)){
+                                Thread.sleep(3000);
+                                System.exit(0);
+                                break;
+                            }
                             moveGenerator.printBoard(true);
-                            */
-
                             System.out.println("Player 1 | Move: " + this.move);
                             System.out.println("\n" );
                         } else if (response.getBoolean("player2") && this.player == 2) {
@@ -149,11 +152,15 @@ public class Connection {
                             System.out.println("Time For move: "+(timeforMove));
                             System.out.println("Time left for moves: "+timeleft);
                             System.out.println("Move: "+moveCounter);
-                            /*
+
                             MoveGenerator moveGenerator = new MoveGenerator();
                             moveGenerator.initializeBoard(fen);
+                            if (moveGenerator.isGameOver(fen)){
+                                Thread.sleep(3000);
+                                System.exit(0);
+                                break;
+                            }
                             moveGenerator.printBoard(true);
-                            */
 
                             System.out.println("Player 2 | Move: " + this.move);
                             System.out.println("\n" );
