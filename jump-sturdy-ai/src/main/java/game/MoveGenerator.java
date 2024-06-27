@@ -756,6 +756,15 @@ public class MoveGenerator {
         return false;
     }
 
+    public boolean isGameOver(String fen) {
+        if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForKI(Color.RED,fen).isEmpty()) {
+                return true;
+        } else if ( doesBaseRowContainColor(Color.BLUE,7)|| generateMaxOnePossibleMoveForKI(Color.BLUE,fen).isEmpty()) {
+                return true;
+        }
+        return false;
+    }
+
     public boolean doesBaseRowContainColor(Color color, int rowToCheck) {
         for (int i = 1; i < 7; i++) {
             if (colorBoard[rowToCheck][i] == color) {
