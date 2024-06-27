@@ -60,7 +60,7 @@ public class MCTSKI {
         MCTSNode parentNode = new MCTSNode(ourColor);
 
         this.parentNode = parentNode;
-        gameState.printBoard(true);
+        gameState.printBoard(false);
 
         MoveGenerator parentGameState = new MoveGenerator();
         parentGameState.initializeBoard(gameState.getFenFromBoard());
@@ -138,7 +138,7 @@ public class MCTSKI {
 
     public MCTSNode treeTraversal(double endtime, MCTSNode node, MoveGenerator moveGenerator){
         while(/*continueSearch(endtime))*/true){        //TODO: check here for tree traversal: Color is somtimes min, sometimes max (weird)
-            if(node.children.isEmpty()||node.isWin){
+            if(node.children.isEmpty()||node.isWinPos||node.isWinNext){
                 return node;
             }
 
@@ -146,11 +146,11 @@ public class MCTSKI {
             double maxUCB = Integer.MIN_VALUE;
             MCTSNode bestChild = null;
             for (MCTSNode child:node.children){
-//                if (child.move==3243&&numberOfAllSimulations>=700000){
-//                    int i = 0;
-//                }
+                if (child.move==3534&&numberOfAllSimulations>=3000000){
+                    int i = 0;
+                }
                 double nodeUCB= child.getNodeValueNew();
-                if (child.isWin){
+                if (child.isWinPos||child.isWinNext){
                      bestChild=child;
                      return  bestChild;
                 }
@@ -166,7 +166,7 @@ public class MCTSKI {
             if (bestChild.numberOfVisits<=1){
                 //check if win
                 bestChild.updateNode(moveGenerator);
-                if (bestChild.isWin){
+                if (bestChild.isWinPos||bestChild.isWinNext){
                     return bestChild;
                 }
             }
@@ -191,6 +191,9 @@ public class MCTSKI {
         if (node.children.size()<=0){
             int i =0;
         }
+        if (node.children.size()==0){
+            int i =0;
+        }
         MCTSNode selectedChild=node.children.get(random.nextInt(node.children.size()));
         moveGenerator.movePiece(selectedChild.move);
         return selectedChild;
@@ -211,22 +214,41 @@ public class MCTSKI {
 //            if (selectedNode.move==2514){
 //                int i =1;
 //            }
-            if (selectedNode.isWin){
+
+            if (selectedNode.isWinNext){
+                if (numberOfAllSimulations>=3000000){
+                    int i=0;
+                }
+                propagateDataToRoot(selectedNode,1,selectedNode.color);
+                node = this.parentNode;
+                moveGenerator.initializeBoard(parentGameState.getFenFromBoard());
+                continue;
+            }
+
+            if (selectedNode.isWinPos){
               //TODO Change for new propagation
+                if (numberOfAllSimulations>=3000000){
+                    int i=0;
+                }
                 //color = (selectedNode.color == Color.RED) ? Color.BLUE : Color.RED;
                 propagateDataToRoot(selectedNode,1,selectedNode.color);
                 node = this.parentNode;
                 moveGenerator.initializeBoard(parentGameState.getFenFromBoard());
                 continue;
             }
+
             color = (selectedNode.color == Color.RED) ? Color.BLUE : Color.RED;
             //generate possible moves:
             LinkedList<Integer> moves = Evaluation.convertMovesToList(moveGenerator.generateAllPossibleMoves(selectedNode.color));
-            MCTSNode nodeToRollout = expandAndReturnRandomNodeNew(selectedNode,moveGenerator,color,moves);
-            int reward = simulateToEnd(nodeToRollout.color,moveGenerator,parentColor);               //maybe random reward?
-
-            propagateDataToRoot(nodeToRollout,reward,nodeToRollout.color);
-
+            if (moves.size()>0) {
+                MCTSNode nodeToRollout = expandAndReturnRandomNodeNew(selectedNode, moveGenerator, color, moves);
+                int reward = simulateToEnd(nodeToRollout.color, moveGenerator, parentColor);               //maybe random reward?
+                propagateDataToRoot(nodeToRollout, reward, nodeToRollout.color);
+            }
+            else {
+                selectedNode.updateNode(moveGenerator);
+                propagateDataToRoot(selectedNode,1,selectedNode.color);
+            }
             node = this.parentNode;
             moveGenerator.initializeBoard(parentGameState.getFenFromBoard());
         }
@@ -258,7 +280,7 @@ public class MCTSKI {
 
     public static void main(String[] args) {
         MCTSKI ki = new MCTSKI();
-        String fen = "2b03/8/8/1b03b02/3rr4/8/8/6 b"; //testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
+        String fen = "3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b"; //testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
         ki.MCTS_Orchestrator(fen);
     }
 }

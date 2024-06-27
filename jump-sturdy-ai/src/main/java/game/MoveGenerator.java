@@ -764,19 +764,15 @@ public class MoveGenerator {
         return false;
     }
 
-    public boolean isWin(Color color) {
+    public boolean isWinForMCTS(Color color) {
         if (color == Color.RED) {
-            if (doesBaseRowContainColor(color,0)||generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+            if (doesBaseRowContainColor(Color.BLUE,7)||generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
-            } else if (doesBaseRowContainColor(Color.BLUE,7)) {
-                return false;
             }
         }
         else {
-            if (doesBaseRowContainColor(color,7)||generateMaxOnePossibleMoveForKI(color).isEmpty()){
+            if (doesBaseRowContainColor(Color.RED,0)||generateMaxOnePossibleMoveForKI(color).isEmpty()){
                 return true;
-            } else if (doesBaseRowContainColor(Color.RED,0)) {
-                return false;
             }
         }
         return false;

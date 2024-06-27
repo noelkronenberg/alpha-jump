@@ -20,7 +20,8 @@ public class MCTSNode {
     //boolean isFullySearched = false;
     Color color;
     //LinkedHashMap<Integer,List<Integer>> movesList;
-    boolean isWin=false;
+    boolean isWinNext=false;
+    boolean isWinPos=false;
 
 //    public MCTSNode(MCTSNode parent, int move, MoveGenerator moveGenerator, Color color) {
 //        MoveGenerator throwAwayMG = new MoveGenerator();
@@ -43,7 +44,7 @@ public class MCTSNode {
         this.numberOfWins = 0;
         this.move = move;
         this.color = color;
-        this.isWin = isOnBaseLineForColor();
+        this.isWinNext = isOnBaseLineForColor();
     }
 
 
@@ -79,7 +80,7 @@ public class MCTSNode {
     }
 
     public void updateNode(MoveGenerator moveGenerator){
-        this.isWin = moveGenerator.isGameOver(color);
+        this.isWinPos = moveGenerator.isWinForMCTS(color);
     }
 
     public boolean isOnBaseLineForColor(){
