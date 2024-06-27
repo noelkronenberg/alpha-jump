@@ -23,7 +23,7 @@ public class Connection {
         int port = 5555;
 
         double overall = 120000.0; // overall time (in ms)
-        int averageMoves = 40;
+        int averageMoves = 30;
         BasisKI.bestConfig.timeLimit = overall / averageMoves; // set time for move (in ms)
 
         try (Socket server = new Socket(serverAddress, port)) {
