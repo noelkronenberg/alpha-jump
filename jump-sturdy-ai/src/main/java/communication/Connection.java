@@ -22,7 +22,7 @@ public class Connection {
         String serverAddress = "localhost";
         int port = 5555;
 
-        double overall = 120000.0; // overall time (in ms
+        double overall = 120000.0; // overall time (in ms)
         int averageMoves = 40;
         BasisKI.bestConfig.timeLimit = overall / averageMoves; // set time for move (in ms)
 
