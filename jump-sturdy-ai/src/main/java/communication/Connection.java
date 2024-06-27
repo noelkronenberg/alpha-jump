@@ -16,13 +16,15 @@ public class Connection {
     String lastBoard = "";
     String move = "";
     Scanner scanner = new Scanner(System.in);
-
+    int moveCounter = 0;
+    long currentTime =0;
+    long timeleft=120000;
     public void connect(boolean isPlayer) {
         BasisKI ki = new BasisKI();
         String serverAddress = "localhost";
         int port = 5555;
 
-        double overall = 120000.0; // overall time (in ms)
+        double overall = 115000.0; // overall time (in ms)
         int averageMoves = 30;
         BasisKI.bestConfig.timeLimit = overall / averageMoves; // set time for move (in ms)
 
@@ -87,45 +89,74 @@ public class Connection {
 
                         // player turns
                         if (response.getBoolean("player1") && this.player == 1) {
-
+                            currentTime = System.currentTimeMillis();
                             // check if AI or human player
                             if (isPlayer) {
                                 System.out.println("Enter your move: ");
                                 this.move = this.scanner.nextLine();
                             } else {
+                                if (moveCounter<=4||(24<moveCounter&&moveCounter<=29)){
+                                    BasisKI.bestConfig.timeLimit=(overall*0.2)/10;
+                                } else if (timeleft<=5000) {
+                                    BasisKI.bestConfig.timeLimit=(timeleft*0.5);
+                                } else {
+                                    BasisKI.bestConfig.timeLimit=(overall*0.8)/20;
+                                }
+
                                 this.move = ki.orchestrator(fen, BasisKI.bestConfig);
+
+                                moveCounter++;
+
                             }
 
                             outputStream.println(gson.toJson(this.move));
-
+                            long timeforMove=System.currentTimeMillis()-currentTime;
+                            timeleft-=timeforMove;
+                            System.out.println("Time For move: "+(timeforMove));
+                            System.out.println("Time left for moves: "+timeleft);
+                            System.out.println("Move: "+moveCounter);
                             /*
                             MoveGenerator moveGenerator = new MoveGenerator();
                             moveGenerator.initializeBoard(fen);
                             moveGenerator.printBoard(true);
                             */
 
-                            System.out.print("\n" + "Player 1 | Move: " + this.move);
-                            System.out.println();
+                            System.out.println("Player 1 | Move: " + this.move);
+                            System.out.println("\n" );
                         } else if (response.getBoolean("player2") && this.player == 2) {
-
+                            currentTime = System.currentTimeMillis();
                             // check if AI or human player
                             if (isPlayer) {
                                 System.out.println("Enter your move: ");
                                 this.move = scanner.nextLine();
                             } else {
+                                if (moveCounter<=4||(24<moveCounter&&moveCounter<=29)){
+                                    BasisKI.bestConfig.timeLimit=(overall*0.2)/10;
+                                } else if (timeleft<=5000) {
+                                    BasisKI.bestConfig.timeLimit=(timeleft*0.5);
+                                } else {
+                                    BasisKI.bestConfig.timeLimit=(overall*0.8)/20;
+                                }
+
                                 this.move = ki.orchestrator(fen, BasisKI.bestConfig);
+
+                                moveCounter++;
                             }
 
                             outputStream.println(gson.toJson(this.move));
-
+                            long timeforMove=System.currentTimeMillis()-currentTime;
+                            timeleft-=timeforMove;
+                            System.out.println("Time For move: "+(timeforMove));
+                            System.out.println("Time left for moves: "+timeleft);
+                            System.out.println("Move: "+moveCounter);
                             /*
                             MoveGenerator moveGenerator = new MoveGenerator();
                             moveGenerator.initializeBoard(fen);
                             moveGenerator.printBoard(true);
                             */
 
-                            System.out.println("\n" + "Player 2 | Move: " + this.move);
-                            System.out.println();
+                            System.out.println("Player 2 | Move: " + this.move);
+                            System.out.println("\n" );
                         }
                     }
                 }
