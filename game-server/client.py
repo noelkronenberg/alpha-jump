@@ -34,6 +34,7 @@ def main():
             if player == 0 and game["player1"]:
                 #printing not necessary, game["board"] is the way to get the board string
                 print("New Board: " + game["board"])
+                print("New Time: " + str(game["time"]))
 
                 #change to any input you like. This one is just console input. Change it here to respond with your Ai's answer. 
                 #Answer must have format: start-end like E7-F7
@@ -46,6 +47,7 @@ def main():
                 n.send(data)
             elif player == 1 and game["player2"]:
                 print("New Board: " + game["board"])
+                print("New Time: " + str(game["time"]))
                 i = input()
                 data = json.dumps(i)
                 n.send(data)
