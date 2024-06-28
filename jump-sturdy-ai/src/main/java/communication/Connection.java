@@ -89,7 +89,7 @@ public class Connection {
                         // System.out.println(fen);
 
                         // player turns
-                        if (response.getBoolean("player1") && this.player == 1 || (response.getBoolean("player2") && this.player == 2)) {
+                        if ((response.getBoolean("player1") && this.player == 1) || (response.getBoolean("player2") && this.player == 2)) {
                             currentTime = System.currentTimeMillis();
 
                             // check if AI or human player
