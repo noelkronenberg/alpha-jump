@@ -19,7 +19,7 @@ public class Connection {
 
     int moveCounter = 0;
     long currentTime = 0;
-    long timeleft = 120000;
+    long timeLeft = 120000;
 
     public void connect(boolean isPlayer) {
         BasisKI ki = new BasisKI();
@@ -101,8 +101,8 @@ public class Connection {
                                 // check for dynamic time management
                                 if (moveCounter <= 6 || (31 < moveCounter && moveCounter <= 39)) {
                                     BasisKI.bestConfig.timeLimit = (overall * 0.2) / 15;
-                                } else if (timeleft <= 5000) {
-                                    BasisKI.bestConfig.timeLimit = (timeleft * 0.5);
+                                } else if (timeLeft <= 5000) {
+                                    BasisKI.bestConfig.timeLimit = (timeLeft * 0.5);
                                 } else {
                                     BasisKI.bestConfig.timeLimit = (overall * 0.8) / 25;
                                 }
@@ -114,10 +114,10 @@ public class Connection {
                             outputStream.println(gson.toJson(this.move));
 
                             long timeForMove = System.currentTimeMillis() - currentTime;
-                            timeleft -= timeForMove;
+                            timeLeft -= timeForMove;
 
                             System.out.println("Time For move: " + (timeForMove));
-                            System.out.println("Time left for moves: " + timeleft);
+                            System.out.println("Time left for moves: " + timeLeft);
                             System.out.println("Move: " + moveCounter);
 
                             /*
