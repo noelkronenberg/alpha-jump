@@ -1,7 +1,9 @@
-package search;
+package search.optimisation;
 
 import game.Color;
 import game.MoveGenerator;
+import search.BasisKI;
+import search.Evaluation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -161,7 +163,7 @@ public class GeneticAlgorithm {
 
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/search/GA-output.txt"));
+            PrintStream fileOut = new PrintStream(new File("src/main/java/search/optimisation/GA-output.txt"));
             System.setOut(fileOut);
 
             List<Individual> population = new ArrayList<>();

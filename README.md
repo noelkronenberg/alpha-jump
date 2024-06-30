@@ -16,5 +16,6 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
       - ```debug``` algorithms (only) for debugging
       - ```game``` actual game logic
       - ```search``` algorithms for optimising gameplay
+        - ```optimisation``` algorithms for parameter optimisation
     - ```test``` [JUnit](https://www.jetbrains.com/help/idea/junit.html) tests
 - ```game-server``` Jump Sturdy server for playing against other players (given by [course organisors](https://git.tu-berlin.de/lengfeld8/jump-sturdy-game-server))
