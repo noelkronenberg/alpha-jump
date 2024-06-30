@@ -228,18 +228,19 @@ public class BasisKI implements KI {
         return bestMove;
     }
     public double quiescenceSearch(MoveGenerator gameState, double alpha, double beta, Color currentColor, Color ourColor) {
-        String fen = gameState.getFenFromBoard();
+        String fen = gameState.getFenFromBoard(); // convert position to FEN
 
+        // rate current position without moving
         double standPat = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth, fen, new LinkedHashMap<>(), currentColor);
-
+        // beta cutoff
         if (standPat >= beta) {
             return beta;
         }
-
+        // found better position
         if (alpha < standPat) {
             alpha = standPat;
         }
-
+        // move list
         LinkedList<Integer> movesList = new LinkedList<>();
         if (this.transpositionTables) {
             if (transpositionTable.containsKey(fen)) {
@@ -256,7 +257,7 @@ public class BasisKI implements KI {
             movesList = Evaluation.convertMovesToList(moves);
             Evaluation.orderMoves(movesList, currentColor, gameState);
         }
-
+       // Quiescence Search for every move
         for (Integer move : movesList) {
             MoveGenerator nextState = new MoveGenerator();
             nextState.initializeBoard(fen);
@@ -267,12 +268,11 @@ public class BasisKI implements KI {
             if (score >= beta) {
                 return beta;
             }
-
             if (score > alpha) {
                 alpha = score;
             }
         }
-
+        // best rating
         return alpha;
     }
 
