@@ -22,6 +22,7 @@ public class GeneticAlgorithm {
     private static final int GENERATIONS = 10;
     private static final double MUTATION_RATE = 0.1;
     private static final double CROSSOVER_RATE = 0.75;
+    private static final int ELITISM_COUNT = 2;
 
     private static Random random = new Random();
 
@@ -179,8 +180,13 @@ public class GeneticAlgorithm {
 
                 List<Individual> newPopulation = new ArrayList<>();
 
-                // use top half as parents
-                for (int i = 0; i < POPULATION_SIZE / 2; i++) {
+                // keep the top (ELITISM_COUNT) individuals
+                for (int i = 0; i < ELITISM_COUNT; i++) {
+                    newPopulation.add(population.get(i));
+                }
+
+                // use top (after ELITISM_COUNT) half as parents
+                for (int i = ELITISM_COUNT; i < POPULATION_SIZE / 2; i++) {
                     Individual parent1 = population.get(i); // get (next) fittest individual
                     Individual parent2 = population.get(random.nextInt(POPULATION_SIZE / 2)); // get random other individual
 
