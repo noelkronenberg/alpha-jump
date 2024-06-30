@@ -5,7 +5,7 @@ import game.MoveGenerator;
 
 import java.util.*;
 
-public class BasisKI {
+public class BasisKI implements KI {
     // hyperparameters (defaults)
     boolean timeCriterion = true;
     double timeLimit = 20000.0;
