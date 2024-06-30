@@ -8,6 +8,7 @@ public class SearchConfig {
     public boolean transpositionTables;
     public int maxAllowedDepth;
     public boolean dynamicTime;
+    public boolean useQuiescenceSearch;
 
     public SearchConfig(boolean timeCriterion, double timeLimit, boolean aspirationWindow, double aspirationWindowSize, boolean transpositionTables, int maxAllowedDepth, boolean dynamicTime) {
         this.timeCriterion = timeCriterion;

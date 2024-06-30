@@ -12,6 +12,7 @@ public class BasisKI {
     boolean aspirationWindow = false; // TODO: turn on by default (with 0.25); requires adjustment of benchmarks / tests
     double aspirationWindowSize = 0;
     boolean transpositionTables = false;
+    boolean useQuiescenceSearch = false;
     int maxAllowedDepth = 0;
     boolean dynamicTime = false;
 
@@ -38,10 +39,16 @@ public class BasisKI {
         this.transpositionTables = config.transpositionTables;
         this.maxAllowedDepth = config.maxAllowedDepth;
         this.dynamicTime = config.dynamicTime;
+        this.useQuiescenceSearch = config.useQuiescenceSearch;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
     public String orchestrator(String fen) {
+        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
+    }
+
+    public String orchestrator(String fen, boolean useQuiescenceSearch) {
+        this.useQuiescenceSearch = true;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
@@ -149,6 +156,8 @@ public class BasisKI {
 
         //TODO: Maybe impl. the starting position for Transposition tables as well?
 
+
+
         // START: time management
         double moveTimeLimit = (this.timeLimit - 100) / movesList.size(); // default (for static)
         double totalTime = this.timeLimit - 100; // for dynamic
@@ -162,6 +171,8 @@ public class BasisKI {
             }
         }
         // END: time management
+
+
 
         // go through all possible moves
         for (int i = 0; i < movesList.size(); i++) {
@@ -214,6 +225,54 @@ public class BasisKI {
         }
 
         return bestMove;
+    }
+    public double quiescenceSearch(MoveGenerator gameState, double alpha, double beta, Color currentColor, Color ourColor) {
+        String fen = gameState.getFenFromBoard();
+
+        double standPat = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth, fen, new LinkedHashMap<>(), currentColor);
+
+        if (standPat >= beta) {
+            return beta;
+        }
+
+        if (alpha < standPat) {
+            alpha = standPat;
+        }
+
+        LinkedList<Integer> movesList = new LinkedList<>();
+        if (this.transpositionTables) {
+            if (transpositionTable.containsKey(fen)) {
+                movesList = transpositionTable.get(fen).movesList;
+            } else {
+                LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor, fen);
+                movesList = Evaluation.convertMovesToList(moves);
+                Evaluation.orderMoves(movesList, currentColor, gameState);
+                TranspositionTableObejct ttData = new TranspositionTableObejct(standPat, movesList, this.currentDepth);
+                transpositionTable.put(fen, ttData);
+            }
+        } else {
+            LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor, fen);
+            movesList = Evaluation.convertMovesToList(moves);
+            Evaluation.orderMoves(movesList, currentColor, gameState);
+        }
+
+        for (Integer move : movesList) {
+            MoveGenerator nextState = new MoveGenerator();
+            nextState.initializeBoard(fen);
+            nextState.movePiece(move);
+
+            double score = -quiescenceSearch(nextState, -beta, -alpha, (currentColor == Color.RED) ? Color.BLUE : Color.RED, ourColor);
+
+            if (score >= beta) {
+                return beta;
+            }
+
+            if (score > alpha) {
+                alpha = score;
+            }
+        }
+
+        return alpha;
     }
 
     public double iterativeDeepening(MoveGenerator gameState, double moveTimeLimit, Color currentColor, Color ourColor) {
@@ -419,7 +478,7 @@ public class BasisKI {
         m.printBoard(true);
 
         BasisKI ki = new BasisKI();
-        String bestMove = ki.orchestrator(fen, 20000000.0, 0.25);
+        String bestMove = ki.orchestrator(fen);
         System.out.println("Best move: " + bestMove);
         System.out.println("Depth reached: " + ki.maxDepth);
 
