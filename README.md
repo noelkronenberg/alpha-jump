@@ -19,3 +19,13 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
         - ```optimisation``` algorithms for parameter optimisation
     - ```test``` [JUnit](https://www.jetbrains.com/help/idea/junit.html) tests
 - ```game-server``` Jump Sturdy server for playing against other players (given by [course organisors](https://git.tu-berlin.de/lengfeld8/jump-sturdy-game-server))
+
+## Playing
+
+> Note: [JDK](https://www.oracle.com/java/technologies/downloads/) version 22.0.1 should be installed on the computer.
+
+1. start server: ```python game-server/server.py```
+2. start AI: ```jump-sturdy-ai/GruppeC_KI.exe```
+3. start other AI (can be another instance of ```jump-sturdy-ai/GruppeC_KI.exe```)
+4. wait for game to end
+5. stop execution of ```GruppeC_KI.exe``` (e.g. via Task Manager)
