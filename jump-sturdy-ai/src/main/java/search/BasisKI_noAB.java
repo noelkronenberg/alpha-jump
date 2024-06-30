@@ -5,7 +5,7 @@ import game.MoveGenerator;
 
 import java.util.*;
 
-public class BasisKI_noAB {
+public class BasisKI_noAB implements KI {
     static final int TIME_LIMIT = 20000;
     static final int winCutOff = 100000;
     static int maxAllowedDepth = 2;
@@ -16,6 +16,12 @@ public class BasisKI_noAB {
     public HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
 
     // START: search without Alpha-Beta
+
+    @Override
+    public String orchestrator(String fen, SearchConfig config) {
+        this.maxAllowedDepth = config.maxAllowedDepth;
+        return MoveGenerator.convertMoveToFEN(getBestMoveNoAlphaBeta(fen));
+    }
 
     public String orchestratorNoAlphaBeta(String fen) {
         return MoveGenerator.convertMoveToFEN(getBestMoveNoAlphaBeta(fen));
