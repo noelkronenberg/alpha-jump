@@ -145,7 +145,7 @@ public class BasisKIBM {
 
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/output.txt"));
+            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/BasisKIBM-output.txt"));
             System.setOut(fileOut);
 
             System.out.println("Start Position: ");

@@ -5,7 +5,7 @@ import game.MoveGenerator;
 
 import java.util.*;
 
-public class BasisKI {
+public class BasisKI implements KI {
     // hyperparameters (defaults)
     boolean timeCriterion = true;
     double timeLimit = 20000.0;
@@ -31,6 +31,7 @@ public class BasisKI {
 
     public static SearchConfig bestConfig = new SearchConfig(true, 50000.0, true, 0.25, true, 0, true);
 
+    @Override
     public String orchestrator(String fen, SearchConfig config) {
         this.timeCriterion = config.timeCriterion;
         this.timeLimit = config.timeLimit;

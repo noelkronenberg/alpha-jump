@@ -17,13 +17,17 @@ public class Connection {
     String move = "";
     Scanner scanner = new Scanner(System.in);
 
+    int moveCounter = 0;
+    long currentTime = 0;
+    long timeLeft = 120000;
+
     public void connect(boolean isPlayer) {
         BasisKI ki = new BasisKI();
         String serverAddress = "localhost";
         int port = 5555;
 
-        double overall = 120000.0; // overall time (in ms)
-        int averageMoves = 30;
+        double overall = 115000.0; // overall time (in ms)
+        int averageMoves = 40;
         BasisKI.bestConfig.timeLimit = overall / averageMoves; // set time for move (in ms)
 
         try (Socket server = new Socket(serverAddress, port)) {
@@ -32,25 +36,24 @@ public class Connection {
             InputStream inputStream = server.getInputStream();
 
             int temp = (int) inputStream.read();
-            if (temp == 48){
+            if (temp == 48) {
                 this.player = 1;
                 System.out.println("\n" + "You are Player 1");
-            }
-            else {
+            } else {
                 this.player = 2;
                 System.out.println("\n" +  "You are Player 2");
             }
 
-            // System.out.println("\n" + "Player "+ this.player + " | " + "Connected to the server.");
+            // System.out.println("\n" + "Player " + this.player + " | " + "Connected to the server.");
             
             Gson gson = new Gson();
 
             while (true) {
                 // send request to get game status
-                outputStream.println("\"get\"");
+                outputStream.println(gson.toJson("get"));
 
                 // wait for server response
-                Thread.sleep(500);
+                Thread.sleep(5);
 
                 // get server response
                 byte[] data = new byte[9999];
@@ -58,19 +61,19 @@ public class Connection {
                 JSONObject response;
 
                 if (bytesRead != -1) {
+
                     // convert response
                     String jsonString;
-                    if (data[0] == 49 || data[0] == 48){ // check player turn (0 or 1)
+                    if (data[0] == 49 || data[0] == 48) { // check player turn (0 or 1)
                          jsonString = new String(data, 1, bytesRead);
-                    }
-                    else {
+                    } else {
                          jsonString = new String(data, 0, bytesRead);
                     }
                     
                     try {
                         response = new JSONObject(jsonString);
                     } catch (JSONException e) {
-                        System.out.println("\n" + "Player "+ this.player + " | " + "Error parsing JSON: " + jsonString);
+                        System.out.println("\n" + "Player " + this.player + " | " + "Error parsing JSON: " + jsonString);
                         continue;
                     }
 
@@ -86,53 +89,57 @@ public class Connection {
                         // System.out.println(fen);
 
                         // player turns
-                        if (response.getBoolean("player1") && this.player == 1) {
+                        if ((response.getBoolean("player1") && this.player == 1) || (response.getBoolean("player2") && this.player == 2)) {
+                            currentTime = System.currentTimeMillis();
 
                             // check if AI or human player
                             if (isPlayer) {
                                 System.out.println("Enter your move: ");
                                 this.move = this.scanner.nextLine();
                             } else {
+
+                                // check for dynamic time management
+                                if (moveCounter <= 6 || (31 < moveCounter && moveCounter <= 39)) {
+                                    BasisKI.bestConfig.timeLimit = (overall * 0.2) / 15;
+                                } else if (timeLeft <= 5000) {
+                                    BasisKI.bestConfig.timeLimit = (timeLeft * 0.5);
+                                } else {
+                                    BasisKI.bestConfig.timeLimit = (overall * 0.8) / 25;
+                                }
+
                                 this.move = ki.orchestrator(fen, BasisKI.bestConfig);
+                                moveCounter++;
                             }
 
                             outputStream.println(gson.toJson(this.move));
 
+                            long timeForMove = System.currentTimeMillis() - currentTime;
+                            timeLeft -= timeForMove;
+
+                            System.out.println("Time For move: " + (timeForMove));
+                            System.out.println("Time left for moves: " + timeLeft);
+                            System.out.println("Move: " + moveCounter);
+
                             /*
                             MoveGenerator moveGenerator = new MoveGenerator();
                             moveGenerator.initializeBoard(fen);
-                            moveGenerator.printBoard(true);
-                            */
-
-                            System.out.print("\n" + "Player 1 | Move: " + this.move);
-                            System.out.println();
-                        } else if (response.getBoolean("player2") && this.player == 2) {
-
-                            // check if AI or human player
-                            if (isPlayer) {
-                                System.out.println("Enter your move: ");
-                                this.move = scanner.nextLine();
-                            } else {
-                                this.move = ki.orchestrator(fen, BasisKI.bestConfig);
+                            if (moveGenerator.isGameOver(fen)) {
+                                Thread.sleep(3000);
+                                System.exit(0);
+                               break;
                             }
-
-                            outputStream.println(gson.toJson(this.move));
-
-                            /*
-                            MoveGenerator moveGenerator = new MoveGenerator();
-                            moveGenerator.initializeBoard(fen);
                             moveGenerator.printBoard(true);
                             */
 
-                            System.out.println("\n" + "Player 2 | Move: " + this.move);
-                            System.out.println();
+                            System.out.println("Player " + this.player + " | Move: " + this.move);
+                            System.out.println("\n");
                         }
                     }
                 }
             }
 
         } catch (IOException | InterruptedException e) {
-            System.err.println("\n" + "Player "+ this.player + " | " +  "Error occurred while connecting to the server: " + e.getMessage());
+            System.err.println("\n" + "Player " + this.player + " | " +  "Error occurred while connecting to the server: " + e.getMessage());
         }
     }
 
