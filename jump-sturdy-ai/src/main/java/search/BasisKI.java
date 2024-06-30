@@ -30,6 +30,7 @@ public class BasisKI implements KI {
 
     public static SearchConfig bestConfig = new SearchConfig(true, 50000.0, true, 0.25, true, 0, true);
 
+    @Override
     public String orchestrator(String fen, SearchConfig config) {
         this.timeCriterion = config.timeCriterion;
         this.timeLimit = config.timeLimit;

@@ -92,7 +92,7 @@ public class Simulation {
         secondConfig.timeLimit = 500.0;
 
         String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
-        int iterations = 3;
+        int iterations = 10;
 
         Simulation simulation = new Simulation();
         simulation.simulate(firstKI, firstConfig, secondKI, secondConfig, initialFEN, iterations);
