@@ -6,7 +6,6 @@ import game.MoveGenerator;
 import java.util.*;
 
 public class BasisKI_noAB implements KI {
-    static final int TIME_LIMIT = 20000;
     static final int winCutOff = 100000;
     static int maxAllowedDepth = 2;
     static int currentDepth = 1;
@@ -49,8 +48,6 @@ public class BasisKI_noAB implements KI {
         fen=fen.substring(0, fen.length() - 2);
         positionsHM.put(fen,1); // save position
 
-        long moveTimeLimit = (TIME_LIMIT - 100) / movesList.size(); // (static) time for each move to search
-
         // go through all possible moves
         for (Integer move : movesList) {
 
@@ -59,7 +56,7 @@ public class BasisKI_noAB implements KI {
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
 
-            double currentScore = iterativeDeepeningNoAlphaBeta(nextState, moveTimeLimit, ourColor,ourColor, move); // get score for current move (order)
+            double currentScore = iterativeDeepeningNoAlphaBeta(nextState, ourColor,ourColor, move); // get score for current move (order)
 
             // evaluate move (score)
 
@@ -79,16 +76,15 @@ public class BasisKI_noAB implements KI {
         return bestMove;
     }
 
-    public double iterativeDeepeningNoAlphaBeta(MoveGenerator gameState, long moveTimeLimit, Color currentColor, Color ourColor, int move) {
+    public double iterativeDeepeningNoAlphaBeta(MoveGenerator gameState, Color currentColor, Color ourColor, int move) {
         int depth = 1;
         double bestScore = Integer.MIN_VALUE;
 
-        long endTime = System.currentTimeMillis() + moveTimeLimit;
         stopSearch = false;
 
         // check until time has run out
         while ((depth) <= maxAllowedDepth) {
-            double currentScore = treeSearchNoAlphaBeta(gameState, endTime, depth, currentColor, ourColor, -1); // get score for current move (order)
+            double currentScore = treeSearchNoAlphaBeta(gameState, depth, currentColor, ourColor, -1); // get score for current move (order)
             // System.out.println("best score (for iteration): " + currentScore + " | depth: " + depth + " | move: " + MoveGenerator.convertMoveToFEN(move));
             currentDepth=1;
 
@@ -105,7 +101,7 @@ public class BasisKI_noAB implements KI {
         return bestScore;
     }
 
-    public double treeSearchNoAlphaBeta(MoveGenerator gameState, long endTime, int depth, Color currentColor , Color ourColor, double value) {
+    public double treeSearchNoAlphaBeta(MoveGenerator gameState, int depth, Color currentColor , Color ourColor, double value) {
         // get score for current position
         String fen = gameState.getFenFromBoard(); // convert position to FEN
 
@@ -114,7 +110,7 @@ public class BasisKI_noAB implements KI {
         LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen);
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
-        Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
+        Evaluation.orderMoves(movesList, currentColor, gameState); // order moves
 
 
         double score = Evaluation.ratePosition(gameState, ourColor, currentDepth, fen);
@@ -147,7 +143,7 @@ public class BasisKI_noAB implements KI {
 
                 isOurMove = false; // player change
                 currentDepth +=1;
-                value = Math.max(value,treeSearchNoAlphaBeta(nextState, endTime, depth - 1, currentColor,ourColor, value));
+                value = Math.max(value,treeSearchNoAlphaBeta(nextState, depth - 1, currentColor,ourColor, value));
 
             }
             return value;
@@ -166,7 +162,7 @@ public class BasisKI_noAB implements KI {
 
                 isOurMove = true; // player change
                 currentDepth +=1;
-                value=Math.min(value,treeSearchNoAlphaBeta(nextState, endTime, depth - 1, currentColor, ourColor,value));
+                value=Math.min(value,treeSearchNoAlphaBeta(nextState, depth - 1, currentColor, ourColor,value));
 
             }
             return value;
