@@ -14,7 +14,7 @@ import java.util.Random;
 // viele Besuche und wins wird minimiert... ?! Sehr komisch
 
 
-public class MCTSKI {
+public class MCTSKI implements KI_MCTS {
     double numberOfAllSimulations;
     Color ourColor = Color.BLUE;
     Random random = new Random();
