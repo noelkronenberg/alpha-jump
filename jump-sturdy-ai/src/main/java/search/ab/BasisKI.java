@@ -81,8 +81,6 @@ public class BasisKI implements KI {
         }
         // END: time management
 
-
-
         // go through all possible moves
         for (int i = 0; i < movesList.size(); i++) {
             Integer move = movesList.get(i);
@@ -140,32 +138,37 @@ public class BasisKI implements KI {
 
         // rate current position without moving
         double standPat = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth, fen, new LinkedHashMap<>(), currentColor);
+
         // beta cutoff
         if (standPat >= beta) {
             return beta;
         }
+
         // found better position
         if (alpha < standPat) {
             alpha = standPat;
         }
+
         // move list
         LinkedList<Integer> movesList = new LinkedList<>();
+
         if (this.transpositionTables) {
             if (transpositionTable.containsKey(fen)) {
                 movesList = transpositionTable.get(fen).movesList;
             } else {
-                LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor, fen);
+                LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
                 movesList = Evaluation.convertMovesToList(moves);
                 Evaluation.orderMoves(movesList, currentColor, gameState);
                 TranspositionTableObejct ttData = new TranspositionTableObejct(standPat, movesList, this.currentDepth);
                 transpositionTable.put(fen, ttData);
             }
         } else {
-            LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor, fen);
+            LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
             movesList = Evaluation.convertMovesToList(moves);
             Evaluation.orderMoves(movesList, currentColor, gameState);
         }
-       // Quiescence Search for every move
+
+       // quiescence Search for every move
         for (Integer move : movesList) {
             MoveGenerator nextState = new MoveGenerator();
             nextState.initializeBoard(fen);
@@ -180,6 +183,7 @@ public class BasisKI implements KI {
                 alpha = score;
             }
         }
+
         // best rating
         return alpha;
     }
