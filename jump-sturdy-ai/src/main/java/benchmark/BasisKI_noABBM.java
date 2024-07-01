@@ -1,16 +1,20 @@
 package benchmark;
 
+import search.ab.BasisKI;
 import search.BasisKI_noAB;
 
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_LongestLine;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
+import search.SearchConfig;
+
 import java.util.Locale;
 import java.util.Map;
 
 public class BasisKI_noABBM {
 
     static BasisKI_noAB ki;
+    static SearchConfig config = BasisKI.bestConfig;
 
     static void init() {
         ki = new BasisKI_noAB();
@@ -18,16 +22,18 @@ public class BasisKI_noABBM {
 
     static String generateBestMove(String board_fen, int depth) {
         init();
-        String bestMove = ki.orchestratorNoAlphaBeta(board_fen, depth);
+        config.maxAllowedDepth = depth;
+        String bestMove = ki.orchestrator(board_fen, config);
         return bestMove;
     }
 
     static double generateBestMoveSpeed(String board_fen, int depth) {
         init();
+        config.maxAllowedDepth = depth;
         int iterations = 10;
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
-            ki.orchestratorNoAlphaBeta(board_fen, depth);
+            ki.orchestrator(board_fen, config);
         }
         double endTime = System.nanoTime();
         double duration = ((endTime - startTime) / iterations) / 1e6; // convert to milliseconds (reference: https://stackoverflow.com/a/924220)
@@ -36,14 +42,16 @@ public class BasisKI_noABBM {
 
     static int generateBestMoveUniquePositions(String board_fen, int depth) {
         init();
-        ki.orchestratorNoAlphaBeta(board_fen, depth);
+        config.maxAllowedDepth = depth;
+        ki.orchestrator(board_fen, config);
         int uniquePositions = ki.positionsHM.size();
         return uniquePositions;
     }
 
     static int generateBestMovePositions(String board_fen, int depth) {
         init();
-        ki.orchestratorNoAlphaBeta(board_fen, depth);
+        config.maxAllowedDepth = depth;
+        ki.orchestrator(board_fen, config);
         int positions = 0;
         for (Map.Entry<String, Integer> entry : ki.positionsHM.entrySet()){
             positions += entry.getValue();

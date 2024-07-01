@@ -1,7 +1,6 @@
 package communication;
 
-import game.MoveGenerator;
-import search.BasisKI;
+import search.ab.BasisKI;
 
 import com.google.gson.Gson;
 import org.json.JSONException;
@@ -167,7 +166,7 @@ public class Connection {
         }
 
         // END: two player game
-        */
+         */
 
     }
 }

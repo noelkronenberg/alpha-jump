@@ -1,15 +1,17 @@
-package search;
+package search.ab;
 
 import game.Color;
 import game.MoveGenerator;
+import search.KI;
+import search.SearchConfig;
 
 import java.util.*;
 
 public class BasisKI implements KI {
     // hyperparameters (defaults)
     boolean timeCriterion = true;
-    double timeLimit = 20000.0;
-    boolean aspirationWindow = false; // TODO: turn on by default (with 0.25); requires adjustment of benchmarks / tests
+    double timeLimit = bestConfig.timeLimit;
+    boolean aspirationWindow = false;
     double aspirationWindowSize = 0;
     boolean transpositionTables = false;
     boolean useQuiescenceSearch = false;
@@ -17,15 +19,15 @@ public class BasisKI implements KI {
     boolean dynamicTime = false;
 
     // derived parameters
-    public int maxDepth = 1;
-    public HashMap<String, Integer> positionsHM = new HashMap<>();
-    public HashMap<String, TranspositionTableObejct> transpositionTable = new HashMap<>();
+    public int maxDepth;
+    public HashMap<String, Integer> positionsHM;
+    public HashMap<String, TranspositionTableObejct> transpositionTable;
 
     // logic
     final int winCutOff = 100000;
     int currentDepth = 1;
     boolean stopSearch = false;
-    boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
+    boolean isOurMove = false; // NOTE: supposed to be false, because we make a move before entering treeSearch
 
     // START: search with Alpha-Beta
 
@@ -44,101 +46,11 @@ public class BasisKI implements KI {
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
-    public String orchestrator(String fen) {
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, boolean useQuiescenceSearch) {
-        this.useQuiescenceSearch = true;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, double ms) {
-        this.timeCriterion = true;
-        this.timeLimit = ms;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, double ms, boolean dynamicTime) {
-        this.timeCriterion = true;
-        this.timeLimit = ms;
-        this.dynamicTime = dynamicTime;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, double ms, double aspirationWindowSize) {
-        this.timeCriterion = true;
-        this.timeLimit = ms;
-        this.aspirationWindow = true;
-        this.aspirationWindowSize = aspirationWindowSize;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, int actualMaxDepth, double aspirationWindowSize) {
-        this.timeCriterion = false;
-        this.maxAllowedDepth = actualMaxDepth;
-        this.aspirationWindow = true;
-        this.aspirationWindowSize = aspirationWindowSize;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, int actualMaxDepth, double aspirationWindowSize, boolean transpositionTables) {
-        this.timeCriterion = false;
-        this.maxAllowedDepth = actualMaxDepth;
-        this.aspirationWindow = true;
-        this.aspirationWindowSize = aspirationWindowSize;
-        this.transpositionTables=transpositionTables;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, int actualMaxDepth, double aspirationWindowSize, boolean transpositionTables, boolean dynamicTime) {
-        this.timeCriterion = false;
-        this.dynamicTime=dynamicTime;
-        this.maxAllowedDepth = actualMaxDepth;
-        this.aspirationWindow = true;
-        this.aspirationWindowSize = aspirationWindowSize;
-        this.transpositionTables=transpositionTables;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, int actualMaxDepth, boolean transpositionTables, double ms, boolean dynamicTime) {
-        this.timeCriterion = true;
-        this.timeLimit = ms;
-        this.dynamicTime=dynamicTime;
-        this.maxAllowedDepth = actualMaxDepth;
-        this.aspirationWindow = false;
-        this.transpositionTables=transpositionTables;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, int actualMaxDepth, double ms, double aspirationWindowSize, boolean transpositionTables, boolean dynamicTime) {
-        this.timeCriterion = true;
-        this.timeLimit = ms;
-        this.dynamicTime=dynamicTime;
-        this.maxAllowedDepth = actualMaxDepth;
-        this.aspirationWindow = true;
-        this.aspirationWindowSize = aspirationWindowSize;
-        this.transpositionTables=transpositionTables;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, double ms, double aspirationWindowSize, boolean transpositionTables, boolean dynamicTime, boolean timeCriterion, boolean aspirationWindow){
-        this.timeCriterion = timeCriterion;
-        this.timeLimit = ms;
-        this.dynamicTime=dynamicTime;
-        this.aspirationWindow = aspirationWindow;
-        this.aspirationWindowSize = aspirationWindowSize;
-        this.transpositionTables=transpositionTables;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
-    public String orchestrator(String fen, int actualMaxDepth) {
-        this.timeCriterion = false;
-        this.maxAllowedDepth = actualMaxDepth;
-        return MoveGenerator.convertMoveToFEN(getBestMove(fen));
-    }
-
     public int getBestMove(String fen) {
+        transpositionTable = new HashMap<>();
+        positionsHM = new HashMap<>();
+        maxDepth = 1;
+
         double bestScore = Integer.MIN_VALUE;
         int bestMove = -1;
 
@@ -154,10 +66,6 @@ public class BasisKI implements KI {
 
         fen = fen.substring(0, fen.length() - 2);
         positionsHM.put(fen, 1); // save position
-
-        //TODO: Maybe impl. the starting position for Transposition tables as well?
-
-
 
         // START: time management
         double moveTimeLimit = (this.timeLimit - 100) / movesList.size(); // default (for static)
@@ -362,7 +270,7 @@ public class BasisKI implements KI {
         // START: Transposition Tables
         if (transpositionTables) {
             if (!isInTT) {
-                LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen); // get moves for other player
+                LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
                 movesList = Evaluation.convertMovesToList(moves);
                 Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
@@ -378,7 +286,7 @@ public class BasisKI implements KI {
         // END: Transposition Tables
 
         else {
-            LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen); // get moves for other player
+            LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
             movesList = Evaluation.convertMovesToList(moves);
             Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
@@ -468,29 +376,5 @@ public class BasisKI implements KI {
             return beta;
         }
     }
-        // END: Transposition Tables
-
     // END: search with Alpha-Beta
-
-    public static void main(String[] args) {
-        String fen = "6/8/8/8/8/1r0b0r0b0r02/4r03/3rr2 r";
-        MoveGenerator m = new MoveGenerator();
-        m.initializeBoard(fen);
-        m.printBoard(true);
-
-        BasisKI ki = new BasisKI();
-        String bestMove = ki.orchestrator(fen);
-        System.out.println("Best move: " + bestMove);
-        System.out.println("Depth reached: " + ki.maxDepth);
-
-        System.out.println();
-        System.out.println("Number of Unique Positions: " + ki.positionsHM.size());
-
-        System.out.println();
-        int numberOfPos = 0;
-        for (Map.Entry < String, Integer > entry : ki.positionsHM.entrySet()){
-            numberOfPos += entry.getValue();
-        }
-        System.out.println("Actual : " + numberOfPos);
-    }
 }

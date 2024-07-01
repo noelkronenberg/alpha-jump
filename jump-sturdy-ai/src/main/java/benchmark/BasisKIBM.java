@@ -1,6 +1,6 @@
 package benchmark;
 
-import search.BasisKI;
+import search.ab.BasisKI;
 
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_LongestLine;

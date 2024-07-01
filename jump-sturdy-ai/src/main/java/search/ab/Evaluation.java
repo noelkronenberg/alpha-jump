@@ -1,4 +1,4 @@
-package search;
+package search.ab;
 
 import game.Color;
 import game.Piece;
@@ -43,7 +43,7 @@ public class Evaluation {
             weight = Evaluation.closenessWeight;
 
             // check gameOver of other player
-            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED, fen), Color.RED)) {
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
                 score += 100000 * (1 + (1 / depth));
             }
 
@@ -65,7 +65,7 @@ public class Evaluation {
             weight = Evaluation.closenessWeightTotal;
 
             // check gameOver of other player
-            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE,fen), Color.BLUE)) {
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE), Color.BLUE)) {
                 score += 100000 * (1 + (1 / depth));
             }
 
@@ -161,13 +161,13 @@ public class Evaluation {
         // TODO: difference between ourColor / currentColor
 
         if (color == Color.BLUE && currentColor != color) {
-            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE,fen));
+            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE));
         } else if (color == Color.BLUE && currentColor == color) {
-            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED,fen)) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moves);
+            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED)) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moves);
         } else if (color == Color.RED && currentColor != color) {
-            score = getScoreWrapperKI(moveGenerator, Color.RED, depth, moves) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED,fen));
+            score = getScoreWrapperKI(moveGenerator, Color.RED, depth, moves) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED));
         } else {
-            score = getScoreWrapperKI(moveGenerator, Color.RED, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE,fen)) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves);
+            score = getScoreWrapperKI(moveGenerator, Color.RED, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE)) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves);
         }
 
         return score;
@@ -195,7 +195,7 @@ public class Evaluation {
             }
 
             // check gameOver of other player
-            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED,fen), Color.RED)) {
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.RED), Color.RED)) {
                 score = 100000;
             }
 
@@ -216,7 +216,7 @@ public class Evaluation {
             }
 
             // check gameOver of other player
-            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE,fen), Color.BLUE)) {
+            if (moveGenerator.isGameOver(moveGenerator.generateAllPossibleMoves(Color.BLUE), Color.BLUE)) {
                 score = 100000;
             }
         }
