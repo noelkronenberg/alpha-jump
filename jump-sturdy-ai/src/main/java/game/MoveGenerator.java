@@ -11,7 +11,6 @@ public class MoveGenerator {
     Color[][] colorBoard;
     int totalPossibleMoves;
     int protectedPieces;
-    String comparisonFen;
     public HashMap<Integer,Integer> capturingHM= new HashMap<>();
 
     public Piece[][] getPieceBoard() {
@@ -26,9 +25,7 @@ public class MoveGenerator {
     public int getProtectedPieces() {
         return protectedPieces;
     }
-    public String getComparisonFen() {
-        return comparisonFen;
-    }
+
 
     // START: board basics
 
@@ -360,7 +357,7 @@ public class MoveGenerator {
                     if (column > 0 && colorBoard[row - 1][column - 1] == Color.BLUE) {
                         int move=convertToNumber(row - 1, column - 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // left diagonal protection (for Evaluation)
@@ -372,7 +369,7 @@ public class MoveGenerator {
                     if (column < 7 && colorBoard[row - 1][column + 1] == Color.BLUE) {
                         int move=convertToNumber(row - 1, column + 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // right diagonal protection (for Evaluation)
@@ -414,7 +411,7 @@ public class MoveGenerator {
                     if (column > 0 && colorBoard[row + 1][column - 1] == Color.RED) {
                         int move = convertToNumber(row + 1, column - 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // left diagonal protection (for Evaluation)
@@ -426,7 +423,7 @@ public class MoveGenerator {
                     if (column < 7 && colorBoard[row + 1][column + 1] == Color.RED) {
                         int move = convertToNumber(row + 1, column + 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // right diagonal protection (for Evaluation)
@@ -471,7 +468,7 @@ public class MoveGenerator {
                 if (newRow > row) {
                     continue;
                 }
-            } else if (color == Color.BLUE) { //NOTE: else
+            } else if (color == Color.BLUE) {
                 if (newRow < row) {
                     continue;
                 }
@@ -494,7 +491,7 @@ public class MoveGenerator {
             }
             // is attacking
             else if (colorBoard[newRow][newColumn] != color && colorBoard[newRow][newColumn] != Color.EMPTY){
-                capturingHM.put((position*100)+convertToNumber(newRow, newColumn),1);
+                capturingHM.put((position * 100) + convertToNumber(newRow, newColumn), 1); // capturing move (for Evaluation)
             }
         }
     }
@@ -555,13 +552,30 @@ public class MoveGenerator {
         return convertPosToString(randomPiece) + "-" + convertPosToString(randomPos);
     }
 
+    public int getRandomMoveInt(LinkedHashMap<Integer, List<Integer>> moves) {
+        Random generator =  new Random();
+        ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
+
+        if (allPieces.size() == 0) {
+            return 0;
+        }
+        int number = generator.nextInt(allPieces.size());
+        int randomPiece = allPieces.get(number);
+
+        List<Integer> allMoveToPos = moves.get(randomPiece);
+        number = generator.nextInt(allMoveToPos.size());
+
+        int randomPos = allMoveToPos.get(number);
+        return randomPiece * 100 + randomPos;
+    }
+
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
         Color color = this.getColor(color_fen);
         // System.out.println("Color: " + color);
         String fenBoard=fen.substring(0, fen.length() - 2);
         this.initializeBoard(fenBoard);
-        return this.generateAllPossibleMoves(color,fenBoard);
+        return this.generateAllPossibleMoves(color);
     }
 
     // END: move generation
@@ -672,12 +686,11 @@ public class MoveGenerator {
         }
     }
 
-    public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color, String fen) {
+    public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
         capturingHM= new HashMap<>();
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
         totalPossibleMoves = 0;
         protectedPieces = 0;
-        comparisonFen = fen;
 
         for (int row = 0; row < 8; row++) {
             for (int column = 0; column < 8; column++) {
@@ -694,11 +707,10 @@ public class MoveGenerator {
         return allPossibleMoves;
     }
 
-    public LinkedHashMap<Integer, List<Integer>> generateMaxOnePossibleMoveForKI(Color color, String fen) {
+    public LinkedHashMap<Integer, List<Integer>> generateMaxOnePossibleMoveForKI(Color color) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
         totalPossibleMoves = 0;
         protectedPieces = 0;
-        comparisonFen = fen;
 
         for (int row = 0; row < 8; row++) {
             for (int column = 0; column < 8; column++) {
@@ -716,6 +728,24 @@ public class MoveGenerator {
         return allPossibleMoves;
     }
 
+    public boolean isGameOver(Color color) {
+        if (color == Color.RED) {
+            if (doesBaseRowContainColor(color,0)) {
+                return false;
+            } else if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+                return true;
+            }
+        }
+        else {
+            if (doesBaseRowContainColor(color,7)) {
+                return false;
+            } else if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isGameOver(String move, Color color) {
         if (color == Color.RED) {
             if (doesBaseRowContainColor(color,0)) {
@@ -725,7 +755,7 @@ public class MoveGenerator {
             }
         }
         else {
-            if (doesBaseRowContainColor(color,7)){
+            if (doesBaseRowContainColor(color,7)) {
                 return false;
             } else if (move.isEmpty() || doesBaseRowContainColor(Color.RED,0)) {
                 return true;
@@ -743,7 +773,7 @@ public class MoveGenerator {
             }
         }
         else {
-            if (doesBaseRowContainColor(color,7)){
+            if (doesBaseRowContainColor(color,7)) {
                 return false;
             } else if (moves.isEmpty() || doesBaseRowContainColor(Color.RED,0)) {
                 return true;
@@ -751,6 +781,7 @@ public class MoveGenerator {
         }
         return false;
     }
+
 
     public boolean isGameOverMCTS_Bib(LinkedHashMap<Integer, List<Integer>> moves) {
         //returns true if somebody has won in that position
@@ -771,6 +802,40 @@ public class MoveGenerator {
         } 
         return false;
     }
+
+
+    public boolean isWinForMCTS(Color color) {
+        if (color == Color.RED) {
+            if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+                return true;
+            }
+        }
+        else {
+            if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int isGameOverMCTS(LinkedHashMap<Integer, List<Integer>> moves, Color color) {
+        if (color == Color.RED) {
+            if (moves.isEmpty() || doesBaseRowContainColor(Color.BLUE,7)) {
+                return 1;
+            } else if (doesBaseRowContainColor(color,0)) {
+                return -1;
+            }
+        }
+        else {
+            if (moves.isEmpty() || doesBaseRowContainColor(Color.RED,0)){
+                return -1;
+            } else if (doesBaseRowContainColor(color,7)) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
 
     public boolean doesBaseRowContainColor(Color color, int rowToCheck) {
         for (int i = 1; i < 7; i++) {

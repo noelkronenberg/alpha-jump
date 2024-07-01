@@ -6,6 +6,8 @@ import game.MoveGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import search.ab.Evaluation;
+
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -107,6 +109,20 @@ public class EvaluationTest {
     @DisplayName("Move Order 2")
     public void testMoveOrder2() {
         testOrderMovesFirst("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b", 2636);
+    }
+
+    // prefer attacking the oppenent instead of cover your targeted player
+    @Test
+    @DisplayName("Move Order Cover")
+    public void testMoveOrderCover() {
+        testOrderMovesFirst("6/1b06/3b04/2b05/3r04/1r01r04/8/6 b", 3243);
+    }
+
+    // shows that attacking the opponent at the side is preferred to middle game
+    @Test
+    @DisplayName("Move Order Middle Game")
+    public void testMoveOrderMG() {
+        testOrderMovesFirst("b0b0b0b0b0b0/b0b0b0b02/8/7b0/3b02r01/1r06/1r03r0r01/r03r01 b", 3746);
     }
 
     // end game move at first

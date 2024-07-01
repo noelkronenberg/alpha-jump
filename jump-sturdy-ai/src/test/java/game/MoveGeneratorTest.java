@@ -305,7 +305,6 @@ public class MoveGeneratorTest {
     }
 
     private void testMoves(String fen, String expectedMoves) {
-
         init();
 
         Color color = fen.charAt(fen.length() - 1) == 'r' ? Color.RED : Color.BLUE;
@@ -314,7 +313,7 @@ public class MoveGeneratorTest {
         moveGenerator.printBoard(false);
 
         // determine color based on the last character of FEN
-        Map<Integer, List<Integer>> actualMovesMap = moveGenerator.generateAllPossibleMoves(color,fen);
+        Map<Integer, List<Integer>> actualMovesMap = moveGenerator.generateAllPossibleMoves(color);
 
         String actualMoves = MoveGenerator.convertAllMoves(actualMovesMap);
         String[] actualMovesArray = actualMoves.split(", ");

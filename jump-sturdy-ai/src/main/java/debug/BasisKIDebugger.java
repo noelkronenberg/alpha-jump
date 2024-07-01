@@ -1,6 +1,6 @@
 package debug;
 
-import search.BasisKI;
+import search.ab.BasisKI;
 import game.MoveGenerator;
 
 import java.io.File;

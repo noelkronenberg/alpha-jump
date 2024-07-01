@@ -1,20 +1,17 @@
-# import pygame
+import pygame
 import json
 from network import Network
-# pygame.font.init()
-import middleware
-
-import middleware
+pygame.font.init()
 
 def main():
     run = True
-    # clock = pygame.time.Clock()
+    clock = pygame.time.Clock()
     n = Network()
     player = int(n.getP())
     print("You are player", player)
 
     while run:
-        # clock.tick(60)
+        clock.tick(60)
         try:
             #try to send get as a json to server over network, rest is error handling
             game = n.send(json.dumps("get"))
@@ -37,15 +34,11 @@ def main():
             if player == 0 and game["player1"]:
                 #printing not necessary, game["board"] is the way to get the board string
                 print("New Board: " + game["board"])
+                print("New Time: " + str(game["time"]))
 
-                import time
-                start_time = time.time()
-                i = middleware.getMove(game["board"])
-                end_time = time.time()
-                elapsed_time = end_time - start_time
-                print(f"Time taken: {elapsed_time} seconds")
-
-                print(f'Move: {i}')
+                #change to any input you like. This one is just console input. Change it here to respond with your Ai's answer. 
+                #Answer must have format: start-end like E7-F7
+                i = input()
 
                 #json.dumps(i) transforms the input into a json. You can print it, if you want to see the difference
                 data = json.dumps(i)
@@ -54,8 +47,8 @@ def main():
                 n.send(data)
             elif player == 1 and game["player2"]:
                 print("New Board: " + game["board"])
-                i = middleware.getMove(game["board"])
-                print(f'Move: {i}')
+                print("New Time: " + str(game["time"]))
+                i = input()
                 data = json.dumps(i)
                 n.send(data)
 
