@@ -21,7 +21,7 @@ public class BasisKITest {
     @BeforeAll
     public static void init() {
         ki = new BasisKI();
-        kiMCTS=new MCTSKI();
+        kiMCTS = new MCTSKI();
     }
 
     @Test

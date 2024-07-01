@@ -556,7 +556,7 @@ public class MoveGenerator {
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
 
-        if (allPieces.size()==0){
+        if (allPieces.size() == 0) {
             return 0;
         }
         int number = generator.nextInt(allPieces.size());
@@ -566,7 +566,7 @@ public class MoveGenerator {
         number = generator.nextInt(allMoveToPos.size());
 
         int randomPos = allMoveToPos.get(number);
-        return randomPiece*100+randomPos;
+        return randomPiece * 100 + randomPos;
     }
 
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
@@ -732,14 +732,14 @@ public class MoveGenerator {
         if (color == Color.RED) {
             if (doesBaseRowContainColor(color,0)) {
                 return false;
-            } else if (doesBaseRowContainColor(Color.BLUE,7)||generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+            } else if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
             }
         }
         else {
-            if (doesBaseRowContainColor(color,7)){
+            if (doesBaseRowContainColor(color,7)) {
                 return false;
-            } else if (doesBaseRowContainColor(Color.RED,0)||generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+            } else if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
             }
         }
@@ -755,7 +755,7 @@ public class MoveGenerator {
             }
         }
         else {
-            if (doesBaseRowContainColor(color,7)){
+            if (doesBaseRowContainColor(color,7)) {
                 return false;
             } else if (move.isEmpty() || doesBaseRowContainColor(Color.RED,0)) {
                 return true;
@@ -773,7 +773,7 @@ public class MoveGenerator {
             }
         }
         else {
-            if (doesBaseRowContainColor(color,7)){
+            if (doesBaseRowContainColor(color,7)) {
                 return false;
             } else if (moves.isEmpty() || doesBaseRowContainColor(Color.RED,0)) {
                 return true;
@@ -784,19 +784,17 @@ public class MoveGenerator {
 
     public boolean isWinForMCTS(Color color) {
         if (color == Color.RED) {
-            if (doesBaseRowContainColor(Color.BLUE,7)||generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+            if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
             }
         }
         else {
-            if (doesBaseRowContainColor(Color.RED,0)||generateMaxOnePossibleMoveForKI(color).isEmpty()){
+            if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
             }
         }
         return false;
     }
-
-
 
     public int isGameOverMCTS(LinkedHashMap<Integer, List<Integer>> moves, Color color) {
         if (color == Color.RED) {
