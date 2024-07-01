@@ -65,17 +65,31 @@ public class Simulation {
     }
 
     public void simulate(KI firstKI, SearchConfig firstConfig, KI secondKI, SearchConfig secondConfig, String fen, int iterations) {
+        if (!(iterations % 2 == 0)) {
+            System.out.println("Please enter an even number of iterations to make the results fair.");
+            return;
+        }
+
         int firstKIWins = 0;
         int secondKIWins = 0;
 
         for (int i = 1; i <= iterations; i++) {
-            int result = playGame(firstKI, firstConfig, secondKI, secondConfig, fen);
-            if (result == 1) {
+            int result;
+            boolean firstKIBegins = (i % 2 != 0);
+
+            if (firstKIBegins) {
+                result = playGame(firstKI, firstConfig, secondKI, secondConfig, fen);
+            } else {
+                result = playGame(secondKI, secondConfig, firstKI, firstConfig, fen);
+            }
+
+            if ((firstKIBegins && result == 1) || (!firstKIBegins && result == 2)) {
                 firstKIWins++;
+                System.out.println("Winner of iteration " + i + " is: KI 1");
             } else {
                 secondKIWins++;
+                System.out.println("Winner of iteration " + i + " is: KI 2");
             }
-            System.out.println("Winner of iteration " + i + " is: KI " + result);
         }
 
         System.out.println("First KI wins: " + firstKIWins);
@@ -85,20 +99,14 @@ public class Simulation {
     public static void main(String[] args) {
         KI firstKI = new BasisKI();
         SearchConfig firstConfig = BasisKI.bestConfig;
-
-        firstConfig.timeLimit=3000.0;
+        firstConfig.timeLimit = 200.0;
 
         KI secondKI = new MCTSKI();
         SearchConfig secondConfig = BasisKI.bestConfig;
-        secondConfig.timeLimit=3000.0;
-
-        // firstConfig.timeCriterion = false;
-        // firstConfig.maxAllowedDepth = 3;
-        firstConfig.timeLimit = 3000;
+        secondConfig.timeLimit = 200.0;
 
         String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
-        int iterations = 10;
-
+        int iterations = 4;
         Simulation simulation = new Simulation();
         simulation.simulate(secondKI, secondConfig, firstKI, firstConfig, initialFEN, iterations);
     }
