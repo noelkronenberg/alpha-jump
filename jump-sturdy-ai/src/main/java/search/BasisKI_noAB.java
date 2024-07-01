@@ -107,7 +107,7 @@ public class BasisKI_noAB implements KI {
 
         // get moves for other player
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED ;  // signal player change
-        LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor,fen);
+        LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
 
         Evaluation.orderMoves(movesList, currentColor, gameState); // order moves

@@ -145,9 +145,9 @@ public class Connection {
 
     public static void main(String[] args) throws InterruptedException {
         Connection player1 = new Connection();
-        player1.connect(false); // only for single player
+        //player1.connect(false); // only for single player
 
-        /*
+
         // START: two player game
 
         Connection player2 = new Connection();
@@ -167,7 +167,7 @@ public class Connection {
         }
 
         // END: two player game
-        */
+
 
     }
 }

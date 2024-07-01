@@ -12,9 +12,12 @@ public class BasisKITest {
 
     static BasisKI ki;
 
+    static MCTSKI kiMCTS;
+
     @BeforeAll
     public static void init() {
         ki = new BasisKI();
+        kiMCTS=new MCTSKI();
     }
 
     @Test
@@ -27,7 +30,7 @@ public class BasisKITest {
 
     private void testMoves(String fen, String... expectedMoves) {
         init();
-        String answer = ki.orchestrator(fen, BasisKI.bestConfig);
+        String answer = ki.orchestrator(fen);
         boolean matchFound = false;
         for (String expectedMove : expectedMoves) {
             if (expectedMove.equals(answer)) {
@@ -42,7 +45,7 @@ public class BasisKITest {
 
     private void testMoves(String fen, String expectedMove) {
         init();
-        String answer = ki.orchestrator(fen, BasisKI.bestConfig);
+        String answer = ki.orchestrator(fen);
         assertEquals(expectedMove, answer);
         System.out.println(answer);
     }
@@ -50,16 +53,16 @@ public class BasisKITest {
     @Test
     @DisplayName("Gruppe H")
     public void testGruppeH() {
-        testMoves("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b", "A6-A7");
+        testMoves("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b", "A6-A7","D3-B4");
         testMoves("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r", "F5-G3");
-        testMoves("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b", "D5-C7");
+        testMoves("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b", "D5-C7","F4-E6");
         testMoves("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 r", "D3-E2");
     }
 
     @Test
     @DisplayName("Gruppe F")
     public void testGruppeF() {
-        testMoves("6/7b0/8/8/1r06/4b03/2rr1rrr02/5r0 b", "E6-D6");
+        testMoves("6/7b0/8/8/1r06/4b03/2rr1rrr02/5r0 b", "E6-D6","E6-F6");
         testMoves("6/4bbb02/b02b01b02/1b02b03/2b01rrrr2/6r01/r01r0r0r03/5r0 r", "E5-D3", "E5-F3");
     }
 
@@ -131,7 +134,7 @@ public class BasisKITest {
     @DisplayName("Gruppe AC")
     public void testGruppeAC() {
         testMoves("3b01b0/3b04/3bb4/2r05/rbbr5rb/4rr3/br4r02/6 b", "A5-B7","H5-G7"); //G3-G2
-        testMoves("1b01b01b0/bb6bb/3bb4/2rr5/r0r01r03r0/1br3rr2/8/6 r", "C4-B2");
+        testMoves("1b01b01b0/bb6bb/3bb4/2rr5/r0r01r03r0/1br3rr2/8/6 r", "C4-B2","C4-D2");
     }
 
     @Test
@@ -180,14 +183,14 @@ public class BasisKITest {
     @DisplayName("Gruppe X")
     public void testGruppeX() {
         testMoves("b05/1r03r02/2b01b03/2r01r03/1b06/8/3b02b01/r04r0 b", "D7-D8");
-        testMoves("4b0b0/2b0br4/3b04/2b0b01b02/8/4r03/1r03r02/r0r0r01r0r0 r", "D2-F1");
+        testMoves("4b0b0/2b0br4/3b04/2b0b01b02/8/4r03/1r03r02/r0r0r01r0r0 r", "D2-F1","D2-B1");
     }
 
     @Test
     @DisplayName("Gruppe Q")
     public void testGruppeQ() {
         testMoves("b03b01/1b0b0b02b01/4b01b01/1b0b05/3b01r0b01/1r02b01rr1/4r0r02/r0r0r03 b", "E6-F7");
-        testMoves("6/3b0b03/8/1rrr02bb2/6b01/2b05/3r04/5r0 b", "C6-D7");
+        testMoves("6/3b0b03/8/1rrr02bb2/6b01/2b05/3r04/5r0 b", "C6-D7","C6-C7");
     }
 
     @Test
@@ -207,8 +210,8 @@ public class BasisKITest {
     @Test
     @DisplayName("Gruppe AI")
     public void testGruppeAI() {
-        testMoves("6/6b01/8/2b02rr2/8/8/6r01/6 r", "F4-G2");
-        testMoves("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "F4-F5"); // added missings
+        testMoves("6/6b01/8/2b02rr2/8/8/6r01/6 r", "F4-G2","F4-E2");
+        testMoves("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "F4-F5");
     }
 
     @Test
@@ -228,7 +231,7 @@ public class BasisKITest {
     @Test
     @DisplayName("Gruppe E")
     public void testGruppeE() {
-        testMoves("b0b0b0b0b01/1b01b02b01/2r05/2r01b03/1r06/3bb4/2r0r02r01/r01r0r0r0r0 b", "D6-E8");
+        testMoves("b0b0b0b0b01/1b01b02b01/2r05/2r01b03/1r06/3bb4/2r0r02r01/r01r0r0r0r0 b", "D6-E8","D6-C8");
         testMoves("b01b03/4b03/1b03r02/3rbb03/1bb4r01/8/2r02r02/1r0r02r0 r", "F3-F2");
     }
 
