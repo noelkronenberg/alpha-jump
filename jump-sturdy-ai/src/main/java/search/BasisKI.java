@@ -16,9 +16,9 @@ public class BasisKI implements KI {
     boolean dynamicTime = false;
 
     // derived parameters
-    public int maxDepth = 1;
-    public HashMap<String, Integer> positionsHM = new HashMap<>();
-    public HashMap<String, TranspositionTableObejct> transpositionTable = new HashMap<>();
+    public int maxDepth;
+    public HashMap<String, Integer> positionsHM;
+    public HashMap<String, TranspositionTableObejct> transpositionTable;
 
     // logic
     final int winCutOff = 100000;
@@ -132,6 +132,10 @@ public class BasisKI implements KI {
     }
 
     public int getBestMove(String fen) {
+        transpositionTable = new HashMap<>();
+        positionsHM = new HashMap<>();
+        maxDepth = 1;
+
         double bestScore = Integer.MIN_VALUE;
         int bestMove = -1;
 
