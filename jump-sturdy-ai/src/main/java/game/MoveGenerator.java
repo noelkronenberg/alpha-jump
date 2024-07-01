@@ -746,6 +746,24 @@ public class MoveGenerator {
         return false;
     }
 
+    public boolean isGameOver(String move, Color color) {
+        if (color == Color.RED) {
+            if (doesBaseRowContainColor(color,0)) {
+                return false;
+            } else if (move.isEmpty() || doesBaseRowContainColor(Color.BLUE,7)) {
+                return true;
+            }
+        }
+        else {
+            if (doesBaseRowContainColor(color,7)){
+                return false;
+            } else if (move.isEmpty() || doesBaseRowContainColor(Color.RED,0)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color color) {
         if (color == Color.RED) {
             if (doesBaseRowContainColor(color,0)) {
