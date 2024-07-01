@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.antlr.v4.misc.Graph.Node;
+import org.antlr.v4.parse.GrammarTreeVisitor.outerAlternative_return;
 
 import game.Color;
 import game.MoveGenerator;
@@ -13,13 +14,18 @@ import search.Evaluation;
 
 public class MCTS {
     private static final Random random = new Random();
-    private static final double EXPLORATION_PARAM = Math.sqrt(0.5);
+    private static final double EXPLORATION_PARAM = 1.3;
+    private static final double timeLimit = 10000;
 
     public static int runMCTS(MoveGenerator moveGenerator, Color color, int iterations) {
+        Color startingPlayer = color;
+        double endTime = System.currentTimeMillis() + timeLimit; 
         String initialState = moveGenerator.getFenFromBoard();
         MCTSNode root = new MCTSNode(0, null, 0); // Root hat keinen Zug, weil es der Startzustand ist
 
-        for (int i = 0; i < iterations; i++) {
+        //for (int i = 0; i < iterations; i++) {
+        while (System.currentTimeMillis() < endTime) {
+
             MCTSNode node = root;
             String state = initialState;
             Color currentPlayer = color;
@@ -27,7 +33,7 @@ public class MCTS {
 
             // Traverse down the tree
             while (!node.children.isEmpty() && node.isFullyExpanded()) {
-                node = selectPromisingNode(node);
+                node = selectPromisingNode(node, startingPlayer, currentPlayer);
                 state = makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
             }
@@ -47,16 +53,23 @@ public class MCTS {
             // Backpropagation
             backpropagate(node, winner, color);
         }
+        /*for (int i = 0; i < root.children.size(); i++) {
+            System.out.println(root.children.get(i).move + ":");
+            System.out.println("Wins: " + root.children.get(i).wins);
+            System.out.println("Visits: " + root.children.get(i).visits);
+        }*/
         return bestChild(root).move;
     }
 
     private static void expand(MCTSNode node, Color color, MoveGenerator moveGenerator) {
         LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
-        LinkedList<Integer> movesList;
-        movesList = Evaluation.convertMovesToList(possibleMoves);
-        for (int move : movesList) {
-            if (!node.children.stream().anyMatch(x -> x.move == move)) {
-                node.children.add(new MCTSNode(move, node, (node.depth+1)));
+        if (!moveGenerator.isGameOverMCTS(possibleMoves)) {
+            LinkedList<Integer> movesList;
+            movesList = Evaluation.convertMovesToList(possibleMoves);
+            for (int move : movesList) {
+                if (!node.children.stream().anyMatch(x -> x.move == move)) {
+                    node.children.add(new MCTSNode(move, node, (node.depth+1)));
+                }
             }
         }
     }
@@ -69,16 +82,25 @@ public class MCTS {
             LinkedList<Integer> movesList = Evaluation.convertMovesToList(possibleMoves);
 
             //checking if game is over
-            if (movesList.isEmpty()) {
+            /*if (movesList.isEmpty()) {
                 winner = (color == Color.RED) ? Color.BLUE : Color.RED;
                 break;
+            }*/
+            if (moveGenerator.isGameOverMCTS(possibleMoves)) {
+                if (moveGenerator.getWinner(possibleMoves, color)) {
+                    winner = Color.BLUE;
+                    break;
+                } else {
+                    winner = Color.RED;
+                    break;
+                }
             }
             Integer raInteger = random.nextInt(movesList.size());
             Integer move = movesList.get(raInteger);
-            if (moveGenerator.isGameOver(MoveGenerator.convertMoveToFEN(move), color)) {
+            /*if (moveGenerator.isGameOver(possibleMoves, color)) {
                 winner = (color == Color.RED) ? Color.BLUE : Color.RED;
                 break;
-            }
+            }*/
             fen = makeMove(moveGenerator, move, color);
             color = (color == Color.RED) ? Color.BLUE : Color.RED;
         }
@@ -95,16 +117,26 @@ public class MCTS {
         }
     }
 
-    private static MCTSNode selectPromisingNode(MCTSNode node) {
+    private static MCTSNode selectPromisingNode(MCTSNode node, Color startingPlayer, Color currPlayer) {
+        if (startingPlayer == currPlayer) {
         return node.children.stream().max((n1, n2) -> {
-            double uct1 = (n1.wins / n1.visits) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / n1.visits);
-            double uct2 = (n2.wins / n2.visits) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / n2.visits);
+            double uct1 = (n1.wins / n1.visits) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n1.visits));
+            double uct2 = (n2.wins / n2.visits) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n2.visits));
+            return Double.compare(uct1, uct2);
+        }).orElseThrow(RuntimeException::new);
+    } else {
+        return node.children.stream().max((n1, n2) -> {
+            double uct1 = (1-(n1.wins / n1.visits)) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n1.visits));
+            double uct2 = (1-(n2.wins / n2.visits)) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n2.visits));
             return Double.compare(uct1, uct2);
         }).orElseThrow(RuntimeException::new);
     }
+    }
+
 
     private static MCTSNode bestChild(MCTSNode node) {
-        return node.children.stream().max((n1, n2) -> Integer.compare(n1.visits, n2.visits)).orElseThrow(RuntimeException::new);
+        return node.children.stream().max((n1, n2) -> Double.compare((n1.wins/n1.visits), (n2.wins/n2.visits))).orElseThrow(RuntimeException::new);
+        //return node.children.stream().max((n1, n2) -> Integer.compare(n1.visits, n2.visits)).orElseThrow(RuntimeException::new);
     }
 
     private static LinkedHashMap<Integer, List<Integer>> getPossibleMoves(MoveGenerator moveGenerator, Color color) {
@@ -122,9 +154,10 @@ public class MCTS {
     public static void main(String[] args) {
         MCTS mcts = new MCTS();
         MoveGenerator mg = new MoveGenerator();
-        String board = "6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/1b0b01b01r01/2r0r03r0/5r0 b";
+        String board = "3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r";
+        mg.initializeBoard(board);
+        //System.out.println(runMCTS(mg, Color.RED, 100000));
         mg.initializeBoard(board);
         mg.printBoard(false);
-        //runMCTS(mg, Color.BLUE, 10000);
     }
 }
