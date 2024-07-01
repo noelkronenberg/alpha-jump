@@ -53,17 +53,12 @@ public class MCTS_BIB {
             // Backpropagation
             backpropagate(node, winner, color);
         }
-        /*for (int i = 0; i < root.children.size(); i++) {
-            System.out.println(root.children.get(i).move + ":");
-            System.out.println("Wins: " + root.children.get(i).wins);
-            System.out.println("Visits: " + root.children.get(i).visits);
-        }*/
         return bestChild(root).move;
     }
 
     private static void expand(MCTSNode_BIB node, Color color, MoveGenerator moveGenerator) {
         LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
-        if (!moveGenerator.isGameOverMCTS(possibleMoves)) {
+        if (!moveGenerator.isGameOverMCTS_Bib(possibleMoves)) {
             LinkedList<Integer> movesList;
             movesList = Evaluation.convertMovesToList(possibleMoves);
             for (int move : movesList) {
@@ -81,12 +76,7 @@ public class MCTS_BIB {
             LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
             LinkedList<Integer> movesList = Evaluation.convertMovesToList(possibleMoves);
 
-            //checking if game is over
-            /*if (movesList.isEmpty()) {
-                winner = (color == Color.RED) ? Color.BLUE : Color.RED;
-                break;
-            }*/
-            if (moveGenerator.isGameOverMCTS(possibleMoves)) {
+            if (moveGenerator.isGameOverMCTS_Bib(possibleMoves)) {
                 if (moveGenerator.getWinner(possibleMoves, color)) {
                     winner = Color.BLUE;
                     break;
@@ -97,10 +87,6 @@ public class MCTS_BIB {
             }
             Integer raInteger = random.nextInt(movesList.size());
             Integer move = movesList.get(raInteger);
-            /*if (moveGenerator.isGameOver(possibleMoves, color)) {
-                winner = (color == Color.RED) ? Color.BLUE : Color.RED;
-                break;
-            }*/
             fen = makeMove(moveGenerator, move, color);
             color = (color == Color.RED) ? Color.BLUE : Color.RED;
         }
@@ -136,7 +122,6 @@ public class MCTS_BIB {
 
     private static MCTSNode_BIB bestChild(MCTSNode_BIB node) {
         return node.children.stream().max((n1, n2) -> Double.compare((n1.wins/n1.visits), (n2.wins/n2.visits))).orElseThrow(RuntimeException::new);
-        //return node.children.stream().max((n1, n2) -> Integer.compare(n1.visits, n2.visits)).orElseThrow(RuntimeException::new);
     }
 
     private static LinkedHashMap<Integer, List<Integer>> getPossibleMoves(MoveGenerator moveGenerator, Color color) {

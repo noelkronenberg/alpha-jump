@@ -752,7 +752,7 @@ public class MoveGenerator {
         return false;
     }
 
-    public boolean isGameOverMCTS(LinkedHashMap<Integer, List<Integer>> moves) {
+    public boolean isGameOverMCTS_Bib(LinkedHashMap<Integer, List<Integer>> moves) {
         //returns true if somebody has won in that position
         if (doesBaseRowContainColor(Color.RED, 0) || doesBaseRowContainColor(Color.BLUE, 7) || moves.isEmpty()) {
             return true;
