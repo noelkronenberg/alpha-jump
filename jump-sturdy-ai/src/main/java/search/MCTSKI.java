@@ -50,7 +50,9 @@ public class MCTSKI implements KI {
 
     @Override
     public String orchestrator(String fen, SearchConfig config) {
+
         this.numberOfAllSimulations=0;
+
         MoveGenerator gameState = new MoveGenerator();
         char color_fen = fen.charAt(fen.length() - 1);
         Color ourColor = gameState.getColor(color_fen);
@@ -284,11 +286,12 @@ public class MCTSKI implements KI {
     public static void main(String[] args) {
         MCTSKI ki = new MCTSKI();
         String fen = "3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b"; //testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
+
         SearchConfig config = BasisKI.bestConfig;
         config.timeLimit=20000.0;
         ki.orchestrator(fen, config);
 
-
+        ki.orchestrator(fen, BasisKI.bestConfig);
     }
 
 }

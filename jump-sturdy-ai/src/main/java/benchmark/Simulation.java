@@ -83,12 +83,19 @@ public class Simulation {
     public static void main(String[] args) {
         KI firstKI = new BasisKI();
         SearchConfig firstConfig = BasisKI.bestConfig;
+
         firstConfig.timeLimit=3000.0;
 
 
         KI secondKI = new MCTSKI();
         SearchConfig secondConfig = BasisKI.bestConfig;
         secondConfig.timeLimit=3000.0;
+
+        // firstConfig.timeCriterion = false;
+        // firstConfig.maxAllowedDepth = 3;
+        firstConfig.timeLimit = 3000;
+
+
 
         String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
         int iterations = 10;
