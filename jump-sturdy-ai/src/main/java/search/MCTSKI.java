@@ -14,7 +14,7 @@ import java.util.Random;
 // viele Besuche und wins wird minimiert... ?! Sehr komisch
 
 
-public class MCTSKI implements KI_MCTS {
+public class MCTSKI implements KI {
     double numberOfAllSimulations;
     Color ourColor = Color.BLUE;
     Random random = new Random();
@@ -48,10 +48,13 @@ public class MCTSKI implements KI_MCTS {
 //        System.out.println(MoveGenerator.convertMoveToFEN(getBestMove(parentNode)));
 //    }
 
-    public String MCTS_Orchestrator(String fen) {
+    @Override
+    public String orchestrator(String fen, SearchConfig config) {
+        this.numberOfAllSimulations=0;
         MoveGenerator gameState = new MoveGenerator();
         char color_fen = fen.charAt(fen.length() - 1);
         Color ourColor = gameState.getColor(color_fen);
+        this.timeLimit=config.timeLimit;
 
         this.ourColor=ourColor;
 
@@ -60,7 +63,7 @@ public class MCTSKI implements KI_MCTS {
         MCTSNode parentNode = new MCTSNode(ourColor);
 
         this.parentNode = parentNode;
-        gameState.printBoard(false);
+        //gameState.printBoard(false);
 
         MoveGenerator parentGameState = new MoveGenerator();
         parentGameState.initializeBoard(gameState.getFenFromBoard());
@@ -75,18 +78,17 @@ public class MCTSKI implements KI_MCTS {
 
         newTreePolicy(parentGameState,parentNode, ourColor);
 
-        for (MCTSNode m : parentNode.children){
-            System.out.println("Node For Move "+m.move+", Value: "+m.getNodeValue()+" Visits: "+m.numberOfVisits+" Wins: "+m.numberOfWins);
-        }
-        System.out.println("Number Of all: "+numberOfAllSimulations);
-        System.out.println("Number Of all: "+parentNode.numberOfVisits);
+//        for (MCTSNode m : parentNode.children){
+//            System.out.println("Node For Move "+m.move+", Value: "+m.getNodeValue()+" Visits: "+m.numberOfVisits+" Wins: "+m.numberOfWins);
+//        }
+//        System.out.println("Number Of all: "+numberOfAllSimulations);
+//        System.out.println("Number Of all: "+parentNode.numberOfVisits);
 
         //System.out.println(MoveGenerator.convertMoveToFEN(getBestMove(parentNode)));
         String s =MoveGenerator.convertMoveToFEN(getBestMove(parentNode));
-        System.out.println(s);
+        //System.out.println(s);
         return s;
     }
-
 
     public int getBestMove(MCTSNode node){
         double max = Integer.MIN_VALUE;
@@ -137,7 +139,7 @@ public class MCTSKI implements KI_MCTS {
     }
 
     public MCTSNode treeTraversal(double endtime, MCTSNode node, MoveGenerator moveGenerator){
-        while(/*continueSearch(endtime))*/true){        //TODO: check here for tree traversal: Color is somtimes min, sometimes max (weird)
+        while(continueSearch(endtime)){        //TODO: check here for tree traversal: Color is somtimes min, sometimes max (weird)
             if(node.children.isEmpty()||node.isWinPos||node.isWinNext){
                 return node;
             }
@@ -172,6 +174,7 @@ public class MCTSKI implements KI_MCTS {
             }
             node=bestChild;
         }
+        return node;
     }
 
 //    public MCTSNode expandAndReturnRandomNode(MCTSNode node, MoveGenerator moveGenerator, Color color){
@@ -281,6 +284,11 @@ public class MCTSKI implements KI_MCTS {
     public static void main(String[] args) {
         MCTSKI ki = new MCTSKI();
         String fen = "3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b"; //testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
-        ki.MCTS_Orchestrator(fen);
+        SearchConfig config = BasisKI.bestConfig;
+        config.timeLimit=20000.0;
+        ki.orchestrator(fen, config);
+
+
     }
+
 }
