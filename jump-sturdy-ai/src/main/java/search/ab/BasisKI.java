@@ -133,6 +133,7 @@ public class BasisKI implements KI {
 
         return bestMove;
     }
+
     public double quiescenceSearch(MoveGenerator gameState, double alpha, double beta, Color currentColor, Color ourColor) {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
 
@@ -179,6 +180,7 @@ public class BasisKI implements KI {
             if (score >= beta) {
                 return beta;
             }
+
             if (score > alpha) {
                 alpha = score;
             }
@@ -274,12 +276,14 @@ public class BasisKI implements KI {
         // START: Transposition Tables
         if (transpositionTables) {
             if (!isInTT) {
+
                 LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
                 movesList = Evaluation.convertMovesToList(moves);
                 Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
                 score = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
                 ttData = new TranspositionTableObejct(score, movesList, depth);
+
                 } else {
                     ttData = transpositionTable.get(fen);
                     movesList = ttData.movesList; // list is already ordered
