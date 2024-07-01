@@ -782,6 +782,28 @@ public class MoveGenerator {
         return false;
     }
 
+
+    public boolean isGameOverMCTS_Bib(LinkedHashMap<Integer, List<Integer>> moves) {
+        //returns true if somebody has won in that position
+        if (doesBaseRowContainColor(Color.RED, 0) || doesBaseRowContainColor(Color.BLUE, 7) || moves.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean getWinner(LinkedHashMap<Integer, List<Integer>> moves, Color currPlayer) {
+        //returns false if red won, returns true if blue won
+        //only use when confirmed that game is over
+        if (currPlayer == Color.RED) {
+            if (doesBaseRowContainColor(Color.BLUE, 7) || moves.isEmpty()) {
+                return true;
+            }
+        } 
+        return false;
+    }
+
+
     public boolean isWinForMCTS(Color color) {
         if (color == Color.RED) {
             if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
@@ -813,6 +835,7 @@ public class MoveGenerator {
         }
         return 0;
     }
+
 
     public boolean doesBaseRowContainColor(Color color, int rowToCheck) {
         for (int i = 1; i < 7; i++) {
