@@ -89,7 +89,7 @@ public class BasisKIBM {
 
     private static Result generateBestMoveResultTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime) {
         init();
-        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime);
+        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false);
         String bestMove = ki.orchestrator(fen, config);
         int depth = ki.maxDepth;
         int uniquePositions = ki.positionsHM.size();
@@ -103,7 +103,7 @@ public class BasisKIBM {
     private static double generateBestMoveSpeedTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime) {
         init();
         int iterations = 3;
-        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime);
+        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false);
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             ki.orchestrator(fen, config);
