@@ -1,4 +1,4 @@
-package search.MCTS;
+package search.MCTS_BIB;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class OpeningBookGenerator {
         MoveGenerator initialState = new MoveGenerator();
         initialState.initializeBoard(board);
         initialState.printBoard(false);
-        MCTS mcts = new MCTS();
+        MCTS_BIB mcts = new MCTS_BIB();
         
         // Im Folgenden den Block auskommentieren, welcher nicht erstellt werden soll
         try (FileWriter writer = new FileWriter("opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
@@ -35,7 +35,7 @@ public class OpeningBookGenerator {
     }
     
 
-    private static void generateOpeningBookStarting(MoveGenerator moveGenerator, MCTS mcts, FileWriter writer, Color player, int depth) throws IOException {
+    private static void generateOpeningBookStarting(MoveGenerator moveGenerator, MCTS_BIB mcts, FileWriter writer, Color player, int depth) throws IOException {
         if (depth == DEPTH) {
             return;
         }
@@ -45,7 +45,7 @@ public class OpeningBookGenerator {
     
         // finde und notiere den besten Zug in der aktuellen Position und resette das Board danach
         String fenStorage = moveGenerator.getFenFromBoard();
-        int bestMove = MCTS.runMCTS(moveGenerator, player, mctsIterations);
+        int bestMove = MCTS_BIB.runMCTS(moveGenerator, player, mctsIterations);
         moveGenerator.initializeBoard(fenStorage);
     
         // Zug ausführen und Ausgangsboard speichern
@@ -65,7 +65,7 @@ public class OpeningBookGenerator {
             String fenAfterOppMove = moveGenerator.getFenFromBoard();
     
             // finde den besten Gegenzug auf den Zug des Gegners
-            int bestResponseMove = MCTS.runMCTS(moveGenerator, player, mctsIterations);
+            int bestResponseMove = MCTS_BIB.runMCTS(moveGenerator, player, mctsIterations);
             String bestResponseFEN = MoveGenerator.convertMoveToFEN(bestResponseMove);
             
             //Position und besten Zug in Dokument eintragen
@@ -87,7 +87,7 @@ public class OpeningBookGenerator {
         moveGenerator.initializeBoard(fenStorage);
     }
 
-    private static void generateOpeningBookSecond(MoveGenerator moveGenerator, MCTS mcts, FileWriter writer, Color player, int depth) throws IOException {
+    private static void generateOpeningBookSecond(MoveGenerator moveGenerator, MCTS_BIB mcts, FileWriter writer, Color player, int depth) throws IOException {
         if (depth == DEPTH) {
             return;
         }
@@ -111,7 +111,7 @@ public class OpeningBookGenerator {
             String fenAfterOppMove = moveGenerator.getFenFromBoard();
     
             // finde den besten Gegenzug auf den Zug des Gegners
-            int bestResponseMove = MCTS.runMCTS(moveGenerator, player, mctsIterations);
+            int bestResponseMove = MCTS_BIB.runMCTS(moveGenerator, player, mctsIterations);
             String bestResponseFEN = MoveGenerator.convertMoveToFEN(bestResponseMove);
             
             //Position und besten Zug in Dokument eintragen

@@ -1,19 +1,19 @@
-package search.MCTS;
+package search.MCTS_BIB;
 import java.util.ArrayList;
 import java.util.List;
 
 import game.Color;
 import game.MoveGenerator;
 
-public class MCTSNode {
+public class MCTSNode_BIB {
     int move; // Der Zug, der zu diesem Knoten führt (z.B. [row, col])
-    MCTSNode parent;
-    List<MCTSNode> children;
+    MCTSNode_BIB parent;
+    List<MCTSNode_BIB> children;
     int visits;
     double wins;
     int depth;
 
-    public MCTSNode(int move, MCTSNode parent, int depth) {
+    public MCTSNode_BIB(int move, MCTSNode_BIB parent, int depth) {
         this.move = move;
         this.parent = parent;
         this.children = new ArrayList<>();
@@ -23,7 +23,7 @@ public class MCTSNode {
     }
 
     public boolean isFullyExpanded() {
-        for (MCTSNode child : children) {
+        for (MCTSNode_BIB child : children) {
             if (child.visits == 0) return false;
         }
         return true;

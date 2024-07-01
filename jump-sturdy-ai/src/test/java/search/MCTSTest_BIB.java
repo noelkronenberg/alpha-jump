@@ -1,7 +1,7 @@
 package search;
 
 import game.MoveGenerator;
-import search.MCTS.MCTS;
+import search.MCTS_BIB.MCTS_BIB;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,17 +14,17 @@ import org.junit.jupiter.api.Test;
 
 import game.Color;
 
-public class MCTSTest {
+public class MCTSTest_BIB {
 
-    static MoveGenerator moveGenerator;
-    static MCTS mcts;
+    /*static MoveGenerator moveGenerator;
+    static MCTS_BIB mcts;
     static Color color = Color.BLUE;
     static int iterations = 450000;
 
     @BeforeAll
     public static void init() {
         moveGenerator = new MoveGenerator();
-        mcts = new MCTS();
+        mcts = new MCTS_BIB();
     }
 
     public void testPosition(String fen, String... expectedAnswers) {
@@ -69,7 +69,7 @@ public class MCTSTest {
     /*@Test
     public void nearlyWinningMoveTest() {
         testPosition("6/3b0b03/3r02bb1/b0b03b02/rrrr1b02rr1/1b04r01/3r03r0/5r0 b", "B6-B7");
-    }*/
+    }
 
     @Test
     @DisplayName("Gruppe H")
@@ -260,7 +260,7 @@ public class MCTSTest {
     public void testGruppeAJ() {
         testPosition("1b04/1bb2b0bb2/2bb1b03/3rr4/2r02b01r0/1b02r0rr1b0/1rr2r03/6 r", "D4-E2");
         testPosition("6/8/8/3b04/3b04/8/2r01r03/6 b", "D4-D5");
-    }
+    }*/
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();

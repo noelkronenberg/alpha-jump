@@ -1,4 +1,4 @@
-package search.MCTS;
+package search.MCTS_BIB;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -12,7 +12,7 @@ import game.Color;
 import game.MoveGenerator;
 import search.Evaluation;
 
-public class MCTS {
+public class MCTS_BIB {
     private static final Random random = new Random();
     private static final double EXPLORATION_PARAM = 1.3;
     private static final double timeLimit = 10000;
@@ -21,12 +21,12 @@ public class MCTS {
         Color startingPlayer = color;
         double endTime = System.currentTimeMillis() + timeLimit; 
         String initialState = moveGenerator.getFenFromBoard();
-        MCTSNode root = new MCTSNode(0, null, 0); // Root hat keinen Zug, weil es der Startzustand ist
+        MCTSNode_BIB root = new MCTSNode_BIB(0, null, 0); // Root hat keinen Zug, weil es der Startzustand ist
 
         //for (int i = 0; i < iterations; i++) {
         while (System.currentTimeMillis() < endTime) {
 
-            MCTSNode node = root;
+            MCTSNode_BIB node = root;
             String state = initialState;
             Color currentPlayer = color;
             moveGenerator.initializeBoard(initialState);
@@ -61,14 +61,14 @@ public class MCTS {
         return bestChild(root).move;
     }
 
-    private static void expand(MCTSNode node, Color color, MoveGenerator moveGenerator) {
+    private static void expand(MCTSNode_BIB node, Color color, MoveGenerator moveGenerator) {
         LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
         if (!moveGenerator.isGameOverMCTS(possibleMoves)) {
             LinkedList<Integer> movesList;
             movesList = Evaluation.convertMovesToList(possibleMoves);
             for (int move : movesList) {
                 if (!node.children.stream().anyMatch(x -> x.move == move)) {
-                    node.children.add(new MCTSNode(move, node, (node.depth+1)));
+                    node.children.add(new MCTSNode_BIB(move, node, (node.depth+1)));
                 }
             }
         }
@@ -107,7 +107,7 @@ public class MCTS {
         return winner;
     }
 
-    private static void backpropagate(MCTSNode node, Color winner, Color color) {
+    private static void backpropagate(MCTSNode_BIB node, Color winner, Color color) {
         while (node != null) {
             node.visits++;
             if (winner == color) {
@@ -117,7 +117,7 @@ public class MCTS {
         }
     }
 
-    private static MCTSNode selectPromisingNode(MCTSNode node, Color startingPlayer, Color currPlayer) {
+    private static MCTSNode_BIB selectPromisingNode(MCTSNode_BIB node, Color startingPlayer, Color currPlayer) {
         if (startingPlayer == currPlayer) {
         return node.children.stream().max((n1, n2) -> {
             double uct1 = (n1.wins / n1.visits) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n1.visits));
@@ -134,7 +134,7 @@ public class MCTS {
     }
 
 
-    private static MCTSNode bestChild(MCTSNode node) {
+    private static MCTSNode_BIB bestChild(MCTSNode_BIB node) {
         return node.children.stream().max((n1, n2) -> Double.compare((n1.wins/n1.visits), (n2.wins/n2.visits))).orElseThrow(RuntimeException::new);
         //return node.children.stream().max((n1, n2) -> Integer.compare(n1.visits, n2.visits)).orElseThrow(RuntimeException::new);
     }
@@ -152,7 +152,7 @@ public class MCTS {
     }
 
     public static void main(String[] args) {
-        MCTS mcts = new MCTS();
+        MCTS_BIB mcts = new MCTS_BIB();
         MoveGenerator mg = new MoveGenerator();
         String board = "3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r";
         mg.initializeBoard(board);
