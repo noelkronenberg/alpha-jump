@@ -357,7 +357,7 @@ public class MoveGenerator {
                     if (column > 0 && colorBoard[row - 1][column - 1] == Color.BLUE) {
                         int move=convertToNumber(row - 1, column - 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // left diagonal protection (for Evaluation)
@@ -369,7 +369,7 @@ public class MoveGenerator {
                     if (column < 7 && colorBoard[row - 1][column + 1] == Color.BLUE) {
                         int move=convertToNumber(row - 1, column + 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // right diagonal protection (for Evaluation)
@@ -411,7 +411,7 @@ public class MoveGenerator {
                     if (column > 0 && colorBoard[row + 1][column - 1] == Color.RED) {
                         int move = convertToNumber(row + 1, column - 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // left diagonal protection (for Evaluation)
@@ -423,7 +423,7 @@ public class MoveGenerator {
                     if (column < 7 && colorBoard[row + 1][column + 1] == Color.RED) {
                         int move = convertToNumber(row + 1, column + 1);
                         possibleMoves.add(move);
-                        capturingHM.put((position*100)+move,1);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
 
                     // right diagonal protection (for Evaluation)
@@ -468,7 +468,7 @@ public class MoveGenerator {
                 if (newRow > row) {
                     continue;
                 }
-            } else if (color == Color.BLUE) { //NOTE: else
+            } else if (color == Color.BLUE) {
                 if (newRow < row) {
                     continue;
                 }
@@ -491,7 +491,7 @@ public class MoveGenerator {
             }
             // is attacking
             else if (colorBoard[newRow][newColumn] != color && colorBoard[newRow][newColumn] != Color.EMPTY){
-                capturingHM.put((position*100)+convertToNumber(newRow, newColumn),1);
+                capturingHM.put((position * 100) + convertToNumber(newRow, newColumn), 1); // capturing move (for Evaluation)
             }
         }
     }

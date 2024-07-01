@@ -1,4 +1,4 @@
-package search;
+package search.ab;
 
 import game.Color;
 import game.Piece;

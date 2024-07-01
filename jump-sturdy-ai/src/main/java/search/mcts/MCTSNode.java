@@ -1,11 +1,10 @@
-package search;
+package search.mcts;
 
 import game.Color;
 import game.MoveGenerator;
 
 import java.util.ArrayList;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 

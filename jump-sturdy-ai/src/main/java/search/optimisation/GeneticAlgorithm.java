@@ -2,8 +2,8 @@ package search.optimisation;
 
 import game.Color;
 import game.MoveGenerator;
-import search.BasisKI;
-import search.Evaluation;
+import search.ab.BasisKI;
+import search.ab.Evaluation;
 
 import java.io.File;
 import java.io.FileNotFoundException;

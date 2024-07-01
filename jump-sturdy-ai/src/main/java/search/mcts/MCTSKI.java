@@ -1,7 +1,11 @@
-package search;
+package search.mcts;
 
 import game.Color;
 import game.MoveGenerator;
+import search.ab.BasisKI;
+import search.ab.Evaluation;
+import search.KI;
+import search.SearchConfig;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;

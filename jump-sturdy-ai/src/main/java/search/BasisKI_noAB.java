@@ -2,32 +2,28 @@ package search;
 
 import game.Color;
 import game.MoveGenerator;
+import search.ab.Evaluation;
 
 import java.util.*;
 
 public class BasisKI_noAB implements KI {
-    static final int winCutOff = 100000;
     static int maxAllowedDepth = 2;
-    static int currentDepth = 1;
-    static boolean stopSearch = false;
-    static boolean isOurMove = false; // supposed to be false, because we make a move before entering treeSearch
+
+    // derived parameters
     static int maxDepth = -1;
     public HashMap<String,Integer> positionsHM = new HashMap<String, Integer>();
+
+    // logic
+    static final int winCutOff = 100000;
+    static int currentDepth = 1;
+    static boolean stopSearch = false;
+    static boolean isOurMove = false; // NOTE: supposed to be false, because we make a move before entering treeSearch
 
     // START: search without Alpha-Beta
 
     @Override
     public String orchestrator(String fen, SearchConfig config) {
         this.maxAllowedDepth = config.maxAllowedDepth;
-        return MoveGenerator.convertMoveToFEN(getBestMoveNoAlphaBeta(fen));
-    }
-
-    public String orchestratorNoAlphaBeta(String fen) {
-        return MoveGenerator.convertMoveToFEN(getBestMoveNoAlphaBeta(fen));
-    }
-
-    public String orchestratorNoAlphaBeta(String fen, int actualMaxDepth) {
-        maxAllowedDepth = actualMaxDepth;
         return MoveGenerator.convertMoveToFEN(getBestMoveNoAlphaBeta(fen));
     }
 
@@ -45,8 +41,8 @@ public class BasisKI_noAB implements KI {
         Color ourColor = gameState.getColor(color_fen);
         Evaluation.orderMoves(movesList, ourColor,gameState);
 
-        fen=fen.substring(0, fen.length() - 2);
-        positionsHM.put(fen,1); // save position
+        fen = fen.substring(0, fen.length() - 2);
+        positionsHM.put(fen, 1); // save position
 
         // go through all possible moves
         for (Integer move : movesList) {
@@ -170,26 +166,4 @@ public class BasisKI_noAB implements KI {
     }
 
     // END: search without Alpha-Beta
-
-    public static void main(String[] args) {
-        String fen = "6/8/8/3r04/4b03/8/8/6 b";
-        MoveGenerator m = new MoveGenerator();
-        m.initializeBoard(fen);
-        m.printBoard(true);
-
-        BasisKI_noAB ki = new BasisKI_noAB();
-        String bestMove = ki.orchestratorNoAlphaBeta(fen);
-        System.out.println("Best move: " + bestMove);
-        System.out.println("Depth reached: " + maxDepth);
-
-        System.out.println();
-        System.out.println("Number of Unique Positions: " + ki.positionsHM.size());
-
-        System.out.println();
-        int numberOfPos = 0;
-        for (Map.Entry < String, Integer> entry : ki.positionsHM.entrySet()){
-            numberOfPos += entry.getValue();
-        }
-        System.out.println("Actual : " + numberOfPos);
-    }
 }

@@ -5,12 +5,16 @@ import game.MoveGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import search.ab.BasisKI;
+import search.mcts.MCTSKI;
+
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BasisKITest {
 
     static BasisKI ki;
+    static SearchConfig config = BasisKI.bestConfig;
 
     static MCTSKI kiMCTS;
 
@@ -24,13 +28,17 @@ public class BasisKITest {
     @DisplayName("Anzahl untersuchter Züge (mit händischen Beweis)")
     public void anzahlSanityCheck() {
         init();
-        ki.orchestrator("6/8/8/3r04/4b03/8/8/6 b", 2);
+        SearchConfig config = BasisKI.bestConfig;
+        config.timeCriterion = false;
+        config.maxAllowedDepth = 2;
+        ki.orchestrator("6/8/8/3r04/4b03/8/8/6 b", config);
         assertEquals(ki.positionsHM.size(), 13);
     }
 
     private void testMoves(String fen, String... expectedMoves) {
         init();
-        String answer = ki.orchestrator(fen);
+
+        String answer = ki.orchestrator(fen, config);
         boolean matchFound = false;
         for (String expectedMove : expectedMoves) {
             if (expectedMove.equals(answer)) {
@@ -45,7 +53,7 @@ public class BasisKITest {
 
     private void testMoves(String fen, String expectedMove) {
         init();
-        String answer = ki.orchestrator(fen);
+        String answer = ki.orchestrator(fen, config);
         assertEquals(expectedMove, answer);
         System.out.println(answer);
     }
