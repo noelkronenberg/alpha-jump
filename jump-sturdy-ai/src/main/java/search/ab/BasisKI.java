@@ -14,6 +14,7 @@ public class BasisKI implements KI {
     boolean aspirationWindow = false;
     double aspirationWindowSize = 0;
     boolean transpositionTables = false;
+    boolean useQuiescenceSearch = false;
     int maxAllowedDepth = 0;
     boolean dynamicTime = false;
 
@@ -41,6 +42,7 @@ public class BasisKI implements KI {
         this.transpositionTables = config.transpositionTables;
         this.maxAllowedDepth = config.maxAllowedDepth;
         this.dynamicTime = config.dynamicTime;
+        this.useQuiescenceSearch = config.useQuiescenceSearch;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
@@ -130,6 +132,60 @@ public class BasisKI implements KI {
         }
 
         return bestMove;
+    }
+    public double quiescenceSearch(MoveGenerator gameState, double alpha, double beta, Color currentColor, Color ourColor) {
+        String fen = gameState.getFenFromBoard(); // convert position to FEN
+
+        // rate current position without moving
+        double standPat = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth, fen, new LinkedHashMap<>(), currentColor);
+
+        // beta cutoff
+        if (standPat >= beta) {
+            return beta;
+        }
+
+        // found better position
+        if (alpha < standPat) {
+            alpha = standPat;
+        }
+
+        // move list
+        LinkedList<Integer> movesList = new LinkedList<>();
+
+        if (this.transpositionTables) {
+            if (transpositionTable.containsKey(fen)) {
+                movesList = transpositionTable.get(fen).movesList;
+            } else {
+                LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
+                movesList = Evaluation.convertMovesToList(moves);
+                Evaluation.orderMoves(movesList, currentColor, gameState);
+                TranspositionTableObejct ttData = new TranspositionTableObejct(standPat, movesList, this.currentDepth);
+                transpositionTable.put(fen, ttData);
+            }
+        } else {
+            LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
+            movesList = Evaluation.convertMovesToList(moves);
+            Evaluation.orderMoves(movesList, currentColor, gameState);
+        }
+
+       // quiescence Search for every move
+        for (Integer move : movesList) {
+            MoveGenerator nextState = new MoveGenerator();
+            nextState.initializeBoard(fen);
+            nextState.movePiece(move);
+
+            double score = -quiescenceSearch(nextState, -beta, -alpha, (currentColor == Color.RED) ? Color.BLUE : Color.RED, ourColor);
+
+            if (score >= beta) {
+                return beta;
+            }
+            if (score > alpha) {
+                alpha = score;
+            }
+        }
+
+        // best rating
+        return alpha;
     }
 
     public double iterativeDeepening(MoveGenerator gameState, double moveTimeLimit, Color currentColor, Color ourColor) {
