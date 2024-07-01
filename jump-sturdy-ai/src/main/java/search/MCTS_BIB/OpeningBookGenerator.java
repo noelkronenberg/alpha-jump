@@ -7,7 +7,7 @@ import java.util.List;
 
 import game.Color;
 import game.MoveGenerator;
-import search.Evaluation;
+import search.ab.Evaluation;
 
 public class OpeningBookGenerator {
     private static final int DEPTH = 3;
@@ -53,7 +53,7 @@ public class OpeningBookGenerator {
         fenStorage = moveGenerator.getFenFromBoard();
     
         // mögliche Moves des Gegners herausfinden
-        LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer, fenStorage);
+        LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer);
         List<Integer> possMovesOppList = Evaluation.convertMovesToList(possMovesOpp);
     
         for (int moveCounter = 0; moveCounter < possMovesOppList.size(); moveCounter++) {
@@ -98,7 +98,7 @@ public class OpeningBookGenerator {
         Color oppPlayer = (player == Color.RED) ? Color.BLUE : Color.RED;
 
         // mögliche Moves des Gegners herausfinden
-        LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer, fenStorage);
+        LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer);
         List<Integer> possMovesOppList = Evaluation.convertMovesToList(possMovesOpp);
     
         for (int moveCounter = 0; moveCounter < possMovesOppList.size(); moveCounter++) {

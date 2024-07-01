@@ -10,7 +10,7 @@ import org.antlr.v4.parse.GrammarTreeVisitor.outerAlternative_return;
 
 import game.Color;
 import game.MoveGenerator;
-import search.Evaluation;
+import search.ab.Evaluation;
 
 public class MCTS_BIB {
     private static final Random random = new Random();
@@ -126,7 +126,7 @@ public class MCTS_BIB {
 
     private static LinkedHashMap<Integer, List<Integer>> getPossibleMoves(MoveGenerator moveGenerator, Color color) {
         String fen = moveGenerator.getFenFromBoard();
-        LinkedHashMap<Integer, List<Integer>> possibleMoves = moveGenerator.generateAllPossibleMoves(color, fen);
+        LinkedHashMap<Integer, List<Integer>> possibleMoves = moveGenerator.generateAllPossibleMoves(color);
         return possibleMoves;
     }
 
