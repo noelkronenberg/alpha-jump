@@ -21,7 +21,7 @@ public class MCTSKI {
     MCTSNode parentNode = null;
     //double endTime = 0;
 
-    double timeLimit = 50000;
+    double timeLimit = 20000;
     //TODO: 1 add a Tree system(Done)     2 add the value function: UCB(done)       3 add a way to simulate randomly the game end(done)      4 traversal Function (done)   5 backpropagation (done)
 
 //    public void MCTS_UCB(String fen){

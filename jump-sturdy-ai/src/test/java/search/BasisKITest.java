@@ -30,7 +30,7 @@ public class BasisKITest {
 
     private void testMoves(String fen, String... expectedMoves) {
         init();
-        String answer = kiMCTS.MCTS_Orchestrator(fen);
+        String answer = ki.orchestrator(fen);
         boolean matchFound = false;
         for (String expectedMove : expectedMoves) {
             if (expectedMove.equals(answer)) {
@@ -45,7 +45,7 @@ public class BasisKITest {
 
     private void testMoves(String fen, String expectedMove) {
         init();
-        String answer = kiMCTS.MCTS_Orchestrator(fen);
+        String answer = ki.orchestrator(fen);
         assertEquals(expectedMove, answer);
         System.out.println(answer);
     }
@@ -211,7 +211,7 @@ public class BasisKITest {
     @DisplayName("Gruppe AI")
     public void testGruppeAI() {
         testMoves("6/6b01/8/2b02rr2/8/8/6r01/6 r", "F4-G2","F4-E2");
-        testMoves("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "F4-F5"); // added missings
+        testMoves("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "F4-F5");
     }
 
     @Test
