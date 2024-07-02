@@ -8,6 +8,16 @@ import search.mcts.MCTSKI;
 
 public class Simulation {
 
+    /**
+     * Plays a full game between two AIs using the provided configurations and initial board state.
+     *
+     * @param firstKI The first AI that will play.
+     * @param firstConfig The configuration for the first AI's search algorithm.
+     * @param secondKI The second AI that will play.
+     * @param secondConfig The configuration for the second AI's search algorithm.
+     * @param fen The initial board state in FEN format.
+     * @return An integer indicating the winner of the game. Returns 1 if the first AI wins, 2 if the second AI wins.
+     */
     public static int playGame(KI firstKI, SearchConfig firstConfig, KI secondKI, SearchConfig secondConfig, String fen) {
 
         MoveGenerator gameState = new MoveGenerator();
@@ -55,15 +65,24 @@ public class Simulation {
             fen = gameState.getFenFromBoard() + " " + nextColor;
         }
 
-        // NOTE: check if correct
         if (moveCount % 2 == 0) {
             return 1;
         } {
             return 2;
         }
-
     }
 
+    /**
+     * Simulates a series of games between two AIs using the provided configurations and initial board state.
+     * The results of each game and the overall win counts for each AI are printed to the console.
+     *
+     * @param firstKI The first AI that will play.
+     * @param firstConfig The configuration for the first AI's search algorithm.
+     * @param secondKI The second AI that will play.
+     * @param secondConfig The configuration for the second AI's search algorithm.
+     * @param fen The initial board state in FEN format.
+     * @param iterations The number of iterations (games) to simulate. Must be an even number.
+     */
     public void simulate(KI firstKI, SearchConfig firstConfig, KI secondKI, SearchConfig secondConfig, String fen, int iterations) {
         if (!(iterations % 2 == 0)) {
             System.out.println("Please enter an even number of iterations to make the results fair.");
