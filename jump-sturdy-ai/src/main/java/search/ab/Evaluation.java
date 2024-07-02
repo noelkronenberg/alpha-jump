@@ -6,8 +6,12 @@ import game.MoveGenerator;
 
 import java.util.*;
 
+/**
+ * Provides methods for evaluating game positions.
+ */
 public class Evaluation {
 
+    // hyperparameters
     public static double possibleMovesWeight = 0.01;
     public static double protectedPiecesWeight = 0.1;
     public static double doubleWeight = 2;
@@ -17,6 +21,14 @@ public class Evaluation {
 
     // START: evaluation
 
+    /**
+     * Computes the score (contribution) of a piece based on its type and weight.
+     *
+     * @param piece The type of piece (SINGLE, DOUBLE, or MIXED).
+     * @param score The current score to be updated.
+     * @param weight The weight multiplier for the piece type.
+     * @return The updated score after adding the piece's contribution.
+     */
     public static double getScore(Piece piece, double score, double weight) {
         switch (piece) {
             case Piece.SINGLE:
@@ -32,7 +44,15 @@ public class Evaluation {
         return score;
     }
 
-    public static double getScoreWrapper(MoveGenerator moveGenerator, Color player, double depth, String fen) {
+    /**
+     * Computes the score of the current game position for a specified player.
+     *
+     * @param moveGenerator The MoveGenerator object providing game state information.
+     * @param player The color of the player for whom the score is computed (BLUE or RED).
+     * @param depth The current depth of evaluation in the search tree.
+     * @return The computed score for the player in the current position.
+     */
+    public static double getScoreWrapper(MoveGenerator moveGenerator, Color player, double depth) {
         double score = 0;
         double weight;
 
@@ -87,7 +107,17 @@ public class Evaluation {
         return score;
     }
 
-    public static double getScoreWrapperKI(MoveGenerator moveGenerator, Color player, double depth, LinkedHashMap<Integer, List<Integer>> moves) {   //moves Contains the enemys moves
+    /**
+     * Computes the score of the current game position for a player considering opponent's moves.
+     * Optimised for AI search
+     *
+     * @param moveGenerator The MoveGenerator object providing game state information.
+     * @param player The color of the player for whom the score is computed (BLUE or RED).
+     * @param depth The current depth of evaluation in the search tree.
+     * @param moves The opponent's moves represented as a map of combined integer start and end positions.
+     * @return The computed score for the player in the current position.
+     */
+    public static double getScoreWrapperKI(MoveGenerator moveGenerator, Color player, double depth, LinkedHashMap<Integer, List<Integer>> moves) { 
         double score = 0;
         double weight;
 
@@ -142,20 +172,39 @@ public class Evaluation {
         return score;
     }
 
+    /**
+     * Rates the overall position of the game for a specified player.
+     *
+     * @param moveGenerator The MoveGenerator object providing game state information.
+     * @param color The color of the player for whom the position is rated (BLUE or RED).
+     * @param depth The current depth of evaluation in the search tree.
+     * @return The rating of the current position for the specified player.
+     */
     public static double ratePosition(MoveGenerator moveGenerator, Color color, int depth, String fen) {
         double score = 0;
 
         if (color == Color.BLUE) {
-            score = getScoreWrapper(moveGenerator, Color.BLUE, depth, fen) - getScoreWrapper(moveGenerator, Color.RED, depth, fen);
+            score = getScoreWrapper(moveGenerator, Color.BLUE, depth) - getScoreWrapper(moveGenerator, Color.RED, depth);
         }
 
         else if (color == Color.RED) {
-            score = getScoreWrapper(moveGenerator, Color.RED, depth, fen) - getScoreWrapper(moveGenerator, Color.BLUE, depth, fen);
+            score = getScoreWrapper(moveGenerator, Color.RED, depth) - getScoreWrapper(moveGenerator, Color.BLUE, depth);
         }
         return score;
     }
 
-    public static double ratePositionKI(MoveGenerator moveGenerator, Color color, int depth,String fen, LinkedHashMap<Integer,List<Integer>> moves, Color currentColor) { // a more efficient approach to ratePosition for the KI
+    /**
+     * Rates the overall position of the game for a player considering opponent's moves.
+     * Optimised for AI search
+     *
+     * @param moveGenerator The MoveGenerator object providing game state information.
+     * @param color The color of the player for whom the position is rated (BLUE or RED).
+     * @param depth The current depth of evaluation in the search tree.
+     * @param moves The opponent's moves represented as a map of combined integer start and end positions.
+     * @param currentColor The current color of the AI player.
+     * @return The rating of the current position for the specified player.
+     */
+    public static double ratePositionKI(MoveGenerator moveGenerator, Color color, int depth, String fen, LinkedHashMap<Integer,List<Integer>> moves, Color currentColor) {
         double score = 0;
 
         // TODO: difference between ourColor / currentColor
@@ -173,8 +222,15 @@ public class Evaluation {
         return score;
     }
 
-    // old version for benchmarking
-    public static double getScoreWrapperOld(MoveGenerator moveGenerator, Color player,String fen) {
+    /**
+     * Computes the score of the current game position for a specified player in an old version for benchmarking.
+     *
+     * @param moveGenerator The MoveGenerator object providing game state information.
+     * @param player The color of the player for whom the score is computed (BLUE or RED).
+     * @param fen The FEN representation of the current board position.
+     * @return The computed score for the player in the current position.
+     */
+    public static double getScoreWrapperOld(MoveGenerator moveGenerator, Color player, String fen) {
         double score = 0;
         int weight;
 
@@ -224,7 +280,14 @@ public class Evaluation {
         return score;
     }
 
-    // old version for benchmarking
+    /**
+     * Rates the overall position of the game for a specified player in an old version for benchmarking.
+     *
+     * @param moveGenerator The MoveGenerator object providing game state information.
+     * @param color The color of the player for whom the position is rated (BLUE or RED).
+     * @param fen The FEN representation of the current board position.
+     * @return The rating of the current position for the specified player.
+     */
     public static double ratePositionOld(MoveGenerator moveGenerator, Color color, String fen) {
         double score = 0;
 
@@ -248,7 +311,17 @@ public class Evaluation {
         return score;
     }
 
-    public double rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition, int depth,String fen) {
+    /**
+     * Rates a move in the game based on its impact on the game position for a specified player.
+     *
+     * @param gameState The current MoveGenerator object representing the game state.
+     * @param color The color of the player making the move (BLUE or RED).
+     * @param startPosition The combined integer starting position of the move.
+     * @param endPosition The combined integer ending position of the move.
+     * @param depth The current depth of evaluation in the search tree.
+     * @return The computed score change due to the move.
+     */
+    public double rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition, int depth, String fen) {
         double score = 0;
 
         MoveGenerator nextState = new MoveGenerator();
@@ -267,6 +340,12 @@ public class Evaluation {
 
     // START: move ordering
 
+    /**
+     * Converts a map of moves to a list for easier manipulation.
+     *
+     * @param moves A map representing moves as combined integer start positions mapped to lists of end positions.
+     * @return A map of moves where each move is represented as a combined integer.
+     */
     public static LinkedList<Integer> convertMovesToList(LinkedHashMap<Integer, List<Integer>> moves) {
         LinkedList<Integer> movesList = new LinkedList<>();
 
@@ -281,6 +360,12 @@ public class Evaluation {
         return movesList;
     }
 
+    /**
+     * Converts a list of moves (as combined integers) back to a map representation.
+     *
+     * @param movesList A list of moves where each move is represented as a combined integer.
+     * @return A map representing moves as combined integer start positions mapped to lists of end positions.
+     */
     public static LinkedHashMap<Integer, List<Integer>> convertMovesToMap(List<Integer> movesList) {
         LinkedHashMap<Integer, List<Integer>> movesMap = new LinkedHashMap<>();
 
@@ -298,6 +383,13 @@ public class Evaluation {
         return movesMap;
     }
 
+    /**
+     * Orders moves in a list based on whether a move winning, capturing, and closeness to target row.
+     *
+     * @param moves A list of moves where each move is represented as a combined integer.
+     * @param color The color of the player for whom moves are being ordered (BLUE or RED).
+     * @param game The MoveGenerator object providing game state information.
+     */
     public static void orderMoves(LinkedList<Integer> moves, Color color, MoveGenerator game) {
         Comparator<Integer> comparator = (move1, move2) -> {
             int newRow_move1 = (move1 % 100) / 10;
@@ -329,7 +421,6 @@ public class Evaluation {
             } else if (!is1TakingMove && is2TakingMove) {
                 return 1;
 
-
             // other moves
             } else {
                 if (color == Color.RED) {
@@ -343,7 +434,12 @@ public class Evaluation {
         moves.sort(comparator);
     }
 
-    // old version for benchmarking
+    /**
+     * Orders moves in a list in an old version for benchmarking based on whether a move winning and closeness to target row.
+     *
+     * @param moves A list of moves where each move is represented as a combined integer.
+     * @param color The color of the player for whom moves are being ordered (BLUE or RED).
+     */
     public static void orderMovesOld(LinkedList<Integer> moves, Color color) {
         Comparator<Integer> comparator = (move1, move2) -> {
             int newRow_move1 = (move1 % 100) / 10;
@@ -366,7 +462,7 @@ public class Evaluation {
             } else if (!isMod1Zero && isMod2Zero) {
                 return 1;
 
-                // other moves
+            // other moves
             } else {
                 if (color == Color.RED) {
                     return Integer.compare(newRow_move1, newRow_move2);
@@ -378,31 +474,5 @@ public class Evaluation {
 
         moves.sort(comparator);
     }
-
     // END: move ordering
-
-    public static void main(String[] args) {
-        MoveGenerator moveGenerator = new MoveGenerator();
-        LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper("b0b0b0b0b0b0/1b0b0b0b0b02/6b01/8/8/1r06/2r0r0r0r0r01/r0r0r0r0r0r0 b");
-        System.out.println(moves);
-
-        String fen = moveGenerator.getFenFromBoard();
-
-        System.out.println();
-        System.out.println("Moves as list: ");
-        LinkedList<Integer> movesList = convertMovesToList(moves);
-        System.out.println(movesList);
-
-        System.out.println();
-        System.out.println("Sorted moves: ");
-        orderMoves(movesList, Color.BLUE,moveGenerator);
-        System.out.println(movesList);
-
-        System.out.println();
-        System.out.println("Moves as map again: ");
-        System.out.println(convertMovesToMap(movesList));
-
-        System.out.println();
-        System.out.println("Score: " + ratePosition(moveGenerator, Color.BLUE,1,fen));
-    }
 }
