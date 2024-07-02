@@ -57,9 +57,9 @@ public class Simulation {
 
         // NOTE: check if correct
         if (moveCount % 2 == 0) {
-            return 2;
-        } {
             return 1;
+        } {
+            return 2;
         }
 
     }
@@ -75,7 +75,7 @@ public class Simulation {
 
         for (int i = 1; i <= iterations; i++) {
             int result;
-            boolean firstKIBegins = (i % 2 != 0);
+            boolean firstKIBegins = (i % 2 == 0);
 
             if (firstKIBegins) {
                 result = playGame(firstKI, firstConfig, secondKI, secondConfig, fen);
