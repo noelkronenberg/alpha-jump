@@ -11,15 +11,28 @@ import search.SearchConfig;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Benchmarking class for the BasisKI_noAB.
+ */
 public class BasisKI_noABBM {
 
     static BasisKI_noAB ki;
     static SearchConfig config = BasisKI.bestConfig;
 
+    /**
+     * Initializes the BasisKI_noAB instance.
+     */
     static void init() {
         ki = new BasisKI_noAB();
     }
 
+    /**
+     * Generates the best move given a board state in FEN format and a search depth.
+     *
+     * @param board_fen The board state in FEN format.
+     * @param depth The search depth.
+     * @return The best move.
+     */
     static String generateBestMove(String board_fen, int depth) {
         init();
         config.maxAllowedDepth = depth;
@@ -27,6 +40,13 @@ public class BasisKI_noABBM {
         return bestMove;
     }
 
+    /**
+     * Measures the time taken to generate the best move given a board state in FEN format and a search depth.
+     *
+     * @param board_fen The board state in FEN format.
+     * @param depth The search depth.
+     * @return The average time in milliseconds to generate the best move.
+     */
     static double generateBestMoveSpeed(String board_fen, int depth) {
         init();
         config.maxAllowedDepth = depth;
@@ -40,6 +60,13 @@ public class BasisKI_noABBM {
         return duration;
     }
 
+    /**
+     * Generates the unique positions visited by the search algorithm given a board state in FEN format and a search depth.
+     *
+     * @param board_fen The board state in FEN format.
+     * @param depth The search depth.
+     * @return The number of unique positions visited.
+     */
     static int generateBestMoveUniquePositions(String board_fen, int depth) {
         init();
         config.maxAllowedDepth = depth;
@@ -48,6 +75,13 @@ public class BasisKI_noABBM {
         return uniquePositions;
     }
 
+    /**
+     * Generates the total positions visited by the search algorithm given a board state in FEN format and a search depth.
+     *
+     * @param board_fen The board state in FEN format.
+     * @param depth The search depth.
+     * @return The total number of positions visited.
+     */
     static int generateBestMovePositions(String board_fen, int depth) {
         init();
         config.maxAllowedDepth = depth;
@@ -59,6 +93,12 @@ public class BasisKI_noABBM {
         return positions;
     }
 
+    /**
+     * Wrapper method to benchmark the search algorithm and display results in a formatted table.
+     *
+     * @param fen The board state in FEN format.
+     * @param depth The search depth.
+     */
     static void wrapperBM(String fen, int depth) {
         String bestMove = BasisKI_noABBM.generateBestMove(fen, depth);
         double duration = BasisKI_noABBM.generateBestMoveSpeed(fen, depth);
@@ -79,6 +119,11 @@ public class BasisKI_noABBM {
         System.out.println(at.render());
     }
 
+    /**
+     * Main method to run the benchmarks and print results to the console.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         System.out.println("Start position: ");
         BasisKI_noABBM.wrapperBM("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b", 2);

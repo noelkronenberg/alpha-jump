@@ -3,15 +3,29 @@ package benchmark;
 import game.Color;
 import game.MoveGenerator;
 
+/**
+ * Benchmarking class for the MoveGenerator.
+ */
 public class MoveGeneratorBM {
 
     static MoveGenerator moveGenerator;
 
+    /**
+     * Initializes the MoveGenerator instance and sets up the board.
+     */
     static void init() {
         moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard();
     }
 
+    /**
+     * Measures the average time taken to generate all possible moves for the given color
+     * on the specified board state over a set number of iterations.
+     *
+     * @param board_fen The board state in FEN format.
+     * @param color The color of the player.
+     * @return The average time in milliseconds to generate all possible moves.
+     */
     static double generateAllPossibleMovesSpeed(String board_fen, Color color) {
         moveGenerator.initializeBoard(board_fen);
         int iterations = 100000;
@@ -24,6 +38,12 @@ public class MoveGeneratorBM {
         return duration;
     }
 
+    /**
+     * Wrapper method to benchmark move generation speed. It splits the FEN string to extract
+     * the board state and the color, then prints the time taken to generate all possible moves.
+     *
+     * @param fen The board state with player color in FEN format.
+     */
     static void wrapperBM(String fen) {
         // split color and board
         char color_fen = fen.charAt(fen.length() - 1);
@@ -35,6 +55,11 @@ public class MoveGeneratorBM {
         System.out.println("Time to generate moves: " + duration + " milliseconds");
     }
 
+    /**
+     * Main method to run the benchmark tests with different board states.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         MoveGeneratorBM.init();
 

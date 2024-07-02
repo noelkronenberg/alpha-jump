@@ -9,6 +9,9 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * Handles connection and communication with the game server.
+ */
 public class Connection {
 
     int player;
@@ -20,6 +23,11 @@ public class Connection {
     long currentTime = 0;
     long timeLeft = 120000;
 
+    /**
+     * Connects to the game server and manages game play.
+     *
+     * @param isPlayer Indicates if the player is a human player (true) or AI (false).
+     */
     public void connect(boolean isPlayer) {
         BasisKI ki = new BasisKI();
         String serverAddress = "localhost";
@@ -142,6 +150,12 @@ public class Connection {
         }
     }
 
+    /**
+     * Main method to start the connection and game play.
+     *
+     * @param args Command line arguments (not used).
+     * @throws InterruptedException if the main thread is interrupted.
+     */
     public static void main(String[] args) throws InterruptedException {
         Connection player1 = new Connection();
         player1.connect(false); // only for single player

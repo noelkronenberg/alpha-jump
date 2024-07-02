@@ -7,8 +7,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
+/**
+ * Debugging tool for analyzing move order of an AI.
+ */
 public class BasisKIDebugger {
 
+    /**
+     * Simulates a sequence of moves and prints board states after each move.
+     *
+     * @param fen Current board position in FEN format.
+     * @param move First move to make.
+     * @param sequence Number of moves to simulate.
+     */
     public static void moveOrder(String fen, String move, int sequence) {
         BasisKI ki = new BasisKI();
         MoveGenerator moveGenerator = new MoveGenerator();
@@ -52,6 +62,11 @@ public class BasisKIDebugger {
         }
     }
 
+    /**
+     * Main method to start the simulation of the move order and output to a file.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         try {
             PrintStream fileOut = new PrintStream(new File("src/main/java/debug/output.txt"));

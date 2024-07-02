@@ -6,6 +6,9 @@ import search.*;
 import search.ab.BasisKI;
 import search.mcts.MCTSKI;
 
+/**
+ * Simulation of full games between two AIs.
+ */
 public class Simulation {
 
     /**
@@ -115,6 +118,11 @@ public class Simulation {
         System.out.println("Second KI wins: " + secondKIWins);
     }
 
+    /**
+     * Main method to run a simulation between two AIs using predefined configurations and an initial board state.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         KI firstKI = new BasisKI();
         SearchConfig firstConfig = BasisKI.bestConfig;
