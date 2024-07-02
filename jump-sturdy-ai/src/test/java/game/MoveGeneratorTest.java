@@ -6,10 +6,16 @@ import java.util.Map;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit test class for MoveGenerator.
+ */
 public class MoveGeneratorTest {
 
     static MoveGenerator moveGenerator;
 
+    /**
+     * Initializes the MoveGenerator instance and sets up the board before all tests.
+     */
     @BeforeAll
     public static void init() {
         moveGenerator = new MoveGenerator();
@@ -304,6 +310,12 @@ public class MoveGeneratorTest {
                 "A2-B2,B4-A4,B4-C4,B4-B3,E5-F5,E5-D5,E5-E4,F5-E5,F5-F4,G6-F6,G6-H6,C7-B7,C7-D7,D8-D7,D8-E8,D8-C8,F8-E8,F8-G8,F8-F7");
     }
 
+    /**
+     * Helper method to test move generation.
+     *
+     * @param fen The board state in FEN notation.
+     * @param expectedMoves The expected move string.
+     */
     private void testMoves(String fen, String expectedMoves) {
         init();
 

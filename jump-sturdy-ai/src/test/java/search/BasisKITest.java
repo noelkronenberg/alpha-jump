@@ -11,6 +11,9 @@ import search.mcts.MCTSKI;
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit test class for BasisKI.
+ */
 public class BasisKITest {
 
     static BasisKI ki;
@@ -18,12 +21,19 @@ public class BasisKITest {
 
     static MCTSKI kiMCTS;
 
+    /**
+     * Initializes the BasisKI instances before all test methods.
+     */
     @BeforeAll
     public static void init() {
         ki = new BasisKI();
         kiMCTS = new MCTSKI();
     }
 
+    /**
+     * Performs sanity check for the number of positions evaluated
+     * Verifies that the number of positions evaluated matches the expected count
+     */
     @Test
     @DisplayName("Anzahl untersuchter Züge (mit händischen Beweis)")
     public void anzahlSanityCheck() {
@@ -35,6 +45,12 @@ public class BasisKITest {
         assertEquals(ki.positionsHM.size(), 13);
     }
 
+    /**
+     * Helper method to test moves returned by the AI against expected moves.
+     *
+     * @param fen FEN notation representing the board state
+     * @param expectedMoves Expected moves as an array of FEN strings
+     */
     private void testMoves(String fen, String... expectedMoves) {
         init();
 
@@ -51,6 +67,12 @@ public class BasisKITest {
         assertTrue(matchFound);
     }
 
+    /**
+     * Overloaded method to test a single move returned by the AI against the expected move.
+     *
+     * @param fen FEN notation representing the board state
+     * @param expectedMove Expected move as a string
+     */
     private void testMoves(String fen, String expectedMove) {
         init();
         String answer = ki.orchestrator(fen, config);
@@ -250,6 +272,12 @@ public class BasisKITest {
         testMoves("6/8/8/3b04/3b04/8/2r01r03/6 b", "D4-D5");
     }
 
+    /**
+     * Main method for visualising the board state.
+     * Initializes MoveGenerator and prints the board state.
+     *
+     * @param args  Command line arguments (not used).
+     */
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b");
