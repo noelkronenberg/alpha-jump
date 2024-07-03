@@ -3,6 +3,7 @@ package search;
 import game.Color;
 import game.MoveGenerator;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import search.mcts_lib.MCTS_lib;
 
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MCTS_libTest {
 
-    /*
+    
     static MoveGenerator moveGenerator;
     static MCTS_lib mcts;
     static Color color = Color.BLUE;
@@ -34,7 +35,7 @@ public class MCTS_libTest {
         }
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard(false);
-        String answer = MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color, iterations));
+        String answer = MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color));
         boolean matchFound = false;
         for (String expectedMove : expectedAnswers) {
             if (expectedMove.equals(answer)) {
@@ -56,14 +57,14 @@ public class MCTS_libTest {
         }
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard(false);
-        assertEquals(expectedAnswer, MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color, iterations)));
+        assertEquals(expectedAnswer, MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color)));
     }
 
     @Test
     public void winningMoveTest() {
         testPosition("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r0b012r0/5r0 b", "D7-D8");
     }
-    /*@Test
+    @Test
     public void nearlyWinningMoveTest() {
         testPosition("6/3b0b03/3r02bb1/b0b03b02/rrrr1b02rr1/1b04r01/3r03r0/5r0 b", "B6-B7");
     }
@@ -257,7 +258,7 @@ public class MCTS_libTest {
     public void testGruppeAJ() {
         testPosition("1b04/1bb2b0bb2/2bb1b03/3rr4/2r02b01r0/1b02r0rr1b0/1rr2r03/6 r", "D4-E2");
         testPosition("6/8/8/3b04/3b04/8/2r01r03/6 b", "D4-D5");
-    }*/
+    }
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();

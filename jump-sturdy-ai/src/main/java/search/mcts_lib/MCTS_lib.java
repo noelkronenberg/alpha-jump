@@ -9,11 +9,11 @@ import game.MoveGenerator;
 import search.ab.Evaluation;
 
 public class MCTS_lib {
-    private static final Random random = new Random();
-    private static final double EXPLORATION_PARAM = 1.3;
-    private static final double timeLimit = 10000;
+    private final Random random = new Random();
+    private final double EXPLORATION_PARAM = 1.3;
+    private final double timeLimit = 20000;
 
-    public static int runMCTS(MoveGenerator moveGenerator, Color color, int iterations) {
+    public int runMCTS(MoveGenerator moveGenerator, Color color) {
         Color startingPlayer = color;
         double endTime = System.currentTimeMillis() + timeLimit; 
         String initialState = moveGenerator.getFenFromBoard();
@@ -52,7 +52,7 @@ public class MCTS_lib {
         return bestChild(root).move;
     }
 
-    private static void expand(MCTSNode_lib node, Color color, MoveGenerator moveGenerator) {
+    private void expand(MCTSNode_lib node, Color color, MoveGenerator moveGenerator) {
         LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
         if (!moveGenerator.isGameOverMCTS_lib(possibleMoves)) {
             LinkedList<Integer> movesList;
@@ -65,7 +65,7 @@ public class MCTS_lib {
         }
     }
 
-    private static Color simulate(MoveGenerator moveGenerator, Color color) {
+    private Color simulate(MoveGenerator moveGenerator, Color color) {
         String fen = "";
         Color winner = Color.EMPTY;
         while (winner == Color.EMPTY) {
@@ -89,7 +89,7 @@ public class MCTS_lib {
         return winner;
     }
 
-    private static void backpropagate(MCTSNode_lib node, Color winner, Color color) {
+    private void backpropagate(MCTSNode_lib node, Color winner, Color color) {
         while (node != null) {
             node.visits++;
             if (winner == color) {
@@ -99,7 +99,7 @@ public class MCTS_lib {
         }
     }
 
-    private static MCTSNode_lib selectPromisingNode(MCTSNode_lib node, Color startingPlayer, Color currPlayer) {
+    private MCTSNode_lib selectPromisingNode(MCTSNode_lib node, Color startingPlayer, Color currPlayer) {
         if (startingPlayer == currPlayer) {
         return node.children.stream().max((n1, n2) -> {
             double uct1 = (n1.wins / n1.visits) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n1.visits));
@@ -116,16 +116,16 @@ public class MCTS_lib {
     }
 
 
-    private static MCTSNode_lib bestChild(MCTSNode_lib node) {
+    private MCTSNode_lib bestChild(MCTSNode_lib node) {
         return node.children.stream().max((n1, n2) -> Double.compare((n1.wins/n1.visits), (n2.wins/n2.visits))).orElseThrow(RuntimeException::new);
     }
 
-    private static LinkedHashMap<Integer, List<Integer>> getPossibleMoves(MoveGenerator moveGenerator, Color color) {
+    private LinkedHashMap<Integer, List<Integer>> getPossibleMoves(MoveGenerator moveGenerator, Color color) {
         LinkedHashMap<Integer, List<Integer>> possibleMoves = moveGenerator.generateAllPossibleMoves(color);
         return possibleMoves;
     }
 
-    private static String makeMove(MoveGenerator moveGenerator, int move, Color player) {
+    private String makeMove(MoveGenerator moveGenerator, int move, Color player) {
         moveGenerator.movePiece(move);
         String fen = moveGenerator.getFenFromBoard();
         return fen;
