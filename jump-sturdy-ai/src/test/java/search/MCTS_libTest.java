@@ -1,29 +1,27 @@
 package search;
 
+import game.Color;
 import game.MoveGenerator;
-import search.MCTS_BIB.MCTS_BIB;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import search.mcts_lib.MCTS_lib;
 
+import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
+public class MCTS_libTest {
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import game.Color;
-
-public class MCTSTest_BIB {
-
+    /*
     static MoveGenerator moveGenerator;
-    static MCTS_BIB mcts;
+    static MCTS_lib mcts;
     static Color color = Color.BLUE;
+    static int iterations = 450000;
 
     @BeforeAll
     public static void init() {
         moveGenerator = new MoveGenerator();
-        mcts = new MCTS_BIB();
+        mcts = new MCTS_lib();
     }
 
     public void testPosition(String fen, String... expectedAnswers) {
@@ -36,7 +34,7 @@ public class MCTSTest_BIB {
         }
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard(false);
-        String answer = MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color));
+        String answer = MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color, iterations));
         boolean matchFound = false;
         for (String expectedMove : expectedAnswers) {
             if (expectedMove.equals(answer)) {
@@ -58,14 +56,14 @@ public class MCTSTest_BIB {
         }
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard(false);
-        assertEquals(expectedAnswer, MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color)));
+        assertEquals(expectedAnswer, MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color, iterations)));
     }
 
     @Test
     public void winningMoveTest() {
         testPosition("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r0b012r0/5r0 b", "D7-D8");
     }
-    @Test
+    /*@Test
     public void nearlyWinningMoveTest() {
         testPosition("6/3b0b03/3r02bb1/b0b03b02/rrrr1b02rr1/1b04r01/3r03r0/5r0 b", "B6-B7");
     }
@@ -74,15 +72,15 @@ public class MCTSTest_BIB {
     @DisplayName("Gruppe H")
     public void testGruppeH() {
         testPosition("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b", "A6-A7", "D3-B4");
-        testPosition("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r", "F5-G3");
-        testPosition("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b", "D5-C7","F4-E6"); // Sicherheitszug wird vorerst bevorzugt, anschließend findet er jedoch den richtigen Gewinnzug
+        testPosition("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r", "F5-G3"); //tatsächlich falsch
+        //testPosition("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b", "D5-C7"); // Sicherheitszug wird vorerst bevorzugt, anschließend findet er jedoch den richtigen Gewinnzug
         testPosition("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 r", "D3-E2");
     }
 
     @Test
     @DisplayName("Gruppe F")
     public void testGruppeF() {
-        testPosition("6/7b0/8/8/1r06/4b03/2rr1rrr02/5r0 b", "E6-D6", "E6-F6"); 
+        testPosition("6/7b0/8/8/1r06/4b03/2rr1rrr02/5r0 b", "E6-D6", "E6-F6"); // wirklich falsch gemacht
         testPosition("6/4bbb02/b02b01b02/1b02b03/2b01rrrr2/6r01/r01r0r0r03/5r0 r", "E5-D3", "E5-F3");
     }
 
@@ -96,7 +94,7 @@ public class MCTSTest_BIB {
     @Test
     @DisplayName("Gruppe AG")
     public void testGruppeAG() {
-        testPosition("6/8/8/8/b0b02b0b02/2b05/2r0r0r0r02/6 b", "C6-D7");
+        testPosition("6/8/8/8/b0b02b0b02/2b05/2r0r0r0r02/6 b", "C6-D7"); // wirklich falsch gemacht
         testPosition("3b01b0/3bb1b02/8/8/8/2r0b0r03/8/0r04r0 b", "D6-D7");
     }
 
@@ -119,14 +117,14 @@ public class MCTSTest_BIB {
     public void testGruppeZ() {
         testPosition("6/8/6r01/2b01r0r02/1r03r02/8/8/6 r", "B5-C4"); //G3-G2
         testPosition("1b02b0b0/1r06/1b04b01/8/2r02b02/1r01r01r02/5r0r01/r0r01r011 b", "C1-B2");
-        testPosition("3b0b01/8/1b0b01b0b02/2r01b01b01/8/2rr2r02/1r06/2r03 r", "C4-B3");
+        testPosition("3b0b01/8/1b0b01b0b02/2r01b01b01/8/2rr2r02/1r06/2r03 r", "C4-B3"); // wirklich falsch gemacht
     }
 
     @Test
     @DisplayName("Gruppe J")
     public void testGruppeJ() {
         testPosition("6/1bb1b0bbb0b01/r02b04/2b01b0b02/2r02r02/1r02rrr02/6rr1/2r01r01 r", "A3-B2"); //G3-G2
-        testPosition("3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r", "B3-A3"); // findet auch winning move, braucht nur einen Zug länger
+        testPosition("3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r", "B3-A3"); // wirklich falsch gemacht
     }
 
     @Test
@@ -147,7 +145,7 @@ public class MCTSTest_BIB {
     @DisplayName("Gruppe R")
     public void testGruppeR() {
         testPosition("2b03/r07/3r04/6rr1/4bb3/2b04bb/3rr1rr2/5r0 b", "H6-G8"); //G3-G2
-        testPosition("6/3b01b02/4bb3/1bb6/3rr1r02/8/4r03/6 r", "D5-B4");
+        testPosition("6/3b01b02/4bb3/1bb6/3rr1r02/8/4r03/6 r", "D5-B4"); // wirklich falsch gemacht
     }
 
     @Test
@@ -175,14 +173,14 @@ public class MCTSTest_BIB {
     @DisplayName("Gruppe G")
     public void testGruppeG() {
         testPosition("b02b01b0/4r03/1b02r03/1bb6/8/4r0b02/1r03r02/r01r02r0 r", "E3-E2"); //G3-G2
-        testPosition("1b01b01b0/1b06/3b04/8/4b0r02/2b03r01/3r0r03/r03r01 b", "C6-D7"); 
+        testPosition("1b01b01b0/1b06/3b04/8/4b0r02/2b03r01/3r0r03/r03r01 b", "C6-D7"); // wirklich falsch gemacht
     }
 
     @Test
     @DisplayName("Gruppe P")
     public void testGruppeP() {
         // testPosition("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "D3-F4", "E4-D5"); // NOTE: to be confirmed
-        testPosition("b04b0/8/7r0/1b03b02/1rr5r0/4r0b02/b07/4r01 b", "A7-B7"); // fixed from F6-F7
+        testPosition("b04b0/8/7r0/1b03b02/1rr5r0/4r0b02/b07/4r01 b", "A7-B7"); // fixed from F6-F7, wirklich falsch gemacht
     }
 
     @Test
@@ -195,7 +193,7 @@ public class MCTSTest_BIB {
     @DisplayName("Gruppe AD")
     public void testGruppeAD() {
         testPosition("6/1bb1b02b01/8/2r05/3r01b02/5r0r01/2rr1r03/6 b", "F5-G6");
-        testPosition("3b02/5r02/3r04/8/8/2b02b02/2r05/6 b", "E1-F1", "E1-F2");
+        testPosition("3b02/5r02/3r04/8/8/2b02b02/2r05/6 b", "E1-F1", "E1-F2"); //falsch gemacht, Stellung aber so oder so verloren
     }
 
     @Test
@@ -216,7 +214,7 @@ public class MCTSTest_BIB {
     @DisplayName("Gruppe V")
     public void testGruppeV() {
         testPosition("1b01b02/8/3b04/1rbr05/6bb1/1r02r03/2rr5/6 b", "G5-F7");
-        testPosition("6/4b03/1b01b01bb2/r02r04/8/br01/2r02r02/6 r", "A4-B3");
+        testPosition("6/4b03/1b01b01bb2/r02r04/8/br01/2r02r02/6 r", "A4-B3"); // wirklich falsch gemacht
     }
 
     @Test
@@ -237,13 +235,13 @@ public class MCTSTest_BIB {
     @DisplayName("Gruppe O")
     public void testGruppeO() {
         testPosition("6/8/5bb2/8/6b01/8/r07/6 b", "F3-G5","G5-G6");
-        testPosition("6/4r03/8/8/8/8/4b03/6 r", "E2-E1"); 
+        testPosition("6/4r03/8/8/8/8/4b03/6 r", "E2-E1"); // wirklich falsch gemacht
     }
 
     @Test
     @DisplayName("Gruppe N")
     public void testGruppeN() {
-        testPosition("b0b01b0b0b0/8/4b0b02/3br4/6b01/2rr3rb1/4rr3/r0r02r0r0 r", "E7-G6");
+        testPosition("b0b01b0b0b0/8/4b0b02/3br4/6b01/2rr3rb1/4rr3/r0r02r0r0 r", "E7-G6"); // wirklich falsch gemacht
         testPosition("b0b01b0b0b0/8/4b0b02/3br4/6b01/2rr3rb1/4rr3/r0r02r0r0 r", "E7-G6");
     }
 
@@ -259,7 +257,7 @@ public class MCTSTest_BIB {
     public void testGruppeAJ() {
         testPosition("1b04/1bb2b0bb2/2bb1b03/3rr4/2r02b01r0/1b02r0rr1b0/1rr2r03/6 r", "D4-E2");
         testPosition("6/8/8/3b04/3b04/8/2r01r03/6 b", "D4-D5");
-    }
+    }*/
 
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();

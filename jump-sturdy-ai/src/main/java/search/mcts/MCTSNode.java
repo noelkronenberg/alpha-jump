@@ -1,94 +1,46 @@
-package search.mcts;
+package search.MCTS;
+import java.util.ArrayList;
+import java.util.List;
 
 import game.Color;
 import game.MoveGenerator;
 
-import java.util.ArrayList;
-
-import java.util.LinkedList;
-import java.util.List;
-
 public class MCTSNode {
+    int move; // Der Zug, der zu diesem Knoten führt (z.B. [row, col])
     MCTSNode parent;
-    //List<MCTSNode> childrenSearched = new LinkedList<>();
-    List<MCTSNode> children = new LinkedList<>();
-    //LinkedList<Integer> childrenUnserached;
-    double numberOfVisits;
-    double numberOfWins;
-    int move;
-    //boolean isFullySearched = false;
-    Color color;
-    //LinkedHashMap<Integer,List<Integer>> movesList;
-    boolean isWinNext=false;
-    boolean isWinPos=false;
+    List<MCTSNode> children;
+    int visits;
+    double wins;
+    int depth;
 
-//    public MCTSNode(MCTSNode parent, int move, MoveGenerator moveGenerator, Color color) {
-//        MoveGenerator throwAwayMG = new MoveGenerator();
-//        throwAwayMG.initializeBoard(moveGenerator.getFenFromBoard());
-//        throwAwayMG.movePiece(move);
-//        this.parent = parent;
-//        LinkedHashMap<Integer,List<Integer>> movesList=throwAwayMG.generateAllPossibleMoves(color);
-//        this.childrenUnserached = Evaluation.convertMovesToList(movesList);         //Eigentlich gerne das nicht mehr machen :( ---> Erstelle neue methode die einfach nur die moves ungeordnet generiert
-//        this.numberOfVisits = 0;
-//        this.numberOfWins = 0;
-//        this.move = move;
-//        this.color = color;
-//        this.isWin = throwAwayMG.isGameOver(color);
-//    }
-
-    public MCTSNode(MCTSNode parent, int move, MoveGenerator moveGenerator, Color color) {
-        this.parent = parent;
-        this.children=new ArrayList<>();
-        this.numberOfVisits = 0;
-        this.numberOfWins = 0;
+    public MCTSNode(int move, MCTSNode parent, int depth) {
         this.move = move;
-        this.color = color;
-        this.isWinNext = isOnBaseLineForColor();
+        this.parent = parent;
+        this.children = new ArrayList<>();
+        this.visits = 0;
+        this.wins = 0.0;
+        this.depth = depth;
     }
 
-
-    public MCTSNode(Color color) {
-        this.parent = null;
-        this.children = new ArrayList<>();;         //Eigentlich gerne das nicht mehr machen :( ---> Erstelle neue methode die einfach nur die moves ungeordnet generiert
-        this.numberOfVisits = 0;
-        this.numberOfWins = 0;
-        this.move = 0;
-        this.color = color;
-    }
-
-
-
-    public void addWinAndIncrementVisit(int winValue) {
-            numberOfWins += winValue;             //It works, due to me assuming either win=1 or loss=0
-            numberOfVisits++;
-    }
-
-    public double getNodeValue(){
-            double value = (this.numberOfWins/this.numberOfVisits)+(Math.sqrt(2)*Math.sqrt((Math.log(parent.numberOfVisits))/(this.numberOfVisits)));
-            return value;
-    }
-
-    public double getNodeValueNew(){
-        if (this.numberOfVisits>0){
-            double value = (this.numberOfWins/this.numberOfVisits)+(Math.sqrt(2)*Math.sqrt((Math.log(parent.numberOfVisits))/(this.numberOfVisits)));
-            return value;
+    public boolean isFullyExpanded() {
+        for (MCTSNode child : children) {
+            if (child.visits == 0) return false;
         }
-        else {
-            return 500000 ;
-        }
+        return true;
     }
 
-    public void updateNode(MoveGenerator moveGenerator){
-        this.isWinPos = moveGenerator.isWinForMCTS(color);
-    }
-
-    public boolean isOnBaseLineForColor(){
-        if ((move%100)/10==0&&color==Color.BLUE){
-            return true;
+    /*public static Color getWinner(MoveGenerator moveGenerator) {
+        String state = moveGenerator.getFenFromBoard();
+        String[] splittedState = state.split("/");
+        String firstRow = splittedState[0];
+        String lastRow = splittedState[7].split(" ")[0];
+        System.out.println(lastRow);
+        if (!state.contains("r") || lastRow.contains("b")) {
+            return Color.BLUE;
+        } else if (!state.contains("b") || firstRow.contains("r")) {
+            return Color.RED;
+        } else {
+            return null;
         }
-        if ((move%100)/10==7&&color==Color.RED){
-            return true;
-        }
-        return false;
-    }
+    }*/
 }

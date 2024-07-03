@@ -6,7 +6,7 @@ import search.ab.Evaluation;
 
 import java.util.*;
 
-public class BasisKI_noAB implements KI {
+public class Minimax_noAB implements AI {
     static int maxAllowedDepth = 2;
 
     // derived parameters
@@ -109,7 +109,7 @@ public class BasisKI_noAB implements KI {
         Evaluation.orderMoves(movesList, currentColor, gameState); // order moves
 
 
-        double score = Evaluation.ratePosition(gameState, ourColor, currentDepth, fen);
+        double score = Evaluation.ratePosition(gameState, ourColor, currentDepth);
 
         // save position
         if (positionsHM.containsKey(fen)){

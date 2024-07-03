@@ -5,40 +5,58 @@ import game.MoveGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import search.ab.BasisKI;
-import search.mcts.MCTSKI;
+import search.ab.Minimax_AB;
+import search.mcts.MCTS;
 
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BasisKITest {
+/**
+ * JUnit test class for Minimax_AB.
+ */
+public class Minimax_ABTest {
 
-    static BasisKI ki;
-    static SearchConfig config = BasisKI.bestConfig;
+    static Minimax_AB ai;
+    static SearchConfig config = Minimax_AB.bestConfig;
 
-    static MCTSKI kiMCTS;
+    static MCTS ai_MCTS;
 
+    /**
+     * Initializes the Minimax_AB instances before all test methods.
+     */
     @BeforeAll
     public static void init() {
-        ki = new BasisKI();
-        kiMCTS = new MCTSKI();
+        ai = new Minimax_AB();
+        config.timeCriterion = true;
+        config.timeLimit = 3000;
+        // aiMCTS = new MCTS();
     }
 
+    /**
+     * Performs sanity check for the number of positions evaluated
+     * Verifies that the number of positions evaluated matches the expected count
+     */
     @Test
     @DisplayName("Anzahl untersuchter Züge (mit händischen Beweis)")
     public void anzahlSanityCheck() {
         init();
-        SearchConfig config = BasisKI.bestConfig;
+        SearchConfig config = Minimax_AB.bestConfig;
         config.timeCriterion = false;
         config.maxAllowedDepth = 2;
-        ki.orchestrator("6/8/8/3r04/4b03/8/8/6 b", config);
-        assertEquals(ki.positionsHM.size(), 13);
+        ai.orchestrator("6/8/8/3r04/4b03/8/8/6 b", config);
+        assertEquals(ai.positionsHM.size(), 13);
     }
 
+    /**
+     * Helper method to test moves returned by the AI against expected moves.
+     *
+     * @param fen FEN notation representing the board state
+     * @param expectedMoves Expected moves as an array of FEN strings
+     */
     private void testMoves(String fen, String... expectedMoves) {
         init();
 
-        String answer = ki.orchestrator(fen, config);
+        String answer = ai.orchestrator(fen, config);
         boolean matchFound = false;
         for (String expectedMove : expectedMoves) {
             if (expectedMove.equals(answer)) {
@@ -51,9 +69,15 @@ public class BasisKITest {
         assertTrue(matchFound);
     }
 
+    /**
+     * Overloaded method to test a single move returned by the AI against the expected move.
+     *
+     * @param fen FEN notation representing the board state
+     * @param expectedMove Expected move as a string
+     */
     private void testMoves(String fen, String expectedMove) {
         init();
-        String answer = ki.orchestrator(fen, config);
+        String answer = ai.orchestrator(fen, config);
         assertEquals(expectedMove, answer);
         System.out.println(answer);
     }
@@ -250,6 +274,12 @@ public class BasisKITest {
         testMoves("6/8/8/3b04/3b04/8/2r01r03/6 b", "D4-D5");
     }
 
+    /**
+     * Main method for visualising the board state.
+     * Initializes MoveGenerator and prints the board state.
+     *
+     * @param args  Command line arguments (not used).
+     */
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b");
