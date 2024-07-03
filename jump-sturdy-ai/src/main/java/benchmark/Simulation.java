@@ -38,9 +38,10 @@ public class Simulation {
      * @param secondAI The second AI that will play.
      * @param secondConfig The configuration for the second AI's search algorithm.
      * @param fen The initial board state in FEN format.
+     * @param showGame Whether to show the game play.
      * @return An integer indicating the winner of the game. Returns 1 if the first AI wins, 2 if the second AI wins.
      */
-    public static GameResult playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen) {
+    public static GameResult playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, boolean showGame) {
 
         MoveGenerator gameState = new MoveGenerator();
         gameState.initializeBoard(fen);
@@ -75,14 +76,15 @@ public class Simulation {
                 moveCount++;
             }
 
-            /*
-            // show status
-            System.out.println("Color: " + currentColor);
-            System.out.println("Move: " + bestMove);
-            System.out.println("MoveCount: " + moveCount);
-            System.out.println("GameOver: " + gameOver);
-            gameState.printBoard(true);
-            */
+            if (showGame) {
+                System.out.println();
+                System.out.println("Color: " + currentColor);
+                System.out.println("Move: " + bestMove);
+                System.out.println("MoveCount: " + moveCount);
+                System.out.println("GameOver: " + gameOver);
+                gameState.printBoard(true);
+                System.out.println();
+            }
 
             // get next FEN
             char nextColor = (currentColorChar == 'r') ? 'b' : 'r'; // switch color
@@ -107,8 +109,9 @@ public class Simulation {
      * @param secondConfig The configuration for the second AI's search algorithm.
      * @param fen The initial board state in FEN format.
      * @param iterations The number of iterations (games) to simulate. Must be an even number.
+     * @param showGame Whether to show the game play.
      */
-    public void simulate(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, int iterations) {
+    public void simulate(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, int iterations, boolean showGame) {
         if (!(iterations % 2 == 0)) {
             System.out.println("Please enter an even number of iterations to make the results fair.");
             return;
@@ -122,9 +125,9 @@ public class Simulation {
             boolean firstAIBegins = (i % 2 == 0);
 
             if (firstAIBegins) {
-                result = playGame(firstAI, firstConfig, secondAI, secondConfig, fen);
+                result = playGame(firstAI, firstConfig, secondAI, secondConfig, fen, showGame);
             } else {
-                result = playGame(secondAI, secondConfig, firstAI, firstConfig, fen);
+                result = playGame(secondAI, secondConfig, firstAI, firstConfig, fen, showGame);
             }
 
             if ((firstAIBegins && result.number == 1) || (!firstAIBegins && result.number == 2)) {
@@ -166,7 +169,7 @@ public class Simulation {
      */
     public static void main(String[] args) {
         try {
-            // filename
+            // filename (DO NOT CHANGE)
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
             String timestamp = dateFormat.format(new Date());
             String filename = timestamp + "_simulation-output" + ".txt";
@@ -186,10 +189,11 @@ public class Simulation {
             // configuration of simulation (CAN BE CHANGED)
             String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
             int iterations = 2;
+            boolean showGame = false;
 
-            // start simulation
+            // start simulation (DO NOT CHANGE)
             Simulation simulation = new Simulation();
-            simulation.simulate(firstAI, firstConfig, secondAI, secondConfig, initialFEN, iterations);
+            simulation.simulate(firstAI, firstConfig, secondAI, secondConfig, initialFEN, iterations, showGame);
 
             fileOut.close();
         } catch (FileNotFoundException e) {
