@@ -162,7 +162,7 @@ public class MCTS implements AI {
      */
     public MCTSNode treeTraversal(double endtime, MCTSNode node, MoveGenerator moveGenerator){
         while(continueSearch(endtime)){        //TODO: check here for tree traversal: Color is somtimes min, sometimes max (weird)
-            if(node.children.isEmpty()||node.isWinPos||node.isWinNext){
+            if(node.children.isEmpty()||node.isWinPos||node.isWinMove){
                 return node;
             }
 
@@ -173,8 +173,8 @@ public class MCTS implements AI {
                 if (child.move==3534&&numberOfAllSimulations>=3000000){
                     int i = 0;
                 }
-                double nodeUCB= child.getNodeValueNew();
-                if (child.isWinPos||child.isWinNext){
+                double nodeUCB= child.getNodeValue();
+                if (child.isWinPos||child.isWinMove){
                      bestChild=child;
                      return  bestChild;
                 }
@@ -190,7 +190,7 @@ public class MCTS implements AI {
             if (bestChild.numberOfVisits<=1){
                 //check if win
                 bestChild.updateNode(moveGenerator);
-                if (bestChild.isWinPos||bestChild.isWinNext){
+                if (bestChild.isWinPos||bestChild.isWinMove){
                     return bestChild;
                 }
             }
@@ -211,7 +211,7 @@ public class MCTS implements AI {
      */
     public MCTSNode expandAndReturnRandomNode(MCTSNode node, MoveGenerator moveGenerator, Color color, LinkedList<Integer> children){
         for (int move:children){
-            node.children.add(new MCTSNode(node,move,moveGenerator, color));        //TODO Switch to new MCTSNode
+            node.children.add(new MCTSNode(node,move, color));        //TODO Switch to new MCTSNode
         }
         if (node.children.size()<=0){
             int i =0;
@@ -249,7 +249,7 @@ public class MCTS implements AI {
 //                int i =1;
 //            }
 
-            if (selectedNode.isWinNext){
+            if (selectedNode.isWinMove){
                 if (numberOfAllSimulations>=3000000){
                     int i=0;
                 }
