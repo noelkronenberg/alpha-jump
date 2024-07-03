@@ -8,7 +8,7 @@ import search.SearchConfig;
 import java.util.*;
 
 /**
- *  An implementation of a Minimax Search with Alpha-Beta Pruning,
+ *  An implementation of a Minimax Search for the game Jump Sturdy with Alpha-Beta Pruning,
  *  Aspiration Windows, Transposition Tables and a Quiescence Search.
  */
 public class Minimax_AB implements AI {
