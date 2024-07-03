@@ -6,7 +6,7 @@ import search.ab.Evaluation;
 
 import java.util.*;
 
-public class BasisKI_noAB implements KI {
+public class Minimax_noAB implements AI {
     static int maxAllowedDepth = 2;
 
     // derived parameters

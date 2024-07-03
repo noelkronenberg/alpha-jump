@@ -2,12 +2,12 @@ package search.ab;
 
 import game.Color;
 import game.MoveGenerator;
-import search.KI;
+import search.AI;
 import search.SearchConfig;
 
 import java.util.*;
 
-public class BasisKI implements KI {
+public class Minimax_AB implements AI {
     // hyperparameters (defaults)
     boolean timeCriterion = true;
     double timeLimit = bestConfig.timeLimit;
@@ -138,7 +138,7 @@ public class BasisKI implements KI {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
 
         // rate current position without moving
-        double standPat = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth, fen, new LinkedHashMap<>(), currentColor);
+        double standPat = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth, fen, new LinkedHashMap<>(), currentColor);
 
         // beta cutoff
         if (standPat >= beta) {
@@ -281,7 +281,7 @@ public class BasisKI implements KI {
                 movesList = Evaluation.convertMovesToList(moves);
                 Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
-                score = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
+                score = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
                 ttData = new TranspositionTableObejct(score, movesList, depth);
 
                 } else {
@@ -298,7 +298,7 @@ public class BasisKI implements KI {
             movesList = Evaluation.convertMovesToList(moves);
             Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
-            score = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
+            score = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
             ttData = new TranspositionTableObejct(score, movesList, depth);
         }
 

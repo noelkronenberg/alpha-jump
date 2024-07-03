@@ -1,5 +1,4 @@
-package search.MCTS_BIB;
-import java.io.File;
+package search.mcts_lib;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -19,15 +18,15 @@ public class OpeningBookGenerator {
         MoveGenerator initialState = new MoveGenerator();
         initialState.initializeBoard(board);
         initialState.printBoard(false);
-        MCTS_BIB mcts = new MCTS_BIB();
+        MCTS_lib mcts = new MCTS_lib();
         
         // Im Folgenden den Block auskommentieren, welcher nicht erstellt werden soll
-        try (FileWriter writer = new FileWriter("src/main/java/search/MCTS_BIB/opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
+        try (FileWriter writer = new FileWriter("src/main/java/search/MCTS_lib/opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
             generateOpeningBookStarting(initialState, mcts, writer, startingPlayer, 0);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*try (FileWriter writer = new FileWriter("src/main/java/search/MCTS_BIB/opening_book_secondMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
+        /*try (FileWriter writer = new FileWriter("src/main/java/search/MCTS_lib/opening_book_secondMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
             generateOpeningBookSecond(initialState, mcts, writer, startingPlayer, 0);
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,7 +34,7 @@ public class OpeningBookGenerator {
     }
     
 
-    private static void generateOpeningBookStarting(MoveGenerator moveGenerator, MCTS_BIB mcts, FileWriter writer, Color player, int depth) throws IOException {
+    private static void generateOpeningBookStarting(MoveGenerator moveGenerator, MCTS_lib mcts, FileWriter writer, Color player, int depth) throws IOException {
         if (depth == DEPTH) {
             return;
         }
@@ -45,7 +44,7 @@ public class OpeningBookGenerator {
     
         // finde und notiere den besten Zug in der aktuellen Position und resette das Board danach
         String fenStorage = moveGenerator.getFenFromBoard();
-        int bestMove = MCTS_BIB.runMCTS(moveGenerator, player, mctsIterations);
+        int bestMove = MCTS_lib.runMCTS(moveGenerator, player, mctsIterations);
         moveGenerator.initializeBoard(fenStorage);
     
         // Zug ausführen und Ausgangsboard speichern
@@ -65,7 +64,7 @@ public class OpeningBookGenerator {
             String fenAfterOppMove = moveGenerator.getFenFromBoard();
     
             // finde den besten Gegenzug auf den Zug des Gegners
-            int bestResponseMove = MCTS_BIB.runMCTS(moveGenerator, player, mctsIterations);
+            int bestResponseMove = MCTS_lib.runMCTS(moveGenerator, player, mctsIterations);
             String bestResponseFEN = MoveGenerator.convertMoveToFEN(bestResponseMove);
             
             //Position und besten Zug in Dokument eintragen
@@ -87,7 +86,7 @@ public class OpeningBookGenerator {
         moveGenerator.initializeBoard(fenStorage);
     }
 
-    private static void generateOpeningBookSecond(MoveGenerator moveGenerator, MCTS_BIB mcts, FileWriter writer, Color player, int depth) throws IOException {
+    private static void generateOpeningBookSecond(MoveGenerator moveGenerator, MCTS_lib mcts, FileWriter writer, Color player, int depth) throws IOException {
         if (depth == DEPTH) {
             return;
         }
@@ -111,7 +110,7 @@ public class OpeningBookGenerator {
             String fenAfterOppMove = moveGenerator.getFenFromBoard();
     
             // finde den besten Gegenzug auf den Zug des Gegners
-            int bestResponseMove = MCTS_BIB.runMCTS(moveGenerator, player, mctsIterations);
+            int bestResponseMove = MCTS_lib.runMCTS(moveGenerator, player, mctsIterations);
             String bestResponseFEN = MoveGenerator.convertMoveToFEN(bestResponseMove);
             
             //Position und besten Zug in Dokument eintragen

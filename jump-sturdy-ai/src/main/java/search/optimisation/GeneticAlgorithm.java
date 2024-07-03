@@ -2,7 +2,7 @@ package search.optimisation;
 
 import game.Color;
 import game.MoveGenerator;
-import search.ab.BasisKI;
+import search.ab.Minimax_AB;
 import search.ab.Evaluation;
 
 import java.io.File;
@@ -97,8 +97,8 @@ public class GeneticAlgorithm {
      * @return The score achieved in the simulated game.
      */
     public static double playGame() {
-        BasisKI ki = new BasisKI();
-        BasisKI.bestConfig.timeLimit = 1000; // reduce time for speed
+        Minimax_AB ai = new Minimax_AB();
+        Minimax_AB.bestConfig.timeLimit = 1000; // reduce time for speed
         String bestMove;
 
         String fen = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
@@ -110,7 +110,7 @@ public class GeneticAlgorithm {
         int moveCount = 0;
 
         while (!gameOver) {
-            bestMove = ki.orchestrator(fen,  BasisKI.bestConfig); // get best move
+            bestMove = ai.orchestrator(fen,  Minimax_AB.bestConfig); // get best move
 
             // convert move
             int[] bestMoveInts = gameState.convertStringToPosWrapper(bestMove);
@@ -217,7 +217,7 @@ public class GeneticAlgorithm {
      */
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/search/optimisation/GA-output.txt"));
+            PrintStream fileOut = new PrintStream(new File("src/main/java/search/optimisation/GA-Debugger-output.txt"));
             System.setOut(fileOut);
 
             List<Individual> population = new ArrayList<>();

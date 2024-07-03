@@ -1,10 +1,11 @@
 package communication;
 
-import search.ab.BasisKI;
+import search.ab.Minimax_AB;
 
 import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -29,13 +30,13 @@ public class Connection {
      * @param isPlayer Indicates if the player is a human player (true) or AI (false).
      */
     public void connect(boolean isPlayer) {
-        BasisKI ki = new BasisKI();
+        Minimax_AB ai = new Minimax_AB();
         String serverAddress = "localhost";
         int port = 5555;
 
         double overall = 115000.0; // overall time (in ms)
         int averageMoves = 40;
-        BasisKI.bestConfig.timeLimit = overall / averageMoves; // set time for move (in ms)
+        Minimax_AB.bestConfig.timeLimit = overall / averageMoves; // set time for move (in ms)
 
         try (Socket server = new Socket(serverAddress, port)) {
 
@@ -107,14 +108,14 @@ public class Connection {
 
                                 // check for dynamic time management
                                 if (moveCounter <= 6 || (31 < moveCounter && moveCounter <= 39)) {
-                                    BasisKI.bestConfig.timeLimit = (overall * 0.2) / 15;
+                                    Minimax_AB.bestConfig.timeLimit = (overall * 0.2) / 15;
                                 } else if (timeLeft <= 5000) {
-                                    BasisKI.bestConfig.timeLimit = (timeLeft * 0.5);
+                                    Minimax_AB.bestConfig.timeLimit = (timeLeft * 0.5);
                                 } else {
-                                    BasisKI.bestConfig.timeLimit = (overall * 0.8) / 25;
+                                    Minimax_AB.bestConfig.timeLimit = (overall * 0.8) / 25;
                                 }
 
-                                this.move = ki.orchestrator(fen, BasisKI.bestConfig);
+                                this.move = ai.orchestrator(fen, Minimax_AB.bestConfig);
                                 moveCounter++;
                             }
 

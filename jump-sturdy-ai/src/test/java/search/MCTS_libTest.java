@@ -1,30 +1,27 @@
 package search;
 
+import game.Color;
 import game.MoveGenerator;
-import search.MCTS_BIB.MCTS_BIB;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import search.mcts_lib.MCTS_lib;
 
+import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
+public class MCTS_libTest {
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import game.Color;
-
-public class MCTSTest_BIB {
-
-    /*static MoveGenerator moveGenerator;
-    static MCTS_BIB mcts;
+    /*
+    static MoveGenerator moveGenerator;
+    static MCTS_lib mcts;
     static Color color = Color.BLUE;
     static int iterations = 450000;
 
     @BeforeAll
     public static void init() {
         moveGenerator = new MoveGenerator();
-        mcts = new MCTS_BIB();
+        mcts = new MCTS_lib();
     }
 
     public void testPosition(String fen, String... expectedAnswers) {

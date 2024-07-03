@@ -1,11 +1,12 @@
 package benchmark;
 
-import search.ab.BasisKI;
+import search.ab.Minimax_AB;
 
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_LongestLine;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import search.SearchConfig;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -13,17 +14,17 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Benchmarking class for the BasisKI.
+ * Benchmarking class for the Minimax_AB.
  */
-public class BasisKIBM {
+public class Minimax_ABBM {
 
-    static BasisKI ki;
+    static Minimax_AB ai;
 
     /**
-     * Initializes the BasisKI instance.
+     * Initializes the Minimax_AB instance.
      */
     static void init() {
-        ki = new BasisKI();
+        ai = new Minimax_AB();
     }
 
     /**
@@ -140,11 +141,11 @@ public class BasisKIBM {
     private static Result generateBestMoveResultTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime) {
         init();
         SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false);
-        String bestMove = ki.orchestrator(fen, config);
-        int depth = ki.maxDepth;
-        int uniquePositions = ki.positionsHM.size();
+        String bestMove = ai.orchestrator(fen, config);
+        int depth = ai.maxDepth;
+        int uniquePositions = ai.positionsHM.size();
         int positions = 0;
-        for (Map.Entry<String, Integer> entry : ki.positionsHM.entrySet()) {
+        for (Map.Entry<String, Integer> entry : ai.positionsHM.entrySet()) {
             positions += entry.getValue();
         }
         return new Result(bestMove, depth, uniquePositions, positions);
@@ -166,7 +167,7 @@ public class BasisKIBM {
         SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false);
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
-            ki.orchestrator(fen, config);
+            ai.orchestrator(fen, config);
         }
         double endTime = System.nanoTime();
         double duration = ((endTime - startTime) / iterations) / 1e6; // convert to milliseconds
@@ -221,7 +222,7 @@ public class BasisKIBM {
      */
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/BasisKIBM-output.txt"));
+            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/Minimax_ABBM-output.txt"));
             System.setOut(fileOut);
 
             System.out.println("Start Position: ");

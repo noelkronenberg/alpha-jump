@@ -5,29 +5,31 @@ import game.MoveGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import search.ab.BasisKI;
-import search.mcts.MCTSKI;
+import search.ab.Minimax_AB;
+import search.mcts.MCTS;
 
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * JUnit test class for BasisKI.
+ * JUnit test class for Minimax_AB.
  */
-public class BasisKITest {
+public class Minimax_ABTest {
 
-    static BasisKI ki;
-    static SearchConfig config = BasisKI.bestConfig;
+    static Minimax_AB ai;
+    static SearchConfig config = Minimax_AB.bestConfig;
 
-    static MCTSKI kiMCTS;
+    static MCTS ai_MCTS;
 
     /**
-     * Initializes the BasisKI instances before all test methods.
+     * Initializes the Minimax_AB instances before all test methods.
      */
     @BeforeAll
     public static void init() {
-        ki = new BasisKI();
-        kiMCTS = new MCTSKI();
+        ai = new Minimax_AB();
+        config.timeCriterion = true;
+        config.timeLimit = 2000;
+        // aiMCTS = new MCTS();
     }
 
     /**
@@ -38,11 +40,11 @@ public class BasisKITest {
     @DisplayName("Anzahl untersuchter Züge (mit händischen Beweis)")
     public void anzahlSanityCheck() {
         init();
-        SearchConfig config = BasisKI.bestConfig;
+        SearchConfig config = Minimax_AB.bestConfig;
         config.timeCriterion = false;
         config.maxAllowedDepth = 2;
-        ki.orchestrator("6/8/8/3r04/4b03/8/8/6 b", config);
-        assertEquals(ki.positionsHM.size(), 13);
+        ai.orchestrator("6/8/8/3r04/4b03/8/8/6 b", config);
+        assertEquals(ai.positionsHM.size(), 13);
     }
 
     /**
@@ -54,7 +56,7 @@ public class BasisKITest {
     private void testMoves(String fen, String... expectedMoves) {
         init();
 
-        String answer = ki.orchestrator(fen, config);
+        String answer = ai.orchestrator(fen, config);
         boolean matchFound = false;
         for (String expectedMove : expectedMoves) {
             if (expectedMove.equals(answer)) {
@@ -75,7 +77,7 @@ public class BasisKITest {
      */
     private void testMoves(String fen, String expectedMove) {
         init();
-        String answer = ki.orchestrator(fen, config);
+        String answer = ai.orchestrator(fen, config);
         assertEquals(expectedMove, answer);
         System.out.println(answer);
     }

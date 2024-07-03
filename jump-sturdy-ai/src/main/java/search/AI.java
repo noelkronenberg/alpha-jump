@@ -3,7 +3,7 @@ package search;
 /**
  * Interface for defining an AI.
  */
-public interface KI {
+public interface AI {
 
     /**
      * Orchestrates the AI on the given FEN position and search configuration.

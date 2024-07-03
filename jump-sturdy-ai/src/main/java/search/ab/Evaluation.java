@@ -117,7 +117,7 @@ public class Evaluation {
      * @param moves The opponent's moves represented as a map of combined integer start and end positions.
      * @return The computed score for the player in the current position.
      */
-    public static double getScoreWrapperKI(MoveGenerator moveGenerator, Color player, double depth, LinkedHashMap<Integer, List<Integer>> moves) { 
+    public static double getScoreWrapperAI(MoveGenerator moveGenerator, Color player, double depth, LinkedHashMap<Integer, List<Integer>> moves) {
         double score = 0;
         double weight;
 
@@ -204,19 +204,19 @@ public class Evaluation {
      * @param currentColor The current color of the AI player.
      * @return The rating of the current position for the specified player.
      */
-    public static double ratePositionKI(MoveGenerator moveGenerator, Color color, int depth, String fen, LinkedHashMap<Integer,List<Integer>> moves, Color currentColor) {
+    public static double ratePositionAI(MoveGenerator moveGenerator, Color color, int depth, String fen, LinkedHashMap<Integer,List<Integer>> moves, Color currentColor) {
         double score = 0;
 
         // TODO: difference between ourColor / currentColor
 
         if (color == Color.BLUE && currentColor != color) {
-            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE));
+            score = getScoreWrapperAI(moveGenerator, Color.BLUE, depth, moves) - getScoreWrapperAI(moveGenerator, Color.RED, depth, moveGenerator.generateMaxOnePossibleMoveForAI(Color.BLUE));
         } else if (color == Color.BLUE && currentColor == color) {
-            score = getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED)) - getScoreWrapperKI(moveGenerator, Color.RED, depth, moves);
+            score = getScoreWrapperAI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForAI(Color.RED)) - getScoreWrapperAI(moveGenerator, Color.RED, depth, moves);
         } else if (color == Color.RED && currentColor != color) {
-            score = getScoreWrapperKI(moveGenerator, Color.RED, depth, moves) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.RED));
+            score = getScoreWrapperAI(moveGenerator, Color.RED, depth, moves) - getScoreWrapperAI(moveGenerator, Color.BLUE, depth,moveGenerator.generateMaxOnePossibleMoveForAI(Color.RED));
         } else {
-            score = getScoreWrapperKI(moveGenerator, Color.RED, depth,moveGenerator.generateMaxOnePossibleMoveForKI(Color.BLUE)) - getScoreWrapperKI(moveGenerator, Color.BLUE, depth, moves);
+            score = getScoreWrapperAI(moveGenerator, Color.RED, depth,moveGenerator.generateMaxOnePossibleMoveForAI(Color.BLUE)) - getScoreWrapperAI(moveGenerator, Color.BLUE, depth, moves);
         }
 
         return score;

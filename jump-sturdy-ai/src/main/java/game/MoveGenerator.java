@@ -29,7 +29,6 @@ public class MoveGenerator {
         return protectedPieces;
     }
 
-
     // START: board basics
 
     /**
@@ -44,7 +43,6 @@ public class MoveGenerator {
             }
         }
     }
-
 
     /**
      * Set the color board.
@@ -837,7 +835,7 @@ public class MoveGenerator {
      * @param color The color of pieces for which moves are to be generated (RED or BLUE).
      * @return A map containing one piece combined integer position and its corresponding list of possible target positions.
      */
-    public LinkedHashMap<Integer, List<Integer>> generateMaxOnePossibleMoveForKI(Color color) {
+    public LinkedHashMap<Integer, List<Integer>> generateMaxOnePossibleMoveForAI(Color color) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
         totalPossibleMoves = 0;
         protectedPieces = 0;
@@ -868,20 +866,19 @@ public class MoveGenerator {
         if (color == Color.RED) {
             if (doesBaseRowContainColor(color,0)) {
                 return false;
-            } else if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+            } else if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForAI(color).isEmpty()) {
                 return true;
             }
         }
         else {
             if (doesBaseRowContainColor(color,7)) {
                 return false;
-            } else if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+            } else if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForAI(color).isEmpty()) {
                 return true;
             }
         }
         return false;
     }
-
 
     /**
      * Checks if the game is over for a specific color after a given move.
@@ -939,7 +936,7 @@ public class MoveGenerator {
      * @param moves A map of possible moves where keys are combined integer positions and values are lists of target positions.
      * @return True if the game is over for either color, false otherwise.
      */
-    public boolean isGameOverMCTS_Bib(LinkedHashMap<Integer, List<Integer>> moves) {
+    public boolean isGameOverMCTS_lib(LinkedHashMap<Integer, List<Integer>> moves) {
         //returns true if somebody has won in that position
         if (doesBaseRowContainColor(Color.RED, 0) || doesBaseRowContainColor(Color.BLUE, 7) || moves.isEmpty()) {
             return true;
@@ -974,12 +971,12 @@ public class MoveGenerator {
      */
     public boolean isWinForMCTS(Color color) {
         if (color == Color.RED) {
-            if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+            if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForAI(color).isEmpty()) {
                 return true;
             }
         }
         else {
-            if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
+            if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForAI(color).isEmpty()) {
                 return true;
             }
         }
