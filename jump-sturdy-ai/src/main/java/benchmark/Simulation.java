@@ -6,6 +6,10 @@ import search.*;
 import search.ab.Minimax_AB;
 import search.mcts.MCTS;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
 /**
  * Simulation of full games between two AIs.
  */
@@ -120,21 +124,36 @@ public class Simulation {
 
     /**
      * Main method to run a simulation between two AIs using predefined configurations and an initial board state.
+     * Prints results to a file.
      *
      * @param args Command line arguments (not used).
      */
     public static void main(String[] args) {
-        AI firstAI = new Minimax_AB();
-        SearchConfig firstConfig = Minimax_AB.bestConfig;
-        firstConfig.timeLimit = 200.0;
+        try {
+            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/Simulation-output.txt"));
+            System.setOut(fileOut);
 
-        AI secondAI = new MCTS();
-        SearchConfig secondConfig = Minimax_AB.bestConfig;
-        secondConfig.timeLimit = 200.0;
+            // configuration of first AI
+            AI firstAI = new Minimax_AB();
+            SearchConfig firstConfig = Minimax_AB.bestConfig;
+            firstConfig.timeLimit = 2000.0;
 
-        String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
-        int iterations = 4;
-        Simulation simulation = new Simulation();
-        simulation.simulate(secondAI, secondConfig, firstAI, firstConfig, initialFEN, iterations);
+            // configuration of second AI
+            AI secondAI = new MCTS();
+            SearchConfig secondConfig = Minimax_AB.bestConfig;
+            secondConfig.timeLimit = 2000.0;
+
+            // configuration of simulation
+            String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
+            int iterations = 4;
+
+            // start simulation
+            Simulation simulation = new Simulation();
+            simulation.simulate(secondAI, secondConfig, firstAI, firstConfig, initialFEN, iterations);
+
+            fileOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

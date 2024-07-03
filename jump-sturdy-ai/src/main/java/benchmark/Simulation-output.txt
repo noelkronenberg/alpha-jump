@@ -1,0 +1,6 @@
+Winner of iteration 1 is: AI 1
+Winner of iteration 2 is: AI 1
+Winner of iteration 3 is: AI 1
+Winner of iteration 4 is: AI 1
+First AI wins: 4
+Second AI wins: 0
