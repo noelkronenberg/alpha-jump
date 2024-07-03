@@ -28,7 +28,7 @@ public class Minimax_ABTest {
     public static void init() {
         ai = new Minimax_AB();
         config.timeCriterion = true;
-        config.timeLimit = 3000;
+        config.timeLimit = 5000;
         // aiMCTS = new MCTS();
     }
 
