@@ -76,7 +76,7 @@ public class MCTS implements AI {
 
         Color color = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
 
-        MCTSNode node = expandAndReturnRandomNodeNew(parentNode,gameState,color,movesList);
+        MCTSNode node = expandAndReturnRandomNode(parentNode,gameState,color,movesList);
 
         //MCTSNode node =expandAndReturnRandomNode(parentNode,gameState,color);
         int reward = simulateToEnd(color,gameState,ourColor);
@@ -193,7 +193,7 @@ public class MCTS implements AI {
 //        return selectedChild;
 //    }
 
-    public MCTSNode expandAndReturnRandomNodeNew(MCTSNode node, MoveGenerator moveGenerator, Color color, LinkedList<Integer> children){
+    public MCTSNode expandAndReturnRandomNode(MCTSNode node, MoveGenerator moveGenerator, Color color, LinkedList<Integer> children){
         for (int move:children){
             node.children.add(new MCTSNode(node,move,moveGenerator, color));        //TODO Switch to new MCTSNode
         }
@@ -250,7 +250,7 @@ public class MCTS implements AI {
             //generate possible moves:
             LinkedList<Integer> moves = Evaluation.convertMovesToList(moveGenerator.generateAllPossibleMoves(selectedNode.color));
             if (moves.size()>0) {
-                MCTSNode nodeToRollout = expandAndReturnRandomNodeNew(selectedNode, moveGenerator, color, moves);
+                MCTSNode nodeToRollout = expandAndReturnRandomNode(selectedNode, moveGenerator, color, moves);
                 int reward = simulateToEnd(nodeToRollout.color, moveGenerator, parentColor);               //maybe random reward?
                 propagateDataToRoot(nodeToRollout, reward, nodeToRollout.color);
             }

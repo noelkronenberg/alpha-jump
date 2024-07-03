@@ -109,7 +109,7 @@ public class Minimax_noAB implements AI {
         Evaluation.orderMoves(movesList, currentColor, gameState); // order moves
 
 
-        double score = Evaluation.ratePosition(gameState, ourColor, currentDepth, fen);
+        double score = Evaluation.ratePosition(gameState, ourColor, currentDepth);
 
         // save position
         if (positionsHM.containsKey(fen)){
