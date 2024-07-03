@@ -8,31 +8,50 @@ import game.Color;
 import game.MoveGenerator;
 import search.ab.Evaluation;
 
+/**
+ * creates a library-file for the first 3 moves with the best response-move for every possible move of the opponent using the MCTS-algorithm
+ */
 public class OpeningBookGenerator extends Thread {
     private final int DEPTH = 3;
     private Color startingPlayer = Color.BLUE;
     public String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
 
     public static void main(String[] args) {
+        OpeningBookGenerator openingBookGenerator = new OpeningBookGenerator();
+        openingBookGenerator.runOPG();
+    }
+
+    /**
+     * runs the openingBookGenerator
+     */
+    public void runOPG() {
         MCTS_lib mcts = new MCTS_lib();
-        OpeningBookGenerator obg = new OpeningBookGenerator();
         MoveGenerator initialState = new MoveGenerator();
-        initialState.initializeBoard(obg.board);
+        initialState.initializeBoard(board);
         initialState.printBoard(false);
         
         // Im Folgenden den Block auskommentieren, welcher nicht erstellt werden soll
         try (FileWriter writer = new FileWriter("jump-sturdy-ai/src/main/java/search/mcts_lib/opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
-            obg.orchestrater(initialState, mcts, writer, obg.startingPlayer, 0, true);
+            orchestrater(initialState, mcts, writer, startingPlayer, 0, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
         try (FileWriter writer = new FileWriter("src/main/java/search/MCTS_lib/opening_book_secondMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
-            obg.orchestrater(initialState, mcts, writer, obg.startingPlayer, 0, false);
+            orchestrater(initialState, mcts, writer, startingPlayer, 0, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 
+     * @param moveGenerator given Movegenerator to play the movelines on
+     * @param mcts given mcts-instance to use the mcts-methods 
+     * @param writer given writer to write in the right document
+     * @param player color of player to move
+     * @param depth starting depth (which should be 0)
+     * @param isStartingMoveLib boolean which decides if the library starts with own first move or opponents first move
+     */
     private void orchestrater(MoveGenerator moveGenerator, MCTS_lib mcts, FileWriter writer, Color player, int depth, boolean isStartingMoveLib) {
         // Startet die Eröffnungsbibliothek entweder mit Startzug oder ohne
         if (depth == DEPTH) {
@@ -106,6 +125,18 @@ public class OpeningBookGenerator extends Thread {
         }
     }
     
+    /**
+     * 
+     * @param moveGenerator given Movegenerator to play the movelines on
+     * @param mcts given mcts-instance to use the mcts-methods 
+     * @param writer given writer to write in the right document
+     * @param player color of player to move
+     * @param depth current depth of moves
+     * @param fenStorage string which defines the current position of the game
+     * @param possMovesOppList list of possible opponents moves
+     * @param start int to define first move in opponents Movelist to be examined by current thread
+     * @param end int to define last move in opponents Movelist to be examined by current thread
+     */
     private void processMoves(MoveGenerator moveGenerator, MCTS_lib mcts, FileWriter writer, Color player, int depth, String fenStorage, List<Integer> possMovesOppList, int start, int end) {
         for (int moveCounter = start; moveCounter < end; moveCounter++) {
             // den variablen Gegenzug des Gegners eintragen
@@ -144,6 +175,15 @@ public class OpeningBookGenerator extends Thread {
         }
     }
 
+    /**
+     * 
+     * @param moveGenerator given Movegenerator to play the movelines on
+     * @param mcts given mcts-instance to use the mcts-methods 
+     * @param writer given writer to write in the right document
+     * @param player color of player to move
+     * @param depth current depth of moves
+     * @throws IOException when there problems occur while trying to write into the writer-file
+     */
     private void generateOpeningBook(MoveGenerator moveGenerator, MCTS_lib mcts, FileWriter writer, Color player, int depth) throws IOException {
         if (depth == DEPTH) {
             return;
