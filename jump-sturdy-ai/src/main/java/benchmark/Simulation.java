@@ -170,7 +170,7 @@ public class Simulation {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
             String timestamp = dateFormat.format(new Date());
             String filename = timestamp + "-simulation-output" + ".txt";
-            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/" + filename));
+            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/output/" + filename));
             System.setOut(fileOut);
 
             // configuration of first AI (CAN BE CHANGED)
