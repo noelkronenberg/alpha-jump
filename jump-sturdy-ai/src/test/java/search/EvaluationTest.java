@@ -43,9 +43,9 @@ public class EvaluationTest {
     private void testPositionComparison(String fen1, Color color1, String fen2, Color color2) {
         init();
         moveGenerator.initializeBoard(fen1);
-        double score1 = evaluator.ratePosition(moveGenerator, color1,1);
+        double score1 = evaluator.ratePosition(moveGenerator, color1,1,fen1);
         moveGenerator.initializeBoard(fen2);
-        double score2 = evaluator.ratePosition(moveGenerator, color2,1);
+        double score2 = evaluator.ratePosition(moveGenerator, color2,1,fen1);
         assertTrue(score1 < score2, "Expected position 2 to be rated higher than position 1");
     }
 
@@ -54,7 +54,7 @@ public class EvaluationTest {
         moveGenerator.initializeBoard(fen);
         char colorFen = fen.charAt(fen.length() - 1);
         Color color = getColorFromFen(colorFen);
-        double rated = evaluator.rateMove(moveGenerator, color, startPosition, endPosition,1);
+        double rated = evaluator.rateMove(moveGenerator, color, startPosition, endPosition,1, fen);
         assertEquals(expectedRating, rated);
     }
 
@@ -63,7 +63,7 @@ public class EvaluationTest {
         moveGenerator.initializeBoard(fen);
         char colorFen = fen.charAt(fen.length() - 1);
         Color color = getColorFromFen(colorFen);
-        double rated = evaluator.rateMove(moveGenerator, color, startPosition, endPosition,1);
+        double rated = evaluator.rateMove(moveGenerator, color, startPosition, endPosition,1,fen);
         assertTrue(rated >= 50000);
     }
 
@@ -71,14 +71,14 @@ public class EvaluationTest {
     private void testPositionRating(String fen, Color color, double expectedScore) {
         init();
         moveGenerator.initializeBoard(fen);
-        double score = evaluator.ratePosition(moveGenerator, color,1);
+        double score = evaluator.ratePosition(moveGenerator, color,1,fen);
         assertEquals(expectedScore, score);
     }
 
     private void testPositionRating(String fen, Color color, boolean win) {
         init();
         moveGenerator.initializeBoard(fen);
-        double score = evaluator.ratePosition(moveGenerator, color,1);
+        double score = evaluator.ratePosition(moveGenerator, color,1,fen);
         assertTrue(score >= 50000);
     }
 
@@ -93,8 +93,8 @@ public class EvaluationTest {
         Color color = getColorFromFen(colorFen);
         String boardFen = fen.substring(0,fen.length()-2);
 
-        double rating1 = evaluator.rateMove(moveGenerator, color, startPosition1, endPosition1,1);
-        double rating2 = evaluator.rateMove(moveGenerator, color, startPosition2, endPosition2,1);
+        double rating1 = evaluator.rateMove(moveGenerator, color, startPosition1, endPosition1,1,boardFen);
+        double rating2 = evaluator.rateMove(moveGenerator, color, startPosition2, endPosition2,1,boardFen);
 
         assertTrue(rating1 > rating2, "Expected move rating (" + rating1 + ") to be higher than (" + rating2 + ")");
     }

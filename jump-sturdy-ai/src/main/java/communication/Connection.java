@@ -1,18 +1,14 @@
 package communication;
 
-import search.ab.Minimax_AB;
+import search.ab.BasisKI;
 
 import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
-/**
- * Handles connection and communication with the game server.
- */
 public class Connection {
 
     int player;
@@ -24,19 +20,14 @@ public class Connection {
     long currentTime = 0;
     long timeLeft = 120000;
 
-    /**
-     * Connects to the game server and manages game play.
-     *
-     * @param isPlayer Indicates if the player is a human player (true) or AI (false).
-     */
     public void connect(boolean isPlayer) {
-        Minimax_AB ai = new Minimax_AB();
+        BasisKI ki = new BasisKI();
         String serverAddress = "localhost";
         int port = 5555;
 
         double overall = 115000.0; // overall time (in ms)
         int averageMoves = 40;
-        Minimax_AB.bestConfig.timeLimit = overall / averageMoves; // set time for move (in ms)
+        BasisKI.bestConfig.timeLimit = overall / averageMoves; // set time for move (in ms)
 
         try (Socket server = new Socket(serverAddress, port)) {
 
@@ -108,14 +99,14 @@ public class Connection {
 
                                 // check for dynamic time management
                                 if (moveCounter <= 6 || (31 < moveCounter && moveCounter <= 39)) {
-                                    Minimax_AB.bestConfig.timeLimit = (overall * 0.2) / 15;
+                                    BasisKI.bestConfig.timeLimit = (overall * 0.2) / 15;
                                 } else if (timeLeft <= 5000) {
-                                    Minimax_AB.bestConfig.timeLimit = (timeLeft * 0.5);
+                                    BasisKI.bestConfig.timeLimit = (timeLeft * 0.5);
                                 } else {
-                                    Minimax_AB.bestConfig.timeLimit = (overall * 0.8) / 25;
+                                    BasisKI.bestConfig.timeLimit = (overall * 0.8) / 25;
                                 }
 
-                                this.move = ai.orchestrator(fen, Minimax_AB.bestConfig);
+                                this.move = ki.orchestrator(fen, BasisKI.bestConfig);
                                 moveCounter++;
                             }
 
@@ -151,12 +142,6 @@ public class Connection {
         }
     }
 
-    /**
-     * Main method to start the connection and game play.
-     *
-     * @param args Command line arguments (not used).
-     * @throws InterruptedException if the main thread is interrupted.
-     */
     public static void main(String[] args) throws InterruptedException {
         Connection player1 = new Connection();
         player1.connect(false); // only for single player

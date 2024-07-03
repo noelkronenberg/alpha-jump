@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.*;
 
-/**
- * Responsible for managing the Jump Sturdy game logic.
- */
 public class MoveGenerator {
 
     Piece[][] pieceBoard;
@@ -29,13 +26,9 @@ public class MoveGenerator {
         return protectedPieces;
     }
 
+
     // START: board basics
 
-    /**
-     * Set the piece board.
-     *
-     * @param givenPieceBoard The piece board to set.
-     */
     public void setPieceBoard(Piece[][] givenPieceBoard) {
         for (int row = 0; row < pieceBoard.length; row++) {
             for (int col = 0; col < pieceBoard[row].length; col++) {
@@ -44,11 +37,6 @@ public class MoveGenerator {
         }
     }
 
-    /**
-     * Set the color board.
-     *
-     * @param givenColorBoard The color board to set.
-     */
     public void setColorBoard(Color[][] givenColorBoard) {
         for (int row = 0; row < colorBoard.length; row++) {
             for (int col = 0; col < colorBoard[row].length; col++) {
@@ -57,9 +45,6 @@ public class MoveGenerator {
         }
     }
 
-    /**
-     * Initialize the board(s) with starting position.
-     */
     public void initializeBoard() {
         pieceBoard = new Piece[8][8];
         colorBoard = new Color[8][8];
@@ -138,11 +123,6 @@ public class MoveGenerator {
 
     }
 
-    /**
-     * Initialize the board based on the provided FEN string.
-     *
-     * @param fen The FEN string representing the board state.
-     */
     public void initializeBoard(String fen) {
         pieceBoard = new Piece[8][8];
         colorBoard = new Color[8][8];
@@ -218,9 +198,6 @@ public class MoveGenerator {
         }
     }
 
-    /**
-     * Fill board edges with null values.
-     */
     void fillBoardEdges() {
         pieceBoard[0][0] = null;
         colorBoard[0][0] = null;
@@ -232,11 +209,6 @@ public class MoveGenerator {
         colorBoard[7][7] = null;
     }
 
-    /**
-     * Get the FEN string representation of the current board state.
-     *
-     * @return The FEN string.
-     */
     public String getFenFromBoard() {
         boolean isCounting = false;
         int counter = 0;
@@ -292,12 +264,6 @@ public class MoveGenerator {
         return s;
     }
 
-    /**
-     * Get the color from a character representation.
-     *
-     * @param c The character representing the color ('r' for RED, 'b' for BLUE).
-     * @return The corresponding Color enum value.
-     */
     public Color getColor(char c) {
         if (c == 'r') {
             return Color.RED;
@@ -306,47 +272,22 @@ public class MoveGenerator {
         }
     }
 
-    /**
-     * Get the piece color at a specific position on the board.
-     *
-     * @param position The position (row * 10 + column) on the board.
-     * @return The piece color at the specified position.
-     */
     public Color getColorAtPosition(int position) {
         int row = position / 10;
         int column = position % 10;
         return colorBoard[row][column];
     }
 
-    /**
-     * Get the piece at a specific position on the board.
-     *
-     * @param position The position (row * 10 + column) on the board.
-     * @return The piece at the specified position.
-     */
     public Piece getPieceAtPosition(int position) {
         int row = position / 10;
         int column = position % 10;
         return pieceBoard[row][column];
     }
 
-    /**
-     * Convert row and column indices to a combined integer position.
-     *
-     * @param row The row index.
-     * @param column The column index.
-     * @return The combined position (row * 10 + column).
-     */
     private int convertToNumber(int row, int column) {
         return row * 10 + column;
     }
 
-    /**
-     * Convert a combined integer position to a string representation.
-     *
-     * @param rowAndColInt The combined integer position (row * 10 + column).
-     * @return The string representation of the position.
-     */
     public static String convertPosToString(int rowAndColInt) {
         int col = rowAndColInt % 10;
         int row = rowAndColInt / 10;
@@ -354,24 +295,12 @@ public class MoveGenerator {
         return colString + (row + 1);
     }
 
-    /**
-     * Convert a combined integer move to FEN notation.
-     *
-     * @param move The move as a combined integer (from * 100 + to).
-     * @return The move in FEN notation.
-     */
     public static String convertMoveToFEN(int move) {
         int from = move / 100;
         int to = move % 100;
         return convertPosToString(from) + "-" +  convertPosToString(to);
     }
 
-    /**
-     * Convert a string position to a combined integer position.
-     *
-     * @param pos The string position.
-     * @return The combined integer position (row * 10 + column).
-     */
     public static int convertStringToPos(String pos) {
         char col=pos.charAt(0);
         char row=pos.charAt(1);
@@ -382,12 +311,6 @@ public class MoveGenerator {
         return rowInt * 10 + colInt;
     }
 
-    /**
-     * Convert a FEN move to an array of two combined integer positions.
-     *
-     * @param position_string The FEN move.
-     * @return An array of two combined integer positions representing the start and end positions.
-     */
     public int[] convertStringToPosWrapper(String position_string) {
         String[] position_strings = position_string.split("-");
 
@@ -404,13 +327,6 @@ public class MoveGenerator {
 
     // START: move generation
 
-    /**
-     * Generates all possible moves for a piece at a given position and color.
-     *
-     * @param position The combined integer position of the piece (row * 10 + column).
-     * @param color The color of the piece (RED or BLUE).
-     * @return A list of all possible moves as combined integer positions (row * 10 + column).
-     */
     List<Integer> generatePossibleMoves(int position, Color color) {
         int row = position / 10;
         int column = position % 10;
@@ -439,7 +355,7 @@ public class MoveGenerator {
 
                     // left diagonal
                     if (column > 0 && colorBoard[row - 1][column - 1] == Color.BLUE) {
-                        int move = convertToNumber(row - 1, column - 1);
+                        int move=convertToNumber(row - 1, column - 1);
                         possibleMoves.add(move);
                         capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
@@ -451,7 +367,7 @@ public class MoveGenerator {
 
                     // right diagonal
                     if (column < 7 && colorBoard[row - 1][column + 1] == Color.BLUE) {
-                        int move = convertToNumber(row - 1, column + 1);
+                        int move=convertToNumber(row - 1, column + 1);
                         possibleMoves.add(move);
                         capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
                     }
@@ -465,7 +381,7 @@ public class MoveGenerator {
 
             // double piece
             else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
-                addKnightMoves(possibleMoves, row, column, color, position);
+                addKnightMoves(possibleMoves, row, column, color,position);
             }
 
             // remove invalid moves
@@ -519,7 +435,7 @@ public class MoveGenerator {
 
             // double piece
             else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
-                addKnightMoves(possibleMoves, row, column, color, position);
+                addKnightMoves(possibleMoves, row, column, color,position);
             }
 
             // remove invalid moves
@@ -530,15 +446,6 @@ public class MoveGenerator {
         return possibleMoves;
     }
 
-    /**
-     * Adds knight moves to the list of possible moves for a piece at a given position and color.
-     *
-     * @param possibleMoves The list to which valid knight moves will be added.
-     * @param row The current row of the piece.
-     * @param column The current column of the piece.
-     * @param color The color of the piece (RED or BLUE).
-     * @param position The combined integer position of the piece (row * 10 + column).
-     */
     private void addKnightMoves(List<Integer> possibleMoves, int row, int column, Color color, Integer position) {
 
         // possible moves
@@ -582,21 +489,13 @@ public class MoveGenerator {
             if (colorBoard[newRow][newColumn] == color) {
                 protectedPieces += 1;
             }
-
             // is attacking
-            else if (colorBoard[newRow][newColumn] != color && colorBoard[newRow][newColumn] != Color.EMPTY) {
+            else if (colorBoard[newRow][newColumn] != color && colorBoard[newRow][newColumn] != Color.EMPTY){
                 capturingHM.put((position * 100) + convertToNumber(newRow, newColumn), 1); // capturing move (for Evaluation)
             }
         }
     }
 
-    /**
-     * Checks if a move is valid for a piece of the given color.
-     *
-     * @param move The combined integer move to validate (position as row * 10 + column).
-     * @param pieceColor The color of the piece making the move (RED or BLUE).
-     * @return True if the move is valid, false otherwise.
-     */
     private boolean isValidMove(int move, Color pieceColor) {
         int row = move / 10;
         int column = move % 10;
@@ -610,12 +509,6 @@ public class MoveGenerator {
         return withinBorder & notCut & !own;
     }
 
-    /**
-     * Converts a map of possible combined integer moves to a formatted FEN string representation.
-     *
-     * @param possibleMoves A map where keys are positions and values are lists of possible target positions.
-     * @return A FEN string listing all moves.
-     */
     public static String convertAllMoves(Map<Integer, List<Integer>> possibleMoves) {
         // mapping for the columns
         Map<Integer, Character> columnMapping = Map.of(
@@ -645,12 +538,6 @@ public class MoveGenerator {
         return formattedOutput.toString();
     }
 
-    /**
-     * Retrieves a random move from a map of possible moves.
-     *
-     * @param moves A map where keys are combined integer starting positions and values are lists of possible target positions.
-     * @return A random FEN string move.
-     */
     public String getRandomMove(LinkedHashMap<Integer, List<Integer>> moves) {
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
@@ -665,13 +552,23 @@ public class MoveGenerator {
         return convertPosToString(randomPiece) + "-" + convertPosToString(randomPos);
     }
 
+    public int getRandomMoveInt(LinkedHashMap<Integer, List<Integer>> moves) {
+        Random generator =  new Random();
+        ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
 
-    /**
-     * Retrieves all possible moves for a given board FEN string.
-     *
-     * @param fen The FEN string representing the given board state.
-     * @return A map where keys are combined integer starting positions and values are lists of possible target positions.
-     */
+        if (allPieces.size() == 0) {
+            return 0;
+        }
+        int number = generator.nextInt(allPieces.size());
+        int randomPiece = allPieces.get(number);
+
+        List<Integer> allMoveToPos = moves.get(randomPiece);
+        number = generator.nextInt(allMoveToPos.size());
+
+        int randomPos = allMoveToPos.get(number);
+        return randomPiece * 100 + randomPos;
+    }
+
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
         Color color = this.getColor(color_fen);
@@ -685,13 +582,6 @@ public class MoveGenerator {
 
     // START: gameplay
 
-    /**
-     * Moves a piece from the combined integer start position to the end position on the board.
-     * Adjusts the state of the piece and its surroundings accordingly.
-     *
-     * @param start The combined integer starting position of the piece to be moved (row * 10 + column).
-     * @param end The combined integer ending position where the piece will be moved (row * 10 + column).
-     */
     public void movePiece(int start, int end) {
         Piece piece = this.getPieceAtPosition(start);
         Color color = this.getColorAtPosition(start);
@@ -743,12 +633,6 @@ public class MoveGenerator {
         }
     }
 
-    /**
-     * Moves a piece from a combined integer start end position.
-     * Adjusts the state of the piece and its surroundings accordingly.
-     *
-     * @param startEnd Combined integer representing both start and end positions (start * 100 + end).
-     */
     public void movePiece(int startEnd) {
         int start = startEnd / 100;
         int end = startEnd % 100;
@@ -802,12 +686,6 @@ public class MoveGenerator {
         }
     }
 
-    /**
-     * Generates all possible moves for a specific color.
-     *
-     * @param color The color of pieces for which moves are to be generated (RED or BLUE).
-     * @return A map where keys are piece combined integer positions and values are lists of possible target positions.
-     */
     public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMoves(Color color) {
         capturingHM= new HashMap<>();
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
@@ -829,13 +707,7 @@ public class MoveGenerator {
         return allPossibleMoves;
     }
 
-    /**
-     * Generates a maximum of one possible move for a given color.
-     *
-     * @param color The color of pieces for which moves are to be generated (RED or BLUE).
-     * @return A map containing one piece combined integer position and its corresponding list of possible target positions.
-     */
-    public LinkedHashMap<Integer, List<Integer>> generateMaxOnePossibleMoveForAI(Color color) {
+    public LinkedHashMap<Integer, List<Integer>> generateMaxOnePossibleMoveForKI(Color color) {
         LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
         totalPossibleMoves = 0;
         protectedPieces = 0;
@@ -856,37 +728,24 @@ public class MoveGenerator {
         return allPossibleMoves;
     }
 
-    /**
-     * Checks if the game is over for a specific color based on current board state.
-     *
-     * @param color The color of the pieces to check (RED or BLUE).
-     * @return True if the game is over for the specified color, false otherwise.
-     */
     public boolean isGameOver(Color color) {
         if (color == Color.RED) {
             if (doesBaseRowContainColor(color,0)) {
                 return false;
-            } else if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForAI(color).isEmpty()) {
+            } else if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
             }
         }
         else {
             if (doesBaseRowContainColor(color,7)) {
                 return false;
-            } else if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForAI(color).isEmpty()) {
+            } else if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
             }
         }
         return false;
     }
 
-    /**
-     * Checks if the game is over for a specific color after a given move.
-     *
-     * @param move The FEN string move made.
-     * @param color The color of the pieces to check (RED or BLUE).
-     * @return True if the game is over for the specified color, false otherwise.
-     */
     public boolean isGameOver(String move, Color color) {
         if (color == Color.RED) {
             if (doesBaseRowContainColor(color,0)) {
@@ -905,13 +764,6 @@ public class MoveGenerator {
         return false;
     }
 
-    /**
-     * Checks if the game is over for a specific color based on available moves.
-     *
-     * @param moves A map of possible moves where keys are combined integer positions and values are lists of target positions.
-     * @param color The color of the pieces to check (RED or BLUE).
-     * @return True if the game is over for the specified color, false otherwise.
-     */
     public boolean isGameOver(LinkedHashMap<Integer, List<Integer>> moves, Color color) {
         if (color == Color.RED) {
             if (doesBaseRowContainColor(color,0)) {
@@ -930,66 +782,20 @@ public class MoveGenerator {
         return false;
     }
 
-    /**
-     * Checks if the game is over for the Monte Carlo Tree Search (MCTS) strategy.
-     *
-     * @param moves A map of possible moves where keys are combined integer positions and values are lists of target positions.
-     * @return True if the game is over for either color, false otherwise.
-     */
-    public boolean isGameOverMCTS_lib(LinkedHashMap<Integer, List<Integer>> moves) {
-        //returns true if somebody has won in that position
-        if (doesBaseRowContainColor(Color.RED, 0) || doesBaseRowContainColor(Color.BLUE, 7) || moves.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Determines the winner for the Monte Carlo Tree Search (MCTS) strategy.
-     *
-     * @param moves A map of possible moves where keys are combined integer positions and values are lists of target positions.
-     * @param currPlayer The current player color to determine the winner (RED or BLUE).
-     * @return True if BLUE (currPlayer) is the winner, false if RED is the winner.
-     */
-    public boolean getWinner(LinkedHashMap<Integer, List<Integer>> moves, Color currPlayer) {
-        //returns false if red won, returns true if blue won
-        //only use when confirmed that game is over
-        if (currPlayer == Color.RED) {
-            if (doesBaseRowContainColor(Color.BLUE, 7) || moves.isEmpty()) {
-                return true;
-            }
-        } 
-        return false;
-    }
-
-    /**
-     * Checks if the game is a win for the Monte Carlo Tree Search (MCTS) strategy.
-     *
-     * @param color The color of the pieces to check (RED or BLUE).
-     * @return True if the game is a win for the specified color, false otherwise.
-     */
     public boolean isWinForMCTS(Color color) {
         if (color == Color.RED) {
-            if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForAI(color).isEmpty()) {
+            if (doesBaseRowContainColor(Color.BLUE,7) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
             }
         }
         else {
-            if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForAI(color).isEmpty()) {
+            if (doesBaseRowContainColor(Color.RED,0) || generateMaxOnePossibleMoveForKI(color).isEmpty()) {
                 return true;
             }
         }
         return false;
     }
 
-    /**
-     * Checks if the game is over for the Monte Carlo Tree Search (MCTS) strategy and returns the result.
-     *
-     * @param moves A map of possible moves where keys are combined integer positions and values are lists of target positions.
-     * @param color The color of the pieces to check (RED or BLUE).
-     * @return 1 if BLUE (color) wins, -1 if RED wins, 0 if the game is not over yet.
-     */
     public int isGameOverMCTS(LinkedHashMap<Integer, List<Integer>> moves, Color color) {
         if (color == Color.RED) {
             if (moves.isEmpty() || doesBaseRowContainColor(Color.BLUE,7)) {
@@ -1008,13 +814,26 @@ public class MoveGenerator {
         return 0;
     }
 
-    /**
-     * Checks if a specific row on the board contains any pieces of a given color.
-     *
-     * @param color The color of the pieces to check (RED or BLUE).
-     * @param rowToCheck The row number to check (0 to 7).
-     * @return True if the specified row contains at least one piece of the specified color, false otherwise.
-     */
+    public boolean isGameOverMCTS(LinkedHashMap<Integer, List<Integer>> moves) {
+        //returns true if somebody has won in that position
+        if (doesBaseRowContainColor(Color.RED, 0) || doesBaseRowContainColor(Color.BLUE, 7) || moves.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean getWinner(LinkedHashMap<Integer, List<Integer>> moves, Color currPlayer) {
+        //returns false if red won, returns true if blue won
+        //only use when confirmed that game is over
+        if (currPlayer == Color.RED) {
+            if (doesBaseRowContainColor(Color.BLUE, 7) || moves.isEmpty()) {
+                return true;
+            }
+        } 
+        return false;
+    }
+
     public boolean doesBaseRowContainColor(Color color, int rowToCheck) {
         for (int i = 1; i < 7; i++) {
             if (colorBoard[rowToCheck][i] == color) {
@@ -1028,12 +847,6 @@ public class MoveGenerator {
 
     // START: visualisation
 
-    /**
-     * Prints the current state of the board to the console.
-     * This can be done in FEN or numeric notation.
-     *
-     * @param fen Indicates whether to print the board in FEN notation format.
-     */
     public void printBoard(boolean fen) {
         if (fen) {
             System.out.println("     A   B   C   D   E   F   G   H");
@@ -1096,5 +909,32 @@ public class MoveGenerator {
         }
         System.out.println();
     }
+
     // END: visualisation
+
+    public static void main(String[] args) {
+        MoveGenerator moveGenerator = new MoveGenerator();
+        String fen = "5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b";
+        for (int i = 0; i < 1; i++) {
+            LinkedHashMap<Integer, List<Integer>> moves = moveGenerator.getMovesWrapper(fen);
+            System.out.println(moves);
+
+            System.out.println();
+            moveGenerator.printBoard(false);
+
+            String move_string = moveGenerator.getRandomMove(moves);
+            System.out.println(move_string);
+            int[] move_int = moveGenerator.convertStringToPosWrapper(move_string);
+            System.out.println(move_int[0] + "-" + move_int[1]);
+
+            System.out.println();
+
+            moveGenerator.movePiece(move_int[0], move_int[1]);
+
+            System.out.println();
+            moveGenerator.printBoard(false);
+
+            System.out.println(moveGenerator.getFenFromBoard());
+        }
+    }
 }

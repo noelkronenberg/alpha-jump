@@ -2,9 +2,9 @@ package search.mcts;
 
 import game.Color;
 import game.MoveGenerator;
-import search.AI;
-import search.ab.Minimax_AB;
+import search.ab.BasisKI;
 import search.ab.Evaluation;
+import search.KI;
 import search.SearchConfig;
 
 import java.util.LinkedHashMap;
@@ -18,7 +18,7 @@ import java.util.Random;
 // viele Besuche und wins wird minimiert... ?! Sehr komisch
 
 
-public class MCTS implements AI {
+public class MCTSKI implements KI {
     double numberOfAllSimulations;
     Color ourColor = Color.BLUE;
     Random random = new Random();
@@ -76,7 +76,7 @@ public class MCTS implements AI {
 
         Color color = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
 
-        MCTSNode node = expandAndReturnRandomNode(parentNode,gameState,color,movesList);
+        MCTSNode node = expandAndReturnRandomNodeNew(parentNode,gameState,color,movesList);
 
         //MCTSNode node =expandAndReturnRandomNode(parentNode,gameState,color);
         int reward = simulateToEnd(color,gameState,ourColor);
@@ -193,7 +193,7 @@ public class MCTS implements AI {
 //        return selectedChild;
 //    }
 
-    public MCTSNode expandAndReturnRandomNode(MCTSNode node, MoveGenerator moveGenerator, Color color, LinkedList<Integer> children){
+    public MCTSNode expandAndReturnRandomNodeNew(MCTSNode node, MoveGenerator moveGenerator, Color color, LinkedList<Integer> children){
         for (int move:children){
             node.children.add(new MCTSNode(node,move,moveGenerator, color));        //TODO Switch to new MCTSNode
         }
@@ -250,7 +250,7 @@ public class MCTS implements AI {
             //generate possible moves:
             LinkedList<Integer> moves = Evaluation.convertMovesToList(moveGenerator.generateAllPossibleMoves(selectedNode.color));
             if (moves.size()>0) {
-                MCTSNode nodeToRollout = expandAndReturnRandomNode(selectedNode, moveGenerator, color, moves);
+                MCTSNode nodeToRollout = expandAndReturnRandomNodeNew(selectedNode, moveGenerator, color, moves);
                 int reward = simulateToEnd(nodeToRollout.color, moveGenerator, parentColor);               //maybe random reward?
                 propagateDataToRoot(nodeToRollout, reward, nodeToRollout.color);
             }
@@ -288,14 +288,14 @@ public class MCTS implements AI {
     }
 
     public static void main(String[] args) {
-        MCTS ai = new MCTS();
+        MCTSKI ki = new MCTSKI();
         String fen = "3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b"; //testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
 
-        SearchConfig config = Minimax_AB.bestConfig;
+        SearchConfig config = BasisKI.bestConfig;
         config.timeLimit=20000.0;
-        ai.orchestrator(fen, config);
+        ki.orchestrator(fen, config);
 
-        ai.orchestrator(fen, Minimax_AB.bestConfig);
+        ki.orchestrator(fen, BasisKI.bestConfig);
     }
 
 }

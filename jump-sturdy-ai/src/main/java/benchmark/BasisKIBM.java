@@ -1,35 +1,25 @@
 package benchmark;
 
-import search.ab.Minimax_AB;
+import search.ab.BasisKI;
 
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_LongestLine;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import search.SearchConfig;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * Benchmarking class for the Minimax_AB.
- */
-public class Minimax_ABBM {
+public class BasisKIBM {
 
-    static Minimax_AB ai;
+    static BasisKI ki;
 
-    /**
-     * Initializes the Minimax_AB instance.
-     */
     static void init() {
-        ai = new Minimax_AB();
+        ki = new BasisKI();
     }
 
-    /**
-     * Helper class to store the result of generating the best move.
-     */
     static class Result {
         String bestMove;
         int depth;
@@ -46,12 +36,6 @@ public class Minimax_ABBM {
 
     // START: benchmarks
 
-    /**
-     * Compares static and dynamic time management strategies.
-     *
-     * @param fen The board state in FEN format.
-     * @param timeLimit The time limit for the search algorithm.
-     */
     private static void compareTimeManagement(String fen, double timeLimit) {
         Result result_static = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false);
         double duration_static = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false);
@@ -62,12 +46,6 @@ public class Minimax_ABBM {
         displayResults("static time management", "dynamic time management", timeLimit, result_static, result_dynamic, duration_static, duration_dynamic);
     }
 
-    /**
-     * Compares the performance with and without aspiration windows.
-     *
-     * @param fen The board state in FEN format.
-     * @param timeLimit The time limit for the search algorithm.
-     */
     private static void compareAspirationWindow(String fen, double timeLimit) {
         Result result_no_window = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false);
         double duration_no_window = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false);
@@ -78,12 +56,6 @@ public class Minimax_ABBM {
         displayResults("without aspiration window", "with aspiration window", timeLimit, result_no_window, result_window, duration_no_window, duration_window);
     }
 
-    /**
-     * Compares the performance with and without a transposition table.
-     *
-     * @param fen The board state in FEN format.
-     * @param timeLimit The time limit for the search algorithm.
-     */
     private static void compareTranspositionTable(String fen, double timeLimit) {
         Result result_no_TT = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false);
         double duration_no_TT = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false);
@@ -94,12 +66,6 @@ public class Minimax_ABBM {
         displayResults("without transposition table", "with transposition table", timeLimit, result_no_TT, result_TT, duration_no_TT, duration_TT);
     }
 
-    /**
-     * Compares the performance with and without all optimizations.
-     *
-     * @param fen The board state in FEN format.
-     * @param timeLimit The time limit for the search algorithm.
-     */
     private static void compareEverything(String fen, double timeLimit) {
         Result result_clean = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false);
         double duration_clean = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false);
@@ -114,13 +80,6 @@ public class Minimax_ABBM {
 
     // START: helper functions
 
-    /**
-     * Calculates the percentage change between two values.
-     *
-     * @param oldValue The original value.
-     * @param newValue The new value.
-     * @return The percentage change from oldValue to newValue.
-     */
     static double calculatePercentageChange(double oldValue, double newValue) {
         if (oldValue == 0) {
             return newValue == 0 ? 0 : 100;
@@ -128,46 +87,26 @@ public class Minimax_ABBM {
         return ((newValue - oldValue) / oldValue) * 100;
     }
 
-    /**
-     * Generates the best move given a time limit and various settings.
-     *
-     * @param fen The board state in FEN format.
-     * @param timeLimit The time limit for the search algorithm.
-     * @param transpositionTable Whether to use a transposition table.
-     * @param aspirationWindow Whether to use an aspiration window.
-     * @param dynamicTime Whether to use dynamic time management.
-     * @return The result of the best move search.
-     */
     private static Result generateBestMoveResultTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime) {
         init();
         SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false);
-        String bestMove = ai.orchestrator(fen, config);
-        int depth = ai.maxDepth;
-        int uniquePositions = ai.positionsHM.size();
+        String bestMove = ki.orchestrator(fen, config);
+        int depth = ki.maxDepth;
+        int uniquePositions = ki.positionsHM.size();
         int positions = 0;
-        for (Map.Entry<String, Integer> entry : ai.positionsHM.entrySet()) {
+        for (Map.Entry<String, Integer> entry : ki.positionsHM.entrySet()) {
             positions += entry.getValue();
         }
         return new Result(bestMove, depth, uniquePositions, positions);
     }
 
-    /**
-     * Measures the time taken to generate the best move given a time limit and various settings.
-     *
-     * @param fen The board state in FEN format.
-     * @param timeLimit The time limit for the search algorithm.
-     * @param transpositionTable Whether to use a transposition table.
-     * @param aspirationWindow Whether to use an aspiration window.
-     * @param dynamicTime Whether to use dynamic time management.
-     * @return The average time in milliseconds to generate the best move.
-     */
     private static double generateBestMoveSpeedTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime) {
         init();
         int iterations = 3;
         SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false);
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
-            ai.orchestrator(fen, config);
+            ki.orchestrator(fen, config);
         }
         double endTime = System.nanoTime();
         double duration = ((endTime - startTime) / iterations) / 1e6; // convert to milliseconds
@@ -176,17 +115,6 @@ public class Minimax_ABBM {
 
     // END: helper functions
 
-    /**
-     * Displays the results of the benchmarks in a formatted table.
-     *
-     * @param settingName1 The name of the first setting being compared.
-     * @param settingName2 The name of the second setting being compared.
-     * @param timeLimit The time limit for the search algorithm.
-     * @param result1 The result of the first setting.
-     * @param result2 The result of the second setting.
-     * @param duration1 The time taken for the first setting.
-     * @param duration2 The time taken for the second setting.
-     */
     private static void displayResults(String settingName1, String settingName2, double timeLimit, Result result1, Result result2, double duration1, double duration2) {
         double duration_comparison = calculatePercentageChange(duration1, duration2);
         double depth_comparison = calculatePercentageChange(result1.depth, result2.depth);
@@ -215,14 +143,9 @@ public class Minimax_ABBM {
         System.out.println(at.render());
     }
 
-    /**
-     * Main method to run the benchmarks and print results to a file.
-     *
-     * @param args Command line arguments (not used).
-     */
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/Minimax_ABBM-output.txt"));
+            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/BasisKIBM-output.txt"));
             System.setOut(fileOut);
 
             System.out.println("Start Position: ");
