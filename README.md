@@ -16,6 +16,9 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
       - ```debug``` algorithms (only) for debugging
       - ```game``` actual game logic
       - ```search``` algorithms for optimising gameplay
+        - ```ab``` alpha-beta pruning
+        - ```mcts_lib``` Monte Carlo tree search for generating an opening book
+        - ```mcts``` Monte Carlo tree search
         - ```optimisation``` algorithms for parameter optimisation
     - ```test``` [JUnit](https://www.jetbrains.com/help/idea/junit.html) tests
 - ```game-server``` Jump Sturdy server for playing against other players (given by [course organisors](https://git.tu-berlin.de/lengfeld8/jump-sturdy-game-server))
@@ -25,7 +28,10 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
 > Note: [JDK](https://www.oracle.com/java/technologies/downloads/) version 22.0.1 should be installed on the computer.
 
 1. start server: ```python game-server/server.py```
-2. start AI: ```jump-sturdy-ai/GruppeC_KI.exe```
-3. start other AI (can be another instance of ```jump-sturdy-ai/GruppeC_KI.exe```)
-4. wait for game to end
-5. stop execution of ```GruppeC_KI.exe``` (e.g. via Task Manager)
+2. if not up to date, generate new ```.exe```
+    1. generate ```.jar```: ```mvn clean package```
+    2. generate ```.exe``` using [Launch4j](https://genuinecoder.com/online-converter/jar-to-exe/)
+3. start AI: ```jump-sturdy-ai/GruppeC_KI.exe```
+4. start other AI (can be another instance of ```jump-sturdy-ai/GruppeC_KI.exe```)
+5. wait for game to end
+6. stop execution of ```GruppeC_KI.exe``` (e.g. via Task Manager)

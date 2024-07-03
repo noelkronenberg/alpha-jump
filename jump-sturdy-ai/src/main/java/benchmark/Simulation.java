@@ -3,12 +3,25 @@ package benchmark;
 import game.Color;
 import game.MoveGenerator;
 import search.*;
-import search.ab.BasisKI;
-import search.mcts.MCTSKI;
+import search.ab.Minimax_AB;
+import search.mcts.MCTS;
 
+/**
+ * Simulation of full games between two AIs.
+ */
 public class Simulation {
 
-    public static int playGame(KI firstKI, SearchConfig firstConfig, KI secondKI, SearchConfig secondConfig, String fen) {
+    /**
+     * Plays a full game between two AIs using the provided configurations and initial board state.
+     *
+     * @param firstAI The first AI that will play.
+     * @param firstConfig The configuration for the first AI's search algorithm.
+     * @param secondAI The second AI that will play.
+     * @param secondConfig The configuration for the second AI's search algorithm.
+     * @param fen The initial board state in FEN format.
+     * @return An integer indicating the winner of the game. Returns 1 if the first AI wins, 2 if the second AI wins.
+     */
+    public static int playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen) {
 
         MoveGenerator gameState = new MoveGenerator();
         gameState.initializeBoard(fen);
@@ -21,9 +34,9 @@ public class Simulation {
 
             // get best move
             if (moveCount % 2 == 0) {
-                bestMove = firstKI.orchestrator(fen, firstConfig);
+                bestMove = firstAI.orchestrator(fen, firstConfig);
             } else {
-                bestMove = secondKI.orchestrator(fen, secondConfig);
+                bestMove = secondAI.orchestrator(fen, secondConfig);
             }
 
             // convert move
@@ -55,59 +68,73 @@ public class Simulation {
             fen = gameState.getFenFromBoard() + " " + nextColor;
         }
 
-        // NOTE: check if correct
         if (moveCount % 2 == 0) {
-            return 2;
-        } {
             return 1;
+        } {
+            return 2;
         }
-
     }
 
-    public void simulate(KI firstKI, SearchConfig firstConfig, KI secondKI, SearchConfig secondConfig, String fen, int iterations) {
+    /**
+     * Simulates a series of games between two AIs using the provided configurations and initial board state.
+     * The results of each game and the overall win counts for each AI are printed to the console.
+     *
+     * @param firstAI The first AI that will play.
+     * @param firstConfig The configuration for the first AI's search algorithm.
+     * @param secondAI The second AI that will play.
+     * @param secondConfig The configuration for the second AI's search algorithm.
+     * @param fen The initial board state in FEN format.
+     * @param iterations The number of iterations (games) to simulate. Must be an even number.
+     */
+    public void simulate(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, int iterations) {
         if (!(iterations % 2 == 0)) {
             System.out.println("Please enter an even number of iterations to make the results fair.");
             return;
         }
 
-        int firstKIWins = 0;
-        int secondKIWins = 0;
+        int firstAIWins = 0;
+        int secondAIWins = 0;
 
         for (int i = 1; i <= iterations; i++) {
             int result;
-            boolean firstKIBegins = (i % 2 != 0);
+            boolean firstAIBegins = (i % 2 == 0);
 
-            if (firstKIBegins) {
-                result = playGame(firstKI, firstConfig, secondKI, secondConfig, fen);
+            if (firstAIBegins) {
+                result = playGame(firstAI, firstConfig, secondAI, secondConfig, fen);
             } else {
-                result = playGame(secondKI, secondConfig, firstKI, firstConfig, fen);
+                result = playGame(secondAI, secondConfig, firstAI, firstConfig, fen);
             }
 
-            if ((firstKIBegins && result == 1) || (!firstKIBegins && result == 2)) {
-                firstKIWins++;
-                System.out.println("Winner of iteration " + i + " is: KI 1");
+            if ((firstAIBegins && result == 1) || (!firstAIBegins && result == 2)) {
+                firstAIWins++;
+                System.out.println("Winner of iteration " + i + " is: AI 1");
             } else {
-                secondKIWins++;
-                System.out.println("Winner of iteration " + i + " is: KI 2");
+                secondAIWins++;
+                System.out.println("Winner of iteration " + i + " is: AI 2");
             }
         }
 
-        System.out.println("First KI wins: " + firstKIWins);
-        System.out.println("Second KI wins: " + secondKIWins);
+        System.out.println("First AI wins: " + firstAIWins);
+        System.out.println("Second AI wins: " + secondAIWins);
     }
 
+    /**
+     * Main method to run a simulation between two AIs using predefined configurations and an initial board state.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
-        KI firstKI = new BasisKI();
-        SearchConfig firstConfig = BasisKI.bestConfig;
+        AI firstAI = new Minimax_AB();
+        SearchConfig firstConfig = Minimax_AB.bestConfig;
         firstConfig.timeLimit = 200.0;
 
-        KI secondKI = new MCTSKI();
-        SearchConfig secondConfig = BasisKI.bestConfig;
+        AI secondAI = new MCTS();
+        SearchConfig secondConfig = Minimax_AB.bestConfig;
         secondConfig.timeLimit = 200.0;
 
         String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
         int iterations = 4;
         Simulation simulation = new Simulation();
-        simulation.simulate(secondKI, secondConfig, firstKI, firstConfig, initialFEN, iterations);
+        simulation.simulate(secondAI, secondConfig, firstAI, firstConfig, initialFEN, iterations);
     }
 }

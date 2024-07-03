@@ -2,7 +2,7 @@ package search.optimisation;
 
 import game.Color;
 import game.MoveGenerator;
-import search.ab.BasisKI;
+import search.ab.Minimax_AB;
 import search.ab.Evaluation;
 
 import java.io.File;
@@ -14,7 +14,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-// references: https://direct.mit.edu/books/book/4675/An-Introduction-to-Genetic-Algorithms, https://stackoverflow.com/a/1575995
+/**
+ * Implementation of a Genetic Algorithm to optimize weights for evaluating game states in a specific game scenario.
+ * References: https://direct.mit.edu/books/book/4675/An-Introduction-to-Genetic-Algorithms, https://stackoverflow.com/a/1575995
+ */
 public class GeneticAlgorithm {
 
     // hyperparameter (reference: https://www.baeldung.com/java-genetic-algorithm)
@@ -26,6 +29,10 @@ public class GeneticAlgorithm {
 
     private static Random random = new Random();
 
+    /**
+     * Represents an individual in the genetic algorithm population,
+     * with specific weights for evaluating game states.
+     */
     public static class Individual {
         double possibleMovesWeight;
         double protectedPiecesWeight;
@@ -34,6 +41,15 @@ public class GeneticAlgorithm {
         double closenessWeight;
         double fitness;
 
+        /**
+         * Constructs an individual with specific weights.
+         *
+         * @param possibleMovesWeight Weight for possible moves evaluation.
+         * @param protectedPiecesWeight Weight for protected pieces evaluation.
+         * @param doubleWeight Weight for double pieces evaluation.
+         * @param mixedWeight Weight for mixed pieces evaluation.
+         * @param closenessWeight Weight for closeness to winning row evaluation.
+         */
         Individual(double possibleMovesWeight, double protectedPiecesWeight, double doubleWeight, double mixedWeight, double closenessWeight) {
             this.possibleMovesWeight = possibleMovesWeight;
             this.protectedPiecesWeight = protectedPiecesWeight;
@@ -42,6 +58,9 @@ public class GeneticAlgorithm {
             this.closenessWeight = closenessWeight;
         }
 
+        /**
+         * Evaluates the fitness of the individual by playing a simulated full game and calculating a score.
+         */
         void evaluateFitness() {
             Evaluation.possibleMovesWeight = this.possibleMovesWeight;
             Evaluation.protectedPiecesWeight = this.protectedPiecesWeight;
@@ -51,10 +70,20 @@ public class GeneticAlgorithm {
             this.fitness = playGame();
         }
 
+        /**
+         * Generates a random individual with random weights.
+         *
+         * @return A new randomly generated individual.
+         */
         static Individual generateRandomIndividual() {
             return new Individual(random.nextDouble()*5, random.nextDouble()*5, random.nextDouble()*5, random.nextDouble()*5, random.nextDouble()*5);
         }
 
+        /**
+         * Provides a string representation of the individual, including its weights and fitness.
+         *
+         * @return String representation of the individual.
+         */
         @Override
         public String toString() {
             return String.format("possibleMovesWeight: %.5f | protectedPiecesWeight: %.5f | doubleWeight: %.5f | mixedWeight: %.5f | closenessWeight: %.5f | fitness: %.5f",
@@ -62,9 +91,14 @@ public class GeneticAlgorithm {
         }
     }
 
+    /**
+     * Simulates playing a full game using a specific set of weights for evaluation.
+     *
+     * @return The score achieved in the simulated game.
+     */
     public static double playGame() {
-        BasisKI ki = new BasisKI();
-        BasisKI.bestConfig.timeLimit = 1000; // reduce time for speed
+        Minimax_AB ai = new Minimax_AB();
+        Minimax_AB.bestConfig.timeLimit = 1000; // reduce time for speed
         String bestMove;
 
         String fen = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
@@ -76,7 +110,7 @@ public class GeneticAlgorithm {
         int moveCount = 0;
 
         while (!gameOver) {
-            bestMove = ki.orchestrator(fen,  BasisKI.bestConfig); // get best move
+            bestMove = ai.orchestrator(fen,  Minimax_AB.bestConfig); // get best move
 
             // convert move
             int[] bestMoveInts = gameState.convertStringToPosWrapper(bestMove);
@@ -127,6 +161,13 @@ public class GeneticAlgorithm {
         return score;
     }
 
+    /**
+     * Performs crossover operation between two parent individuals.
+     *
+     * @param parent1 First parent individual.
+     * @param parent2 Second parent individual.
+     * @return Array of two new individuals resulting from crossover.
+     */
     private static Individual[] crossover(Individual parent1, Individual parent2) {
         // crossover with given probability (CROSSOVER_RATE)
         if (random.nextDouble() < CROSSOVER_RATE) {
@@ -149,6 +190,12 @@ public class GeneticAlgorithm {
         return new Individual[]{parent1, parent2};
     }
 
+    /**
+     * Mutates an individual with a given mutation rate.
+     *
+     * @param individual Individual to be mutated.
+     * @return Mutated individual.
+     */
     private static Individual mutate(Individual individual) {
         // mutate with given probability (MUTATION_RATE)
         if (random.nextDouble() < MUTATION_RATE) {
@@ -162,9 +209,15 @@ public class GeneticAlgorithm {
         return individual;
     }
 
+    /**
+     * Main method that executes the Genetic Algorithm to optimize weights.
+     *
+     * Outputs the best individual found after a number of generations to a text file.
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/search/optimisation/GA-output.txt"));
+            PrintStream fileOut = new PrintStream(new File("src/main/java/search/optimisation/GA-Debugger-output.txt"));
             System.setOut(fileOut);
 
             List<Individual> population = new ArrayList<>();
