@@ -7,6 +7,10 @@ import search.SearchConfig;
 
 import java.util.*;
 
+/**
+ *  An implementation of a Minimax Search with Alpha-Beta Pruning,
+ *  Aspiration Windows, Transposition Tables and a Quiescence Search.
+ */
 public class Minimax_AB implements AI {
     // hyperparameters (defaults)
     boolean timeCriterion = true;
@@ -33,6 +37,15 @@ public class Minimax_AB implements AI {
 
     public static SearchConfig bestConfig = new SearchConfig(true, 50000.0, true, 0.25, true, 0, true, false);
 
+    /**
+     * Orchestrates the process of getting the best move for a given board state
+     * and search configuration.
+     *
+     * @param fen The current position in FEN notation.
+     * @param config The {@code SearchConfig} object containing search parameters such as
+     *               time limits, aspiration window settings, and depth limits.
+     * @return A string representing of the best move in the format: "StartColum""StartRow"-"EndColum""EndRow".
+     */
     @Override
     public String orchestrator(String fen, SearchConfig config) {
         this.timeCriterion = config.timeCriterion;
@@ -46,6 +59,14 @@ public class Minimax_AB implements AI {
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
+    /**
+     * Determines the best move for a given board state represented by a FEN string.
+     * This method utilizes iterative deepening search with time management to
+     * evaluate possible moves and select the one with the highest score.
+     *
+     * @param fen The current position in FEN notation.
+     * @return The best move determined based on the evaluation, represented as an integer.
+     */
     public int getBestMove(String fen) {
         transpositionTable = new HashMap<>();
         positionsHM = new HashMap<>();
@@ -112,7 +133,7 @@ public class Minimax_AB implements AI {
             // for safety (in case of TimeCutOffs)
             this.isOurMove = false;
 
-            double currentScore = iterativeDeepening(nextState, moveTimeLimit, ourColor,ourColor); // get score for current move (order)
+            double currentScore = iterativeDeepening(nextState, moveTimeLimit, ourColor); // get score for current move (order)
 
             // evaluate move (score)
 
@@ -190,7 +211,17 @@ public class Minimax_AB implements AI {
         return alpha;
     }
 
-    public double iterativeDeepening(MoveGenerator gameState, double moveTimeLimit, Color currentColor, Color ourColor) {
+    /**
+     * Performs an iterative deepening search to find the best move score within the given time limit.
+     * This method incrementally deepens the search depth until the time runs out or the maximum
+     * allowed depth is reached. Alpha-Beta pruning is used to optimize the search.
+     *
+     * @param gameState The current state of the game represented by a {@code MoveGenerator} object.
+     * @param moveTimeLimit The maximum time allowed for evaluating a move, in milliseconds.
+     * @param ourColor The color of the player whose best move gets evaluated.
+     * @return The best score obtained for the evaluated moves within the given time limit.
+     */
+    public double iterativeDeepening(MoveGenerator gameState, double moveTimeLimit, Color ourColor) {
         int depth = 1;
         double bestScore = Integer.MIN_VALUE;
         double alpha = Integer.MIN_VALUE;
@@ -209,7 +240,7 @@ public class Minimax_AB implements AI {
 
             this.isOurMove = false; // to switch players for each depth
 
-            double currentScore = treeSearch(gameState, alpha, beta, endTime, depth, currentColor, ourColor); // get score for current move (order)
+            double currentScore = treeSearch(gameState, alpha, beta, endTime, depth, ourColor, ourColor); // get score for current move (order)
 
             this.currentDepth = 1;
 
@@ -242,6 +273,20 @@ public class Minimax_AB implements AI {
         return bestScore;
     }
 
+    /**
+     * Executes a recursive tree search with alpha-beta pruning to evaluate game positions and find
+     * the best possible move for the current player. This method can use, based on the configuration,
+     * transposition tables to store and get previously evaluated positions to optimize the search.
+     *
+     * @param gameState The current state of the game represented by a {@code MoveGenerator} object.
+     * @param alpha The alpha value used in alpha-beta pruning.
+     * @param beta The beta value used in alpha-beta pruning.
+     * @param endTime The time when the search should stop, used for time management.
+     * @param depth The depth left for the search tree.
+     * @param currentColor The color of the player currently making a move.
+     * @param ourColor The color of the player whose best move gets evaluated.
+     * @return The best score obtained for the evaluated game position.
+     */
     public double treeSearch(MoveGenerator gameState, double alpha, double beta, double endTime, int depth, Color currentColor , Color ourColor) {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
         boolean isInTT = transpositionTable.containsKey(fen);
@@ -290,10 +335,8 @@ public class Minimax_AB implements AI {
                     score = ttData.overAllScore;
                     ttData.depth = depth; // TODO: should depth be updated here or at the end?
                 }
-        }
         // END: Transposition Tables
-
-        else {
+        } else {
             LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor); // get moves for other player
             movesList = Evaluation.convertMovesToList(moves);
             Evaluation.orderMoves(movesList, currentColor,gameState); // order moves

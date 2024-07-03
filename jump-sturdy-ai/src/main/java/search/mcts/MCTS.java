@@ -17,7 +17,9 @@ import java.util.Random;
 //https://stackoverflow.com/questions/42302142/monte-carlo-tree-search-tree-policy-for-two-player-games
 // viele Besuche und wins wird minimiert... ?! Sehr komisch
 
-
+/**
+ *
+ */
 public class MCTS implements AI {
     double numberOfAllSimulations;
     Color ourColor = Color.BLUE;
@@ -52,6 +54,12 @@ public class MCTS implements AI {
 //        System.out.println(MoveGenerator.convertMoveToFEN(getBestMove(parentNode)));
 //    }
 
+    /**
+     *
+     * @param fen The current position in FEN notation
+     * @param config The configuration object specifying the AI search parameters
+     * @return
+     */
     @Override
     public String orchestrator(String fen, SearchConfig config) {
 
@@ -82,7 +90,7 @@ public class MCTS implements AI {
         int reward = simulateToEnd(color,gameState,ourColor);
         propagateDataToRoot(node,reward,node.color);    //TODO check if node.color and color is always equal
 
-        newTreePolicy(parentGameState,parentNode, ourColor);
+        treePolicy(parentGameState,parentNode, ourColor);
 
 //        for (MCTSNode m : parentNode.children){
 //            System.out.println("Node For Move "+m.move+", Value: "+m.getNodeValue()+" Visits: "+m.numberOfVisits+" Wins: "+m.numberOfWins);
@@ -96,6 +104,11 @@ public class MCTS implements AI {
         return s;
     }
 
+    /**
+     *
+     * @param node
+     * @return
+     */
     public int getBestMove(MCTSNode node){
         double max = Integer.MIN_VALUE;
         MCTSNode maxChild = null;
@@ -109,7 +122,13 @@ public class MCTS implements AI {
         return maxChild.move;
     }
 
-
+    /**
+     *
+     * @param color
+     * @param moveGenerator
+     * @param parentColor
+     * @return
+     */
     public int simulateToEnd(Color color, MoveGenerator moveGenerator, Color parentColor){
 //        while (true){           //TODO CHANGE FOR NEW PROPAGATION
 //            //generate and Pick random mov
@@ -135,7 +154,11 @@ public class MCTS implements AI {
         return  generator.nextDouble() >= prob? 1 : 0;
     }
 
-
+    /**
+     *
+     * @param endTime
+     * @return
+     */
     public boolean continueSearch(double endTime){
         double time = System.currentTimeMillis();
         if (endTime>=time){
@@ -144,6 +167,13 @@ public class MCTS implements AI {
         return false;
     }
 
+    /**
+     *
+     * @param endtime
+     * @param node
+     * @param moveGenerator
+     * @return
+     */
     public MCTSNode treeTraversal(double endtime, MCTSNode node, MoveGenerator moveGenerator){
         while(continueSearch(endtime)){        //TODO: check here for tree traversal: Color is somtimes min, sometimes max (weird)
             if(node.children.isEmpty()||node.isWinPos||node.isWinNext){
@@ -183,16 +213,14 @@ public class MCTS implements AI {
         return node;
     }
 
-//    public MCTSNode expandAndReturnRandomNode(MCTSNode node, MoveGenerator moveGenerator, Color color){
-//        for (int move:node.childrenUnserached){
-//            node.children.add(new MCTSNode(node,move,moveGenerator, color));
-//        }
-//        node.childrenUnserached.clear();
-//
-//        MCTSNode selectedChild=node.children.get(random.nextInt(node.children.size()));
-//        return selectedChild;
-//    }
-
+    /**
+     *
+     * @param node
+     * @param moveGenerator
+     * @param color
+     * @param children
+     * @return
+     */
     public MCTSNode expandAndReturnRandomNode(MCTSNode node, MoveGenerator moveGenerator, Color color, LinkedList<Integer> children){
         for (int move:children){
             node.children.add(new MCTSNode(node,move,moveGenerator, color));        //TODO Switch to new MCTSNode
@@ -208,7 +236,13 @@ public class MCTS implements AI {
         return selectedChild;
     }
 
-    public void newTreePolicy(MoveGenerator moveGenerator, MCTSNode node, Color color){
+    /**
+     *
+     * @param moveGenerator
+     * @param node
+     * @param color
+     */
+    public void treePolicy(MoveGenerator moveGenerator, MCTSNode node, Color color){
         //TODO: IMPL Time cutoff und solange es nicht ein win ist
         //TODO: mach UCB, falls noch nicht alle children explored wurden, mach das (done)
         //TODO: Change node to have searched child nodes and unsearched child nodes (maybe play around with a bool to see if unsearched is empty) (done)
@@ -263,7 +297,12 @@ public class MCTS implements AI {
         }
     }
 
-
+    /**
+     * 
+     * @param node
+     * @param reward
+     * @param colorOfExpandedPlayer
+     */
     public void propagateDataToRoot(MCTSNode node, int reward, Color colorOfExpandedPlayer){
         while (node.parent != null){
             if (node.color==colorOfExpandedPlayer){
