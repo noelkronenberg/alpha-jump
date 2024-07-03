@@ -23,6 +23,7 @@ public class Debugger {
     public static void moveOrder(String fen, String move, int sequence) {
         Minimax_AB ai = new Minimax_AB();
         SearchConfig config = Minimax_AB.bestConfig.copy();
+        config.timeLimit = 500.0;
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard(fen);
 
@@ -73,7 +74,7 @@ public class Debugger {
         try {
             PrintStream fileOut = new PrintStream(new File("src/main/java/debug/Debugger-output.txt"));
             System.setOut(fileOut);
-            Debugger.moveOrder("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b", "E4-D5", 3);
+            Debugger.moveOrder("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/1r0r02rr2/b03r01rr1/2r01r0r0 r", "G8-F8", 10);
             fileOut.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
