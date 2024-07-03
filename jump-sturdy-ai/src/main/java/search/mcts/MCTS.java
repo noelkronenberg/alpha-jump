@@ -322,11 +322,11 @@ public class MCTS extends AI {
         MCTS ai = new MCTS();
         String fen = "3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b"; //testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
 
-        SearchConfig config = Minimax_AB.bestConfig;
+        SearchConfig config = Minimax_AB.bestConfig.copy();
         config.timeLimit=20000.0;
         ai.orchestrator(fen, config);
 
-        ai.orchestrator(fen, Minimax_AB.bestConfig);
+        ai.orchestrator(fen, Minimax_AB.bestConfig.copy());
     }
 
 }

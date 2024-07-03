@@ -35,4 +35,13 @@ public class SearchConfig {
         this.dynamicTime = dynamicTime;
         this.useQuiescenceSearch = useQuiescenceSearch;
     }
+
+    /**
+     * Method to create a copy of this configuration.
+     *
+     * @return A new SearchConfig instance with the same values as this one.
+     */
+    public SearchConfig copy() {
+        return new SearchConfig(timeCriterion, timeLimit, aspirationWindow, aspirationWindowSize, transpositionTables, maxAllowedDepth, dynamicTime, useQuiescenceSearch);
+    }
 }

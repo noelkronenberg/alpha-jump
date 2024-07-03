@@ -1,5 +1,6 @@
 package debug;
 
+import search.SearchConfig;
 import search.ab.Minimax_AB;
 import game.MoveGenerator;
 
@@ -21,6 +22,7 @@ public class Debugger {
      */
     public static void moveOrder(String fen, String move, int sequence) {
         Minimax_AB ai = new Minimax_AB();
+        SearchConfig config = Minimax_AB.bestConfig.copy();
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard(fen);
 
@@ -48,7 +50,7 @@ public class Debugger {
 
             // get best move
             current_fen = moveGenerator.getFenFromBoard() + " " + currentColor;
-            String bestMove = ai.orchestrator(current_fen, Minimax_AB.bestConfig);
+            String bestMove = ai.orchestrator(current_fen, config);
             System.out.println("Best move: " + bestMove + " (color: " + currentColor + " | move: "+ i + ")");
 
             // convert move

@@ -178,12 +178,12 @@ public class Simulation {
 
             // configuration of first AI (CAN BE CHANGED)
             AI firstAI = new Minimax_AB();
-            SearchConfig firstConfig = Minimax_AB.bestConfig;
+            SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
             firstConfig.timeLimit = 5000;
 
             // configuration of second AI (CAN BE CHANGED)
             AI secondAI = new MCTS();
-            SearchConfig secondConfig = Minimax_AB.bestConfig;
+            SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
             secondConfig.timeLimit = 5000.0;
 
             // configuration of simulation (CAN BE CHANGED)

@@ -2,6 +2,7 @@ package search.optimisation;
 
 import game.Color;
 import game.MoveGenerator;
+import search.SearchConfig;
 import search.ab.Minimax_AB;
 import search.ab.Evaluation;
 
@@ -98,7 +99,8 @@ public class GeneticAlgorithm {
      */
     public static double playGame() {
         Minimax_AB ai = new Minimax_AB();
-        Minimax_AB.bestConfig.timeLimit = 1000; // reduce time for speed
+        SearchConfig config = Minimax_AB.bestConfig.copy();
+        config.timeLimit = 1000; // reduce time for speed
         String bestMove;
 
         String fen = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
@@ -110,7 +112,7 @@ public class GeneticAlgorithm {
         int moveCount = 0;
 
         while (!gameOver) {
-            bestMove = ai.orchestrator(fen,  Minimax_AB.bestConfig); // get best move
+            bestMove = ai.orchestrator(fen, config); // get best move
 
             // convert move
             int[] bestMoveInts = gameState.convertStringToPosWrapper(bestMove);
