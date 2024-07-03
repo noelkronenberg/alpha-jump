@@ -11,7 +11,9 @@ import java.util.*;
  *  An implementation of a Minimax Search for the game Jump Sturdy with Alpha-Beta Pruning,
  *  Aspiration Windows, Transposition Tables and a Quiescence Search.
  */
-public class Minimax_AB implements AI {
+public class Minimax_AB extends AI {
+    SearchConfig config;
+
     // hyperparameters (defaults)
     boolean timeCriterion = true;
     double timeLimit = bestConfig.timeLimit;
@@ -37,26 +39,30 @@ public class Minimax_AB implements AI {
 
     public static SearchConfig bestConfig = new SearchConfig(true, 50000.0, true, 0.25, true, 0, true, false);
 
-    /**
-     * Orchestrates the process of getting the best move for a given board state
-     * and search configuration.
-     *
-     * @param fen The current position in FEN notation.
-     * @param config The {@code SearchConfig} object containing search parameters such as
-     *               time limits, aspiration window settings, and depth limits.
-     * @return A string representing of the best move in the format: "StartColum""StartRow"-"EndColum""EndRow".
-     */
     @Override
     public String orchestrator(String fen, SearchConfig config) {
-        this.timeCriterion = config.timeCriterion;
-        this.timeLimit = config.timeLimit;
-        this.aspirationWindow = config.aspirationWindow;
-        this.aspirationWindowSize = config.aspirationWindowSize;
-        this.transpositionTables = config.transpositionTables;
-        this.maxAllowedDepth = config.maxAllowedDepth;
-        this.dynamicTime = config.dynamicTime;
-        this.useQuiescenceSearch = config.useQuiescenceSearch;
+        this.config = config;
+        this.timeCriterion = this.config.timeCriterion;
+        this.timeLimit = this.config.timeLimit;
+        this.aspirationWindow = this.config.aspirationWindow;
+        this.aspirationWindowSize = this.config.aspirationWindowSize;
+        this.transpositionTables = this.config.transpositionTables;
+        this.maxAllowedDepth = this.config.maxAllowedDepth;
+        this.dynamicTime = this.config.dynamicTime;
+        this.useQuiescenceSearch = this.config.useQuiescenceSearch;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
+    }
+
+    @Override
+    public String showConfig() {
+        return "timeCriterion = " + timeCriterion +
+                " | timeLimit = " + timeLimit +
+                " | aspirationWindow = " + aspirationWindow +
+                " | aspirationWindowSize = " + aspirationWindowSize +
+                " | transpositionTables = " + transpositionTables +
+                " | maxAllowedDepth = " + maxAllowedDepth +
+                " | dynamicTime = " + dynamicTime +
+                " | useQuiescenceSearch = " + useQuiescenceSearch;
     }
 
     /**

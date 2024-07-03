@@ -134,8 +134,26 @@ public class Simulation {
             }
         }
 
+        System.out.println();
         System.out.println("First AI wins: " + firstAIWins);
         System.out.println("Second AI wins: " + secondAIWins);
+
+        System.out.println();
+        System.out.println("Settings: ");
+        System.out.println();
+
+        System.out.println("Iterations: " + iterations);
+
+        System.out.println("FEN: " + fen);
+        System.out.println();
+
+        System.out.println("First AI: ");
+        System.out.println(firstAI.toString());
+        System.out.println();
+
+        System.out.println("Second AI: ");
+        System.out.println(secondAI.toString());
+        System.out.println();
     }
 
     /**
@@ -161,7 +179,7 @@ public class Simulation {
 
             // configuration of simulation
             String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
-            int iterations = 4;
+            int iterations = 2;
 
             // start simulation
             Simulation simulation = new Simulation();

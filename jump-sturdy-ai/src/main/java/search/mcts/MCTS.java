@@ -20,7 +20,9 @@ import java.util.Random;
 /**
  * An implementation of a Monte Carlo Tree Search for the game Jump Sturdy
  */
-public class MCTS implements AI {
+public class MCTS extends AI {
+    SearchConfig config;
+
     double numberOfAllSimulations;
     Color ourColor = Color.BLUE;
     Random random = new Random();
@@ -30,25 +32,17 @@ public class MCTS implements AI {
     double timeLimit = 20000;
     //TODO: 1 add a Tree system(Done)     2 add the value function: UCB(done)       3 add a way to simulate randomly the game end(done)      4 traversal Function (done)   5 backpropagation (done)
 
-
-    /**
-     * Orchestrates the process of getting the best move for a given board state
-     * and search configuration. It further generates all children from the root to initialize the tree.
-     *
-     * @param fen The current position in FEN notation
-     * @param config The {@code SearchConfig} object containing search parameters such as
-     *               time limits.
-     * @return A string representing of the best move in the format: "StartColum""StartRow"-"EndColum""EndRow".
-     */
     @Override
     public String orchestrator(String fen, SearchConfig config) {
+        this.config = config;
 
         this.numberOfAllSimulations=0;
 
         MoveGenerator gameState = new MoveGenerator();
         char color_fen = fen.charAt(fen.length() - 1);
         Color ourColor = gameState.getColor(color_fen);
-        this.timeLimit=config.timeLimit;
+
+        this.timeLimit = this.config.timeLimit;
 
         this.ourColor=ourColor;
 
@@ -82,6 +76,11 @@ public class MCTS implements AI {
         String s =MoveGenerator.convertMoveToFEN(getBestMove(parentNode));
         //System.out.println(s);
         return s;
+    }
+
+    @Override
+    public String showConfig() {
+        return "timeLimit = " + this.config.timeLimit;
     }
 
     /**

@@ -6,7 +6,10 @@ import search.ab.Evaluation;
 
 import java.util.*;
 
-public class Minimax_noAB implements AI {
+public class Minimax_noAB extends AI {
+    SearchConfig config;
+
+    // hyperparameters
     static int maxAllowedDepth = 2;
 
     // derived parameters
@@ -23,8 +26,14 @@ public class Minimax_noAB implements AI {
 
     @Override
     public String orchestrator(String fen, SearchConfig config) {
-        this.maxAllowedDepth = config.maxAllowedDepth;
+        this.config = config;
+        this.maxAllowedDepth = this.config.maxAllowedDepth;
         return MoveGenerator.convertMoveToFEN(getBestMoveNoAlphaBeta(fen));
+    }
+
+    @Override
+    public String showConfig() {
+        return "maxAllowedDepth = " + this.config.maxAllowedDepth;
     }
 
     public int getBestMoveNoAlphaBeta(String fen) {
