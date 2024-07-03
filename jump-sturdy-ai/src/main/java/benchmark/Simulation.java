@@ -16,6 +16,19 @@ import java.io.PrintStream;
 public class Simulation {
 
     /**
+     * Class to represent the result of a game, including the winning AI and the color.
+     */
+    public static class GameResult {
+        public final int number;
+        public final Color color;
+
+        public GameResult(int number, Color color) {
+            this.number = number;
+            this.color = color;
+        }
+    }
+
+    /**
      * Plays a full game between two AIs using the provided configurations and initial board state.
      *
      * @param firstAI The first AI that will play.
@@ -25,7 +38,7 @@ public class Simulation {
      * @param fen The initial board state in FEN format.
      * @return An integer indicating the winner of the game. Returns 1 if the first AI wins, 2 if the second AI wins.
      */
-    public static int playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen) {
+    public static GameResult playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen) {
 
         MoveGenerator gameState = new MoveGenerator();
         gameState.initializeBoard(fen);
@@ -33,6 +46,8 @@ public class Simulation {
         String bestMove;
         boolean gameOver = false;
         int moveCount = 0;
+
+        Color startingColor = fen.charAt(fen.length() - 1) == 'r' ? Color.RED : Color.BLUE;
 
         while (!gameOver) {
 
@@ -73,9 +88,10 @@ public class Simulation {
         }
 
         if (moveCount % 2 == 0) {
-            return 1;
-        } {
-            return 2;
+            return new GameResult(1, startingColor);
+        } else {
+            Color otherColor = (startingColor == Color.RED) ? Color.BLUE : Color.RED;
+            return new GameResult(2, otherColor);
         }
     }
 
@@ -100,7 +116,7 @@ public class Simulation {
         int secondAIWins = 0;
 
         for (int i = 1; i <= iterations; i++) {
-            int result;
+            GameResult result;
             boolean firstAIBegins = (i % 2 == 0);
 
             if (firstAIBegins) {
@@ -109,12 +125,12 @@ public class Simulation {
                 result = playGame(secondAI, secondConfig, firstAI, firstConfig, fen);
             }
 
-            if ((firstAIBegins && result == 1) || (!firstAIBegins && result == 2)) {
+            if ((firstAIBegins && result.number == 1) || (!firstAIBegins && result.number == 2)) {
                 firstAIWins++;
-                System.out.println("Winner of iteration " + i + " is: AI 1");
+                System.out.println("Winner of iteration " + i + " is: AI 1 (" + result.color + ")");
             } else {
                 secondAIWins++;
-                System.out.println("Winner of iteration " + i + " is: AI 2");
+                System.out.println("Winner of iteration " + i + " is: AI 2 (" + result.color + ")");
             }
         }
 
@@ -149,7 +165,7 @@ public class Simulation {
 
             // start simulation
             Simulation simulation = new Simulation();
-            simulation.simulate(secondAI, secondConfig, firstAI, firstConfig, initialFEN, iterations);
+            simulation.simulate(firstAI, firstConfig, secondAI, secondConfig, initialFEN, iterations);
 
             fileOut.close();
         } catch (FileNotFoundException e) {
