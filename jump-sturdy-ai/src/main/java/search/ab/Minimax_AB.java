@@ -21,7 +21,7 @@ public class Minimax_AB implements AI {
     // derived parameters
     public int maxDepth;
     public HashMap<String, Integer> positionsHM;
-    public HashMap<String, TranspositionTableObejct> transpositionTable;
+    public HashMap<String, TranspositionTableObject> transpositionTable;
 
     // logic
     final int winCutOff = 100000;
@@ -160,7 +160,7 @@ public class Minimax_AB implements AI {
                 LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
                 movesList = Evaluation.convertMovesToList(moves);
                 Evaluation.orderMoves(movesList, currentColor, gameState);
-                TranspositionTableObejct ttData = new TranspositionTableObejct(standPat, movesList, this.currentDepth);
+                TranspositionTableObject ttData = new TranspositionTableObject(standPat, movesList, this.currentDepth);
                 transpositionTable.put(fen, ttData);
             }
         } else {
@@ -271,7 +271,7 @@ public class Minimax_AB implements AI {
         double score;
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED; // signal player change
         LinkedList<Integer> movesList;
-        TranspositionTableObejct ttData;
+        TranspositionTableObject ttData;
 
         // START: Transposition Tables
         if (transpositionTables) {
@@ -282,7 +282,7 @@ public class Minimax_AB implements AI {
                 Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
                 score = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
-                ttData = new TranspositionTableObejct(score, movesList, depth);
+                ttData = new TranspositionTableObject(score, movesList, depth);
 
                 } else {
                     ttData = transpositionTable.get(fen);
@@ -299,7 +299,7 @@ public class Minimax_AB implements AI {
             Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
             score = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
-            ttData = new TranspositionTableObejct(score, movesList, depth);
+            ttData = new TranspositionTableObject(score, movesList, depth);
         }
 
         if (this.timeCriterion && System.currentTimeMillis() >= endTime) {

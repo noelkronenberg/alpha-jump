@@ -180,14 +180,12 @@ public class Evaluation {
      * @param depth The current depth of evaluation in the search tree.
      * @return The rating of the current position for the specified player.
      */
-    public static double ratePosition(MoveGenerator moveGenerator, Color color, int depth, String fen) {
+    public static double ratePosition(MoveGenerator moveGenerator, Color color, int depth) {
         double score = 0;
 
         if (color == Color.BLUE) {
             score = getScoreWrapper(moveGenerator, Color.BLUE, depth) - getScoreWrapper(moveGenerator, Color.RED, depth);
-        }
-
-        else if (color == Color.RED) {
+        } else if (color == Color.RED) {
             score = getScoreWrapper(moveGenerator, Color.RED, depth) - getScoreWrapper(moveGenerator, Color.BLUE, depth);
         }
         return score;
@@ -321,7 +319,7 @@ public class Evaluation {
      * @param depth The current depth of evaluation in the search tree.
      * @return The computed score change due to the move.
      */
-    public double rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition, int depth, String fen) {
+    public double rateMove(MoveGenerator gameState, Color color, int startPosition, int endPosition, int depth) {
         double score = 0;
 
         MoveGenerator nextState = new MoveGenerator();
@@ -329,9 +327,9 @@ public class Evaluation {
         nextState.setColorBoard(gameState.getColorBoard());
         nextState.setPieceBoard(gameState.getPieceBoard());
 
-        score -= ratePosition(nextState, color, depth,fen);
+        score -= ratePosition(nextState, color, depth);
         nextState.movePiece(startPosition, endPosition);
-        score += ratePosition(nextState, color, depth, fen);
+        score += ratePosition(nextState, color, depth);
 
         return score;
     }
