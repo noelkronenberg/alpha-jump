@@ -103,7 +103,6 @@ public class OpeningBookGenerator {
         for (int moveCounter = 0; moveCounter < possMovesOppList.size(); moveCounter++) {
             // den variablen Gegenzug des Gegners eintragen
             int oppMove = possMovesOppList.get(moveCounter);
-            String oppMoveFEN = MoveGenerator.convertMoveToFEN(oppMove);
     
             // Zug des Gegners ausführen und Board speichern
             moveGenerator.movePiece(oppMove);

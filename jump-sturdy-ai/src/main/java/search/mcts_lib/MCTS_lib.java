@@ -23,7 +23,7 @@ public class MCTS_lib {
         while (System.currentTimeMillis() < endTime) {
 
             MCTSNode_lib node = root;
-            String state = initialState;
+            String state = "";
             Color currentPlayer = color;
             moveGenerator.initializeBoard(initialState);
 
@@ -66,7 +66,7 @@ public class MCTS_lib {
     }
 
     private static Color simulate(MoveGenerator moveGenerator, Color color) {
-        String fen = moveGenerator.getFenFromBoard();
+        String fen = "";
         Color winner = Color.EMPTY;
         while (winner == Color.EMPTY) {
             LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
@@ -121,7 +121,6 @@ public class MCTS_lib {
     }
 
     private static LinkedHashMap<Integer, List<Integer>> getPossibleMoves(MoveGenerator moveGenerator, Color color) {
-        String fen = moveGenerator.getFenFromBoard();
         LinkedHashMap<Integer, List<Integer>> possibleMoves = moveGenerator.generateAllPossibleMoves(color);
         return possibleMoves;
     }
@@ -133,7 +132,6 @@ public class MCTS_lib {
     }
 
     public static void main(String[] args) {
-        MCTS_lib mcts = new MCTS_lib();
         MoveGenerator mg = new MoveGenerator();
         String board = "3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r";
         mg.initializeBoard(board);
