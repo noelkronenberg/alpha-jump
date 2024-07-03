@@ -22,12 +22,12 @@ public class OpeningBookGenerator {
         MCTS_BIB mcts = new MCTS_BIB();
         
         // Im Folgenden den Block auskommentieren, welcher nicht erstellt werden soll
-        try (FileWriter writer = new FileWriter("opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
+        try (FileWriter writer = new FileWriter("src/main/java/search/MCTS_BIB/opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
             generateOpeningBookStarting(initialState, mcts, writer, startingPlayer, 0);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*try (FileWriter writer = new FileWriter("opening_book_secondMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
+        /*try (FileWriter writer = new FileWriter("src/main/java/search/MCTS_BIB/opening_book_secondMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
             generateOpeningBookSecond(initialState, mcts, writer, startingPlayer, 0);
         } catch (IOException e) {
             e.printStackTrace();
