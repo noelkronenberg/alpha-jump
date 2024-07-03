@@ -17,7 +17,7 @@ import java.util.Map;
 public class Minimax_noABBM {
 
     static Minimax_noAB ai;
-    static SearchConfig config = Minimax_AB.bestConfig;
+    static SearchConfig config = Minimax_AB.bestConfig.copy();
 
     /**
      * Initializes the Minimax_noAB instance.

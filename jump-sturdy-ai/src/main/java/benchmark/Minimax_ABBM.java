@@ -222,7 +222,7 @@ public class Minimax_ABBM {
      */
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/Minimax_ABBM-output.txt"));
+            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/output/Minimax_ABBM-output.txt"));
             System.setOut(fileOut);
 
             System.out.println("Start Position: ");

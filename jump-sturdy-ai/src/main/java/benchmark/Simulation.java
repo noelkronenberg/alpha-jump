@@ -6,10 +6,29 @@ import search.*;
 import search.ab.Minimax_AB;
 import search.mcts.MCTS;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Simulation of full games between two AIs.
  */
 public class Simulation {
+
+    /**
+     * Class to represent the result of a game, including the winning AI and the color.
+     */
+    public static class GameResult {
+        public final int number;
+        public final Color color;
+
+        public GameResult(int number, Color color) {
+            this.number = number;
+            this.color = color;
+        }
+    }
 
     /**
      * Plays a full game between two AIs using the provided configurations and initial board state.
@@ -19,9 +38,10 @@ public class Simulation {
      * @param secondAI The second AI that will play.
      * @param secondConfig The configuration for the second AI's search algorithm.
      * @param fen The initial board state in FEN format.
+     * @param showGame Whether to show the game play.
      * @return An integer indicating the winner of the game. Returns 1 if the first AI wins, 2 if the second AI wins.
      */
-    public static int playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen) {
+    public static GameResult playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, boolean showGame) {
 
         MoveGenerator gameState = new MoveGenerator();
         gameState.initializeBoard(fen);
@@ -29,6 +49,8 @@ public class Simulation {
         String bestMove;
         boolean gameOver = false;
         int moveCount = 0;
+
+        Color startingColor = fen.charAt(fen.length() - 1) == 'r' ? Color.RED : Color.BLUE;
 
         while (!gameOver) {
 
@@ -54,14 +76,15 @@ public class Simulation {
                 moveCount++;
             }
 
-            /*
-            // show status
-            System.out.println("Color: " + currentColor);
-            System.out.println("Move: " + bestMove);
-            System.out.println("MoveCount: " + moveCount);
-            System.out.println("GameOver: " + gameOver);
-            gameState.printBoard(true);
-            */
+            if (showGame) {
+                System.out.println();
+                System.out.println("Color: " + currentColor);
+                System.out.println("Move: " + bestMove);
+                System.out.println("MoveCount: " + moveCount);
+                System.out.println("GameOver: " + gameOver);
+                gameState.printBoard(true);
+                System.out.println();
+            }
 
             // get next FEN
             char nextColor = (currentColorChar == 'r') ? 'b' : 'r'; // switch color
@@ -69,9 +92,10 @@ public class Simulation {
         }
 
         if (moveCount % 2 == 0) {
-            return 1;
-        } {
-            return 2;
+            return new GameResult(1, startingColor);
+        } else {
+            Color otherColor = (startingColor == Color.RED) ? Color.BLUE : Color.RED;
+            return new GameResult(2, otherColor);
         }
     }
 
@@ -85,8 +109,9 @@ public class Simulation {
      * @param secondConfig The configuration for the second AI's search algorithm.
      * @param fen The initial board state in FEN format.
      * @param iterations The number of iterations (games) to simulate. Must be an even number.
+     * @param showGame Whether to show the game play.
      */
-    public void simulate(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, int iterations) {
+    public void simulate(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, int iterations, boolean showGame) {
         if (!(iterations % 2 == 0)) {
             System.out.println("Please enter an even number of iterations to make the results fair.");
             return;
@@ -96,45 +121,83 @@ public class Simulation {
         int secondAIWins = 0;
 
         for (int i = 1; i <= iterations; i++) {
-            int result;
+            GameResult result;
             boolean firstAIBegins = (i % 2 == 0);
 
             if (firstAIBegins) {
-                result = playGame(firstAI, firstConfig, secondAI, secondConfig, fen);
+                result = playGame(firstAI, firstConfig, secondAI, secondConfig, fen, showGame);
             } else {
-                result = playGame(secondAI, secondConfig, firstAI, firstConfig, fen);
+                result = playGame(secondAI, secondConfig, firstAI, firstConfig, fen, showGame);
             }
 
-            if ((firstAIBegins && result == 1) || (!firstAIBegins && result == 2)) {
+            if ((firstAIBegins && result.number == 1) || (!firstAIBegins && result.number == 2)) {
                 firstAIWins++;
-                System.out.println("Winner of iteration " + i + " is: AI 1");
+                System.out.println("Winner of iteration " + i + " is: AI 1 (" + result.color + ")");
             } else {
                 secondAIWins++;
-                System.out.println("Winner of iteration " + i + " is: AI 2");
+                System.out.println("Winner of iteration " + i + " is: AI 2 (" + result.color + ")");
             }
         }
 
+        System.out.println();
         System.out.println("First AI wins: " + firstAIWins);
         System.out.println("Second AI wins: " + secondAIWins);
+
+        System.out.println();
+        System.out.println("Settings: ");
+        System.out.println();
+
+        System.out.println("Iterations: " + iterations);
+
+        System.out.println("FEN: " + fen);
+        System.out.println();
+
+        System.out.println("First AI: ");
+        System.out.println(firstAI.toString());
+        System.out.println();
+
+        System.out.println("Second AI: ");
+        System.out.println(secondAI.toString());
+        System.out.println();
     }
 
     /**
      * Main method to run a simulation between two AIs using predefined configurations and an initial board state.
+     * Prints results to a file.
      *
      * @param args Command line arguments (not used).
      */
     public static void main(String[] args) {
-        AI firstAI = new Minimax_AB();
-        SearchConfig firstConfig = Minimax_AB.bestConfig;
-        firstConfig.timeLimit = 200.0;
+        try {
+            // filename (DO NOT CHANGE)
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+            String timestamp = dateFormat.format(new Date());
+            String filename = timestamp + "_simulation-output" + ".txt";
+            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/output/" + filename));
+            System.setOut(fileOut);
 
-        AI secondAI = new MCTS();
-        SearchConfig secondConfig = Minimax_AB.bestConfig;
-        secondConfig.timeLimit = 200.0;
+            // configuration of first AI (CAN BE CHANGED)
+            AI firstAI = new Minimax_AB();
+            SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
+            firstConfig.timeLimit = 5000;
 
-        String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
-        int iterations = 4;
-        Simulation simulation = new Simulation();
-        simulation.simulate(secondAI, secondConfig, firstAI, firstConfig, initialFEN, iterations);
+            // configuration of second AI (CAN BE CHANGED)
+            AI secondAI = new MCTS();
+            SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
+            secondConfig.timeLimit = 5000.0;
+
+            // configuration of simulation (CAN BE CHANGED)
+            String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
+            int iterations = 10;
+            boolean showGame = false;
+
+            // start simulation (DO NOT CHANGE)
+            Simulation simulation = new Simulation();
+            simulation.simulate(firstAI, firstConfig, secondAI, secondConfig, initialFEN, iterations, showGame);
+
+            fileOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

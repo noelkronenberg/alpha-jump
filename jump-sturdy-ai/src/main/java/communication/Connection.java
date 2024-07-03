@@ -1,5 +1,6 @@
 package communication;
 
+import search.SearchConfig;
 import search.ab.Minimax_AB;
 
 import com.google.gson.Gson;
@@ -31,12 +32,13 @@ public class Connection {
      */
     public void connect(boolean isPlayer) {
         Minimax_AB ai = new Minimax_AB();
+        SearchConfig config = Minimax_AB.bestConfig.copy();
         String serverAddress = "localhost";
         int port = 5555;
 
         double overall = 115000.0; // overall time (in ms)
         int averageMoves = 40;
-        Minimax_AB.bestConfig.timeLimit = overall / averageMoves; // set time for move (in ms)
+        config.timeLimit = overall / averageMoves; // set time for move (in ms)
 
         try (Socket server = new Socket(serverAddress, port)) {
 
@@ -108,14 +110,14 @@ public class Connection {
 
                                 // check for dynamic time management
                                 if (moveCounter <= 6 || (31 < moveCounter && moveCounter <= 39)) {
-                                    Minimax_AB.bestConfig.timeLimit = (overall * 0.2) / 15;
+                                    config.timeLimit = (overall * 0.2) / 15;
                                 } else if (timeLeft <= 5000) {
-                                    Minimax_AB.bestConfig.timeLimit = (timeLeft * 0.5);
+                                    config.timeLimit = (timeLeft * 0.5);
                                 } else {
-                                    Minimax_AB.bestConfig.timeLimit = (overall * 0.8) / 25;
+                                    config.timeLimit = (overall * 0.8) / 25;
                                 }
 
-                                this.move = ai.orchestrator(fen, Minimax_AB.bestConfig);
+                                this.move = ai.orchestrator(fen, config);
                                 moveCounter++;
                             }
 

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class Minimax_ABTest {
 
     static Minimax_AB ai;
-    static SearchConfig config = Minimax_AB.bestConfig;
+    static SearchConfig config = Minimax_AB.bestConfig.copy();
 
     static MCTS ai_MCTS;
 
@@ -28,7 +28,7 @@ public class Minimax_ABTest {
     public static void init() {
         ai = new Minimax_AB();
         config.timeCriterion = true;
-        config.timeLimit = 3000;
+        config.timeLimit = 10000;
         // aiMCTS = new MCTS();
     }
 
@@ -40,7 +40,7 @@ public class Minimax_ABTest {
     @DisplayName("Anzahl untersuchter Züge (mit händischen Beweis)")
     public void anzahlSanityCheck() {
         init();
-        SearchConfig config = Minimax_AB.bestConfig;
+        SearchConfig config = Minimax_AB.bestConfig.copy();
         config.timeCriterion = false;
         config.maxAllowedDepth = 2;
         ai.orchestrator("6/8/8/3r04/4b03/8/8/6 b", config);

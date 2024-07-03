@@ -17,8 +17,12 @@ import java.util.Random;
 //https://stackoverflow.com/questions/42302142/monte-carlo-tree-search-tree-policy-for-two-player-games
 // viele Besuche und wins wird minimiert... ?! Sehr komisch
 
+/**
+ * An implementation of a Monte Carlo Tree Search for the game Jump Sturdy
+ */
+public class MCTS extends AI {
+    SearchConfig config;
 
-public class MCTS implements AI {
     double numberOfAllSimulations;
     Color ourColor = Color.BLUE;
     Random random = new Random();
@@ -28,39 +32,17 @@ public class MCTS implements AI {
     double timeLimit = 20000;
     //TODO: 1 add a Tree system(Done)     2 add the value function: UCB(done)       3 add a way to simulate randomly the game end(done)      4 traversal Function (done)   5 backpropagation (done)
 
-//    public void MCTS_UCB(String fen){
-//        MoveGenerator gameState = new MoveGenerator();
-//        char color_fen = fen.charAt(fen.length() - 1);
-//        Color ourColor = gameState.getColor(color_fen);
-//
-//        this.ourColor=ourColor;
-//
-//        LinkedHashMap<Integer, List<Integer>> moves = gameState.getMovesWrapper(fen);
-//        LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
-//        MCTSNode parentNode = new MCTSNode(movesList,moves,ourColor);
-//        this.parentNode = parentNode;
-//        gameState.printBoard(true);
-//
-//        treePolicy(gameState,parentNode, ourColor);
-//
-//        for (MCTSNode m : parentNode.children){
-//            System.out.println("Node For Move "+m.move+", Value: "+m.getNodeValue()+" Visits: "+m.numberOfVisits+" Wins: "+m.numberOfWins);
-//        }
-//        System.out.println("Number Of all: "+numberOfAllSimulations);
-//        System.out.println("Number Of all: "+parentNode.numberOfVisits);
-//
-//        System.out.println(MoveGenerator.convertMoveToFEN(getBestMove(parentNode)));
-//    }
-
     @Override
     public String orchestrator(String fen, SearchConfig config) {
+        this.config = config;
 
         this.numberOfAllSimulations=0;
 
         MoveGenerator gameState = new MoveGenerator();
         char color_fen = fen.charAt(fen.length() - 1);
         Color ourColor = gameState.getColor(color_fen);
-        this.timeLimit=config.timeLimit;
+
+        this.timeLimit = this.config.timeLimit;
 
         this.ourColor=ourColor;
 
@@ -82,7 +64,7 @@ public class MCTS implements AI {
         int reward = simulateToEnd(color,gameState,ourColor);
         propagateDataToRoot(node,reward,node.color);    //TODO check if node.color and color is always equal
 
-        newTreePolicy(parentGameState,parentNode, ourColor);
+        treePolicy(parentGameState,parentNode, ourColor);
 
 //        for (MCTSNode m : parentNode.children){
 //            System.out.println("Node For Move "+m.move+", Value: "+m.getNodeValue()+" Visits: "+m.numberOfVisits+" Wins: "+m.numberOfWins);
@@ -96,6 +78,17 @@ public class MCTS implements AI {
         return s;
     }
 
+    @Override
+    public String showConfig() {
+        return "timeLimit = " + this.config.timeLimit;
+    }
+
+    /**
+     * Determines the average wins per visit for each child of a give node and chooses the child that maximizes this value.
+     *
+     * @param node The {@code MCTSNode} representing the current state in the search tree.
+     * @return An integer representing the best move.
+     */
     public int getBestMove(MCTSNode node){
         double max = Integer.MIN_VALUE;
         MCTSNode maxChild = null;
@@ -109,7 +102,14 @@ public class MCTS implements AI {
         return maxChild.move;
     }
 
-
+    /**
+     * Simulates the game to the end using a probabilistic approach weighted by the number of possible moves or each player.
+     *
+     * @param color The color of the player to move.
+     * @param moveGenerator The {@code MoveGenerator} object used to generate and execute moves.
+     * @param parentColor The color of the root node in the Monte Carlo Tree Search (MCTS).
+     * @return An integer representing the simulation result: 1 if the parent color wins, otherwise 0
+     */
     public int simulateToEnd(Color color, MoveGenerator moveGenerator, Color parentColor){
 //        while (true){           //TODO CHANGE FOR NEW PROPAGATION
 //            //generate and Pick random mov
@@ -135,7 +135,12 @@ public class MCTS implements AI {
         return  generator.nextDouble() >= prob? 1 : 0;
     }
 
-
+    /**
+     * Checks whether the search should continue based on the end time-
+     *
+     * @param endTime The maximum time allowed for evaluating moves, in milliseconds.
+     * @return  {@code true} if the current system time is less or equal than the end time,  {@code false} if the current system time is more than the end time.
+     */
     public boolean continueSearch(double endTime){
         double time = System.currentTimeMillis();
         if (endTime>=time){
@@ -144,9 +149,19 @@ public class MCTS implements AI {
         return false;
     }
 
+    /**
+     * Performs a tree traversal in the Monte Carlo Tree Search (MCTS) algorithm.
+     * This method traverses the tree by selecting the child node with the highest UCB value
+     * until a leaf node or a winning position is found, or the end time is reached.
+     *
+     * @param endtime The time at which the search should stop, in milliseconds.
+     * @param node The current {@code MCTSNode} from which to start the traversal.
+     * @param moveGenerator The {@code MoveGenerator} object used to generate and execute moves.
+     * @return The {@code MCTSNode} reached at the end of the traversal.
+     */
     public MCTSNode treeTraversal(double endtime, MCTSNode node, MoveGenerator moveGenerator){
         while(continueSearch(endtime)){        //TODO: check here for tree traversal: Color is somtimes min, sometimes max (weird)
-            if(node.children.isEmpty()||node.isWinPos||node.isWinNext){
+            if(node.children.isEmpty()||node.isWinPos||node.isWinMove){
                 return node;
             }
 
@@ -157,8 +172,8 @@ public class MCTS implements AI {
                 if (child.move==3534&&numberOfAllSimulations>=3000000){
                     int i = 0;
                 }
-                double nodeUCB= child.getNodeValueNew();
-                if (child.isWinPos||child.isWinNext){
+                double nodeUCB= child.getNodeValue();
+                if (child.isWinPos||child.isWinMove){
                      bestChild=child;
                      return  bestChild;
                 }
@@ -174,7 +189,7 @@ public class MCTS implements AI {
             if (bestChild.numberOfVisits<=1){
                 //check if win
                 bestChild.updateNode(moveGenerator);
-                if (bestChild.isWinPos||bestChild.isWinNext){
+                if (bestChild.isWinPos||bestChild.isWinMove){
                     return bestChild;
                 }
             }
@@ -183,19 +198,19 @@ public class MCTS implements AI {
         return node;
     }
 
-//    public MCTSNode expandAndReturnRandomNode(MCTSNode node, MoveGenerator moveGenerator, Color color){
-//        for (int move:node.childrenUnserached){
-//            node.children.add(new MCTSNode(node,move,moveGenerator, color));
-//        }
-//        node.childrenUnserached.clear();
-//
-//        MCTSNode selectedChild=node.children.get(random.nextInt(node.children.size()));
-//        return selectedChild;
-//    }
-
+    /**
+     * Expands the given MCTS node by creating new child nodes for each possible move
+     * and returns one of the created child nodes at random.
+     *
+     * @param node The {@code MCTSNode} to be expanded.
+     * @param moveGenerator The {@code MoveGenerator} object used to generate and execute moves.
+     * @param color The color of the children.
+     * @param children A list of possible moves (as integers) from the current node.
+     * @return A randomly selected {@code MCTSNode} from the newly created children.
+     */
     public MCTSNode expandAndReturnRandomNode(MCTSNode node, MoveGenerator moveGenerator, Color color, LinkedList<Integer> children){
         for (int move:children){
-            node.children.add(new MCTSNode(node,move,moveGenerator, color));        //TODO Switch to new MCTSNode
+            node.children.add(new MCTSNode(node,move, color));        //TODO Switch to new MCTSNode
         }
         if (node.children.size()<=0){
             int i =0;
@@ -208,7 +223,16 @@ public class MCTS implements AI {
         return selectedChild;
     }
 
-    public void newTreePolicy(MoveGenerator moveGenerator, MCTSNode node, Color color){
+    /**
+     * Executes the tree policy for the Monte Carlo Tree Search (MCTS) algorithm.
+     * This method traverses the search tree, expands nodes, and performs simulations
+     * to update the tree with new information.
+     *
+     * @param moveGenerator The {@code MoveGenerator} object used to generate and execute moves.
+     * @param node The current {@code MCTSNode} from which to start the tree policy.
+     * @param color The color of the current node making the move.
+     */
+    public void treePolicy(MoveGenerator moveGenerator, MCTSNode node, Color color){
         //TODO: IMPL Time cutoff und solange es nicht ein win ist
         //TODO: mach UCB, falls noch nicht alle children explored wurden, mach das (done)
         //TODO: Change node to have searched child nodes and unsearched child nodes (maybe play around with a bool to see if unsearched is empty) (done)
@@ -224,7 +248,7 @@ public class MCTS implements AI {
 //                int i =1;
 //            }
 
-            if (selectedNode.isWinNext){
+            if (selectedNode.isWinMove){
                 if (numberOfAllSimulations>=3000000){
                     int i=0;
                 }
@@ -263,7 +287,14 @@ public class MCTS implements AI {
         }
     }
 
-
+    /**
+     *  Propagates the results of a simulation back up to the root of the Monte Carlo Tree Search (MCTS) tree.
+     *  This method updates the win and visit counts of the nodes.
+     *
+     * @param node The Leaf {@code MCTSNode} from which to start the propagation.
+     * @param reward The reward obtained from the simulation (1 for a win, 0 for a loss).
+     * @param colorOfExpandedPlayer The color of the leaf node (last expanded node).
+     */
     public void propagateDataToRoot(MCTSNode node, int reward, Color colorOfExpandedPlayer){
         while (node.parent != null){
             if (node.color==colorOfExpandedPlayer){
@@ -291,11 +322,11 @@ public class MCTS implements AI {
         MCTS ai = new MCTS();
         String fen = "3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b"; //testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
 
-        SearchConfig config = Minimax_AB.bestConfig;
+        SearchConfig config = Minimax_AB.bestConfig.copy();
         config.timeLimit=20000.0;
         ai.orchestrator(fen, config);
 
-        ai.orchestrator(fen, Minimax_AB.bestConfig);
+        ai.orchestrator(fen, Minimax_AB.bestConfig.copy());
     }
 
 }

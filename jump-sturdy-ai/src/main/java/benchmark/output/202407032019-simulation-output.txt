@@ -1,0 +1,27 @@
+Winner of iteration 1 is: AI 1 (RED)
+Winner of iteration 2 is: AI 2 (RED)
+Winner of iteration 3 is: AI 2 (BLUE)
+Winner of iteration 4 is: AI 2 (RED)
+Winner of iteration 5 is: AI 1 (RED)
+Winner of iteration 6 is: AI 1 (BLUE)
+Winner of iteration 7 is: AI 1 (RED)
+Winner of iteration 8 is: AI 2 (RED)
+Winner of iteration 9 is: AI 2 (BLUE)
+Winner of iteration 10 is: AI 2 (RED)
+
+First AI wins: 4
+Second AI wins: 6
+
+Settings: 
+
+Iterations: 10
+FEN: 2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b
+
+First AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 5000.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false
+
+Second AI: 
+Class: MCTS
+Config: timeLimit = 5000.0
+

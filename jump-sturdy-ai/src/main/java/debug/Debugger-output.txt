@@ -1,26 +1,143 @@
 
      A   B   C   D   E   F   G   H
 
-8        .   .   .   .   .   .      
-7    .   .   .   .   .   R   R   R  
-6    .   .   .   .   .   .   R   .  
-5    .   R   R   .   .   R   .   R  
-4    .   B   .   .   .   .   .   .  
-3    .   .   .   B   .   .  BB   B  
-2    B   .   .   B   .   .   B   .  
-1        .   .   .  BB   .   .      
+8        .   .   R   .   R   R      
+7    B   .   .   .   R   .  RR   .  
+6    .   R   R   .   .  RR   .   .  
+5    .   .   .   R   .  RR   .   .  
+4    .   B   .   B   .   B   .   .  
+3    B   .   B  BB   .   .   .   .  
+2    .   B   B   .   .   .   .   .  
+1        .  BB   .   .   .   .      
 
 
-Best move: E1-D3 (color: b | move: 1)
+Best move: G8-F8 (color: r | move: 1)
 
      A   B   C   D   E   F   G   H
 
-8        .   .   .   .   .   .      
-7    .   .   .   .   .   R   R   R  
-6    .   .   .   .   .   .   R   .  
-5    .   R   R   .   .   R   .   R  
-4    .   B   .   .   .   .   .   .  
-3    .   .   .  BB   .   .  BB   B  
-2    B   .   .   B   .   .   B   .  
-1        .   .   .   B   .   .      
+8        .   .   R   .  RR   .      
+7    B   .   .   .   R   .  RR   .  
+6    .   R   R   .   .  RR   .   .  
+5    .   .   .   R   .  RR   .   .  
+4    .   B   .   B   .   B   .   .  
+3    B   .   B  BB   .   .   .   .  
+2    .   B   B   .   .   .   .   .  
+1        .  BB   .   .   .   .      
+
+Best move: A7-B7 (color: b | move: 2)
+
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .  RR   .      
+7    .   B   .   .   R   .  RR   .  
+6    .   R   R   .   .  RR   .   .  
+5    .   .   .   R   .  RR   .   .  
+4    .   B   .   B   .   B   .   .  
+3    B   .   B  BB   .   .   .   .  
+2    .   B   B   .   .   .   .   .  
+1        .  BB   .   .   .   .      
+
+Best move: F5-D4 (color: r | move: 3)
+
+     A   B   C   D   E   F   G   H
+
+8        .   .   R   .  RR   .      
+7    .   B   .   .   R   .  RR   .  
+6    .   R   R   .   .  RR   .   .  
+5    .   .   .   R   .   R   .   .  
+4    .   B   .   R   .   B   .   .  
+3    B   .   B  BB   .   .   .   .  
+2    .   B   B   .   .   .   .   .  
+1        .  BB   .   .   .   .      
+
+Best move: B7-B8 (color: b | move: 4)
+
+     A   B   C   D   E   F   G   H
+
+8        B   .   R   .  RR   .      
+7    .   .   .   .   R   .  RR   .  
+6    .   R   R   .   .  RR   .   .  
+5    .   .   .   R   .   R   .   .  
+4    .   B   .   R   .   B   .   .  
+3    B   .   B  BB   .   .   .   .  
+2    .   B   B   .   .   .   .   .  
+1        .  BB   .   .   .   .      
+
+Best move: D4-C3 (color: r | move: 5)
+
+     A   B   C   D   E   F   G   H
+
+8        B   .   R   .  RR   .      
+7    .   .   .   .   R   .  RR   .  
+6    .   R   R   .   .  RR   .   .  
+5    .   .   .   R   .   R   .   .  
+4    .   B   .   .   .   B   .   .  
+3    B   .   R  BB   .   .   .   .  
+2    .   B   B   .   .   .   .   .  
+1        .  BB   .   .   .   .      
+
+Best move: B2-C3 (color: b | move: 6)
+
+     A   B   C   D   E   F   G   H
+
+8        B   .   R   .  RR   .      
+7    .   .   .   .   R   .  RR   .  
+6    .   R   R   .   .  RR   .   .  
+5    .   .   .   R   .   R   .   .  
+4    .   B   .   .   .   B   .   .  
+3    B   .   B  BB   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .  BB   .   .   .   .      
+
+Best move: F6-G4 (color: r | move: 7)
+
+     A   B   C   D   E   F   G   H
+
+8        B   .   R   .  RR   .      
+7    .   .   .   .   R   .  RR   .  
+6    .   R   R   .   .   R   .   .  
+5    .   .   .   R   .   R   .   .  
+4    .   B   .   .   .   B   R   .  
+3    B   .   B  BB   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .  BB   .   .   .   .      
+
+Best move: C1-B3 (color: b | move: 8)
+
+     A   B   C   D   E   F   G   H
+
+8        B   .   R   .  RR   .      
+7    .   .   .   .   R   .  RR   .  
+6    .   R   R   .   .   R   .   .  
+5    .   .   .   R   .   R   .   .  
+4    .   B   .   .   .   B   R   .  
+3    B   B   B  BB   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   B   .   .   .   .      
+
+Best move: G7-F5 (color: r | move: 9)
+
+     A   B   C   D   E   F   G   H
+
+8        B   .   R   .  RR   .      
+7    .   .   .   .   R   .   R   .  
+6    .   R   R   .   .   R   .   .  
+5    .   .   .   R   .  RR   .   .  
+4    .   B   .   .   .   B   R   .  
+3    B   B   B  BB   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   B   .   .   .   .      
+
+Best move: D3-E5 (color: b | move: 10)
+
+     A   B   C   D   E   F   G   H
+
+8        B   .   R   .  RR   .      
+7    .   .   .   .   R   .   R   .  
+6    .   R   R   .   .   R   .   .  
+5    .   .   .   R   B  RR   .   .  
+4    .   B   .   .   .   B   R   .  
+3    B   B   B   B   .   .   .   .  
+2    .   .   B   .   .   .   .   .  
+1        .   B   .   .   .   .      
 
