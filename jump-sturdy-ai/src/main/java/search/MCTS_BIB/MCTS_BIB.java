@@ -15,9 +15,9 @@ import search.ab.Evaluation;
 public class MCTS_BIB {
     private static final Random random = new Random();
     private static final double EXPLORATION_PARAM = 1.3;
-    private static final double timeLimit = 10000;
+    private static final double timeLimit = 50000;
 
-    public static int runMCTS(MoveGenerator moveGenerator, Color color, int iterations) {
+    public static int runMCTS(MoveGenerator moveGenerator, Color color) {
         Color startingPlayer = color;
         double endTime = System.currentTimeMillis() + timeLimit; 
         String initialState = moveGenerator.getFenFromBoard();
@@ -58,7 +58,7 @@ public class MCTS_BIB {
 
     private static void expand(MCTSNode_BIB node, Color color, MoveGenerator moveGenerator) {
         LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
-        if (!moveGenerator.isGameOverMCTS_Bib(possibleMoves)) {
+        if (!moveGenerator.isGameOverMCTS(possibleMoves)) {
             LinkedList<Integer> movesList;
             movesList = Evaluation.convertMovesToList(possibleMoves);
             for (int move : movesList) {
@@ -76,14 +76,12 @@ public class MCTS_BIB {
             LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
             LinkedList<Integer> movesList = Evaluation.convertMovesToList(possibleMoves);
 
-            if (moveGenerator.isGameOverMCTS_Bib(possibleMoves)) {
-                if (moveGenerator.getWinner(possibleMoves, color)) {
-                    winner = Color.BLUE;
-                    break;
-                } else {
-                    winner = Color.RED;
-                    break;
-                }
+            if (moveGenerator.isGameOverMCTS(possibleMoves, color) == 1) {
+                winner = Color.BLUE;
+                break;
+            } else if (moveGenerator.isGameOverMCTS(possibleMoves, color) == -1) {
+                winner = Color.RED;
+                break;
             }
             Integer raInteger = random.nextInt(movesList.size());
             Integer move = movesList.get(raInteger);
@@ -139,9 +137,9 @@ public class MCTS_BIB {
     public static void main(String[] args) {
         MCTS_BIB mcts = new MCTS_BIB();
         MoveGenerator mg = new MoveGenerator();
-        String board = "3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r";
+        String board = "6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b";
         mg.initializeBoard(board);
-        //System.out.println(runMCTS(mg, Color.RED, 100000));
+        System.out.println(runMCTS(mg, Color.BLUE));
         mg.initializeBoard(board);
         mg.printBoard(false);
     }
