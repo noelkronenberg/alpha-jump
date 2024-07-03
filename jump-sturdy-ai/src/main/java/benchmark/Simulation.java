@@ -9,6 +9,8 @@ import search.mcts.MCTS;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Simulation of full games between two AIs.
@@ -164,18 +166,23 @@ public class Simulation {
      */
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/Simulation-output.txt"));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+            String timestamp = dateFormat.format(new Date());
+
+            String filename = timestamp + "-simulation-output" + ".txt";
+
+            PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/" + filename));
             System.setOut(fileOut);
 
             // configuration of first AI
             AI firstAI = new Minimax_AB();
             SearchConfig firstConfig = Minimax_AB.bestConfig;
-            firstConfig.timeLimit = 2000.0;
+            firstConfig.timeLimit = 200;
 
             // configuration of second AI
             AI secondAI = new MCTS();
             SearchConfig secondConfig = Minimax_AB.bestConfig;
-            secondConfig.timeLimit = 2000.0;
+            secondConfig.timeLimit = 200.0;
 
             // configuration of simulation
             String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
