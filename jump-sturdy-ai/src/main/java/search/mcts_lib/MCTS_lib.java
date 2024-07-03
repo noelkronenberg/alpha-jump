@@ -11,7 +11,7 @@ import search.ab.Evaluation;
 public class MCTS_lib {
     private final Random random = new Random();
     private final double EXPLORATION_PARAM = 1.3;
-    private final double timeLimit = 20000;
+    private final double timeLimit = 50000;
 
     public int runMCTS(MoveGenerator moveGenerator, Color color) {
         Color startingPlayer = color;
