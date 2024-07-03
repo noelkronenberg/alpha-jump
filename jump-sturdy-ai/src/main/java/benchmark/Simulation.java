@@ -179,16 +179,16 @@ public class Simulation {
             // configuration of first AI (CAN BE CHANGED)
             AI firstAI = new Minimax_AB();
             SearchConfig firstConfig = Minimax_AB.bestConfig;
-            firstConfig.timeLimit = 200;
+            firstConfig.timeLimit = 5000;
 
             // configuration of second AI (CAN BE CHANGED)
             AI secondAI = new MCTS();
             SearchConfig secondConfig = Minimax_AB.bestConfig;
-            secondConfig.timeLimit = 200.0;
+            secondConfig.timeLimit = 5000.0;
 
             // configuration of simulation (CAN BE CHANGED)
             String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b";
-            int iterations = 2;
+            int iterations = 10;
             boolean showGame = false;
 
             // start simulation (DO NOT CHANGE)
