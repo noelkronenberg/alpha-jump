@@ -2,12 +2,12 @@ package search.ab;
 
 import game.Color;
 import game.MoveGenerator;
-import search.KI;
+import search.AI;
 import search.SearchConfig;
 
 import java.util.*;
 
-public class BasisKI implements KI {
+public class Minimax_AB implements AI {
     // hyperparameters (defaults)
     boolean timeCriterion = true;
     double timeLimit = bestConfig.timeLimit;
@@ -21,7 +21,7 @@ public class BasisKI implements KI {
     // derived parameters
     public int maxDepth;
     public HashMap<String, Integer> positionsHM;
-    public HashMap<String, TranspositionTableObejct> transpositionTable;
+    public HashMap<String, TranspositionTableObject> transpositionTable;
 
     // logic
     final int winCutOff = 100000;
@@ -138,7 +138,7 @@ public class BasisKI implements KI {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
 
         // rate current position without moving
-        double standPat = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth, fen, new LinkedHashMap<>(), currentColor);
+        double standPat = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth, fen, new LinkedHashMap<>(), currentColor);
 
         // beta cutoff
         if (standPat >= beta) {
@@ -160,7 +160,7 @@ public class BasisKI implements KI {
                 LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
                 movesList = Evaluation.convertMovesToList(moves);
                 Evaluation.orderMoves(movesList, currentColor, gameState);
-                TranspositionTableObejct ttData = new TranspositionTableObejct(standPat, movesList, this.currentDepth);
+                TranspositionTableObject ttData = new TranspositionTableObject(standPat, movesList, this.currentDepth);
                 transpositionTable.put(fen, ttData);
             }
         } else {
@@ -271,7 +271,7 @@ public class BasisKI implements KI {
         double score;
         currentColor = (currentColor == Color.RED) ? Color.BLUE : Color.RED; // signal player change
         LinkedList<Integer> movesList;
-        TranspositionTableObejct ttData;
+        TranspositionTableObject ttData;
 
         // START: Transposition Tables
         if (transpositionTables) {
@@ -281,8 +281,8 @@ public class BasisKI implements KI {
                 movesList = Evaluation.convertMovesToList(moves);
                 Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
-                score = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
-                ttData = new TranspositionTableObejct(score, movesList, depth);
+                score = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
+                ttData = new TranspositionTableObject(score, movesList, depth);
 
                 } else {
                     ttData = transpositionTable.get(fen);
@@ -298,8 +298,8 @@ public class BasisKI implements KI {
             movesList = Evaluation.convertMovesToList(moves);
             Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
-            score = Evaluation.ratePositionKI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
-            ttData = new TranspositionTableObejct(score, movesList, depth);
+            score = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
+            ttData = new TranspositionTableObject(score, movesList, depth);
         }
 
         if (this.timeCriterion && System.currentTimeMillis() >= endTime) {
