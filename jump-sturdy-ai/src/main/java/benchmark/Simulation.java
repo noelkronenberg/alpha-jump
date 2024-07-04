@@ -179,15 +179,17 @@ public class Simulation {
             // configuration of first AI (CAN BE CHANGED)
             AI firstAI = new Minimax_AB();
             SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
-            firstConfig.timeLimit = 5000;
+            firstConfig.timeLimit = 500;
 
             // configuration of second AI (CAN BE CHANGED)
             AI secondAI = new MCTS();
             SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
-            secondConfig.timeLimit = 5000.0;
+            secondConfig.timeLimit = 500;
 
             // configuration of simulation (CAN BE CHANGED)
-            String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r";
+
+            String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
+
             int iterations = 10;
             boolean showGame = false;
 
