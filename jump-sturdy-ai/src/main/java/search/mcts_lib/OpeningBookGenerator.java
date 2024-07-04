@@ -31,12 +31,12 @@ public class OpeningBookGenerator extends Thread {
         initialState.printBoard(false);
         
         // Im Folgenden den Block auskommentieren, welcher nicht erstellt werden soll
-        try (FileWriter writer = new FileWriter("jump-sturdy-ai/src/main/java/search/mcts_lib/opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
+        /*try (FileWriter writer = new FileWriter("jump-sturdy-ai/src/main/java/search/mcts_lib/opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
             orchestrater(initialState, mcts, writer, startingPlayer, 0, true);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        try (FileWriter writer = new FileWriter("src/main/java/search/MCTS_lib/opening_book_secondMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
+        }*/
+        try (FileWriter writer = new FileWriter("jump-sturdy-ai/src/main/java/search/mcts_lib/opening_book_secondMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
             orchestrater(initialState, mcts, writer, startingPlayer, 0, false);
         } catch (IOException e) {
             e.printStackTrace();
