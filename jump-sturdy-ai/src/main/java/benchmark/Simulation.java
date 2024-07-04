@@ -187,7 +187,7 @@ public class Simulation {
             secondConfig.timeLimit = 1000;
 
             // configuration of simulation (CAN BE CHANGED)
-            String initialFEN = "b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r";
+            String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
             int iterations = 10;
             boolean showGame = false;
 
