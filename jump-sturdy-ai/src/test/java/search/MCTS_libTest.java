@@ -26,6 +26,8 @@ public class MCTS_libTest {
     }
 
     public void testPosition(String fen, String... expectedAnswers) {
+        init();
+
         if (fen.charAt(fen.length() - 1) == 'r') {
             color = Color.RED;
         } else if (fen.charAt(fen.length() - 1) == 'b') {
@@ -33,6 +35,7 @@ public class MCTS_libTest {
         } else {
             System.out.println("Im String wurde keine Farbe angegeben, der Test wird für den Spieler Blau ausgeführt.");
         }
+
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard(false);
         String answer = MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color));
@@ -48,6 +51,8 @@ public class MCTS_libTest {
     }
 
     public void testPosition(String fen, String expectedAnswer) {
+        init();
+
         if (fen.charAt(fen.length() - 1) == 'r') {
             color = Color.RED;
         } else if (fen.charAt(fen.length() - 1) == 'b') {
