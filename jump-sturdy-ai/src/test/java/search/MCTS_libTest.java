@@ -34,6 +34,7 @@ public class MCTS_libTest {
         } else {
             System.out.println("Im String wurde keine Farbe angegeben, der Test wird für den Spieler Blau ausgeführt.");
         }
+
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard(false);
         String answer = MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color));
