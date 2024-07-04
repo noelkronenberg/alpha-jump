@@ -92,10 +92,10 @@ public class Simulation {
         }
 
         if (moveCount % 2 == 0) {
-            return new GameResult(1, startingColor);
-        } else {
             Color otherColor = (startingColor == Color.RED) ? Color.BLUE : Color.RED;
             return new GameResult(2, otherColor);
+        } else {
+            return new GameResult(1, startingColor);
         }
     }
 
