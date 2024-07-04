@@ -86,33 +86,68 @@ public class OpeningBookGenerator extends Thread {
         LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer);
         List<Integer> possMovesOppList = Evaluation.convertMovesToList(possMovesOpp);
         int size = possMovesOppList.size();
-        int quarter = size / 4;
+        int tenth = size / 10;
     
         // Erstelle und starte Threads für jedes Viertel der Liste
     Thread thread1 = new Thread(() -> {
         MoveGenerator threadMoveGenerator = moveGenerator.clone();  // Klone den MoveGenerator für jeden Thread
-        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, 0, quarter);
+        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, 0, tenth);
     });
 
     Thread thread2 = new Thread(() -> {
         MoveGenerator threadMoveGenerator = moveGenerator.clone();
-        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, quarter, quarter * 2);
+        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth, tenth * 2);
     });
 
     Thread thread3 = new Thread(() -> {
         MoveGenerator threadMoveGenerator = moveGenerator.clone();
-        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, quarter * 2, quarter * 3);
+        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 2, tenth * 3);
     });
 
     Thread thread4 = new Thread(() -> {
         MoveGenerator threadMoveGenerator = moveGenerator.clone();
-        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, quarter * 3, size);
+        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 3, tenth * 4);
+    });
+
+    Thread thread5 = new Thread(() -> {
+        MoveGenerator threadMoveGenerator = moveGenerator.clone();
+        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 4, tenth * 5);
+    });
+
+    Thread thread6 = new Thread(() -> {
+        MoveGenerator threadMoveGenerator = moveGenerator.clone();
+        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 5, tenth * 6);
+    });
+
+    Thread thread7 = new Thread(() -> {
+        MoveGenerator threadMoveGenerator = moveGenerator.clone();
+        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 6, tenth * 7);
+    });
+
+    Thread thread8 = new Thread(() -> {
+        MoveGenerator threadMoveGenerator = moveGenerator.clone();
+        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 7, tenth * 8);
     });
     
+    Thread thread9 = new Thread(() -> {
+        MoveGenerator threadMoveGenerator = moveGenerator.clone();
+        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 8, tenth * 9);
+    });
+
+    Thread thread10 = new Thread(() -> {
+        MoveGenerator threadMoveGenerator = moveGenerator.clone();
+        processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 9, size);
+    });
         thread1.start();
         thread2.start();
         thread3.start();
         thread4.start();
+        thread5.start();
+        thread6.start();
+        thread7.start();
+        thread8.start();
+        thread9.start();
+        thread10.start();
     
         try {
             // Warte, bis alle Threads abgeschlossen sind
@@ -120,6 +155,12 @@ public class OpeningBookGenerator extends Thread {
             thread2.join();
             thread3.join();
             thread4.join();
+            thread5.join();
+            thread6.join();
+            thread7.join();
+            thread8.join();
+            thread9.join();
+            thread10.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
