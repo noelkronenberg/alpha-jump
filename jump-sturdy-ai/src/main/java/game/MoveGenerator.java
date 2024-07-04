@@ -28,6 +28,15 @@ public class MoveGenerator {
     public int getProtectedPieces() {
         return protectedPieces;
     }
+    public MoveGenerator clone() {
+        MoveGenerator returnMG = new MoveGenerator();
+        String fen = this.getFenFromBoard();
+        returnMG.initializeBoard(fen);
+        returnMG.totalPossibleMoves = this.totalPossibleMoves;
+        returnMG.protectedPieces = this.protectedPieces;
+        returnMG.capturingHM = this.capturingHM;
+        return returnMG;
+    }
 
     // START: board basics
 
