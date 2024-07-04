@@ -1,5 +1,6 @@
 package communication;
 
+import game.MoveGenerator;
 import search.SearchConfig;
 import search.ab.Minimax_AB;
 
@@ -9,6 +10,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -25,6 +27,8 @@ public class Connection {
     long currentTime = 0;
     long timeLeft = 120000;
 
+    HashMap<String, Integer> visitedPositions = new HashMap<>();
+
     /**
      * Connects to the game server and manages game play.
      *
@@ -35,6 +39,8 @@ public class Connection {
         SearchConfig config = Minimax_AB.bestConfig.copy();
         String serverAddress = "localhost";
         int port = 5555;
+
+        MoveGenerator gameInstance =  new MoveGenerator();
 
         double overall = 115000.0; // overall time (in ms)
         int averageMoves = 40;
@@ -91,6 +97,21 @@ public class Connection {
 
                     String fen = response.getString("board");
 
+                    String fenNoPlayer = fen.substring(0, fen.length() - 2);
+
+                    gameInstance.initializeBoard(fenNoPlayer);
+                    if(visitedPositions.containsKey(fenNoPlayer)){
+                        int numberOfVisits=visitedPositions.get(fenNoPlayer);
+                        if (numberOfVisits==3){
+                            return;
+                        }
+                        else {
+                            visitedPositions.put(fenNoPlayer,numberOfVisits+1);
+                        }
+                    }
+                    else {
+                        visitedPositions.put(fenNoPlayer,1);
+                    }
                     // process server response
                     if (response.getBoolean("bothConnected") && !fen.equals(this.lastBoard)) {
 
@@ -122,6 +143,20 @@ public class Connection {
                             }
 
                             outputStream.println(gson.toJson(this.move));
+                            gameInstance.movePiece(gameInstance.convertStringToPos(this.move));
+                            String fenAfterMove = gameInstance.getFenFromBoard();
+                            if(visitedPositions.containsKey(fenAfterMove)){
+                                int numberOfVisits=visitedPositions.get(fenAfterMove);
+                                if (numberOfVisits==3){
+                                    return;
+                                }
+                                else {
+                                    visitedPositions.put(fenAfterMove,numberOfVisits+1);
+                                }
+                            }
+                            else {
+                                visitedPositions.put(fenAfterMove,1);
+                            }
 
                             long timeForMove = System.currentTimeMillis() - currentTime;
                             timeLeft -= timeForMove;
