@@ -52,18 +52,18 @@ public class MCTS extends AI {
         Color color = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
         MCTSNode node = expandAndReturnRandomNode(parentNode, gameState, color, movesList);
 
-        // MCTSNode node =expandAndReturnRandomNode(parentNode,gameState,color);
-        int reward = simulateToEnd(color,gameState,ourColor);
-        propagateDataToRoot(node,reward,node.color);
+        // MCTSNode node =expandAndReturnRandomNode(parentNode, gameState, color);
+        int reward = simulateToEnd(color, gameState, ourColor);
+        propagateDataToRoot(node, reward, node.color);
         treePolicy(parentGameState, parentNode, ourColor);
 
         /*
         for (MCTSNode m : parentNode.children) {
-                System.out.println("Node For Move "+m.move+", Value: "+m.getNodeValue()+" Visits: "+m.numberOfVisits+" Wins: "+m.numberOfWins);
+                System.out.println("Node For Move " + m.move+", Value: " + m.getNodeValue() + " Visits: " + m.numberOfVisits + " Wins: " + m.numberOfWins);
         }
-        System.out.println("Number Of all: "+numberOfAllSimulations);
-        System.out.println("Number Of all: "+parentNode.numberOfVisits);
-         */
+        System.out.println("Number Of all: " + numberOfAllSimulations);
+        System.out.println("Number Of all: " + parentNode.numberOfVisits);
+        */
 
         // System.out.println(MoveGenerator.convertMoveToFEN(getBestMove(parentNode)));
         String s = MoveGenerator.convertMoveToFEN(getBestMove(parentNode));
@@ -114,7 +114,7 @@ public class MCTS extends AI {
             int move = moveGenerator.getRandomMoveInt(moves);
             int res = moveGenerator.isGameOverMCTS(moves, color);
 
-            if (parentColor = =Color.RED && res == -1 || parentColor == Color.BLUE && res == 1) {
+            if (parentColor == Color.RED && res == -1 || parentColor == Color.BLUE && res == 1) {
                 return 1;
             } else if (parentColor == Color.BLUE && res == -1 || parentColor == Color.RED && res == 1) {
                 return 0;
@@ -168,7 +168,7 @@ public class MCTS extends AI {
             MCTSNode bestChild = null;
 
             for (MCTSNode child : node.children) {
-                
+
                 /*
                 if (child.move == 3534 && numberOfAllSimulations >= 3000000) {
                     int i = 0;
