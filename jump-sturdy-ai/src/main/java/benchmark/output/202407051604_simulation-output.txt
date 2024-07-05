@@ -21,11 +21,12 @@ Winner of iteration 20 is: AI 1 (BLUE)
 Winner of iteration 21 is: AI 1 (RED)
 Winner of iteration 22 is: AI 1 (BLUE)
 
-// stopped due to index out of bounds (likely no moves left)
+First AI wins: 17
+Second AI wins: 5
 
 Settings:
 
-Iterations: 24
+Iterations: 22
 FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b
 
 First AI:
