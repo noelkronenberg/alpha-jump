@@ -169,23 +169,23 @@ public class MoveGenerator {
                 char fenChar = fenArray[fenCounter];
                 if (Character.isLetter(fenChar)) {
 
-                    // CASE: PIECE SINGLE
+                    // CASE: single piece
                     if (fenArray[fenCounter + 1] == '0') {
                         pieceBoard[row][column + counter] = Piece.SINGLE;
                         colorBoard[row][column + counter] = getColor(fenChar);
                     }
 
-                    // CASE: PIECE STACKED
+                    // CASE: stack piece
                     else {
                         char fenCharSecondPos = fenArray[fenCounter + 1];
 
-                        // CASE: PIECE MIXED STACK
+                        // CASE: mixed stack piece
                         if (fenCharSecondPos != fenChar) {
                             pieceBoard[row][column + counter] = Piece.MIXED;
                             colorBoard[row][column + counter] = getColor(fenCharSecondPos);
                         }
 
-                        // CASE: PIECE SAME COLOR STACK
+                        // CASE: same color stack piece
                         else {
                             pieceBoard[row][column + counter] = Piece.DOUBLE;
                             colorBoard[row][column + counter] = getColor(fenCharSecondPos);
@@ -249,7 +249,7 @@ public class MoveGenerator {
     public String getFenFromBoard() {
         boolean isCounting = false;
         int counter = 0;
-        String s= "";
+        String s = "";
         for (int i = 0; i < colorBoard.length; i++) {
             for (int j = 0; j < colorBoard.length; j++) {
                 if (colorBoard[i][j] == null) {
@@ -287,17 +287,18 @@ public class MoveGenerator {
                     }
                 }
             }
+
             if (isCounting) {
                 isCounting = false;
                 s += counter;
                 counter = 0;
             }
-            if (i!=7) {
+
+            if (i != 7) {
                 s += "/";
             }
         }
 
-        // NOTE: maybe add Color
         return s;
     }
 
@@ -385,7 +386,7 @@ public class MoveGenerator {
         char col=pos.charAt(0);
         char row=pos.charAt(1);
 
-        int rowInt =Character.getNumericValue(row)-1;
+        int rowInt = Character.getNumericValue(row)-1;
         int colInt = col - 65;
 
         return rowInt * 10 + colInt;
@@ -635,12 +636,12 @@ public class MoveGenerator {
 
         // add the possible moves
         for (Map.Entry<Integer, List<Integer>> entry : possibleMoves.entrySet()) {
-            int startY = entry.getKey() / 10 + 1;  // Y-coordinate of the starting point
-            int startX = entry.getKey() % 10;  // X-coordinate of the starting point
+            int startY = entry.getKey() / 10 + 1; // Y-coordinate of the starting point
+            int startX = entry.getKey() % 10; // X-coordinate of the starting point
             char startColumn = columnMapping.get(startX);
             for (int targetPosition : entry.getValue()) {
-                int targetY = targetPosition / 10 + 1;  // Y-coordinate of the target point
-                int targetX = targetPosition % 10;  // X-coordinate of the target point
+                int targetY = targetPosition / 10 + 1; // Y-coordinate of the target point
+                int targetX = targetPosition % 10; // X-coordinate of the target point
                 char targetColumn = columnMapping.get(targetX);
                 formattedOutput.append(startColumn).append(startY).append("-").append(targetColumn).append(targetY).append(", ");
             }

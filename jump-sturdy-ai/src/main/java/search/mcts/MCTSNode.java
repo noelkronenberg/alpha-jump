@@ -4,8 +4,6 @@ import game.Color;
 import game.MoveGenerator;
 
 import java.util.ArrayList;
-
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,7 +16,7 @@ import java.util.List;
  */
 public class MCTSNode {
     MCTSNode parent;
-    List<MCTSNode> children = new LinkedList<>();
+    List<MCTSNode> children;
 
     double numberOfVisits;
     double numberOfWins;
@@ -38,7 +36,7 @@ public class MCTSNode {
      */
     public MCTSNode(MCTSNode parent, int move, Color color) {
         this.parent = parent;
-        this.children=new ArrayList<>();
+        this.children = new ArrayList<>();
         this.numberOfVisits = 0;
         this.numberOfWins = 0;
         this.move = move;
@@ -53,7 +51,7 @@ public class MCTSNode {
      */
     public MCTSNode(Color color) {
         this.parent = null;
-        this.children = new ArrayList<>();;         //Eigentlich gerne das nicht mehr machen :( ---> Erstelle neue methode die einfach nur die moves ungeordnet generiert
+        this.children = new ArrayList<>();
         this.numberOfVisits = 0;
         this.numberOfWins = 0;
         this.move = 0;
@@ -66,7 +64,7 @@ public class MCTSNode {
      * @param winValue The value of the win to add (1 for win, 0 for loss).
      */
     public void addWinAndIncrementVisit(int winValue) {
-            numberOfWins += winValue;             //It works, due to me assuming either win=1 or loss=0
+            numberOfWins += winValue; // win = 1 or loss = 0
             numberOfVisits++;
     }
 
@@ -76,13 +74,12 @@ public class MCTSNode {
      *
      * @return The value of the node.
      */
-    public double getNodeValue(){
-        if (this.numberOfVisits>0){
-            double value = (this.numberOfWins/this.numberOfVisits)+(Math.sqrt(2)*Math.sqrt((Math.log(parent.numberOfVisits))/(this.numberOfVisits)));
+    public double getNodeValue() {
+        if (this.numberOfVisits > 0) {
+            double value = (this.numberOfWins / this.numberOfVisits) + (Math.sqrt(2) * Math.sqrt((Math.log(parent.numberOfVisits)) / (this.numberOfVisits)));
             return value;
-        }
-        else {
-            return 500000 ;
+        } else {
+            return 500000;
         }
     }
 
@@ -100,11 +97,11 @@ public class MCTSNode {
      *
      * @return {@code true} if the move is on the baseline for the color, {@code false} otherwise.
      */
-    public boolean isOnBaseLineForColor(){
-        if ((move%100)/10==0&&color==Color.BLUE){
+    public boolean isOnBaseLineForColor() {
+        if ((move % 100) / 10 == 0 && color == Color.BLUE) {
             return true;
         }
-        if ((move%100)/10==7&&color==Color.RED){
+        if ((move % 100) / 10 == 7 && color == Color.RED) {
             return true;
         }
         return false;

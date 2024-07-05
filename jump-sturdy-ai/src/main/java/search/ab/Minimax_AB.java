@@ -178,7 +178,7 @@ public class Minimax_AB extends AI {
         }
 
         // move list
-        LinkedList<Integer> movesList = new LinkedList<>();
+        LinkedList<Integer> movesList;
 
         if (this.transpositionTables) {
             if (transpositionTable.containsKey(fen)) {
@@ -392,6 +392,7 @@ public class Minimax_AB extends AI {
                     break;
                 }
             }
+
             ttData.bestMove = bestMove; // update TT
             ttData.overAllScore = bestScore;
 
