@@ -29,6 +29,7 @@ public class MCTS_libTest {
     public static void init() {
         moveGenerator = new MoveGenerator();
         mcts = new MCTS_lib();
+        mcts.timeLimit = 50000;
     }
 
     /**
