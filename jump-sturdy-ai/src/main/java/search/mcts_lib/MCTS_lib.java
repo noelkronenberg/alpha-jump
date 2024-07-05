@@ -31,7 +31,7 @@ public class MCTS_lib {
         String initialState = moveGenerator.getFenFromBoard();
         MCTSNode_lib root = new MCTSNode_lib(0, null, 0); // Root hat keinen Zug, weil es der Startzustand ist
 
-        //for (int i = 0; i < iterations; i++) {
+        // for (int i = 0; i < iterations; i++) {
         while (System.currentTimeMillis() < endTime) {
 
             MCTSNode_lib node = root;
@@ -39,15 +39,14 @@ public class MCTS_lib {
             Color currentPlayer = color;
             moveGenerator.initializeBoard(initialState);
 
-            // Traverse down the tree
+            // traverse down the tree
             while (!node.children.isEmpty() && node.isFullyExpanded()) {
                 node = selectPromisingNode(node, startingPlayer, currentPlayer);
                 state = makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
             }
 
-            // Expansion
-            
+            // expansion
             expand(node, currentPlayer, moveGenerator);
             if (!node.children.isEmpty()) {
                 node = node.children.get(random.nextInt(node.children.size()));
@@ -55,10 +54,10 @@ public class MCTS_lib {
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
             }
 
-            // Simulation
+            // simulation
             Color winner = simulate(moveGenerator, currentPlayer);
 
-            // Backpropagation
+            // backpropagation
             backpropagate(node, winner, color);
         }
         return bestChild(root).move;
@@ -77,7 +76,7 @@ public class MCTS_lib {
             movesList = Evaluation.convertMovesToList(possibleMoves);
             for (int move : movesList) {
                 if (!node.children.stream().anyMatch(x -> x.move == move)) {
-                    node.children.add(new MCTSNode_lib(move, node, (node.depth+1)));
+                    node.children.add(new MCTSNode_lib(move, node, (node.depth + 1)));
                 }
             }
         }
@@ -165,7 +164,7 @@ public class MCTS_lib {
      * 
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param color color of player to move
-     * @return list of all possible moves of current player in the current position
+     * @return map of all possible moves of current player in the current position
      */
     private LinkedHashMap<Integer, List<Integer>> getPossibleMoves(MoveGenerator moveGenerator, Color color) {
         LinkedHashMap<Integer, List<Integer>> possibleMoves = moveGenerator.generateAllPossibleMoves(color);
@@ -189,7 +188,7 @@ public class MCTS_lib {
         MoveGenerator mg = new MoveGenerator();
         String board = "3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r";
         mg.initializeBoard(board);
-        //System.out.println(runMCTS(mg, Color.RED, 100000));
+        // System.out.println(runMCTS(mg, Color.RED, 100000));
         mg.initializeBoard(board);
         mg.printBoard(false);
     }

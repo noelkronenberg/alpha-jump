@@ -6,7 +6,7 @@ import java.util.List;
  * class of nodes for the MCTS-algorithm for creating an opening-library-document
  */
 public class MCTSNode_lib {
-    int move; // Der Zug, der zu diesem Knoten führt (z.B. [row, col])
+    int move; // move leading to node
     MCTSNode_lib parent;
     List<MCTSNode_lib> children;
     int visits;
