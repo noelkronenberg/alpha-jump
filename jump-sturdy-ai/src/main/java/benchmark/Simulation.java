@@ -119,6 +119,10 @@ public class Simulation {
         int firstAIWins = 0;
         int secondAIWins = 0;
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        String timestamp = dateFormat.format(new Date());
+        System.out.println("START: " +  timestamp);
+
         for (int i = 1; i <= iterations; i++) {
             GameResult result;
             boolean firstAIBegins = (i % 2 == 0);
@@ -143,6 +147,10 @@ public class Simulation {
                 System.out.println("Winner of game " + i + " is: AI 2 (" + result.color + ")");
             }
         }
+
+        dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        timestamp = dateFormat.format(new Date());
+        System.out.println("END: " +  timestamp);
 
         System.out.println();
         System.out.println("First AI wins: " + firstAIWins);
