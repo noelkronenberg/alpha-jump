@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-/** 
- * MCTS-implementation for creating an opening library 
+/**
+ * MCTS-implementation for creating an opening library
  */
 public class MCTS_lib {
 
@@ -20,16 +20,16 @@ public class MCTS_lib {
     public double timeLimit = 50000;
 
     /**
-     * 
+     *
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param color color of player to move
      * @return best move int
      */
     public int runMCTS(MoveGenerator moveGenerator, Color color) {
         Color startingPlayer = color;
-        double endTime = System.currentTimeMillis() + timeLimit; 
+        double endTime = System.currentTimeMillis() + timeLimit;
         String initialState = moveGenerator.getFenFromBoard();
-        MCTSNode_lib root = new MCTSNode_lib(0, null, 0); // Root hat keinen Zug, weil es der Startzustand ist
+        MCTSNode_lib root = new MCTSNode_lib(0, null, 0);
 
         // for (int i = 0; i < iterations; i++) {
         while (System.currentTimeMillis() < endTime) {
@@ -41,6 +41,7 @@ public class MCTS_lib {
             // traverse down the tree
             while (!node.children.isEmpty() && node.isFullyExpanded()) {
                 node = selectPromisingNode(node, startingPlayer, currentPlayer);
+                makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
             }
 
@@ -48,6 +49,7 @@ public class MCTS_lib {
             expand(node, currentPlayer, moveGenerator);
             if (!node.children.isEmpty()) {
                 node = node.children.get(random.nextInt(node.children.size()));
+                makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
             }
 
@@ -61,7 +63,7 @@ public class MCTS_lib {
     }
 
     /**
-     * 
+     *
      * @param node node from MCTS-tree which is to be expanded
      * @param color color of player to move
      * @param moveGenerator given Movegenerator to play the movelines on
@@ -80,7 +82,7 @@ public class MCTS_lib {
     }
 
     /**
-     * 
+     *
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param color color of player to move
      * @return color of winning player in this simulation
@@ -90,6 +92,7 @@ public class MCTS_lib {
         while (winner == Color.EMPTY) {
             LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
             LinkedList<Integer> movesList = Evaluation.convertMovesToList(possibleMoves);
+
             if (moveGenerator.isGameOverMCTS_lib(possibleMoves)) {
                 if (moveGenerator.getWinner(possibleMoves, color)) {
                     winner = Color.BLUE;
@@ -99,13 +102,17 @@ public class MCTS_lib {
                     break;
                 }
             }
+
+            int raInteger = random.nextInt(movesList.size());
+            int move = movesList.get(raInteger);
+            makeMove(moveGenerator, move, color);
             color = (color == Color.RED) ? Color.BLUE : Color.RED;
         }
         return winner;
     }
 
     /**
-     * 
+     *
      * @param node current node which is to be backpropagated until root
      * @param winner color of winning player in this simulation
      * @param color color of player to move
@@ -121,7 +128,7 @@ public class MCTS_lib {
     }
 
     /**
-     * 
+     *
      * @param node parent node of which is to be found the best child node
      * @param startingPlayer color of player who made the first move
      * @param currPlayer color of player who makes the next move
@@ -129,22 +136,22 @@ public class MCTS_lib {
      */
     private MCTSNode_lib selectPromisingNode(MCTSNode_lib node, Color startingPlayer, Color currPlayer) {
         if (startingPlayer == currPlayer) {
-        return node.children.stream().max((n1, n2) -> {
-            double uct1 = (n1.wins / n1.visits) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n1.visits));
-            double uct2 = (n2.wins / n2.visits) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n2.visits));
-            return Double.compare(uct1, uct2);
-        }).orElseThrow(RuntimeException::new);
-    } else {
-        return node.children.stream().max((n1, n2) -> {
-            double uct1 = (1-(n1.wins / n1.visits)) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n1.visits));
-            double uct2 = (1-(n2.wins / n2.visits)) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n2.visits));
-            return Double.compare(uct1, uct2);
-        }).orElseThrow(RuntimeException::new);
-    }
+            return node.children.stream().max((n1, n2) -> {
+                double uct1 = (n1.wins / n1.visits) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n1.visits));
+                double uct2 = (n2.wins / n2.visits) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n2.visits));
+                return Double.compare(uct1, uct2);
+            }).orElseThrow(RuntimeException::new);
+        } else {
+            return node.children.stream().max((n1, n2) -> {
+                double uct1 = (1 - (n1.wins / n1.visits)) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n1.visits));
+                double uct2 = (1 - (n2.wins / n2.visits)) + EXPLORATION_PARAM * Math.sqrt(Math.log(node.visits) / (n2.visits));
+                return Double.compare(uct1, uct2);
+            }).orElseThrow(RuntimeException::new);
+        }
     }
 
     /**
-     * 
+     *
      * @param node node of which the best child is to be found
      * @return best child note of given node
      */
@@ -153,7 +160,7 @@ public class MCTS_lib {
     }
 
     /**
-     * 
+     *
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param color color of player to move
      * @return map of all possible moves of current player in the current position
@@ -161,6 +168,19 @@ public class MCTS_lib {
     private LinkedHashMap<Integer, List<Integer>> getPossibleMoves(MoveGenerator moveGenerator, Color color) {
         LinkedHashMap<Integer, List<Integer>> possibleMoves = moveGenerator.generateAllPossibleMoves(color);
         return possibleMoves;
+    }
+
+    /**
+     *
+     * @param moveGenerator given Movegenerator to play the movelines on
+     * @param move move-int to play
+     * @param player color of player to move
+     * @return
+     */
+    private String makeMove(MoveGenerator moveGenerator, int move, Color player) {
+        moveGenerator.movePiece(move);
+        String fen = moveGenerator.getFenFromBoard();
+        return fen;
     }
 
     public static void main(String[] args) {
