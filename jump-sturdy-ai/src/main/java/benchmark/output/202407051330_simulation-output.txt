@@ -1,0 +1,56 @@
+Winner of iteration 1 is: AI 2 (BLUE)
+Winner of iteration 2 is: AI 1 (BLUE)
+Winner of iteration 3 is: AI 1 (RED)
+Winner of iteration 4 is: AI 1 (BLUE)
+Winner of iteration 5 is: AI 1 (RED)
+Winner of iteration 6 is: AI 1 (BLUE)
+Winner of iteration 7 is: AI 1 (RED)
+Winner of iteration 8 is: AI 1 (BLUE)
+Winner of iteration 9 is: AI 1 (RED)
+Winner of iteration 10 is: AI 1 (BLUE)
+Winner of iteration 11 is: AI 2 (BLUE)
+Winner of iteration 12 is: AI 1 (BLUE)
+Winner of iteration 13 is: AI 1 (RED)
+Winner of iteration 14 is: AI 1 (BLUE)
+Winner of iteration 15 is: AI 1 (RED)
+Winner of iteration 16 is: AI 1 (BLUE)
+Winner of iteration 17 is: AI 1 (RED)
+Winner of iteration 18 is: AI 1 (BLUE)
+Winner of iteration 19 is: AI 2 (BLUE)
+Winner of iteration 20 is: AI 1 (BLUE)
+Winner of iteration 21 is: AI 1 (RED)
+Winner of iteration 22 is: AI 1 (BLUE)
+Winner of iteration 23 is: AI 1 (RED)
+Winner of iteration 24 is: AI 1 (BLUE)
+Winner of iteration 25 is: AI 1 (RED)
+Winner of iteration 26 is: AI 1 (BLUE)
+Winner of iteration 27 is: AI 2 (BLUE)
+Winner of iteration 28 is: AI 1 (BLUE)
+Winner of iteration 29 is: AI 2 (BLUE)
+Winner of iteration 30 is: AI 1 (BLUE)
+Winner of iteration 31 is: AI 1 (RED)
+Winner of iteration 32 is: AI 1 (BLUE)
+Winner of iteration 33 is: AI 1 (RED)
+
+// stopped due to index out of bounds (likely no moves left)
+
+Settings:
+
+Iterations: 10
+FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b
+
+First AI:
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3000.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false
+
+Second AI:
+Class: MCTS
+Config: timeLimit = 3000.0
+
+System Information:
+
+OS: Mac OS X | aarch64
+Available processors (cores): 8
+System load average (cores): n/a
+Total physical memory (GB): 16,00
+Free physical memory (GB): n/a
