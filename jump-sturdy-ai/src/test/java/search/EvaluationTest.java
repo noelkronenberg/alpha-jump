@@ -14,11 +14,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit test class for Evaluation.
+ */
 public class EvaluationTest {
 
     static Evaluation evaluator;
     static MoveGenerator moveGenerator;
 
+    /**
+     * Initializes the needed instances before all test methods.
+     */
     @BeforeAll
     public static void init() {
         evaluator = new Evaluation();

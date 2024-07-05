@@ -18,18 +18,17 @@ public class Minimax_ABTest {
 
     static Minimax_AB ai;
     static SearchConfig config = Minimax_AB.bestConfig.copy();
-
     static MCTS ai_MCTS;
 
     /**
-     * Initializes the Minimax_AB instances before all test methods.
+     * Initializes the Minimax_AB instance before all test methods.
      */
     @BeforeAll
     public static void init() {
         ai = new Minimax_AB();
         config.timeCriterion = true;
         config.timeLimit = 10000;
-        // aiMCTS = new MCTS();
+        // ai_MCTS = new MCTS();
     }
 
     /**

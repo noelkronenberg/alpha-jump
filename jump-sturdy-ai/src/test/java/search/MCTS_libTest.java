@@ -11,6 +11,9 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * JUnit test class for MCTS_lib.
+ */
 public class MCTS_libTest {
 
     
@@ -19,24 +22,35 @@ public class MCTS_libTest {
     static Color color = Color.BLUE;
     static int iterations = 450000;
 
+    /**
+     * Initializes the MCTS_lib instance before all test methods.
+     */
     @BeforeAll
     public static void init() {
         moveGenerator = new MoveGenerator();
         mcts = new MCTS_lib();
     }
 
+    /**
+     * Helper method to test moves returned by the AI against expected moves.
+     *
+     * @param fen FEN notation representing the board state
+     * @param expectedAnswers Expected moves as an array of FEN strings
+     */
     public void testPosition(String fen, String... expectedAnswers) {
         init();
+
         if (fen.charAt(fen.length() - 1) == 'r') {
             color = Color.RED;
         } else if (fen.charAt(fen.length() - 1) == 'b') {
             color = Color.BLUE;
         } else {
-            System.out.println("Im String wurde keine Farbe angegeben, der Test wird für den Spieler Blau ausgeführt.");
+            System.out.println("No color was specified in the string, the test is performed for the player blue.");
         }
 
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard(false);
+
         String answer = MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color));
         boolean matchFound = false;
         for (String expectedMove : expectedAnswers) {
@@ -45,21 +59,31 @@ public class MCTS_libTest {
                 break;
             }
         }
+
         System.out.println("Expected: " + Arrays.asList(expectedAnswers)+ "\n" + "Actual: " + answer);
         assertTrue(matchFound);
     }
 
+    /**
+     * Overloaded method to test a single move returned by the AI against the expected move.
+     *
+     * @param fen FEN notation representing the board state
+     * @param expectedAnswer Expected move as a string
+     */
     public void testPosition(String fen, String expectedAnswer) {
         init();
+
         if (fen.charAt(fen.length() - 1) == 'r') {
             color = Color.RED;
         } else if (fen.charAt(fen.length() - 1) == 'b') {
             color = Color.BLUE;
         } else {
-            System.out.println("Im String wurde keine Farbe angegeben, der Test wird für den Spieler Blau ausgeführt.");
+            System.out.println("No color was specified in the string, the test is performed for the player blue.");
         }
+
         moveGenerator.initializeBoard(fen);
         moveGenerator.printBoard(false);
+
         assertEquals(expectedAnswer, MoveGenerator.convertMoveToFEN(mcts.runMCTS(moveGenerator, color)));
     }
 
@@ -263,6 +287,12 @@ public class MCTS_libTest {
         testPosition("6/8/8/3b04/3b04/8/2r01r03/6 b", "D4-D5");
     }
 
+    /**
+     * Main method for visualising the board state.
+     * Initializes MoveGenerator and prints the board state.
+     *
+     * @param args  Command line arguments (not used).
+     */
     public static void main(String[] args) {
         MoveGenerator moveGenerator = new MoveGenerator();
         moveGenerator.initializeBoard("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b");
