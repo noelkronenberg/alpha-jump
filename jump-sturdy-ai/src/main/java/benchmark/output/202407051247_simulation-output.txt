@@ -1,0 +1,34 @@
+Winner of iteration 1 is: AI 2 (BLUE)
+Winner of iteration 2 is: AI 2 (RED)
+Winner of iteration 3 is: AI 1 (RED)
+Winner of iteration 4 is: AI 1 (BLUE)
+Winner of iteration 5 is: AI 2 (BLUE)
+Winner of iteration 6 is: AI 1 (BLUE)
+Winner of iteration 7 is: AI 1 (RED)
+Winner of iteration 8 is: AI 2 (RED)
+Winner of iteration 9 is: AI 1 (RED)
+Winner of iteration 10 is: AI 2 (RED)
+
+First AI wins: 5
+Second AI wins: 5
+
+Settings: 
+
+Iterations: 10
+FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b
+
+First AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3000.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false
+
+Second AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3000.0 | aspirationWindow = true | aspirationWindowSize = 0.5 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false
+
+System Information:
+
+OS: Mac OS X | aarch64
+Available processors (cores): 8
+System load average (cores): 3,72
+Total physical memory (GB): 16,00
+Free physical memory (GB): 0,12
