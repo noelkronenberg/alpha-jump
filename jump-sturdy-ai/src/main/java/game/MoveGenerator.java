@@ -371,6 +371,9 @@ public class MoveGenerator {
      * @return The move in FEN notation.
      */
     public static String convertMoveToFEN(int move) {
+        if (move==-1){
+            return "";
+        }
         int from = move / 100;
         int to = move % 100;
         return convertPosToString(from) + "-" +  convertPosToString(to);
@@ -675,6 +678,28 @@ public class MoveGenerator {
         return convertPosToString(randomPiece) + "-" + convertPosToString(randomPos);
     }
 
+    /**
+     * Generates a random move from the given possible moves.
+     *
+     * @param moves Contains all possible moves to pick from.
+     * @return An integer representing a randomly selected move.
+     */
+    public int getRandomMoveInt(LinkedHashMap<Integer, List<Integer>> moves) {
+        Random generator =  new Random();
+        ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
+
+        if (allPieces.size()==0){
+            return 0;
+        }
+        int number = generator.nextInt(allPieces.size());
+        int randomPiece = allPieces.get(number);
+
+        List<Integer> allMoveToPos = moves.get(randomPiece);
+        number = generator.nextInt(allMoveToPos.size());
+
+        int randomPos = allMoveToPos.get(number);
+        return randomPiece*100+randomPos;
+    }
 
     /**
      * Retrieves all possible moves for a given board FEN string.

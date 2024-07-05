@@ -50,6 +50,11 @@ public class MCTS extends AI {
         parentGameState.initializeBoard(gameState.getFenFromBoard());
 
         Color color = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
+
+        if (movesList.isEmpty()){
+            return "";
+        }
+
         MCTSNode node = expandAndReturnRandomNode(parentNode, gameState, color, movesList);
 
         // MCTSNode node =expandAndReturnRandomNode(parentNode, gameState, color);
@@ -126,12 +131,14 @@ public class MCTS extends AI {
         }
         */
 
+
         LinkedHashMap<Integer,List<Integer>> moves1 = moveGenerator.generateAllPossibleMoves(color);
         color = (color == Color.RED) ? Color.BLUE : Color.RED;
         LinkedHashMap<Integer,List<Integer>> moves2 = moveGenerator.generateAllPossibleMoves(color);
         double prob = moves1.size() / (double) (moves2.size() + moves1.size());
         Random generator =  new Random();
         return  generator.nextDouble() >= prob? 1 : 0;
+
     }
 
     /**

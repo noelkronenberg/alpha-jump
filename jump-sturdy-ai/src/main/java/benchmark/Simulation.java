@@ -61,16 +61,16 @@ public class Simulation {
                 bestMove = secondAI.orchestrator(fen, secondConfig);
             }
 
-            // convert move
-            int[] bestMoveInts = gameState.convertStringToPosWrapper(bestMove);
-            int bestMoveInt = bestMoveInts[0] * 100 + bestMoveInts[1];
-
             // check for game over
             char currentColorChar = fen.charAt(fen.length() - 1);
             Color currentColor = (currentColorChar == 'r') ? Color.RED : Color.BLUE;
             gameOver = gameState.isGameOver(bestMove, currentColor);
 
             if (!gameOver) {
+                // convert move
+                int[] bestMoveInts = gameState.convertStringToPosWrapper(bestMove);
+                int bestMoveInt = bestMoveInts[0] * 100 + bestMoveInts[1];
+
                 // move piece
                 gameState.movePiece(bestMoveInt);
                 moveCount++;
@@ -202,7 +202,7 @@ public class Simulation {
             secondConfig.timeLimit = 3000;
 
             // configuration of simulation (CAN BE CHANGED)
-            String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
+            String initialFEN = "6/8/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
             int iterations = 50;
             boolean showGame = false;
 
