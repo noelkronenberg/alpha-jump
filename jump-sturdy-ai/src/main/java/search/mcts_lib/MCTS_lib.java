@@ -1,12 +1,13 @@
 package search.mcts_lib;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
 
 import game.Color;
 import game.MoveGenerator;
 import search.ab.Evaluation;
+
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 /** 
  * MCTS-implementation for creating an opening library 
