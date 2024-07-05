@@ -35,14 +35,12 @@ public class MCTS_lib {
         while (System.currentTimeMillis() < endTime) {
 
             MCTSNode_lib node = root;
-            String state = "";
             Color currentPlayer = color;
             moveGenerator.initializeBoard(initialState);
 
             // traverse down the tree
             while (!node.children.isEmpty() && node.isFullyExpanded()) {
                 node = selectPromisingNode(node, startingPlayer, currentPlayer);
-                state = makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
             }
 
@@ -50,7 +48,6 @@ public class MCTS_lib {
             expand(node, currentPlayer, moveGenerator);
             if (!node.children.isEmpty()) {
                 node = node.children.get(random.nextInt(node.children.size()));
-                state = makeMove(moveGenerator, node.move, currentPlayer);
                 currentPlayer = (currentPlayer == Color.RED) ? Color.BLUE : Color.RED;
             }
 
@@ -89,11 +86,9 @@ public class MCTS_lib {
      * @return color of winning player in this simulation
      */
     private Color simulate(MoveGenerator moveGenerator, Color color) {
-        String fen = "";
         Color winner = Color.EMPTY;
         while (winner == Color.EMPTY) {
             LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
-            LinkedList<Integer> movesList = Evaluation.convertMovesToList(possibleMoves);
 
             if (moveGenerator.isGameOverMCTS_lib(possibleMoves)) {
                 if (moveGenerator.getWinner(possibleMoves, color)) {
@@ -104,9 +99,6 @@ public class MCTS_lib {
                     break;
                 }
             }
-            Integer raInteger = random.nextInt(movesList.size());
-            Integer move = movesList.get(raInteger);
-            fen = makeMove(moveGenerator, move, color);
             color = (color == Color.RED) ? Color.BLUE : Color.RED;
         }
         return winner;
@@ -169,19 +161,6 @@ public class MCTS_lib {
     private LinkedHashMap<Integer, List<Integer>> getPossibleMoves(MoveGenerator moveGenerator, Color color) {
         LinkedHashMap<Integer, List<Integer>> possibleMoves = moveGenerator.generateAllPossibleMoves(color);
         return possibleMoves;
-    }
-
-    /**
-     * 
-     * @param moveGenerator given Movegenerator to play the movelines on
-     * @param move move-int to play
-     * @param player color of player to move
-     * @return
-     */
-    private String makeMove(MoveGenerator moveGenerator, int move, Color player) {
-        moveGenerator.movePiece(move);
-        String fen = moveGenerator.getFenFromBoard();
-        return fen;
     }
 
     public static void main(String[] args) {
