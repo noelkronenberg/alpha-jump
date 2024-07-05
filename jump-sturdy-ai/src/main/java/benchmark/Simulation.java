@@ -77,13 +77,12 @@ public class Simulation {
             }
 
             if (showGame) {
-                System.out.println();
                 System.out.println("Color: " + currentColor);
                 System.out.println("Move: " + bestMove);
                 System.out.println("MoveCount: " + moveCount);
                 System.out.println("GameOver: " + gameOver);
+                System.out.println("Board: ");
                 gameState.printBoard(true);
-                System.out.println();
             }
 
             // get next FEN
@@ -124,6 +123,12 @@ public class Simulation {
             GameResult result;
             boolean firstAIBegins = (i % 2 == 0);
 
+            if (showGame) {
+                System.out.println();
+                System.out.println("Game " + i + ":");
+                System.out.println();
+            }
+
             if (firstAIBegins) {
                 result = playGame(firstAI, firstConfig, secondAI, secondConfig, fen, showGame);
             } else {
@@ -132,10 +137,10 @@ public class Simulation {
 
             if ((firstAIBegins && result.number == 1) || (!firstAIBegins && result.number == 2)) {
                 firstAIWins++;
-                System.out.println("Winner of iteration " + i + " is: AI 1 (" + result.color + ")");
+                System.out.println("Winner of game " + i + " is: AI 1 (" + result.color + ")");
             } else {
                 secondAIWins++;
-                System.out.println("Winner of iteration " + i + " is: AI 2 (" + result.color + ")");
+                System.out.println("Winner of game " + i + " is: AI 2 (" + result.color + ")");
             }
         }
 
@@ -202,9 +207,9 @@ public class Simulation {
             secondConfig.timeLimit = 3000;
 
             // configuration of simulation (CAN BE CHANGED)
-            String initialFEN = "6/8/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
-            int iterations = 50;
-            boolean showGame = false;
+            String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
+            int iterations = 100;
+            boolean showGame = true;
 
             // start simulation (DO NOT CHANGE)
             Simulation simulation = new Simulation();
