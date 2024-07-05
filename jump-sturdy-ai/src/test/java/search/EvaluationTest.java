@@ -31,6 +31,12 @@ public class EvaluationTest {
         moveGenerator = new MoveGenerator();
     }
 
+    /**
+     * Tests the ordering of moves to ensure the expected move is first.
+     *
+     * @param fen The FEN string representing the board state.
+     * @param expectedFirst The expected combined integer first move in the ordered list.
+     */
     private void testOrderMovesFirst(String fen, int expectedFirst) {
         init();
 
@@ -46,6 +52,14 @@ public class EvaluationTest {
         assertEquals(movesList.getFirst(), expectedFirst);
     }
 
+    /**
+     * Compares two positions to ensure the second one is rated higher.
+     *
+     * @param fen1 The FEN string for the first position.
+     * @param color1 The color for the first position.
+     * @param fen2 The FEN string for the second position.
+     * @param color2 The color for the second position.
+     */
     private void testPositionComparison(String fen1, Color color1, String fen2, Color color2) {
         init();
         moveGenerator.initializeBoard(fen1);
@@ -55,15 +69,14 @@ public class EvaluationTest {
         assertTrue(score1 < score2, "Expected position 2 to be rated higher than position 1");
     }
 
-    private void testRateMoves(String fen, double expectedRating, int startPosition, int endPosition) {
-        init();
-        moveGenerator.initializeBoard(fen);
-        char colorFen = fen.charAt(fen.length() - 1);
-        Color color = getColorFromFen(colorFen);
-        double rated = evaluator.rateMove(moveGenerator, color, startPosition, endPosition,1);
-        assertEquals(expectedRating, rated);
-    }
-
+    /**
+     * Tests the rating of a winning move to ensure it is above a threshold.
+     *
+     * @param fen The FEN string representing the board state.
+     * @param win Indicates if the move is a winning move.
+     * @param startPosition The combined integer start position of the move.
+     * @param endPosition The combined integer end position of the move.
+     */
     private void testRateMoves(String fen, boolean win, int startPosition, int endPosition) {
         init();
         moveGenerator.initializeBoard(fen);
@@ -73,14 +86,13 @@ public class EvaluationTest {
         assertTrue(rated >= 50000);
     }
 
-
-    private void testPositionRating(String fen, Color color, double expectedScore) {
-        init();
-        moveGenerator.initializeBoard(fen);
-        double score = evaluator.ratePosition(moveGenerator, color,1);
-        assertEquals(expectedScore, score);
-    }
-
+    /**
+     * Tests the rating of a winning position to ensure it is above a threshold.
+     *
+     * @param fen The FEN string representing the board state.
+     * @param color The color for the position.
+     * @param win Indicates if the position is a winning position.
+     */
     private void testPositionRating(String fen, Color color, boolean win) {
         init();
         moveGenerator.initializeBoard(fen);
@@ -88,10 +100,25 @@ public class EvaluationTest {
         assertTrue(score >= 50000);
     }
 
+    /**
+     * Determines the color from the FEN character.
+     *
+     * @param colorFen The FEN character representing the color.
+     * @return The corresponding Color enum value.
+     */
     private Color getColorFromFen(char colorFen) {
         return colorFen == 'b' ? Color.BLUE : Color.RED;
     }
 
+    /**
+     * Compares the ratings of two moves to ensure the first move is rated higher.
+     *
+     * @param fen The FEN string representing the board state.
+     * @param startPosition1 The combined integer start position of the first move.
+     * @param endPosition1 The combined integer end position of the first move.
+     * @param startPosition2 The combined integer start position of the second move.
+     * @param endPosition2 The combined integer end position of the second move.
+     */
     private void testMoveRatingComparison(String fen, int startPosition1, int endPosition1, int startPosition2, int endPosition2) {
         init();
         moveGenerator.initializeBoard(fen);
