@@ -1,0 +1,44 @@
+Winner of iteration 1 is: AI 2 (RED)
+Winner of iteration 2 is: AI 1 (RED)
+Winner of iteration 3 is: AI 2 (RED)
+Winner of iteration 4 is: AI 2 (BLUE)
+Winner of iteration 5 is: AI 2 (RED)
+Winner of iteration 6 is: AI 2 (BLUE)
+Winner of iteration 7 is: AI 1 (BLUE)
+Winner of iteration 8 is: AI 2 (BLUE)
+Winner of iteration 9 is: AI 1 (BLUE)
+Winner of iteration 10 is: AI 2 (BLUE)
+Winner of iteration 11 is: AI 2 (RED)
+Winner of iteration 12 is: AI 2 (BLUE)
+Winner of iteration 13 is: AI 1 (BLUE)
+Winner of iteration 14 is: AI 2 (BLUE)
+Winner of iteration 15 is: AI 1 (BLUE)
+Winner of iteration 16 is: AI 1 (RED)
+Winner of iteration 17 is: AI 2 (RED)
+Winner of iteration 18 is: AI 1 (RED)
+Winner of iteration 19 is: AI 1 (BLUE)
+Winner of iteration 20 is: AI 1 (RED)
+
+First AI wins: 9
+Second AI wins: 11
+
+Settings: 
+
+Iterations: 20
+FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r
+
+First AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3000.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false
+
+Second AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3000.0 | aspirationWindow = true | aspirationWindowSize = 1.0 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false
+
+System Information:
+
+OS: Windows 11 | amd64
+Available processors (cores): 12
+System load average (cores): -1,00
+Total physical memory (GB): 15,87
+Free physical memory (GB): 5,49
