@@ -89,7 +89,7 @@ public class MCTS_lib {
         Color winner = Color.EMPTY;
         while (winner == Color.EMPTY) {
             LinkedHashMap<Integer, List<Integer>> possibleMoves = getPossibleMoves(moveGenerator, color);
-
+            LinkedList<Integer> movesList = Evaluation.convertMovesToList(possibleMoves);
             if (moveGenerator.isGameOverMCTS_lib(possibleMoves)) {
                 if (moveGenerator.getWinner(possibleMoves, color)) {
                     winner = Color.BLUE;
