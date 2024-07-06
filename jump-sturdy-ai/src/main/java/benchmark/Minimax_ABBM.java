@@ -140,7 +140,7 @@ public class Minimax_ABBM {
      */
     private static Result generateBestMoveResultTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime) {
         init();
-        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false);
+        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false, Minimax_AB.bestConfig.qSDepth);
         String bestMove = ai.orchestrator(fen, config);
         int depth = ai.maxDepth;
         int uniquePositions = ai.positionsHM.size();
@@ -164,7 +164,7 @@ public class Minimax_ABBM {
     private static double generateBestMoveSpeedTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime) {
         init();
         int iterations = 3;
-        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false);
+        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false, Minimax_AB.bestConfig.qSDepth);
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             ai.orchestrator(fen, config);

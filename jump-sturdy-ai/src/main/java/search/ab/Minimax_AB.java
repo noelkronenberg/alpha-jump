@@ -51,6 +51,7 @@ public class Minimax_AB extends AI {
         this.maxAllowedDepth = this.config.maxAllowedDepth;
         this.dynamicTime = this.config.dynamicTime;
         this.useQuiescenceSearch = this.config.useQuiescenceSearch;
+        this.qSDepth = this.config.qSDepth;
         return MoveGenerator.convertMoveToFEN(getBestMove(fen));
     }
 
@@ -434,6 +435,7 @@ public class Minimax_AB extends AI {
         first.timeCriterion = false;
         first.maxAllowedDepth = 1;
         first.useQuiescenceSearch = true;
+        first.qSDepth = 1;
         String s = ab.orchestrator(fen, first);
         System.out.println(s);
     }
