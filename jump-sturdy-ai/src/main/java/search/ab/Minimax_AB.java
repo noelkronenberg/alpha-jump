@@ -357,7 +357,7 @@ public class Minimax_AB extends AI {
                     ttData = transpositionTable.get(fen);
                     movesList = ttData.movesList; // list is already ordered
                     score = ttData.overAllScore;
-                    ttData.depth = depth; // TODO: should depth be updated here or at the end?
+                    ttData.depth = depth;
                 }
         // END: Transposition Tables
         } else {
