@@ -1025,6 +1025,33 @@ public class MoveGenerator {
     }
 
     /**
+     * Generates all possible capturing moves for a specific color.
+     *
+     * @param color The color of pieces for which moves are to be generated (RED or BLUE).
+     * @return A map where keys are piece combined integer positions and values are lists of possible target positions.
+     */
+    public LinkedHashMap<Integer, List<Integer>> generateAllPossibleMovesCaptures(Color color) {
+        capturingHM= new HashMap<>();
+        LinkedHashMap<Integer, List<Integer>> allPossibleMoves = new LinkedHashMap<>();
+        totalPossibleMoves = 0;
+        protectedPieces = 0;
+
+        for (int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
+                if (colorBoard[row][column] == color) {
+                    int position = convertToNumber(row, column);
+                    List<Integer> piecePossibleMoves = generatePossibleMovesCaptures(position, color);
+                    if (!piecePossibleMoves.isEmpty()) { // ignores Pieces that have no moves
+                        allPossibleMoves.put(position, piecePossibleMoves);
+                    }
+                }
+            }
+        }
+
+        return allPossibleMoves;
+    }
+
+    /**
      * Generates a maximum of one possible move for a given color.
      *
      * @param color The color of pieces for which moves are to be generated (RED or BLUE).
