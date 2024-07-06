@@ -21,6 +21,7 @@ public class Minimax_AB extends AI {
     double aspirationWindowSize = 0;
     boolean transpositionTables = false;
     boolean useQuiescenceSearch = false;
+    int qSDepth = bestConfig.qSDepth; // TODO: find good value for maxDepth (i.e. when to activate QS)
     int maxAllowedDepth = 0;
     boolean dynamicTime = false;
 
@@ -37,7 +38,7 @@ public class Minimax_AB extends AI {
 
     // START: search with Alpha-Beta
 
-    public static SearchConfig bestConfig = new SearchConfig(true, 50000.0, true, 0.25, true, 0, true, false);
+    public static SearchConfig bestConfig = new SearchConfig(true, 50000.0, true, 0.25, true, 0, true, false, 6);
 
     @Override
     public String orchestrator(String fen, SearchConfig config) {
@@ -341,7 +342,7 @@ public class Minimax_AB extends AI {
         }
 
         // QS search for captures
-        if (this.useQuiescenceSearch && this.maxDepth >=6 && depth == 1) { // TODO: find good value for maxDepth (i.e. when to activate QS)
+        if (this.useQuiescenceSearch && this.maxDepth >= this.qSDepth && depth == 1) {
             return quiescenceSearch(gameState, alpha, beta, currentColor, ourColor);
         }
 
@@ -431,7 +432,8 @@ public class Minimax_AB extends AI {
         SearchConfig first = Minimax_AB.bestConfig.copy();
         first.timeCriterion = false;
         first.maxAllowedDepth = 1;
-        String s = ab.orchestrator(fen,first);
+        first.useQuiescenceSearch = true;
+        String s = ab.orchestrator(fen, first);
         System.out.println(s);
     }
 }

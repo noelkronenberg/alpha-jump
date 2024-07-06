@@ -12,6 +12,7 @@ public class SearchConfig {
     public int maxAllowedDepth;
     public boolean dynamicTime;
     public boolean useQuiescenceSearch;
+    public int qSDepth;
 
     /**
      * Constructor to initialize all configuration parameters.
@@ -24,8 +25,9 @@ public class SearchConfig {
      * @param maxAllowedDepth Maximum allowed depth for search (in case timeCriterion is not used)
      * @param dynamicTime Whether dynamic time management is used
      * @param useQuiescenceSearch Whether quiescence search is used
+     * @param qSDepth Depth at which to activate QS
      */
-    public SearchConfig(boolean timeCriterion, double timeLimit, boolean aspirationWindow, double aspirationWindowSize, boolean transpositionTables, int maxAllowedDepth, boolean dynamicTime, boolean useQuiescenceSearch) {
+    public SearchConfig(boolean timeCriterion, double timeLimit, boolean aspirationWindow, double aspirationWindowSize, boolean transpositionTables, int maxAllowedDepth, boolean dynamicTime, boolean useQuiescenceSearch, int qSDepth) {
         this.timeCriterion = timeCriterion;
         this.timeLimit = timeLimit;
         this.aspirationWindow = aspirationWindow;
@@ -34,6 +36,7 @@ public class SearchConfig {
         this.maxAllowedDepth = maxAllowedDepth;
         this.dynamicTime = dynamicTime;
         this.useQuiescenceSearch = useQuiescenceSearch;
+        this.qSDepth = qSDepth;
     }
 
     /**
@@ -42,6 +45,6 @@ public class SearchConfig {
      * @return A new SearchConfig instance with the same values as this one.
      */
     public SearchConfig copy() {
-        return new SearchConfig(timeCriterion, timeLimit, aspirationWindow, aspirationWindowSize, transpositionTables, maxAllowedDepth, dynamicTime, useQuiescenceSearch);
+        return new SearchConfig(timeCriterion, timeLimit, aspirationWindow, aspirationWindowSize, transpositionTables, maxAllowedDepth, dynamicTime, useQuiescenceSearch, qSDepth);
     }
 }
