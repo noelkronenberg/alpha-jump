@@ -218,6 +218,24 @@ public class Minimax_AB extends AI {
     }
 
     /**
+     * Checks if a given move represents a diagonal capture move.
+     *
+     * @param move An integer representing a combined integer move.
+     * @return {@code true} if the move is a diagonal capture move, {@code false} otherwise.
+     */
+    private boolean isCaptureMove(int move) {
+        int start = move / 100;
+        int end = move % 100;
+
+        int fromRow = start / 10;
+        int fromColumn = start % 10;
+        int toRow = end / 10;
+        int toColumn = end % 10;
+
+        return Math.abs(fromColumn - toColumn) == 1 && Math.abs(fromRow - toRow) == 1;
+    }
+
+    /**
      * Performs an iterative deepening search to find the best move score within the given time limit.
      * This method incrementally deepens the search depth until the time runs out or the maximum
      * allowed depth is reached. Alpha-Beta pruning is used to optimize the search.
