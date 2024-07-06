@@ -139,9 +139,7 @@ public class Minimax_AB extends AI {
             // for safety (in case of TimeCutOffs)
             this.isOurMove = false;
 
-            double currentScore = iterativeDeepening(nextState, moveTimeLimit, ourColor); // get score for current move (order)
-
-            // evaluate move (score)
+            double currentScore = iterativeDeepening(nextState, moveTimeLimit, ourColor); // get score for current move
 
             /*
             // return if move order contains winning move
@@ -175,12 +173,10 @@ public class Minimax_AB extends AI {
         LinkedList<Integer> capturesMoveList = Evaluation.convertMovesToList(captureMoves);
         Evaluation.orderMoves(capturesMoveList, currentColor, gameState);
 
-        //Base Case
+        // base Case
         if (captureMoves.isEmpty() || standPat >= this.winCutOff || standPat <= -this.winCutOff||this.stopSearch) {
             return standPat;
         }
-
-
 
        // quiescence search for every move
         for (Integer move : capturesMoveList) {
@@ -192,13 +188,15 @@ public class Minimax_AB extends AI {
             } else {
                 beta = Math.min(beta, quiescenceSearch(nextState, alpha, beta, (currentColor == Color.RED) ? Color.BLUE : Color.RED, ourColor));
             }
+
             // prune branch if no improvements can be made
             if (beta <= alpha) {
                 break;
             }
         }
-        //Best rating
-        if (currentColor==ourColor){
+
+        // best rating
+        if (currentColor == ourColor){
             return alpha;
         }
         else {
@@ -344,14 +342,14 @@ public class Minimax_AB extends AI {
             this.stopSearch = true;
         }
 
-        if (useQuiescenceSearch&&maxDepth>=6&&depth == 1){        //TODO: Play with maxDepth
-            return quiescenceSearch(gameState,alpha,beta,currentColor,ourColor);
+        // QS search for captures
+        if (useQuiescenceSearch && maxDepth >=6 && depth == 1) { // TODO: find good value for maxDepth (i.e. when to activate QS)
+            return quiescenceSearch(gameState, alpha, beta, currentColor, ourColor);
         }
 
         if (this.stopSearch ||(depth == 1)|| score >= this.winCutOff || score <= -this.winCutOff) {
             return score;
         }
-
 
         // update depth
         if (this.maxDepth < depth) {
@@ -430,11 +428,11 @@ public class Minimax_AB extends AI {
     }
     // END: search with Alpha-Beta
     public static void main(String[] args) {
-        String fen =  "3b02/3b04/2r05/8/8/8/8/6 r";
+        String fen = "3b02/3b04/2r05/8/8/8/8/6 r";
         Minimax_AB ab = new Minimax_AB();
-        SearchConfig first =Minimax_AB.bestConfig.copy();
-        first.timeCriterion=false;
-        first.maxAllowedDepth=1;
+        SearchConfig first = Minimax_AB.bestConfig.copy();
+        first.timeCriterion = false;
+        first.maxAllowedDepth = 1;
         String s = ab.orchestrator(fen,first);
         System.out.println(s);
     }
