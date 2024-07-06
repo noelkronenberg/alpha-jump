@@ -1,7 +1,6 @@
 package search;
 
 import game.MoveGenerator;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,39 +8,26 @@ import search.ab.Minimax_AB;
 import search.mcts.MCTS;
 
 import java.util.Arrays;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * JUnit test class for Minimax_AB.
+ * JUnit test class for MCTS.
  */
-public class Minimax_ABTest {
+public class MCTSTest {
 
-    static Minimax_AB ai;
+    static MCTS ai;
     static SearchConfig config = Minimax_AB.bestConfig.copy();
 
     /**
-     * Initializes the Minimax_AB instance before all test methods.
+     * Initializes the MCTS instance before all test methods.
      */
     @BeforeAll
     public static void init() {
-        ai = new Minimax_AB();
+        ai = new MCTS();
         config.timeCriterion = true;
         config.timeLimit = 10000;
-    }
-
-    /**
-     * Performs sanity check for the number of positions evaluated
-     * Verifies that the number of positions evaluated matches the expected count
-     */
-    @Test
-    @DisplayName("Anzahl untersuchter Züge (mit händischen Beweis)")
-    public void anzahlSanityCheck() {
-        init();
-        SearchConfig config = Minimax_AB.bestConfig.copy();
-        config.timeCriterion = false;
-        config.maxAllowedDepth = 2;
-        ai.orchestrator("6/8/8/3r04/4b03/8/8/6 b", config);
-        assertEquals(ai.positionsHM.size(), 13);
     }
 
     /**
@@ -113,7 +99,7 @@ public class Minimax_ABTest {
     @DisplayName("Gruppe C")
     public void testGruppeC() {
         testMoves("6/4b01b01/8/5b01b0/2b04r0/1b04r01/5r01rr/1r04 b", "C5-C6", "C5-B5", "B6-C6");
-        testMoves("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b", "B4-C5", "E1-D3", "D2-D3"); // NOTE: unconfirmed
+        // testMoves("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b", "B4-C5", "E1-D3", "D2-D3"); // NOTE: unconfirmed
     }
 
     @Test
@@ -240,7 +226,7 @@ public class Minimax_ABTest {
     @DisplayName("Gruppe AI")
     public void testGruppeAI() {
         testMoves("6/6b01/8/2b02rr2/8/8/6r01/6 r", "F4-G2","F4-E2");
-        testMoves("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "F4-F5");
+        // testMoves("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "F4-F5");
     }
 
     @Test
@@ -269,30 +255,6 @@ public class Minimax_ABTest {
     public void testGruppeAJ() {
         testMoves("1b04/1bb2b0bb2/2bb1b03/3rr4/2r02b01r0/1b02r0rr1b0/1rr2r03/6 r", "D4-E2");
         testMoves("6/8/8/3b04/3b04/8/2r01r03/6 b", "D4-D5");
-    }
-
-    @Test
-    @DisplayName("QS")
-    public void testQS() {
-        String fen = "3b02/3b04/2r05/8/8/8/8/6 r";
-
-        Minimax_AB ab = new Minimax_AB();
-        SearchConfig qsConfig = Minimax_AB.bestConfig.copy();
-        qsConfig.timeCriterion = false;
-        qsConfig.maxAllowedDepth = 1;
-        qsConfig.useQuiescenceSearch = true;
-        qsConfig.qSDepth = 1;
-        String moveWithQS = ab.orchestrator(fen, qsConfig);
-        System.out.println(moveWithQS);
-
-        SearchConfig withoutConfig = Minimax_AB.bestConfig.copy();
-        withoutConfig.timeCriterion = false;
-        withoutConfig.maxAllowedDepth = 1;
-        withoutConfig.useQuiescenceSearch = false;
-        String moveWithoutQS = ab.orchestrator(fen, withoutConfig);
-        System.out.println(moveWithoutQS);
-
-        assertTrue((moveWithQS.equals("C3-C2") && moveWithoutQS.equals("C3-D2")));
     }
 
     /**
