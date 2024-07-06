@@ -164,43 +164,43 @@ public class Minimax_AB extends AI {
     public double quiescenceSearch(MoveGenerator gameState, double alpha, double beta, Color currentColor, Color ourColor) {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
 
+        //all moves for position rating
+        LinkedHashMap<Integer, List<Integer>> allMoves = gameState.generateAllPossibleMoves(currentColor);
+
         // rate current position without moving
-        double standPat = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth, fen, new LinkedHashMap<>(), currentColor);
-
-        // beta cutoff
-        if (standPat >= beta) {
-            return beta;
-        }
-
-        // found better position
-        if (alpha < standPat) {
-            alpha = standPat;
-        }
+        double standPat = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth, allMoves, currentColor);
 
         // moves
         LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMovesCaptures(currentColor);
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
         Evaluation.orderMoves(movesList, currentColor, gameState);
 
+        //Base Case
+        if (moves.isEmpty() || standPat >= this.winCutOff || standPat <= -this.winCutOff||this.stopSearch) {
+            return standPat;
+        }
+
+
+
        // quiescence search for every move
         for (Integer move : movesList) {
             MoveGenerator nextState = new MoveGenerator();
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
-
-            double score = -quiescenceSearch(nextState, -beta, -alpha, (currentColor == Color.RED) ? Color.BLUE : Color.RED, ourColor);
-
-            if (score >= beta) {
-                return beta;
+            if (currentColor==ourColor){
+                alpha = Math.max(alpha, quiescenceSearch(nextState, alpha, beta, (currentColor == Color.RED) ? Color.BLUE : Color.RED, ourColor));
             }
-
-            if (score > alpha) {
-                alpha = score;
+            else {
+                beta = Math.min(beta, quiescenceSearch(nextState, alpha, beta, (currentColor == Color.RED) ? Color.BLUE : Color.RED, ourColor));
             }
         }
-
-        // best rating
-        return alpha;
+        //Best rating
+        if (currentColor==ourColor){
+            return alpha;
+        }
+        else {
+            return beta;
+        }
     }
 
     /**
@@ -318,7 +318,7 @@ public class Minimax_AB extends AI {
                 movesList = Evaluation.convertMovesToList(moves);
                 Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
-                score = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
+                score = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth, moves, currentColor);
                 ttData = new TranspositionTableObject(score, movesList, depth);
 
                 } else {
@@ -333,7 +333,7 @@ public class Minimax_AB extends AI {
             movesList = Evaluation.convertMovesToList(moves);
             Evaluation.orderMoves(movesList, currentColor,gameState); // order moves
 
-            score = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth,fen, moves, currentColor);
+            score = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth, moves, currentColor);
             ttData = new TranspositionTableObject(score, movesList, depth);
         }
 
@@ -341,8 +341,11 @@ public class Minimax_AB extends AI {
             this.stopSearch = true;
         }
 
-        if (this.stopSearch || (depth == 1)|| score >= this.winCutOff || score <= -this.winCutOff) {
+        if (this.stopSearch || score >= this.winCutOff || score <= -this.winCutOff) {
             return score;
+        }
+        if (depth == 1){
+            return quiescenceSearch(gameState,alpha,beta,currentColor,ourColor);
         }
 
         // update depth
@@ -421,4 +424,13 @@ public class Minimax_AB extends AI {
         }
     }
     // END: search with Alpha-Beta
+    public static void main(String[] args) {
+        String fen =  "3b02/3b04/2r05/8/8/8/8/6 r";
+        Minimax_AB ab = new Minimax_AB();
+        SearchConfig first =Minimax_AB.bestConfig.copy();
+        first.timeCriterion=false;
+        first.maxAllowedDepth=1;
+        String s = ab.orchestrator(fen,first);
+        System.out.println(s);
+    }
 }

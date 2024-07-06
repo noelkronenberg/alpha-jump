@@ -202,7 +202,7 @@ public class Evaluation {
      * @param currentColor The current color of the AI player.
      * @return The rating of the current position for the specified player.
      */
-    public static double ratePositionAI(MoveGenerator moveGenerator, Color color, int depth, String fen, LinkedHashMap<Integer,List<Integer>> moves, Color currentColor) {
+    public static double ratePositionAI(MoveGenerator moveGenerator, Color color, int depth, LinkedHashMap<Integer,List<Integer>> moves, Color currentColor) {
         double score = 0;
 
         // TODO: difference between ourColor / currentColor
