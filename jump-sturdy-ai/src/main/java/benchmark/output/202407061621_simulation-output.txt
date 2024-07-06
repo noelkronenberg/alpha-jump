@@ -1,0 +1,3627 @@
+START: 202407061621
+
+Game 1:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 1 is: AI 2 (BLUE)
+
+Game 2:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 2 is: AI 1 (BLUE)
+
+Game 3:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 3 is: AI 2 (BLUE)
+
+Game 4:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 4 is: AI 1 (BLUE)
+
+Game 5:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 5 is: AI 2 (BLUE)
+
+Game 6:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 6 is: AI 1 (BLUE)
+
+Game 7:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 7 is: AI 2 (BLUE)
+
+Game 8:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 8 is: AI 1 (BLUE)
+
+Game 9:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 9 is: AI 2 (BLUE)
+
+Game 10:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 10 is: AI 1 (BLUE)
+
+Game 11:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 11 is: AI 2 (BLUE)
+
+Game 12:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 12 is: AI 1 (BLUE)
+
+Game 13:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 13 is: AI 2 (BLUE)
+
+Game 14:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 14 is: AI 1 (BLUE)
+
+Game 15:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 15 is: AI 2 (BLUE)
+
+Game 16:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 16 is: AI 1 (BLUE)
+
+Game 17:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 17 is: AI 2 (BLUE)
+
+Game 18:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 18 is: AI 1 (BLUE)
+
+Game 19:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 19 is: AI 2 (BLUE)
+
+Game 20:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 20 is: AI 1 (BLUE)
+
+Game 21:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 21 is: AI 2 (BLUE)
+
+Game 22:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 22 is: AI 1 (BLUE)
+
+Game 23:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 23 is: AI 2 (BLUE)
+
+Game 24:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 24 is: AI 1 (BLUE)
+
+Game 25:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 25 is: AI 2 (BLUE)
+
+Game 26:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 26 is: AI 1 (BLUE)
+
+Game 27:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 27 is: AI 2 (BLUE)
+
+Game 28:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 28 is: AI 1 (BLUE)
+
+Game 29:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 29 is: AI 2 (BLUE)
+
+Game 30:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 30 is: AI 1 (BLUE)
+
+Game 31:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 31 is: AI 2 (BLUE)
+
+Game 32:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 32 is: AI 1 (BLUE)
+
+Game 33:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 33 is: AI 2 (BLUE)
+
+Game 34:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 34 is: AI 1 (BLUE)
+
+Game 35:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 35 is: AI 2 (BLUE)
+
+Game 36:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 36 is: AI 1 (BLUE)
+
+Game 37:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 37 is: AI 2 (BLUE)
+
+Game 38:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 38 is: AI 1 (BLUE)
+
+Game 39:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 39 is: AI 2 (BLUE)
+
+Game 40:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 40 is: AI 1 (BLUE)
+
+Game 41:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 41 is: AI 2 (BLUE)
+
+Game 42:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 42 is: AI 1 (BLUE)
+
+Game 43:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 43 is: AI 2 (BLUE)
+
+Game 44:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 44 is: AI 1 (BLUE)
+
+Game 45:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 45 is: AI 2 (BLUE)
+
+Game 46:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 46 is: AI 1 (BLUE)
+
+Game 47:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 47 is: AI 2 (BLUE)
+
+Game 48:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 48 is: AI 1 (BLUE)
+
+Game 49:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 49 is: AI 2 (BLUE)
+
+Game 50:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 50 is: AI 1 (BLUE)
+
+Game 51:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 51 is: AI 2 (BLUE)
+
+Game 52:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 52 is: AI 1 (BLUE)
+
+Game 53:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 53 is: AI 2 (BLUE)
+
+Game 54:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 54 is: AI 1 (BLUE)
+
+Game 55:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 55 is: AI 2 (BLUE)
+
+Game 56:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 56 is: AI 1 (BLUE)
+
+Game 57:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 57 is: AI 2 (BLUE)
+
+Game 58:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 58 is: AI 1 (BLUE)
+
+Game 59:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 59 is: AI 2 (BLUE)
+
+Game 60:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 60 is: AI 1 (BLUE)
+
+Game 61:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 61 is: AI 2 (BLUE)
+
+Game 62:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 62 is: AI 1 (BLUE)
+
+Game 63:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 63 is: AI 2 (BLUE)
+
+Game 64:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 64 is: AI 1 (BLUE)
+
+Game 65:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 65 is: AI 2 (BLUE)
+
+Game 66:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 66 is: AI 1 (BLUE)
+
+Game 67:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 67 is: AI 2 (BLUE)
+
+Game 68:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 68 is: AI 1 (BLUE)
+
+Game 69:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 69 is: AI 2 (BLUE)
+
+Game 70:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 70 is: AI 1 (BLUE)
+
+Game 71:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 71 is: AI 2 (BLUE)
+
+Game 72:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 72 is: AI 1 (BLUE)
+
+Game 73:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 73 is: AI 2 (BLUE)
+
+Game 74:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 74 is: AI 1 (BLUE)
+
+Game 75:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 75 is: AI 2 (BLUE)
+
+Game 76:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 76 is: AI 1 (BLUE)
+
+Game 77:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 77 is: AI 2 (BLUE)
+
+Game 78:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 78 is: AI 1 (BLUE)
+
+Game 79:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 79 is: AI 2 (BLUE)
+
+Game 80:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 80 is: AI 1 (BLUE)
+
+Game 81:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 81 is: AI 2 (BLUE)
+
+Game 82:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 82 is: AI 1 (BLUE)
+
+Game 83:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 83 is: AI 2 (BLUE)
+
+Game 84:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 84 is: AI 1 (BLUE)
+
+Game 85:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 85 is: AI 2 (BLUE)
+
+Game 86:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 86 is: AI 1 (BLUE)
+
+Game 87:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 87 is: AI 2 (BLUE)
+
+Game 88:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 88 is: AI 1 (BLUE)
+
+Game 89:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 89 is: AI 2 (BLUE)
+
+Game 90:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 90 is: AI 1 (BLUE)
+
+Game 91:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 91 is: AI 2 (BLUE)
+
+Game 92:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 92 is: AI 1 (BLUE)
+
+Game 93:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 93 is: AI 2 (BLUE)
+
+Game 94:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 94 is: AI 1 (BLUE)
+
+Game 95:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 95 is: AI 2 (BLUE)
+
+Game 96:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 96 is: AI 1 (BLUE)
+
+Game 97:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 97 is: AI 2 (BLUE)
+
+Game 98:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 98 is: AI 1 (BLUE)
+
+Game 99:
+
+Color: BLUE
+Move: D7-D8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-G1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   R   B   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 99 is: AI 2 (BLUE)
+
+Game 100:
+
+Color: BLUE
+Move: D7-C8
+MoveCount: 1
+GameOver: false
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Color: RED
+Move: E2-C1
+MoveCount: 1
+GameOver: true
+Board: 
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   .      
+7    .  RR   .   .   R  RR  RR   .  
+6    .   .   .   .   B   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   B   R   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B  BR   B   B   .  
+1        .   .   .   .   .   B      
+
+Winner of game 100 is: AI 1 (BLUE)
+
+END: 202407061623
+
+First AI wins: 50
+Second AI wins: 50
+
+Settings: 
+
+Iterations: 100
+FEN: 5b0/1bbb0b0brb0b01/8/3b0r03/8/4b03/1rr1b0r0rrrr1/1r04 b (end game)
+
+First AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 1000.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false
+
+Second AI: 
+Class: MCTS
+Config: timeLimit = 1000.0
+
+System Information:
+
+OS: Mac OS X | aarch64
+Available processors (cores): 8
+System load average (cores): 3,78
+Total physical memory (GB): 16,00
+Free physical memory (GB): 0,18
