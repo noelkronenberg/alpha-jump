@@ -177,26 +177,12 @@ public class Minimax_AB extends AI {
             alpha = standPat;
         }
 
-        // move list
-        LinkedList<Integer> movesList;
+        // moves
+        LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMovesCaptures(currentColor);
+        LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
+        Evaluation.orderMoves(movesList, currentColor, gameState);
 
-        if (this.transpositionTables) {
-            if (transpositionTable.containsKey(fen)) {
-                movesList = transpositionTable.get(fen).movesList;
-            } else {
-                LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
-                movesList = Evaluation.convertMovesToList(moves);
-                Evaluation.orderMoves(movesList, currentColor, gameState);
-                TranspositionTableObject ttData = new TranspositionTableObject(standPat, movesList, this.currentDepth);
-                transpositionTable.put(fen, ttData);
-            }
-        } else {
-            LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMoves(currentColor);
-            movesList = Evaluation.convertMovesToList(moves);
-            Evaluation.orderMoves(movesList, currentColor, gameState);
-        }
-
-       // quiescence Search for every move
+       // quiescence search for every move
         for (Integer move : movesList) {
             MoveGenerator nextState = new MoveGenerator();
             nextState.initializeBoard(fen);
