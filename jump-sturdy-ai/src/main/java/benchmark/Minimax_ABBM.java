@@ -53,11 +53,11 @@ public class Minimax_ABBM {
      * @param timeLimit The time limit for the search algorithm.
      */
     private static void compareTimeManagement(String fen, double timeLimit) {
-        Result result_static = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false);
-        double duration_static = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false);
+        Result result_static = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false, false);
+        double duration_static = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false, false);
 
-        Result result_dynamic = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, true);
-        double duration_dynamic = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, true);
+        Result result_dynamic = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, true, false);
+        double duration_dynamic = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, true, false);
 
         displayResults("static time management", "dynamic time management", timeLimit, result_static, result_dynamic, duration_static, duration_dynamic);
     }
@@ -69,11 +69,11 @@ public class Minimax_ABBM {
      * @param timeLimit The time limit for the search algorithm.
      */
     private static void compareAspirationWindow(String fen, double timeLimit) {
-        Result result_no_window = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false);
-        double duration_no_window = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false);
+        Result result_no_window = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false, false);
+        double duration_no_window = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false, false);
 
-        Result result_window = generateBestMoveResultTimeLimit(fen, timeLimit, false, true, false);
-        double duration_window = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, true, false);
+        Result result_window = generateBestMoveResultTimeLimit(fen, timeLimit, false, true, false, false);
+        double duration_window = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, true, false, false);
 
         displayResults("without aspiration window", "with aspiration window", timeLimit, result_no_window, result_window, duration_no_window, duration_window);
     }
@@ -85,13 +85,29 @@ public class Minimax_ABBM {
      * @param timeLimit The time limit for the search algorithm.
      */
     private static void compareTranspositionTable(String fen, double timeLimit) {
-        Result result_no_TT = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false);
-        double duration_no_TT = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false);
+        Result result_no_TT = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false, false);
+        double duration_no_TT = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false, false);
 
-        Result result_TT = generateBestMoveResultTimeLimit(fen, timeLimit, true, false, false);
-        double duration_TT = generateBestMoveSpeedTimeLimit(fen, timeLimit, true, false, false);
+        Result result_TT = generateBestMoveResultTimeLimit(fen, timeLimit, true, false, false, false);
+        double duration_TT = generateBestMoveSpeedTimeLimit(fen, timeLimit, true, false, false, false);
 
         displayResults("without transposition table", "with transposition table", timeLimit, result_no_TT, result_TT, duration_no_TT, duration_TT);
+    }
+
+    /**
+     * Compares the performance with and without quiescence search.
+     *
+     * @param fen The board state in FEN format.
+     * @param timeLimit The time limit for the search algorithm.
+     */
+    private static void compareQS(String fen, double timeLimit) {
+        Result result_no_QS = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false, false);
+        double duration_no_QS = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false, false);
+
+        Result result_QS = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false, true);
+        double duration_QS = generateBestMoveSpeedTimeLimit(fen, timeLimit, true, false, false, true);
+
+        displayResults("without quiescence search", "with quiescence search", timeLimit, result_no_QS, result_QS, duration_no_QS, duration_QS);
     }
 
     /**
@@ -101,11 +117,11 @@ public class Minimax_ABBM {
      * @param timeLimit The time limit for the search algorithm.
      */
     private static void compareEverything(String fen, double timeLimit) {
-        Result result_clean = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false);
-        double duration_clean = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false);
+        Result result_clean = generateBestMoveResultTimeLimit(fen, timeLimit, false, false, false, false);
+        double duration_clean = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false, false);
 
-        Result result_everything = generateBestMoveResultTimeLimit(fen, timeLimit, true, true, true);
-        double duration_everything = generateBestMoveSpeedTimeLimit(fen, timeLimit, true, false, true);
+        Result result_everything = generateBestMoveResultTimeLimit(fen, timeLimit, true, true, true, true);
+        double duration_everything = generateBestMoveSpeedTimeLimit(fen, timeLimit, true, false, true, true);
 
         displayResults("without everything", "with everything", timeLimit, result_clean, result_everything, duration_clean, duration_everything);
     }
@@ -138,9 +154,9 @@ public class Minimax_ABBM {
      * @param dynamicTime Whether to use dynamic time management.
      * @return The result of the best move search.
      */
-    private static Result generateBestMoveResultTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime) {
+    private static Result generateBestMoveResultTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime, boolean quiescenceSearch) {
         init();
-        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false, Minimax_AB.bestConfig.qSDepth);
+        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, quiescenceSearch, Minimax_AB.bestConfig.qSDepth);
         String bestMove = ai.orchestrator(fen, config);
         int depth = ai.maxDepth;
         int uniquePositions = ai.positionsHM.size();
@@ -161,10 +177,10 @@ public class Minimax_ABBM {
      * @param dynamicTime Whether to use dynamic time management.
      * @return The average time in milliseconds to generate the best move.
      */
-    private static double generateBestMoveSpeedTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime) {
+    private static double generateBestMoveSpeedTimeLimit(String fen, double timeLimit, boolean transpositionTable, boolean aspirationWindow, boolean dynamicTime, boolean quiescenceSearch) {
         init();
         int iterations = 3;
-        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, false, Minimax_AB.bestConfig.qSDepth);
+        SearchConfig config = new SearchConfig(true, timeLimit, aspirationWindow, 0.25, transpositionTable, 0, dynamicTime, quiescenceSearch, Minimax_AB.bestConfig.qSDepth);
         double startTime = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             ai.orchestrator(fen, config);
@@ -228,12 +244,13 @@ public class Minimax_ABBM {
             System.out.println("Start Position: ");
             String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
             System.out.println(fen);
-            double timeLimit = 1000;
+            double timeLimit = 10000;
             System.out.println();
 
             compareTimeManagement(fen, timeLimit);
             compareAspirationWindow(fen, timeLimit);
             compareTranspositionTable(fen, timeLimit);
+            compareQS(fen, timeLimit);
             compareEverything(fen, timeLimit);
 
             System.out.println();
@@ -245,6 +262,7 @@ public class Minimax_ABBM {
             compareTimeManagement(fen, timeLimit);
             compareAspirationWindow(fen, timeLimit);
             compareTranspositionTable(fen, timeLimit);
+            compareQS(fen, timeLimit);
             compareEverything(fen, timeLimit);
 
             System.out.println();
@@ -256,6 +274,7 @@ public class Minimax_ABBM {
             compareTimeManagement(fen, timeLimit);
             compareAspirationWindow(fen, timeLimit);
             compareTranspositionTable(fen, timeLimit);
+            compareQS(fen, timeLimit);
             compareEverything(fen, timeLimit);
 
             System.out.println();
@@ -267,6 +286,7 @@ public class Minimax_ABBM {
             compareTimeManagement(fen, timeLimit);
             compareAspirationWindow(fen, timeLimit);
             compareTranspositionTable(fen, timeLimit);
+            compareQS(fen, timeLimit);
             compareEverything(fen, timeLimit);
 
             fileOut.close();
