@@ -63,7 +63,8 @@ public class Minimax_AB extends AI {
                 " | transpositionTables = " + transpositionTables +
                 " | maxAllowedDepth = " + maxAllowedDepth +
                 " | dynamicTime = " + dynamicTime +
-                " | useQuiescenceSearch = " + useQuiescenceSearch;
+                " | useQuiescenceSearch = " + useQuiescenceSearch +
+                " | qSDepth = " + qSDepth;
     }
 
     /**
