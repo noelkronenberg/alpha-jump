@@ -99,19 +99,19 @@ public class Connection {
 
                     String fenNoPlayer = fen.substring(0, fen.length() - 2);
 
+                    // check for draw
                     gameInstance.initializeBoard(fenNoPlayer);
-                    if(visitedPositions.containsKey(fenNoPlayer)){
-                        int numberOfVisits=visitedPositions.get(fenNoPlayer);
-                        if (numberOfVisits==3){
+                    if(visitedPositions.containsKey(fenNoPlayer) ){
+                        int numberOfVisits = visitedPositions.get(fenNoPlayer);
+                        if (numberOfVisits == 3) {
                             return;
+                        } else {
+                            visitedPositions.put(fenNoPlayer, numberOfVisits + 1);
                         }
-                        else {
-                            visitedPositions.put(fenNoPlayer,numberOfVisits+1);
-                        }
-                    }
-                    else {
+                    } else {
                         visitedPositions.put(fenNoPlayer,1);
                     }
+
                     // process server response
                     if (response.getBoolean("bothConnected") && !fen.equals(this.lastBoard)) {
 
@@ -145,17 +145,17 @@ public class Connection {
                             outputStream.println(gson.toJson(this.move));
                             gameInstance.movePiece(gameInstance.convertStringToPos(this.move));
                             String fenAfterMove = gameInstance.getFenFromBoard();
+
+                            // check for draw
                             if(visitedPositions.containsKey(fenAfterMove)){
-                                int numberOfVisits=visitedPositions.get(fenAfterMove);
-                                if (numberOfVisits==3){
+                                int numberOfVisits = visitedPositions.get(fenAfterMove);
+                                if (numberOfVisits == 3){
                                     return;
+                                } else {
+                                    visitedPositions.put(fenAfterMove, numberOfVisits + 1);
                                 }
-                                else {
-                                    visitedPositions.put(fenAfterMove,numberOfVisits+1);
-                                }
-                            }
-                            else {
-                                visitedPositions.put(fenAfterMove,1);
+                            } else {
+                                visitedPositions.put(fenAfterMove, 1);
                             }
 
                             long timeForMove = System.currentTimeMillis() - currentTime;
