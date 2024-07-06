@@ -204,6 +204,7 @@ public class Connection {
     }
 
     /**
+     * Fills the startingBib HashMap with precalculated starting moves.
      *
      * @param fileLocation Path to the File
      * @throws IOException
