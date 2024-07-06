@@ -544,6 +544,106 @@ public class MoveGenerator {
     }
 
     /**
+     * Generates all possible capturing moves for a piece at a given position and color.
+     *
+     * @param position The combined integer position of the piece (row * 10 + column).
+     * @param color The color of the piece (RED or BLUE).
+     * @return A list of all possible moves as combined integer positions (row * 10 + column).
+     */
+    List<Integer> generatePossibleMovesCaptures(int position, Color color) {
+        int row = position / 10;
+        int column = position % 10;
+
+        List<Integer> possibleMoves = new ArrayList<>();
+
+        // RED
+        if (color == Color.RED) {
+
+            // single piece
+            if (pieceBoard[row][column] == Piece.SINGLE) {
+                if (row > 0) {
+
+                    // left diagonal
+                    if (column > 0 && colorBoard[row - 1][column - 1] == Color.BLUE) {
+                        int move = convertToNumber(row - 1, column - 1);
+                        possibleMoves.add(move);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
+                    }
+
+                    // left diagonal protection (for Evaluation)
+                    else if (column > 0 && colorBoard[row - 1][column - 1] == Color.RED) {
+                        protectedPieces += 1;
+                    }
+
+                    // right diagonal
+                    if (column < 7 && colorBoard[row - 1][column + 1] == Color.BLUE) {
+                        int move = convertToNumber(row - 1, column + 1);
+                        possibleMoves.add(move);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
+                    }
+
+                    // right diagonal protection (for Evaluation)
+                    else if (column < 7 && colorBoard[row - 1][column + 1] == Color.RED) {
+                        protectedPieces += 1;
+                    }
+                }
+            }
+
+            // double piece
+            else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
+                addKnightMovesCaptures(possibleMoves, row, column, color, position);
+            }
+
+            // remove invalid moves
+            possibleMoves.removeIf(move -> !isValidMove(move, Color.RED));
+
+            // BLUE
+        } else if (color == Color.BLUE) {
+
+            // single piece
+            if (pieceBoard[row][column] == Piece.SINGLE) {
+                if (row < 7) {
+
+                    // left diagonal
+                    if (column > 0 && colorBoard[row + 1][column - 1] == Color.RED) {
+                        int move = convertToNumber(row + 1, column - 1);
+                        possibleMoves.add(move);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
+                    }
+
+                    // left diagonal protection (for Evaluation)
+                    else if (column > 0 && colorBoard[row + 1][column - 1] == Color.BLUE) {
+                        protectedPieces += 1;
+                    }
+
+                    // right diagonal
+                    if (column < 7 && colorBoard[row + 1][column + 1] == Color.RED) {
+                        int move = convertToNumber(row + 1, column + 1);
+                        possibleMoves.add(move);
+                        capturingHM.put((position * 100) + move, 1); // capturing move (for Evaluation)
+                    }
+
+                    // right diagonal protection (for Evaluation)
+                    else if (column < 7 && colorBoard[row + 1][column + 1] == Color.BLUE) {
+                        protectedPieces += 1;
+                    }
+                }
+            }
+
+            // double piece
+            else if (pieceBoard[row][column] == Piece.DOUBLE || pieceBoard[row][column] == Piece.MIXED) {
+                addKnightMovesCaptures(possibleMoves, row, column, color, position);
+            }
+
+            // remove invalid moves
+            possibleMoves.removeIf(move -> !isValidMove(move, Color.BLUE));
+        }
+
+        totalPossibleMoves += possibleMoves.size(); // for Evaluation
+        return possibleMoves;
+    }
+
+    /**
      * Adds knight moves to the list of possible moves for a piece at a given position and color.
      *
      * @param possibleMoves The list to which valid knight moves will be added.
@@ -588,6 +688,66 @@ public class MoveGenerator {
             // cannot move to own double
             if (!((pieceBoard[newRow][newColumn] == Piece.DOUBLE || pieceBoard[newRow][newColumn] == Piece.MIXED)
                     && colorBoard[newRow][newColumn] == color)) {
+                possibleMoves.add(convertToNumber(newRow, newColumn));
+            }
+
+            // count protected pieces (for Evaluation)
+            if (colorBoard[newRow][newColumn] == color) {
+                protectedPieces += 1;
+            }
+
+            // is attacking
+            else if (colorBoard[newRow][newColumn] != color && colorBoard[newRow][newColumn] != Color.EMPTY) {
+                capturingHM.put((position * 100) + convertToNumber(newRow, newColumn), 1); // capturing move (for Evaluation)
+            }
+        }
+    }
+
+    /**
+     * Adds capturing knight moves to the list of possible moves for a piece at a given position and color.
+     *
+     * @param possibleMoves The list to which valid knight moves will be added.
+     * @param row The current row of the piece.
+     * @param column The current column of the piece.
+     * @param color The color of the piece (RED or BLUE).
+     * @param position The combined integer position of the piece (row * 10 + column).
+     */
+    private void addKnightMovesCaptures(List<Integer> possibleMoves, int row, int column, Color color, Integer position) {
+
+        // possible moves
+        int[][] knightMoves = {
+                {-2, -1}, {-2, 1}, {-1, -2}, {-1, 2},
+                {1, -2}, {1, 2}, {2, -1}, {2, 1}
+        };
+
+        // add moves
+        for (int[] move : knightMoves) {
+            int newRow = row + move[0];
+            int newColumn = column + move[1];
+
+            if (newRow >= 8 || newColumn >= 8) {
+                continue;
+            }
+
+            // no moving backwards
+            if (color == Color.RED) {
+                if (newRow > row) {
+                    continue;
+                }
+            } else if (color == Color.BLUE) {
+                if (newRow < row) {
+                    continue;
+                }
+            }
+
+            // no moves outside the board
+            if (newRow < 0 || newColumn < 0) {
+                continue;
+            }
+
+            // cannot move to own double
+            if (!((pieceBoard[newRow][newColumn] == Piece.DOUBLE || pieceBoard[newRow][newColumn] == Piece.MIXED) && colorBoard[newRow][newColumn] == color)
+                    && (colorBoard[newRow][newColumn] != color && colorBoard[newRow][newColumn] != Color.EMPTY)) {
                 possibleMoves.add(convertToNumber(newRow, newColumn));
             }
 
