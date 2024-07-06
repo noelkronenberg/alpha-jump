@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -28,6 +29,8 @@ public class Connection {
     long timeLeft = 120000;
 
     HashMap<String, Integer> visitedPositions = new HashMap<>();
+
+    HashMap<String, String> startingBib = new HashMap<>();
 
     /**
      * Connects to the game server and manages game play.
@@ -54,9 +57,16 @@ public class Connection {
             int temp = (int) inputStream.read();
             if (temp == 48) {
                 this.player = 1;
+                String basePath = new File("").getAbsolutePath();
+                String path = basePath+"\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
+                readFileAndFillBib(path);
                 System.out.println("\n" + "You are Player 1");
+
             } else {
                 this.player = 2;
+                String basePath = new File("").getAbsolutePath();
+                String path = basePath+"\\src\\main\\java\\search\\mcts_lib\\opening_book_secondMove.txt";
+                readFileAndFillBib(path);
                 System.out.println("\n" +  "You are Player 2");
             }
 
@@ -128,18 +138,23 @@ public class Connection {
                                 System.out.println("Enter your move: ");
                                 this.move = this.scanner.nextLine();
                             } else {
-
-                                // check for dynamic time management
-                                if (moveCounter <= 6 || (31 < moveCounter && moveCounter <= 39)) {
-                                    config.timeLimit = (overall * 0.2) / 15;
-                                } else if (timeLeft <= 5000) {
-                                    config.timeLimit = (timeLeft * 0.5);
-                                } else {
-                                    config.timeLimit = (overall * 0.8) / 25;
+                                //check if a position is in the starting bib
+                                String moveStartingBib = startingBib.get(fenNoPlayer);
+                                if (moveStartingBib!=null){
+                                    this.move=moveStartingBib;
                                 }
-
-                                this.move = ai.orchestrator(fen, config);
-                                moveCounter++;
+                                else {
+                                    // check for dynamic time management
+                                    if (moveCounter <= 6 || (31 < moveCounter && moveCounter <= 39)) {
+                                        config.timeLimit = (overall * 0.2) / 15;
+                                    } else if (timeLeft <= 5000) {
+                                        config.timeLimit = (timeLeft * 0.5);
+                                    } else {
+                                        config.timeLimit = (overall * 0.8) / 25;
+                                    }
+                                    this.move = ai.orchestrator(fen, config);
+                                    moveCounter++;
+                                }
                             }
 
                             outputStream.println(gson.toJson(this.move));
@@ -185,6 +200,22 @@ public class Connection {
 
         } catch (IOException | InterruptedException e) {
             System.err.println("\n" + "Player " + this.player + " | " +  "Error occurred while connecting to the server: " + e.getMessage());
+        }
+    }
+
+    /**
+     *
+     * @param fileLocation Path to the File
+     * @throws IOException
+     */
+    public void readFileAndFillBib(String fileLocation) throws IOException {
+        final BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileLocation), StandardCharsets.UTF_8));
+        String line;
+        int i  = 0;
+        while ((line=in.readLine())!=null) {
+            String[] tokens = line.split(", ");
+            startingBib.put(tokens[0], tokens[1]);
+            i  = i+1;
         }
     }
 
