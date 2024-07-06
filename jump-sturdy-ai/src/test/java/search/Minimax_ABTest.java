@@ -273,6 +273,30 @@ public class Minimax_ABTest {
         testMoves("6/8/8/3b04/3b04/8/2r01r03/6 b", "D4-D5");
     }
 
+    @Test
+    @DisplayName("QS")
+    public void testQS() {
+        String fen = "3b02/3b04/2r05/8/8/8/8/6 r";
+
+        Minimax_AB ab = new Minimax_AB();
+        SearchConfig qsConfig = Minimax_AB.bestConfig.copy();
+        qsConfig.timeCriterion = false;
+        qsConfig.maxAllowedDepth = 1;
+        qsConfig.useQuiescenceSearch = true;
+        qsConfig.qSDepth = 1;
+        String moveWithQS = ab.orchestrator(fen, qsConfig);
+        System.out.println(moveWithQS);
+
+        SearchConfig withoutConfig = Minimax_AB.bestConfig.copy();
+        withoutConfig.timeCriterion = false;
+        withoutConfig.maxAllowedDepth = 1;
+        withoutConfig.useQuiescenceSearch = false;
+        String moveWithoutQS = ab.orchestrator(fen, withoutConfig);
+        System.out.println(moveWithoutQS);
+
+        assertTrue((moveWithQS.equals("C3-C2") && moveWithoutQS.equals("C3-D2")));
+    }
+
     /**
      * Main method for visualising the board state.
      * Initializes MoveGenerator and prints the board state.
