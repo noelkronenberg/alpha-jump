@@ -209,17 +209,17 @@ public class Simulation {
             AI firstAI = new Minimax_AB();
             SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
             firstConfig.timeLimit = 1000;
-            firstConfig.aspirationWindowSize = 0.01;
+            firstConfig.aspirationWindowSize = 10;
 
             // configuration of second AI (CAN BE CHANGED)
             AI secondAI = new Minimax_AB();
             SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
             secondConfig.timeLimit = 1000;
-            secondConfig.aspirationWindowSize = 10;
+            secondConfig.aspirationWindowSize = 0.5;
 
             // configuration of simulation (CAN BE CHANGED)
             String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
-            int iterations = 20;
+            int iterations = 100;
             boolean showGame = true;
 
             // start simulation (DO NOT CHANGE)
