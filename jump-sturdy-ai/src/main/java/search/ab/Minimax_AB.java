@@ -162,19 +162,17 @@ public class Minimax_AB extends AI {
     public double quiescenceSearch(MoveGenerator gameState, double alpha, double beta, Color currentColor, Color ourColor) {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
 
-        //all moves for position rating
-        LinkedHashMap<Integer, List<Integer>> allMoves = gameState.generateAllPossibleMoves(currentColor);
+        // evaluation
+        LinkedHashMap<Integer, List<Integer>> allMoves = gameState.generateAllPossibleMoves(currentColor); // all moves for position rating
+        double standPat = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth, allMoves, currentColor); // rate current position without moving
 
-        // rate current position without moving
-        double standPat = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth, allMoves, currentColor);
-
-        // moves
+        // capturing moves
         LinkedHashMap<Integer, List<Integer>> captureMoves = gameState.generateAllPossibleMovesCaptures(currentColor);
         LinkedList<Integer> capturesMoveList = Evaluation.convertMovesToList(captureMoves);
         Evaluation.orderMoves(capturesMoveList, currentColor, gameState);
 
-        // base Case
-        if (captureMoves.isEmpty() || standPat >= this.winCutOff || standPat <= -this.winCutOff||this.stopSearch) {
+        // base case
+        if (captureMoves.isEmpty() || standPat >= this.winCutOff || standPat <= -this.winCutOff || this.stopSearch) {
             return standPat;
         }
 
@@ -343,7 +341,7 @@ public class Minimax_AB extends AI {
         }
 
         // QS search for captures
-        if (useQuiescenceSearch && maxDepth >=6 && depth == 1) { // TODO: find good value for maxDepth (i.e. when to activate QS)
+        if (this.useQuiescenceSearch && this.maxDepth >=6 && depth == 1) { // TODO: find good value for maxDepth (i.e. when to activate QS)
             return quiescenceSearch(gameState, alpha, beta, currentColor, ourColor);
         }
 
