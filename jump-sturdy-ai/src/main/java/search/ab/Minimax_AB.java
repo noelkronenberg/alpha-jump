@@ -30,7 +30,7 @@ public class Minimax_AB extends AI {
     public HashMap<String, TranspositionTableObject> transpositionTable;
 
     // logic
-    final int winCutOff = 100000;
+    final int winCutOff = 80000; //100000-buffer if enemy has good position but still lost (for large depth)
     int currentDepth = 1;
     boolean stopSearch = false;
     boolean isOurMove = false; // NOTE: supposed to be false, because we make a move before entering treeSearch
@@ -171,27 +171,30 @@ public class Minimax_AB extends AI {
         double standPat = Evaluation.ratePositionAI(gameState, ourColor, this.currentDepth, allMoves, currentColor);
 
         // moves
-        LinkedHashMap<Integer, List<Integer>> moves = gameState.generateAllPossibleMovesCaptures(currentColor);
-        LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
-        Evaluation.orderMoves(movesList, currentColor, gameState);
+        LinkedHashMap<Integer, List<Integer>> captureMoves = gameState.generateAllPossibleMovesCaptures(currentColor);
+        LinkedList<Integer> capturesMoveList = Evaluation.convertMovesToList(captureMoves);
+        Evaluation.orderMoves(capturesMoveList, currentColor, gameState);
 
         //Base Case
-        if (moves.isEmpty() || standPat >= this.winCutOff || standPat <= -this.winCutOff||this.stopSearch) {
+        if (captureMoves.isEmpty() || standPat >= this.winCutOff || standPat <= -this.winCutOff||this.stopSearch) {
             return standPat;
         }
 
 
 
        // quiescence search for every move
-        for (Integer move : movesList) {
+        for (Integer move : capturesMoveList) {
             MoveGenerator nextState = new MoveGenerator();
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
             if (currentColor==ourColor){
                 alpha = Math.max(alpha, quiescenceSearch(nextState, alpha, beta, (currentColor == Color.RED) ? Color.BLUE : Color.RED, ourColor));
-            }
-            else {
+            } else {
                 beta = Math.min(beta, quiescenceSearch(nextState, alpha, beta, (currentColor == Color.RED) ? Color.BLUE : Color.RED, ourColor));
+            }
+            // prune branch if no improvements can be made
+            if (beta <= alpha) {
+                break;
             }
         }
         //Best rating
@@ -341,12 +344,14 @@ public class Minimax_AB extends AI {
             this.stopSearch = true;
         }
 
-        if (this.stopSearch || score >= this.winCutOff || score <= -this.winCutOff) {
-            return score;
-        }
-        if (depth == 1){
+        if (useQuiescenceSearch&&maxDepth>=6&&depth == 1){        //TODO: Play with maxDepth
             return quiescenceSearch(gameState,alpha,beta,currentColor,ourColor);
         }
+
+        if (this.stopSearch ||(depth == 1)|| score >= this.winCutOff || score <= -this.winCutOff) {
+            return score;
+        }
+
 
         // update depth
         if (this.maxDepth < depth) {
