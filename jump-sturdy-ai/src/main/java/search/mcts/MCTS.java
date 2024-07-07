@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * An implementation of a Monte Carlo Tree Search for the game Jump Sturdy
+ * An implementation of a Monte Carlo Tree Search for the game Jump Sturdy.
  */
 public class MCTS extends AI {
     SearchConfig config;
@@ -131,14 +131,12 @@ public class MCTS extends AI {
         }
         */
 
-
         LinkedHashMap<Integer,List<Integer>> moves1 = moveGenerator.generateAllPossibleMoves(color);
         color = (color == Color.RED) ? Color.BLUE : Color.RED;
         LinkedHashMap<Integer,List<Integer>> moves2 = moveGenerator.generateAllPossibleMoves(color);
         double prob = moves1.size() / (double) (moves2.size() + moves1.size());
         Random generator =  new Random();
         return  generator.nextDouble() >= prob? 1 : 0;
-
     }
 
     /**
