@@ -14,7 +14,7 @@ import search.ab.Evaluation;
 public class OpeningBookGenerator extends Thread {
     private final int DEPTH = 3;
     private Color startingPlayer = Color.RED;
-    public String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
+    public String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r";
 
     public static HashMap<String,String> openingBook = new HashMap<>();
     public static LinkedHashSet<String> duplicateBook = new LinkedHashSet<>();
