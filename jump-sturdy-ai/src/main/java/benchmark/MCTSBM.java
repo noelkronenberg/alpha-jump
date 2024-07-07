@@ -74,7 +74,7 @@ public class MCTSBM {
             System.out.println("Start Position: ");
             String fen = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b";
             System.out.println(fen);
-            double timeLimit = 120000;
+            double timeLimit = 3000;
             System.out.println();
 
             getSimulations(fen, timeLimit);
