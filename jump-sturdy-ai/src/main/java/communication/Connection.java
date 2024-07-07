@@ -109,17 +109,9 @@ public class Connection {
 
                     String fenNoPlayer = fen.substring(0, fen.length() - 2);
 
-                    // check for draw
-                    gameInstance.initializeBoard(fenNoPlayer);
-                    if(visitedPositions.containsKey(fenNoPlayer) ){
-                        int numberOfVisits = visitedPositions.get(fenNoPlayer);
-                        if (numberOfVisits == 3) {
-                            return;
-                        } else {
-                            visitedPositions.put(fenNoPlayer, numberOfVisits + 1);
-                        }
-                    } else {
-                        visitedPositions.put(fenNoPlayer,1);
+                    if (response.getBoolean("end")){
+                        Thread.sleep(1000);
+                        return;
                     }
 
                     // process server response
@@ -133,6 +125,20 @@ public class Connection {
                         if ((response.getBoolean("player1") && this.player == 1) || (response.getBoolean("player2") && this.player == 2)) {
                             currentTime = System.currentTimeMillis();
 
+                            // check for draw
+                            gameInstance.initializeBoard(fenNoPlayer);
+                            if(visitedPositions.containsKey(fenNoPlayer) ){
+                                int numberOfVisits = visitedPositions.get(fenNoPlayer);
+                                if (numberOfVisits == 3) {
+                                    Thread.sleep(1000);
+                                    return;
+                                } else {
+                                    visitedPositions.put(fenNoPlayer, numberOfVisits + 1);
+                                }
+                            } else {
+                                visitedPositions.put(fenNoPlayer,1);
+                            }
+
                             // check if AI or human player
                             if (isPlayer) {
                                 System.out.println("Enter your move: ");
@@ -142,8 +148,7 @@ public class Connection {
                                 String moveStartingBib = startingBib.get(fenNoPlayer);
                                 if (moveStartingBib!=null){
                                     this.move=moveStartingBib;
-                                }
-                                else {
+                                } else {
                                     // check for dynamic time management
                                     if (moveCounter <= 6 || (31 < moveCounter && moveCounter <= 39)) {
                                         config.timeLimit = (overall * 0.2) / 15;
