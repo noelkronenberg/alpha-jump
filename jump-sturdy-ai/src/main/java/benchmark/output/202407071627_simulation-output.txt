@@ -1,0 +1,34 @@
+START: 202407071627
+Winner of game 1 is: AI 1 (RED)
+Winner of game 2 is: AI 1 (BLUE)
+
+END: 202407071627
+
+First AI wins: 2
+Second AI wins: 0
+
+First AI depths: [6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 6, 6, 5]
+First AI average depth: 6,50
+Second AI depths: [5, 6, 6, 7, 6, 6, 6, 6, 7, 6, 6, 7, 7, 7, 6, 6, 7, 6, 6, 6, 7, 7, 3]
+Second AI average depth: 6,17
+
+Settings: 
+
+Iterations: 2
+FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b
+
+First AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 500.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false | qSDepth = 6
+
+Second AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 500.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = true | qSDepth = 3
+
+System Information:
+
+OS: Mac OS X | aarch64
+Available processors (cores): 8
+System load average (cores): 4,49
+Total physical memory (GB): 16,00
+Free physical memory (GB): 0,04

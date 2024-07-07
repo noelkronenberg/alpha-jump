@@ -10,6 +10,7 @@ import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -23,10 +24,12 @@ public class Simulation {
     public static class GameResult {
         public final int number;
         public final Color color;
+        public final ArrayList<Integer> depths;
 
-        public GameResult(int number, Color color) {
+        public GameResult(int number, Color color, ArrayList<Integer> depths) {
             this.number = number;
             this.color = color;
+            this.depths = depths;
         }
     }
 
@@ -49,6 +52,8 @@ public class Simulation {
         String bestMove;
         boolean gameOver = false;
         int moveCount = 0;
+        ArrayList<Integer> firstAIDepths = new ArrayList<>();
+        ArrayList<Integer> secondAIDepths = new ArrayList<>();
 
         Color startingColor = fen.charAt(fen.length() - 1) == 'r' ? Color.RED : Color.BLUE;
 
@@ -57,8 +62,14 @@ public class Simulation {
             // get best move
             if (moveCount % 2 == 0) {
                 bestMove = firstAI.orchestrator(fen, firstConfig);
+                if (firstAI instanceof Minimax_AB) {
+                    firstAIDepths.add(((Minimax_AB) firstAI).maxDepth);
+                }
             } else {
                 bestMove = secondAI.orchestrator(fen, secondConfig);
+                if (secondAI instanceof Minimax_AB) {
+                    secondAIDepths.add(((Minimax_AB) secondAI).maxDepth);
+                }
             }
 
             // check for game over
@@ -92,9 +103,9 @@ public class Simulation {
 
         if (moveCount % 2 == 0) {
             Color otherColor = (startingColor == Color.RED) ? Color.BLUE : Color.RED;
-            return new GameResult(2, otherColor);
+            return new GameResult(2, otherColor, secondAIDepths);
         } else {
-            return new GameResult(1, startingColor);
+            return new GameResult(1, startingColor, firstAIDepths);
         }
     }
 
@@ -118,6 +129,8 @@ public class Simulation {
 
         int firstAIWins = 0;
         int secondAIWins = 0;
+        ArrayList<Integer> firstAIDepthsAllGames = new ArrayList<>();
+        ArrayList<Integer> secondAIDepthsAllGames = new ArrayList<>();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
         String timestamp = dateFormat.format(new Date());
@@ -135,8 +148,14 @@ public class Simulation {
 
             if (firstAIBegins) {
                 result = playGame(firstAI, firstConfig, secondAI, secondConfig, fen, showGame);
+                if (firstAI instanceof Minimax_AB) {
+                    firstAIDepthsAllGames.addAll(result.depths);
+                }
             } else {
                 result = playGame(secondAI, secondConfig, firstAI, firstConfig, fen, showGame);
+                if (secondAI instanceof Minimax_AB) {
+                    secondAIDepthsAllGames.addAll(result.depths);
+                }
             }
 
             if ((firstAIBegins && result.number == 1) || (!firstAIBegins && result.number == 2)) {
@@ -157,6 +176,20 @@ public class Simulation {
         System.out.println("First AI wins: " + firstAIWins);
         System.out.println("Second AI wins: " + secondAIWins);
         System.out.println();
+
+        if (firstAI instanceof Minimax_AB) {
+            double averageFirstAIDepth = firstAIDepthsAllGames.stream().mapToInt(Integer::intValue).average().orElse(0.0);
+            System.out.printf("First AI depths: %s\n", firstAIDepthsAllGames);
+            System.out.printf("First AI average depth: %.2f\n", averageFirstAIDepth);
+        }
+        if (firstAI instanceof Minimax_AB) {
+            double averageSecondAIDepth = secondAIDepthsAllGames.stream().mapToInt(Integer::intValue).average().orElse(0.0);
+            System.out.printf("Second AI depths: %s\n", secondAIDepthsAllGames);
+            System.out.printf("Second AI average depth: %.2f\n", averageSecondAIDepth);
+        }
+        if (firstAI instanceof Minimax_AB || secondAI instanceof Minimax_AB) {
+            System.out.println();
+        }
 
         System.out.println("Settings: ");
         System.out.println();
@@ -208,19 +241,19 @@ public class Simulation {
             // configuration of first AI (CAN BE CHANGED)
             AI firstAI = new Minimax_AB();
             SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
-            firstConfig.timeLimit = 3000;
+            firstConfig.timeLimit = 500;
             firstConfig.useQuiescenceSearch = false;
 
             // configuration of second AI (CAN BE CHANGED)
             AI secondAI = new Minimax_AB();
             SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
-            secondConfig.timeLimit = 3000;
+            secondConfig.timeLimit = 500;
             secondConfig.useQuiescenceSearch = true;
-            secondConfig.qSDepth = 6;
+            secondConfig.qSDepth = 3;
 
             // configuration of simulation (CAN BE CHANGED)
             String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
-            int iterations = 10;
+            int iterations = 2;
             boolean showGame = false;
 
             // start simulation (DO NOT CHANGE)
