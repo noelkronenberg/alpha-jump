@@ -22,7 +22,7 @@ public class MCTS extends AI {
     double timeLimit = 20000;
 
     // logic
-    double numberOfAllSimulations;
+    public double numberOfAllSimulations;
     Color ourColor = Color.BLUE;
     Random random = new Random();
     MCTSNode parentNode = null;
