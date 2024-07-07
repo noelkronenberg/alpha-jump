@@ -1,0 +1,44 @@
+START: 202407071629
+Winner of game 1 is: AI 2 (BLUE)
+Winner of game 2 is: AI 1 (BLUE)
+Winner of game 3 is: AI 1 (RED)
+Winner of game 4 is: AI 1 (BLUE)
+Winner of game 5 is: AI 1 (RED)
+Winner of game 6 is: AI 1 (BLUE)
+Winner of game 7 is: AI 2 (BLUE)
+Winner of game 8 is: AI 1 (BLUE)
+Winner of game 9 is: AI 1 (RED)
+Winner of game 10 is: AI 1 (BLUE)
+Winner of game 11 is: AI 2 (BLUE)
+Winner of game 12 is: AI 2 (RED)
+
+END: 202407071655
+
+First AI wins: 8
+Second AI wins: 4
+
+First AI depths: [7, 6, 6, 7, 7, 7, 7, 7, 7, 8, 8, 7, 7, 7, 7, 8, 7, 8, 7, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 8, 7, 6, 6, 7, 7, 6, 6, 7, 6, 7, 7, 8, 7, 7, 9, 7, 7, 7, 3, 7, 6, 6, 7, 7, 8, 8, 7, 7, 7, 7, 8, 8, 7, 7, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 9, 9, 9, 8, 9, 11, 4, 7, 6, 7, 7, 7, 7, 7, 7, 7, 7, 8, 7, 8, 8, 8, 8, 3, 7, 6, 6, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 8, 8, 9, 8, 8, 9, 8, 9, 9, 8, 8, 8, 8, 8, 9, 9, 9, 10, 9, 11, 11, 11, 11, 10, 9, 3, 6, 6, 6, 6, 6, 5, 6, 7, 7, 7, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 5, 7, 3]
+First AI average depth: 7,42
+Second AI depths: [6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 6, 7, 8, 8, 8, 7, 3, 7, 7, 6, 7, 7, 7, 6, 6, 7, 7, 7, 7, 9, 7, 8, 8, 8, 8, 8, 9, 9, 8, 9, 9, 9, 8, 5, 3, 7, 7, 7, 7, 7, 7, 8, 8, 8, 7, 8, 8, 8, 8, 8, 9, 9, 8, 9, 9, 8, 9, 9, 6, 5, 6, 6, 7, 6, 7, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 7, 7, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 7, 8, 8, 8, 8, 8, 8, 8, 7, 6, 6, 6, 7, 7, 7, 7, 7, 7, 6, 7, 7, 6, 6, 7, 6, 6, 7, 8, 8, 7, 6, 5]
+Second AI average depth: 7,11
+
+Settings: 
+
+Iterations: 12
+FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b
+
+First AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3000.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false | qSDepth = 6
+
+Second AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3000.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = true | qSDepth = 6
+
+System Information:
+
+OS: Mac OS X | aarch64
+Available processors (cores): 8
+System load average (cores): 9,59
+Total physical memory (GB): 16,00
+Free physical memory (GB): 0,06
