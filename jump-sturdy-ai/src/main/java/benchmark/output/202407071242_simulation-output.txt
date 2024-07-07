@@ -1,0 +1,77 @@
+START: 202407071242
+Winner of game 1 is: AI 1 (RED)
+Winner of game 2 is: AI 2 (RED)
+Winner of game 3 is: AI 1 (RED)
+Winner of game 4 is: AI 2 (RED)
+Winner of game 5 is: AI 2 (BLUE)
+Winner of game 6 is: AI 1 (BLUE)
+Winner of game 7 is: AI 2 (BLUE)
+Winner of game 8 is: AI 1 (BLUE)
+Winner of game 9 is: AI 2 (BLUE)
+Winner of game 10 is: AI 1 (BLUE)
+Winner of game 11 is: AI 1 (RED)
+Winner of game 12 is: AI 2 (RED)
+Winner of game 13 is: AI 1 (RED)
+Winner of game 14 is: AI 2 (RED)
+Winner of game 15 is: AI 1 (RED)
+Winner of game 16 is: AI 1 (BLUE)
+Winner of game 17 is: AI 2 (BLUE)
+Winner of game 18 is: AI 1 (BLUE)
+Winner of game 19 is: AI 1 (RED)
+Winner of game 20 is: AI 2 (RED)
+Winner of game 21 is: AI 1 (RED)
+Winner of game 22 is: AI 1 (BLUE)
+Winner of game 23 is: AI 1 (RED)
+Winner of game 24 is: AI 2 (RED)
+Winner of game 25 is: AI 2 (BLUE)
+Winner of game 26 is: AI 2 (RED)
+Winner of game 27 is: AI 2 (BLUE)
+Winner of game 28 is: AI 2 (RED)
+Winner of game 29 is: AI 2 (BLUE)
+Winner of game 30 is: AI 2 (RED)
+Winner of game 31 is: AI 1 (RED)
+Winner of game 32 is: AI 1 (BLUE)
+Winner of game 33 is: AI 2 (BLUE)
+Winner of game 34 is: AI 1 (BLUE)
+Winner of game 35 is: AI 1 (RED)
+Winner of game 36 is: AI 2 (RED)
+Winner of game 37 is: AI 2 (BLUE)
+Winner of game 38 is: AI 2 (RED)
+Winner of game 39 is: AI 1 (RED)
+Winner of game 40 is: AI 2 (RED)
+Winner of game 41 is: AI 1 (RED)
+Winner of game 42 is: AI 1 (BLUE)
+Winner of game 43 is: AI 2 (BLUE)
+Winner of game 44 is: AI 1 (BLUE)
+Winner of game 45 is: AI 1 (RED)
+Winner of game 46 is: AI 1 (BLUE)
+Winner of game 47 is: AI 1 (RED)
+Winner of game 48 is: AI 1 (BLUE)
+Winner of game 49 is: AI 1 (RED)
+Winner of game 50 is: AI 2 (RED)
+
+END: 202407071421
+
+First AI wins: 27
+Second AI wins: 23
+
+Settings: 
+
+Iterations: 50
+FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b
+
+First AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3000.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false | qSDepth = 6
+
+Second AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3000.0 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = true | qSDepth = 6
+
+System Information:
+
+OS: Mac OS X | aarch64
+Available processors (cores): 8
+System load average (cores): 4,14
+Total physical memory (GB): 16,00
+Free physical memory (GB): 0,05
