@@ -9,6 +9,7 @@ import search.mcts.MCTS;
 import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -135,13 +136,16 @@ public class Simulation {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
         String timestamp = dateFormat.format(new Date());
         System.out.println("START: " +  timestamp);
+        System.out.println();
 
         for (int i = 1; i <= iterations; i++) {
             GameResult result;
             boolean firstAIBegins = (i % 2 == 0);
 
             if (showGame) {
-                System.out.println();
+                if (i != 1) {
+                    System.out.println();
+                }
                 System.out.println("Game " + i + ":");
                 System.out.println();
             }
@@ -171,8 +175,11 @@ public class Simulation {
         timestamp = dateFormat.format(new Date());
         System.out.println();
         System.out.println("END: " +  timestamp);
-
         System.out.println();
+
+        System.out.println("Results: ");
+        System.out.println();
+
         System.out.println("First AI wins: " + firstAIWins);
         System.out.println("Second AI wins: " + secondAIWins);
         System.out.println();
@@ -241,19 +248,19 @@ public class Simulation {
             // configuration of first AI (CAN BE CHANGED)
             AI firstAI = new Minimax_AB();
             SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
-            firstConfig.timeLimit = 500;
+            firstConfig.timeLimit = 3000;
             firstConfig.useQuiescenceSearch = false;
 
             // configuration of second AI (CAN BE CHANGED)
             AI secondAI = new Minimax_AB();
             SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
-            secondConfig.timeLimit = 500;
+            secondConfig.timeLimit = 3000;
             secondConfig.useQuiescenceSearch = true;
-            secondConfig.qSDepth = 3;
+            secondConfig.qSDepth = 6;
 
             // configuration of simulation (CAN BE CHANGED)
             String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
-            int iterations = 2;
+            int iterations = 12;
             boolean showGame = false;
 
             // start simulation (DO NOT CHANGE)
