@@ -51,13 +51,13 @@ public class MCTS extends AI {
 
         Color color = (ourColor == Color.RED) ? Color.BLUE : Color.RED;
 
-        if (movesList.isEmpty()){
+        if (movesList.isEmpty()) {
             return "";
         }
 
         MCTSNode node = expandAndReturnRandomNode(parentNode, gameState, color, movesList);
 
-        // MCTSNode node =expandAndReturnRandomNode(parentNode, gameState, color);
+        // MCTSNode node = expandAndReturnRandomNode(parentNode, gameState, color);
         int reward = simulateToEnd(color, gameState, ourColor);
         propagateDataToRoot(node, reward, node.color);
         treePolicy(parentGameState, parentNode, ourColor);
@@ -71,8 +71,10 @@ public class MCTS extends AI {
         */
 
         // System.out.println(MoveGenerator.convertMoveToFEN(getBestMove(parentNode)));
+
         String s = MoveGenerator.convertMoveToFEN(getBestMove(parentNode));
         // System.out.println(s);
+
         return s;
     }
 
@@ -97,7 +99,12 @@ public class MCTS extends AI {
                 maxChild = child;
             }
         }
-        return maxChild.move;
+
+        if (maxChild == null) {
+            return node.move;
+        } else {
+            return maxChild.move;
+        }
     }
 
     /**
