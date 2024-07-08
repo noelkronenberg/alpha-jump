@@ -74,18 +74,17 @@ public class OpeningBookGenerator extends Thread {
      * @param isStartingMoveLib boolean which decides if the library starts with own first move or opponents first move
      */
     private void orchestrater(MoveGenerator moveGenerator, MCTS_lib mcts, FileWriter writer, Color player, int depth, boolean isStartingMoveLib) {
-        // Startet die Eröffnungsbibliothek entweder mit Startzug oder ohne
         if (depth == DEPTH) {
             return;
         }
 
         if (isStartingMoveLib) {
-            // finde und notiere den besten Zug in der aktuellen Position und resette das Board danach
+            // find and record the best move in the current position and reset the board afterward
             String fenStorage = moveGenerator.getFenFromBoard();
             int bestMove = mcts.runMCTS(moveGenerator, player);
             moveGenerator.initializeBoard(fenStorage);
 
-            //Fen und besten Zug in die Datei schreiben
+            // write FEN and best move to the file
             String schreibString = fenStorage + ", " + moveGenerator.convertMoveToFEN(bestMove);
 
             try {
@@ -94,32 +93,31 @@ public class OpeningBookGenerator extends Thread {
                 e.printStackTrace();
             }
 
-            // Zug ausführen und Ausgangsboard speichern
+            // execute the move and save the initial board
             moveGenerator.movePiece(bestMove);
         }
-        //Alle ersten Züge des Gegners herausfinden
+        // find all first moves of the opponent
         String fenStorage = moveGenerator.getFenFromBoard();
 
-        // Farbe des Gegners herausfinden
+        // find the color of the opponent
         Color oppPlayer = (player == Color.RED) ? Color.BLUE : Color.RED;
 
-        // mögliche Moves des Gegners herausfinden
+        // find possible moves of the opponent
         LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer);
         List<Integer> possMovesOppList = Evaluation.convertMovesToList(possMovesOpp);
 
-        int totalRange = possMovesOppList.size(); // Beispiel für den gesamten Bereich, der aufgeteilt wird
+        int totalRange = possMovesOppList.size(); // example for the entire range to be divided
 
-
-        // Erstelle und starte Threads für jedes Viertel der Liste
+        // create and start threads for each quarter of the list
         Thread thread1 = new Thread(() -> {
-            MoveGenerator threadMoveGenerator = moveGenerator.clone();  // Klone den MoveGenerator für jeden Thread
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();  // clone the MoveGenerator for each thread
             processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, 0,  totalRange);
         });
 
         thread1.start();
 
         try {
-            // Warte, bis alle Threads abgeschlossen sind
+            // wait until thread is completed
             thread1.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -141,18 +139,18 @@ public class OpeningBookGenerator extends Thread {
      */
     private void processMoves(MoveGenerator moveGenerator, MCTS_lib mcts, FileWriter writer, Color player, int depth, String fenStorage, List<Integer> possMovesOppList, int start, int end) {
         for (int moveCounter = start; moveCounter < end; moveCounter++) {
-            // den variablen Gegenzug des Gegners eintragen
+            // record the variable counter move of the opponent
             int oppMove = possMovesOppList.get(moveCounter);
 
-            // Zug des Gegners ausführen und Board speichern
+            // execute the opponent's move and save the board
             moveGenerator.movePiece(oppMove);
             String fenAfterOppMove = moveGenerator.getFenFromBoard();
 
-            // finde den besten Gegenzug auf den Zug des Gegners
+            // find the best counter-move to the opponent's move
             int bestResponseMove = mcts.runMCTS(moveGenerator, player);
             String bestResponseFEN = MoveGenerator.convertMoveToFEN(bestResponseMove);
 
-            //Position und besten Zug in Dokument eintragen
+            // record the position and best move in the document
             String schreibString = fenAfterOppMove + ", " + bestResponseFEN;
 
             try {
@@ -161,7 +159,7 @@ public class OpeningBookGenerator extends Thread {
                 e.printStackTrace();
             }
 
-            // Board zurücksetzen auf nach dem Gegnerzug und besten Zug ausführen
+            // reset the board to after the opponent's move and execute the best move
             moveGenerator.initializeBoard(fenAfterOppMove);
             moveGenerator.movePiece(bestResponseMove);
 
@@ -172,7 +170,7 @@ public class OpeningBookGenerator extends Thread {
                 e.printStackTrace();
             }
 
-            // Board zurücksetzen auf nach dem Spielerzug
+            // reset the board to after the player's move
             moveGenerator.initializeBoard(fenStorage);
         }
     }
@@ -194,40 +192,40 @@ public class OpeningBookGenerator extends Thread {
 
         String fenStorage = moveGenerator.getFenFromBoard();
 
-        // Farbe des Gegners herausfinden
+        // find the color of the opponent
         Color oppPlayer = (player == Color.RED) ? Color.BLUE : Color.RED;
 
-        // mögliche Moves des Gegners herausfinden
+        // find possible moves of the opponent
         LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer);
         List<Integer> possMovesOppList = Evaluation.convertMovesToList(possMovesOpp);
 
         for (int moveCounter = 0; moveCounter < possMovesOppList.size(); moveCounter++) {
-            // den variablen Gegenzug des Gegners eintragen
+            // record the variable counter move of the opponent
             int oppMove = possMovesOppList.get(moveCounter);
 
-            // Zug des Gegners ausführen und Board speichern
+            // execute the opponent's move and save the board
             moveGenerator.movePiece(oppMove);
             String fenAfterOppMove = moveGenerator.getFenFromBoard();
 
-            // finde den besten Gegenzug auf den Zug des Gegners
+            // find the best counter-move to the opponent's move
             int bestResponseMove = mcts.runMCTS(moveGenerator, player);
             String bestResponseFEN = MoveGenerator.convertMoveToFEN(bestResponseMove);
 
-            // Position und besten Zug in Dokument eintragen
+            // record the position and best move in the document
             String schreibString = fenAfterOppMove + ", " + bestResponseFEN;
             writer.write(schreibString + "\n");
 
-            // Board zurücksetzen auf nach dem Gegnerzug und besten Zug ausführen
+            // reset the board to after the opponent's move and execute the best move
             moveGenerator.initializeBoard(fenAfterOppMove);
             moveGenerator.movePiece(bestResponseMove);
 
-            // nächste Iteration starten
+            // start the next iteration
             generateOpeningBook(moveGenerator, mcts, writer, player, depth + 1);
 
-            // Board zurücksetzen auf nach dem Spielerzug
+            // reset the board to after the player's move
             moveGenerator.initializeBoard(fenStorage);
         }
-        // Ursprüngliches Board zurücksetzen
+        // reset the original board
         moveGenerator.initializeBoard(fenStorage);
     }
 }
