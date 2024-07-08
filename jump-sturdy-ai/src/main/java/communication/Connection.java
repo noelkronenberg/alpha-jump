@@ -30,10 +30,11 @@ public class Connection {
     double timeLeft = 120000; // default time for entire game (in ms)
     boolean firstIter = true; // helper
     HashMap<String, Integer> visitedPositions = new HashMap<>();
-    HashMap<String, String> startingBib = new HashMap<>();
+    HashMap<String, String> openingLib = new HashMap<>();
 
     // hyperparameter
     public boolean switchMCTS = true;
+    public boolean useOpeningLib = true;
 
     /**
      * Connects to the game server and manages game play.
@@ -177,10 +178,15 @@ public class Connection {
 
                             // AI
                             else {
-                                //check if a position is in the starting bib
-                                String moveStartingBib = this.startingBib.get(fenNoPlayer);
-                                if (moveStartingBib != null){
-                                    this.move = moveStartingBib;
+
+                                // START: opening library
+                                if (this.useOpeningLib) {
+                                    // check if a position is in the opening library
+                                    String moveOpeningLib = this.openingLib.get(fenNoPlayer);
+                                    if (moveOpeningLib != null){
+                                        this.move = moveOpeningLib;
+                                    }
+                                // END: opening library
                                 } else {
 
                                     // START: dynamic time management
@@ -266,7 +272,7 @@ public class Connection {
         int i  = 0;
         while ((line=in.readLine()) != null) {
             String[] tokens = line.split(", ");
-            this.startingBib.put(tokens[0], tokens[1]);
+            this.openingLib.put(tokens[0], tokens[1]);
             i  = i+1;
         }
     }
