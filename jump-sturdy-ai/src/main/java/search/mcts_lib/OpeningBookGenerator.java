@@ -10,7 +10,7 @@ import game.MoveGenerator;
 import search.ab.Evaluation;
 
 /**
- * creates a library-file for the first 3 moves with the best response-move for every possible move of the opponent using the MCTS-algorithm
+ * Creates a library-file for the first 3 moves with the best response-move for every possible move of the opponent using the MCTS-algorithm.
  */
 public class OpeningBookGenerator extends Thread {
     private final int DEPTH = 3;
@@ -23,7 +23,7 @@ public class OpeningBookGenerator extends Thread {
     }
 
     /**
-     * runs the openingBookGenerator
+     * Runs the openingBookGenerator.
      */
     public void runOPG() {
         MCTS_lib mcts = new MCTS_lib();
@@ -46,7 +46,7 @@ public class OpeningBookGenerator extends Thread {
     }
 
     /**
-     * generates first set of opponents moves and starts multiple threads to simulate differents parts of the moveslist
+     * Generates first set of opponents moves and starts multiple threads to simulate differents parts of the moveslist.
      * 
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param mcts given mcts-instance to use the mcts-methods
@@ -244,7 +244,7 @@ public class OpeningBookGenerator extends Thread {
     }
 
     /**
-     * runs first iteration of move-simulation and calls next function
+     * Runs first iteration of move-simulation and calls next function.
      *
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param mcts given mcts-instance to use the mcts-methods
@@ -295,7 +295,7 @@ public class OpeningBookGenerator extends Thread {
     }
 
     /**
-     * simulates until set depth and adds best moves into the list which is written into document later
+     * Simulates until set depth and adds best moves into the list which is written into document later.
      *
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param mcts given mcts-instance to use the mcts-methods
