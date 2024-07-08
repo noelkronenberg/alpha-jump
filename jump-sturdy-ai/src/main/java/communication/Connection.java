@@ -210,21 +210,18 @@ public class Connection {
                                 gameInstance.printBoard(true);
                                 System.out.println("Enter your move: ");
                                 this.move = this.scanner.nextLine();
-                            }
 
                             // AI
-                            else {
-
+                            } else {
                                 // START: opening library
-                                if (this.useOpeningLib) {
+                                String moveOpeningLib = this.openingLib.get(fenNoPlayer);
+                                if (this.useOpeningLib&&moveOpeningLib != null){
                                     // check if a position is in the opening library
-                                    String moveOpeningLib = this.openingLib.get(fenNoPlayer);
-                                    if (moveOpeningLib != null){
-                                        this.move = moveOpeningLib;
-                                    }
+                                    this.move = moveOpeningLib;
+                                    this.moveCounter++;
+
                                 // END: opening library
                                 } else {
-
                                     // START: dynamic time management
 
                                     // CASE: start- and endgame
@@ -307,13 +304,13 @@ public class Connection {
      * @throws InterruptedException if the main thread is interrupted.
      */
     public static void main(String[] args) throws InterruptedException {
-        boolean twoPlayer = false;
+        boolean twoPlayer = true;
 
         if (!twoPlayer) {
             Connection player1 = new Connection(false, true, 100, false);
             player1.connect(); // only for single player
         } else {
-            Connection player1 = new Connection(true, true, 100, false);
+            Connection player1 = new Connection(false, true, 100, false);
             player1.connect();
 
             Connection player2 = new Connection(false, true, 100, false);
