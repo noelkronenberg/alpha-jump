@@ -273,17 +273,6 @@ public class Connection {
                             System.out.println("Time left for moves: " + this.timeLeft);
                             System.out.println("Move: " + this.moveCounter);
 
-                            /*
-                            MoveGenerator moveGenerator = new MoveGenerator();
-                            moveGenerator.initializeBoard(fen);
-                            if (moveGenerator.isGameOver(fen)) {
-                                Thread.sleep(3000);
-                                System.exit(0);
-                               break;
-                            }
-                            moveGenerator.printBoard(true);
-                            */
-
                             System.out.println("Player " + this.player + " | Move: " + this.move);
                             System.out.println("");
                         }
@@ -305,11 +294,9 @@ public class Connection {
     public void readFileAndFillBib(String fileLocation) throws IOException {
         final BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileLocation), StandardCharsets.UTF_8));
         String line;
-        int i  = 0;
         while ((line=in.readLine()) != null) {
             String[] tokens = line.split(", ");
             this.openingLib.put(tokens[0], tokens[1]);
-            i  = i+1;
         }
     }
 
