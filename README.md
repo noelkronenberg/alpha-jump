@@ -29,8 +29,9 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
 
 1. start server: ```python game-server/server.py```
 2. if not up to date, generate new ```.exe```
-    1. generate ```.jar```: ```mvn clean package```
-    2. generate ```.exe``` using [Launch4j](https://genuinecoder.com/online-converter/jar-to-exe/)
+    1.temporarily remove ```test``` folder
+    2. generate ```.jar```: ```mvn clean package```
+    3. generate ```.exe``` using [Launch4j](https://genuinecoder.com/online-converter/jar-to-exe/)
 3. start AI: ```jump-sturdy-ai/GruppeC_KI.exe```
 4. start other AI (can be another instance of ```jump-sturdy-ai/GruppeC_KI.exe```)
 5. wait for game to end
