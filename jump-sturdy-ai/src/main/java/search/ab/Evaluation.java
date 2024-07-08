@@ -205,8 +205,6 @@ public class Evaluation {
     public static double ratePositionAI(MoveGenerator moveGenerator, Color color, int depth, LinkedHashMap<Integer,List<Integer>> moves, Color currentColor) {
         double score = 0;
 
-        // TODO: difference between ourColor / currentColor
-
         if (color == Color.BLUE && currentColor != color) {
             score = getScoreWrapperAI(moveGenerator, Color.BLUE, depth, moves) - getScoreWrapperAI(moveGenerator, Color.RED, depth, moveGenerator.generateMaxOnePossibleMoveForAI(Color.BLUE));
         } else if (color == Color.BLUE && currentColor == color) {

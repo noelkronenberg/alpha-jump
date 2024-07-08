@@ -185,7 +185,7 @@ public class EvaluationTest {
         testMoveRatingComparison(fen, startPosition1, endPosition1, startPosition2, endPosition2);
     }
 
-    // Compare the rating of different moves
+    // compare the rating of different moves
     @Test
     @DisplayName("Move Rating Comparison 2")
     public void testMoveRatingComparison2() {
@@ -205,7 +205,7 @@ public class EvaluationTest {
         testPositionRating("6/8/4r03/8/8/8/8/b05 b", Color.BLUE, true);
     }
 
-    // Compare two positions where one should be rated higher - end position vs. possible end
+    // compare two positions where one should be rated higher - end position vs. possible end
     @Test
     @DisplayName("Position Comparison")
     public void testPositionComparison() {

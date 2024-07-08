@@ -21,7 +21,7 @@ public class Minimax_AB extends AI {
     double aspirationWindowSize = 0;
     boolean transpositionTables = false;
     boolean useQuiescenceSearch = false;
-    int qSDepth = bestConfig.qSDepth; // TODO: find good value for maxDepth (i.e. when to activate QS)
+    int qSDepth = bestConfig.qSDepth;
     int maxAllowedDepth = 0;
     boolean dynamicTime = false;
 

@@ -102,7 +102,7 @@ public class MCTS_libTest {
     public void testGruppeH() {
         testPosition("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b", "A6-A7", "D3-B4");
         testPosition("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r", "F5-G3");
-        //testPosition("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b", "D5-C7"); // Sicherheitszug wird vorerst bevorzugt, anschließend findet er jedoch den richtigen Gewinnzug
+        // testPosition("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b", "D5-C7");
         testPosition("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 r", "D3-E2");
     }
 
@@ -131,20 +131,20 @@ public class MCTS_libTest {
     @DisplayName("Gruppe C")
     public void testGruppeC() {
         testPosition("6/4b01b01/8/5b01b0/2b04r0/1b04r01/5r01rr/1r04 b", "C5-C6", "C5-B5", "B6-C6");
-        testPosition("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b", "B4-C5", "E1-D3", "D2-D3"); // NOTE: unconfirmed
+        testPosition("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b", "B4-C5", "E1-D3", "D2-D3");
     }
 
     @Test
     @DisplayName("Gruppe S")
     public void testGruppeS() {
         testPosition("2b03/1b0b05/6b01/3bb2r01/3r02r01/2b05/2r03r01/3r02 b", "D4-C6");
-        testPosition("2b03/1b0b05/6b01/3b02r01/1b01r02r01/2b05/2r03r01/3r02 b", "B5-C5","B5-B6");      //NOTE: Added Move (For Forum)
+        testPosition("2b03/1b0b05/6b01/3b02r01/1b01r02r01/2b05/2r03r01/3r02 b", "B5-C5","B5-B6");
     }
 
     @Test
     @DisplayName("Gruppe Z")
     public void testGruppeZ() {
-        testPosition("6/8/6r01/2b01r0r02/1r03r02/8/8/6 r", "B5-C4"); //G3-G2
+        testPosition("6/8/6r01/2b01r0r02/1r03r02/8/8/6 r", "B5-C4");
         testPosition("1b02b0b0/1r06/1b04b01/8/2r02b02/1r01r01r02/5r0r01/r0r01r011 b", "C1-B2");
         testPosition("3b0b01/8/1b0b01b0b02/2r01b01b01/8/2rr2r02/1r06/2r03 r", "C4-B3");
     }
@@ -152,64 +152,64 @@ public class MCTS_libTest {
     @Test
     @DisplayName("Gruppe J")
     public void testGruppeJ() {
-        testPosition("6/1bb1b0bbb0b01/r02b04/2b01b0b02/2r02r02/1r02rrr02/6rr1/2r01r01 r", "A3-B2"); //G3-G2
-        //testPosition("3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r", "B3-A3"); //Hier findet der Algorithmus einen Zug, der einen Zug länger für den Gewinn braucht als der expected move
+        testPosition("6/1bb1b0bbb0b01/r02b04/2b01b0b02/2r02r02/1r02rrr02/6rr1/2r01r01 r", "A3-B2");
+        //testPosition("3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r", "B3-A3");
     }
 
     @Test
     @DisplayName("Gruppe I")
     public void testGruppeI() {
-        testPosition("3b02/5b02/8/1b06/4bb3/6r01/1r06/1r0r03 b", "E5-F7"); //G3-G2
+        testPosition("3b02/5b02/8/1b06/4bb3/6r01/1r06/1r0r03 b", "E5-F7");
         testPosition("6/1b06/5b02/2b05/2b05/4r03/2r05/6 b", "C4-C5");
     }
 
     @Test
     @DisplayName("Gruppe W")
     public void testGruppeW() {
-        testPosition("6/8/2b01b03/6b0r0/4b03/8/r07/6 b", "E5-E6"); //G3-G2
+        testPosition("6/8/2b01b03/6b0r0/4b03/8/r07/6 b", "E5-E6");
         testPosition("6/8/8/8/8/1r0b0r0b0r02/4r03/3rr2 r", "E8-C7");
     }
 
     @Test
     @DisplayName("Gruppe R")
     public void testGruppeR() {
-        testPosition("2b03/r07/3r04/6rr1/4bb3/2b04bb/3rr1rr2/5r0 b", "H6-G8"); //G3-G2
+        testPosition("2b03/r07/3r04/6rr1/4bb3/2b04bb/3rr1rr2/5r0 b", "H6-G8");
         testPosition("6/3b01b02/4bb3/1bb6/3rr1r02/8/4r03/6 r", "D5-B4");
     }
 
     @Test
     @DisplayName("Gruppe AC")
     public void testGruppeAC() {
-        testPosition("3b01b0/3b04/3bb4/2r05/rbbr5rb/4rr3/br4r02/6 b", "A5-B7","H5-G7"); //G3-G2
+        testPosition("3b01b0/3b04/3bb4/2r05/rbbr5rb/4rr3/br4r02/6 b", "A5-B7","H5-G7");
         testPosition("1b01b01b0/bb6bb/3bb4/2rr5/r0r01r03r0/1br3rr2/8/6 r", "C4-B2", "C4-D2");
     }
 
     @Test
     @DisplayName("Gruppe K")
     public void testGruppeK() {
-         testPosition("1bbb01b0b0/4b03/4r01b01/2b01r0b02/5r02/1r06/3r02r01/1rrr01r01 r", "E4-E3"); //G3-G2
+         testPosition("1bbb01b0b0/4b03/4r01b01/2b01r0b02/5r02/1r06/3r02r01/1rrr01r01 r", "E4-E3");
          testPosition("b0b02b01/3b01b0b01/2r01r02b0/4r0b02/r07/3b04/5r02/rr3rr1 r", "E3-D2","C3-D2");
     }
 
     @Test
     @DisplayName("Gruppe AF")
     public void testGruppeAF() {
-        testPosition("1b0b0b0b0b0/1b06/8/2bb5/8/3rr4/1r03r0r01/r0r0r0r0r0r0 b", "C4-D6"); //G3-G2
+        testPosition("1b0b0b0b0b0/1b06/8/2bb5/8/3rr4/1r03r0r01/r0r0r0r0r0r0 b", "C4-D6");
         testPosition("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
     }
 
     @Test
     @DisplayName("Gruppe G")
     public void testGruppeG() {
-        testPosition("b02b01b0/4r03/1b02r03/1bb6/8/4r0b02/1r03r02/r01r02r0 r", "E3-E2"); //G3-G2
+        testPosition("b02b01b0/4r03/1b02r03/1bb6/8/4r0b02/1r03r02/r01r02r0 r", "E3-E2");
         testPosition("1b01b01b0/1b06/3b04/8/4b0r02/2b03r01/3r0r03/r03r01 b", "C6-D7"); 
     }
 
     @Test
     @DisplayName("Gruppe P")
     public void testGruppeP() {
-        // testPosition("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "D3-F4", "E4-D5"); // NOTE: to be confirmed
-        testPosition("b04b0/8/7r0/1b03b02/1rr5r0/4r0b02/b07/4r01 b", "A7-B7"); // fixed from F6-F7
+        // testPosition("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "D3-F4", "E4-D5");
+        testPosition("b04b0/8/7r0/1b03b02/1rr5r0/4r0b02/b07/4r01 b", "A7-B7");
     }
 
     @Test
@@ -257,7 +257,7 @@ public class MCTS_libTest {
     @DisplayName("Gruppe AI")
     public void testGruppeAI() {
         testPosition("6/6b01/8/2b02rr2/8/8/6r01/6 r", "F4-G2", "F4-E2");
-        testPosition("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "F4-F5"); // added missings
+        testPosition("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "F4-F5");
     }
 
     @Test
