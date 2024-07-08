@@ -198,6 +198,5 @@ public class Minimax_noAB extends AI {
             return value;
         }
     }
-
     // END: search without Alpha-Beta
 }
