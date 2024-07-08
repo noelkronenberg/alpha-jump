@@ -124,7 +124,7 @@ public class EvaluationTest {
         moveGenerator.initializeBoard(fen);
         char colorFen = fen.charAt(fen.length() - 1);
         Color color = getColorFromFen(colorFen);
-        String boardFen = fen.substring(0,fen.length()-2);
+        String boardFen = fen.substring(0, fen.length()-2);
 
         double rating1 = evaluator.rateMove(moveGenerator, color, startPosition1, endPosition1,1);
         double rating2 = evaluator.rateMove(moveGenerator, color, startPosition2, endPosition2,1);

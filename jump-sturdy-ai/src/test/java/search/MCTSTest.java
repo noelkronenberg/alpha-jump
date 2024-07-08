@@ -99,7 +99,6 @@ public class MCTSTest {
     @DisplayName("Gruppe C")
     public void testGruppeC() {
         testMoves("6/4b01b01/8/5b01b0/2b04r0/1b04r01/5r01rr/1r04 b", "C5-C6", "C5-B5", "B6-C6");
-        // testMoves("3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b", "B4-C5", "E1-D3", "D2-D3");
     }
 
     @Test
@@ -176,7 +175,6 @@ public class MCTSTest {
     @Test
     @DisplayName("Gruppe P")
     public void testGruppeP() {
-        // testMoves("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "D3-F4", "E4-D5"); /
         testMoves("b04b0/8/7r0/1b03b02/1rr5r0/4r0b02/b07/4r01 b", "A7-B7");
     }
 
@@ -226,7 +224,6 @@ public class MCTSTest {
     @DisplayName("Gruppe AI")
     public void testGruppeAI() {
         testMoves("6/6b01/8/2b02rr2/8/8/6r01/6 r", "F4-G2","F4-E2");
-        // testMoves("2b03/8/8/1b03b02/3rr4/8/8/6 b", "B4-B5", "F4-F5");
     }
 
     @Test

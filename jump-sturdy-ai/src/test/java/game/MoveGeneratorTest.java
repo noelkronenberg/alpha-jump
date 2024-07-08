@@ -59,15 +59,6 @@ public class MoveGeneratorTest {
     }
 
     @Test
-    @DisplayName("Gruppe X")
-    public void testGruppeX() {
-        //testMoves("b0b0b0b0b0b0/2b01b0b02/1b01b04/4r03/2b01r03/6r01/1r0r0r01r02/r0r0r0r01r0 b",
-        //"B6-B5,E5-D6,E7-D6,D2-D3,B8-C8,D3-C4,B5-C4,B2-B3,C8-D6,D1-C1,E8-D8,E4-E5,D6-E4,B3-C4,D6-E5,C4-C5,C7-B7,C1-D3,D8-B7,C5-C6,B7-C5,G3-G4,B7-C6,D3-E4,C6-C5,C1-C2,C5-E4,C2-E3,C5-D5,C2-D2,D5-E5,G4-F4,E5-F3,F4-E5,D8-D7,B1-C1,F8-F7,E5-F5,F7-E5");
-        //testMoves("1b03b0/3b01b02/8/4b0r02/4b03/4r0b02/3r01r02/1r01r01r0 r",
-                //"C1-D1,E5-E4,D1-D2,E4-D2,E1-D2,F7-F6,D2-E4,F6-E6,F5-F6,D7-D6,E3-E4,D6-E6,E4-F6,E6-F4,F6-G8");
-    }
-
-    @Test
     @DisplayName("Gruppe E")
     public void testGruppeE() {
         testMoves("1b0b0b0b01/1b0b0b0b0b0b01/8/4r0b02/2b05/3r04/1r0rr1r0r0r01/r01r0r01r0 b",
@@ -259,8 +250,6 @@ public class MoveGeneratorTest {
     @Test
     @DisplayName("Gruppe AA")
     public void testGruppeAA() {
-       // testMoves("1r0r0r0r01/8/1r01rb2rr1/5bb2/2b05/8/4bb3/1b02b01 b",
-                //"F5-G7,F5-E7,F5-H6,F5-H4,F5-D4,F5-E3,F5-G3,C4-C5,C4-C3,C4-B4,C4-D4,E2-F4,E2-D4,E2-C3,E2-C1,E2-G3,E2-G1,C1-C2,C1-B1,C1-D1,F1-F2,F1-G1,F1-E1");
         testMoves("b0b0b01b0b0/4b01b01/2bb2b02/8/1r01br4/4r01r01/2r02rr2/r01r01r0r0 r",
                 "B8-C8,B8-B7,D8-C8,D8-E8,D8-D7,F8-E8,F8-G8,G8-F8,G8-G7,C7-B7,C7-D7,C7-C6,F7-D6,F7-E5,F7-G5,F7-H6,E6-D6,E6-E5,E6-F6,G6-F6,G6-G5,G6-H6,B5-A5,B5-B4,B5-C5,D5-B4,D5-C3,D5-E3,D5-F4");
     }
@@ -272,15 +261,6 @@ public class MoveGeneratorTest {
                 "B6-A6,B6-C6,D4-D5,D4-C5,D4-C4,E3-D3,E3-F3,E6-D6,E6-F6,E6-E7,G5-H5");
         testMoves("b0b0b0b0b0b0/8/8/4b03/1r01b01r02/8/3r02r01/6 r",
                 "B5-B4,B5-A5,B5-C5,D7-C7,D7-E7,D7-D6,F5-E4,F5-E5,F5-G5,F5-F4,G7-G6,G7-H7,G7-F7");
-    }
-
-    @Test
-    @DisplayName("Gruppe W")
-    public void testGruppeW() {
-        //testMoves("r03r01/8/2r05/3b04/8/8/5b02/1b04 b",
-              //"B1-B2,B1-C1,F1-E1,F1-F2,F1-G1,C3-B3,C3-C4,C3-D3,C3-D4,D4-C4,D4-D3,D4-E4,D4-C3,F7-E7,F7-F6,F7-G7,C8-B8,C8-C7,C8-D8");
-       // testMoves("r05/8/8/3rr4/5b02/8/1b06/6 b",
-         //   "B1-B2,B1-C1,D4-F5,D4-E6,D4-C6,D4-B5,F5-E5,F5-F4,F5-G5,B7-A7,B7-B6,B7-C7");
     }
 
     @Test
@@ -336,5 +316,4 @@ public class MoveGeneratorTest {
 
         assertArrayEquals(expectedMovesArray, actualMovesArray);
     }
-
 }
