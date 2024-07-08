@@ -5,6 +5,9 @@ import game.MoveGenerator;
 import search.SearchConfig;
 import search.ab.Minimax_AB;
 
+/**
+ * Orchestrates and manages the gameplay between a human player and an AI player.
+ */
 public class Orchestrator {
 
     static Player player = new Player();
@@ -12,6 +15,11 @@ public class Orchestrator {
     static SearchConfig config = Minimax_AB.bestConfig;
     static MoveGenerator gameState = new MoveGenerator();
 
+    /**
+     * Plays a game between a human player and an AI.
+     *
+     * @param fen The initial board state in FEN notation.
+     */
     public static void playGame(String fen) {
 
         // adjust time for AI
@@ -84,6 +92,11 @@ public class Orchestrator {
 
     }
 
+    /**
+     * Main method to start the game with a specific initial board state.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         Orchestrator.playGame("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b");
     }

@@ -5,11 +5,22 @@ import game.MoveGenerator;
 
 import java.util.Scanner;
 
+/**
+ * Represents a player in a game.
+ * Allows the player to input moves and validates them based on the current game state.
+ */
 public class Player {
 
     Scanner scanner = new Scanner(System.in);
     MoveGenerator moveGenerator = new MoveGenerator();
 
+    /**
+     * Gets a valid move from the player.
+     *
+     * @param fen The current board state in FEN notation.
+     * @param color The color of the player making the move.
+     * @return A valid move input by the player in FEN notation.
+     */
     public String getMove(String fen, Color color) {
 
         // set up board
