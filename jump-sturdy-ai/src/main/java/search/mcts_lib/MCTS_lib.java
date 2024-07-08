@@ -17,7 +17,7 @@ public class MCTS_lib {
     // hyperparameters
     private final Random random = new Random();
     private final double EXPLORATION_PARAM = 1.3;
-    public double timeLimit = 50000;
+    public double timeLimit = 10000;
 
     /**
      *

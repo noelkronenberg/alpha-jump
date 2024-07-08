@@ -2,7 +2,8 @@ package search.mcts_lib;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import game.Color;
 import game.MoveGenerator;
@@ -16,9 +17,6 @@ public class OpeningBookGenerator extends Thread {
     private Color startingPlayer = Color.RED;
     public String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r";
 
-    public static HashMap<String,String> openingBook = new HashMap<>();
-    public static LinkedHashSet<String> duplicateBook = new LinkedHashSet<>();
-
     public static void main(String[] args) {
         OpeningBookGenerator openingBookGenerator = new OpeningBookGenerator();
         openingBookGenerator.runOPG();
@@ -29,59 +27,52 @@ public class OpeningBookGenerator extends Thread {
      */
     public void runOPG() {
         MCTS_lib mcts = new MCTS_lib();
-        mcts.timeLimit=10000;
         MoveGenerator initialState = new MoveGenerator();
         initialState.initializeBoard(board);
         initialState.printBoard(false);
-        
+        String basePath = new File("").getAbsolutePath();
+        String path = basePath+"\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
         // Im Folgenden den Block auskommentieren, welcher nicht erstellt werden soll
         /*try (FileWriter writer = new FileWriter("jump-sturdy-ai/src/main/java/search/mcts_lib/opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
-            orchestrater(initialState, mcts , startingPlayer, 0, true);
+            orchestrater(initialState, mcts, writer, startingPlayer, 0, true);
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-        String basePath = new File("").getAbsolutePath();
-        String path = basePath+"\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
-        try  { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
-            orchestrater(initialState, mcts , startingPlayer, 0, true,path); //TODO: Change to jump-sturdy-ai/src/main/java/search/mcts_lib/opening_book_secondMove.txt
+        try (FileWriter writer = new FileWriter(path)) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
+            orchestrater(initialState, mcts, writer, startingPlayer, 0, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * 
+     *
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param mcts given mcts-instance to use the mcts-methods
+     * @param writer given writer to write in the right document
      * @param player color of player to move
      * @param depth starting depth (which should be 0)
      * @param isStartingMoveLib boolean which decides if the library starts with own first move or opponents first move
      */
-    private void orchestrater(MoveGenerator moveGenerator, MCTS_lib mcts, Color player, int depth, boolean isStartingMoveLib, String path) throws IOException {
+    private void orchestrater(MoveGenerator moveGenerator, MCTS_lib mcts, FileWriter writer, Color player, int depth, boolean isStartingMoveLib) {
         // Startet die Eröffnungsbibliothek entweder mit Startzug oder ohne
         if (depth == DEPTH) {
             return;
         }
-        
+
         if (isStartingMoveLib) {
             // finde und notiere den besten Zug in der aktuellen Position und resette das Board danach
             String fenStorage = moveGenerator.getFenFromBoard();
             int bestMove = mcts.runMCTS(moveGenerator, player);
             moveGenerator.initializeBoard(fenStorage);
 
-            String bestMoveString = moveGenerator.convertMoveToFEN(bestMove);
+            //Fen und besten Zug in die Datei schreiben
+            String schreibString = fenStorage + ", " + moveGenerator.convertMoveToFEN(bestMove);
 
-            synchronized (openingBook) {
-                if (!openingBook.containsKey(fenStorage)){
-                    openingBook.put(fenStorage, bestMoveString);
-                }
-                else {
-                    synchronized (duplicateBook) {
-                        if (!duplicateBook.contains(fenStorage)) {
-                            duplicateBook.add(fenStorage);
-                        }
-                    }
-                }
+            try {
+                writer.write(schreibString + "\n");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             // Zug ausführen und Ausgangsboard speichern
@@ -96,91 +87,163 @@ public class OpeningBookGenerator extends Thread {
         // mögliche Moves des Gegners herausfinden
         LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer);
         List<Integer> possMovesOppList = Evaluation.convertMovesToList(possMovesOpp);
+        int size = possMovesOppList.size();
+        int tenth = size / 10;
 
         // Erstelle und starte Threads für jedes Viertel der Liste
-        int numberOfThreads = 20; // Hier kannst du die Anzahl der Threads festlegen
-        int totalRange = possMovesOppList.size(); // Beispiel für den gesamten Bereich, der aufgeteilt wird
-        int quantiles = totalRange / numberOfThreads; // Berechne den Bereich, den jeder Thread verarbeiten soll
+        Thread thread1 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();  // Klone den MoveGenerator für jeden Thread
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, 0, tenth);
+        });
 
-        List<Thread> threads = new ArrayList<>();
+        Thread thread2 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth, tenth * 2);
+        });
 
-        for (int i = 0; i < numberOfThreads; i++) {
-            final int start = i * quantiles;
-            final int end = (i + 1) * quantiles;
-            String threadName = "Thread-" + (i + 1);
+        Thread thread3 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 2, tenth * 3);
+        });
 
-            Thread thread = new Thread(() -> {
-                MoveGenerator threadMoveGenerator = moveGenerator.clone();  // Klone den MoveGenerator für jeden Thread
-                processMoves(threadMoveGenerator, mcts, player, depth, fenStorage, possMovesOppList, start, end);
-            }, threadName);
+        Thread thread4 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 3, tenth * 4);
+        });
 
-            threads.add(thread);
-            thread.start();
-        }
+        Thread thread5 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 4, tenth * 5);
+        });
+
+        Thread thread6 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 5, tenth * 6);
+        });
+
+        Thread thread7 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 6, tenth * 7);
+        });
+
+        Thread thread8 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 7, tenth * 8);
+        });
+
+        Thread thread9 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 8, tenth * 9);
+        });
+
+        Thread thread10 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 9, size);
+        });
+
+        // Erstelle und starte Threads für jedes Viertel der Liste
+        Thread thread11 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();  // Klone den MoveGenerator für jeden Thread
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, 0, tenth);
+        });
+
+        Thread thread12 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth, tenth * 2);
+        });
+
+        Thread thread13 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 2, tenth * 3);
+        });
+
+        Thread thread14 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 3, tenth * 4);
+        });
+
+        Thread thread15 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 4, tenth * 5);
+        });
+
+        Thread thread16 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 5, tenth * 6);
+        });
+
+        Thread thread17 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 6, tenth * 7);
+        });
+
+        Thread thread18 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 7, tenth * 8);
+        });
+
+        Thread thread19 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 8, tenth * 9);
+        });
+
+        Thread thread20 = new Thread(() -> {
+            MoveGenerator threadMoveGenerator = moveGenerator.clone();
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, tenth * 9, size);
+        });
+        thread1.start();
+        thread2.start();
+        thread3.start();
+        thread4.start();
+        thread5.start();
+        thread6.start();
+        thread7.start();
+        thread8.start();
+        thread9.start();
+        thread10.start();
+        thread11.start();
+        thread12.start();
+        thread13.start();
+        thread14.start();
+        thread15.start();
+        thread16.start();
+        thread17.start();
+        thread18.start();
+        thread19.start();
+        thread20.start();
+
         try {
             // Warte, bis alle Threads abgeschlossen sind
-            for (int j = 0; j < threads.size(); j++) {
-                threads.get(j).join();
-            }
+            thread1.join();
+            thread2.join();
+            thread3.join();
+            thread4.join();
+            thread5.join();
+            thread6.join();
+            thread7.join();
+            thread8.join();
+            thread9.join();
+            thread10.join();
+            thread11.join();
+            thread12.join();
+            thread13.join();
+            thread14.join();
+            thread15.join();
+            thread16.join();
+            thread17.join();
+            thread18.join();
+            thread19.join();
+            thread20.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        writeToFile(player,path);
     }
 
     /**
-     *  Writes the Fen-Position and best move into a given file path.
      *
-     * @param player The color of player to move.
-     * @param pathToFile The String path where the Library File is going to be.
-     * @throws IOException
-     */
-    public void writeToFile(Color player, String pathToFile) throws IOException {
-        FileWriter writer = new FileWriter(pathToFile);
-
-        calculateDuplicatePositionsAndWriteToFile(writer,player);
-
-        for (Map.Entry<String, String> entry:openingBook.entrySet()) {
-            //Fen und besten Zug in die Datei schreiben
-            String schreibString = entry.getKey() + ", " + entry.getValue();
-
-            try {
-                writer.write(schreibString + "\n");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Recalculates all positions that would be a duplicate int the starting library with a bit more time.
-     *
-     * @param writer Given writer to write in the document.
-     * @param player Color of player to move.
-     */
-    public void calculateDuplicatePositionsAndWriteToFile(FileWriter writer, Color player){
-        MCTS_lib mcts = new MCTS_lib();
-        MoveGenerator moveGenerator=new MoveGenerator();
-        for (String fenPos:duplicateBook){
-            //TODO: simulate only these positions
-            moveGenerator.initializeBoard(fenPos);
-            int bestResponseMove = mcts.runMCTS(moveGenerator, player);
-            mcts.timeLimit=11000;           //TODO Maybe change value here, but have it a bit more than the rest of the board
-            String bestMoveString = moveGenerator.convertMoveToFEN(bestResponseMove);
-            String schreibString = fenPos + ", " + bestMoveString;
-            try {
-                writer.write(schreibString + "\n");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    /**
-     * 
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param mcts given mcts-instance to use the mcts-methods
+     * @param writer given writer to write in the right document
      * @param player color of player to move
      * @param depth current depth of moves
      * @param fenStorage string which defines the current position of the game
@@ -188,11 +251,11 @@ public class OpeningBookGenerator extends Thread {
      * @param start int to define first move in opponents Movelist to be examined by current thread
      * @param end int to define last move in opponents Movelist to be examined by current thread
      */
-    private void processMoves(MoveGenerator moveGenerator, MCTS_lib mcts, Color player, int depth, String fenStorage, List<Integer> possMovesOppList, int start, int end) {
+    private void processMoves(MoveGenerator moveGenerator, MCTS_lib mcts, FileWriter writer, Color player, int depth, String fenStorage, List<Integer> possMovesOppList, int start, int end) {
         for (int moveCounter = start; moveCounter < end; moveCounter++) {
             // den variablen Gegenzug des Gegners eintragen
             int oppMove = possMovesOppList.get(moveCounter);
-    
+
             // Zug des Gegners ausführen und Board speichern
             moveGenerator.movePiece(oppMove);
             String fenAfterOppMove = moveGenerator.getFenFromBoard();
@@ -201,44 +264,41 @@ public class OpeningBookGenerator extends Thread {
             int bestResponseMove = mcts.runMCTS(moveGenerator, player);
             String bestResponseFEN = MoveGenerator.convertMoveToFEN(bestResponseMove);
 
-            synchronized (openingBook) {
-                if (!openingBook.containsKey(fenStorage)){
-                    openingBook.put(fenStorage, bestResponseFEN);
-                }
-                else {
-                    synchronized (duplicateBook) {
-                        if (!duplicateBook.contains(fenStorage)) {
-                            duplicateBook.add(fenStorage);
-                        }
-                    }
-                }
-            }
-    
-            // Board zurücksetzen auf nach dem Gegnerzug und besten Zug ausführen
-            moveGenerator.initializeBoard(fenAfterOppMove);
-            moveGenerator.movePiece(bestResponseMove);
-    
-            // nächste Iteration starten
+            //Position und besten Zug in Dokument eintragen
+            String schreibString = fenAfterOppMove + ", " + bestResponseFEN;
+
             try {
-                generateOpeningBook(moveGenerator, mcts, player, depth + 1);
+                writer.write(schreibString + "\n");
             } catch(IOException e) {
                 e.printStackTrace();
             }
-    
+
+            // Board zurücksetzen auf nach dem Gegnerzug und besten Zug ausführen
+            moveGenerator.initializeBoard(fenAfterOppMove);
+            moveGenerator.movePiece(bestResponseMove);
+
+            // nächste Iteration starten
+            try {
+                generateOpeningBook(moveGenerator, mcts, writer, player, depth + 1);
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+
             // Board zurücksetzen auf nach dem Spielerzug
             moveGenerator.initializeBoard(fenStorage);
         }
     }
 
     /**
-     * 
+     *
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param mcts given mcts-instance to use the mcts-methods
+     * @param writer given writer to write in the right document
      * @param player color of player to move
      * @param depth current depth of moves
      * @throws IOException when there problems occur while trying to write into the writer-file
      */
-    private void generateOpeningBook(MoveGenerator moveGenerator, MCTS_lib mcts, Color player, int depth) throws IOException {
+    private void generateOpeningBook(MoveGenerator moveGenerator, MCTS_lib mcts, FileWriter writer, Color player, int depth) throws IOException {
         if (depth == DEPTH) {
             return;
         }
@@ -251,40 +311,30 @@ public class OpeningBookGenerator extends Thread {
         // mögliche Moves des Gegners herausfinden
         LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer);
         List<Integer> possMovesOppList = Evaluation.convertMovesToList(possMovesOpp);
-    
+
         for (int moveCounter = 0; moveCounter < possMovesOppList.size(); moveCounter++) {
             // den variablen Gegenzug des Gegners eintragen
             int oppMove = possMovesOppList.get(moveCounter);
-    
+
             // Zug des Gegners ausführen und Board speichern
             moveGenerator.movePiece(oppMove);
             String fenAfterOppMove = moveGenerator.getFenFromBoard();
-    
+
             // finde den besten Gegenzug auf den Zug des Gegners
             int bestResponseMove = mcts.runMCTS(moveGenerator, player);
             String bestResponseFEN = MoveGenerator.convertMoveToFEN(bestResponseMove);
-            
+
             //Position und besten Zug in Dokument eintragen
-            synchronized (openingBook) {
-                if (!openingBook.containsKey(fenStorage)){
-                    openingBook.put(fenStorage, bestResponseFEN);
-                }
-                else {
-                    synchronized (duplicateBook) {
-                        if (!duplicateBook.contains(fenStorage)) {
-                            duplicateBook.add(fenStorage);
-                        }
-                    }
-                }
-            }
-    
+            String schreibString = fenAfterOppMove + ", " + bestResponseFEN;
+            writer.write(schreibString + "\n");
+
             // Board zurücksetzen auf nach dem Gegnerzug und besten Zug ausführen
             moveGenerator.initializeBoard(fenAfterOppMove);
             moveGenerator.movePiece(bestResponseMove);
-    
+
             // nächste Iteration starten
-            generateOpeningBook(moveGenerator, mcts , player, depth + 1);
-    
+            generateOpeningBook(moveGenerator, mcts, writer, player, depth + 1);
+
             // Board zurücksetzen auf nach dem Spielerzug
             moveGenerator.initializeBoard(fenStorage);
         }
@@ -292,4 +342,3 @@ public class OpeningBookGenerator extends Thread {
         moveGenerator.initializeBoard(fenStorage);
     }
 }
-
