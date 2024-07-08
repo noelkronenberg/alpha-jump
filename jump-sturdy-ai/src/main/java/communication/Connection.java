@@ -7,6 +7,7 @@ import search.ab.Minimax_AB;
 import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
+import search.mcts.MCTS;
 
 import java.io.*;
 import java.net.Socket;
@@ -26,7 +27,7 @@ public class Connection {
 
     int moveCounter = 0;
     long currentTime = 0;
-    double timeLeft = 120000;
+    double timeLeft = 120000; // default time for entire game (in ms)
 
     boolean firstIter = true; // helper
 
@@ -41,13 +42,14 @@ public class Connection {
      */
     public void connect(boolean isPlayer) {
         Minimax_AB ai = new Minimax_AB();
+        MCTS ai_MCTS = new MCTS();
         SearchConfig config = Minimax_AB.bestConfig.copy();
         String serverAddress = "localhost";
         int port = 5555;
 
         MoveGenerator gameInstance =  new MoveGenerator();
 
-        double overall = 115000.0; // overall time (in ms)
+        double overall = 115000.0; // default time for main game (in ms)
         int averageMoves = 40;
         config.timeLimit = overall / averageMoves; // set time for move (in ms)
 
@@ -126,8 +128,8 @@ public class Connection {
                         this.timeLeft = serverTime; // time for entire game
                         overall = 0.95 * this.timeLeft; // time for main game + buffer for longer end phase
 
-                        System.out.println("Set time left to: " + this.timeLeft); // TEST
-                        System.out.println("Set time for main game to: : " + overall); // TEST
+                        System.out.println("Set time left to: " + this.timeLeft);
+                        System.out.println("Set time for main game to: : " + overall);
                     }
 
                     // System.out.println("\n" + "Player "+ this.player + " | " + "Server response:  " + response);
@@ -167,25 +169,41 @@ public class Connection {
                                 visitedPositions.put(fenNoPlayer, 1);
                             }
 
-                            // check if AI or human player
+                            // human player
                             if (isPlayer) {
                                 System.out.println("Enter your move: ");
                                 this.move = this.scanner.nextLine();
-                            } else {
+                            }
+
+                            // AI
+                            else {
                                 //check if a position is in the starting bib
                                 String moveStartingBib = startingBib.get(fenNoPlayer);
                                 if (moveStartingBib != null){
                                     this.move = moveStartingBib;
                                 } else {
-                                    // check for dynamic time management
-                                    if (moveCounter <= 6 || (31 < moveCounter && moveCounter <= 39)) {
-                                        config.timeLimit = (overall * 0.2) / 15;
+
+                                    // START: dynamic time management
+
+                                    // CASE: start- and endgame
+                                    if (moveCounter <= 6 || (averageMoves-9 < moveCounter && moveCounter <= averageMoves-1)) {
+                                        config.timeLimit = (overall * 0.2) / 15; // 20% of the time (for on average 15 moves in these states)
+                                    // CASE: overtime (if game goes beyond averageMoves)
                                     } else if (timeLeft <= 5000) {
-                                        config.timeLimit = (timeLeft * 0.5);
+                                        config.timeLimit = (timeLeft * 0.5); // continuously less (but never running out directly)
+                                    // CASE: mid-game
                                     } else {
-                                        config.timeLimit = (overall * 0.8) / 25;
+                                        config.timeLimit = (overall * 0.8) / 25; // 80% of the time (for on average 25 moves in this state)
                                     }
-                                    this.move = ai.orchestrator(fen, config);
+
+                                    // END: dynamic time management
+
+                                    // get move (switch to MCTS if time low)
+                                    if (timeLeft <= 500) {
+                                        this.move = ai_MCTS.orchestrator(fen, config);
+                                    } else {
+                                        this.move = ai.orchestrator(fen, config);
+                                    }
                                     moveCounter++;
                                 }
                             }
