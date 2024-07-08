@@ -115,8 +115,8 @@ public class MCTS extends AI {
      */
     public int simulateToEnd(Color color, MoveGenerator moveGenerator, Color parentColor) {
 
+        // Alternative: generate and pick random move
         /*
-        // alternative: generate and pick random mov
         while (true) {
             color = (color == Color.RED) ? Color.BLUE : Color.RED;
             LinkedHashMap<Integer,List<Integer>> moves = moveGenerator.generateAllPossibleMoves(color);
@@ -160,8 +160,6 @@ public class MCTS extends AI {
 
     /**
      * Performs a tree traversal in the Monte Carlo Tree Search (MCTS) algorithm.
-     * This method traverses the tree by selecting the child node with the highest UCB value
-     * until a leaf node or a winning position is found, or the end time is reached.
      *
      * @param endtime The time at which the search should stop, in milliseconds.
      * @param node The current {@code MCTSNode} from which to start the traversal.
@@ -228,7 +226,7 @@ public class MCTS extends AI {
 
     /**
      * Executes the tree policy for the Monte Carlo Tree Search (MCTS) algorithm.
-     * This method traverses the search tree, expands nodes, and performs simulations
+     * This traverses the search tree, expands nodes, and performs simulations
      * to update the tree with new information.
      *
      * @param moveGenerator The {@code MoveGenerator} object used to generate and execute moves.
