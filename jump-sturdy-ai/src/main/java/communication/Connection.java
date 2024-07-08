@@ -306,7 +306,7 @@ public class Connection {
      * @throws InterruptedException if the main thread is interrupted.
      */
     public static void main(String[] args) throws InterruptedException {
-        boolean twoPlayer = true;
+        boolean twoPlayer = false;
 
         if (!twoPlayer) {
             Connection player1 = new Connection(false, true, 100, false);
