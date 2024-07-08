@@ -58,7 +58,7 @@ public class Connection {
             if (temp == 48) {
                 this.player = 1;
                 String basePath = new File("").getAbsolutePath();
-                String path = basePath+"\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
+                String path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
                 readFileAndFillBib(path);
                 System.out.println("\n" + "You are Player 1");
 
@@ -109,7 +109,8 @@ public class Connection {
 
                     String fenNoPlayer = fen.substring(0, fen.length() - 2);
 
-                    if (response.getBoolean("end")){
+                    if (response.getBoolean("end")) {
+                        System.out.println("Game has ended!");
                         Thread.sleep(1000);
                         return;
                     }
@@ -136,7 +137,7 @@ public class Connection {
                                     visitedPositions.put(fenNoPlayer, numberOfVisits + 1);
                                 }
                             } else {
-                                visitedPositions.put(fenNoPlayer,1);
+                                visitedPositions.put(fenNoPlayer, 1);
                             }
 
                             // check if AI or human player
@@ -146,8 +147,8 @@ public class Connection {
                             } else {
                                 //check if a position is in the starting bib
                                 String moveStartingBib = startingBib.get(fenNoPlayer);
-                                if (moveStartingBib!=null){
-                                    this.move=moveStartingBib;
+                                if (moveStartingBib != null){
+                                    this.move = moveStartingBib;
                                 } else {
                                     // check for dynamic time management
                                     if (moveCounter <= 6 || (31 < moveCounter && moveCounter <= 39)) {
