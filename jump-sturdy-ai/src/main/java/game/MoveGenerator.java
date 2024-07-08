@@ -371,7 +371,7 @@ public class MoveGenerator {
      * @return The move in FEN notation.
      */
     public static String convertMoveToFEN(int move) {
-        if (move==-1){
+        if (move == -1){
             return "";
         }
         int from = move / 100;
@@ -848,7 +848,7 @@ public class MoveGenerator {
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
 
-        if (allPieces.size()==0){
+        if (allPieces.size() == 0){
             return 0;
         }
         int number = generator.nextInt(allPieces.size());
@@ -858,7 +858,7 @@ public class MoveGenerator {
         number = generator.nextInt(allMoveToPos.size());
 
         int randomPos = allMoveToPos.get(number);
-        return randomPiece*100+randomPos;
+        return randomPiece * 100 + randomPos;
     }
 
     /**
