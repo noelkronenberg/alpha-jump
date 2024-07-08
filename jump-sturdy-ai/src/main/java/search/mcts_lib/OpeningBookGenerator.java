@@ -14,7 +14,7 @@ import search.ab.Evaluation;
  */
 public class OpeningBookGenerator extends Thread {
     private final int DEPTH = 3;
-    private Color startingPlayer = Color.RED;
+    private Color startingPlayer = Color.BLUE;
     public String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r";
 
     public static void main(String[] args) {
@@ -33,16 +33,16 @@ public class OpeningBookGenerator extends Thread {
         String basePath = new File("").getAbsolutePath();
         String path = basePath+"\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
         // Im Folgenden den Block auskommentieren, welcher nicht erstellt werden soll
-        /*try (FileWriter writer = new FileWriter("jump-sturdy-ai/src/main/java/search/mcts_lib/opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
+        try (FileWriter writer = new FileWriter("jump-sturdy-ai/src/main/java/search/mcts_lib/opening_book_secondMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
+            orchestrater(initialState, mcts, writer, startingPlayer, 0, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /*try (FileWriter writer = new FileWriter(path)) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
             orchestrater(initialState, mcts, writer, startingPlayer, 0, true);
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-        try (FileWriter writer = new FileWriter(path)) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
-            orchestrater(initialState, mcts, writer, startingPlayer, 0, true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -87,6 +87,7 @@ public class OpeningBookGenerator extends Thread {
         // mögliche Moves des Gegners herausfinden
         LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer);
         List<Integer> possMovesOppList = Evaluation.convertMovesToList(possMovesOpp);
+        System.out.println("Mögliche Züge Blau: " + possMovesOppList.size());
 
         double numberOfThreads = 20; // Hier kannst du die Anzahl der Threads festlegen
         double totalRange = possMovesOppList.size(); // Beispiel für den gesamten Bereich, der aufgeteilt wird
