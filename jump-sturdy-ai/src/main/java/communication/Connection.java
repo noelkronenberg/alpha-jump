@@ -20,6 +20,8 @@ import java.util.Scanner;
  */
 public class Connection {
 
+    boolean isPlayer;
+
     // logic
     int player;
     String lastBoard = "";
@@ -33,15 +35,43 @@ public class Connection {
     HashMap<String, String> openingLib = new HashMap<>();
 
     // hyperparameter
-    public boolean switchMCTS = true;
-    public boolean useOpeningLib = true;
+    public boolean switchMCTS;
+    double MCTSTime; // time to start using MCTS (in ms)
+    public boolean useOpeningLib;
+
+    /**
+     * Constructs a Connection object.
+     *
+     * @param isPlayer Indicates if the player is a human player (true) or AI (false).
+     * @param switchMCTS Indicates if the AI should switch to MCTS after MCTSTime.
+     * @param MCTSTime The time limit after which to switch to MCTS (in ms). Defaults to 100ms if not provided.
+     * @param useOpeningLib Indicates if the AI should use an opening library.
+     */
+    public Connection(boolean isPlayer, boolean switchMCTS, double MCTSTime, boolean useOpeningLib) {
+        this.isPlayer = isPlayer;
+        this.switchMCTS = switchMCTS;
+        this.MCTSTime = MCTSTime;
+        this.useOpeningLib = useOpeningLib;
+    }
+
+    /**
+     * Constructs a Connection object.
+     *
+     * @param isPlayer Indicates if the player is a human player (true) or AI (false).
+     * @param useOpeningLib Indicates if the AI should use an opening library.
+     */
+    public Connection(boolean isPlayer, boolean useOpeningLib) {
+        this.isPlayer = isPlayer;
+        this.switchMCTS = false;
+        this.MCTSTime = 0;
+        this.useOpeningLib = useOpeningLib;
+    }
 
     /**
      * Connects to the game server and manages game play.
      *
-     * @param isPlayer Indicates if the player is a human player (true) or AI (false).
      */
-    public void connect(boolean isPlayer) {
+    public void connect() {
         Minimax_AB ai = new Minimax_AB();
         MCTS ai_MCTS = new MCTS();
         SearchConfig config = Minimax_AB.bestConfig.copy();
@@ -171,7 +201,7 @@ public class Connection {
                             }
 
                             // human player
-                            if (isPlayer) {
+                            if (this.isPlayer) {
                                 System.out.println("Enter your move: ");
                                 this.move = this.scanner.nextLine();
                             }
@@ -204,8 +234,8 @@ public class Connection {
 
                                     // END: dynamic time management
 
-                                    // get move (switch to MCTS if time low)
-                                    if (this.timeLeft <= 500 && this.switchMCTS) {
+                                    // get move (switch to MCTS if time too low)
+                                    if (this.timeLeft <= this.MCTSTime && this.switchMCTS) {
                                         this.move = ai_MCTS.orchestrator(fen, config);
                                     } else {
                                         this.move = ai.orchestrator(fen, config);
@@ -284,16 +314,16 @@ public class Connection {
      * @throws InterruptedException if the main thread is interrupted.
      */
     public static void main(String[] args) throws InterruptedException {
-        Connection player1 = new Connection();
-        player1.connect(false); // only for single player
+        Connection player1 = new Connection(false, true, 100, true);
+        player1.connect(); // only for single player
 
         /*
         // START: two player game
 
-        Connection player2 = new Connection();
+        Connection player2 = new Connection(false, true, 100, true);
 
-        Thread thread1 = new Thread(() -> player1.connect(false));
-        Thread thread2 = new Thread(() -> player2.connect(false));
+        Thread thread1 = new Thread(() -> player1.connect());
+        Thread thread2 = new Thread(() -> player2.connect());
 
         thread1.start();
         Thread.sleep(100);
