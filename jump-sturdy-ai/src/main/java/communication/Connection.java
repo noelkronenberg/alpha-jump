@@ -165,6 +165,8 @@ public class Connection {
                         System.out.println("Set time left to: " + this.timeLeft);
                         System.out.println("Set time for main game to: : " + overall);
                         System.out.println();
+
+                        // Thread.sleep(100); // turn on for better visualisation
                     }
 
                     // System.out.println("\n" + "Player "+ this.player + " | " + "Server response:  " + response);
@@ -205,6 +207,7 @@ public class Connection {
 
                             // human player
                             if (this.isPlayer) {
+                                gameInstance.printBoard(true);
                                 System.out.println("Enter your move: ");
                                 this.move = this.scanner.nextLine();
                             }
@@ -263,7 +266,7 @@ public class Connection {
                                 this.visitedPositions.put(fenAfterMove, 1);
                             }
 
-                            long timeForMove = System.currentTimeMillis() - this.currentTime;
+                            double timeForMove = System.currentTimeMillis() - this.currentTime;
                             this.timeLeft -= timeForMove;
 
                             System.out.println("Time For move: " + (timeForMove));
@@ -317,30 +320,30 @@ public class Connection {
      * @throws InterruptedException if the main thread is interrupted.
      */
     public static void main(String[] args) throws InterruptedException {
-        Connection player1 = new Connection(false, true, 100, true);
-        player1.connect(); // only for single player
+        boolean twoPlayer = false;
 
-        /*
-        // START: two player game
+        if (!twoPlayer) {
+            Connection player1 = new Connection(false, true, 100, false);
+            player1.connect(); // only for single player
+        } else {
+            Connection player1 = new Connection(true, true, 100, false);
+            player1.connect();
 
-        Connection player2 = new Connection(false, true, 100, true);
+            Connection player2 = new Connection(false, true, 100, false);
 
-        Thread thread1 = new Thread(() -> player1.connect());
-        Thread thread2 = new Thread(() -> player2.connect());
+            Thread thread1 = new Thread(() -> player1.connect());
+            Thread thread2 = new Thread(() -> player2.connect());
 
-        thread1.start();
-        Thread.sleep(100);
-        thread2.start();
+            thread1.start();
+            Thread.sleep(100);
+            thread2.start();
 
-        try {
-            thread1.join();
-            thread2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            try {
+                thread1.join();
+                thread2.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-
-        // END: two player game
-        */
-
     }
 }
