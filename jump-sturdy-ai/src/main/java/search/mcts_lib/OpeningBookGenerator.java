@@ -107,15 +107,13 @@ public class OpeningBookGenerator extends Thread {
         LinkedHashMap<Integer, List<Integer>> possMovesOpp = moveGenerator.generateAllPossibleMoves(oppPlayer);
         List<Integer> possMovesOppList = Evaluation.convertMovesToList(possMovesOpp);
 
-        double numberOfThreads = 20; // Hier kannst du die Anzahl der Threads festlegen
-        double totalRange = possMovesOppList.size(); // Beispiel für den gesamten Bereich, der aufgeteilt wird
-        double partitions = totalRange / numberOfThreads;
+        int totalRange = possMovesOppList.size(); // Beispiel für den gesamten Bereich, der aufgeteilt wird
 
 
         // Erstelle und starte Threads für jedes Viertel der Liste
         Thread thread1 = new Thread(() -> {
             MoveGenerator threadMoveGenerator = moveGenerator.clone();  // Klone den MoveGenerator für jeden Thread
-            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, 0, (int) Math.floor(partitions)*2);
+            processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList, 0,  totalRange);
         });
 
         Thread thread2 = new Thread(() -> {
@@ -215,48 +213,10 @@ public class OpeningBookGenerator extends Thread {
         });
 
         thread1.start();
-        thread2.start();
-        thread3.start();
-        thread4.start();
-        thread5.start();
-        thread6.start();
-        thread7.start();
-        thread8.start();
-        thread9.start();
-        thread10.start();
-        thread11.start();
-        thread12.start();
-        thread13.start();
-        thread14.start();
-        thread15.start();
-        thread16.start();
-        thread17.start();
-        thread18.start();
-        thread19.start();
-        thread20.start();
 
         try {
             // Warte, bis alle Threads abgeschlossen sind
             thread1.join();
-            thread2.join();
-            thread3.join();
-            thread4.join();
-            thread5.join();
-            thread6.join();
-            thread7.join();
-            thread8.join();
-            thread9.join();
-            thread10.join();
-            thread11.join();
-            thread12.join();
-            thread13.join();
-            thread14.join();
-            thread15.join();
-            thread16.join();
-            thread17.join();
-            thread18.join();
-            thread19.join();
-            thread20.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
