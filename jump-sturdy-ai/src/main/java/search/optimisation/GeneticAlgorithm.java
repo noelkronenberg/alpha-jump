@@ -22,7 +22,7 @@ import java.util.Random;
 public class GeneticAlgorithm {
 
     // hyperparameter (reference: https://www.baeldung.com/java-genetic-algorithm)
-    private static final int POPULATION_SIZE = 20;
+    private static final int POPULATION_SIZE = 10;
     private static final int GENERATIONS = 10;
     private static final double MUTATION_RATE = 0.1;
     private static final double CROSSOVER_RATE = 0.75;
@@ -219,7 +219,7 @@ public class GeneticAlgorithm {
      */
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/search/optimisation/GA-Debugger-output.txt"));
+            PrintStream fileOut = new PrintStream(new File("src/main/java/search/optimisation/GA-output.txt"));
             System.setOut(fileOut);
 
             List<Individual> population = new ArrayList<>();
