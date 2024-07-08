@@ -311,11 +311,11 @@ public class Connection {
         boolean twoPlayer = false;
 
         if (!twoPlayer) {
-            Connection player1 = new Connection(false, true, 100, false);
+            Connection player1 = new Connection(false, true, 100, true);
             player1.connect(); // only for single player
         } else {
-            Connection player1 = new Connection(false, true, 100, false);
-            Connection player2 = new Connection(false, true, 100, false);
+            Connection player1 = new Connection(false, true, 100, true);
+            Connection player2 = new Connection(false, true, 100, true);
 
             Thread thread1 = new Thread(() -> player1.connect());
             Thread thread2 = new Thread(() -> player2.connect());
