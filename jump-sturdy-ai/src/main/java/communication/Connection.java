@@ -213,15 +213,17 @@ public class Connection {
 
                             // AI
                             } else {
+
                                 // START: opening library
                                 String moveOpeningLib = this.openingLib.get(fenNoPlayer);
                                 if (this.useOpeningLib&&moveOpeningLib != null){
                                     // check if a position is in the opening library
                                     this.move = moveOpeningLib;
                                     this.moveCounter++;
-
                                 // END: opening library
+
                                 } else {
+                                    
                                     // START: dynamic time management
 
                                     // CASE: start- and endgame
