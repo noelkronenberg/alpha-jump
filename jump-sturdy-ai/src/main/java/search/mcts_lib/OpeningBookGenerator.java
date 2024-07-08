@@ -15,33 +15,51 @@ import search.ab.Evaluation;
 public class OpeningBookGenerator extends Thread {
     private final int DEPTH = 3;
     private Color startingPlayer = Color.RED;
+    private Color oppositeColor = (startingPlayer == Color.RED) ? Color.BLUE : Color.RED;
     public String board = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r";
 
     public static void main(String[] args) {
         OpeningBookGenerator openingBookGenerator = new OpeningBookGenerator();
-        openingBookGenerator.runOPG();
+        openingBookGenerator.runOBG(true); // NOTE: adjust to desired player
     }
 
     /**
      * Runs the openingBookGenerator.
+     *
+     * @param starting indicator for whether starting or second move player library should be generated.
      */
-    public void runOPG() {
+    public void runOBG(boolean starting) {
         MCTS_lib mcts = new MCTS_lib();
+
         MoveGenerator initialState = new MoveGenerator();
         initialState.initializeBoard(board);
         initialState.printBoard(false);
+
+        String os = System.getProperty("os.name").toLowerCase();
         String basePath = new File("").getAbsolutePath();
-        String path = basePath+"\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
-        // Im Folgenden den Block auskommentieren, welcher nicht erstellt werden soll
-        /*try (FileWriter writer = new FileWriter("jump-sturdy-ai/src/main/java/search/mcts_lib/opening_book_startingMove.txt")) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem ersten Zug
-            orchestrater(initialState, mcts, writer, startingPlayer, 0, true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-        try (FileWriter writer = new FileWriter(path)) { // Dieser Block erstellt Zug-Bibliothek für Spiele mit dem zweiten Zug
-            orchestrater(initialState, mcts, writer, startingPlayer, 0, true);
-        } catch (IOException e) {
-            e.printStackTrace();
+        String path;
+
+        // adjust path to opening book
+        if (os.contains("win")) {
+            path = basePath + "\\src\\main\\java\\search\\mcts_lib\\";
+        } else {
+            path = basePath + "/src/main/java/search/mcts_lib/";
+        }
+
+        // starting move player
+        if (starting) {
+            try (FileWriter writer = new FileWriter(path + "opening_book_startingMove.txt")) {
+                orchestrater(initialState, mcts, writer, startingPlayer, 0, true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        // second move player
+        } else {
+            try (FileWriter writer = new FileWriter(path + "opening_book_secondMove.txt")) {
+                orchestrater(initialState, mcts, writer, oppositeColor, 0, false);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -195,6 +213,7 @@ public class OpeningBookGenerator extends Thread {
             MoveGenerator threadMoveGenerator = moveGenerator.clone();
             processMoves(threadMoveGenerator, mcts, writer, player, depth, fenStorage, possMovesOppList,33, (int) totalRange);
         });
+
         thread1.start();
         thread2.start();
         thread3.start();
@@ -330,7 +349,7 @@ public class OpeningBookGenerator extends Thread {
             int bestResponseMove = mcts.runMCTS(moveGenerator, player);
             String bestResponseFEN = MoveGenerator.convertMoveToFEN(bestResponseMove);
 
-            //Position und besten Zug in Dokument eintragen
+            // Position und besten Zug in Dokument eintragen
             String schreibString = fenAfterOppMove + ", " + bestResponseFEN;
             writer.write(schreibString + "\n");
 
