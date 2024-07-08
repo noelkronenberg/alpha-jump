@@ -20,20 +20,20 @@ import java.util.Scanner;
  */
 public class Connection {
 
+    // logic
     int player;
     String lastBoard = "";
     String move = "";
     Scanner scanner = new Scanner(System.in);
-
     int moveCounter = 0;
     long currentTime = 0;
     double timeLeft = 120000; // default time for entire game (in ms)
-
     boolean firstIter = true; // helper
-
     HashMap<String, Integer> visitedPositions = new HashMap<>();
-
     HashMap<String, String> startingBib = new HashMap<>();
+
+    // hyperparameter
+    public boolean switchMCTS = true;
 
     /**
      * Connects to the game server and manages game play.
@@ -153,20 +153,20 @@ public class Connection {
 
                         // player turns
                         if ((response.getBoolean("player1") && this.player == 1) || (response.getBoolean("player2") && this.player == 2)) {
-                            currentTime = System.currentTimeMillis();
+                            this.currentTime = System.currentTimeMillis();
 
                             // check for draw
                             gameInstance.initializeBoard(fenNoPlayer);
-                            if(visitedPositions.containsKey(fenNoPlayer) ){
-                                int numberOfVisits = visitedPositions.get(fenNoPlayer);
+                            if(this.visitedPositions.containsKey(fenNoPlayer) ){
+                                int numberOfVisits = this.visitedPositions.get(fenNoPlayer);
                                 if (numberOfVisits == 3) {
                                     Thread.sleep(1000);
                                     return;
                                 } else {
-                                    visitedPositions.put(fenNoPlayer, numberOfVisits + 1);
+                                    this.visitedPositions.put(fenNoPlayer, numberOfVisits + 1);
                                 }
                             } else {
-                                visitedPositions.put(fenNoPlayer, 1);
+                                this.visitedPositions.put(fenNoPlayer, 1);
                             }
 
                             // human player
@@ -178,7 +178,7 @@ public class Connection {
                             // AI
                             else {
                                 //check if a position is in the starting bib
-                                String moveStartingBib = startingBib.get(fenNoPlayer);
+                                String moveStartingBib = this.startingBib.get(fenNoPlayer);
                                 if (moveStartingBib != null){
                                     this.move = moveStartingBib;
                                 } else {
@@ -186,11 +186,11 @@ public class Connection {
                                     // START: dynamic time management
 
                                     // CASE: start- and endgame
-                                    if (moveCounter <= 6 || (averageMoves-9 < moveCounter && moveCounter <= averageMoves-1)) {
+                                    if (this.moveCounter <= 6 || (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)) {
                                         config.timeLimit = (overall * 0.2) / 15; // 20% of the time (for on average 15 moves in these states)
                                     // CASE: overtime (if game goes beyond averageMoves)
-                                    } else if (timeLeft <= 5000) {
-                                        config.timeLimit = (timeLeft * 0.5); // continuously less (but never running out directly)
+                                    } else if (this.timeLeft <= 5000) {
+                                        config.timeLimit = (this.timeLeft * 0.5); // continuously less (but never running out directly)
                                     // CASE: mid-game
                                     } else {
                                         config.timeLimit = (overall * 0.8) / 25; // 80% of the time (for on average 25 moves in this state)
@@ -199,12 +199,12 @@ public class Connection {
                                     // END: dynamic time management
 
                                     // get move (switch to MCTS if time low)
-                                    if (timeLeft <= 500) {
+                                    if (this.timeLeft <= 500 && this.switchMCTS) {
                                         this.move = ai_MCTS.orchestrator(fen, config);
                                     } else {
                                         this.move = ai.orchestrator(fen, config);
                                     }
-                                    moveCounter++;
+                                    this.moveCounter++;
                                 }
                             }
 
@@ -213,23 +213,23 @@ public class Connection {
                             String fenAfterMove = gameInstance.getFenFromBoard();
 
                             // check for draw
-                            if(visitedPositions.containsKey(fenAfterMove)){
-                                int numberOfVisits = visitedPositions.get(fenAfterMove);
+                            if(this.visitedPositions.containsKey(fenAfterMove)){
+                                int numberOfVisits = this.visitedPositions.get(fenAfterMove);
                                 if (numberOfVisits == 3){
                                     return;
                                 } else {
-                                    visitedPositions.put(fenAfterMove, numberOfVisits + 1);
+                                    this.visitedPositions.put(fenAfterMove, numberOfVisits + 1);
                                 }
                             } else {
-                                visitedPositions.put(fenAfterMove, 1);
+                                this.visitedPositions.put(fenAfterMove, 1);
                             }
 
-                            long timeForMove = System.currentTimeMillis() - currentTime;
-                            timeLeft -= timeForMove;
+                            long timeForMove = System.currentTimeMillis() - this.currentTime;
+                            this.timeLeft -= timeForMove;
 
                             System.out.println("Time For move: " + (timeForMove));
-                            System.out.println("Time left for moves: " + timeLeft);
-                            System.out.println("Move: " + moveCounter);
+                            System.out.println("Time left for moves: " + this.timeLeft);
+                            System.out.println("Move: " + this.moveCounter);
 
                             /*
                             MoveGenerator moveGenerator = new MoveGenerator();
@@ -266,7 +266,7 @@ public class Connection {
         int i  = 0;
         while ((line=in.readLine()) != null) {
             String[] tokens = line.split(", ");
-            startingBib.put(tokens[0], tokens[1]);
+            this.startingBib.put(tokens[0], tokens[1]);
             i  = i+1;
         }
     }
