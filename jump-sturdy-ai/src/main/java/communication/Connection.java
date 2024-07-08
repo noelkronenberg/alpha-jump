@@ -97,7 +97,8 @@ public class Connection {
             int temp = (int) inputStream.read();
             if (temp == 48) {
                 this.player = 1;
-                System.out.println("\n" + "You are Player 1");
+                System.out.println("You are Player 1");
+                System.out.println();
 
                 // adjust path to opening book
                 if (os.contains("win")) {
@@ -108,7 +109,8 @@ public class Connection {
                 readFileAndFillBib(path);
             } else {
                 this.player = 2;
-                System.out.println("\n" +  "You are Player 2");
+                System.out.println("You are Player 2");
+                System.out.println();
 
                 // adjust path to opening book
                 if (os.contains("win")) {
@@ -159,8 +161,10 @@ public class Connection {
                         this.timeLeft = serverTime; // time for entire game
                         overall = 0.95 * this.timeLeft; // time for main game + buffer for longer end phase
 
+                        System.out.println("Player " + this.player);
                         System.out.println("Set time left to: " + this.timeLeft);
                         System.out.println("Set time for main game to: : " + overall);
+                        System.out.println();
                     }
 
                     // System.out.println("\n" + "Player "+ this.player + " | " + "Server response:  " + response);
@@ -172,7 +176,6 @@ public class Connection {
                     if (response.getBoolean("end")) {
                         System.out.println("Game has ended!");
                         Thread.sleep(1000);
-                        return;
                     }
 
                     // process server response
@@ -279,7 +282,7 @@ public class Connection {
                             */
 
                             System.out.println("Player " + this.player + " | Move: " + this.move);
-                            System.out.println("\n");
+                            System.out.println("");
                         }
                     }
                 }
@@ -337,7 +340,7 @@ public class Connection {
         }
 
         // END: two player game
-         */
+        */
 
     }
 }
