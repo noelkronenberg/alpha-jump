@@ -29,7 +29,8 @@ public class Connection {
     Scanner scanner = new Scanner(System.in);
     int moveCounter = 0;
     long currentTime = 0;
-    double timeLeft = 120000; // default time for entire game (in ms)
+    double timeLeft = 120000; // time counter for entire game (in ms)
+    double maxTime = 120000; // the maximum time for the game (in ms)
     boolean firstIter = true; // helper
     HashMap<String, Integer> visitedPositions = new HashMap<>();
     HashMap<String, String> openingLib = new HashMap<>();
@@ -158,7 +159,8 @@ public class Connection {
                     if (this.moveCounter == 0 && this.firstIter) {
                         firstIter = false;
                         double serverTime = response.getDouble("time");
-                        this.timeLeft = serverTime; // time for entire game
+                        this.timeLeft = serverTime; // countdown for entire game
+                        this.maxTime = serverTime; // time for entire game
                         overall = 0.95 * this.timeLeft; // time for main game + buffer for longer end phase
 
                         System.out.println("Player " + this.player);
@@ -230,7 +232,7 @@ public class Connection {
                                     if (this.moveCounter <= 6 || (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)) {
                                         config.timeLimit = (overall * 0.2) / 15; // 20% of the time (for on average 15 moves in these states)
                                     // CASE: overtime (if game goes beyond averageMoves)
-                                    } else if (this.timeLeft <= 5000) {
+                                    } else if (this.timeLeft <= maxTime * 0.05) { // if we have 5% of time left
                                         config.timeLimit = (this.timeLeft * 0.5); // continuously less (but never running out directly)
                                     // CASE: mid-game
                                     } else {
