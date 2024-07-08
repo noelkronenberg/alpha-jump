@@ -1,0 +1,8 @@
+Start position: 
+Time to generate moves: 0.0010698583300000001 milliseconds
+
+Mid game: 
+Time to generate moves: 9.6492125E-4 milliseconds
+
+End game: 
+Time to generate moves: 7.8326416E-4 milliseconds
