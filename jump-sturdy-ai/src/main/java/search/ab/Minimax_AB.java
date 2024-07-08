@@ -162,6 +162,16 @@ public class Minimax_AB extends AI {
         return bestMove;
     }
 
+    /**
+     * Performs a quiescence search to evaluate positions more accurately by only exploring capture moves.
+     *
+     * @param gameState The current game state.
+     * @param alpha The alpha value for alpha-beta pruning.
+     * @param beta The beta value for alpha-beta pruning.
+     * @param currentColor The color of the player whose turn it is.
+     * @param ourColor The color of our player.
+     * @return The best score for the current game state after exploring capture moves.
+     */
     public double quiescenceSearch(MoveGenerator gameState, double alpha, double beta, Color currentColor, Color ourColor) {
         String fen = gameState.getFenFromBoard(); // convert position to FEN
 
@@ -428,15 +438,4 @@ public class Minimax_AB extends AI {
         }
     }
     // END: search with Alpha-Beta
-    public static void main(String[] args) {
-        String fen = "3b02/3b04/2r05/8/8/8/8/6 r";
-        Minimax_AB ab = new Minimax_AB();
-        SearchConfig first = Minimax_AB.bestConfig.copy();
-        first.timeCriterion = false;
-        first.maxAllowedDepth = 1;
-        first.useQuiescenceSearch = true;
-        first.qSDepth = 1;
-        String s = ab.orchestrator(fen, first);
-        System.out.println(s);
-    }
 }

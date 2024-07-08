@@ -102,7 +102,6 @@ public class MCTS_libTest {
     public void testGruppeH() {
         testPosition("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 b", "A6-A7", "D3-B4");
         testPosition("1bb4/1b0b05/b01b0bb4/1b01b01b02/3r01rr2/b0r0r02rr2/4r01rr1/4r0r0 r", "F5-G3");
-        // testPosition("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 b", "D5-C7");
         testPosition("6/3b0b03/3r02bb1/b0b03bb2/rrrr1bb2rr1/2b01b01r01/2r01r02r0/4r01 r", "D3-E2");
     }
 
@@ -153,7 +152,6 @@ public class MCTS_libTest {
     @DisplayName("Gruppe J")
     public void testGruppeJ() {
         testPosition("6/1bb1b0bbb0b01/r02b04/2b01b0b02/2r02r02/1r02rrr02/6rr1/2r01r01 r", "A3-B2");
-        //testPosition("3b02/1bb6/1r0b02r02/2r05/4r03/8/2r03r01/6 r", "B3-A3");
     }
 
     @Test
@@ -208,7 +206,6 @@ public class MCTS_libTest {
     @Test
     @DisplayName("Gruppe P")
     public void testGruppeP() {
-        // testPosition("b0b01bb2/6b01/3bb4/4b0b02/3r04/3r04/1r0r05/1r0rrrr2 b", "D3-F4", "E4-D5");
         testPosition("b04b0/8/7r0/1b03b02/1rr5r0/4r0b02/b07/4r01 b", "A7-B7");
     }
 

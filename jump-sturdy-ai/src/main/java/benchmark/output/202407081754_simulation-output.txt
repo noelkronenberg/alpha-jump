@@ -1,0 +1,54 @@
+START: 202407081754
+
+Winner of game 1 is: AI 2 (BLUE)
+Winner of game 2 is: AI 2 (RED)
+Winner of game 3 is: AI 2 (BLUE)
+Winner of game 4 is: AI 2 (RED)
+Winner of game 5 is: AI 2 (BLUE)
+Winner of game 6 is: AI 2 (RED)
+Winner of game 7 is: AI 2 (BLUE)
+Winner of game 8 is: AI 2 (RED)
+Winner of game 9 is: AI 2 (BLUE)
+Winner of game 10 is: AI 2 (RED)
+Winner of game 11 is: AI 2 (BLUE)
+Winner of game 12 is: AI 2 (RED)
+Winner of game 13 is: AI 2 (BLUE)
+Winner of game 14 is: AI 2 (RED)
+Winner of game 15 is: AI 2 (BLUE)
+Winner of game 16 is: AI 2 (RED)
+Winner of game 17 is: AI 2 (BLUE)
+Winner of game 18 is: AI 2 (RED)
+Winner of game 19 is: AI 2 (BLUE)
+Winner of game 20 is: AI 2 (RED)
+Winner of game 21 is: AI 2 (BLUE)
+Winner of game 22 is: AI 2 (RED)
+Winner of game 23 is: AI 2 (BLUE)
+Winner of game 24 is: AI 2 (RED)
+
+END: 202407081755
+
+Results: 
+
+First AI wins: 0
+Second AI wins: 24
+
+Settings: 
+
+Iterations: 24
+FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b
+
+First AI: 
+Class: RandomAI
+Config: random moves | average time to generate move = 0,02 ms
+
+Second AI: 
+Class: MCTS
+Config: timeLimit = 100.0
+
+System Information:
+
+OS: Mac OS X | aarch64
+Available processors (cores): 8
+System load average (cores): 2,75
+Total physical memory (GB): 16,00
+Free physical memory (GB): 0,09

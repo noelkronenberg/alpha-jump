@@ -66,6 +66,11 @@ public class MCTSBM {
         System.out.println(at.render());
     }
 
+    /**
+     * Main method to run the benchmarks and print results to a file.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         try {
             PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/output/MCTSBM-output.txt"));

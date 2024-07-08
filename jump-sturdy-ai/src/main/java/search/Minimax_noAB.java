@@ -6,6 +6,9 @@ import search.ab.Evaluation;
 
 import java.util.*;
 
+/**
+ *  An implementation of a Minimax Search for the game Jump Sturdy without Alpha-Beta Pruning,.
+ */
 public class Minimax_noAB extends AI {
     SearchConfig config;
 
@@ -36,6 +39,12 @@ public class Minimax_noAB extends AI {
         return "maxAllowedDepth = " + this.config.maxAllowedDepth;
     }
 
+    /**
+     * Finds the best move using the Minimax algorithm without Alpha-Beta pruning.
+     *
+     * @param fen The FEN string representing the current game state.
+     * @return The best move as an integer.
+     */
     public int getBestMoveNoAlphaBeta(String fen) {
         double bestScore = Integer.MIN_VALUE;
         int bestMove = -1;
@@ -61,9 +70,7 @@ public class Minimax_noAB extends AI {
             nextState.initializeBoard(fen);
             nextState.movePiece(move);
 
-            double currentScore = iterativeDeepeningNoAlphaBeta(nextState, ourColor,ourColor, move); // get score for current move (order)
-
-            // evaluate move (score)
+            double currentScore = iterativeDeepeningNoAlphaBeta(nextState, ourColor,ourColor, move); // get score for current move
 
             // return if move order contains winning move
             if (currentScore >= winCutOff) {
@@ -81,6 +88,14 @@ public class Minimax_noAB extends AI {
         return bestMove;
     }
 
+    /**
+     * Performs iterative deepening search using the Minimax algorithm without Alpha-Beta pruning.
+     *
+     * @param gameState The current game state.
+     * @param currentColor The color of the player whose turn it is.
+     * @param ourColor The color of our player.
+     * @return The best score for the current game state.
+     */
     public double iterativeDeepeningNoAlphaBeta(MoveGenerator gameState, Color currentColor, Color ourColor, int move) {
         int depth = 1;
         double bestScore = Integer.MIN_VALUE;
@@ -106,6 +121,16 @@ public class Minimax_noAB extends AI {
         return bestScore;
     }
 
+    /**
+     * Performs the Minimax search without Alpha-Beta pruning.
+     *
+     * @param gameState The current game state.
+     * @param depth The maximum depth to search.
+     * @param currentColor The color of the player whose turn it is.
+     * @param ourColor The color of our player.
+     * @param value The value for pruning.
+     * @return The best score for the current game state.
+     */
     public double treeSearchNoAlphaBeta(MoveGenerator gameState, int depth, Color currentColor , Color ourColor, double value) {
         // get score for current position
         String fen = gameState.getFenFromBoard(); // convert position to FEN
@@ -173,6 +198,5 @@ public class Minimax_noAB extends AI {
             return value;
         }
     }
-
     // END: search without Alpha-Beta
 }

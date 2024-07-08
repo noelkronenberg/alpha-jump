@@ -20,27 +20,59 @@ import java.util.Scanner;
  */
 public class Connection {
 
+    boolean isPlayer;
+
+    // logic
     int player;
     String lastBoard = "";
     String move = "";
     Scanner scanner = new Scanner(System.in);
-
     int moveCounter = 0;
     long currentTime = 0;
-    double timeLeft = 120000; // default time for entire game (in ms)
-
+    double timeLeft = 120000; // time counter for entire game (in ms)
+    double maxTime = 120000; // the maximum time for the game (in ms)
     boolean firstIter = true; // helper
-
     HashMap<String, Integer> visitedPositions = new HashMap<>();
+    HashMap<String, String> openingLib = new HashMap<>();
 
-    HashMap<String, String> startingBib = new HashMap<>();
+    // hyperparameter
+    public boolean switchMCTS;
+    double MCTSTime; // time to start using MCTS (in ms)
+    public boolean useOpeningLib;
+
+    /**
+     * Constructs a Connection object.
+     *
+     * @param isPlayer Indicates if the player is a human player (true) or AI (false).
+     * @param switchMCTS Indicates if the AI should switch to MCTS after MCTSTime.
+     * @param MCTSTime The time limit after which to switch to MCTS (in ms). Defaults to 100ms if not provided.
+     * @param useOpeningLib Indicates if the AI should use an opening library.
+     */
+    public Connection(boolean isPlayer, boolean switchMCTS, double MCTSTime, boolean useOpeningLib) {
+        this.isPlayer = isPlayer;
+        this.switchMCTS = switchMCTS;
+        this.MCTSTime = MCTSTime;
+        this.useOpeningLib = useOpeningLib;
+    }
+
+    /**
+     * Constructs a Connection object.
+     *
+     * @param isPlayer Indicates if the player is a human player (true) or AI (false).
+     * @param useOpeningLib Indicates if the AI should use an opening library.
+     */
+    public Connection(boolean isPlayer, boolean useOpeningLib) {
+        this.isPlayer = isPlayer;
+        this.switchMCTS = false;
+        this.MCTSTime = 0;
+        this.useOpeningLib = useOpeningLib;
+    }
 
     /**
      * Connects to the game server and manages game play.
      *
-     * @param isPlayer Indicates if the player is a human player (true) or AI (false).
      */
-    public void connect(boolean isPlayer) {
+    public void connect() {
         Minimax_AB ai = new Minimax_AB();
         MCTS ai_MCTS = new MCTS();
         SearchConfig config = Minimax_AB.bestConfig.copy();
@@ -66,7 +98,8 @@ public class Connection {
             int temp = (int) inputStream.read();
             if (temp == 48) {
                 this.player = 1;
-                System.out.println("\n" + "You are Player 1");
+                System.out.println("You are Player 1");
+                System.out.println();
 
                 // adjust path to opening book
                 if (os.contains("win")) {
@@ -77,7 +110,8 @@ public class Connection {
                 readFileAndFillBib(path);
             } else {
                 this.player = 2;
-                System.out.println("\n" +  "You are Player 2");
+                System.out.println("You are Player 2");
+                System.out.println();
 
                 // adjust path to opening book
                 if (os.contains("win")) {
@@ -125,11 +159,16 @@ public class Connection {
                     if (this.moveCounter == 0 && this.firstIter) {
                         firstIter = false;
                         double serverTime = response.getDouble("time");
-                        this.timeLeft = serverTime; // time for entire game
+                        this.timeLeft = serverTime; // countdown for entire game
+                        this.maxTime = serverTime; // time for entire game
                         overall = 0.95 * this.timeLeft; // time for main game + buffer for longer end phase
 
+                        System.out.println("Player " + this.player);
                         System.out.println("Set time left to: " + this.timeLeft);
                         System.out.println("Set time for main game to: : " + overall);
+                        System.out.println();
+
+                        // Thread.sleep(100); // turn on for better visualisation
                     }
 
                     // System.out.println("\n" + "Player "+ this.player + " | " + "Server response:  " + response);
@@ -141,7 +180,6 @@ public class Connection {
                     if (response.getBoolean("end")) {
                         System.out.println("Game has ended!");
                         Thread.sleep(1000);
-                        return;
                     }
 
                     // process server response
@@ -153,44 +191,49 @@ public class Connection {
 
                         // player turns
                         if ((response.getBoolean("player1") && this.player == 1) || (response.getBoolean("player2") && this.player == 2)) {
-                            currentTime = System.currentTimeMillis();
+                            this.currentTime = System.currentTimeMillis();
 
                             // check for draw
                             gameInstance.initializeBoard(fenNoPlayer);
-                            if(visitedPositions.containsKey(fenNoPlayer) ){
-                                int numberOfVisits = visitedPositions.get(fenNoPlayer);
+                            if(this.visitedPositions.containsKey(fenNoPlayer) ){
+                                int numberOfVisits = this.visitedPositions.get(fenNoPlayer);
                                 if (numberOfVisits == 3) {
                                     Thread.sleep(1000);
                                     return;
                                 } else {
-                                    visitedPositions.put(fenNoPlayer, numberOfVisits + 1);
+                                    this.visitedPositions.put(fenNoPlayer, numberOfVisits + 1);
                                 }
                             } else {
-                                visitedPositions.put(fenNoPlayer, 1);
+                                this.visitedPositions.put(fenNoPlayer, 1);
                             }
 
                             // human player
-                            if (isPlayer) {
+                            if (this.isPlayer) {
+                                gameInstance.printBoard(true);
                                 System.out.println("Enter your move: ");
                                 this.move = this.scanner.nextLine();
-                            }
 
                             // AI
-                            else {
-                                //check if a position is in the starting bib
-                                String moveStartingBib = startingBib.get(fenNoPlayer);
-                                if (moveStartingBib != null){
-                                    this.move = moveStartingBib;
+                            } else {
+
+                                // START: opening library
+                                String moveOpeningLib = this.openingLib.get(fenNoPlayer);
+                                if (this.useOpeningLib&&moveOpeningLib != null){
+                                    // check if a position is in the opening library
+                                    this.move = moveOpeningLib;
+                                    this.moveCounter++;
+                                // END: opening library
+
                                 } else {
 
                                     // START: dynamic time management
 
                                     // CASE: start- and endgame
-                                    if (moveCounter <= 6 || (averageMoves-9 < moveCounter && moveCounter <= averageMoves-1)) {
+                                    if (this.moveCounter <= 6 || (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)) {
                                         config.timeLimit = (overall * 0.2) / 15; // 20% of the time (for on average 15 moves in these states)
                                     // CASE: overtime (if game goes beyond averageMoves)
-                                    } else if (timeLeft <= 5000) {
-                                        config.timeLimit = (timeLeft * 0.5); // continuously less (but never running out directly)
+                                    } else if (this.timeLeft <= maxTime * 0.05) { // if we have 5% of time left
+                                        config.timeLimit = (this.timeLeft * 0.5); // continuously less (but never running out directly)
                                     // CASE: mid-game
                                     } else {
                                         config.timeLimit = (overall * 0.8) / 25; // 80% of the time (for on average 25 moves in this state)
@@ -198,13 +241,13 @@ public class Connection {
 
                                     // END: dynamic time management
 
-                                    // get move (switch to MCTS if time low)
-                                    if (timeLeft <= 500) {
+                                    // get move (switch to MCTS if time too low)
+                                    if (this.timeLeft <= this.MCTSTime && this.switchMCTS) {
                                         this.move = ai_MCTS.orchestrator(fen, config);
                                     } else {
                                         this.move = ai.orchestrator(fen, config);
                                     }
-                                    moveCounter++;
+                                    this.moveCounter++;
                                 }
                             }
 
@@ -213,37 +256,26 @@ public class Connection {
                             String fenAfterMove = gameInstance.getFenFromBoard();
 
                             // check for draw
-                            if(visitedPositions.containsKey(fenAfterMove)){
-                                int numberOfVisits = visitedPositions.get(fenAfterMove);
+                            if(this.visitedPositions.containsKey(fenAfterMove)){
+                                int numberOfVisits = this.visitedPositions.get(fenAfterMove);
                                 if (numberOfVisits == 3){
                                     return;
                                 } else {
-                                    visitedPositions.put(fenAfterMove, numberOfVisits + 1);
+                                    this.visitedPositions.put(fenAfterMove, numberOfVisits + 1);
                                 }
                             } else {
-                                visitedPositions.put(fenAfterMove, 1);
+                                this.visitedPositions.put(fenAfterMove, 1);
                             }
 
-                            long timeForMove = System.currentTimeMillis() - currentTime;
-                            timeLeft -= timeForMove;
+                            double timeForMove = System.currentTimeMillis() - this.currentTime;
+                            this.timeLeft -= timeForMove;
 
                             System.out.println("Time For move: " + (timeForMove));
-                            System.out.println("Time left for moves: " + timeLeft);
-                            System.out.println("Move: " + moveCounter);
-
-                            /*
-                            MoveGenerator moveGenerator = new MoveGenerator();
-                            moveGenerator.initializeBoard(fen);
-                            if (moveGenerator.isGameOver(fen)) {
-                                Thread.sleep(3000);
-                                System.exit(0);
-                               break;
-                            }
-                            moveGenerator.printBoard(true);
-                            */
+                            System.out.println("Time left for moves: " + this.timeLeft);
+                            System.out.println("Move: " + this.moveCounter);
 
                             System.out.println("Player " + this.player + " | Move: " + this.move);
-                            System.out.println("\n");
+                            System.out.println("");
                         }
                     }
                 }
@@ -263,11 +295,9 @@ public class Connection {
     public void readFileAndFillBib(String fileLocation) throws IOException {
         final BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileLocation), StandardCharsets.UTF_8));
         String line;
-        int i  = 0;
         while ((line=in.readLine()) != null) {
             String[] tokens = line.split(", ");
-            startingBib.put(tokens[0], tokens[1]);
-            i  = i+1;
+            this.openingLib.put(tokens[0], tokens[1]);
         }
     }
 
@@ -278,30 +308,28 @@ public class Connection {
      * @throws InterruptedException if the main thread is interrupted.
      */
     public static void main(String[] args) throws InterruptedException {
-        Connection player1 = new Connection();
-        player1.connect(false); // only for single player
+        boolean twoPlayer = false;
 
-        /*
-        // START: two player game
+        if (!twoPlayer) {
+            Connection player1 = new Connection(false, true, 100, true);
+            player1.connect(); // only for single player
+        } else {
+            Connection player1 = new Connection(false, true, 100, true);
+            Connection player2 = new Connection(false, true, 100, true);
 
-        Connection player2 = new Connection();
+            Thread thread1 = new Thread(() -> player1.connect());
+            Thread thread2 = new Thread(() -> player2.connect());
 
-        Thread thread1 = new Thread(() -> player1.connect(false));
-        Thread thread2 = new Thread(() -> player2.connect(false));
+            thread1.start();
+            Thread.sleep(100);
+            thread2.start();
 
-        thread1.start();
-        Thread.sleep(100);
-        thread2.start();
-
-        try {
-            thread1.join();
-            thread2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            try {
+                thread1.join();
+                thread2.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-
-        // END: two player game
-         */
-
     }
 }
