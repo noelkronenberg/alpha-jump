@@ -770,7 +770,7 @@ public class MoveGenerator {
      * @param pieceColor The color of the piece making the move (RED or BLUE).
      * @return True if the move is valid, false otherwise.
      */
-    private boolean isValidMove(int move, Color pieceColor) {
+    public boolean isValidMove(int move, Color pieceColor) {
         int row = move / 10;
         int column = move % 10;
 

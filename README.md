@@ -11,6 +11,7 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
   - ```pom.xml``` [Maven](https://www.jetbrains.com/help/idea/maven-support.html) configuration
   - ```src``` 
     - ```main``` Java files
+      - ```app``` playing against AI (as human)
       - ```benchmark``` benchmarking of algorithms
       - ```communication``` communication with demo game server
       - ```debug``` algorithms for debugging
