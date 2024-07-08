@@ -46,7 +46,8 @@ public class OpeningBookGenerator extends Thread {
     }
 
     /**
-     *
+     * generates first set of opponents moves and starts multiple threads to simulate differents parts of the moveslist
+     * 
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param mcts given mcts-instance to use the mcts-methods
      * @param writer given writer to write in the right document
@@ -243,6 +244,7 @@ public class OpeningBookGenerator extends Thread {
     }
 
     /**
+     * runs first iteration of move-simulation and calls next function
      *
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param mcts given mcts-instance to use the mcts-methods
@@ -293,6 +295,7 @@ public class OpeningBookGenerator extends Thread {
     }
 
     /**
+     * simulates until set depth and adds best moves into the list which is written into document later
      *
      * @param moveGenerator given Movegenerator to play the movelines on
      * @param mcts given mcts-instance to use the mcts-methods
