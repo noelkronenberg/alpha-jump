@@ -8,12 +8,12 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
 
 - ```.github/workflows``` [GitHub Actions](https://docs.github.com/en/actions) for automatic unit testing
 - ```jump-sturdy-ai``` project work
-  - ```pom.xml``` [Maven](https://www.jetbrains.com/help/idea/maven-support.html) configuration (e.g. [dependencies](https://mvnrepository.com/))
+  - ```pom.xml``` [Maven](https://www.jetbrains.com/help/idea/maven-support.html) configuration
   - ```src``` 
     - ```main``` Java files
       - ```benchmark``` benchmarking of algorithms
-      - ```communication``` communication with (demo) game server
-      - ```debug``` algorithms (only) for debugging
+      - ```communication``` communication with demo game server
+      - ```debug``` algorithms for debugging
       - ```game``` actual game logic
       - ```search``` algorithms for optimising gameplay
         - ```ab``` alpha-beta pruning
@@ -29,7 +29,7 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
 
 1. start server: ```python game-server/server.py```
 2. if not up to date, generate new ```.exe```
-    1.temporarily remove ```test``` folder
+    1. temporarily remove ```test``` folder
     2. generate ```.jar```: ```mvn clean package```
     3. generate ```.exe``` using [Launch4j](https://genuinecoder.com/online-converter/jar-to-exe/)
 3. start AI: ```jump-sturdy-ai/GruppeC_KI.exe```
