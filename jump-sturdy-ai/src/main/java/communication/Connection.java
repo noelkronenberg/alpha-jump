@@ -223,7 +223,7 @@ public class Connection {
                                 // END: opening library
 
                                 } else {
-                                    
+
                                     // START: dynamic time management
 
                                     // CASE: start- and endgame
@@ -313,8 +313,6 @@ public class Connection {
             player1.connect(); // only for single player
         } else {
             Connection player1 = new Connection(false, true, 100, false);
-            player1.connect();
-
             Connection player2 = new Connection(false, true, 100, false);
 
             Thread thread1 = new Thread(() -> player1.connect());
