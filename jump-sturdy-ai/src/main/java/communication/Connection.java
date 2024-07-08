@@ -26,7 +26,9 @@ public class Connection {
 
     int moveCounter = 0;
     long currentTime = 0;
-    long timeLeft = 120000;
+    double timeLeft = 120000;
+
+    boolean firstIter = true; // helper
 
     HashMap<String, Integer> visitedPositions = new HashMap<>();
 
@@ -54,20 +56,34 @@ public class Connection {
             PrintWriter outputStream = new PrintWriter(server.getOutputStream(), true);
             InputStream inputStream = server.getInputStream();
 
+            // get OS (for file path format)
+            String os = System.getProperty("os.name").toLowerCase();
+            String basePath = new File("").getAbsolutePath();
+            String path;
+
             int temp = (int) inputStream.read();
             if (temp == 48) {
                 this.player = 1;
-                String basePath = new File("").getAbsolutePath();
-                String path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
-                readFileAndFillBib(path);
                 System.out.println("\n" + "You are Player 1");
 
+                // adjust path to opening book
+                if (os.contains("win")) {
+                    path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
+                } else {
+                    path = basePath + "/src/main/java/search/mcts_lib/opening_book_startingMove.txt";
+                }
+                readFileAndFillBib(path);
             } else {
                 this.player = 2;
-                String basePath = new File("").getAbsolutePath();
-                String path = basePath+"\\src\\main\\java\\search\\mcts_lib\\opening_book_secondMove.txt";
-                readFileAndFillBib(path);
                 System.out.println("\n" +  "You are Player 2");
+
+                // adjust path to opening book
+                if (os.contains("win")) {
+                    path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_secondMove.txt";
+                } else {
+                    path = basePath + "/src/main/java/search/mcts_lib/opening_book_secondMove.txt";
+                }
+                readFileAndFillBib(path);
             }
 
             // System.out.println("\n" + "Player " + this.player + " | " + "Connected to the server.");
@@ -101,6 +117,17 @@ public class Connection {
                     } catch (JSONException e) {
                         System.out.println("\n" + "Player " + this.player + " | " + "Error parsing JSON: " + jsonString);
                         continue;
+                    }
+
+                    // set initial time
+                    if (this.moveCounter == 0 && this.firstIter) {
+                        firstIter = false;
+                        double serverTime = response.getDouble("time");
+                        this.timeLeft = serverTime; // time for entire game
+                        overall = 0.95 * this.timeLeft; // time for main game + buffer for longer end phase
+
+                        System.out.println("Set time left to: " + this.timeLeft); // TEST
+                        System.out.println("Set time for main game to: : " + overall); // TEST
                     }
 
                     // System.out.println("\n" + "Player "+ this.player + " | " + "Server response:  " + response);
@@ -219,7 +246,7 @@ public class Connection {
         final BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileLocation), StandardCharsets.UTF_8));
         String line;
         int i  = 0;
-        while ((line=in.readLine())!=null) {
+        while ((line=in.readLine()) != null) {
             String[] tokens = line.split(", ");
             startingBib.put(tokens[0], tokens[1]);
             i  = i+1;
