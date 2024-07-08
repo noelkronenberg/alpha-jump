@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * class of nodes for the MCTS-algorithm for creating an opening-library-document
+ * Class of nodes for the MCTS-algorithm for creating an opening-library-document.
  */
 public class MCTSNode_lib {
     int move; // move leading to node
@@ -14,10 +14,11 @@ public class MCTSNode_lib {
     int depth;
 
     /**
-     * 
-     * @param move move which the node represants
-     * @param parent parent node of this node
-     * @param depth int which indicates the depth of this node in the mcts-tree
+     * Constructs a new MCTSNode_lib object.
+     *
+     * @param move The move associated with this node.
+     * @param parent The parent node of this node.
+     * @param depth The depth of this node in the MCTS tree.
      */
     public MCTSNode_lib(int move, MCTSNode_lib parent, int depth) {
         this.move = move;
@@ -29,8 +30,9 @@ public class MCTSNode_lib {
     }
 
     /**
-     * 
-     * @return boolean which indicates if every child node of this one has been visited
+     * Checks if every child node of this node has been visited at least once.
+     *
+     * @return true if every child node has been visited; false otherwise.
      */
     public boolean isFullyExpanded() {
         for (MCTSNode_lib child : children) {
