@@ -3,7 +3,6 @@ package search.mcts;
 import game.Color;
 import game.MoveGenerator;
 import search.AI;
-import search.ab.Minimax_AB;
 import search.ab.Evaluation;
 import search.SearchConfig;
 
@@ -44,7 +43,6 @@ public class MCTS extends AI {
         LinkedList<Integer> movesList = Evaluation.convertMovesToList(moves);
         MCTSNode parentNode = new MCTSNode(ourColor);
         this.parentNode = parentNode;
-        // gameState.printBoard(false);
 
         MoveGenerator parentGameState = new MoveGenerator();
         parentGameState.initializeBoard(gameState.getFenFromBoard());
@@ -118,8 +116,8 @@ public class MCTS extends AI {
     public int simulateToEnd(Color color, MoveGenerator moveGenerator, Color parentColor) {
 
         /*
+        // alternative: generate and pick random mov
         while (true) {
-            // generate and Pick random mov
             color = (color == Color.RED) ? Color.BLUE : Color.RED;
             LinkedHashMap<Integer,List<Integer>> moves = moveGenerator.generateAllPossibleMoves(color);
 
@@ -181,12 +179,6 @@ public class MCTS extends AI {
 
             for (MCTSNode child : node.children) {
 
-                /*
-                if (child.move == 3534 && numberOfAllSimulations >= 3000000) {
-                    int i = 0;
-                }
-                */
-
                 double nodeUCB = child.getNodeValue();
 
                 if (child.isWinPos || child.isWinMove) {
@@ -199,12 +191,6 @@ public class MCTS extends AI {
                     bestChild = child;
                 }
             }
-
-            /*
-            if (bestChild.move == 6171) {
-                int i = 0;
-            }
-            */
 
             moveGenerator.movePiece(bestChild.move);
             if (bestChild.numberOfVisits <= 1) {
@@ -235,15 +221,6 @@ public class MCTS extends AI {
             node.children.add(new MCTSNode(node, move, color));
         }
 
-        /*
-        if (node.children.size() <= 0) {
-            int i = 0;
-        }
-        if (node.children.size() == 0) {
-            int i = 0;
-        }
-        */
-
         MCTSNode selectedChild = node.children.get(random.nextInt(node.children.size()));
         moveGenerator.movePiece(selectedChild.move);
         return selectedChild;
@@ -265,22 +242,10 @@ public class MCTS extends AI {
         double endtime = System.currentTimeMillis() + timeLimit;
 
         while(continueSearch(endtime)) {
-            MCTSNode selectedNode=treeTraversal(endtime, node, moveGenerator);
 
-            /*
-            if (selectedNode.move == 2514) {
-                int i = 1;
-            }
-            */
+            MCTSNode selectedNode = treeTraversal(endtime, node, moveGenerator);
 
             if (selectedNode.isWinMove) {
-
-                /*
-                if (numberOfAllSimulations >= 3000000) {
-                    int i = 0;
-                }
-                */
-
                 propagateDataToRoot(selectedNode,1, selectedNode.color);
                 node = this.parentNode;
                 moveGenerator.initializeBoard(parentGameState.getFenFromBoard());
@@ -288,13 +253,6 @@ public class MCTS extends AI {
             }
 
             if (selectedNode.isWinPos) {
-                /*
-                if (numberOfAllSimulations >= 3000000) {
-                    int i = 0;
-                }
-                */
-
-                // color = (selectedNode.color == Color.RED) ? Color.BLUE : Color.RED;
                 propagateDataToRoot(selectedNode,1, selectedNode.color);
                 node = this.parentNode;
                 moveGenerator.initializeBoard(parentGameState.getFenFromBoard());
@@ -302,7 +260,7 @@ public class MCTS extends AI {
             }
 
             color = (selectedNode.color == Color.RED) ? Color.BLUE : Color.RED;
-            //generate possible moves:
+            // generate possible moves:
             LinkedList<Integer> moves = Evaluation.convertMovesToList(moveGenerator.generateAllPossibleMoves(selectedNode.color));
 
             if (moves.size() > 0) {
@@ -342,21 +300,11 @@ public class MCTS extends AI {
                 node = node.parent;
             }
         }
+
         node.numberOfVisits++;
         if (node.color == colorOfExpandedPlayer) {
             node.numberOfWins += reward;
         }
         numberOfAllSimulations++;
     }
-
-    public static void main(String[] args) {
-        MCTS ai = new MCTS();
-        String fen = "3bb2/b02b02b01/3b02bbb0/1b06/1r0r02r01r0/6r01/5r0r0r0/6 b"; // testMoves("2b01bbb0/2b0r0b03/4b03/2bbb04/3r04/5r02/1r03r02/r0r0r0r0r0r0 r", "D5-C4");
-
-        SearchConfig config = Minimax_AB.bestConfig.copy();
-        config.timeLimit = 20000.0;
-        ai.orchestrator(fen, config);
-        ai.orchestrator(fen, Minimax_AB.bestConfig.copy());
-    }
-
 }

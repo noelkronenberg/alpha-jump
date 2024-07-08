@@ -754,10 +754,8 @@ public class MoveGenerator {
             // count protected pieces (for Evaluation)
             if (colorBoard[newRow][newColumn] == color) {
                 protectedPieces += 1;
-            }
-
             // is attacking
-            else if (colorBoard[newRow][newColumn] != color && colorBoard[newRow][newColumn] != Color.EMPTY) {
+            } else if (colorBoard[newRow][newColumn] != color && colorBoard[newRow][newColumn] != Color.EMPTY) {
                 capturingHM.put((position * 100) + convertToNumber(newRow, newColumn), 1); // capturing move (for Evaluation)
             }
         }
@@ -848,7 +846,7 @@ public class MoveGenerator {
         Random generator =  new Random();
         ArrayList<Integer> allPieces = new ArrayList<>(moves.keySet());
 
-        if (allPieces.size() == 0){
+        if (allPieces.size() == 0) {
             return 0;
         }
         int number = generator.nextInt(allPieces.size());
@@ -870,7 +868,6 @@ public class MoveGenerator {
     public LinkedHashMap<Integer, List<Integer>> getMovesWrapper(String fen) {
         char color_fen = fen.charAt(fen.length() - 1);
         Color color = this.getColor(color_fen);
-        // System.out.println("Color: " + color);
         String fenBoard=fen.substring(0, fen.length() - 2);
         this.initializeBoard(fenBoard);
         return this.generateAllPossibleMoves(color);
@@ -1159,7 +1156,6 @@ public class MoveGenerator {
      * @return True if the game is over for either color, false otherwise.
      */
     public boolean isGameOverMCTS_lib(LinkedHashMap<Integer, List<Integer>> moves) {
-        //returns true if somebody has won in that position
         if (doesBaseRowContainColor(Color.RED, 0) || doesBaseRowContainColor(Color.BLUE, 7) || moves.isEmpty()) {
             return true;
         } else {
@@ -1168,15 +1164,13 @@ public class MoveGenerator {
     }
 
     /**
-     * Determines the winner for the Monte Carlo Tree Search (MCTS) strategy.
+     * Determines the winner for the Monte Carlo Tree Search (MCTS) strategy (only use when confirmed that game is over).
      *
      * @param moves A map of possible moves where keys are combined integer positions and values are lists of target positions.
      * @param currPlayer The current player color to determine the winner (RED or BLUE).
      * @return True if BLUE (currPlayer) is the winner, false if RED is the winner.
      */
     public boolean getWinner(LinkedHashMap<Integer, List<Integer>> moves, Color currPlayer) {
-        //returns false if red won, returns true if blue won
-        //only use when confirmed that game is over
         if (currPlayer == Color.RED) {
             if (doesBaseRowContainColor(Color.BLUE, 7) || moves.isEmpty()) {
                 return true;
@@ -1282,7 +1276,7 @@ public class MoveGenerator {
                 }
 
                 else {
-                    // Red piece
+                    // red piece
                     if (colorBoard[row][column] == Color.RED) {
                         switch (pieceBoard[row][column]) {
                             case SINGLE:
@@ -1296,7 +1290,7 @@ public class MoveGenerator {
                                 break;
                         }
 
-                    // Blue piece
+                    // blue piece
                     } else {
                         switch (pieceBoard[row][column]) {
                             case SINGLE:
@@ -1318,5 +1312,6 @@ public class MoveGenerator {
         }
         System.out.println();
     }
+
     // END: visualisation
 }

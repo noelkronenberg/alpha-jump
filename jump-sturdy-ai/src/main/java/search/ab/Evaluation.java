@@ -470,5 +470,6 @@ public class Evaluation {
 
         moves.sort(comparator);
     }
+
     // END: move ordering
 }
