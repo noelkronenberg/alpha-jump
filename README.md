@@ -4,6 +4,8 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
 
 ![](https://github.com/noelkronenberg/projekt-ki/actions/workflows/junit.yml/badge.svg)
 
+> **Note:** Unit Tests (see badge above) might fail if GitHUb Actions limit has been reached. If so, run them locally.
+
 ## Structure
 
 - ```.github/workflows``` [GitHub Actions](https://docs.github.com/en/actions) for automatic unit testing
@@ -26,7 +28,7 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
 
 ## Playing
 
-> Note: [JDK](https://www.oracle.com/java/technologies/downloads/) version 22.0.1 should be installed on the computer.
+> **Note:** [JDK](https://www.oracle.com/java/technologies/downloads/) version 22.0.1 should be installed on the computer.
 
 1. start server: ```python game-server/server.py```
 2. if not up to date, generate new ```.exe```
