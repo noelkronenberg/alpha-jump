@@ -19,6 +19,9 @@ import java.util.HashMap;
  */
 public class ConnectionSimulation {
 
+    static HashMap<String,String> startingMoveLib;
+    static HashMap<String,String> secondMoveLib;
+
     /**
      * Class to represent the result of a game, including the winning AI and the color.
      */
@@ -48,8 +51,6 @@ public class ConnectionSimulation {
      * @return An integer indicating the winner of the game. Returns 1 if the first AI wins, 2 if the second AI wins.
      */
     public static GameResult playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, boolean showGame, ConnectionSimulationConfig timeConfigFirst, ConnectionSimulationConfig timeConfigSecond) throws IOException {
-
-
         double maxTime = 120000.0;
 
         double overall = 0.96 * maxTime;
@@ -60,17 +61,15 @@ public class ConnectionSimulation {
         MoveGenerator gameState = new MoveGenerator();
         gameState.initializeBoard(fen);
 
-        String fenNoPlayer = fen.substring(0, fen.length() - 2);
-
         String bestMove;
         boolean gameOver = false;
         int moveCount = 0;
 
         int moveCountRed = 0;
         int moveCountBlue = 0;
-
-        HashMap<String,String> startingMovesRed = readFileAndFillBib("opening_book_startingMove.txt",1, new HashMap<>());
-        HashMap<String,String> startingMovesBlue = readFileAndFillBib("opening_book_secondMove.txt",2, new HashMap<>());
+        long currentTime = 0;
+        double totalTimeRed = maxTime;
+        double totalTimeBlue = maxTime;
 
         ArrayList<Integer> firstAIDepths = new ArrayList<>();
         ArrayList<Integer> secondAIDepths = new ArrayList<>();
@@ -78,13 +77,23 @@ public class ConnectionSimulation {
         Color startingColor = fen.charAt(fen.length() - 1) == 'r' ? Color.RED : Color.BLUE;
 
         while (!gameOver) {
+
+            currentTime = System.currentTimeMillis();
+
+            char currentColorChar = fen.charAt(fen.length() - 1);
+            Color currentColor = (currentColorChar == 'r') ? Color.RED : Color.BLUE;
+
+            String moveOpeningLib;
+            if (currentColor == Color.RED) {
+                moveOpeningLib = startingMoveLib.get(fen.substring(0, fen.length() - 2));
+            } else {
+                moveOpeningLib = secondMoveLib.get(fen.substring(0, fen.length() - 2));
+            }
+
             // get best move
             if (moveCount % 2 == 0) {
                 // START: opening library
-                String moveOpeningLib = startingMovesRed.get(fenNoPlayer);
                 if (moveOpeningLib != null) {
-                    System.out.println("Player 1 " + " | Using opening library");
-                    System.out.println();
                     // check if a position is in the opening library
                     bestMove = moveOpeningLib;
                     moveCountRed++;
@@ -100,46 +109,53 @@ public class ConnectionSimulation {
                     } else {
                         firstConfig.timeLimit = (overall * timeConfigFirst.weightParameterNormal) / timeConfigFirst.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
                     }
+
+                    bestMove = firstAI.orchestrator(fen, firstConfig);
+                    moveCountRed++;
                 }
-                bestMove = firstAI.orchestrator(fen, firstConfig);
-                moveCountRed++;
 
                 if (firstAI instanceof Minimax_AB) {
                     firstAIDepths.add(((Minimax_AB) firstAI).maxDepth);
                 }
             } else {
                 // START: opening library
-                String moveOpeningLib = startingMovesBlue.get(fenNoPlayer);
                 if (moveOpeningLib != null) {
-                    System.out.println("Player 2 " + " | Using opening library");
-                    System.out.println();
                     // check if a position is in the opening library
                     bestMove = moveOpeningLib;
                     moveCountBlue++;
                  // END: opening library
 
                 } else {
-                    if (moveCountRed <= timeConfigSecond.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
+                    if (moveCountBlue <= timeConfigSecond.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
                         firstConfig.timeLimit = (overall * timeConfigSecond.weightParameterStart) / timeConfigSecond.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
                         // CASE: overtime (if game goes beyond averageMoves)
-                    } else if (timeLeftRed <= maxTime * timeConfigSecond.weightParameterEndTime) { // if we have 5% of time left
-                        firstConfig.timeLimit = (timeLeftRed * timeConfigSecond.weightParameterFinal); // continuously less (but never running out directly)
+                    } else if (timeLeftBlue <= maxTime * timeConfigSecond.weightParameterEndTime) { // if we have 5% of time left
+                        secondConfig.timeLimit = (timeLeftBlue * timeConfigSecond.weightParameterFinal); // continuously less (but never running out directly)
                         // CASE: mid-game
                     } else {
-                        firstConfig.timeLimit = (overall * timeConfigSecond.weightParameterNormal) / timeConfigSecond.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
+                        secondConfig.timeLimit = (overall * timeConfigSecond.weightParameterNormal) / timeConfigSecond.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
                     }
+
+                    bestMove = secondAI.orchestrator(fen, secondConfig);
+                    moveCountBlue++;
                 }
-                bestMove = secondAI.orchestrator(fen, secondConfig);
-                moveCountBlue++;
 
                 if (secondAI instanceof Minimax_AB) {
                     secondAIDepths.add(((Minimax_AB) secondAI).maxDepth);
                 }
             }
 
+            // time keeping
+            double timeForMove = System.currentTimeMillis() - currentTime;
+            System.out.println(currentColor + " | Time for move: " + timeForMove);
+            System.out.println();
+            if (currentColor == Color.RED) {
+                totalTimeRed -= timeForMove;
+            } else {
+                totalTimeBlue -= timeForMove;
+            }
+
             // check for game over
-            char currentColorChar = fen.charAt(fen.length() - 1);
-            Color currentColor = (currentColorChar == 'r') ? Color.RED : Color.BLUE;
             gameOver = gameState.isGameOver(bestMove, currentColor);
 
             if (!gameOver) {
@@ -165,6 +181,14 @@ public class ConnectionSimulation {
             char nextColor = (currentColorChar == 'r') ? 'b' : 'r'; // switch color
             fen = gameState.getFenFromBoard() + " " + nextColor;
         }
+
+        System.out.println("Total moves for red: " + moveCountRed);
+        System.out.println("Total moves for blue: " + moveCountBlue);
+        System.out.println();
+
+        System.out.println("Total time left for red: " + totalTimeRed);
+        System.out.println("Total time left for blue: " + totalTimeBlue);
+        System.out.println();
 
         if (moveCount % 2 == 0) {
             Color otherColor = (startingColor == Color.RED) ? Color.BLUE : Color.RED;
@@ -235,6 +259,10 @@ public class ConnectionSimulation {
                 secondAIWins++;
                 System.out.println("Winner of game " + i + " is: AI 2 (" + result.color + ")");
             }
+
+            if (i != iterations) {
+                System.out.println();
+            }
         }
 
         dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
@@ -274,10 +302,12 @@ public class ConnectionSimulation {
 
         System.out.println("First AI: ");
         System.out.println(firstAI.toString());
+        System.out.println(timeConfigFirst.toString());
         System.out.println();
 
         System.out.println("Second AI: ");
         System.out.println(secondAI.toString());
+        System.out.println(timeConfigSecond.toString());
         System.out.println();
 
         System.out.println("System Information:");
@@ -309,30 +339,17 @@ public class ConnectionSimulation {
         ) {
 
             if (player == 1) {
-                System.out.println("Player 1 | Read file: " + fileLocation);
-                System.out.println();
-
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] tokens = line.split(", ");
                     openingLib.put(tokens[0], tokens[1]);
                 }
-
-                System.out.println("Player 1 | Read file: " + fileLocation);
-                System.out.println();
-
             } else {
-                System.out.println("Player 2 | Read file: " + fileLocation);
-                System.out.println();
-
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] tokens = line.split(", ");
                     openingLib.put(tokens[0], tokens[1]);
                 }
-
-                System.out.println("Player 2 | Read file: " + fileLocation);
-                System.out.println();
             }
 
             return openingLib;
@@ -347,6 +364,9 @@ public class ConnectionSimulation {
      */
     public static void main(String[] args) {
         try {
+            startingMoveLib = readFileAndFillBib("opening_book_startingMove.txt",1, new HashMap<>());
+            secondMoveLib = readFileAndFillBib("opening_book_secondMove.txt",2, new HashMap<>());
+
             // filename (DO NOT CHANGE)
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
             String timestamp = dateFormat.format(new Date());
@@ -368,7 +388,7 @@ public class ConnectionSimulation {
             ConnectionSimulationConfig timeConfigSecond =  new ConnectionSimulationConfig(0.92,0.08,0.04,29,6,0.5);
 
             // configuration of connectionSimulation (CAN BE CHANGED)
-            String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
+            String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
             int iterations = 2;
             boolean showGame = false;
 

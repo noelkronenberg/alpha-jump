@@ -16,4 +16,14 @@ public class ConnectionSimulationConfig {
         this.numberOfMovesNormal = numberOfMovesNormal;
         this.numberOfMovesStart = numberOfMovesStart;
     }
+
+    @Override
+    public String toString() {
+        return "weightParameterNormal = " + weightParameterNormal +
+                " | weightParameterStart = " + weightParameterStart +
+                " | weightParameterEndTime = " + weightParameterEndTime +
+                " | weightParameterFinal = " + weightParameterFinal +
+                " | numberOfMovesNormal = " + numberOfMovesNormal +
+                " | numberOfMovesStart = " + numberOfMovesStart;
+    }
 }

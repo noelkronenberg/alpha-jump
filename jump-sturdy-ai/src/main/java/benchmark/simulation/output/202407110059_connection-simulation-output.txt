@@ -1,0 +1,66 @@
+START: 202407110059
+
+Player 1  | Using opening library
+
+Player 2  | Using opening library
+
+Player 1  | Using opening library
+
+Player 2  | Using opening library
+
+Player 1  | Using opening library
+
+Player 2  | Using opening library
+
+Player 1  | Using opening library
+
+Winner of game 1 is: AI 1 (BLUE)
+
+Player 1  | Using opening library
+
+Player 2  | Using opening library
+
+Player 1  | Using opening library
+
+Player 2  | Using opening library
+
+Player 1  | Using opening library
+
+Player 2  | Using opening library
+
+Player 1  | Using opening library
+
+Winner of game 2 is: AI 2 (BLUE)
+
+END: 202407110102
+
+Results: 
+
+First AI wins: 1
+Second AI wins: 1
+
+First AI depths: [1, 1, 1, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9, 8, 9, 8, 8, 3]
+First AI average depth: 6,73
+Second AI depths: [0, 0, 0, 6, 7, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 7]
+Second AI average depth: 5,91
+
+Settings: 
+
+Iterations: 2
+FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r
+
+First AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 4147.2 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false | qSDepth = 6
+
+Second AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3654.6206896551726 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false | qSDepth = 6
+
+System Information:
+
+OS: Mac OS X | aarch64
+Available processors (cores): 8
+System load average (cores): 3,42
+Total physical memory (GB): 16,00
+Free physical memory (GB): 0,04
