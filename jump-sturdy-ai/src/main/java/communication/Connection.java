@@ -103,9 +103,9 @@ public class Connection {
 
                 // adjust path to opening book
                 if (os.contains("win")) {
-                    path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
+                    path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt"; // # NOTE: maybe adjust to project path (with "/")
                 } else {
-                    path = basePath + "/src/main/java/search/mcts_lib/opening_book_startingMove.txt";
+                    path = "opening_book_startingMove.txt";
                 }
                 readFileAndFillBib(path);
             } else {
@@ -115,9 +115,9 @@ public class Connection {
 
                 // adjust path to opening book
                 if (os.contains("win")) {
-                    path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_secondMove.txt";
+                    path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_secondMove.txt"; // # NOTE: maybe adjust to project path (with "/")
                 } else {
-                    path = basePath + "/src/main/java/search/mcts_lib/opening_book_secondMove.txt";
+                    path = "opening_book_secondMove.txt";
                 }
                 readFileAndFillBib(path);
             }
@@ -165,7 +165,7 @@ public class Connection {
 
                         System.out.println("Player " + this.player);
                         System.out.println("Set time left to: " + this.timeLeft);
-                        System.out.println("Set time for main game to: : " + overall);
+                        System.out.println("Set time for main game to:: " + overall);
                         System.out.println();
 
                         // Thread.sleep(100); // turn on for better visualisation
@@ -218,7 +218,9 @@ public class Connection {
 
                                 // START: opening library
                                 String moveOpeningLib = this.openingLib.get(fenNoPlayer);
-                                if (this.useOpeningLib&&moveOpeningLib != null){
+                                if (this.useOpeningLib && moveOpeningLib != null){
+                                    System.out.println("Player " + this.player + " | Using opening library");
+                                    System.out.println();
                                     // check if a position is in the opening library
                                     this.move = moveOpeningLib;
                                     this.moveCounter++;
@@ -293,11 +295,21 @@ public class Connection {
      * @throws IOException
      */
     public void readFileAndFillBib(String fileLocation) throws IOException {
-        final BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileLocation), StandardCharsets.UTF_8));
-        String line;
-        while ((line=in.readLine()) != null) {
-            String[] tokens = line.split(", ");
-            this.openingLib.put(tokens[0], tokens[1]);
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        try (InputStream inputStream = classloader.getResourceAsStream(fileLocation);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+        ) {
+            System.out.println(Thread.currentThread().getName() + " | Reading file: " + fileLocation);
+            System.out.println();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                String position = parts[0];
+                String move = parts[1];
+                openingLib.put(position, move);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -308,7 +320,7 @@ public class Connection {
      * @throws InterruptedException if the main thread is interrupted.
      */
     public static void main(String[] args) throws InterruptedException {
-        boolean twoPlayer = false;
+        boolean twoPlayer = true;
 
         if (!twoPlayer) {
             Connection player1 = new Connection(false, true, 100, true);
@@ -319,6 +331,9 @@ public class Connection {
 
             Thread thread1 = new Thread(() -> player1.connect());
             Thread thread2 = new Thread(() -> player2.connect());
+
+            thread1.setName("Player 1");
+            thread2.setName("Player 2");
 
             thread1.start();
             Thread.sleep(100);
