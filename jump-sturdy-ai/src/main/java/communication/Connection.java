@@ -102,11 +102,7 @@ public class Connection {
                 System.out.println();
 
                 // adjust path to opening book
-                if (os.contains("win")) {
-                    path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt"; // # NOTE: maybe adjust to project path (with "/")
-                } else {
-                    path = "opening_book_startingMove.txt";
-                }
+                path = "opening_book_startingMove.txt";
                 readFileAndFillBib(path);
             } else {
                 this.player = 2;
@@ -114,11 +110,7 @@ public class Connection {
                 System.out.println();
 
                 // adjust path to opening book
-                if (os.contains("win")) {
-                    path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_secondMove.txt"; // # NOTE: maybe adjust to project path (with "/")
-                } else {
-                    path = "opening_book_secondMove.txt";
-                }
+                path = "opening_book_secondMove.txt";
                 readFileAndFillBib(path);
             }
 
