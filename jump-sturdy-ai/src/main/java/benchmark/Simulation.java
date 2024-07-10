@@ -75,16 +75,16 @@ public class Simulation {
         String path = "";
 
         if (os.contains("win")) {
-            path = basePath + "\\src\\main\\java\\resources\\opening_book_startingMove.txt";
+            path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
         } else {
-            path = basePath + "/src/main/java/resources/opening_book_startingMove.txt";
+            path = basePath + "/src/main/java/search/mcts_lib/opening_book_startingMove.txt";
         }
         HashMap<String,String> startingMovesRed = readFileAndFillBib(path,1,new HashMap<>());
 
         if (os.contains("win")) {
-            path = basePath + "\\src\\main\\java\\resources\\opening_book_secondMove.txt";
+            path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_secondMove.txt";
         } else {
-            path = basePath + "/src/main/java/resources/opening_book_secondMove.txt";
+            path = basePath + "/src/main/java/search/mcts_lib/opening_book_secondMove.txt";
         }
         HashMap<String,String> startingMovesBlue = readFileAndFillBib(path,2,new HashMap<>());
 
