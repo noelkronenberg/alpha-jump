@@ -16,6 +16,7 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
       - ```java``` Java files
         - ```app``` playing against AI (as human)
         - ```benchmark``` benchmarking of algorithms
+          - ```simulation``` game simulations
         - ```communication``` communication with demo game server
         - ```debug``` algorithms for debugging
         - ```game``` actual game logic
