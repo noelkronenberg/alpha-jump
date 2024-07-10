@@ -1,5 +1,8 @@
 package benchmark.simulation;
 
+/**
+ * Configuration for a connection simulation.
+ */
 public class ConnectionSimulationConfig {
     double weightParameterNormal;
     double weightParameterStart;
@@ -8,6 +11,16 @@ public class ConnectionSimulationConfig {
     int numberOfMovesNormal;
     int numberOfMovesStart;
 
+    /**
+     * Constructs a new {@code ConnectionSimulationConfig} with the specified parameters.
+     *
+     * @param weightParameterNormal the weight parameter for normal moves
+     * @param weightParameterStart the weight parameter at the start of the simulation
+     * @param weightParameterEndTime the weight parameter at the end time of the simulation
+     * @param numberOfMovesNormal the number of normal moves in the simulation
+     * @param numberOfMovesStart the number of moves at the start of the simulation
+     * @param weightParameterFinal the final weight parameter
+     */
     public ConnectionSimulationConfig(double weightParameterNormal, double weightParameterStart, double weightParameterEndTime, int numberOfMovesNormal, int numberOfMovesStart, double weightParameterFinal) {
         this.weightParameterNormal = weightParameterNormal;
         this.weightParameterStart = weightParameterStart;
