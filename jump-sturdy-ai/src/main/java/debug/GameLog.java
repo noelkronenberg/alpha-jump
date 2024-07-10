@@ -2,6 +2,7 @@ package debug;
 
 import game.MoveGenerator;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import org.jfree.chart.ChartFactory;
@@ -11,6 +12,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -100,8 +102,8 @@ public class GameLog {
 
                 }
 
-                plotChart("Time Used / Move", "Move Number", "Time (ms)", datasetTimeMove);
-                plotChart("Time Left / Move", "Move Number", "Time Left (ms)", datasetTimeLeft);
+                plotChart("Time Used / Move", "Move Number", "Time (ms)", datasetTimeMove, "time-used");
+                plotChart("Time Left / Move", "Move Number", "Time Left (ms)", datasetTimeLeft, "time-left");
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -120,9 +122,10 @@ public class GameLog {
      * @param xAxisLabel The label for the x-axis.
      * @param yAxisLabel The label for the y-axis.
      * @param dataset The dataset containing the chart data.
+     * @param fileName The name of the output file.
      */
     private static void plotChart(String chartTitle, String xAxisLabel, String yAxisLabel,
-                                           CategoryDataset dataset) {
+                                           CategoryDataset dataset, String fileName) {
 
         Color backgroundPaint =  Color.WHITE;
         Color gridLinePaint = Color.GRAY;
@@ -144,6 +147,17 @@ public class GameLog {
             frame.setContentPane(chartPanel);
             frame.pack();
             frame.setVisible(true);
+
+            // export
+            File outputFile = new File("src/main/java/debug/", fileName + "-output.png");
+            try {
+                BufferedImage image = lineChart.createBufferedImage(1000, 500);
+                ImageIO.write(image, "png", outputFile) ;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
+
+
     }
 }
