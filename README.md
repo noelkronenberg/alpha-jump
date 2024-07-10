@@ -12,17 +12,19 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
 - ```jump-sturdy-ai``` project work
   - ```pom.xml``` [Maven](https://www.jetbrains.com/help/idea/maven-support.html) configuration
   - ```src``` 
-    - ```main``` Java files
-      - ```app``` playing against AI (as human)
-      - ```benchmark``` benchmarking of algorithms
-      - ```communication``` communication with demo game server
-      - ```debug``` algorithms for debugging
-      - ```game``` actual game logic
-      - ```search``` algorithms for optimising gameplay
-        - ```ab``` alpha-beta pruning
-        - ```mcts_lib``` Monte Carlo tree search for generating an opening book
-        - ```mcts``` Monte Carlo tree search
-        - ```optimisation``` algorithms for parameter optimisation
+    - ```main``` main files
+      - ```java``` Java files
+        - ```app``` playing against AI (as human)
+        - ```benchmark``` benchmarking of algorithms
+        - ```communication``` communication with demo game server
+        - ```debug``` algorithms for debugging
+        - ```game``` actual game logic
+        - ```search``` algorithms for optimising gameplay
+          - ```ab``` alpha-beta pruning
+          - ```mcts_lib``` Monte Carlo tree search for generating an opening book
+          - ```mcts``` Monte Carlo tree search
+          - ```optimisation``` algorithms for parameter optimisation
+      - ```resources``` resource files
     - ```test``` [JUnit](https://www.jetbrains.com/help/idea/junit.html) tests
 - ```game-server``` Jump Sturdy server for playing against other players (given by [course organisors](https://git.tu-berlin.de/lengfeld8/jump-sturdy-game-server))
 
