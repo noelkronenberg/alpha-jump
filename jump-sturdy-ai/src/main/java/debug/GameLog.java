@@ -12,7 +12,7 @@ public class GameLog {
     /**
      * Main method to execute the game log processing.
      *
-     * @param args Command-line arguments (not used in this application).
+     * @param args Command-line arguments (not used).
      */
     public static void main(String[] args) {
         try {
