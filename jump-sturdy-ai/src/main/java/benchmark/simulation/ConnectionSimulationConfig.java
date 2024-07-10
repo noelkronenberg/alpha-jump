@@ -1,18 +1,19 @@
 package benchmark.simulation;
 
 public class ConnectionSimulationConfig {
-    double gewichtungsParameterNormal;
-    double gewichtungsParameterStart;
-    double gewichtungsParameterEndZeit;
-    double gewichtungsParameterFinal;
+    double weightParameterNormal;
+    double weightParameterStart;
+    double weightParameterEndTime;
+    double weightParameterFinal;
     int numberOfMovesNormal;
     int numberOfMovesStart;
-    public ConnectionSimulationConfig(double gewichtungsParameterNormal,double gewichtungsParameterStart, double gewichtungsParameterEndZeit, int numberOfMovesNormal, int numberOfMovesStart, double gewichtungsParameterFinal){
-        this.gewichtungsParameterNormal=gewichtungsParameterNormal;
-        this.gewichtungsParameterStart=gewichtungsParameterStart;
-        this.gewichtungsParameterEndZeit=gewichtungsParameterEndZeit;
-        this.gewichtungsParameterFinal=gewichtungsParameterFinal;
-        this.numberOfMovesNormal=numberOfMovesNormal;
-        this.numberOfMovesStart=numberOfMovesStart;
+
+    public ConnectionSimulationConfig(double weightParameterNormal, double weightParameterStart, double weightParameterEndTime, int numberOfMovesNormal, int numberOfMovesStart, double weightParameterFinal) {
+        this.weightParameterNormal = weightParameterNormal;
+        this.weightParameterStart = weightParameterStart;
+        this.weightParameterEndTime = weightParameterEndTime;
+        this.weightParameterFinal = weightParameterFinal;
+        this.numberOfMovesNormal = numberOfMovesNormal;
+        this.numberOfMovesStart = numberOfMovesStart;
     }
 }

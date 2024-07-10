@@ -44,6 +44,8 @@ public class ConnectionSimulation {
      * @param secondConfig The configuration for the second AI's search algorithm.
      * @param fen The initial board state in FEN format.
      * @param showGame Whether to show the game play.
+     * @param timeConfigFirst Time configuration of firstAI.
+     * @param timeConfigSecond Time configuration of secondAI.
      * @return An integer indicating the winner of the game. Returns 1 if the first AI wins, 2 if the second AI wins.
      */
     public static GameResult playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, boolean showGame, ConnectionSimulationConfig timeConfigFirst, ConnectionSimulationConfig timeConfigSecond) throws IOException {
@@ -103,13 +105,13 @@ public class ConnectionSimulation {
 
                 } else {
                     if (moveCountRed <= timeConfigFirst.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
-                        firstConfig.timeLimit = (overall * timeConfigFirst.gewichtungsParameterStart) / timeConfigFirst.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
+                        firstConfig.timeLimit = (overall * timeConfigFirst.weightParameterStart) / timeConfigFirst.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
                         // CASE: overtime (if game goes beyond averageMoves)
-                    } else if (timeLeftRed <= maxTime * timeConfigFirst.gewichtungsParameterEndZeit) { // if we have 5% of time left
-                        firstConfig.timeLimit = (timeLeftRed * timeConfigFirst.gewichtungsParameterFinal); // continuously less (but never running out directly)
+                    } else if (timeLeftRed <= maxTime * timeConfigFirst.weightParameterEndTime) { // if we have 5% of time left
+                        firstConfig.timeLimit = (timeLeftRed * timeConfigFirst.weightParameterFinal); // continuously less (but never running out directly)
                         // CASE: mid-game
                     } else {
-                        firstConfig.timeLimit = (overall * timeConfigFirst.gewichtungsParameterNormal) / timeConfigFirst.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
+                        firstConfig.timeLimit = (overall * timeConfigFirst.weightParameterNormal) / timeConfigFirst.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
                     }
                 }
                 bestMove = firstAI.orchestrator(fen, firstConfig);
@@ -128,13 +130,13 @@ public class ConnectionSimulation {
 
                 } else {
                     if (moveCountRed <= timeConfigSecond.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
-                        firstConfig.timeLimit = (overall * timeConfigSecond.gewichtungsParameterStart) / timeConfigSecond.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
+                        firstConfig.timeLimit = (overall * timeConfigSecond.weightParameterStart) / timeConfigSecond.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
                         // CASE: overtime (if game goes beyond averageMoves)
-                    } else if (timeLeftRed <= maxTime * timeConfigSecond.gewichtungsParameterEndZeit) { // if we have 5% of time left
-                        firstConfig.timeLimit = (timeLeftRed * timeConfigSecond.gewichtungsParameterFinal); // continuously less (but never running out directly)
+                    } else if (timeLeftRed <= maxTime * timeConfigSecond.weightParameterEndTime) { // if we have 5% of time left
+                        firstConfig.timeLimit = (timeLeftRed * timeConfigSecond.weightParameterFinal); // continuously less (but never running out directly)
                         // CASE: mid-game
                     } else {
-                        firstConfig.timeLimit = (overall * timeConfigSecond.gewichtungsParameterNormal) / timeConfigSecond.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
+                        firstConfig.timeLimit = (overall * timeConfigSecond.weightParameterNormal) / timeConfigSecond.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
                     }
                 }
                 bestMove = secondAI.orchestrator(fen, secondConfig);
@@ -192,6 +194,8 @@ public class ConnectionSimulation {
      * @param secondConfig The configuration for the second AI's search algorithm.
      * @param fen The initial board state in FEN format.
      * @param iterations The number of iterations (games) to simulate. Must be an even number.
+     * @param timeConfigFirst Time configuration of firstAI.
+     * @param timeConfigSecond Time configuration of secondAI.
      * @param showGame Whether to show the game play.
      */
     public void simulate(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, int iterations, boolean showGame, ConnectionSimulationConfig timeConfigFirst, ConnectionSimulationConfig timeConfigSecond) throws IOException {
@@ -333,7 +337,7 @@ public class ConnectionSimulation {
             // filename (DO NOT CHANGE)
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
             String timestamp = dateFormat.format(new Date());
-            String filename = timestamp + "_simulation-output" + ".txt";
+            String filename = timestamp + "_connection-simulation-output" + ".txt";
             PrintStream fileOut = new PrintStream(new File("src/main/java/benchmark/simulation/output/" + filename));
             System.setOut(fileOut);
 
@@ -344,7 +348,7 @@ public class ConnectionSimulation {
             ConnectionSimulationConfig timeConfigFirst =  new ConnectionSimulationConfig(0.9,0.1,0.04,25,6,0.5);
 
             // configuration of second AI (CAN BE CHANGED)
-            //Parameter unsere gerade (gleichwertig): 0.92,0.08,0.04,29,6,0.5
+            // current (same): 0.92,0.08,0.04,29,6,0.5
             AI secondAI = new Minimax_AB();
             SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
             secondConfig.timeLimit = 1000;
