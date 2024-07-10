@@ -116,6 +116,7 @@ public class GameLog {
 
     /**
      * Creates a line chart with specified parameters and displays it in a JFrame.
+     * It also exports the results.
      * Reference: https://www.javatpoint.com/jfreechart-line-chart
      *
      * @param chartTitle The title of the chart.
