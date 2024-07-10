@@ -77,14 +77,14 @@ public class GameLog {
                                 if (redMove) {
                                     moveTime = prevRedTime - time;
                                     prevRedTime = time;
-                                    indicator = moveParts[0] + " " + moveParts[1] + " (" + redPlayer + ") " + moveParts[2];
+                                    indicator = moveParts[0] + " (" + redPlayer + ") " + moveParts[1] + " " + moveParts[2];
                                     datasetTimeMove.addValue(moveTime, redPlayer, String.valueOf(moveCountRed));
                                     datasetTimeLeft.addValue(time, redPlayer, String.valueOf(moveCountRed));
                                     moveCountRed++;
                                 } else {
                                     moveTime = prevBlueTime - time;
                                     prevBlueTime = time;
-                                    indicator = moveParts[0] + " " + moveParts[1] + " (" + bluePlayer + ") " + moveParts[2];
+                                    indicator = moveParts[0] + " (" + bluePlayer + ") " + moveParts[1] + " "  + moveParts[2];
                                     datasetTimeMove.addValue(moveTime, bluePlayer, String.valueOf(moveCountBlue));
                                     datasetTimeLeft.addValue(time, bluePlayer, String.valueOf(moveCountRed));
                                     moveCountBlue++;

@@ -1,4 +1,4 @@
-Red move: (AD) B8-B7 (118506 | 1494)
+Red (AD) move: B8-B7 (118506 | 1494)
 
      A   B   C   D   E   F   G   H
 
@@ -11,7 +11,7 @@ Red move: (AD) B8-B7 (118506 | 1494)
 2    .   B   B   B   B   B   B   .  
 1        B   B   B   B   B   B      
 
-Blue move: (C) E2-D2 (118529 | 1471)
+Blue (C) move: E2-D2 (118529 | 1471)
 
      A   B   C   D   E   F   G   H
 
@@ -24,7 +24,7 @@ Blue move: (C) E2-D2 (118529 | 1471)
 2    .   B   B  BB   .   B   B   .  
 1        B   B   B   B   B   B      
 
-Red move: (AD) B7-A5 (117359 | 1147)
+Red (AD) move: B7-A5 (117359 | 1147)
 
      A   B   C   D   E   F   G   H
 
@@ -37,7 +37,7 @@ Red move: (AD) B7-A5 (117359 | 1147)
 2    .   B   B  BB   .   B   B   .  
 1        B   B   B   B   B   B      
 
-Blue move: (C) G2-H2 (117067 | 1462)
+Blue (C) move: G2-H2 (117067 | 1462)
 
      A   B   C   D   E   F   G   H
 
@@ -50,7 +50,7 @@ Blue move: (C) G2-H2 (117067 | 1462)
 2    .   B   B  BB   .   B   .   B  
 1        B   B   B   B   B   B      
 
-Red move: (AD) D8-D7 (116037 | 1322)
+Red (AD) move: D8-D7 (116037 | 1322)
 
      A   B   C   D   E   F   G   H
 
@@ -63,7 +63,7 @@ Red move: (AD) D8-D7 (116037 | 1322)
 2    .   B   B  BB   .   B   .   B  
 1        B   B   B   B   B   B      
 
-Blue move: (C) D2-C4 (115617 | 1450)
+Blue (C) move: D2-C4 (115617 | 1450)
 
      A   B   C   D   E   F   G   H
 
@@ -76,7 +76,7 @@ Blue move: (C) D2-C4 (115617 | 1450)
 2    .   B   B   B   .   B   .   B  
 1        B   B   B   B   B   B      
 
-Red move: (AD) A5-A4 (114264 | 1773)
+Red (AD) move: A5-A4 (114264 | 1773)
 
      A   B   C   D   E   F   G   H
 
@@ -89,7 +89,7 @@ Red move: (AD) A5-A4 (114264 | 1773)
 2    .   B   B   B   .   B   .   B  
 1        B   B   B   B   B   B      
 
-Blue move: (C) B2-B3 (114153 | 1464)
+Blue (C) move: B2-B3 (114153 | 1464)
 
      A   B   C   D   E   F   G   H
 
@@ -102,7 +102,7 @@ Blue move: (C) B2-B3 (114153 | 1464)
 2    .   .   B   B   .   B   .   B  
 1        B   B   B   B   B   B      
 
-Red move: (AD) A4-B3 (110513 | 3751)
+Red (AD) move: A4-B3 (110513 | 3751)
 
      A   B   C   D   E   F   G   H
 
@@ -115,7 +115,7 @@ Red move: (AD) A4-B3 (110513 | 3751)
 2    .   .   B   B   .   B   .   B  
 1        B   B   B   B   B   B      
 
-Blue move: (C) C2-B3 (112695 | 1458)
+Blue (C) move: C2-B3 (112695 | 1458)
 
      A   B   C   D   E   F   G   H
 
@@ -128,7 +128,7 @@ Blue move: (C) C2-B3 (112695 | 1458)
 2    .   .   .   B   .   B   .   B  
 1        B   B   B   B   B   B      
 
-Red move: (AD) D7-C5 (105515 | 4998)
+Red (AD) move: D7-C5 (105515 | 4998)
 
      A   B   C   D   E   F   G   H
 
@@ -141,7 +141,7 @@ Red move: (AD) D7-C5 (105515 | 4998)
 2    .   .   .   B   .   B   .   B  
 1        B   B   B   B   B   B      
 
-Blue move: (C) C1-B1 (111244 | 1451)
+Blue (C) move: C1-B1 (111244 | 1451)
 
      A   B   C   D   E   F   G   H
 
@@ -154,7 +154,7 @@ Blue move: (C) C1-B1 (111244 | 1451)
 2    .   .   .   B   .   B   .   B  
 1       BB   .   B   B   B   B      
 
-Red move: (AD) E8-E7 (99116 | 6399)
+Red (AD) move: E8-E7 (99116 | 6399)
 
      A   B   C   D   E   F   G   H
 
@@ -167,7 +167,7 @@ Red move: (AD) E8-E7 (99116 | 6399)
 2    .   .   .   B   .   B   .   B  
 1       BB   .   B   B   B   B      
 
-Blue move: (C) F1-E1 (109771 | 1473)
+Blue (C) move: F1-E1 (109771 | 1473)
 
      A   B   C   D   E   F   G   H
 
@@ -180,7 +180,7 @@ Blue move: (C) F1-E1 (109771 | 1473)
 2    .   .   .   B   .   B   .   B  
 1       BB   .   B  BB   .   B      
 
-Red move: (AD) E7-C6 (91379 | 7737)
+Red (AD) move: E7-C6 (91379 | 7737)
 
      A   B   C   D   E   F   G   H
 
@@ -193,7 +193,7 @@ Red move: (AD) E7-C6 (91379 | 7737)
 2    .   .   .   B   .   B   .   B  
 1       BB   .   B  BB   .   B      
 
-Blue move: (C) B1-C3 (106171 | 3600)
+Blue (C) move: B1-C3 (106171 | 3600)
 
      A   B   C   D   E   F   G   H
 
@@ -206,7 +206,7 @@ Blue move: (C) B1-C3 (106171 | 3600)
 2    .   .   .   B   .   B   .   B  
 1        B   .   B  BB   .   B      
 
-Red move: (AD) C5-B5 (87191 | 4188)
+Red (AD) move: C5-B5 (87191 | 4188)
 
      A   B   C   D   E   F   G   H
 
@@ -219,7 +219,7 @@ Red move: (AD) C5-B5 (87191 | 4188)
 2    .   .   .   B   .   B   .   B  
 1        B   .   B  BB   .   B      
 
-Blue move: (C) E1-F3 (102564 | 3607)
+Blue (C) move: E1-F3 (102564 | 3607)
 
      A   B   C   D   E   F   G   H
 
@@ -232,7 +232,7 @@ Blue move: (C) E1-F3 (102564 | 3607)
 2    .   .   .   B   .   B   .   B  
 1        B   .   B   B   .   B      
 
-Red move: (AD) B5-C4 (78067 | 9124)
+Red (AD) move: B5-C4 (78067 | 9124)
 
      A   B   C   D   E   F   G   H
 
@@ -245,7 +245,7 @@ Red move: (AD) B5-C4 (78067 | 9124)
 2    .   .   .   B   .   B   .   B  
 1        B   .   B   B   .   B      
 
-Blue move: (C) B3-B4 (99066 | 3498)
+Blue (C) move: B3-B4 (99066 | 3498)
 
      A   B   C   D   E   F   G   H
 
@@ -258,7 +258,7 @@ Blue move: (C) B3-B4 (99066 | 3498)
 2    .   .   .   B   .   B   .   B  
 1        B   .   B   B   .   B      
 
-Red move: (AD) C7-C6 (68791 | 9276)
+Red (AD) move: C7-C6 (68791 | 9276)
 
      A   B   C   D   E   F   G   H
 
@@ -271,7 +271,7 @@ Red move: (AD) C7-C6 (68791 | 9276)
 2    .   .   .   B   .   B   .   B  
 1        B   .   B   B   .   B      
 
-Blue move: (C) D1-D2 (95462 | 3604)
+Blue (C) move: D1-D2 (95462 | 3604)
 
      A   B   C   D   E   F   G   H
 
@@ -284,7 +284,7 @@ Blue move: (C) D1-D2 (95462 | 3604)
 2    .   .   .  BB   .   B   .   B  
 1        B   .   .   B   .   B      
 
-Red move: (AD) C6-B4 (66059 | 2732)
+Red (AD) move: C6-B4 (66059 | 2732)
 
      A   B   C   D   E   F   G   H
 
@@ -297,7 +297,7 @@ Red move: (AD) C6-B4 (66059 | 2732)
 2    .   .   .  BB   .   B   .   B  
 1        B   .   .   B   .   B      
 
-Blue move: (C) B1-B2 (91872 | 3590)
+Blue (C) move: B1-B2 (91872 | 3590)
 
      A   B   C   D   E   F   G   H
 
@@ -310,7 +310,7 @@ Blue move: (C) B1-B2 (91872 | 3590)
 2    .   B   .  BB   .   B   .   B  
 1        .   .   .   B   .   B      
 
-Red move: (AD) B4-B3 (61074 | 4985)
+Red (AD) move: B4-B3 (61074 | 4985)
 
      A   B   C   D   E   F   G   H
 
@@ -323,7 +323,7 @@ Red move: (AD) B4-B3 (61074 | 4985)
 2    .   B   .  BB   .   B   .   B  
 1        .   .   .   B   .   B      
 
-Blue move: (C) F2-F3 (88405 | 3467)
+Blue (C) move: F2-F3 (88405 | 3467)
 
      A   B   C   D   E   F   G   H
 
@@ -336,7 +336,7 @@ Blue move: (C) F2-F3 (88405 | 3467)
 2    .   B   .  BB   .   .   .   B  
 1        .   .   .   B   .   B      
 
-Red move: (AD) B7-B6 (54155 | 6919)
+Red (AD) move: B7-B6 (54155 | 6919)
 
      A   B   C   D   E   F   G   H
 
@@ -349,7 +349,7 @@ Red move: (AD) B7-B6 (54155 | 6919)
 2    .   B   .  BB   .   .   .   B  
 1        .   .   .   B   .   B      
 
-Blue move: (C) E1-E2 (84897 | 3508)
+Blue (C) move: E1-E2 (84897 | 3508)
 
      A   B   C   D   E   F   G   H
 
@@ -362,7 +362,7 @@ Blue move: (C) E1-E2 (84897 | 3508)
 2    .   B   .  BB   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Red move: (AD) B6-B5 (49593 | 4562)
+Red (AD) move: B6-B5 (49593 | 4562)
 
      A   B   C   D   E   F   G   H
 
@@ -375,7 +375,7 @@ Red move: (AD) B6-B5 (49593 | 4562)
 2    .   B   .  BB   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Blue move: (C) F3-G5 (81434 | 3463)
+Blue (C) move: F3-G5 (81434 | 3463)
 
      A   B   C   D   E   F   G   H
 
@@ -388,7 +388,7 @@ Blue move: (C) F3-G5 (81434 | 3463)
 2    .   B   .  BB   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Red move: (AD) C6-C5 (45319 | 4274)
+Red (AD) move: C6-C5 (45319 | 4274)
 
      A   B   C   D   E   F   G   H
 
@@ -401,7 +401,7 @@ Red move: (AD) C6-C5 (45319 | 4274)
 2    .   B   .  BB   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Blue move: (C) F3-F4 (77954 | 3480)
+Blue (C) move: F3-F4 (77954 | 3480)
 
      A   B   C   D   E   F   G   H
 
@@ -414,7 +414,7 @@ Blue move: (C) F3-F4 (77954 | 3480)
 2    .   B   .  BB   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Red move: (AD) C5-C4 (41234 | 4085)
+Red (AD) move: C5-C4 (41234 | 4085)
 
      A   B   C   D   E   F   G   H
 
@@ -427,7 +427,7 @@ Red move: (AD) C5-C4 (41234 | 4085)
 2    .   B   .  BB   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Blue move: (C) D2-C4 (77503 | 451)
+Blue (C) move: D2-C4 (77503 | 451)
 
      A   B   C   D   E   F   G   H
 
@@ -440,7 +440,7 @@ Blue move: (C) D2-C4 (77503 | 451)
 2    .   B   .   B   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Red move: (AD) B5-C4 (40292 | 942)
+Red (AD) move: B5-C4 (40292 | 942)
 
      A   B   C   D   E   F   G   H
 
@@ -453,7 +453,7 @@ Red move: (AD) B5-C4 (40292 | 942)
 2    .   B   .   B   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Blue move: (C) C3-D3 (77344 | 159)
+Blue (C) move: C3-D3 (77344 | 159)
 
      A   B   C   D   E   F   G   H
 
@@ -466,7 +466,7 @@ Blue move: (C) C3-D3 (77344 | 159)
 2    .   B   .   B   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Red move: (AD) C4-B2 (40217 | 75)
+Red (AD) move: C4-B2 (40217 | 75)
 
      A   B   C   D   E   F   G   H
 
@@ -479,7 +479,7 @@ Red move: (AD) C4-B2 (40217 | 75)
 2    .   R   .   B   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Blue move: (C) D3-C4 (77344 | 0)
+Blue (C) move: D3-C4 (77344 | 0)
 
      A   B   C   D   E   F   G   H
 
@@ -492,7 +492,7 @@ Blue move: (C) D3-C4 (77344 | 0)
 2    .   R   .   B   B   .   .   B  
 1        .   .   .   .   .   B      
 
-Red move: (AD) B2-B1 (40216 | 1)
+Red (AD) move: B2-B1 (40216 | 1)
 
      A   B   C   D   E   F   G   H
 

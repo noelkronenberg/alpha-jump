@@ -1,0 +1,520 @@
+Red (C) move: C8-B8 (118486 | 1514)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   R   R   R   R      
+7    .   R   R   R   R   R   R   .  
+6    .   .   .   .   .   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .   B   B   B   B   B   B   .  
+1        B   B   B   B   B   B      
+
+Blue (AD) move: B1-B2 (118664 | 1336)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   R   R   R   R      
+7    .   R   R   R   R   R   R   .  
+6    .   .   .   .   .   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: E7-E6 (117030 | 1456)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   R   R   R   R      
+7    .   R   R   R   .   R   R   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .  BB   B   B   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: B2-A4 (117813 | 851)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   R   R   R   R      
+7    .   R   R   R   .   R   R   .  
+6    .   .   .   .   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    B   .   .   .   .   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .   B   B   B   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: D7-D6 (115559 | 1471)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   R   R   R   R      
+7    .   R   R   .   .   R   R   .  
+6    .   .   .   R   R   .   .   .  
+5    .   .   .   .   .   .   .   .  
+4    B   .   .   .   .   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .   B   B   B   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: A4-A5 (116309 | 1504)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   R   R   R   R      
+7    .   R   R   .   .   R   R   .  
+6    .   .   .   R   R   .   .   .  
+5    B   .   .   .   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .   B   B   B   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: G7-G6 (114106 | 1453)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   R   R   R   R      
+7    .   R   R   .   .   R   .   .  
+6    .   .   .   R   R   .   R   .  
+5    B   .   .   .   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .   B   B   B   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: B2-B3 (113735 | 2574)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   R   R   R   R      
+7    .   R   R   .   .   R   .   .  
+6    .   .   .   R   R   .   R   .  
+5    B   .   .   .   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   B   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: D8-D7 (112604 | 1502)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   .   R   R   R      
+7    .   R   R   R   .   R   .   .  
+6    .   .   .   R   R   .   R   .  
+5    B   .   .   .   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   B   .   .   .   .   .   .  
+2    .   .   B   B   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: B3-B4 (111549 | 2186)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   .   R   R   R      
+7    .   R   R   R   .   R   .   .  
+6    .   .   .   R   R   .   R   .  
+5    B   .   .   .   .   .   .   .  
+4    .   B   .   .   .   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .   .   B   B   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: D6-D5 (111119 | 1485)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   .   R   R   R      
+7    .   R   R   R   .   R   .   .  
+6    .   .   .   .   R   .   R   .  
+5    B   .   .   R   .   .   .   .  
+4    .   B   .   .   .   .   .   .  
+3    .   .   .   .   .   .   .   .  
+2    .   .   B   B   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: D2-D3 (109440 | 2109)
+
+     A   B   C   D   E   F   G   H
+
+8       RR   .   .   R   R   R      
+7    .   R   R   R   .   R   .   .  
+6    .   .   .   .   R   .   R   .  
+5    B   .   .   R   .   .   .   .  
+4    .   B   .   .   .   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   .   B   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: B8-D7 (109649 | 1470)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   R   R   R      
+7    .   R   R  RR   .   R   .   .  
+6    .   .   .   .   R   .   R   .  
+5    B   .   .   R   .   .   .   .  
+4    .   B   .   .   .   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   .   B   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: C2-C3 (107724 | 1716)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   R   R   R      
+7    .   R   R  RR   .   R   .   .  
+6    .   .   .   .   R   .   R   .  
+5    B   .   .   R   .   .   .   .  
+4    .   B   .   .   .   .   .   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: D7-C5 (105947 | 3702)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   R   R   R      
+7    .   R   R   R   .   R   .   .  
+6    .   .   .   .   R   .   R   .  
+5    B   .   R   R   .   .   .   .  
+4    .   B   .   .   .   .   .   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: B4-C5 (101918 | 5806)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   R   R   R      
+7    .   R   R   R   .   R   .   .  
+6    .   .   .   .   R   .   R   .  
+5    B   .   B   R   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: C7-B7 (102219 | 3728)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   R   R   R      
+7    .  RR   .   R   .   R   .   .  
+6    .   .   .   .   R   .   R   .  
+5    B   .   B   R   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: A5-A6 (97626 | 4292)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   R   R   R      
+7    .  RR   .   R   .   R   .   .  
+6    B   .   .   .   R   .   R   .  
+5    .   .   B   R   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: B7-D6 (100663 | 1556)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   R   R   R      
+7    .   R   .   R   .   R   .   .  
+6    B   .   .   R   R   .   R   .  
+5    .   .   B   R   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: A6-B7 (93290 | 4336)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   R   R   R      
+7    .   B   .   R   .   R   .   .  
+6    .   .   .   R   R   .   R   .  
+5    .   .   B   R   .   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: E6-E5 (97243 | 3420)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   R   R   R      
+7    .   B   .   R   .   R   .   .  
+6    .   .   .   R   .   .   R   .  
+5    .   .   B   R   R   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: C5-D6 (89051 | 4239)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   R   R   R      
+7    .   B   .   R   .   R   .   .  
+6    .   .   .   B   .   .   R   .  
+5    .   .   .   R   R   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: E8-E7 (93742 | 3501)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   .   R   R      
+7    .   B   .   R   R   R   .   .  
+6    .   .   .   B   .   .   R   .  
+5    .   .   .   R   R   .   .   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   B   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: C3-C4 (84341 | 4710)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   .   R   R      
+7    .   B   .   R   R   R   .   .  
+6    .   .   .   B   .   .   R   .  
+5    .   .   .   R   R   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: D5-E5 (90320 | 3422)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   .   R   R      
+7    .   B   .   R   R   R   .   .  
+6    .   .   .   B   .   .   R   .  
+5    .   .   .   .  RR   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: B7-C7 (80164 | 4177)
+
+     A   B   C   D   E   F   G   H
+
+8        R   .   .   .   R   R      
+7    .   .   B   R   R   R   .   .  
+6    .   .   .   B   .   .   R   .  
+5    .   .   .   .  RR   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: B8-C8 (90254 | 66)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   R   R      
+7    .   .   B   R   R   R   .   .  
+6    .   .   .   B   .   .   R   .  
+5    .   .   .   .  RR   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: D6-E7 (76418 | 3746)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   R   R      
+7    .   .   B   R   B   R   .   .  
+6    .   .   .   .   .   .   R   .  
+5    .   .   .   .  RR   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: F8-E7 (89844 | 410)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   .   B   R   R   R   .   .  
+6    .   .   .   .   .   .   R   .  
+5    .   .   .   .  RR   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   .   .   B   .   .   .   .  
+2    .   .   .   .   B   B   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: F2-F3 (73277 | 3141)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   .   B   R   R   R   .   .  
+6    .   .   .   .   .   .   R   .  
+5    .   .   .   .  RR   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   .   .   B   .   B   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: D7-D6 (86252 | 3592)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   .   B   .   R   R   .   .  
+6    .   .   .   R   .   .   R   .  
+5    .   .   .   .  RR   .   .   .  
+4    .   .   B   .   .   .   .   .  
+3    .   .   .   B   .   B   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: C4-B4 (68214 | 5063)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   .   B   .   R   R   .   .  
+6    .   .   .   R   .   .   R   .  
+5    .   .   .   .  RR   .   .   .  
+4    .   B   .   .   .   .   .   .  
+3    .   .   .   B   .   B   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: G6-G5 (82731 | 3521)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   .   B   .   R   R   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   .   .   .  RR   .   R   .  
+4    .   B   .   .   .   .   .   .  
+3    .   .   .   B   .   B   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: B4-B5 (64693 | 3521)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   .   B   .   R   R   .   .  
+6    .   .   .   R   .   .   .   .  
+5    .   B   .   .  RR   .   R   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   B   .   B   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: E7-E6 (79231 | 3500)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   .   B   .   .   R   .   .  
+6    .   .   .   R   R   .   .   .  
+5    .   B   .   .  RR   .   R   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   B   .   B   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: B5-B6 (63523 | 1170)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   .   B   .   .   R   .   .  
+6    .   B   .   R   R   .   .   .  
+5    .   .   .   .  RR   .   R   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   B   .   B   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: E5-F3 (78985 | 246)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   .   B   .   .   R   .   .  
+6    .   B   .   R   R   .   .   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   B   .   R   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: B6-B7 (63430 | 93)
+
+     A   B   C   D   E   F   G   H
+
+8        .   R   .   .   .   R      
+7    .   B   B   .   .   R   .   .  
+6    .   .   .   R   R   .   .   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   B   .   R   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
+Red (C) move: C8-B7 (78985 | 0)
+
+     A   B   C   D   E   F   G   H
+
+8        .   .   .   .   .   R      
+7    .   R   B   .   .   R   .   .  
+6    .   .   .   R   R   .   .   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   B   .   R   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
+Blue (AD) move: C7-C8 (63431 | -1)
+
+     A   B   C   D   E   F   G   H
+
+8        .   B   .   .   .   R      
+7    .   R   .   .   .   R   .   .  
+6    .   .   .   R   R   .   .   .  
+5    .   .   .   .   R   .   R   .  
+4    .   .   .   .   .   .   .   .  
+3    .   .   .   B   .   R   .   .  
+2    .   .   .   .   B   .   B   .  
+1        .   B   B   B   B   B      
+
