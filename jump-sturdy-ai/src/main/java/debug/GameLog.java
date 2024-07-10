@@ -7,7 +7,9 @@ import java.nio.charset.StandardCharsets;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import javax.swing.*;
 import java.awt.*;
@@ -98,33 +100,8 @@ public class GameLog {
 
                 }
 
-                // plotting (reference: https://www.javatpoint.com/jfreechart-line-chart)
-
-                SwingUtilities.invokeLater(() -> {
-                    JFreeChart lineChart = ChartFactory.createLineChart(
-                            "Time Used / Move", "Move Number", "Time (ms)",
-                            datasetTimeMove, PlotOrientation.VERTICAL, true, true, false);
-                    ChartPanel chartPanel = new ChartPanel(lineChart);
-                    chartPanel.setPreferredSize(new Dimension(1000, 500));
-                    JFrame frame = new JFrame("Game Log Analysis");
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setContentPane(chartPanel);
-                    frame.pack();
-                    frame.setVisible(true);
-                });
-
-                SwingUtilities.invokeLater(() -> {
-                    JFreeChart lineChart = ChartFactory.createLineChart(
-                            "Time Left / Move", "Move Number", "Time Left (ms)",
-                            datasetTimeLeft, PlotOrientation.VERTICAL, true, true, false);
-                    ChartPanel chartPanel = new ChartPanel(lineChart);
-                    chartPanel.setPreferredSize(new Dimension(1000, 500));
-                    JFrame frame = new JFrame("Game Log Analysis");
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setContentPane(chartPanel);
-                    frame.pack();
-                    frame.setVisible(true);
-                });
+                plotChart("Time Used / Move", "Move Number", "Time (ms)", datasetTimeMove);
+                plotChart("Time Left / Move", "Move Number", "Time Left (ms)", datasetTimeLeft);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -133,5 +110,40 @@ public class GameLog {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Creates a line chart with specified parameters and displays it in a JFrame.
+     * Reference: https://www.javatpoint.com/jfreechart-line-chart
+     *
+     * @param chartTitle The title of the chart.
+     * @param xAxisLabel The label for the x-axis.
+     * @param yAxisLabel The label for the y-axis.
+     * @param dataset The dataset containing the chart data.
+     */
+    private static void plotChart(String chartTitle, String xAxisLabel, String yAxisLabel,
+                                           CategoryDataset dataset) {
+
+        Color backgroundPaint =  Color.WHITE;
+        Color gridLinePaint = Color.GRAY;
+
+        SwingUtilities.invokeLater(() -> {
+            JFreeChart lineChart = ChartFactory.createLineChart(
+                    chartTitle, xAxisLabel, yAxisLabel,
+                    dataset, PlotOrientation.VERTICAL, true, true, false);
+
+            CategoryPlot plot = lineChart.getCategoryPlot();
+            plot.setBackgroundPaint(backgroundPaint);
+            plot.setRangeGridlinePaint(gridLinePaint);
+
+            ChartPanel chartPanel = new ChartPanel(lineChart);
+            chartPanel.setPreferredSize(new Dimension(1000, 500));
+
+            JFrame frame = new JFrame("Game Log Analysis");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setContentPane(chartPanel);
+            frame.pack();
+            frame.setVisible(true);
+        });
     }
 }
