@@ -27,7 +27,6 @@ public class ConnectionSimulation {
         public final Color color;
         public final ArrayList<Integer> depths;
 
-
         public GameResult(int number, Color color, ArrayList<Integer> depths) {
             this.number = number;
             this.color = color;
@@ -70,23 +69,8 @@ public class ConnectionSimulation {
         int moveCountRed = 0;
         int moveCountBlue = 0;
 
-        String os = System.getProperty("os.name").toLowerCase();
-        String basePath = new File("").getAbsolutePath();
-        String path = "";
-
-        if (os.contains("win")) {
-            path = basePath + "\\src\\main\\java\\resources\\opening_book_startingMove.txt";
-        } else {
-            path = basePath + "/src/main/java/resources/opening_book_startingMove.txt";
-        }
-        HashMap<String,String> startingMovesRed = readFileAndFillBib(path,1,new HashMap<>());
-
-        if (os.contains("win")) {
-            path = basePath + "\\src\\main\\java\\resources\\opening_book_secondMove.txt";
-        } else {
-            path = basePath + "/src/main/java/resources/opening_book_secondMove.txt";
-        }
-        HashMap<String,String> startingMovesBlue = readFileAndFillBib(path,2,new HashMap<>());
+        HashMap<String,String> startingMovesRed = readFileAndFillBib("opening_book_startingMove.txt",1, new HashMap<>());
+        HashMap<String,String> startingMovesBlue = readFileAndFillBib("opening_book_secondMove.txt",2, new HashMap<>());
 
         ArrayList<Integer> firstAIDepths = new ArrayList<>();
         ArrayList<Integer> secondAIDepths = new ArrayList<>();
@@ -96,12 +80,15 @@ public class ConnectionSimulation {
         while (!gameOver) {
             // get best move
             if (moveCount % 2 == 0) {
+                // START: opening library
                 String moveOpeningLib = startingMovesRed.get(fenNoPlayer);
-                if (moveOpeningLib != null){
+                if (moveOpeningLib != null) {
+                    System.out.println("Player 1 " + " | Using opening library");
+                    System.out.println();
                     // check if a position is in the opening library
                     bestMove = moveOpeningLib;
                     moveCountRed++;
-                    // END: opening library
+                // END: opening library
 
                 } else {
                     if (moveCountRed <= timeConfigFirst.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
@@ -121,12 +108,15 @@ public class ConnectionSimulation {
                     firstAIDepths.add(((Minimax_AB) firstAI).maxDepth);
                 }
             } else {
+                // START: opening library
                 String moveOpeningLib = startingMovesBlue.get(fenNoPlayer);
-                if (moveOpeningLib != null){
+                if (moveOpeningLib != null) {
+                    System.out.println("Player 2 " + " | Using opening library");
+                    System.out.println();
                     // check if a position is in the opening library
                     bestMove = moveOpeningLib;
                     moveCountBlue++;
-                    // END: opening library
+                 // END: opening library
 
                 } else {
                     if (moveCountRed <= timeConfigSecond.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
@@ -306,24 +296,47 @@ public class ConnectionSimulation {
         return String.format("%.2f", bytes / (1024.0 * 1024.0 * 1024.0));
     }
 
+    /**
+     * Fills the startingBib HashMap with precalculated starting moves.
+     *
+     * @param fileLocation Path to the File
+     * @throws IOException
+     */
     public static HashMap<String,String> readFileAndFillBib(String fileLocation, int player, HashMap<String, String> openingLib) throws IOException {
-        if (player==1){
-            final BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileLocation), StandardCharsets.UTF_8));
-            String line;
-            while ((line=in.readLine()) != null) {
-                String[] tokens = line.split(", ");
-                openingLib.put(tokens[0], tokens[1]);
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        try (InputStream inputStream = classloader.getResourceAsStream(fileLocation);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+        ) {
+
+            if (player == 1) {
+                System.out.println("Player 1 | Read file: " + fileLocation);
+                System.out.println();
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] tokens = line.split(", ");
+                    openingLib.put(tokens[0], tokens[1]);
+                }
+
+                System.out.println("Player 1 | Read file: " + fileLocation);
+                System.out.println();
+
+            } else {
+                System.out.println("Player 2 | Read file: " + fileLocation);
+                System.out.println();
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] tokens = line.split(", ");
+                    openingLib.put(tokens[0], tokens[1]);
+                }
+
+                System.out.println("Player 2 | Read file: " + fileLocation);
+                System.out.println();
             }
+
+            return openingLib;
         }
-        else {
-            final BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileLocation), StandardCharsets.UTF_8));
-            String line;
-            while ((line=in.readLine()) != null) {
-                String[] tokens = line.split(", ");
-                openingLib.put(tokens[0], tokens[1]);
-            }
-        }
-        return openingLib;
     }
 
     /**
@@ -355,13 +368,13 @@ public class ConnectionSimulation {
             ConnectionSimulationConfig timeConfigSecond =  new ConnectionSimulationConfig(0.92,0.08,0.04,29,6,0.5);
 
             // configuration of connectionSimulation (CAN BE CHANGED)
-            String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
-            int iterations = 20;
+            String initialFEN = "2bbbb1b0/1b06/1b01b04/4b03/4r03/3r02b01/1r0r02rr2/2rr2r0 b"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
+            int iterations = 2;
             boolean showGame = false;
 
             // start connectionSimulation (DO NOT CHANGE)
             ConnectionSimulation connectionSimulation = new ConnectionSimulation();
-            connectionSimulation.simulate(firstAI, firstConfig, secondAI, secondConfig, initialFEN, iterations, showGame,timeConfigFirst,timeConfigSecond);
+            connectionSimulation.simulate(firstAI, firstConfig, secondAI, secondConfig, initialFEN, iterations, showGame, timeConfigFirst, timeConfigSecond);
 
             fileOut.close();
         } catch (FileNotFoundException e) {
