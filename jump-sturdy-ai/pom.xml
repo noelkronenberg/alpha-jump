@@ -47,6 +47,13 @@
             <version>3.4.2</version>
             <type>maven-plugin</type>
         </dependency>
+
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+
     </dependencies>
 
     <!-- reference: https://howtodoinjava.com/maven/executable-jar-with-dependencies/-->

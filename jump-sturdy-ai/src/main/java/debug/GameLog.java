@@ -4,6 +4,13 @@ import game.MoveGenerator;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Reads a log file containing game logs and outputs a visual representation to a text file.
@@ -23,6 +30,8 @@ public class GameLog {
 
             MoveGenerator moveGenerator = new MoveGenerator();
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset(); // Dataset for plotting
+
             try (InputStream inputStream = classloader.getResourceAsStream(fileName);
                  BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
 
@@ -31,6 +40,9 @@ public class GameLog {
 
                 long prevRedTime = 120000;
                 long prevBlueTime = 120000;
+
+                int moveCountRed = 0;
+                int moveCountBlue = 0;
 
                 String line;
                 while ((line = br.readLine()) != null) {
@@ -55,10 +67,14 @@ public class GameLog {
                                     moveTime = prevRedTime - time;
                                     prevRedTime = time;
                                     indicator = moveParts[0] + " " + moveParts[1] + " (" + redPlayer + ") " + moveParts[2];
+                                    dataset.addValue(moveTime, "Red", String.valueOf(moveCountRed));
+                                    moveCountRed++;
                                 } else {
                                     moveTime = prevBlueTime - time;
                                     prevBlueTime = time;
                                     indicator = moveParts[0] + " " + moveParts[1] + " (" + bluePlayer + ") " + moveParts[2];
+                                    dataset.addValue(moveTime, "Blue", String.valueOf(moveCountBlue));
+                                    moveCountBlue++;
                                 }
 
                                 System.out.println(indicator + " (" + time + " | " + moveTime + ")");
@@ -72,7 +88,22 @@ public class GameLog {
                             moveGenerator.printBoard(true);
                         }
 
-                    }
+                }
+
+                // plotting (reference: https://www.javatpoint.com/jfreechart-line-chart)
+                SwingUtilities.invokeLater(() -> {
+                    JFreeChart lineChart = ChartFactory.createLineChart(
+                            "Time Used / Move", "Move Number", "Time (ms)",
+                            dataset, PlotOrientation.VERTICAL, false, true, false);
+                    ChartPanel chartPanel = new ChartPanel(lineChart);
+                    chartPanel.setPreferredSize(new Dimension(1000, 500));
+                    JFrame frame = new JFrame("Game Log Analysis");
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setContentPane(chartPanel);
+                    frame.pack();
+                    frame.setVisible(true);
+                });
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
