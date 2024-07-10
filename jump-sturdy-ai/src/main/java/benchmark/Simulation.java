@@ -9,12 +9,10 @@ import search.mcts.MCTS;
 import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * Simulation of full games between two AIs.
@@ -28,7 +26,6 @@ public class Simulation {
         public final int number;
         public final Color color;
         public final ArrayList<Integer> depths;
-
 
         public GameResult(int number, Color color, ArrayList<Integer> depths) {
             this.number = number;
@@ -48,100 +45,29 @@ public class Simulation {
      * @param showGame Whether to show the game play.
      * @return An integer indicating the winner of the game. Returns 1 if the first AI wins, 2 if the second AI wins.
      */
-    public static GameResult playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, boolean showGame, TimeConfig timeConfigFirst, TimeConfig timeConfigSecond) throws IOException {
-
-
-        double maxTime = 120000.0;
-
-        double overall = 0.96 * maxTime;
-
-        double timeLeftRed = 120000.0;
-        double timeLeftBlue = 120000.0;
+    public static GameResult playGame(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, boolean showGame) {
 
         MoveGenerator gameState = new MoveGenerator();
         gameState.initializeBoard(fen);
 
-        String fenNoPlayer = fen.substring(0, fen.length() - 2);
-
         String bestMove;
         boolean gameOver = false;
         int moveCount = 0;
-
-        int moveCountRed = 0;
-        int moveCountBlue = 0;
-
-        String os = System.getProperty("os.name").toLowerCase();
-        String basePath = new File("").getAbsolutePath();
-        String path = "";
-
-        if (os.contains("win")) {
-            path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_startingMove.txt";
-        } else {
-            path = basePath + "/src/main/java/search/mcts_lib/opening_book_startingMove.txt";
-        }
-        HashMap<String,String> startingMovesRed = readFileAndFillBib(path,1,new HashMap<>());
-
-        if (os.contains("win")) {
-            path = basePath + "\\src\\main\\java\\search\\mcts_lib\\opening_book_secondMove.txt";
-        } else {
-            path = basePath + "/src/main/java/search/mcts_lib/opening_book_secondMove.txt";
-        }
-        HashMap<String,String> startingMovesBlue = readFileAndFillBib(path,2,new HashMap<>());
-
         ArrayList<Integer> firstAIDepths = new ArrayList<>();
         ArrayList<Integer> secondAIDepths = new ArrayList<>();
 
         Color startingColor = fen.charAt(fen.length() - 1) == 'r' ? Color.RED : Color.BLUE;
 
         while (!gameOver) {
+
             // get best move
             if (moveCount % 2 == 0) {
-                String moveOpeningLib = startingMovesRed.get(fenNoPlayer);
-                if (moveOpeningLib != null){
-                    // check if a position is in the opening library
-                    bestMove = moveOpeningLib;
-                    moveCountRed++;
-                    // END: opening library
-
-                } else {
-                    if (moveCountRed <= timeConfigFirst.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
-                        firstConfig.timeLimit = (overall * timeConfigFirst.gewichtungsParameterStart) / timeConfigFirst.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
-                        // CASE: overtime (if game goes beyond averageMoves)
-                    } else if (timeLeftRed <= maxTime * timeConfigFirst.gewichtungsParameterEndZeit) { // if we have 5% of time left
-                        firstConfig.timeLimit = (timeLeftRed * timeConfigFirst.gewichtungsParameterFinal); // continuously less (but never running out directly)
-                        // CASE: mid-game
-                    } else {
-                        firstConfig.timeLimit = (overall * timeConfigFirst.gewichtungsParameterNormal) / timeConfigFirst.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
-                    }
-                }
                 bestMove = firstAI.orchestrator(fen, firstConfig);
-                moveCountRed++;
-
                 if (firstAI instanceof Minimax_AB) {
                     firstAIDepths.add(((Minimax_AB) firstAI).maxDepth);
                 }
             } else {
-                String moveOpeningLib = startingMovesBlue.get(fenNoPlayer);
-                if (moveOpeningLib != null){
-                    // check if a position is in the opening library
-                    bestMove = moveOpeningLib;
-                    moveCountBlue++;
-                    // END: opening library
-
-                } else {
-                    if (moveCountRed <= timeConfigSecond.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
-                        firstConfig.timeLimit = (overall * timeConfigSecond.gewichtungsParameterStart) / timeConfigSecond.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
-                        // CASE: overtime (if game goes beyond averageMoves)
-                    } else if (timeLeftRed <= maxTime * timeConfigSecond.gewichtungsParameterEndZeit) { // if we have 5% of time left
-                        firstConfig.timeLimit = (timeLeftRed * timeConfigSecond.gewichtungsParameterFinal); // continuously less (but never running out directly)
-                        // CASE: mid-game
-                    } else {
-                        firstConfig.timeLimit = (overall * timeConfigSecond.gewichtungsParameterNormal) / timeConfigSecond.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
-                    }
-                }
                 bestMove = secondAI.orchestrator(fen, secondConfig);
-                moveCountBlue++;
-
                 if (secondAI instanceof Minimax_AB) {
                     secondAIDepths.add(((Minimax_AB) secondAI).maxDepth);
                 }
@@ -196,7 +122,7 @@ public class Simulation {
      * @param iterations The number of iterations (games) to simulate. Must be an even number.
      * @param showGame Whether to show the game play.
      */
-    public void simulate(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, int iterations, boolean showGame, TimeConfig timeConfigFirst, TimeConfig timeConfigSecond) throws IOException {
+    public void simulate(AI firstAI, SearchConfig firstConfig, AI secondAI, SearchConfig secondConfig, String fen, int iterations, boolean showGame) {
         if (!(iterations % 2 == 0)) {
             System.out.println("Please enter an even number of iterations to make the results fair.");
             return;
@@ -225,12 +151,12 @@ public class Simulation {
             }
 
             if (firstAIBegins) {
-                result = playGame(firstAI, firstConfig, secondAI, secondConfig, fen, showGame,timeConfigFirst,timeConfigSecond);
+                result = playGame(firstAI, firstConfig, secondAI, secondConfig, fen, showGame);
                 if (firstAI instanceof Minimax_AB) {
                     firstAIDepthsAllGames.addAll(result.depths);
                 }
             } else {
-                result = playGame(secondAI, secondConfig, firstAI, firstConfig, fen, showGame,timeConfigSecond,timeConfigFirst) ;
+                result = playGame(secondAI, secondConfig, firstAI, firstConfig, fen, showGame);
                 if (secondAI instanceof Minimax_AB) {
                     secondAIDepthsAllGames.addAll(result.depths);
                 }
@@ -304,26 +230,6 @@ public class Simulation {
         return String.format("%.2f", bytes / (1024.0 * 1024.0 * 1024.0));
     }
 
-    public static HashMap<String,String> readFileAndFillBib(String fileLocation, int player, HashMap<String, String> openingLib) throws IOException {
-        if (player==1){
-            final BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileLocation), StandardCharsets.UTF_8));
-            String line;
-            while ((line=in.readLine()) != null) {
-                String[] tokens = line.split(", ");
-                openingLib.put(tokens[0], tokens[1]);
-            }
-        }
-        else {
-            final BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileLocation), StandardCharsets.UTF_8));
-            String line;
-            while ((line=in.readLine()) != null) {
-                String[] tokens = line.split(", ");
-                openingLib.put(tokens[0], tokens[1]);
-            }
-        }
-        return openingLib;
-    }
-
     /**
      * Main method to run a simulation between two AIs using predefined configurations and an initial board state.
      * Prints results to a file.
@@ -340,31 +246,26 @@ public class Simulation {
             System.setOut(fileOut);
 
             // configuration of first AI (CAN BE CHANGED)
-            AI firstAI = new Minimax_AB();
+            AI firstAI = new RandomAI();
             SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
-            firstConfig.timeLimit = 1000;
-            TimeConfig timeConfigFirst =  new TimeConfig(0.9,0.1,0.04,25,6,0.5);
+            firstConfig.timeLimit = 10;
 
             // configuration of second AI (CAN BE CHANGED)
-            //Parameter unsere gerade (gleichwertig): 0.92,0.08,0.04,29,6,0.5
-            AI secondAI = new Minimax_AB();
+            AI secondAI = new MCTS();
             SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
-            secondConfig.timeLimit = 1000;
-            TimeConfig timeConfigSecond =  new TimeConfig(0.92,0.08,0.04,29,6,0.5);
+            secondConfig.timeLimit = 10;
 
             // configuration of simulation (CAN BE CHANGED)
             String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 b"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
-            int iterations = 20;
+            int iterations = 100;
             boolean showGame = false;
 
             // start simulation (DO NOT CHANGE)
             Simulation simulation = new Simulation();
-            simulation.simulate(firstAI, firstConfig, secondAI, secondConfig, initialFEN, iterations, showGame,timeConfigFirst,timeConfigSecond);
+            simulation.simulate(firstAI, firstConfig, secondAI, secondConfig, initialFEN, iterations, showGame);
 
             fileOut.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }
