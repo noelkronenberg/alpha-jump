@@ -31,11 +31,12 @@ public class GameLog {
             fileNames.add("C2-AD-C.txt");
             fileNames.add("C2-C-AD.txt");
 
-            int fileIndex = 1; // CHANGE THIS
+            int fileIndex = 0; // CHANGE THIS
 
             MoveGenerator moveGenerator = new MoveGenerator();
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            DefaultCategoryDataset dataset = new DefaultCategoryDataset(); // Dataset for plotting
+            DefaultCategoryDataset datasetTimeMove = new DefaultCategoryDataset();
+            DefaultCategoryDataset datasetTimeLeft = new DefaultCategoryDataset();
 
             try (InputStream inputStream = classloader.getResourceAsStream(fileNames.get(fileIndex));
                  BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
@@ -72,13 +73,15 @@ public class GameLog {
                                     moveTime = prevRedTime - time;
                                     prevRedTime = time;
                                     indicator = moveParts[0] + " " + moveParts[1] + " (" + redPlayer + ") " + moveParts[2];
-                                    dataset.addValue(moveTime, redPlayer, String.valueOf(moveCountRed));
+                                    datasetTimeMove.addValue(moveTime, redPlayer, String.valueOf(moveCountRed));
+                                    datasetTimeLeft.addValue(time, redPlayer, String.valueOf(moveCountRed));
                                     moveCountRed++;
                                 } else {
                                     moveTime = prevBlueTime - time;
                                     prevBlueTime = time;
                                     indicator = moveParts[0] + " " + moveParts[1] + " (" + bluePlayer + ") " + moveParts[2];
-                                    dataset.addValue(moveTime, bluePlayer, String.valueOf(moveCountBlue));
+                                    datasetTimeMove.addValue(moveTime, bluePlayer, String.valueOf(moveCountBlue));
+                                    datasetTimeLeft.addValue(time, bluePlayer, String.valueOf(moveCountRed));
                                     moveCountBlue++;
                                 }
 
@@ -96,10 +99,24 @@ public class GameLog {
                 }
 
                 // plotting (reference: https://www.javatpoint.com/jfreechart-line-chart)
+
                 SwingUtilities.invokeLater(() -> {
                     JFreeChart lineChart = ChartFactory.createLineChart(
                             "Time Used / Move", "Move Number", "Time (ms)",
-                            dataset, PlotOrientation.VERTICAL, true, true, false);
+                            datasetTimeMove, PlotOrientation.VERTICAL, true, true, false);
+                    ChartPanel chartPanel = new ChartPanel(lineChart);
+                    chartPanel.setPreferredSize(new Dimension(1000, 500));
+                    JFrame frame = new JFrame("Game Log Analysis");
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setContentPane(chartPanel);
+                    frame.pack();
+                    frame.setVisible(true);
+                });
+
+                SwingUtilities.invokeLater(() -> {
+                    JFreeChart lineChart = ChartFactory.createLineChart(
+                            "Time Left / Move", "Move Number", "Time Left (ms)",
+                            datasetTimeLeft, PlotOrientation.VERTICAL, true, true, false);
                     ChartPanel chartPanel = new ChartPanel(lineChart);
                     chartPanel.setPreferredSize(new Dimension(1000, 500));
                     JFrame frame = new JFrame("Game Log Analysis");
