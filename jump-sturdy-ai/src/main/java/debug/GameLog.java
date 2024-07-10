@@ -28,14 +28,15 @@ public class GameLog {
      */
     public static void main(String[] args) {
         try {
-            PrintStream fileOut = new PrintStream(new File("src/main/java/debug/GameLog-output.txt"));
-            System.setOut(fileOut);
-
             ArrayList<String> fileNames = new ArrayList<>();
             fileNames.add("C2-AD-C.txt");
             fileNames.add("C2-C-AD.txt");
 
             int fileIndex = 0; // CHANGE THIS
+
+            String exportName = fileNames.get(fileIndex).substring(0, fileNames.get(fileIndex).length() - 4);
+            PrintStream fileOut = new PrintStream(new File("src/main/java/debug/output/" + exportName + "_GameLog-output.txt"));
+            System.setOut(fileOut);
 
             MoveGenerator moveGenerator = new MoveGenerator();
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -102,8 +103,8 @@ public class GameLog {
 
                 }
 
-                plotChart("Time Used / Move", "Move Number", "Time (ms)", datasetTimeMove, "time-used");
-                plotChart("Time Left / Move", "Move Number", "Time Left (ms)", datasetTimeLeft, "time-left");
+                plotChart("Time Used / Move", "Move Number", "Time (ms)", datasetTimeMove,  exportName + "_time-used");
+                plotChart("Time Left / Move", "Move Number", "Time Left (ms)", datasetTimeLeft, exportName + "_time-left");
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -150,7 +151,7 @@ public class GameLog {
             frame.setVisible(true);
 
             // export
-            File outputFile = new File("src/main/java/debug/", fileName + "-output.png");
+            File outputFile = new File("src/main/java/debug/output/", fileName + "-output.png");
             try {
                 BufferedImage image = lineChart.createBufferedImage(1000, 500);
                 ImageIO.write(image, "png", outputFile) ;
