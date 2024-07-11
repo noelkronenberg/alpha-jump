@@ -242,22 +242,22 @@ public class ConnectionSimulation {
 
             if (firstAIBegins) {
                 result = playGame(firstAI, firstConfig, secondAI, secondConfig, fen, showGame,timeConfigFirst,timeConfigSecond);
-                if (firstAI instanceof Minimax_AB) {
-                    firstAIDepthsAllGames.addAll(result.depths);
-                }
             } else {
                 result = playGame(secondAI, secondConfig, firstAI, firstConfig, fen, showGame,timeConfigSecond,timeConfigFirst) ;
-                if (secondAI instanceof Minimax_AB) {
-                    secondAIDepthsAllGames.addAll(result.depths);
-                }
             }
 
             if ((firstAIBegins && result.number == 1) || (!firstAIBegins && result.number == 2)) {
                 firstAIWins++;
                 System.out.println("Winner of game " + i + " is: AI 1 (" + result.color + ")");
+                if (firstAI instanceof Minimax_AB) {
+                    firstAIDepthsAllGames.addAll(result.depths);
+                }
             } else {
                 secondAIWins++;
                 System.out.println("Winner of game " + i + " is: AI 2 (" + result.color + ")");
+                if (secondAI instanceof Minimax_AB) {
+                    secondAIDepthsAllGames.addAll(result.depths);
+                }
             }
 
             if (i != iterations) {
