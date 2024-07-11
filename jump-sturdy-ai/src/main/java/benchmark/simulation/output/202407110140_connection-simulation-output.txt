@@ -1,0 +1,230 @@
+START: 202407110140
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 916.0
+
+RED | Time for move: 1451.0
+
+BLUE | Time for move: 915.0
+
+RED | Time for move: 1456.0
+
+BLUE | Time for move: 916.0
+
+RED | Time for move: 1456.0
+
+BLUE | Time for move: 915.0
+
+RED | Time for move: 3572.0
+
+BLUE | Time for move: 4059.0
+
+RED | Time for move: 3568.0
+
+BLUE | Time for move: 3854.0
+
+RED | Time for move: 3572.0
+
+BLUE | Time for move: 3862.0
+
+RED | Time for move: 3575.0
+
+BLUE | Time for move: 868.0
+
+RED | Time for move: 3573.0
+
+BLUE | Time for move: 4061.0
+
+RED | Time for move: 3573.0
+
+BLUE | Time for move: 772.0
+
+RED | Time for move: 3570.0
+
+BLUE | Time for move: 2576.0
+
+RED | Time for move: 3469.0
+
+BLUE | Time for move: 3693.0
+
+RED | Time for move: 3442.0
+
+BLUE | Time for move: 1911.0
+
+RED | Time for move: 2116.0
+
+BLUE | Time for move: 87.0
+
+RED | Time for move: 1224.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 27.0
+
+BLUE | Time for move: 0.0
+
+Total moves for red: 19
+Total moves for blue: 19
+
+Total time left for red: 80356.0
+Total time left for blue: 90595.0
+
+Winner of game 1 is: AI 2 (RED)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 3576.0
+
+RED | Time for move: 1836.0
+
+BLUE | Time for move: 3570.0
+
+RED | Time for move: 1842.0
+
+BLUE | Time for move: 3573.0
+
+RED | Time for move: 1838.0
+
+BLUE | Time for move: 3573.0
+
+RED | Time for move: 4067.0
+
+BLUE | Time for move: 3571.0
+
+RED | Time for move: 4063.0
+
+BLUE | Time for move: 3574.0
+
+RED | Time for move: 4067.0
+
+BLUE | Time for move: 3580.0
+
+RED | Time for move: 4066.0
+
+BLUE | Time for move: 399.0
+
+RED | Time for move: 4073.0
+
+BLUE | Time for move: 3470.0
+
+RED | Time for move: 4073.0
+
+BLUE | Time for move: 3530.0
+
+RED | Time for move: 4076.0
+
+BLUE | Time for move: 3544.0
+
+RED | Time for move: 4063.0
+
+BLUE | Time for move: 3567.0
+
+RED | Time for move: 4072.0
+
+BLUE | Time for move: 3552.0
+
+RED | Time for move: 4014.0
+
+BLUE | Time for move: 3416.0
+
+RED | Time for move: 4034.0
+
+BLUE | Time for move: 3449.0
+
+RED | Time for move: 4040.0
+
+BLUE | Time for move: 3415.0
+
+RED | Time for move: 3992.0
+
+BLUE | Time for move: 3409.0
+
+RED | Time for move: 2180.0
+
+BLUE | Time for move: 3363.0
+
+RED | Time for move: 1007.0
+
+BLUE | Time for move: 2699.0
+
+RED | Time for move: 140.0
+
+BLUE | Time for move: 77.0
+
+RED | Time for move: 53.0
+
+BLUE | Time for move: 432.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 34.0
+
+RED | Time for move: 0.0
+
+Total moves for red: 26
+Total moves for blue: 25
+
+Total time left for red: 58404.0
+Total time left for blue: 56627.0
+
+Winner of game 2 is: AI 2 (BLUE)
+
+END: 202407110143
+
+Results: 
+
+First AI wins: 0
+Second AI wins: 2
+
+First AI depths: [3, 3, 3, 7, 7, 7, 7, 7, 7, 7, 5, 7, 7, 7, 7, 7, 8, 8, 9, 8, 9, 9, 7, 9, 3]
+First AI average depth: 6,72
+Second AI depths: [0, 0, 0, 0, 7, 6, 7, 7, 8, 8, 8, 7, 8, 8, 9, 8, 8, 7, 3]
+Second AI average depth: 5,74
+
+Settings: 
+
+Iterations: 2
+FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r
+
+First AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 4147.2 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false | qSDepth = 6
+weightParameterNormal = 0.9 | weightParameterStart = 0.1 | weightParameterEndTime = 0.04 | weightParameterFinal = 0.5 | numberOfMovesNormal = 25 | numberOfMovesStart = 6
+
+Second AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3654.6206896551726 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false | qSDepth = 6
+weightParameterNormal = 0.92 | weightParameterStart = 0.08 | weightParameterEndTime = 0.04 | weightParameterFinal = 0.5 | numberOfMovesNormal = 29 | numberOfMovesStart = 6
+
+System Information:
+
+OS: Mac OS X | aarch64
+Available processors (cores): 8
+System load average (cores): 3,38
+Total physical memory (GB): 16,00
+Free physical memory (GB): 0,09
