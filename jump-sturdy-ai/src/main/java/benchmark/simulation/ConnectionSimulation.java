@@ -144,17 +144,7 @@ public class ConnectionSimulation {
                     secondAIDepths.add(((Minimax_AB) secondAI).maxDepth);
                 }
             }
-
-            // time keeping
             double timeForMove = System.currentTimeMillis() - currentTime;
-            System.out.println(currentColor + " | Time for move: " + timeForMove);
-            System.out.println();
-            if (currentColor == Color.RED) {
-                totalTimeRed -= timeForMove;
-            } else {
-                totalTimeBlue -= timeForMove;
-            }
-
             // check for game over
             gameOver = gameState.isGameOver(bestMove, currentColor);
 
@@ -166,6 +156,17 @@ public class ConnectionSimulation {
                 // move piece
                 gameState.movePiece(bestMoveInt);
                 moveCount++;
+
+                // time keeping
+
+                System.out.println(currentColor + " | Time for move: " + timeForMove);
+                System.out.println();
+                if (currentColor == Color.RED) {
+                    totalTimeRed -= timeForMove;
+                } else {
+                    totalTimeBlue -= timeForMove;
+                }
+
             }
 
             if (showGame) {
@@ -378,7 +379,7 @@ public class ConnectionSimulation {
             AI firstAI = new Minimax_AB();
             SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
             firstConfig.timeLimit = 1000;
-            ConnectionSimulationConfig timeConfigFirst =  new ConnectionSimulationConfig(0.9,0.1,0.04,25,6,0.5);
+            ConnectionSimulationConfig timeConfigFirst =  new ConnectionSimulationConfig(0.9,0.1,0.04,18,6,0.5);
 
             // configuration of second AI (CAN BE CHANGED)
             // current (same): 0.92,0.08,0.04,29,6,0.5
@@ -389,7 +390,7 @@ public class ConnectionSimulation {
 
             // configuration of connectionSimulation (CAN BE CHANGED)
             String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
-            int iterations = 2;
+            int iterations = 20;
             boolean showGame = false;
 
             // start connectionSimulation (DO NOT CHANGE)
