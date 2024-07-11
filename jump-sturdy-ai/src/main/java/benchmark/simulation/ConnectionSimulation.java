@@ -127,7 +127,7 @@ public class ConnectionSimulation {
 
                 } else {
                     if (moveCountBlue <= timeConfigSecond.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
-                        firstConfig.timeLimit = (overall * timeConfigSecond.weightParameterStart) / timeConfigSecond.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
+                        secondConfig.timeLimit = (overall * timeConfigSecond.weightParameterStart) / timeConfigSecond.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
                         // CASE: overtime (if game goes beyond averageMoves)
                     } else if (timeLeftBlue <= maxTime * timeConfigSecond.weightParameterEndTime) { // if we have 5% of time left
                         secondConfig.timeLimit = (timeLeftBlue * timeConfigSecond.weightParameterFinal); // continuously less (but never running out directly)
@@ -145,9 +145,9 @@ public class ConnectionSimulation {
                 }
             }
             double timeForMove = System.currentTimeMillis() - currentTime;
+            
             // check for game over
             gameOver = gameState.isGameOver(bestMove, currentColor);
-
             if (!gameOver) {
                 // convert move
                 int[] bestMoveInts = gameState.convertStringToPosWrapper(bestMove);
@@ -158,7 +158,6 @@ public class ConnectionSimulation {
                 moveCount++;
 
                 // time keeping
-
                 System.out.println(currentColor + " | Time for move: " + timeForMove);
                 System.out.println();
                 if (currentColor == Color.RED) {
