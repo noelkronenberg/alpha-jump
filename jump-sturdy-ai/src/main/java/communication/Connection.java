@@ -223,14 +223,14 @@ public class Connection {
                                     // START: dynamic time management
 
                                     // CASE: start- and endgame
-                                    if (this.moveCounter <= 6 || (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)) {
-                                        config.timeLimit = (overall * 0.2) / 15; // 20% of the time (for on average 15 moves in these states)
+                                    if (this.moveCounter <= 6 /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
+                                        config.timeLimit = (overall * 0.1) / 6; // 20% of the time (for on average 15 moves in these states)
                                     // CASE: overtime (if game goes beyond averageMoves)
                                     } else if (this.timeLeft <= maxTime * 0.05) { // if we have 5% of time left
                                         config.timeLimit = (this.timeLeft * 0.5); // continuously less (but never running out directly)
                                     // CASE: mid-game
                                     } else {
-                                        config.timeLimit = (overall * 0.8) / 25; // 80% of the time (for on average 25 moves in this state)
+                                        config.timeLimit = (overall * 0.9) / 22; // 80% of the time (for on average 25 moves in this state)
                                     }
 
                                     // END: dynamic time management
