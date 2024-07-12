@@ -4,7 +4,7 @@ High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/i
 
 ![](https://github.com/noelkronenberg/projekt-ki/actions/workflows/junit.yml/badge.svg)
 
->**Note:** Unit Tests (see badge above) might fail if GitHUb Actions limit has been reached. If so, run them locally.
+>**Note:** Unit Tests (see badge above) might fail if GitHub Actions limit has been reached. If so, run them locally.
 
 ## Structure
 
