@@ -397,7 +397,8 @@ public class ConnectionSimulation {
             SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
             secondConfig.timeLimit = 1000;
             ConnectionSimulationConfig timeConfigSecond =  new ConnectionSimulationConfig(0.9,0.1,0.04,22,6,0.5, false);
-            //Sonst: 1.920 ,4.712
+            // NOTE: otherwise: 1.920 ,4.712
+
             // configuration of connectionSimulation (CAN BE CHANGED)
             String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
             int iterations = 20;
