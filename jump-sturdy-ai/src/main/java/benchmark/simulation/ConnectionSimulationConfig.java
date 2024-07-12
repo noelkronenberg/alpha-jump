@@ -10,6 +10,7 @@ public class ConnectionSimulationConfig {
     double weightParameterFinal;
     int numberOfMovesNormal;
     int numberOfMovesStart;
+    boolean activateLongSearch;
 
     /**
      * Constructs a new {@code ConnectionSimulationConfig} with the specified parameters.
@@ -21,13 +22,14 @@ public class ConnectionSimulationConfig {
      * @param numberOfMovesStart the number of moves at the start of the simulation
      * @param weightParameterFinal the final weight parameter
      */
-    public ConnectionSimulationConfig(double weightParameterNormal, double weightParameterStart, double weightParameterEndTime, int numberOfMovesNormal, int numberOfMovesStart, double weightParameterFinal) {
+    public ConnectionSimulationConfig(double weightParameterNormal, double weightParameterStart, double weightParameterEndTime, int numberOfMovesNormal, int numberOfMovesStart, double weightParameterFinal,boolean activateLongSearch) {
         this.weightParameterNormal = weightParameterNormal;
         this.weightParameterStart = weightParameterStart;
         this.weightParameterEndTime = weightParameterEndTime;
         this.weightParameterFinal = weightParameterFinal;
         this.numberOfMovesNormal = numberOfMovesNormal;
         this.numberOfMovesStart = numberOfMovesStart;
+        this.activateLongSearch = activateLongSearch;
     }
 
     @Override

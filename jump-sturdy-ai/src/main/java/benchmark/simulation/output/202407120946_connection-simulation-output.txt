@@ -1,0 +1,70 @@
+START: 202407120946
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1359.0
+
+RED | Time for move: 1836.0
+
+BLUE | Time for move: 1357.0
+
+RED | Time for move: 1843.0
+
+BLUE | Time for move: 1358.0
+
+RED | Time for move: 1838.0
+
+BLUE | Time for move: 1355.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 1372.0
+
+RED | Time for move: 4586.0
+
+BLUE | Time for move: 1357.0
+
+RED | Time for move: 4594.0
+
+BLUE | Time for move: 3911.0
+
+RED | Time for move: 4603.0
+
+BLUE | Time for move: 3910.0
+
+RED | Time for move: 446.0
+
+BLUE | Time for move: 3913.0
+
+RED | Time for move: 1557.0
+
+BLUE | Time for move: 3910.0
+
+RED | Time for move: 4301.0
+
+BLUE | Time for move: 3907.0
+
+RED | Time for move: 4342.0
+
+BLUE | Time for move: 3919.0
+
+RED | Time for move: 4360.0
+
+BLUE | Time for move: 7916.0
+
+RED | Time for move: 4366.0
+
+BLUE | Time for move: 7925.0
+

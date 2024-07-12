@@ -55,9 +55,6 @@ public class ConnectionSimulation {
 
         double overall = 0.96 * maxTime;
 
-        double timeLeftRed = 120000.0;
-        double timeLeftBlue = 120000.0;
-
         MoveGenerator gameState = new MoveGenerator();
         gameState.initializeBoard(fen);
 
@@ -103,13 +100,14 @@ public class ConnectionSimulation {
                     if (moveCountRed <= timeConfigFirst.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
                         firstConfig.timeLimit = (overall * timeConfigFirst.weightParameterStart) / timeConfigFirst.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
                         // CASE: overtime (if game goes beyond averageMoves)
-                    } else if (timeLeftRed <= maxTime * timeConfigFirst.weightParameterEndTime) { // if we have 5% of time left
-                        firstConfig.timeLimit = (timeLeftRed * timeConfigFirst.weightParameterFinal); // continuously less (but never running out directly)
+                    } else if (totalTimeRed <= maxTime * timeConfigFirst.weightParameterEndTime) { // if we have 5% of time left
+                        firstConfig.timeLimit = (totalTimeRed * timeConfigFirst.weightParameterFinal); // continuously less (but never running out directly)
                         // CASE: mid-game
+                    } else if (timeConfigFirst.activateLongSearch && moveCountRed<= 20 && moveCountRed>= 15){
+                        firstConfig.timeLimit = 8000; // 80% of the time (for on average 25 moves in this state)
                     } else {
                         firstConfig.timeLimit = (overall * timeConfigFirst.weightParameterNormal) / timeConfigFirst.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
                     }
-
                     bestMove = firstAI.orchestrator(fen, firstConfig);
                     moveCountRed++;
                 }
@@ -129,9 +127,11 @@ public class ConnectionSimulation {
                     if (moveCountBlue <= timeConfigSecond.numberOfMovesStart /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
                         secondConfig.timeLimit = (overall * timeConfigSecond.weightParameterStart) / timeConfigSecond.numberOfMovesStart; // 20% of the time (for on average 15 moves in these states)
                         // CASE: overtime (if game goes beyond averageMoves)
-                    } else if (timeLeftBlue <= maxTime * timeConfigSecond.weightParameterEndTime) { // if we have 5% of time left
-                        secondConfig.timeLimit = (timeLeftBlue * timeConfigSecond.weightParameterFinal); // continuously less (but never running out directly)
+                    } else if (totalTimeBlue <= maxTime * timeConfigSecond.weightParameterEndTime) { // if we have 5% of time left
+                        secondConfig.timeLimit = (totalTimeBlue * timeConfigSecond.weightParameterFinal); // continuously less (but never running out directly)
                         // CASE: mid-game
+                    } else if (timeConfigSecond.activateLongSearch && moveCountBlue<= 20 && moveCountBlue>= 15){
+                        secondConfig.timeLimit = 8000; // 80% of the time (for on average 25 moves in this state)
                     } else {
                         secondConfig.timeLimit = (overall * timeConfigSecond.weightParameterNormal) / timeConfigSecond.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
                     }
@@ -144,8 +144,10 @@ public class ConnectionSimulation {
                     secondAIDepths.add(((Minimax_AB) secondAI).maxDepth);
                 }
             }
+
             double timeForMove = System.currentTimeMillis() - currentTime;
-            
+
+
             // check for game over
             gameOver = gameState.isGameOver(bestMove, currentColor);
             if (!gameOver) {
@@ -182,18 +184,27 @@ public class ConnectionSimulation {
             fen = gameState.getFenFromBoard() + " " + nextColor;
         }
 
-        System.out.println("Total moves for red: " + moveCountRed);
-        System.out.println("Total moves for blue: " + moveCountBlue);
-        System.out.println();
-
-        System.out.println("Total time left for red: " + totalTimeRed);
-        System.out.println("Total time left for blue: " + totalTimeBlue);
-        System.out.println();
-
         if (moveCount % 2 == 0) {
             Color otherColor = (startingColor == Color.RED) ? Color.BLUE : Color.RED;
+
+            System.out.println("Total moves for red: " + (moveCountRed-1));
+            System.out.println("Total moves for blue: " + moveCountBlue);
+            System.out.println();
+
+            System.out.println("Total time left for red: " + totalTimeRed);
+            System.out.println("Total time left for blue: " + totalTimeBlue);
+            System.out.println();
+
             return new GameResult(2, otherColor, secondAIDepths);
         } else {
+            System.out.println("Total moves for red: " + moveCountRed);
+            System.out.println("Total moves for blue: " + (moveCountBlue-1));
+            System.out.println();
+
+            System.out.println("Total time left for red: " + totalTimeRed);
+            System.out.println("Total time left for blue: " + totalTimeBlue);
+            System.out.println();
+
             return new GameResult(1, startingColor, firstAIDepths);
         }
     }
@@ -378,15 +389,15 @@ public class ConnectionSimulation {
             AI firstAI = new Minimax_AB();
             SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
             firstConfig.timeLimit = 1000;
-            ConnectionSimulationConfig timeConfigFirst =  new ConnectionSimulationConfig(0.9,0.1,0.04,22,6,0.5);
+            ConnectionSimulationConfig timeConfigFirst =  new ConnectionSimulationConfig(0.9,0.1,0.04,26,8,0.5, true);
 
             // configuration of second AI (CAN BE CHANGED)
             // current (same): 0.92,0.08,0.04,29,6,0.5
             AI secondAI = new Minimax_AB();
             SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
             secondConfig.timeLimit = 1000;
-            ConnectionSimulationConfig timeConfigSecond =  new ConnectionSimulationConfig(0.92,0.08,0.04,29,6,0.5);
-
+            ConnectionSimulationConfig timeConfigSecond =  new ConnectionSimulationConfig(0.9,0.1,0.04,22,6,0.5, false);
+            //Sonst: 1.920 ,4.712
             // configuration of connectionSimulation (CAN BE CHANGED)
             String initialFEN = "b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r"; // sanity check: b0b0b0b0b0b0/1r0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r (red should always win)
             int iterations = 20;
