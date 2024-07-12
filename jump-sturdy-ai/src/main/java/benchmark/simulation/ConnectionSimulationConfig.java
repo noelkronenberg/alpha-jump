@@ -50,6 +50,9 @@ public class ConnectionSimulationConfig {
                 " | weightParameterFinal = " + weightParameterFinal +
                 " | numberOfMovesNormal = " + numberOfMovesNormal +
                 " | numberOfMovesStart = " + numberOfMovesStart +
-                " | activateLongSearch = " + activateLongSearch;
+                " | activateLongSearch = " + activateLongSearch +
+                " | startLongSearch = " + startLongSearch +
+                " | endLongSearch = " + endLongSearch +
+                " | longSearchDuration = " + longSearchDuration;
     }
 }
