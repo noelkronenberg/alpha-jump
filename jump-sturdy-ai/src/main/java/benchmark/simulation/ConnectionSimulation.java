@@ -389,14 +389,14 @@ public class ConnectionSimulation {
             AI firstAI = new Minimax_AB();
             SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
             firstConfig.timeLimit = 1000;
-            ConnectionSimulationConfig timeConfigFirst =  new ConnectionSimulationConfig(0.9,0.1,0.04,26,8,0.5, true,15,20,8000.0);
+            ConnectionSimulationConfig timeConfigFirst =  new ConnectionSimulationConfig(0.9,0.1,0.04,26,8,0.5, true,18,23,8000.0);
 
             // configuration of second AI (CAN BE CHANGED)
             // current (same): 0.92,0.08,0.04,29,6,0.5
             AI secondAI = new Minimax_AB();
             SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
             secondConfig.timeLimit = 1000;
-            ConnectionSimulationConfig timeConfigSecond =  new ConnectionSimulationConfig(0.9,0.1,0.04,22,6,0.5, false,0,0,0.0);
+            ConnectionSimulationConfig timeConfigSecond =  new ConnectionSimulationConfig(0.92,0.08,0.04,29,6,0.5, false,0,0,0);
             // NOTE: otherwise: 1.920 ,4.712
 
             // configuration of connectionSimulation (CAN BE CHANGED)
