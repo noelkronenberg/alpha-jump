@@ -21,6 +21,7 @@ public class ConnectionSimulationConfig {
      * @param numberOfMovesNormal the number of normal moves in the simulation
      * @param numberOfMovesStart the number of moves at the start of the simulation
      * @param weightParameterFinal the final weight parameter
+     * @param activateLongSearch TBI
      */
     public ConnectionSimulationConfig(double weightParameterNormal, double weightParameterStart, double weightParameterEndTime, int numberOfMovesNormal, int numberOfMovesStart, double weightParameterFinal,boolean activateLongSearch) {
         this.weightParameterNormal = weightParameterNormal;
@@ -39,6 +40,7 @@ public class ConnectionSimulationConfig {
                 " | weightParameterEndTime = " + weightParameterEndTime +
                 " | weightParameterFinal = " + weightParameterFinal +
                 " | numberOfMovesNormal = " + numberOfMovesNormal +
-                " | numberOfMovesStart = " + numberOfMovesStart;
+                " | numberOfMovesStart = " + numberOfMovesStart +
+                " | activateLongSearch = " + activateLongSearch;
     }
 }
