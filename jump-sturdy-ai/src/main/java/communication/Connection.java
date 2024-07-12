@@ -81,7 +81,7 @@ public class Connection {
 
         MoveGenerator gameInstance =  new MoveGenerator();
 
-        double overall = 115000.0; // default time for main game (in ms)
+        double overall = this.maxTime*0.96; // default time for main game (in ms)
         int averageMoves = 40;
         config.timeLimit = overall / averageMoves; // set time for move (in ms)
 
@@ -223,14 +223,16 @@ public class Connection {
                                     // START: dynamic time management
 
                                     // CASE: start- and endgame
-                                    if (this.moveCounter <= 6 /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
-                                        config.timeLimit = (overall * 0.1) / 6; // 20% of the time (for on average 15 moves in these states)
-                                    // CASE: overtime (if game goes beyond averageMoves)
-                                    } else if (this.timeLeft <= maxTime * 0.05) { // if we have 5% of time left
+                                    if (this.moveCounter <= 8 /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
+                                        config.timeLimit = (overall * 0.1) / 8; // 20% of the time (for on average 15 moves in these states)
+                                        // CASE: overtime (if game goes beyond averageMoves)
+                                    } else if (this.timeLeft <= maxTime * 0.04) { // if we have 5% of time left
                                         config.timeLimit = (this.timeLeft * 0.5); // continuously less (but never running out directly)
-                                    // CASE: mid-game
+                                        // CASE: mid-game
+                                    } else if (this.moveCounter <= 23 && this.moveCounter <= 18) {
+
                                     } else {
-                                        config.timeLimit = (overall * 0.9) / 22; // 80% of the time (for on average 25 moves in this state)
+                                        config.timeLimit = (overall * 0.9) / 26; // 80% of the time (for on average 25 moves in this state)
                                     }
 
                                     // END: dynamic time management
