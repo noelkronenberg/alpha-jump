@@ -103,8 +103,8 @@ public class ConnectionSimulation {
                     } else if (totalTimeRed <= maxTime * timeConfigFirst.weightParameterEndTime) { // if we have 5% of time left
                         firstConfig.timeLimit = (totalTimeRed * timeConfigFirst.weightParameterFinal); // continuously less (but never running out directly)
                         // CASE: mid-game
-                    } else if (timeConfigFirst.activateLongSearch && moveCountRed<= 20 && moveCountRed>= 15){
-                        firstConfig.timeLimit = 8000; // 80% of the time (for on average 25 moves in this state)
+                    } else if (timeConfigFirst.activateLongSearch && moveCountRed<= timeConfigFirst.endLongSearch && moveCountRed>= timeConfigFirst.startLongSearch){
+                        firstConfig.timeLimit = timeConfigFirst.longSearchDuration; // 80% of the time (for on average 25 moves in this state)
                     } else {
                         firstConfig.timeLimit = (overall * timeConfigFirst.weightParameterNormal) / timeConfigFirst.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
                     }
@@ -130,8 +130,8 @@ public class ConnectionSimulation {
                     } else if (totalTimeBlue <= maxTime * timeConfigSecond.weightParameterEndTime) { // if we have 5% of time left
                         secondConfig.timeLimit = (totalTimeBlue * timeConfigSecond.weightParameterFinal); // continuously less (but never running out directly)
                         // CASE: mid-game
-                    } else if (timeConfigSecond.activateLongSearch && moveCountBlue<= 20 && moveCountBlue>= 15){
-                        secondConfig.timeLimit = 8000; // 80% of the time (for on average 25 moves in this state)
+                    } else if (timeConfigSecond.activateLongSearch && moveCountBlue<= timeConfigSecond.endLongSearch && moveCountBlue>= timeConfigSecond.startLongSearch){
+                        secondConfig.timeLimit = timeConfigSecond.longSearchDuration;
                     } else {
                         secondConfig.timeLimit = (overall * timeConfigSecond.weightParameterNormal) / timeConfigSecond.numberOfMovesNormal; // 80% of the time (for on average 25 moves in this state)
                     }
@@ -389,14 +389,14 @@ public class ConnectionSimulation {
             AI firstAI = new Minimax_AB();
             SearchConfig firstConfig = Minimax_AB.bestConfig.copy();
             firstConfig.timeLimit = 1000;
-            ConnectionSimulationConfig timeConfigFirst =  new ConnectionSimulationConfig(0.9,0.1,0.04,26,8,0.5, true);
+            ConnectionSimulationConfig timeConfigFirst =  new ConnectionSimulationConfig(0.9,0.1,0.04,26,8,0.5, true,15,20,8000.0);
 
             // configuration of second AI (CAN BE CHANGED)
             // current (same): 0.92,0.08,0.04,29,6,0.5
             AI secondAI = new Minimax_AB();
             SearchConfig secondConfig = Minimax_AB.bestConfig.copy();
             secondConfig.timeLimit = 1000;
-            ConnectionSimulationConfig timeConfigSecond =  new ConnectionSimulationConfig(0.9,0.1,0.04,22,6,0.5, false);
+            ConnectionSimulationConfig timeConfigSecond =  new ConnectionSimulationConfig(0.9,0.1,0.04,22,6,0.5, false,0,0,0.0);
             // NOTE: otherwise: 1.920 ,4.712
 
             // configuration of connectionSimulation (CAN BE CHANGED)
