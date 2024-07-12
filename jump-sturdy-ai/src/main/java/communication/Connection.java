@@ -208,6 +208,8 @@ public class Connection {
                             // AI
                             } else {
 
+                                // gameInstance.printBoard(true);
+
                                 // START: opening library
                                 String moveOpeningLib = this.openingLib.get(fenNoPlayer);
                                 if (this.useOpeningLib && moveOpeningLib != null){
