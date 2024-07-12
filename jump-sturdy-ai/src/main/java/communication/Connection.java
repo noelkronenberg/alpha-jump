@@ -229,7 +229,7 @@ public class Connection {
                                     } else if (this.timeLeft <= maxTime * 0.04) { // if we have 5% of time left
                                         config.timeLimit = (this.timeLeft * 0.5); // continuously less (but never running out directly)
                                         // CASE: mid-game
-                                    } else if (this.moveCounter <= 23 && this.moveCounter <= 18) {
+                                    } else if (this.moveCounter <= 23 && this.moveCounter >= 18) {
 
                                     } else {
                                         config.timeLimit = (overall * 0.9) / 26; // 80% of the time (for on average 25 moves in this state)
