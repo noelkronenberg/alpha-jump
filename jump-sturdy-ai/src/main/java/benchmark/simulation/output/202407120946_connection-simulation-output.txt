@@ -68,3 +68,2299 @@ RED | Time for move: 4366.0
 
 BLUE | Time for move: 7925.0
 
+RED | Time for move: 4337.0
+
+BLUE | Time for move: 7917.0
+
+RED | Time for move: 4393.0
+
+BLUE | Time for move: 7718.0
+
+RED | Time for move: 4323.0
+
+BLUE | Time for move: 7778.0
+
+RED | Time for move: 4092.0
+
+BLUE | Time for move: 7917.0
+
+RED | Time for move: 4299.0
+
+BLUE | Time for move: 3905.0
+
+RED | Time for move: 4177.0
+
+BLUE | Time for move: 3904.0
+
+RED | Time for move: 4214.0
+
+BLUE | Time for move: 3809.0
+
+RED | Time for move: 124.0
+
+BLUE | Time for move: 1668.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 43.0
+
+Total moves for red: 26
+Total moves for blue: 26
+
+Total time left for red: 46742.0
+Total time left for blue: 27872.0
+
+Winner of game 1 is: AI 1 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1837.0
+
+RED | Time for move: 1369.0
+
+BLUE | Time for move: 1837.0
+
+RED | Time for move: 1358.0
+
+BLUE | Time for move: 1837.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 1851.0
+
+RED | Time for move: 1358.0
+
+BLUE | Time for move: 4634.0
+
+RED | Time for move: 1350.0
+
+BLUE | Time for move: 4629.0
+
+RED | Time for move: 3908.0
+
+BLUE | Time for move: 4631.0
+
+RED | Time for move: 3906.0
+
+BLUE | Time for move: 4637.0
+
+RED | Time for move: 3900.0
+
+BLUE | Time for move: 4629.0
+
+RED | Time for move: 3908.0
+
+BLUE | Time for move: 4636.0
+
+RED | Time for move: 3905.0
+
+BLUE | Time for move: 4629.0
+
+RED | Time for move: 3913.0
+
+BLUE | Time for move: 4627.0
+
+RED | Time for move: 7923.0
+
+BLUE | Time for move: 976.0
+
+RED | Time for move: 7915.0
+
+BLUE | Time for move: 4381.0
+
+RED | Time for move: 7911.0
+
+BLUE | Time for move: 4366.0
+
+RED | Time for move: 7929.0
+
+BLUE | Time for move: 4538.0
+
+RED | Time for move: 7922.0
+
+BLUE | Time for move: 4540.0
+
+RED | Time for move: 7740.0
+
+BLUE | Time for move: 3821.0
+
+RED | Time for move: 3801.0
+
+BLUE | Time for move: 3741.0
+
+RED | Time for move: 3796.0
+
+BLUE | Time for move: 163.0
+
+RED | Time for move: 104.0
+
+BLUE | Time for move: 93.0
+
+RED | Time for move: 2061.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 48.0
+
+Total moves for red: 26
+Total moves for blue: 25
+
+Total time left for red: 32620.0
+Total time left for blue: 48967.0
+
+Winner of game 2 is: AI 1 (RED)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1359.0
+
+RED | Time for move: 1841.0
+
+BLUE | Time for move: 1373.0
+
+RED | Time for move: 1833.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 1835.0
+
+BLUE | Time for move: 1355.0
+
+RED | Time for move: 4631.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 4629.0
+
+BLUE | Time for move: 3900.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 3900.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 3908.0
+
+RED | Time for move: 4597.0
+
+BLUE | Time for move: 3900.0
+
+RED | Time for move: 4587.0
+
+BLUE | Time for move: 3903.0
+
+RED | Time for move: 4554.0
+
+BLUE | Time for move: 3899.0
+
+RED | Time for move: 4589.0
+
+BLUE | Time for move: 7910.0
+
+RED | Time for move: 4628.0
+
+BLUE | Time for move: 7911.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 7910.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 7914.0
+
+RED | Time for move: 4634.0
+
+BLUE | Time for move: 7906.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 7918.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 3651.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 3901.0
+
+RED | Time for move: 2324.0
+
+BLUE | Time for move: 1835.0
+
+RED | Time for move: 969.0
+
+BLUE | Time for move: 3906.0
+
+RED | Time for move: 4622.0
+
+BLUE | Time for move: 3911.0
+
+RED | Time for move: 4619.0
+
+BLUE | Time for move: 3764.0
+
+RED | Time for move: 1011.0
+
+BLUE | Time for move: 1200.0
+
+RED | Time for move: 2395.0
+
+BLUE | Time for move: 3816.0
+
+RED | Time for move: 4443.0
+
+BLUE | Time for move: 2267.0
+
+RED | Time for move: 314.0
+
+BLUE | Time for move: 2801.0
+
+RED | Time for move: 120.0
+
+BLUE | Time for move: 1948.0
+
+RED | Time for move: 26.0
+
+BLUE | Time for move: 309.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 12.0
+
+Total moves for red: 34
+Total moves for blue: 34
+
+Total time left for red: 19791.0
+Total time left for blue: 7630.0
+
+Winner of game 3 is: AI 1 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1836.0
+
+RED | Time for move: 1354.0
+
+BLUE | Time for move: 1837.0
+
+RED | Time for move: 1364.0
+
+BLUE | Time for move: 1837.0
+
+RED | Time for move: 1360.0
+
+BLUE | Time for move: 1839.0
+
+RED | Time for move: 1361.0
+
+BLUE | Time for move: 4634.0
+
+RED | Time for move: 1358.0
+
+BLUE | Time for move: 4636.0
+
+RED | Time for move: 3898.0
+
+BLUE | Time for move: 4626.0
+
+RED | Time for move: 3904.0
+
+BLUE | Time for move: 4631.0
+
+RED | Time for move: 3904.0
+
+BLUE | Time for move: 4631.0
+
+RED | Time for move: 3907.0
+
+BLUE | Time for move: 4634.0
+
+RED | Time for move: 3915.0
+
+BLUE | Time for move: 4624.0
+
+RED | Time for move: 3554.0
+
+BLUE | Time for move: 320.0
+
+RED | Time for move: 6045.0
+
+BLUE | Time for move: 1.0
+
+RED | Time for move: 634.0
+
+Total moves for red: 17
+Total moves for blue: 16
+
+Total time left for red: 83442.0
+Total time left for blue: 79914.0
+
+Winner of game 4 is: AI 1 (RED)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1354.0
+
+RED | Time for move: 1844.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 1836.0
+
+BLUE | Time for move: 1358.0
+
+RED | Time for move: 1836.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 4638.0
+
+BLUE | Time for move: 1365.0
+
+RED | Time for move: 4645.0
+
+BLUE | Time for move: 1359.0
+
+RED | Time for move: 4636.0
+
+BLUE | Time for move: 3910.0
+
+RED | Time for move: 4638.0
+
+BLUE | Time for move: 3901.0
+
+RED | Time for move: 4637.0
+
+BLUE | Time for move: 3899.0
+
+RED | Time for move: 4640.0
+
+BLUE | Time for move: 3911.0
+
+RED | Time for move: 4635.0
+
+BLUE | Time for move: 3903.0
+
+RED | Time for move: 4631.0
+
+BLUE | Time for move: 3912.0
+
+RED | Time for move: 4623.0
+
+BLUE | Time for move: 7824.0
+
+RED | Time for move: 4634.0
+
+BLUE | Time for move: 4674.0
+
+RED | Time for move: 4632.0
+
+BLUE | Time for move: 7913.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 7917.0
+
+RED | Time for move: 4621.0
+
+BLUE | Time for move: 7917.0
+
+RED | Time for move: 4630.0
+
+BLUE | Time for move: 7736.0
+
+RED | Time for move: 4637.0
+
+BLUE | Time for move: 3845.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 3863.0
+
+RED | Time for move: 4623.0
+
+BLUE | Time for move: 3867.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 3897.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 3897.0
+
+RED | Time for move: 4631.0
+
+BLUE | Time for move: 3895.0
+
+RED | Time for move: 4634.0
+
+BLUE | Time for move: 3897.0
+
+RED | Time for move: 4442.0
+
+BLUE | Time for move: 3831.0
+
+RED | Time for move: 4594.0
+
+BLUE | Time for move: 3642.0
+
+RED | Time for move: 1463.0
+
+BLUE | Time for move: 3229.0
+
+RED | Time for move: 3614.0
+
+BLUE | Time for move: 662.0
+
+RED | Time for move: 1191.0
+
+BLUE | Time for move: 34.0
+
+RED | Time for move: 487.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 21.0
+
+Total moves for red: 35
+Total moves for blue: 34
+
+Total time left for red: 1405.0
+Total time left for blue: 5866.0
+
+Winner of game 5 is: AI 2 (RED)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1841.0
+
+RED | Time for move: 1354.0
+
+BLUE | Time for move: 1838.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 1842.0
+
+RED | Time for move: 1362.0
+
+BLUE | Time for move: 1845.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 4634.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 4641.0
+
+RED | Time for move: 3898.0
+
+BLUE | Time for move: 4626.0
+
+RED | Time for move: 3906.0
+
+BLUE | Time for move: 4634.0
+
+RED | Time for move: 3908.0
+
+BLUE | Time for move: 4630.0
+
+RED | Time for move: 3915.0
+
+BLUE | Time for move: 4626.0
+
+RED | Time for move: 3907.0
+
+BLUE | Time for move: 4611.0
+
+RED | Time for move: 3612.0
+
+BLUE | Time for move: 353.0
+
+RED | Time for move: 6245.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 641.0
+
+Total moves for red: 17
+Total moves for blue: 16
+
+Total time left for red: 83187.0
+Total time left for blue: 79879.0
+
+Winner of game 6 is: AI 1 (RED)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1354.0
+
+RED | Time for move: 1851.0
+
+BLUE | Time for move: 1447.0
+
+RED | Time for move: 1839.0
+
+BLUE | Time for move: 1369.0
+
+RED | Time for move: 1847.0
+
+BLUE | Time for move: 1359.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 1372.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 4631.0
+
+BLUE | Time for move: 3904.0
+
+RED | Time for move: 2145.0
+
+BLUE | Time for move: 3749.0
+
+RED | Time for move: 225.0
+
+BLUE | Time for move: 2947.0
+
+RED | Time for move: 1.0
+
+BLUE | Time for move: 484.0
+
+Total moves for red: 13
+Total moves for blue: 13
+
+Total time left for red: 98207.0
+Total time left for blue: 100654.0
+
+Winner of game 7 is: AI 1 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1837.0
+
+RED | Time for move: 1354.0
+
+BLUE | Time for move: 1843.0
+
+RED | Time for move: 1365.0
+
+BLUE | Time for move: 1837.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 1838.0
+
+RED | Time for move: 1358.0
+
+BLUE | Time for move: 4634.0
+
+RED | Time for move: 1350.0
+
+BLUE | Time for move: 4629.0
+
+RED | Time for move: 3903.0
+
+BLUE | Time for move: 4632.0
+
+RED | Time for move: 3905.0
+
+BLUE | Time for move: 4625.0
+
+RED | Time for move: 3911.0
+
+BLUE | Time for move: 4624.0
+
+RED | Time for move: 3915.0
+
+BLUE | Time for move: 230.0
+
+RED | Time for move: 3907.0
+
+BLUE | Time for move: 4521.0
+
+RED | Time for move: 3909.0
+
+BLUE | Time for move: 682.0
+
+RED | Time for move: 7742.0
+
+BLUE | Time for move: 4627.0
+
+RED | Time for move: 2307.0
+
+BLUE | Time for move: 4643.0
+
+RED | Time for move: 7127.0
+
+BLUE | Time for move: 4626.0
+
+RED | Time for move: 7362.0
+
+BLUE | Time for move: 4539.0
+
+RED | Time for move: 7403.0
+
+BLUE | Time for move: 4548.0
+
+RED | Time for move: 5958.0
+
+BLUE | Time for move: 4625.0
+
+RED | Time for move: 2776.0
+
+BLUE | Time for move: 4625.0
+
+RED | Time for move: 3525.0
+
+BLUE | Time for move: 4625.0
+
+RED | Time for move: 3640.0
+
+BLUE | Time for move: 4636.0
+
+RED | Time for move: 3676.0
+
+BLUE | Time for move: 4613.0
+
+RED | Time for move: 1019.0
+
+BLUE | Time for move: 3701.0
+
+RED | Time for move: 311.0
+
+BLUE | Time for move: 3058.0
+
+RED | Time for move: 76.0
+
+BLUE | Time for move: 1095.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 60.0
+
+Total moves for red: 29
+Total moves for blue: 29
+
+Total time left for red: 36846.0
+Total time left for blue: 30047.0
+
+Winner of game 8 is: AI 2 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1362.0
+
+RED | Time for move: 1836.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 1836.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 1846.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 4626.0
+
+BLUE | Time for move: 1364.0
+
+RED | Time for move: 4631.0
+
+BLUE | Time for move: 1359.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 3905.0
+
+RED | Time for move: 4609.0
+
+BLUE | Time for move: 3907.0
+
+RED | Time for move: 654.0
+
+BLUE | Time for move: 3903.0
+
+RED | Time for move: 4626.0
+
+BLUE | Time for move: 3905.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 3907.0
+
+RED | Time for move: 4624.0
+
+BLUE | Time for move: 3900.0
+
+RED | Time for move: 4632.0
+
+BLUE | Time for move: 7923.0
+
+RED | Time for move: 4624.0
+
+BLUE | Time for move: 7922.0
+
+RED | Time for move: 4631.0
+
+BLUE | Time for move: 7914.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 7911.0
+
+RED | Time for move: 4638.0
+
+BLUE | Time for move: 7554.0
+
+RED | Time for move: 326.0
+
+BLUE | Time for move: 5851.0
+
+RED | Time for move: 89.0
+
+BLUE | Time for move: 156.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+Total moves for red: 23
+Total moves for blue: 23
+
+Total time left for red: 57895.0
+Total time left for blue: 43174.0
+
+Winner of game 9 is: AI 1 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1836.0
+
+RED | Time for move: 1354.0
+
+BLUE | Time for move: 1842.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 1849.0
+
+RED | Time for move: 1356.0
+
+BLUE | Time for move: 1857.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 4644.0
+
+RED | Time for move: 1362.0
+
+BLUE | Time for move: 4634.0
+
+RED | Time for move: 3904.0
+
+BLUE | Time for move: 4631.0
+
+RED | Time for move: 3905.0
+
+BLUE | Time for move: 4624.0
+
+RED | Time for move: 3905.0
+
+BLUE | Time for move: 4627.0
+
+RED | Time for move: 3911.0
+
+BLUE | Time for move: 219.0
+
+RED | Time for move: 3905.0
+
+BLUE | Time for move: 4520.0
+
+RED | Time for move: 3907.0
+
+BLUE | Time for move: 682.0
+
+RED | Time for move: 7740.0
+
+BLUE | Time for move: 4623.0
+
+RED | Time for move: 2309.0
+
+BLUE | Time for move: 4623.0
+
+RED | Time for move: 7347.0
+
+BLUE | Time for move: 4627.0
+
+RED | Time for move: 7396.0
+
+BLUE | Time for move: 4539.0
+
+RED | Time for move: 7369.0
+
+BLUE | Time for move: 4559.0
+
+RED | Time for move: 7448.0
+
+BLUE | Time for move: 4635.0
+
+RED | Time for move: 3518.0
+
+BLUE | Time for move: 4177.0
+
+RED | Time for move: 3611.0
+
+BLUE | Time for move: 4407.0
+
+RED | Time for move: 3432.0
+
+BLUE | Time for move: 4226.0
+
+RED | Time for move: 3703.0
+
+BLUE | Time for move: 4174.0
+
+RED | Time for move: 1672.0
+
+BLUE | Time for move: 3917.0
+
+RED | Time for move: 3305.0
+
+BLUE | Time for move: 3988.0
+
+RED | Time for move: 2488.0
+
+BLUE | Time for move: 3474.0
+
+RED | Time for move: 3081.0
+
+BLUE | Time for move: 4184.0
+
+RED | Time for move: 1365.0
+
+BLUE | Time for move: 297.0
+
+RED | Time for move: 577.0
+
+BLUE | Time for move: 1118.0
+
+RED | Time for move: 40.0
+
+BLUE | Time for move: 344.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 14.0
+
+Total moves for red: 33
+Total moves for blue: 33
+
+Total time left for red: 23380.0
+Total time left for blue: 22109.0
+
+Winner of game 10 is: AI 2 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1354.0
+
+RED | Time for move: 1843.0
+
+BLUE | Time for move: 1368.0
+
+RED | Time for move: 1849.0
+
+BLUE | Time for move: 1371.0
+
+RED | Time for move: 1845.0
+
+BLUE | Time for move: 1358.0
+
+RED | Time for move: 4626.0
+
+BLUE | Time for move: 1358.0
+
+RED | Time for move: 4647.0
+
+BLUE | Time for move: 1364.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 3904.0
+
+RED | Time for move: 4593.0
+
+BLUE | Time for move: 3787.0
+
+RED | Time for move: 4611.0
+
+BLUE | Time for move: 3784.0
+
+RED | Time for move: 4592.0
+
+BLUE | Time for move: 3782.0
+
+RED | Time for move: 4591.0
+
+BLUE | Time for move: 3790.0
+
+RED | Time for move: 4595.0
+
+BLUE | Time for move: 3700.0
+
+RED | Time for move: 4581.0
+
+BLUE | Time for move: 7557.0
+
+RED | Time for move: 672.0
+
+BLUE | Time for move: 7503.0
+
+RED | Time for move: 4628.0
+
+BLUE | Time for move: 7915.0
+
+RED | Time for move: 4629.0
+
+BLUE | Time for move: 7911.0
+
+RED | Time for move: 4635.0
+
+BLUE | Time for move: 7916.0
+
+RED | Time for move: 4631.0
+
+BLUE | Time for move: 7912.0
+
+RED | Time for move: 4629.0
+
+BLUE | Time for move: 3864.0
+
+RED | Time for move: 414.0
+
+BLUE | Time for move: 2929.0
+
+RED | Time for move: 102.0
+
+BLUE | Time for move: 1317.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 57.0
+
+Total moves for red: 25
+Total moves for blue: 25
+
+Total time left for red: 48662.0
+Total time left for blue: 34199.0
+
+Winner of game 11 is: AI 1 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1841.0
+
+RED | Time for move: 1356.0
+
+BLUE | Time for move: 1839.0
+
+RED | Time for move: 1357.0
+
+BLUE | Time for move: 1839.0
+
+RED | Time for move: 1365.0
+
+BLUE | Time for move: 1845.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 4637.0
+
+RED | Time for move: 1352.0
+
+BLUE | Time for move: 4632.0
+
+RED | Time for move: 3907.0
+
+BLUE | Time for move: 4634.0
+
+RED | Time for move: 3911.0
+
+BLUE | Time for move: 4632.0
+
+RED | Time for move: 3905.0
+
+BLUE | Time for move: 4624.0
+
+RED | Time for move: 3906.0
+
+BLUE | Time for move: 225.0
+
+RED | Time for move: 3906.0
+
+BLUE | Time for move: 4522.0
+
+RED | Time for move: 3907.0
+
+BLUE | Time for move: 4537.0
+
+RED | Time for move: 7644.0
+
+BLUE | Time for move: 1284.0
+
+RED | Time for move: 6278.0
+
+BLUE | Time for move: 3964.0
+
+RED | Time for move: 7919.0
+
+BLUE | Time for move: 3986.0
+
+RED | Time for move: 7915.0
+
+BLUE | Time for move: 3958.0
+
+RED | Time for move: 7912.0
+
+BLUE | Time for move: 3963.0
+
+RED | Time for move: 7911.0
+
+BLUE | Time for move: 1141.0
+
+RED | Time for move: 3785.0
+
+BLUE | Time for move: 318.0
+
+RED | Time for move: 2894.0
+
+BLUE | Time for move: 96.0
+
+RED | Time for move: 1325.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 21.0
+
+Total moves for red: 25
+Total moves for blue: 24
+
+Total time left for red: 36169.0
+Total time left for blue: 61483.0
+
+Winner of game 12 is: AI 1 (RED)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1362.0
+
+RED | Time for move: 1839.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 1836.0
+
+BLUE | Time for move: 1366.0
+
+RED | Time for move: 1841.0
+
+BLUE | Time for move: 1367.0
+
+RED | Time for move: 4629.0
+
+BLUE | Time for move: 1358.0
+
+RED | Time for move: 4595.0
+
+BLUE | Time for move: 1362.0
+
+RED | Time for move: 4578.0
+
+BLUE | Time for move: 3904.0
+
+RED | Time for move: 4569.0
+
+BLUE | Time for move: 3911.0
+
+RED | Time for move: 4548.0
+
+BLUE | Time for move: 3915.0
+
+RED | Time for move: 4566.0
+
+BLUE | Time for move: 3906.0
+
+RED | Time for move: 4543.0
+
+BLUE | Time for move: 1608.0
+
+RED | Time for move: 4573.0
+
+BLUE | Time for move: 1695.0
+
+RED | Time for move: 4561.0
+
+BLUE | Time for move: 7683.0
+
+RED | Time for move: 4572.0
+
+BLUE | Time for move: 7702.0
+
+RED | Time for move: 502.0
+
+BLUE | Time for move: 7656.0
+
+RED | Time for move: 4629.0
+
+BLUE | Time for move: 7915.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 7923.0
+
+RED | Time for move: 2578.0
+
+BLUE | Time for move: 7032.0
+
+RED | Time for move: 86.0
+
+BLUE | Time for move: 684.0
+
+RED | Time for move: 1.0
+
+BLUE | Time for move: 0.0
+
+Total moves for red: 23
+Total moves for blue: 23
+
+Total time left for red: 56329.0
+Total time left for blue: 46290.0
+
+Winner of game 13 is: AI 1 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1849.0
+
+RED | Time for move: 1357.0
+
+BLUE | Time for move: 1840.0
+
+RED | Time for move: 1361.0
+
+BLUE | Time for move: 1846.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 1839.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 4636.0
+
+RED | Time for move: 1352.0
+
+BLUE | Time for move: 4631.0
+
+RED | Time for move: 3910.0
+
+BLUE | Time for move: 4633.0
+
+RED | Time for move: 3910.0
+
+BLUE | Time for move: 4625.0
+
+RED | Time for move: 3904.0
+
+BLUE | Time for move: 4627.0
+
+RED | Time for move: 3908.0
+
+BLUE | Time for move: 240.0
+
+RED | Time for move: 3908.0
+
+BLUE | Time for move: 4520.0
+
+RED | Time for move: 3906.0
+
+BLUE | Time for move: 683.0
+
+RED | Time for move: 7751.0
+
+BLUE | Time for move: 4623.0
+
+RED | Time for move: 2297.0
+
+BLUE | Time for move: 4623.0
+
+RED | Time for move: 7150.0
+
+BLUE | Time for move: 4637.0
+
+RED | Time for move: 7352.0
+
+BLUE | Time for move: 4518.0
+
+RED | Time for move: 7410.0
+
+BLUE | Time for move: 4633.0
+
+RED | Time for move: 5220.0
+
+BLUE | Time for move: 4624.0
+
+RED | Time for move: 3768.0
+
+BLUE | Time for move: 4632.0
+
+RED | Time for move: 3797.0
+
+BLUE | Time for move: 4626.0
+
+RED | Time for move: 3832.0
+
+BLUE | Time for move: 4623.0
+
+RED | Time for move: 685.0
+
+BLUE | Time for move: 4606.0
+
+RED | Time for move: 3842.0
+
+BLUE | Time for move: 4579.0
+
+RED | Time for move: 2271.0
+
+BLUE | Time for move: 2747.0
+
+RED | Time for move: 82.0
+
+BLUE | Time for move: 1333.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 29.0
+
+Total moves for red: 29
+Total moves for blue: 29
+
+Total time left for red: 34317.0
+Total time left for blue: 29198.0
+
+Winner of game 14 is: AI 2 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1358.0
+
+RED | Time for move: 1836.0
+
+BLUE | Time for move: 1362.0
+
+RED | Time for move: 1845.0
+
+BLUE | Time for move: 1366.0
+
+RED | Time for move: 1850.0
+
+BLUE | Time for move: 1365.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 1358.0
+
+RED | Time for move: 4632.0
+
+BLUE | Time for move: 1368.0
+
+RED | Time for move: 4624.0
+
+BLUE | Time for move: 3904.0
+
+RED | Time for move: 4597.0
+
+BLUE | Time for move: 3911.0
+
+RED | Time for move: 654.0
+
+BLUE | Time for move: 3910.0
+
+RED | Time for move: 4626.0
+
+BLUE | Time for move: 3901.0
+
+RED | Time for move: 4624.0
+
+BLUE | Time for move: 3905.0
+
+RED | Time for move: 4624.0
+
+BLUE | Time for move: 3901.0
+
+RED | Time for move: 4626.0
+
+BLUE | Time for move: 7911.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 7918.0
+
+RED | Time for move: 4634.0
+
+BLUE | Time for move: 7923.0
+
+RED | Time for move: 4624.0
+
+BLUE | Time for move: 7918.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 7912.0
+
+RED | Time for move: 4632.0
+
+BLUE | Time for move: 7921.0
+
+RED | Time for move: 4632.0
+
+BLUE | Time for move: 3914.0
+
+RED | Time for move: 4624.0
+
+BLUE | Time for move: 3899.0
+
+RED | Time for move: 1426.0
+
+BLUE | Time for move: 3879.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 3315.0
+
+RED | Time for move: 2810.0
+
+BLUE | Time for move: 1937.0
+
+RED | Time for move: 1689.0
+
+BLUE | Time for move: 3844.0
+
+RED | Time for move: 3677.0
+
+BLUE | Time for move: 2220.0
+
+RED | Time for move: 1489.0
+
+BLUE | Time for move: 896.0
+
+RED | Time for move: 4502.0
+
+BLUE | Time for move: 2464.0
+
+RED | Time for move: 846.0
+
+BLUE | Time for move: 617.0
+
+RED | Time for move: 235.0
+
+BLUE | Time for move: 704.0
+
+RED | Time for move: 22.0
+
+BLUE | Time for move: 6.0
+
+RED | Time for move: 7.0
+
+BLUE | Time for move: 63.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 3.0
+
+Total moves for red: 35
+Total moves for blue: 35
+
+Total time left for red: 23109.0
+Total time left for blue: 13127.0
+
+Winner of game 15 is: AI 1 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1841.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 1838.0
+
+RED | Time for move: 1359.0
+
+BLUE | Time for move: 1839.0
+
+RED | Time for move: 1362.0
+
+BLUE | Time for move: 1838.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 4640.0
+
+RED | Time for move: 1358.0
+
+BLUE | Time for move: 4631.0
+
+RED | Time for move: 3906.0
+
+BLUE | Time for move: 4637.0
+
+RED | Time for move: 3908.0
+
+BLUE | Time for move: 4629.0
+
+RED | Time for move: 3911.0
+
+BLUE | Time for move: 4625.0
+
+RED | Time for move: 3905.0
+
+BLUE | Time for move: 250.0
+
+RED | Time for move: 3911.0
+
+BLUE | Time for move: 4522.0
+
+RED | Time for move: 3910.0
+
+BLUE | Time for move: 4545.0
+
+RED | Time for move: 7688.0
+
+BLUE | Time for move: 4519.0
+
+RED | Time for move: 7919.0
+
+BLUE | Time for move: 4532.0
+
+RED | Time for move: 7914.0
+
+BLUE | Time for move: 4535.0
+
+RED | Time for move: 7915.0
+
+BLUE | Time for move: 4520.0
+
+RED | Time for move: 7913.0
+
+BLUE | Time for move: 4624.0
+
+RED | Time for move: 7910.0
+
+BLUE | Time for move: 4627.0
+
+RED | Time for move: 3901.0
+
+BLUE | Time for move: 4629.0
+
+RED | Time for move: 3900.0
+
+BLUE | Time for move: 4628.0
+
+RED | Time for move: 3900.0
+
+BLUE | Time for move: 4365.0
+
+RED | Time for move: 3896.0
+
+BLUE | Time for move: 4627.0
+
+RED | Time for move: 3902.0
+
+BLUE | Time for move: 4405.0
+
+RED | Time for move: 3897.0
+
+BLUE | Time for move: 4631.0
+
+RED | Time for move: 1236.0
+
+BLUE | Time for move: 4628.0
+
+RED | Time for move: 2997.0
+
+BLUE | Time for move: 4595.0
+
+RED | Time for move: 2762.0
+
+BLUE | Time for move: 4533.0
+
+RED | Time for move: 3674.0
+
+BLUE | Time for move: 4497.0
+
+RED | Time for move: 3583.0
+
+BLUE | Time for move: 4020.0
+
+RED | Time for move: 3086.0
+
+BLUE | Time for move: 1359.0
+
+RED | Time for move: 745.0
+
+BLUE | Time for move: 523.0
+
+RED | Time for move: 79.0
+
+BLUE | Time for move: 357.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 56.0
+
+Total moves for red: 36
+Total moves for blue: 36
+
+Total time left for red: 943.0
+Total time left for blue: 955.0
+
+Winner of game 16 is: AI 2 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1357.0
+
+RED | Time for move: 1843.0
+
+BLUE | Time for move: 1369.0
+
+RED | Time for move: 1841.0
+
+BLUE | Time for move: 1362.0
+
+RED | Time for move: 1844.0
+
+BLUE | Time for move: 1362.0
+
+RED | Time for move: 4629.0
+
+BLUE | Time for move: 1357.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 1358.0
+
+RED | Time for move: 4628.0
+
+BLUE | Time for move: 3913.0
+
+RED | Time for move: 4593.0
+
+BLUE | Time for move: 3785.0
+
+RED | Time for move: 4599.0
+
+BLUE | Time for move: 3782.0
+
+RED | Time for move: 4589.0
+
+BLUE | Time for move: 3805.0
+
+RED | Time for move: 4595.0
+
+BLUE | Time for move: 3778.0
+
+RED | Time for move: 4602.0
+
+BLUE | Time for move: 3773.0
+
+RED | Time for move: 4581.0
+
+BLUE | Time for move: 7917.0
+
+RED | Time for move: 4532.0
+
+BLUE | Time for move: 7925.0
+
+RED | Time for move: 4628.0
+
+BLUE | Time for move: 7931.0
+
+RED | Time for move: 4414.0
+
+BLUE | Time for move: 7925.0
+
+RED | Time for move: 4638.0
+
+BLUE | Time for move: 7876.0
+
+RED | Time for move: 4628.0
+
+BLUE | Time for move: 7919.0
+
+RED | Time for move: 4624.0
+
+BLUE | Time for move: 3902.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 3907.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 3905.0
+
+RED | Time for move: 4633.0
+
+BLUE | Time for move: 3906.0
+
+RED | Time for move: 4626.0
+
+BLUE | Time for move: 3664.0
+
+RED | Time for move: 4626.0
+
+BLUE | Time for move: 371.0
+
+RED | Time for move: 4628.0
+
+BLUE | Time for move: 3898.0
+
+RED | Time for move: 4621.0
+
+BLUE | Time for move: 1645.0
+
+RED | Time for move: 4624.0
+
+BLUE | Time for move: 1653.0
+
+RED | Time for move: 3805.0
+
+BLUE | Time for move: 968.0
+
+RED | Time for move: 1476.0
+
+BLUE | Time for move: 80.0
+
+RED | Time for move: 723.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 71.0
+
+Total moves for red: 34
+Total moves for blue: 33
+
+Total time left for red: 2482.0
+Total time left for blue: 13607.0
+
+Winner of game 17 is: AI 2 (RED)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1837.0
+
+RED | Time for move: 1364.0
+
+BLUE | Time for move: 1845.0
+
+RED | Time for move: 1356.0
+
+BLUE | Time for move: 1843.0
+
+RED | Time for move: 1355.0
+
+BLUE | Time for move: 1840.0
+
+RED | Time for move: 1356.0
+
+BLUE | Time for move: 4635.0
+
+RED | Time for move: 1350.0
+
+BLUE | Time for move: 4630.0
+
+RED | Time for move: 3907.0
+
+BLUE | Time for move: 4637.0
+
+RED | Time for move: 3906.0
+
+BLUE | Time for move: 4630.0
+
+RED | Time for move: 3909.0
+
+BLUE | Time for move: 4632.0
+
+RED | Time for move: 3910.0
+
+BLUE | Time for move: 226.0
+
+RED | Time for move: 3908.0
+
+BLUE | Time for move: 4521.0
+
+RED | Time for move: 3911.0
+
+BLUE | Time for move: 682.0
+
+RED | Time for move: 7922.0
+
+BLUE | Time for move: 4628.0
+
+RED | Time for move: 7935.0
+
+BLUE | Time for move: 4528.0
+
+RED | Time for move: 3481.0
+
+BLUE | Time for move: 4522.0
+
+RED | Time for move: 6369.0
+
+BLUE | Time for move: 4625.0
+
+RED | Time for move: 5561.0
+
+BLUE | Time for move: 4633.0
+
+RED | Time for move: 6113.0
+
+BLUE | Time for move: 1991.0
+
+RED | Time for move: 2892.0
+
+BLUE | Time for move: 4626.0
+
+RED | Time for move: 3800.0
+
+BLUE | Time for move: 4618.0
+
+RED | Time for move: 3658.0
+
+BLUE | Time for move: 4401.0
+
+RED | Time for move: 3781.0
+
+BLUE | Time for move: 4368.0
+
+RED | Time for move: 3854.0
+
+BLUE | Time for move: 4620.0
+
+RED | Time for move: 3850.0
+
+BLUE | Time for move: 4322.0
+
+RED | Time for move: 3833.0
+
+BLUE | Time for move: 4359.0
+
+RED | Time for move: 3835.0
+
+BLUE | Time for move: 4393.0
+
+RED | Time for move: 3658.0
+
+BLUE | Time for move: 4358.0
+
+RED | Time for move: 3599.0
+
+BLUE | Time for move: 4360.0
+
+RED | Time for move: 3588.0
+
+BLUE | Time for move: 4280.0
+
+RED | Time for move: 3701.0
+
+BLUE | Time for move: 4409.0
+
+RED | Time for move: 1165.0
+
+BLUE | Time for move: 4064.0
+
+RED | Time for move: 215.0
+
+BLUE | Time for move: 88.0
+
+RED | Time for move: 69.0
+
+BLUE | Time for move: 365.0
+
+RED | Time for move: 9.0
+
+BLUE | Time for move: 196.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 2.0
+
+Total moves for red: 38
+Total moves for blue: 38
+
+Total time left for red: 6880.0
+Total time left for blue: 1286.0
+
+Winner of game 18 is: AI 2 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1360.0
+
+RED | Time for move: 1838.0
+
+BLUE | Time for move: 1373.0
+
+RED | Time for move: 1833.0
+
+BLUE | Time for move: 1368.0
+
+RED | Time for move: 1849.0
+
+BLUE | Time for move: 1361.0
+
+RED | Time for move: 4635.0
+
+BLUE | Time for move: 1369.0
+
+RED | Time for move: 4628.0
+
+BLUE | Time for move: 1362.0
+
+RED | Time for move: 2201.0
+
+BLUE | Time for move: 3904.0
+
+RED | Time for move: 4632.0
+
+BLUE | Time for move: 3899.0
+
+RED | Time for move: 4627.0
+
+BLUE | Time for move: 3901.0
+
+RED | Time for move: 4625.0
+
+BLUE | Time for move: 3907.0
+
+RED | Time for move: 4624.0
+
+BLUE | Time for move: 3904.0
+
+RED | Time for move: 847.0
+
+BLUE | Time for move: 3715.0
+
+RED | Time for move: 156.0
+
+BLUE | Time for move: 5893.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1148.0
+
+Total moves for red: 17
+Total moves for blue: 17
+
+Total time left for red: 83505.0
+Total time left for blue: 81536.0
+
+Winner of game 19 is: AI 1 (BLUE)
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 0.0
+
+BLUE | Time for move: 1844.0
+
+RED | Time for move: 1357.0
+
+BLUE | Time for move: 1837.0
+
+RED | Time for move: 1358.0
+
+BLUE | Time for move: 1841.0
+
+RED | Time for move: 1362.0
+
+BLUE | Time for move: 1845.0
+
+RED | Time for move: 1357.0
+
+BLUE | Time for move: 4641.0
+
+RED | Time for move: 1350.0
+
+BLUE | Time for move: 4637.0
+
+RED | Time for move: 3906.0
+
+BLUE | Time for move: 4646.0
+
+RED | Time for move: 3905.0
+
+BLUE | Time for move: 4632.0
+
+RED | Time for move: 3906.0
+
+BLUE | Time for move: 4628.0
+
+RED | Time for move: 3912.0
+
+BLUE | Time for move: 218.0
+
+RED | Time for move: 3957.0
+
+BLUE | Time for move: 4526.0
+
+RED | Time for move: 3916.0
+
+BLUE | Time for move: 682.0
+
+RED | Time for move: 7920.0
+
+BLUE | Time for move: 4623.0
+
+RED | Time for move: 3359.0
+
+BLUE | Time for move: 4626.0
+
+RED | Time for move: 7317.0
+
+BLUE | Time for move: 4625.0
+
+RED | Time for move: 7467.0
+
+BLUE | Time for move: 4540.0
+
+RED | Time for move: 7448.0
+
+BLUE | Time for move: 4540.0
+
+RED | Time for move: 7468.0
+
+BLUE | Time for move: 4641.0
+
+RED | Time for move: 3807.0
+
+BLUE | Time for move: 4437.0
+
+RED | Time for move: 3848.0
+
+BLUE | Time for move: 4252.0
+
+RED | Time for move: 3434.0
+
+BLUE | Time for move: 4525.0
+
+RED | Time for move: 2993.0
+
+BLUE | Time for move: 4523.0
+
+RED | Time for move: 2911.0
+
+BLUE | Time for move: 4556.0
+
+RED | Time for move: 3000.0
+
+BLUE | Time for move: 4484.0
+
+RED | Time for move: 2565.0
+
+BLUE | Time for move: 204.0
+
+RED | Time for move: 2907.0
+
+BLUE | Time for move: 144.0
+
+RED | Time for move: 1459.0
+
+BLUE | Time for move: 0.0
+
+RED | Time for move: 46.0
+
+Total moves for red: 31
+Total moves for blue: 30
+
+Total time left for red: 21765.0
+Total time left for blue: 29303.0
+
+Winner of game 20 is: AI 1 (RED)
+
+END: 202407121040
+
+Results: 
+
+First AI wins: 13
+Second AI wins: 7
+
+First AI depths: [0, 0, 0, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 8, 9, 9, 8, 8, 3, 3, 3, 3, 3, 7, 7, 7, 7, 7, 7, 7, 8, 7, 7, 8, 9, 9, 9, 9, 9, 9, 8, 9, 6, 9, 3, 3, 3, 3, 7, 6, 6, 6, 7, 7, 8, 8, 8, 9, 8, 9, 8, 9, 8, 9, 9, 9, 9, 8, 9, 8, 9, 9, 8, 10, 9, 9, 9, 5, 3, 3, 3, 3, 3, 7, 7, 7, 7, 7, 7, 7, 7, 8, 7, 7, 8, 9, 1, 1, 1, 1, 7, 7, 7, 7, 7, 7, 7, 7, 8, 7, 7, 8, 8, 8, 8, 8, 7, 6, 6, 6, 7, 7, 8, 8, 7, 6, 1, 1, 1, 7, 6, 6, 6, 7, 7, 7, 8, 7, 7, 8, 8, 8, 9, 8, 9, 9, 8, 6, 2, 1, 1, 1, 7, 6, 6, 6, 7, 7, 7, 9, 9, 9, 9, 9, 10, 9, 9, 9, 9, 8, 8, 8, 7, 3, 3, 3, 3, 3, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 8, 7, 3, 3, 3, 3, 7, 6, 6, 6, 7, 7, 8, 8, 8, 8, 8, 8, 9, 10, 8, 9, 9, 9, 7, 2, 1, 1, 1, 7, 6, 6, 6, 7, 7, 7, 8, 7, 7, 8, 8, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 8, 9, 10, 9, 11, 9, 9, 5, 5, 3, 1, 1, 1, 7, 6, 6, 6, 7, 7, 7, 7, 7, 7, 8, 9, 9, 8, 8, 8, 8, 8, 7, 7, 6, 7, 7, 7, 7, 8, 8, 8, 8, 8, 7, 9, 9, 9, 10, 9, 9, 9, 9, 9, 9, 7, 9, 6, 4]
+First AI average depth: 6,93
+Second AI depths: [1, 1, 1, 1, 7, 7, 7, 7, 7, 7, 8, 8, 8, 7, 8, 9, 9, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 7, 3, 1, 1, 1, 7, 6, 6, 6, 7, 7, 8, 7, 7, 6, 7, 7, 8, 7, 8, 9, 8, 8, 8, 8, 8, 9, 9, 8, 8, 5, 9, 9, 9, 7, 6, 6, 6, 7, 7, 8, 7, 7, 6, 7, 7, 8, 7, 8, 8, 9, 8, 9, 9, 9, 9, 9, 9, 9, 9, 7, 8, 5, 3, 8, 8, 8, 7, 6, 6, 6, 7, 7, 8, 7, 7, 5, 8, 7, 8, 7, 8, 9, 9, 8, 8, 9, 8, 9, 9, 8, 7, 3, 1, 1, 1, 7, 6, 6, 6, 7, 7, 8, 7, 7, 6, 8, 8, 7, 7, 8, 8, 8, 8, 9, 9, 9, 8, 9, 8, 8, 9, 8, 9, 9, 8, 6, 5, 5, 5, 5, 5, 5, 7, 6, 7, 7, 7, 7, 8, 9, 9, 9, 9, 8, 7, 8, 9, 9, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 7, 7, 5, 5, 5, 5, 7, 6, 6, 6, 7, 7, 8, 7, 7, 6, 7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 10, 9, 9, 10, 10, 10, 10, 10, 10, 11, 11, 7, 9, 7, 3]
+Second AI average depth: 7,39
+
+Settings: 
+
+Iterations: 20
+FEN: b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/8/1r0r0r0r0r0r01/r0r0r0r0r0r0 r
+
+First AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 3987.6923076923076 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false | qSDepth = 6
+weightParameterNormal = 0.9 | weightParameterStart = 0.1 | weightParameterEndTime = 0.04 | weightParameterFinal = 0.5 | numberOfMovesNormal = 26 | numberOfMovesStart = 8
+
+Second AI: 
+Class: Minimax_AB
+Config: timeCriterion = true | timeLimit = 4712.727272727273 | aspirationWindow = true | aspirationWindowSize = 0.25 | transpositionTables = true | maxAllowedDepth = 0 | dynamicTime = true | useQuiescenceSearch = false | qSDepth = 6
+weightParameterNormal = 0.9 | weightParameterStart = 0.1 | weightParameterEndTime = 0.04 | weightParameterFinal = 0.5 | numberOfMovesNormal = 22 | numberOfMovesStart = 6
+
+System Information:
+
+OS: Windows 11 | amd64
+Available processors (cores): 12
+System load average (cores): -1,00
+Total physical memory (GB): 15,87
+Free physical memory (GB): 2,87
