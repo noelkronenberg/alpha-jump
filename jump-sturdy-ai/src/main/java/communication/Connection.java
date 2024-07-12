@@ -230,7 +230,7 @@ public class Connection {
                                         config.timeLimit = (this.timeLeft * 0.5); // continuously less (but never running out directly)
                                         // CASE: mid-game
                                     } else if (this.moveCounter <= 23 && this.moveCounter >= 18) {
-
+                                        config.timeLimit = 8000.0;
                                     } else {
                                         config.timeLimit = (overall * 0.9) / 26; // 80% of the time (for on average 25 moves in this state)
                                     }
