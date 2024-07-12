@@ -81,9 +81,9 @@ public class Connection {
 
         MoveGenerator gameInstance =  new MoveGenerator();
 
-        double overall = this.maxTime*0.96; // default time for main game (in ms)
+        double overall = this.maxTime * 0.96; // default time for main game (in ms)
         int averageMoves = 40;
-        config.timeLimit = overall / averageMoves; // set time for move (in ms)
+        config.timeLimit = overall / averageMoves; // default time for move (in ms)
 
         try (Socket server = new Socket(serverAddress, port)) {
 
@@ -223,16 +223,16 @@ public class Connection {
                                     // START: dynamic time management
 
                                     // CASE: start- and endgame
-                                    if (this.moveCounter <= 8 /*|| (averageMoves-9 < this.moveCounter && this.moveCounter <= averageMoves-1)*/) {
-                                        config.timeLimit = (overall * 0.1) / 8; // 20% of the time (for on average 15 moves in these states)
-                                        // CASE: overtime (if game goes beyond averageMoves)
-                                    } else if (this.timeLeft <= maxTime * 0.04) { // if we have 5% of time left
+                                    if (this.moveCounter <= averageMoves * 0.2) {
+                                        config.timeLimit = (overall * 0.1) / (averageMoves * 0.2); // 10% of the time (for on average (averageMoves * 0.2) moves in these states)
+                                    // CASE: overtime (if game goes beyond averageMoves)
+                                    } else if (this.timeLeft <= maxTime * 0.04) { // if we have 4% of time left
                                         config.timeLimit = (this.timeLeft * 0.5); // continuously less (but never running out directly)
-                                        // CASE: mid-game
-                                    } else if (this.moveCounter <= 23 && this.moveCounter >= 18) {
+                                    // CASE: mid-game
+                                    } else if ((averageMoves * 0.45) <= this.moveCounter && this.moveCounter <= (averageMoves * 0.575)) {
                                         config.timeLimit = 8000.0;
                                     } else {
-                                        config.timeLimit = (overall * 0.9) / 26; // 80% of the time (for on average 25 moves in this state)
+                                        config.timeLimit = (overall * 0.9) / (averageMoves * 0.65); // 90% of the time (for on average (averageMoves * 0.65) moves in this state)
                                     }
 
                                     // END: dynamic time management
