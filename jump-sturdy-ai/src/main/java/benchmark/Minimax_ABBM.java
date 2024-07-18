@@ -121,7 +121,7 @@ public class Minimax_ABBM {
         double duration_clean = generateBestMoveSpeedTimeLimit(fen, timeLimit, false, false, false, false);
 
         Result result_everything = generateBestMoveResultTimeLimit(fen, timeLimit, true, true, true, true);
-        double duration_everything = generateBestMoveSpeedTimeLimit(fen, timeLimit, true, false, true, true);
+        double duration_everything = generateBestMoveSpeedTimeLimit(fen, timeLimit, true, true, true, true);
 
         displayResults("without everything", "with everything", timeLimit, result_clean, result_everything, duration_clean, duration_everything);
     }
