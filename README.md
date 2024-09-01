@@ -1,4 +1,4 @@
-# Projekt KI
+# Alpha Jump
 
 High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/index.php/the-pit/576-jumpsturdy).
 
