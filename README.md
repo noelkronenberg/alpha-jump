@@ -28,7 +28,7 @@ Developed as part of [course work](https://moseskonto.tu-berlin.de/moses/modultr
           - ```optimisation``` algorithms for parameter optimisation
       - ```resources``` resource files
     - ```test``` [JUnit](https://www.jetbrains.com/help/idea/junit.html) tests
-- ```game-server``` Jump Sturdy server for playing against other players (given by [course organisors](https://git.tu-berlin.de/lengfeld8/jump-sturdy-game-server))
+- ```game-server``` Jump Sturdy server for playing against other players (based on an implementation of the [course organisors](https://git.tu-berlin.de/lengfeld8/jump-sturdy-game-server))
 
 ## Playing
 
