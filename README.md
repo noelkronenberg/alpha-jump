@@ -1,6 +1,7 @@
 # Alpha Jump
 
-High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/index.php/the-pit/576-jumpsturdy).
+High-performance AI for the board game [Jump Sturdy](https://www.mindsports.nl/index.php/the-pit/576-jumpsturdy).  
+Developed as part of [course work](https://moseskonto.tu-berlin.de/moses/modultransfersystem/bolognamodule/beschreibung/anzeigen.html?number=40658&version=5&sprache=1) by students at [TU Berlin](https://www.tu.berlin/en).
 
 ![](https://github.com/noelkronenberg/projekt-ki/actions/workflows/junit.yml/badge.svg)
 
