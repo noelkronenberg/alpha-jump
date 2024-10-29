@@ -1,0 +1,18 @@
+package de.mcc;
+
+message FENRequest {
+  required string request = 1;
+}
+
+message FENResponse {
+  required string answer = 2;
+}
+
+enum PlayerColor {
+  WHITE = 0;
+  BLACK = 1;
+}
+
+service FENService {
+  rpc GetFen(FENRequest) returns (FENResponse) {};
+}
