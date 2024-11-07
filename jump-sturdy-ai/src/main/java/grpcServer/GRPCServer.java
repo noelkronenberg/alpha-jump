@@ -11,9 +11,10 @@ import java.util.concurrent.TimeUnit;
 
 public class GRPCServer {
     public static void main(String[] args) throws Exception{
-        Server server = Grpc.newServerBuilderForPort(9090, InsecureServerCredentials.create()).addService(new ServerImpl()).build();
+        Server server = Grpc.newServerBuilderForPort(8080, InsecureServerCredentials.create()).addService(new ServerImpl()).build();
 
         server.start();
+
 
         // Shut down the server when runtime shuts down (e.g., when CTRL+C is received by the terminal)
         Runtime.getRuntime().addShutdownHook(new Thread() {
