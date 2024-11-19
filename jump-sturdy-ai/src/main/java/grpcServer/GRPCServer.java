@@ -1,5 +1,6 @@
 package grpcServer;
 
+import game.MoveGenerator;
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
 import io.grpc.Server;
@@ -10,11 +11,18 @@ import de.mcc.FenService;
 import java.util.concurrent.TimeUnit;
 
 public class GRPCServer {
+
+    static MoveGenerator moveGenerator;
+
     public static void main(String[] args) throws Exception{
+        System.out.println(getChessFen("b0b0b0b0b0b0/1b0b0b0b0b0b01/8/8/8/3r04/1r0r01r0r0r01/r0r0r0r0r0r0"));
+
         Server server = Grpc.newServerBuilderForPort(8080, InsecureServerCredentials.create()).addService(new ServerImpl()).build();
 
-        server.start();
+        moveGenerator = new MoveGenerator();
+        moveGenerator.initializeBoard();
 
+        server.start();
 
         // Shut down the server when runtime shuts down (e.g., when CTRL+C is received by the terminal)
         Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -33,13 +41,104 @@ public class GRPCServer {
         server.awaitTermination();
     }
 
+    /**
+     * Executes a recursive tree search with alpha-beta pruning to evaluate game positions and find
+     * the best possible move for the current player. This method can use, based on the configuration,
+     * transposition tables to store and get previously evaluated positions to optimize the search.
+     *
+     * @param gameFen The java internal FEN Notation
+     */
+    public static String getChessFen(String gameFen){
+        String chessFen = "";
+        String line = "/1";
+        int countSlash = 0;
+        boolean maybeHorse = false;
+        for (char c : gameFen.toCharArray()){
+            if (c=='b'){
+                if (maybeHorse) {
+                    maybeHorse = false;
+                    //Lösche letzten char aus line und ersetze mit Schwarzen Pferd
+                    line =  line.substring(0, line.length()-1)+"n";
+                    continue;
+                }
+                line += "p";
+                maybeHorse=true;
+            }
+            else if (c=='r'){
+                if (maybeHorse) {
+                    maybeHorse = false;
+                    //Lösche letzten char aus line und ersetze mit Schwarzen Pferd
+                    line =  line.substring(0, line.length()-1)+"N";
+                    continue;
+                }
+                line += "P";
+                maybeHorse=true;
+            }
+            else if (Character.isDigit(c)){
+                if (maybeHorse && c=='0'){
+                    maybeHorse = false;
+                    continue;
+                }
+                /*if (countSlash==0 || countSlash==7){
+                    char last =line.charAt(line.length()-1);
+                    if (Character.isDigit(last)){
+                        int digit = Character.getNumericValue(last);
+                        digit +=1;
+                        line += digit;
+                    }
+                }*/
+                line+=c;
+                maybeHorse = false;
+            }
+            else {  //Slash
+                maybeHorse = false;
+                if (countSlash==0 || countSlash==7){
+                    char last =line.charAt(line.length()-1);
+                    if (Character.isDigit(last)){
+                        int digit = Character.getNumericValue(last);
+                        digit +=1;
+                        line += digit;
+                    }
+                    else {
+                        line += "1";
+                    }
+
+                    countSlash++;
+                    chessFen = line+chessFen;
+                    line="/";
+                    continue;
+                }
+                if (countSlash==6){
+                    chessFen = line+chessFen;
+                    line ="1";
+                    countSlash++;
+                    continue;
+                }
+                chessFen = line+chessFen;
+                line="/";
+                countSlash++;
+            }
+        }
+        char last =line.charAt(line.length()-1);
+        if (Character.isDigit(last)){
+            int digit = Character.getNumericValue(last);
+            digit +=1;
+            line += digit;
+        }
+        else {
+            line += "1";
+        }
+        chessFen = line+chessFen;
+        return chessFen;
+    }
+
     public static class ServerImpl extends FENServiceGrpc.FENServiceImplBase{
         @Override
         public void getFen(FenService.FENRequest request, StreamObserver<FenService.FENResponse> responseObserver) {
             String req = request.getRequest();
             System.out.println(req);
             if (req.equals("FEN")){
-                FenService.FENResponse response = FenService.FENResponse.newBuilder().setAnswer("Beispiel FEN").build();
+                FenService.FENResponse response = FenService.FENResponse.newBuilder().setAnswer(getChessFen(moveGenerator.getFenFromBoard())).build();
                 // Send the response
                 responseObserver.onNext(response);
 
