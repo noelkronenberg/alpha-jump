@@ -137,7 +137,7 @@ public class GRPCServer {
                 responseObserver.onCompleted();
             }
             if (req.equals("MOVE")){    //Client makes a move
-
+                //TODO: IMPL way to make the move
             }
         }
     }
