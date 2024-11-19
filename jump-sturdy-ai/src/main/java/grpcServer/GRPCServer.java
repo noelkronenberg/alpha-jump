@@ -42,9 +42,7 @@ public class GRPCServer {
     }
 
     /**
-     * Executes a recursive tree search with alpha-beta pruning to evaluate game positions and find
-     * the best possible move for the current player. This method can use, based on the configuration,
-     * transposition tables to store and get previously evaluated positions to optimize the search.
+     *
      *
      * @param gameFen The java internal FEN Notation
      */
@@ -79,14 +77,6 @@ public class GRPCServer {
                     maybeHorse = false;
                     continue;
                 }
-                /*if (countSlash==0 || countSlash==7){
-                    char last =line.charAt(line.length()-1);
-                    if (Character.isDigit(last)){
-                        int digit = Character.getNumericValue(last);
-                        digit +=1;
-                        line += digit;
-                    }
-                }*/
                 line+=c;
                 maybeHorse = false;
             }
@@ -136,6 +126,7 @@ public class GRPCServer {
         @Override
         public void getFen(FenService.FENRequest request, StreamObserver<FenService.FENResponse> responseObserver) {
             String req = request.getRequest();
+            String message = request.getMessage();
             System.out.println(req);
             if (req.equals("FEN")){
                 FenService.FENResponse response = FenService.FENResponse.newBuilder().setAnswer(getChessFen(moveGenerator.getFenFromBoard())).build();
@@ -145,7 +136,9 @@ public class GRPCServer {
                 // Call onCompleted to signify end of messages
                 responseObserver.onCompleted();
             }
+            if (req.equals("MOVE")){    //Client makes a move
 
+            }
         }
     }
 }
