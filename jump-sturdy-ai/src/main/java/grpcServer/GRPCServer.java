@@ -136,8 +136,18 @@ public class GRPCServer {
                 // Call onCompleted to signify end of messages
                 responseObserver.onCompleted();
             }
-            if (req.equals("MOVE")){    //Client makes a move
-                //TODO: IMPL way to make the move
+            else if (req.equals("MOVE")){    //Client makes a move
+                int[] moves = moveGenerator.convertStringToPosWrapper(message);
+                //Make Move
+                moveGenerator.movePiece(moves[0], moves[1]);
+
+                FenService.FENResponse response = FenService.FENResponse.newBuilder().setAnswer(getChessFen(moveGenerator.getFenFromBoard())).build();
+
+                // Send the response
+                responseObserver.onNext(response);
+
+                // Call onCompleted to signify end of messages
+                responseObserver.onCompleted();
             }
         }
     }
