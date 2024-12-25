@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package de.mcc;
+
+option java_package = "de.mcc";
+
+message FENRequest {
+  required string request = 1;
+  optional string message = 2;
+}
+
+message FENResponse {
+  required string answer = 3;
+}
+
+enum PlayerColor {
+  WHITE = 0;
+  BLACK = 1;
+}
+
+service FENService {
+  rpc GetFen(FENRequest) returns (FENResponse) {};
+}
