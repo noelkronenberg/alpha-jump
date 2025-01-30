@@ -1,4 +1,4 @@
-name: Deploy Javadoc
+name: Generate JavaDoc
 
 on:
   push:
@@ -6,17 +6,31 @@ on:
       - main
 
 jobs:
-  publish:
+  javadoc:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+
     steps:
-      - name: Deploy JavaDoc
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.5.0
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          javadoc-branch: javadoc
-          java-version: 22
-          target-folder: javadoc
-          project: maven 
-          custom-command: cd jump-sturdy-ai && mvn javadoc:javadoc
+          java-version: '11' # Specify your Java version here
+
+      - name: Generate JavaDoc
+        run: |
+          cd jump-sturdy-ai
+          mvn javadoc:javadoc
+
+      - name: Deploy JavaDoc to javadoc branch
+        run: |
+          cd jump-sturdy-ai
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git checkout --orphan javadoc
+          git rm -rf .
+          cp -r target/site/apidocs/* .
+          git add .
+          git commit -m "deploy JavaDoc"
+          git push origin javadoc --force
