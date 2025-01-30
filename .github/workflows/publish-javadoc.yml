@@ -16,7 +16,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
-          java-version: 17
+          java-version: 22
           target-folder: javadoc
           project: maven 
           custom-command: cd jump-sturdy-ai && mvn javadoc:javadoc
