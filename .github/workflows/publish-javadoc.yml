@@ -19,4 +19,4 @@ jobs:
           java-version: 17
           target-folder: javadoc
           project: maven 
-          subdirectories: jump-sturdy-ai
+          custom-command: cd jump-sturdy-ai && mvn javadoc:javadoc
