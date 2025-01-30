@@ -16,7 +16,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '22'
+          java-version: '22' 
+          distribution: 'adopt'
 
       - name: Generate JavaDoc
         run: |
@@ -32,5 +33,5 @@ jobs:
           git rm -rf .
           cp -r target/site/apidocs/* .
           git add .
-          git commit -m "deploy JavaDoc"
+          git commit -m "Deploy JavaDoc"
           git push origin javadoc --force
