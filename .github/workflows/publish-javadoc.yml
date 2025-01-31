@@ -48,7 +48,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: javadoc  # check out the javadoc branch
+          ref: javadoc # check out the javadoc branch
 
       - name: Rename apidocs to docs and clean up
         run: |
@@ -57,11 +57,11 @@ jobs:
             git config --global user.name "github-actions"
             git config --global user.email "github-actions@github.com" 
             git add docs
-            git commit -m "Renamed apidocs to docs and removed old folder"
+            git commit -m "renamed apidocs to docs and removed old folder"
             rm -rf apidocs
-            git add -u  # Stage the removal of the old folder
-            git commit -m "Removed old apidocs directory"
-            git push origin javadoc  # Push changes to the javadoc branch
+            git add -u 
+            git commit -m "renamed old apidocs directory"
+            git push origin javadoc
           fi
 
   deploy:
@@ -72,7 +72,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: javadoc  # check out the javadoc branch
+          ref: javadoc # check out the javadoc branch
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
