@@ -27,9 +27,14 @@ jobs:
           cd jump-sturdy-ai
           mvn javadoc:javadoc
 
+      - name: Rename apidocs to docs
+        run: |
+          cd jump-sturdy-ai
+          mv target/site/apidocs target/site/docs
+
       - name: Deploy Javadoc to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
           branch: javadoc
-          folder: jump-sturdy-ai/target/site/apidocs
+          folder: jump-sturdy-ai/target/site/docs
           token: ${{ secrets.GITHUB_TOKEN }}
