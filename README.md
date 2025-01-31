@@ -27,3 +27,7 @@ Developed as part of [course work](https://moseskonto.tu-berlin.de/moses/modultr
           - ```optimisation``` algorithms for parameter optimisation
       - ```resources``` resource files
     - ```test``` [JUnit](https://www.jetbrains.com/help/idea/junit.html) tests
+   
+## Documentation
+
+[noelkronenberg.github.io/alpha-jump/](noelkronenberg.github.io/alpha-jump/)
