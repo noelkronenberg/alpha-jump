@@ -57,10 +57,10 @@ jobs:
             git config --global user.name "github-actions"
             git config --global user.email "github-actions@github.com" 
             git add docs
-            git commit -m "renamed apidocs to docs and removed old folder"
+            git commit -m "renamed apidocs to docs"
             rm -rf apidocs
             git add -u 
-            git commit -m "renamed old apidocs directory"
+            git commit -m "removed old apidocs directory"
             git push origin javadoc
           fi
 
