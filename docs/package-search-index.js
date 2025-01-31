@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"app"},{"l":"benchmark"},{"l":"benchmark.simulation"},{"l":"communication"},{"l":"debug"},{"l":"game"},{"l":"search"},{"l":"search.ab"},{"l":"search.mcts"},{"l":"search.mcts_lib"},{"l":"search.optimisation"}];updateSearchResults();
