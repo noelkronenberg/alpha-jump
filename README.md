@@ -30,4 +30,4 @@ Developed as part of [course work](https://moseskonto.tu-berlin.de/moses/modultr
    
 ## Documentation
 
-[noelkronenberg.github.io/alpha-jump/](noelkronenberg.github.io/alpha-jump/)
+[noelkronenberg.github.io/alpha-jump/](https://noelkronenberg.github.io/alpha-jump/)
