@@ -32,9 +32,17 @@ jobs:
           cd jump-sturdy-ai
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
+
+          # create or switch to the javadoc branch
           git checkout --orphan javadoc
+
+          # remove any existing files in the branch
           git rm -rf .
-          cp -r apidocs/* .
+
+          # copy only the contents of the apidocs directory to the root
+          cp -r target/site/apidocs/* .
+
+          # add and commit the changes
           git add .
           git commit -m "Deploy JavaDoc"
           git push origin javadoc --force
