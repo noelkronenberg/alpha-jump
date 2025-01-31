@@ -7,7 +7,7 @@ Developed as part of [course work](https://moseskonto.tu-berlin.de/moses/modultr
 
 ## Structure
 
-- ```.github/workflows``` [GitHub Actions](https://docs.github.com/en/actions) for automatic unit testing
+- ```.github/workflows``` [GitHub Actions](https://docs.github.com/en/actions) for automatic workflows
 - ```app``` web app (**in active development**)
 - ```jump-sturdy-ai``` Jump Sturdy AI
   - ```pom.xml``` [Maven](https://www.jetbrains.com/help/idea/maven-support.html) configuration
