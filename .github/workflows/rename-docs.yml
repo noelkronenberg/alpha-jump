@@ -22,4 +22,9 @@ jobs:
             git add docs
             git commit -m "renamed apidocs to docs"
             git push
+
+            rm -rf apidocs
+            git add -u  
+            git commit -m "remove old apidocs directory"
+            git push
           fi
