@@ -1,0 +1,23 @@
+name: Rename apidocs to docs
+
+on:
+  push:
+    branches:
+      - javadoc
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Rename apidocs to docs
+        run: |
+          if [ -d "apidocs" ]; then
+            mv apidocs docs
+            git add docs
+            git commit -m "renamed apidocs to docs"
+            git push
+          fi
