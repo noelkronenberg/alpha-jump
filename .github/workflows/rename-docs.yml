@@ -3,7 +3,7 @@ name: Rename apidocs to docs and Deploy to GitHub Pages
 on:
   push:
     branches:
-      - javadoc
+      - '**' # any branch
 
 jobs:
   rename:
