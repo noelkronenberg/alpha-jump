@@ -39,3 +39,46 @@ jobs:
           branch: javadoc
           folder: jump-sturdy-ai/target/site/docs # folder to move
           token: ${{ secrets.GITHUB_TOKEN }}
+          
+  rename:
+    runs-on: ubuntu-latest
+    needs: javadoc
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: javadoc  # check out the javadoc branch
+
+      - name: Rename apidocs to docs and clean up
+        run: |
+          if [ -d "apidocs" ]; then
+            mv apidocs docs
+            git config --global user.name "github-actions"
+            git config --global user.email "github-actions@github.com" 
+            git add docs
+            git commit -m "Renamed apidocs to docs and removed old folder"
+            rm -rf apidocs
+            git add -u  # Stage the removal of the old folder
+            git commit -m "Removed old apidocs directory"
+            git push origin javadoc  # Push changes to the javadoc branch
+          fi
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: rename
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: javadoc  # check out the javadoc branch
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
+          user_name: github-actions 
+          user_email: github-actions@github.com  
