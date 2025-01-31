@@ -17,6 +17,8 @@ jobs:
         run: |
           if [ -d "apidocs" ]; then
             mv apidocs docs
+            git config --global user.name "github-actions"
+            git config --global user.email "github-actions@github.com"
             git add docs
             git commit -m "renamed apidocs to docs"
             git push
