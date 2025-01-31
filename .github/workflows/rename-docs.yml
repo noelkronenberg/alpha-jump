@@ -20,10 +20,10 @@ jobs:
             git config --global user.name "github-actions"
             git config --global user.email "github-actions@github.com" 
             git add docs
-            git commit -m "Rename apidocs to docs and remove old folder"
+            git commit -m "renamed apidocs to docs and remove old folder"
             rm -rf apidocs
             git add -u  # Stage the removal of the old folder
-            git commit -m "Remove old apidocs directory"
+            git commit -m "removed old apidocs directory"
             git push
           fi
 
