@@ -27,22 +27,9 @@ jobs:
           cd jump-sturdy-ai
           mvn javadoc:javadoc
 
-      - name: Deploy JavaDoc to javadoc branch
-        run: |
-          cd jump-sturdy-ai
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-
-          # create or switch to the javadoc branch
-          git checkout --orphan javadoc
-
-          # remove any existing files in the branch
-          git rm -rf .
-
-          # copy only the contents of the apidocs directory to the root
-          cp -r target/site/apidocs/* .
-
-          # add and commit the changes
-          git add .
-          git commit -m "Deploy JavaDoc"
-          git push origin javadoc --force
+      - name: Deploy Javadoc to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
+        with:
+          branch: javadoc
+          folder: jump-sturdy-ai/target/site/apidocs
+          token: ${{ secrets.GITHUB_TOKEN }}
