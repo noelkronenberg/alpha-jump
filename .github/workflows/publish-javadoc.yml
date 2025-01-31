@@ -30,10 +30,6 @@ jobs:
       - name: Rename apidocs to docs
         run: |
           cd jump-sturdy-ai/target/site
-          mv apidocs docs 
-
-      - name: Rename apidocs to docs (backup)
-        run: |
           mkdir -p docs
           mv apidocs/* docs/
 
